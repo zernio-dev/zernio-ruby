@@ -155,7 +155,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Impressions, clicks and spend forecast
+    # Forecast ad delivery
     # LinkedIn-only. Forecasted impressions, clicks, spend and ~20 other metrics for a targeting spec over a time range. Wraps LinkedIn's `adSupplyForecasts` finder.  Each returned series carries a `metricType` (IMPRESSION, CLICK, SPENDING, MAX_POTENTIAL_BUDGET, COST_PER_MILLION_IMPRESSIONS, ...) and a `granularity` (DAILY, SEVEN_DAY, THIRTY_DAY, CUSTOM). LinkedIn caps the daily spending forecast at 1.2x the daily budget and returns 0 once the total budget is exhausted.  Non-LinkedIn accounts return `available: false`. 
     # @param get_linked_in_supply_forecast_request [GetLinkedInSupplyForecastRequest] 
     # @param [Hash] opts the optional parameters
@@ -165,7 +165,7 @@ module Zernio
       data
     end
 
-    # Impressions, clicks and spend forecast
+    # Forecast ad delivery
     # LinkedIn-only. Forecasted impressions, clicks, spend and ~20 other metrics for a targeting spec over a time range. Wraps LinkedIn&#39;s &#x60;adSupplyForecasts&#x60; finder.  Each returned series carries a &#x60;metricType&#x60; (IMPRESSION, CLICK, SPENDING, MAX_POTENTIAL_BUDGET, COST_PER_MILLION_IMPRESSIONS, ...) and a &#x60;granularity&#x60; (DAILY, SEVEN_DAY, THIRTY_DAY, CUSTOM). LinkedIn caps the daily spending forecast at 1.2x the daily budget and returns 0 once the total budget is exhausted.  Non-LinkedIn accounts return &#x60;available: false&#x60;. 
     # @param get_linked_in_supply_forecast_request [GetLinkedInSupplyForecastRequest] 
     # @param [Hash] opts the optional parameters

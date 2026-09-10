@@ -4,14 +4,14 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_ad_insights_report**](AdInsightsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run |
-| [**generate_keyword_historical_metrics**](AdInsightsApi.md#generate_keyword_historical_metrics) | **POST** /v1/ads/keywords/historical-metrics | Historical keyword metrics (Google Keyword Planner) |
-| [**generate_keyword_ideas**](AdInsightsApi.md#generate_keyword_ideas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas (Google Keyword Planner) |
+| [**create_ad_insights_report**](AdInsightsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit async insights report |
+| [**generate_keyword_historical_metrics**](AdInsightsApi.md#generate_keyword_historical_metrics) | **POST** /v1/ads/keywords/historical-metrics | Get historical keyword metrics |
+| [**generate_keyword_ideas**](AdInsightsApi.md#generate_keyword_ideas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas |
 | [**get_ad_analytics**](AdInsightsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**get_ad_insights_report**](AdInsightsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run |
 | [**get_ads_search_terms**](AdInsightsApi.md#get_ads_search_terms) | **GET** /v1/ads/search-terms | Google Ads search terms report |
 | [**get_campaign_analytics**](AdInsightsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics |
-| [**list_local_services_lead_conversations**](AdInsightsApi.md#list_local_services_lead_conversations) | **GET** /v1/ads/local-services/leads/{leadId}/conversations | Conversations of a Local Services lead |
+| [**list_local_services_lead_conversations**](AdInsightsApi.md#list_local_services_lead_conversations) | **GET** /v1/ads/local-services/leads/{leadId}/conversations | List lead conversations |
 | [**list_local_services_leads**](AdInsightsApi.md#list_local_services_leads) | **GET** /v1/ads/local-services/leads | Google Local Services Ads leads |
 | [**query_ad_insights**](AdInsightsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query |
 
@@ -20,7 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 
 > <CreateAdInsightsReport202Response> create_ad_insights_report(create_ad_insights_report_request)
 
-Submit an async insights report run
+Submit async insights report
 
 Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a `reportRunId` to poll via GET /v1/ads/insights/reports/{reportRunId}. 
 
@@ -39,7 +39,7 @@ api_instance = Zernio::AdInsightsApi.new
 create_ad_insights_report_request = Zernio::CreateAdInsightsReportRequest.new({account_id: 'account_id_example', object_id: 'object_id_example'}) # CreateAdInsightsReportRequest | 
 
 begin
-  # Submit an async insights report run
+  # Submit async insights report
   result = api_instance.create_ad_insights_report(create_ad_insights_report_request)
   p result
 rescue Zernio::ApiError => e
@@ -55,7 +55,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Submit an async insights report run
+  # Submit async insights report
   data, status_code, headers = api_instance.create_ad_insights_report_with_http_info(create_ad_insights_report_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -89,7 +89,7 @@ end
 
 > <GenerateKeywordHistoricalMetrics200Response> generate_keyword_historical_metrics(generate_keyword_historical_metrics_request)
 
-Historical keyword metrics (Google Keyword Planner)
+Get historical keyword metrics
 
 Google Ads only. Runs Keyword Planner's generateKeywordHistoricalMetrics for up to 1,000 exact keywords: historical search volume, competition and top-of-page bid ranges, plus averageCpcMicros when includeAverageCpc is set. Rows come back verbatim; counters are int64s encoded as strings, bid/CPC values are micros of the account currency. 
 
@@ -108,7 +108,7 @@ api_instance = Zernio::AdInsightsApi.new
 generate_keyword_historical_metrics_request = Zernio::GenerateKeywordHistoricalMetricsRequest.new({account_id: 'account_id_example', keywords: ['keywords_example']}) # GenerateKeywordHistoricalMetricsRequest | 
 
 begin
-  # Historical keyword metrics (Google Keyword Planner)
+  # Get historical keyword metrics
   result = api_instance.generate_keyword_historical_metrics(generate_keyword_historical_metrics_request)
   p result
 rescue Zernio::ApiError => e
@@ -124,7 +124,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Historical keyword metrics (Google Keyword Planner)
+  # Get historical keyword metrics
   data, status_code, headers = api_instance.generate_keyword_historical_metrics_with_http_info(generate_keyword_historical_metrics_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -158,7 +158,7 @@ end
 
 > <GenerateKeywordIdeas200Response> generate_keyword_ideas(generate_keyword_ideas_request)
 
-Generate keyword ideas (Google Keyword Planner)
+Generate keyword ideas
 
 Google Ads only. Runs Keyword Planner's generateKeywordIdeas from seed keywords, a seed URL, or both, returning idea rows verbatim (avgMonthlySearches, competition, competitionIndex, top-of-page bid micros, monthlySearchVolumes). Counters are int64s encoded as strings; bid values are micros of the account currency. Omitting `countries` targets worldwide. 
 
@@ -177,7 +177,7 @@ api_instance = Zernio::AdInsightsApi.new
 generate_keyword_ideas_request = Zernio::GenerateKeywordIdeasRequest.new({account_id: 'account_id_example'}) # GenerateKeywordIdeasRequest | 
 
 begin
-  # Generate keyword ideas (Google Keyword Planner)
+  # Generate keyword ideas
   result = api_instance.generate_keyword_ideas(generate_keyword_ideas_request)
   p result
 rescue Zernio::ApiError => e
@@ -193,7 +193,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Generate keyword ideas (Google Keyword Planner)
+  # Generate keyword ideas
   data, status_code, headers = api_instance.generate_keyword_ideas_with_http_info(generate_keyword_ideas_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -543,7 +543,7 @@ end
 
 > <ListLocalServicesLeadConversations200Response> list_local_services_lead_conversations(lead_id, account_id, opts)
 
-Conversations of a Local Services lead
+List lead conversations
 
 Conversation entries of one Local Services lead: phone calls (duration, recording URL) and messages (text, attachment URLs), oldest first. Read live from `local_services_lead_conversation`, always scoped to a single lead. Call-recording URLs require read access on the Google Ads account. Draws on the shared Google Ads operations budget.
 
@@ -567,7 +567,7 @@ opts = {
 }
 
 begin
-  # Conversations of a Local Services lead
+  # List lead conversations
   result = api_instance.list_local_services_lead_conversations(lead_id, account_id, opts)
   p result
 rescue Zernio::ApiError => e
@@ -583,7 +583,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Conversations of a Local Services lead
+  # List lead conversations
   data, status_code, headers = api_instance.list_local_services_lead_conversations_with_http_info(lead_id, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }

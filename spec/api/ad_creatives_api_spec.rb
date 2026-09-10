@@ -196,6 +196,46 @@ describe 'AdCreativesApi' do
     end
   end
 
+  # unit tests for list_partnership_ad_content
+  # List partnership ad content
+  # Private beta. Lists creator Instagram posts available to the advertiser for Partnership Ads. Supply creatorUsername or postUrl. Requires instagram_branded_content_ads_brand permission and an advertiser Instagram Business Account.
+  # @param account_id Zernio SocialAccount ID.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :creator_username Creator username. Required unless postUrl is supplied.
+  # @option opts [String] :post_url Instagram post permalink. Required unless creatorUsername is supplied.
+  # @option opts [Boolean] :only_allowlisted Return only creators with account-level permission.
+  # @return [ListPartnershipAdContent200Response]
+  describe 'list_partnership_ad_content test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_partnership_ad_permissions
+  # List partnership permissions
+  # Private beta. Lists granted or pending creator permissions for the advertiser Instagram Business Account. Requires instagram_branded_content_ads_brand permission.
+  # @param account_id Zernio SocialAccount ID.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :creator_username Filter by creator username.
+  # @return [ListPartnershipAdPermissions200Response]
+  describe 'list_partnership_ad_permissions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for set_partnership_ad_permission
+  # Set partnership permission
+  # Private beta. Requests permission from a creator or revokes it when revoke is true. Requests require the creator to approve in Instagram. Requires instagram_branded_content_ads_brand permission.
+  # @param set_partnership_ad_permission_request 
+  # @param [Hash] opts the optional parameters
+  # @return [SetPartnershipAdPermission200Response]
+  describe 'set_partnership_ad_permission test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_ad_creative
   # Rename a creative
   # Renames a creative. Creatives are immutable on Meta beyond &#x60;name&#x60;. For content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with &#x60;creative&#x60;).

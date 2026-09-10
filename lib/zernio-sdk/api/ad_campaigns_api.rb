@@ -19,7 +19,7 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Add Search keywords to an ad group
+    # Add Search ad-group keywords
     # Adds one or more keyword criteria to an existing Google Search ad group, without touching the keywords already there (unlike the whole-set diff on `PUT /v1/ads/{adId}`, `keywords`/`negativeKeywords` in `platformSpecificData`, which replaces the set). Set `negative: true` to add ad-group-level negatives instead of positive keywords. 
     # @param add_ad_keywords_request [AddAdKeywordsRequest] 
     # @param [Hash] opts the optional parameters
@@ -29,7 +29,7 @@ module Zernio
       data
     end
 
-    # Add Search keywords to an ad group
+    # Add Search ad-group keywords
     # Adds one or more keyword criteria to an existing Google Search ad group, without touching the keywords already there (unlike the whole-set diff on &#x60;PUT /v1/ads/{adId}&#x60;, &#x60;keywords&#x60;/&#x60;negativeKeywords&#x60; in &#x60;platformSpecificData&#x60;, which replaces the set). Set &#x60;negative: true&#x60; to add ad-group-level negatives instead of positive keywords. 
     # @param add_ad_keywords_request [AddAdKeywordsRequest] 
     # @param [Hash] opts the optional parameters
@@ -538,7 +538,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Create a Google Ads portfolio bid strategy
+    # Create portfolio bid strategy
     # Creates a standalone bid strategy shared across campaigns. Attach it to a campaign with `portfolioBidStrategyId` on POST /v1/ads/create, PUT /v1/ads/campaigns/{campaignId}, or PUT /v1/ads/ad-sets/{adSetId}. Attaching a strategy aligned to a shared budget fails there with a 400 (Google's `BIDDING_STRATEGY_AND_BUDGET_MUST_BE_ALIGNED`); this is not retryable.
     # @param create_bid_strategy_request [CreateBidStrategyRequest] 
     # @param [Hash] opts the optional parameters
@@ -548,7 +548,7 @@ module Zernio
       data
     end
 
-    # Create a Google Ads portfolio bid strategy
+    # Create portfolio bid strategy
     # Creates a standalone bid strategy shared across campaigns. Attach it to a campaign with &#x60;portfolioBidStrategyId&#x60; on POST /v1/ads/create, PUT /v1/ads/campaigns/{campaignId}, or PUT /v1/ads/ad-sets/{adSetId}. Attaching a strategy aligned to a shared budget fails there with a 400 (Google&#39;s &#x60;BIDDING_STRATEGY_AND_BUDGET_MUST_BE_ALIGNED&#x60;); this is not retryable.
     # @param create_bid_strategy_request [CreateBidStrategyRequest] 
     # @param [Hash] opts the optional parameters
@@ -1186,7 +1186,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Live ad-set details incl. learning phase
+    # Get live ad-set details
     # Reads the ad set live from Meta, returned verbatim. The default projection includes `learning_stage_info` (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING; Meta omits its `status` key on paused ad sets), delivery settings, budgets, schedule and targeting. `fields` is a raw-passthrough override; unknown fields return Meta's 400 verbatim.
     # @param ad_set_id [String] Meta ad set id (platformAdSetId).
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
@@ -1198,7 +1198,7 @@ module Zernio
       data
     end
 
-    # Live ad-set details incl. learning phase
+    # Get live ad-set details
     # Reads the ad set live from Meta, returned verbatim. The default projection includes &#x60;learning_stage_info&#x60; (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING; Meta omits its &#x60;status&#x60; key on paused ad sets), delivery settings, budgets, schedule and targeting. &#x60;fields&#x60; is a raw-passthrough override; unknown fields return Meta&#39;s 400 verbatim.
     # @param ad_set_id [String] Meta ad set id (platformAdSetId).
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
@@ -2158,7 +2158,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # List Google Ads portfolio bid strategies
+    # List portfolio bid strategies
     # Bidding strategy report: type, status, campaign count, clicks, cost, cost per conversion, impressions, average CPC and conversions over the date range (default last 30 days). Reads Google's `bidding_strategy` resource, cached for the quota window. Draws on the shared Google Ads operations budget. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
     # @param account_id [String] Google ads SocialAccount id.
     # @param [Hash] opts the optional parameters
@@ -2171,7 +2171,7 @@ module Zernio
       data
     end
 
-    # List Google Ads portfolio bid strategies
+    # List portfolio bid strategies
     # Bidding strategy report: type, status, campaign count, clicks, cost, cost per conversion, impressions, average CPC and conversions over the date range (default last 30 days). Reads Google&#39;s &#x60;bidding_strategy&#x60; resource, cached for the quota window. Draws on the shared Google Ads operations budget. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
     # @param account_id [String] Google ads SocialAccount id.
     # @param [Hash] opts the optional parameters
@@ -3503,7 +3503,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Update a Google Ads portfolio bid strategy
+    # Update portfolio bid strategy
     # Renames or retargets a portfolio bid strategy. The strategy's status is output only on Google's side, so it cannot be changed here; remove a strategy in Google Ads. `type` is only needed alongside `targetCpa`/`targetRoas` to disambiguate the field Google writes to (TARGET_CPA and MAXIMIZE_CONVERSIONS both take a target CPA; TARGET_ROAS and MAXIMIZE_CONVERSION_VALUE both take a target ROAS); the strategy's family is otherwise immutable once created.
     # @param strategy_id [String] Numeric Google Ads bid strategy id.
     # @param update_bid_strategy_request [UpdateBidStrategyRequest] 
@@ -3514,7 +3514,7 @@ module Zernio
       data
     end
 
-    # Update a Google Ads portfolio bid strategy
+    # Update portfolio bid strategy
     # Renames or retargets a portfolio bid strategy. The strategy&#39;s status is output only on Google&#39;s side, so it cannot be changed here; remove a strategy in Google Ads. &#x60;type&#x60; is only needed alongside &#x60;targetCpa&#x60;/&#x60;targetRoas&#x60; to disambiguate the field Google writes to (TARGET_CPA and MAXIMIZE_CONVERSIONS both take a target CPA; TARGET_ROAS and MAXIMIZE_CONVERSION_VALUE both take a target ROAS); the strategy&#39;s family is otherwise immutable once created.
     # @param strategy_id [String] Numeric Google Ads bid strategy id.
     # @param update_bid_strategy_request [UpdateBidStrategyRequest] 

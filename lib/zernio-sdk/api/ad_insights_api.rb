@@ -19,7 +19,7 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Submit an async insights report run
+    # Submit async insights report
     # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a `reportRunId` to poll via GET /v1/ads/insights/reports/{reportRunId}. 
     # @param create_ad_insights_report_request [CreateAdInsightsReportRequest] 
     # @param [Hash] opts the optional parameters
@@ -29,7 +29,7 @@ module Zernio
       data
     end
 
-    # Submit an async insights report run
+    # Submit async insights report
     # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a &#x60;reportRunId&#x60; to poll via GET /v1/ads/insights/reports/{reportRunId}. 
     # @param create_ad_insights_report_request [CreateAdInsightsReportRequest] 
     # @param [Hash] opts the optional parameters
@@ -87,7 +87,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Historical keyword metrics (Google Keyword Planner)
+    # Get historical keyword metrics
     # Google Ads only. Runs Keyword Planner's generateKeywordHistoricalMetrics for up to 1,000 exact keywords: historical search volume, competition and top-of-page bid ranges, plus averageCpcMicros when includeAverageCpc is set. Rows come back verbatim; counters are int64s encoded as strings, bid/CPC values are micros of the account currency. 
     # @param generate_keyword_historical_metrics_request [GenerateKeywordHistoricalMetricsRequest] 
     # @param [Hash] opts the optional parameters
@@ -97,7 +97,7 @@ module Zernio
       data
     end
 
-    # Historical keyword metrics (Google Keyword Planner)
+    # Get historical keyword metrics
     # Google Ads only. Runs Keyword Planner&#39;s generateKeywordHistoricalMetrics for up to 1,000 exact keywords: historical search volume, competition and top-of-page bid ranges, plus averageCpcMicros when includeAverageCpc is set. Rows come back verbatim; counters are int64s encoded as strings, bid/CPC values are micros of the account currency. 
     # @param generate_keyword_historical_metrics_request [GenerateKeywordHistoricalMetricsRequest] 
     # @param [Hash] opts the optional parameters
@@ -155,7 +155,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Generate keyword ideas (Google Keyword Planner)
+    # Generate keyword ideas
     # Google Ads only. Runs Keyword Planner's generateKeywordIdeas from seed keywords, a seed URL, or both, returning idea rows verbatim (avgMonthlySearches, competition, competitionIndex, top-of-page bid micros, monthlySearchVolumes). Counters are int64s encoded as strings; bid values are micros of the account currency. Omitting `countries` targets worldwide. 
     # @param generate_keyword_ideas_request [GenerateKeywordIdeasRequest] 
     # @param [Hash] opts the optional parameters
@@ -165,7 +165,7 @@ module Zernio
       data
     end
 
-    # Generate keyword ideas (Google Keyword Planner)
+    # Generate keyword ideas
     # Google Ads only. Runs Keyword Planner&#39;s generateKeywordIdeas from seed keywords, a seed URL, or both, returning idea rows verbatim (avgMonthlySearches, competition, competitionIndex, top-of-page bid micros, monthlySearchVolumes). Counters are int64s encoded as strings; bid values are micros of the account currency. Omitting &#x60;countries&#x60; targets worldwide. 
     # @param generate_keyword_ideas_request [GenerateKeywordIdeasRequest] 
     # @param [Hash] opts the optional parameters
@@ -536,7 +536,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Conversations of a Local Services lead
+    # List lead conversations
     # Conversation entries of one Local Services lead: phone calls (duration, recording URL) and messages (text, attachment URLs), oldest first. Read live from `local_services_lead_conversation`, always scoped to a single lead. Call-recording URLs require read access on the Google Ads account. Draws on the shared Google Ads operations budget.
     # @param lead_id [String] Numeric lead id from /v1/ads/local-services/leads.
     # @param account_id [String] Google ads SocialAccount id.
@@ -549,7 +549,7 @@ module Zernio
       data
     end
 
-    # Conversations of a Local Services lead
+    # List lead conversations
     # Conversation entries of one Local Services lead: phone calls (duration, recording URL) and messages (text, attachment URLs), oldest first. Read live from &#x60;local_services_lead_conversation&#x60;, always scoped to a single lead. Call-recording URLs require read access on the Google Ads account. Draws on the shared Google Ads operations budget.
     # @param lead_id [String] Numeric lead id from /v1/ads/local-services/leads.
     # @param account_id [String] Google ads SocialAccount id.

@@ -93,7 +93,7 @@ describe 'AdAccountsApi' do
   end
 
   # unit tests for create_custom_conversion
-  # Create or reuse a custom conversion
+  # Create custom conversion
   # Provision the Meta custom conversion an ads flow optimises toward, and hand back the &#x60;customConversionId&#x60; for &#x60;promotedObject.customConversionId&#x60; on POST /v1/ads/create. Removes the manual \&quot;create it in Ads Manager first\&quot; step.  **Reuse is ours, not Meta&#39;s.** Meta&#39;s create is not idempotent, so a retried request would otherwise mint a duplicate carrying none of the original&#39;s optimisation history. A non-archived conversion with the same &#x60;name&#x60; on the same &#x60;pixelId&#x60; is returned instead of created, with &#x60;reused: true&#x60; and a 200 rather than a 201.  &#x60;rule&#x60; is forwarded verbatim in Meta&#39;s own grammar (e.g. &#x60;{\&quot;url\&quot;: {\&quot;i_contains\&quot;: \&quot;thank-you\&quot;}}&#x60;); Meta validates it and rejects a malformed one with \&quot;A conversion rule is required at creation time\&quot;.
   # @param account_id Meta ads SocialAccount id.
   # @param create_custom_conversion_request 
@@ -249,7 +249,7 @@ describe 'AdAccountsApi' do
   end
 
   # unit tests for get_dsa_recommendations
-  # List DSA beneficiary/payor suggestions
+  # Get DSA recommendations
   # Returns Meta&#39;s suggested beneficiary/payor names for an ad account, derived by Meta from the account&#39;s recent activity. Useful for prefilling &#x60;dsaBeneficiary&#x60;/&#x60;dsaPayor&#x60; inputs, or the defaults sent to &#x60;PATCH /v1/ads/accounts&#x60;, in your own UI.  Meta returns a single flat list. Entries are not labeled as beneficiary or payor, and since these are legal disclosures Zernio never applies them automatically: let your user pick the right entity. The list may be empty for accounts with little activity. Meta accounts only. 
   # @param account_id Account ID (metaads, or a facebook/instagram posting account)
   # @param ad_account_id Meta ad account ID (act_...)
@@ -454,7 +454,7 @@ describe 'AdAccountsApi' do
   end
 
   # unit tests for list_high_demand_periods
-  # High demand periods / budget schedules
+  # List high-demand periods
   # Scheduled budget increases (Meta&#39;s budget-scheduling API). The Graph edge lives on the campaign and ad-set nodes only, so exactly one of &#x60;campaignId&#x60; / &#x60;adSetId&#x60; (platform ids) is required. Rows returned verbatim (budget_value, budget_value_type, time window, recurrence).
   # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
   # @param [Hash] opts the optional parameters
@@ -478,6 +478,20 @@ describe 'AdAccountsApi' do
   # @option opts [String] :after Cursor from paging.after of the previous page.
   # @return [ListMetaBusinesses200Response]
   describe 'list_meta_businesses test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_tik_tok_ad_pixels
+  # List TikTok ad pixels
+  # Lists pixels and their supported optimization events for a connected TikTok Ads account. The advertiser defaults to the first advertiser on the connection. Reconnect if Pixel Management permission has not been granted.
+  # @param account_id Zernio SocialAccount ID.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :advertiser_id Advertiser belonging to this connection.
+  # @option opts [String] :code Filter by a Pixel Code.
+  # @return [ListTikTokAdPixels200Response]
+  describe 'list_tik_tok_ad_pixels test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

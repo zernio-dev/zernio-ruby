@@ -16,6 +16,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_creatives**](AdCreativesApi.md#list_ad_creatives) | **GET** /v1/ads/creatives | Creative library |
 | [**list_ad_images**](AdCreativesApi.md#list_ad_images) | **GET** /v1/ads/images | Ad image library |
 | [**list_ad_videos**](AdCreativesApi.md#list_ad_videos) | **GET** /v1/ads/videos | Ad video library |
+| [**list_partnership_ad_content**](AdCreativesApi.md#list_partnership_ad_content) | **GET** /v1/ads/partnership-content | List partnership ad content |
+| [**list_partnership_ad_permissions**](AdCreativesApi.md#list_partnership_ad_permissions) | **GET** /v1/ads/partnership-permissions | List partnership permissions |
+| [**set_partnership_ad_permission**](AdCreativesApi.md#set_partnership_ad_permission) | **POST** /v1/ads/partnership-permissions | Set partnership permission |
 | [**update_ad_creative**](AdCreativesApi.md#update_ad_creative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative |
 | [**upload_ad_image**](AdCreativesApi.md#upload_ad_image) | **POST** /v1/ads/images | Upload an ad image from base64 |
 | [**upload_ad_video**](AdCreativesApi.md#upload_ad_video) | **POST** /v1/ads/videos | Upload an ad video |
@@ -896,6 +899,225 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_partnership_ad_content
+
+> <ListPartnershipAdContent200Response> list_partnership_ad_content(account_id, opts)
+
+List partnership ad content
+
+Private beta. Lists creator Instagram posts available to the advertiser for Partnership Ads. Supply creatorUsername or postUrl. Requires instagram_branded_content_ads_brand permission and an advertiser Instagram Business Account.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCreativesApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount ID.
+opts = {
+  creator_username: 'creator_username_example', # String | Creator username. Required unless postUrl is supplied.
+  post_url: 'post_url_example', # String | Instagram post permalink. Required unless creatorUsername is supplied.
+  only_allowlisted: true # Boolean | Return only creators with account-level permission.
+}
+
+begin
+  # List partnership ad content
+  result = api_instance.list_partnership_ad_content(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->list_partnership_ad_content: #{e}"
+end
+```
+
+#### Using the list_partnership_ad_content_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListPartnershipAdContent200Response>, Integer, Hash)> list_partnership_ad_content_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List partnership ad content
+  data, status_code, headers = api_instance.list_partnership_ad_content_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListPartnershipAdContent200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->list_partnership_ad_content_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount ID. |  |
+| **creator_username** | **String** | Creator username. Required unless postUrl is supplied. | [optional] |
+| **post_url** | **String** | Instagram post permalink. Required unless creatorUsername is supplied. | [optional] |
+| **only_allowlisted** | **Boolean** | Return only creators with account-level permission. | [optional] |
+
+### Return type
+
+[**ListPartnershipAdContent200Response**](ListPartnershipAdContent200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_partnership_ad_permissions
+
+> <ListPartnershipAdPermissions200Response> list_partnership_ad_permissions(account_id, opts)
+
+List partnership permissions
+
+Private beta. Lists granted or pending creator permissions for the advertiser Instagram Business Account. Requires instagram_branded_content_ads_brand permission.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCreativesApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount ID.
+opts = {
+  creator_username: 'creator_username_example' # String | Filter by creator username.
+}
+
+begin
+  # List partnership permissions
+  result = api_instance.list_partnership_ad_permissions(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->list_partnership_ad_permissions: #{e}"
+end
+```
+
+#### Using the list_partnership_ad_permissions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListPartnershipAdPermissions200Response>, Integer, Hash)> list_partnership_ad_permissions_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List partnership permissions
+  data, status_code, headers = api_instance.list_partnership_ad_permissions_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListPartnershipAdPermissions200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->list_partnership_ad_permissions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount ID. |  |
+| **creator_username** | **String** | Filter by creator username. | [optional] |
+
+### Return type
+
+[**ListPartnershipAdPermissions200Response**](ListPartnershipAdPermissions200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## set_partnership_ad_permission
+
+> <SetPartnershipAdPermission200Response> set_partnership_ad_permission(set_partnership_ad_permission_request)
+
+Set partnership permission
+
+Private beta. Requests permission from a creator or revokes it when revoke is true. Requests require the creator to approve in Instagram. Requires instagram_branded_content_ads_brand permission.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCreativesApi.new
+set_partnership_ad_permission_request = Zernio::SetPartnershipAdPermissionRequest.new({account_id: 'account_id_example', creator_username: 'creator_username_example'}) # SetPartnershipAdPermissionRequest | 
+
+begin
+  # Set partnership permission
+  result = api_instance.set_partnership_ad_permission(set_partnership_ad_permission_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->set_partnership_ad_permission: #{e}"
+end
+```
+
+#### Using the set_partnership_ad_permission_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SetPartnershipAdPermission200Response>, Integer, Hash)> set_partnership_ad_permission_with_http_info(set_partnership_ad_permission_request)
+
+```ruby
+begin
+  # Set partnership permission
+  data, status_code, headers = api_instance.set_partnership_ad_permission_with_http_info(set_partnership_ad_permission_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SetPartnershipAdPermission200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->set_partnership_ad_permission_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **set_partnership_ad_permission_request** | [**SetPartnershipAdPermissionRequest**](SetPartnershipAdPermissionRequest.md) |  |  |
+
+### Return type
+
+[**SetPartnershipAdPermission200Response**](SetPartnershipAdPermission200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

@@ -59,7 +59,7 @@ describe 'ConversionsApi' do
   end
 
   # unit tests for create_conversion_action
-  # Create a website conversion action
+  # Create website conversion action
   # Creates a &#x60;WEBPAGE&#x60; conversion action (category &#x60;DEFAULT&#x60;) and returns it with its tag snippets, read back after creation since Google never returns them on the create response itself. Invalidates the cached list &#x60;GET&#x60; on this resource would otherwise keep serving. Google-only; other platforms return &#x60;501&#x60;. Requires the Ads add-on. 
   # @param create_conversion_action_request 
   # @param [Hash] opts the optional parameters
@@ -142,7 +142,7 @@ describe 'ConversionsApi' do
   end
 
   # unit tests for list_conversion_actions
-  # List conversion actions and their tag snippets
+  # List conversion actions
   # Lists Google Ads conversion actions on the resolved customer, all types by default. Each action&#39;s &#x60;tagSnippets&#x60; (global site tag + event snippet) is included when Google has them for that action&#39;s type, e.g. &#x60;WEBPAGE&#x60;. Google-only; other platforms return &#x60;501&#x60;. Requires the Ads add-on.  &#x60;customerId&#x60; is optional: when omitted, it is resolved from the connection&#39;s accessible Google Ads customers, and the call fails with &#x60;400&#x60; when more than one is accessible (pass &#x60;customerId&#x60; to disambiguate).  The list itself is cached for the quota window (1 hour fresh, up to 7 days last-good; the cache key does not vary on &#x60;type&#x60;). The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read. 
   # @param account_id SocialAccount _id (must be a googleads account).
   # @param [Hash] opts the optional parameters

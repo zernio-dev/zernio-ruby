@@ -359,7 +359,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Create or reuse a custom conversion
+    # Create custom conversion
     # Provision the Meta custom conversion an ads flow optimises toward, and hand back the `customConversionId` for `promotedObject.customConversionId` on POST /v1/ads/create. Removes the manual \"create it in Ads Manager first\" step.  **Reuse is ours, not Meta's.** Meta's create is not idempotent, so a retried request would otherwise mint a duplicate carrying none of the original's optimisation history. A non-archived conversion with the same `name` on the same `pixelId` is returned instead of created, with `reused: true` and a 200 rather than a 201.  `rule` is forwarded verbatim in Meta's own grammar (e.g. `{\"url\": {\"i_contains\": \"thank-you\"}}`); Meta validates it and rejects a malformed one with \"A conversion rule is required at creation time\".
     # @param account_id [String] Meta ads SocialAccount id.
     # @param create_custom_conversion_request [CreateCustomConversionRequest] 
@@ -370,7 +370,7 @@ module Zernio
       data
     end
 
-    # Create or reuse a custom conversion
+    # Create custom conversion
     # Provision the Meta custom conversion an ads flow optimises toward, and hand back the &#x60;customConversionId&#x60; for &#x60;promotedObject.customConversionId&#x60; on POST /v1/ads/create. Removes the manual \&quot;create it in Ads Manager first\&quot; step.  **Reuse is ours, not Meta&#39;s.** Meta&#39;s create is not idempotent, so a retried request would otherwise mint a duplicate carrying none of the original&#39;s optimisation history. A non-archived conversion with the same &#x60;name&#x60; on the same &#x60;pixelId&#x60; is returned instead of created, with &#x60;reused: true&#x60; and a 200 rather than a 201.  &#x60;rule&#x60; is forwarded verbatim in Meta&#39;s own grammar (e.g. &#x60;{\&quot;url\&quot;: {\&quot;i_contains\&quot;: \&quot;thank-you\&quot;}}&#x60;); Meta validates it and rejects a malformed one with \&quot;A conversion rule is required at creation time\&quot;.
     # @param account_id [String] Meta ads SocialAccount id.
     # @param create_custom_conversion_request [CreateCustomConversionRequest] 
@@ -1235,7 +1235,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # List DSA beneficiary/payor suggestions
+    # Get DSA recommendations
     # Returns Meta's suggested beneficiary/payor names for an ad account, derived by Meta from the account's recent activity. Useful for prefilling `dsaBeneficiary`/`dsaPayor` inputs, or the defaults sent to `PATCH /v1/ads/accounts`, in your own UI.  Meta returns a single flat list. Entries are not labeled as beneficiary or payor, and since these are legal disclosures Zernio never applies them automatically: let your user pick the right entity. The list may be empty for accounts with little activity. Meta accounts only. 
     # @param account_id [String] Account ID (metaads, or a facebook/instagram posting account)
     # @param ad_account_id [String] Meta ad account ID (act_...)
@@ -1246,7 +1246,7 @@ module Zernio
       data
     end
 
-    # List DSA beneficiary/payor suggestions
+    # Get DSA recommendations
     # Returns Meta&#39;s suggested beneficiary/payor names for an ad account, derived by Meta from the account&#39;s recent activity. Useful for prefilling &#x60;dsaBeneficiary&#x60;/&#x60;dsaPayor&#x60; inputs, or the defaults sent to &#x60;PATCH /v1/ads/accounts&#x60;, in your own UI.  Meta returns a single flat list. Entries are not labeled as beneficiary or payor, and since these are legal disclosures Zernio never applies them automatically: let your user pick the right entity. The list may be empty for accounts with little activity. Meta accounts only. 
     # @param account_id [String] Account ID (metaads, or a facebook/instagram posting account)
     # @param ad_account_id [String] Meta ad account ID (act_...)
@@ -2407,7 +2407,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # High demand periods / budget schedules
+    # List high-demand periods
     # Scheduled budget increases (Meta's budget-scheduling API). The Graph edge lives on the campaign and ad-set nodes only, so exactly one of `campaignId` / `adSetId` (platform ids) is required. Rows returned verbatim (budget_value, budget_value_type, time window, recurrence).
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
     # @param [Hash] opts the optional parameters
@@ -2421,7 +2421,7 @@ module Zernio
       data
     end
 
-    # High demand periods / budget schedules
+    # List high-demand periods
     # Scheduled budget increases (Meta&#39;s budget-scheduling API). The Graph edge lives on the campaign and ad-set nodes only, so exactly one of &#x60;campaignId&#x60; / &#x60;adSetId&#x60; (platform ids) is required. Rows returned verbatim (budget_value, budget_value_type, time window, recurrence).
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
     # @param [Hash] opts the optional parameters
@@ -2565,6 +2565,81 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#list_meta_businesses\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List TikTok ad pixels
+    # Lists pixels and their supported optimization events for a connected TikTok Ads account. The advertiser defaults to the first advertiser on the connection. Reconnect if Pixel Management permission has not been granted.
+    # @param account_id [String] Zernio SocialAccount ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :advertiser_id Advertiser belonging to this connection.
+    # @option opts [String] :code Filter by a Pixel Code.
+    # @return [ListTikTokAdPixels200Response]
+    def list_tik_tok_ad_pixels(account_id, opts = {})
+      data, _status_code, _headers = list_tik_tok_ad_pixels_with_http_info(account_id, opts)
+      data
+    end
+
+    # List TikTok ad pixels
+    # Lists pixels and their supported optimization events for a connected TikTok Ads account. The advertiser defaults to the first advertiser on the connection. Reconnect if Pixel Management permission has not been granted.
+    # @param account_id [String] Zernio SocialAccount ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :advertiser_id Advertiser belonging to this connection.
+    # @option opts [String] :code Filter by a Pixel Code.
+    # @return [Array<(ListTikTokAdPixels200Response, Integer, Hash)>] ListTikTokAdPixels200Response data, response status code and response headers
+    def list_tik_tok_ad_pixels_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.list_tik_tok_ad_pixels ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_tik_tok_ad_pixels"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdAccountsApi.list_tik_tok_ad_pixels, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/pixels'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'advertiserId'] = opts[:'advertiser_id'] if !opts[:'advertiser_id'].nil?
+      query_params[:'code'] = opts[:'code'] if !opts[:'code'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListTikTokAdPixels200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.list_tik_tok_ad_pixels",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#list_tik_tok_ad_pixels\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

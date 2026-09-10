@@ -909,6 +909,224 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List partnership ad content
+    # Private beta. Lists creator Instagram posts available to the advertiser for Partnership Ads. Supply creatorUsername or postUrl. Requires instagram_branded_content_ads_brand permission and an advertiser Instagram Business Account.
+    # @param account_id [String] Zernio SocialAccount ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :creator_username Creator username. Required unless postUrl is supplied.
+    # @option opts [String] :post_url Instagram post permalink. Required unless creatorUsername is supplied.
+    # @option opts [Boolean] :only_allowlisted Return only creators with account-level permission.
+    # @return [ListPartnershipAdContent200Response]
+    def list_partnership_ad_content(account_id, opts = {})
+      data, _status_code, _headers = list_partnership_ad_content_with_http_info(account_id, opts)
+      data
+    end
+
+    # List partnership ad content
+    # Private beta. Lists creator Instagram posts available to the advertiser for Partnership Ads. Supply creatorUsername or postUrl. Requires instagram_branded_content_ads_brand permission and an advertiser Instagram Business Account.
+    # @param account_id [String] Zernio SocialAccount ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :creator_username Creator username. Required unless postUrl is supplied.
+    # @option opts [String] :post_url Instagram post permalink. Required unless creatorUsername is supplied.
+    # @option opts [Boolean] :only_allowlisted Return only creators with account-level permission.
+    # @return [Array<(ListPartnershipAdContent200Response, Integer, Hash)>] ListPartnershipAdContent200Response data, response status code and response headers
+    def list_partnership_ad_content_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCreativesApi.list_partnership_ad_content ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdCreativesApi.list_partnership_ad_content"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdCreativesApi.list_partnership_ad_content, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/partnership-content'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'creatorUsername'] = opts[:'creator_username'] if !opts[:'creator_username'].nil?
+      query_params[:'postUrl'] = opts[:'post_url'] if !opts[:'post_url'].nil?
+      query_params[:'onlyAllowlisted'] = opts[:'only_allowlisted'] if !opts[:'only_allowlisted'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListPartnershipAdContent200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCreativesApi.list_partnership_ad_content",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCreativesApi#list_partnership_ad_content\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List partnership permissions
+    # Private beta. Lists granted or pending creator permissions for the advertiser Instagram Business Account. Requires instagram_branded_content_ads_brand permission.
+    # @param account_id [String] Zernio SocialAccount ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :creator_username Filter by creator username.
+    # @return [ListPartnershipAdPermissions200Response]
+    def list_partnership_ad_permissions(account_id, opts = {})
+      data, _status_code, _headers = list_partnership_ad_permissions_with_http_info(account_id, opts)
+      data
+    end
+
+    # List partnership permissions
+    # Private beta. Lists granted or pending creator permissions for the advertiser Instagram Business Account. Requires instagram_branded_content_ads_brand permission.
+    # @param account_id [String] Zernio SocialAccount ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :creator_username Filter by creator username.
+    # @return [Array<(ListPartnershipAdPermissions200Response, Integer, Hash)>] ListPartnershipAdPermissions200Response data, response status code and response headers
+    def list_partnership_ad_permissions_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCreativesApi.list_partnership_ad_permissions ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdCreativesApi.list_partnership_ad_permissions"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdCreativesApi.list_partnership_ad_permissions, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/partnership-permissions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'creatorUsername'] = opts[:'creator_username'] if !opts[:'creator_username'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListPartnershipAdPermissions200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCreativesApi.list_partnership_ad_permissions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCreativesApi#list_partnership_ad_permissions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Set partnership permission
+    # Private beta. Requests permission from a creator or revokes it when revoke is true. Requests require the creator to approve in Instagram. Requires instagram_branded_content_ads_brand permission.
+    # @param set_partnership_ad_permission_request [SetPartnershipAdPermissionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [SetPartnershipAdPermission200Response]
+    def set_partnership_ad_permission(set_partnership_ad_permission_request, opts = {})
+      data, _status_code, _headers = set_partnership_ad_permission_with_http_info(set_partnership_ad_permission_request, opts)
+      data
+    end
+
+    # Set partnership permission
+    # Private beta. Requests permission from a creator or revokes it when revoke is true. Requests require the creator to approve in Instagram. Requires instagram_branded_content_ads_brand permission.
+    # @param set_partnership_ad_permission_request [SetPartnershipAdPermissionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SetPartnershipAdPermission200Response, Integer, Hash)>] SetPartnershipAdPermission200Response data, response status code and response headers
+    def set_partnership_ad_permission_with_http_info(set_partnership_ad_permission_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCreativesApi.set_partnership_ad_permission ...'
+      end
+      # verify the required parameter 'set_partnership_ad_permission_request' is set
+      if @api_client.config.client_side_validation && set_partnership_ad_permission_request.nil?
+        fail ArgumentError, "Missing the required parameter 'set_partnership_ad_permission_request' when calling AdCreativesApi.set_partnership_ad_permission"
+      end
+      # resource path
+      local_var_path = '/v1/ads/partnership-permissions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_partnership_ad_permission_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SetPartnershipAdPermission200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCreativesApi.set_partnership_ad_permission",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCreativesApi#set_partnership_ad_permission\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Rename a creative
     # Renames a creative. Creatives are immutable on Meta beyond `name`. For content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with `creative`).
     # @param creative_id [String] Platform creative id
