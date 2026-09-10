@@ -48,6 +48,12 @@ module Zernio
     # Instagram Reels skip rate, 0 to 1
     attr_accessor :reels_skip_rate
 
+    # TikTok business lane: share of viewers who watched to the end, 0 to 1
+    attr_accessor :completion_rate
+
+    # TikTok business lane: profile views attributed to the post
+    attr_accessor :profile_views
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -64,7 +70,9 @@ module Zernio
         :'ig_reels_avg_watch_time' => :'igReelsAvgWatchTime',
         :'ig_reels_video_view_total_time' => :'igReelsVideoViewTotalTime',
         :'reposts' => :'reposts',
-        :'reels_skip_rate' => :'reelsSkipRate'
+        :'reels_skip_rate' => :'reelsSkipRate',
+        :'completion_rate' => :'completionRate',
+        :'profile_views' => :'profileViews'
       }
     end
 
@@ -94,7 +102,9 @@ module Zernio
         :'ig_reels_avg_watch_time' => :'Integer',
         :'ig_reels_video_view_total_time' => :'Integer',
         :'reposts' => :'Integer',
-        :'reels_skip_rate' => :'Float'
+        :'reels_skip_rate' => :'Float',
+        :'completion_rate' => :'Float',
+        :'profile_views' => :'Integer'
       }
     end
 
@@ -203,6 +213,18 @@ module Zernio
       else
         self.reels_skip_rate = nil
       end
+
+      if attributes.key?(:'completion_rate')
+        self.completion_rate = attributes[:'completion_rate']
+      else
+        self.completion_rate = nil
+      end
+
+      if attributes.key?(:'profile_views')
+        self.profile_views = attributes[:'profile_views']
+      else
+        self.profile_views = nil
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -266,6 +288,14 @@ module Zernio
         invalid_properties.push('invalid value for "reels_skip_rate", reels_skip_rate cannot be nil.')
       end
 
+      if @completion_rate.nil?
+        invalid_properties.push('invalid value for "completion_rate", completion_rate cannot be nil.')
+      end
+
+      if @profile_views.nil?
+        invalid_properties.push('invalid value for "profile_views", profile_views cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -287,6 +317,8 @@ module Zernio
       return false if @ig_reels_video_view_total_time.nil?
       return false if @reposts.nil?
       return false if @reels_skip_rate.nil?
+      return false if @completion_rate.nil?
+      return false if @profile_views.nil?
       true
     end
 
@@ -430,6 +462,26 @@ module Zernio
       @reels_skip_rate = reels_skip_rate
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] completion_rate Value to be assigned
+    def completion_rate=(completion_rate)
+      if completion_rate.nil?
+        fail ArgumentError, 'completion_rate cannot be nil'
+      end
+
+      @completion_rate = completion_rate
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] profile_views Value to be assigned
+    def profile_views=(profile_views)
+      if profile_views.nil?
+        fail ArgumentError, 'profile_views cannot be nil'
+      end
+
+      @profile_views = profile_views
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -448,7 +500,9 @@ module Zernio
           ig_reels_avg_watch_time == o.ig_reels_avg_watch_time &&
           ig_reels_video_view_total_time == o.ig_reels_video_view_total_time &&
           reposts == o.reposts &&
-          reels_skip_rate == o.reels_skip_rate
+          reels_skip_rate == o.reels_skip_rate &&
+          completion_rate == o.completion_rate &&
+          profile_views == o.profile_views
     end
 
     # @see the `==` method
@@ -460,7 +514,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [impressions, reach, likes, comments, shares, saves, sends, clicks, views, follows, ig_reels_avg_watch_time, ig_reels_video_view_total_time, reposts, reels_skip_rate].hash
+      [impressions, reach, likes, comments, shares, saves, sends, clicks, views, follows, ig_reels_avg_watch_time, ig_reels_video_view_total_time, reposts, reels_skip_rate, completion_rate, profile_views].hash
     end
 
     # Builds the object from hash

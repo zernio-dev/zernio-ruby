@@ -44,6 +44,12 @@ module Zernio
     # Instagram Reels only: percentage (0-100) of initial views that skipped the reel within its first 3 seconds, as reported by Meta. Meta labels the metric estimated and in development, so it can move between syncs. 0 for non-Reels media and other platforms. When a post is published to several accounts, the aggregate is weighted by views.
     attr_accessor :reels_skip_rate
 
+    # TikTok accounts connected through the TikTok for Business app only: share of viewers who watched the video to the end, 0 to 1, as TikTok reports it (T+24-48h, only for posts active in the last 7 days). 0 for other platforms. When a post is published to several accounts, the aggregate is weighted by views.
+    attr_accessor :completion_rate
+
+    # TikTok accounts connected through the TikTok for Business app only: profile views from users who reached the profile through this post (T+24-48h). 0 for other platforms.
+    attr_accessor :profile_views
+
     # Instagram accounts connected with Facebook Login only: reposts of the media by other users, minus deleted reposts, on feed posts, reels and stories. Meta does not expose this metric for accounts connected with Instagram Login, so those always report 0. 0 for other platforms, including Threads, where reposts are counted in shares instead.
     attr_accessor :reposts
 
@@ -70,6 +76,8 @@ module Zernio
         :'ig_reels_avg_watch_time' => :'igReelsAvgWatchTime',
         :'ig_reels_video_view_total_time' => :'igReelsVideoViewTotalTime',
         :'reels_skip_rate' => :'reelsSkipRate',
+        :'completion_rate' => :'completionRate',
+        :'profile_views' => :'profileViews',
         :'reposts' => :'reposts',
         :'video_duration_seconds' => :'videoDurationSeconds',
         :'engagement_rate' => :'engagementRate',
@@ -102,6 +110,8 @@ module Zernio
         :'ig_reels_avg_watch_time' => :'Integer',
         :'ig_reels_video_view_total_time' => :'Integer',
         :'reels_skip_rate' => :'Float',
+        :'completion_rate' => :'Float',
+        :'profile_views' => :'Integer',
         :'reposts' => :'Integer',
         :'video_duration_seconds' => :'Integer',
         :'engagement_rate' => :'Float',
@@ -181,6 +191,14 @@ module Zernio
         self.reels_skip_rate = attributes[:'reels_skip_rate']
       end
 
+      if attributes.key?(:'completion_rate')
+        self.completion_rate = attributes[:'completion_rate']
+      end
+
+      if attributes.key?(:'profile_views')
+        self.profile_views = attributes[:'profile_views']
+      end
+
       if attributes.key?(:'reposts')
         self.reposts = attributes[:'reposts']
       end
@@ -230,6 +248,8 @@ module Zernio
           ig_reels_avg_watch_time == o.ig_reels_avg_watch_time &&
           ig_reels_video_view_total_time == o.ig_reels_video_view_total_time &&
           reels_skip_rate == o.reels_skip_rate &&
+          completion_rate == o.completion_rate &&
+          profile_views == o.profile_views &&
           reposts == o.reposts &&
           video_duration_seconds == o.video_duration_seconds &&
           engagement_rate == o.engagement_rate &&
@@ -245,7 +265,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [impressions, reach, likes, comments, shares, saves, clicks, views, follows, ig_reels_avg_watch_time, ig_reels_video_view_total_time, reels_skip_rate, reposts, video_duration_seconds, engagement_rate, last_updated].hash
+      [impressions, reach, likes, comments, shares, saves, clicks, views, follows, ig_reels_avg_watch_time, ig_reels_video_view_total_time, reels_skip_rate, completion_rate, profile_views, reposts, video_duration_seconds, engagement_rate, last_updated].hash
     end
 
     # Builds the object from hash
