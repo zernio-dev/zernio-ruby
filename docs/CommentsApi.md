@@ -11,12 +11,14 @@ All URIs are relative to *https://zernio.com/api*
 | [**like_inbox_comment**](CommentsApi.md#like_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/like | Like comment |
 | [**like_post**](CommentsApi.md#like_post) | **POST** /v1/inbox/posts/{postId}/like | Like post |
 | [**list_inbox_comments**](CommentsApi.md#list_inbox_comments) | **GET** /v1/inbox/comments | List commented posts |
+| [**pin_inbox_comment**](CommentsApi.md#pin_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/pin | Pin comment |
 | [**reply_to_inbox_post**](CommentsApi.md#reply_to_inbox_post) | **POST** /v1/inbox/comments/{postId} | Reply to comment |
 | [**send_private_reply_to_comment**](CommentsApi.md#send_private_reply_to_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/private-reply | Send private reply |
 | [**set_comment_moderation**](CommentsApi.md#set_comment_moderation) | **POST** /v1/inbox/comments/{postId}/{commentId}/moderation | Set comment moderation status |
 | [**unhide_inbox_comment**](CommentsApi.md#unhide_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment |
 | [**unlike_inbox_comment**](CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment |
 | [**unlike_post**](CommentsApi.md#unlike_post) | **DELETE** /v1/inbox/posts/{postId}/like | Unlike post |
+| [**unpin_inbox_comment**](CommentsApi.md#unpin_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/pin | Unpin comment |
 
 
 ## delete_inbox_comment
@@ -171,7 +173,7 @@ end
 
 Get post comments
 
-Fetch comments for a specific post. Requires accountId query parameter.  On Facebook and Instagram, passing a COMMENT id as `postId` is also supported and returns that comment's replies instead of the post's top-level comments. This is not available on YouTube, where `postId` must be a video id.  Responses are cached for up to 10 minutes, so a page may lag new comments by that window. Do not poll this endpoint for real-time updates: subscribe to the `comment.received` webhook, which delivers new comments as they arrive. Your own writes (creating, replying to, or deleting a comment) refresh the cache immediately. 
+Fetch comments for a specific post. Requires accountId query parameter.  On Facebook and Instagram, passing a COMMENT id as `postId` is also supported and returns that comment's replies instead of the post's top-level comments. This is not available on YouTube, where `postId` must be a video id.  Responses are cached for up to 10 minutes, so a page may lag new comments by that window. Do not poll this endpoint for real-time updates: subscribe to the `comment.received` webhook, which delivers new comments as they arrive. Your own writes (creating, replying to, or deleting a comment) refresh the cache immediately.  TikTok is served for accounts connected through the TikTok for Business app: `postId` is the TikTok video id, each top-level comment carries up to three inline replies, and `commentId` pages the full reply list of one comment. Developer-app TikTok accounts return 400 with code `PLATFORM_LIMITATION`. 
 
 ### Examples
 
@@ -191,7 +193,7 @@ opts = {
   subreddit: 'subreddit_example', # String | (Reddit only) Subreddit name
   limit: 56, # Integer | Maximum number of comments to return
   cursor: 'cursor_example', # String | Pagination cursor, returned by a previous call as `pagination.cursor`. This is the platform's own opaque paging value passed through verbatim: never construct, decode or validate it client-side.
-  comment_id: 'comment_id_example' # String | (Reddit only) Get replies to a specific comment
+  comment_id: 'comment_id_example' # String | (Reddit and TikTok only) Get replies to a specific comment
 }
 
 begin
@@ -230,7 +232,7 @@ end
 | **subreddit** | **String** | (Reddit only) Subreddit name | [optional] |
 | **limit** | **Integer** | Maximum number of comments to return | [optional][default to 25] |
 | **cursor** | **String** | Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side. | [optional] |
-| **comment_id** | **String** | (Reddit only) Get replies to a specific comment | [optional] |
+| **comment_id** | **String** | (Reddit and TikTok only) Get replies to a specific comment | [optional] |
 
 ### Return type
 
@@ -252,7 +254,7 @@ end
 
 Hide comment
 
-Hide a comment on a post. Supported by Facebook, Instagram, Threads, and X. Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
+Hide a comment on a post. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
 
 ### Examples
 
@@ -550,6 +552,79 @@ end
 - **Accept**: application/json
 
 
+## pin_inbox_comment
+
+> <PinInboxComment200Response> pin_inbox_comment(post_id, comment_id, pin_inbox_comment_request)
+
+Pin comment
+
+Pin a top-level comment to the top of a post's comment section. TikTok accounts connected through the TikTok for Business app only; every other platform returns 400. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommentsApi.new
+post_id = 'post_id_example' # String | 
+comment_id = 'comment_id_example' # String | 
+pin_inbox_comment_request = Zernio::PinInboxCommentRequest.new({account_id: 'account_id_example'}) # PinInboxCommentRequest | 
+
+begin
+  # Pin comment
+  result = api_instance.pin_inbox_comment(post_id, comment_id, pin_inbox_comment_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommentsApi->pin_inbox_comment: #{e}"
+end
+```
+
+#### Using the pin_inbox_comment_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PinInboxComment200Response>, Integer, Hash)> pin_inbox_comment_with_http_info(post_id, comment_id, pin_inbox_comment_request)
+
+```ruby
+begin
+  # Pin comment
+  data, status_code, headers = api_instance.pin_inbox_comment_with_http_info(post_id, comment_id, pin_inbox_comment_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PinInboxComment200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommentsApi->pin_inbox_comment_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **comment_id** | **String** |  |  |
+| **pin_inbox_comment_request** | [**PinInboxCommentRequest**](PinInboxCommentRequest.md) |  |  |
+
+### Return type
+
+[**PinInboxComment200Response**](PinInboxComment200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## reply_to_inbox_post
 
 > <ReplyToInboxPost200Response> reply_to_inbox_post(post_id, reply_to_inbox_post_request, opts)
@@ -777,7 +852,7 @@ end
 
 Unhide comment
 
-Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, and X. 
+Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). 
 
 ### Examples
 
@@ -985,6 +1060,79 @@ end
 ### Return type
 
 [**UnlikePost200Response**](UnlikePost200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## unpin_inbox_comment
+
+> <PinInboxComment200Response> unpin_inbox_comment(post_id, comment_id, account_id)
+
+Unpin comment
+
+Unpin a previously pinned comment. TikTok accounts connected through the TikTok for Business app only. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommentsApi.new
+post_id = 'post_id_example' # String | 
+comment_id = 'comment_id_example' # String | 
+account_id = 'account_id_example' # String | 
+
+begin
+  # Unpin comment
+  result = api_instance.unpin_inbox_comment(post_id, comment_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommentsApi->unpin_inbox_comment: #{e}"
+end
+```
+
+#### Using the unpin_inbox_comment_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PinInboxComment200Response>, Integer, Hash)> unpin_inbox_comment_with_http_info(post_id, comment_id, account_id)
+
+```ruby
+begin
+  # Unpin comment
+  data, status_code, headers = api_instance.unpin_inbox_comment_with_http_info(post_id, comment_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PinInboxComment200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommentsApi->unpin_inbox_comment_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **comment_id** | **String** |  |  |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**PinInboxComment200Response**](PinInboxComment200Response.md)
 
 ### Authorization
 

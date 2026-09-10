@@ -14,22 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SyncExternalPosts200ResponseSynced < ApiModelBase
-    # Posts returned by the platform listing during the on-demand sync
-    attr_accessor :posts_found
-
-    # Posts inserted or updated in Zernio
-    attr_accessor :posts_synced
-
-    # True when the account was synced within the debounce window and no live fetch ran.
-    attr_accessor :skipped
+  class PinInboxCommentRequest < ApiModelBase
+    # The social account ID
+    attr_accessor :account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'posts_found' => :'postsFound',
-        :'posts_synced' => :'postsSynced',
-        :'skipped' => :'skipped'
+        :'account_id' => :'accountId'
       }
     end
 
@@ -46,9 +38,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'posts_found' => :'Integer',
-        :'posts_synced' => :'Integer',
-        :'skipped' => :'Boolean'
+        :'account_id' => :'String'
       }
     end
 
@@ -62,28 +52,22 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SyncExternalPosts200ResponseSynced` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PinInboxCommentRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SyncExternalPosts200ResponseSynced`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PinInboxCommentRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'posts_found')
-        self.posts_found = attributes[:'posts_found']
-      end
-
-      if attributes.key?(:'posts_synced')
-        self.posts_synced = attributes[:'posts_synced']
-      end
-
-      if attributes.key?(:'skipped')
-        self.skipped = attributes[:'skipped']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      else
+        self.account_id = nil
       end
     end
 
@@ -92,6 +76,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -99,7 +87,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @account_id.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] account_id Value to be assigned
+    def account_id=(account_id)
+      if account_id.nil?
+        fail ArgumentError, 'account_id cannot be nil'
+      end
+
+      @account_id = account_id
     end
 
     # Checks equality by comparing each attribute.
@@ -107,9 +106,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          posts_found == o.posts_found &&
-          posts_synced == o.posts_synced &&
-          skipped == o.skipped
+          account_id == o.account_id
     end
 
     # @see the `==` method
@@ -121,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [posts_found, posts_synced, skipped].hash
+      [account_id].hash
     end
 
     # Builds the object from hash

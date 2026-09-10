@@ -62,14 +62,14 @@ describe 'CommentsApi' do
 
   # unit tests for get_inbox_post_comments
   # Get post comments
-  # Fetch comments for a specific post. Requires accountId query parameter.  On Facebook and Instagram, passing a COMMENT id as &#x60;postId&#x60; is also supported and returns that comment&#39;s replies instead of the post&#39;s top-level comments. This is not available on YouTube, where &#x60;postId&#x60; must be a video id.  Responses are cached for up to 10 minutes, so a page may lag new comments by that window. Do not poll this endpoint for real-time updates: subscribe to the &#x60;comment.received&#x60; webhook, which delivers new comments as they arrive. Your own writes (creating, replying to, or deleting a comment) refresh the cache immediately. 
+  # Fetch comments for a specific post. Requires accountId query parameter.  On Facebook and Instagram, passing a COMMENT id as &#x60;postId&#x60; is also supported and returns that comment&#39;s replies instead of the post&#39;s top-level comments. This is not available on YouTube, where &#x60;postId&#x60; must be a video id.  Responses are cached for up to 10 minutes, so a page may lag new comments by that window. Do not poll this endpoint for real-time updates: subscribe to the &#x60;comment.received&#x60; webhook, which delivers new comments as they arrive. Your own writes (creating, replying to, or deleting a comment) refresh the cache immediately.  TikTok is served for accounts connected through the TikTok for Business app: &#x60;postId&#x60; is the TikTok video id, each top-level comment carries up to three inline replies, and &#x60;commentId&#x60; pages the full reply list of one comment. Developer-app TikTok accounts return 400 with code &#x60;PLATFORM_LIMITATION&#x60;. 
   # @param post_id Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. On Facebook and Instagram, a comment ID is also accepted here and returns that comment&#39;s replies.
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :subreddit (Reddit only) Subreddit name
   # @option opts [Integer] :limit Maximum number of comments to return
   # @option opts [String] :cursor Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side.
-  # @option opts [String] :comment_id (Reddit only) Get replies to a specific comment
+  # @option opts [String] :comment_id (Reddit and TikTok only) Get replies to a specific comment
   # @return [GetInboxPostComments200Response]
   describe 'get_inbox_post_comments test' do
     it 'should work' do
@@ -79,7 +79,7 @@ describe 'CommentsApi' do
 
   # unit tests for hide_inbox_comment
   # Hide comment
-  # Hide a comment on a post. Supported by Facebook, Instagram, Threads, and X. Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
+  # Hide a comment on a post. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
   # @param post_id 
   # @param comment_id 
   # @param hide_inbox_comment_request 
@@ -138,6 +138,20 @@ describe 'CommentsApi' do
     end
   end
 
+  # unit tests for pin_inbox_comment
+  # Pin comment
+  # Pin a top-level comment to the top of a post&#39;s comment section. TikTok accounts connected through the TikTok for Business app only; every other platform returns 400. 
+  # @param post_id 
+  # @param comment_id 
+  # @param pin_inbox_comment_request 
+  # @param [Hash] opts the optional parameters
+  # @return [PinInboxComment200Response]
+  describe 'pin_inbox_comment test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for reply_to_inbox_post
   # Reply to comment
   # Post a reply to a post or specific comment. Requires accountId in request body.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with &#x60;Idempotent-Replayed: true&#x60;) instead of posting the comment a second time; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different postId returns 422 rather than replaying the other post&#39;s response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \&quot;request succeeded but the response was lost\&quot; case. After an ambiguous failure (a 5xx or a network timeout) list the post&#39;s comments before retrying with the same key, and treat an empty result as inconclusive rather than as proof nothing was posted. 
@@ -182,7 +196,7 @@ describe 'CommentsApi' do
 
   # unit tests for unhide_inbox_comment
   # Unhide comment
-  # Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, and X. 
+  # Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). 
   # @param post_id 
   # @param comment_id 
   # @param account_id 
@@ -218,6 +232,20 @@ describe 'CommentsApi' do
   # @option opts [String] :like_uri (Bluesky only) The like URI returned when liking
   # @return [UnlikePost200Response]
   describe 'unlike_post test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for unpin_inbox_comment
+  # Unpin comment
+  # Unpin a previously pinned comment. TikTok accounts connected through the TikTok for Business app only. 
+  # @param post_id 
+  # @param comment_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [PinInboxComment200Response]
+  describe 'unpin_inbox_comment test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

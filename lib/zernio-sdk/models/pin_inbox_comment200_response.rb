@@ -14,22 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SyncExternalPosts200ResponseSynced < ApiModelBase
-    # Posts returned by the platform listing during the on-demand sync
-    attr_accessor :posts_found
+  class PinInboxComment200Response < ApiModelBase
+    attr_accessor :status
 
-    # Posts inserted or updated in Zernio
-    attr_accessor :posts_synced
+    attr_accessor :comment_id
 
-    # True when the account was synced within the debounce window and no live fetch ran.
-    attr_accessor :skipped
+    attr_accessor :pinned
+
+    attr_accessor :platform
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'posts_found' => :'postsFound',
-        :'posts_synced' => :'postsSynced',
-        :'skipped' => :'skipped'
+        :'status' => :'status',
+        :'comment_id' => :'commentId',
+        :'pinned' => :'pinned',
+        :'platform' => :'platform'
       }
     end
 
@@ -46,9 +46,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'posts_found' => :'Integer',
-        :'posts_synced' => :'Integer',
-        :'skipped' => :'Boolean'
+        :'status' => :'String',
+        :'comment_id' => :'String',
+        :'pinned' => :'Boolean',
+        :'platform' => :'String'
       }
     end
 
@@ -62,28 +63,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SyncExternalPosts200ResponseSynced` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PinInboxComment200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SyncExternalPosts200ResponseSynced`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PinInboxComment200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'posts_found')
-        self.posts_found = attributes[:'posts_found']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'posts_synced')
-        self.posts_synced = attributes[:'posts_synced']
+      if attributes.key?(:'comment_id')
+        self.comment_id = attributes[:'comment_id']
       end
 
-      if attributes.key?(:'skipped')
-        self.skipped = attributes[:'skipped']
+      if attributes.key?(:'pinned')
+        self.pinned = attributes[:'pinned']
+      end
+
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
       end
     end
 
@@ -107,9 +112,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          posts_found == o.posts_found &&
-          posts_synced == o.posts_synced &&
-          skipped == o.skipped
+          status == o.status &&
+          comment_id == o.comment_id &&
+          pinned == o.pinned &&
+          platform == o.platform
     end
 
     # @see the `==` method
@@ -121,7 +127,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [posts_found, posts_synced, skipped].hash
+      [status, comment_id, pinned, platform].hash
     end
 
     # Builds the object from hash

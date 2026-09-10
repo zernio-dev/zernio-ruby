@@ -1312,6 +1312,8 @@ docs/Pending.md
 docs/PhoneNumberStockWatch.md
 docs/PhoneNumbersApi.md
 docs/PinDiscordMessage200Response.md
+docs/PinInboxComment200Response.md
+docs/PinInboxCommentRequest.md
 docs/PinterestPlatformData.md
 docs/PlatformAnalytics.md
 docs/PlatformTarget.md
@@ -3428,6 +3430,8 @@ lib/zernio-sdk/models/pause_workflow200_response.rb
 lib/zernio-sdk/models/pending.rb
 lib/zernio-sdk/models/phone_number_stock_watch.rb
 lib/zernio-sdk/models/pin_discord_message200_response.rb
+lib/zernio-sdk/models/pin_inbox_comment200_response.rb
+lib/zernio-sdk/models/pin_inbox_comment_request.rb
 lib/zernio-sdk/models/pinterest_platform_data.rb
 lib/zernio-sdk/models/platform_analytics.rb
 lib/zernio-sdk/models/platform_target.rb
@@ -5512,6 +5516,8 @@ spec/models/pause_workflow200_response_spec.rb
 spec/models/pending_spec.rb
 spec/models/phone_number_stock_watch_spec.rb
 spec/models/pin_discord_message200_response_spec.rb
+spec/models/pin_inbox_comment200_response_spec.rb
+spec/models/pin_inbox_comment_request_spec.rb
 spec/models/pinterest_platform_data_spec.rb
 spec/models/platform_analytics_spec.rb
 spec/models/platform_target_account_id_spec.rb

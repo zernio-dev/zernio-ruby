@@ -177,14 +177,14 @@ module Zernio
     end
 
     # Get post comments
-    # Fetch comments for a specific post. Requires accountId query parameter.  On Facebook and Instagram, passing a COMMENT id as `postId` is also supported and returns that comment's replies instead of the post's top-level comments. This is not available on YouTube, where `postId` must be a video id.  Responses are cached for up to 10 minutes, so a page may lag new comments by that window. Do not poll this endpoint for real-time updates: subscribe to the `comment.received` webhook, which delivers new comments as they arrive. Your own writes (creating, replying to, or deleting a comment) refresh the cache immediately. 
+    # Fetch comments for a specific post. Requires accountId query parameter.  On Facebook and Instagram, passing a COMMENT id as `postId` is also supported and returns that comment's replies instead of the post's top-level comments. This is not available on YouTube, where `postId` must be a video id.  Responses are cached for up to 10 minutes, so a page may lag new comments by that window. Do not poll this endpoint for real-time updates: subscribe to the `comment.received` webhook, which delivers new comments as they arrive. Your own writes (creating, replying to, or deleting a comment) refresh the cache immediately.  TikTok is served for accounts connected through the TikTok for Business app: `postId` is the TikTok video id, each top-level comment carries up to three inline replies, and `commentId` pages the full reply list of one comment. Developer-app TikTok accounts return 400 with code `PLATFORM_LIMITATION`. 
     # @param post_id [String] Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. On Facebook and Instagram, a comment ID is also accepted here and returns that comment&#39;s replies.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :subreddit (Reddit only) Subreddit name
     # @option opts [Integer] :limit Maximum number of comments to return (default to 25)
     # @option opts [String] :cursor Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side.
-    # @option opts [String] :comment_id (Reddit only) Get replies to a specific comment
+    # @option opts [String] :comment_id (Reddit and TikTok only) Get replies to a specific comment
     # @return [GetInboxPostComments200Response]
     def get_inbox_post_comments(post_id, account_id, opts = {})
       data, _status_code, _headers = get_inbox_post_comments_with_http_info(post_id, account_id, opts)
@@ -192,14 +192,14 @@ module Zernio
     end
 
     # Get post comments
-    # Fetch comments for a specific post. Requires accountId query parameter.  On Facebook and Instagram, passing a COMMENT id as &#x60;postId&#x60; is also supported and returns that comment&#39;s replies instead of the post&#39;s top-level comments. This is not available on YouTube, where &#x60;postId&#x60; must be a video id.  Responses are cached for up to 10 minutes, so a page may lag new comments by that window. Do not poll this endpoint for real-time updates: subscribe to the &#x60;comment.received&#x60; webhook, which delivers new comments as they arrive. Your own writes (creating, replying to, or deleting a comment) refresh the cache immediately. 
+    # Fetch comments for a specific post. Requires accountId query parameter.  On Facebook and Instagram, passing a COMMENT id as &#x60;postId&#x60; is also supported and returns that comment&#39;s replies instead of the post&#39;s top-level comments. This is not available on YouTube, where &#x60;postId&#x60; must be a video id.  Responses are cached for up to 10 minutes, so a page may lag new comments by that window. Do not poll this endpoint for real-time updates: subscribe to the &#x60;comment.received&#x60; webhook, which delivers new comments as they arrive. Your own writes (creating, replying to, or deleting a comment) refresh the cache immediately.  TikTok is served for accounts connected through the TikTok for Business app: &#x60;postId&#x60; is the TikTok video id, each top-level comment carries up to three inline replies, and &#x60;commentId&#x60; pages the full reply list of one comment. Developer-app TikTok accounts return 400 with code &#x60;PLATFORM_LIMITATION&#x60;. 
     # @param post_id [String] Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID. On Facebook and Instagram, a comment ID is also accepted here and returns that comment&#39;s replies.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :subreddit (Reddit only) Subreddit name
     # @option opts [Integer] :limit Maximum number of comments to return (default to 25)
     # @option opts [String] :cursor Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side.
-    # @option opts [String] :comment_id (Reddit only) Get replies to a specific comment
+    # @option opts [String] :comment_id (Reddit and TikTok only) Get replies to a specific comment
     # @return [Array<(GetInboxPostComments200Response, Integer, Hash)>] GetInboxPostComments200Response data, response status code and response headers
     def get_inbox_post_comments_with_http_info(post_id, account_id, opts = {})
       if @api_client.config.debugging
@@ -267,7 +267,7 @@ module Zernio
     end
 
     # Hide comment
-    # Hide a comment on a post. Supported by Facebook, Instagram, Threads, and X. Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
+    # Hide a comment on a post. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
     # @param post_id [String] 
     # @param comment_id [String] 
     # @param hide_inbox_comment_request [HideInboxCommentRequest] 
@@ -279,7 +279,7 @@ module Zernio
     end
 
     # Hide comment
-    # Hide a comment on a post. Supported by Facebook, Instagram, Threads, and X. Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
+    # Hide a comment on a post. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
     # @param post_id [String] 
     # @param comment_id [String] 
     # @param hide_inbox_comment_request [HideInboxCommentRequest] 
@@ -608,6 +608,86 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Pin comment
+    # Pin a top-level comment to the top of a post's comment section. TikTok accounts connected through the TikTok for Business app only; every other platform returns 400. 
+    # @param post_id [String] 
+    # @param comment_id [String] 
+    # @param pin_inbox_comment_request [PinInboxCommentRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [PinInboxComment200Response]
+    def pin_inbox_comment(post_id, comment_id, pin_inbox_comment_request, opts = {})
+      data, _status_code, _headers = pin_inbox_comment_with_http_info(post_id, comment_id, pin_inbox_comment_request, opts)
+      data
+    end
+
+    # Pin comment
+    # Pin a top-level comment to the top of a post&#39;s comment section. TikTok accounts connected through the TikTok for Business app only; every other platform returns 400. 
+    # @param post_id [String] 
+    # @param comment_id [String] 
+    # @param pin_inbox_comment_request [PinInboxCommentRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(PinInboxComment200Response, Integer, Hash)>] PinInboxComment200Response data, response status code and response headers
+    def pin_inbox_comment_with_http_info(post_id, comment_id, pin_inbox_comment_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CommentsApi.pin_inbox_comment ...'
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling CommentsApi.pin_inbox_comment"
+      end
+      # verify the required parameter 'comment_id' is set
+      if @api_client.config.client_side_validation && comment_id.nil?
+        fail ArgumentError, "Missing the required parameter 'comment_id' when calling CommentsApi.pin_inbox_comment"
+      end
+      # verify the required parameter 'pin_inbox_comment_request' is set
+      if @api_client.config.client_side_validation && pin_inbox_comment_request.nil?
+        fail ArgumentError, "Missing the required parameter 'pin_inbox_comment_request' when calling CommentsApi.pin_inbox_comment"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/comments/{postId}/{commentId}/pin'.sub('{' + 'postId' + '}', CGI.escape(post_id.to_s)).sub('{' + 'commentId' + '}', CGI.escape(comment_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(pin_inbox_comment_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PinInboxComment200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"CommentsApi.pin_inbox_comment",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CommentsApi#pin_inbox_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Reply to comment
     # Post a reply to a post or specific comment. Requires accountId in request body.  **Idempotency:** send an `Idempotency-Key` header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with `Idempotent-Replayed: true`) instead of posting the comment a second time; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different postId returns 422 rather than replaying the other post's response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \"request succeeded but the response was lost\" case. After an ambiguous failure (a 5xx or a network timeout) list the post's comments before retrying with the same key, and treat an empty result as inconclusive rather than as proof nothing was posted. 
     # @param post_id [String] Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
@@ -850,7 +930,7 @@ module Zernio
     end
 
     # Unhide comment
-    # Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, and X. 
+    # Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). 
     # @param post_id [String] 
     # @param comment_id [String] 
     # @param account_id [String] 
@@ -862,7 +942,7 @@ module Zernio
     end
 
     # Unhide comment
-    # Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, and X. 
+    # Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). 
     # @param post_id [String] 
     # @param comment_id [String] 
     # @param account_id [String] 
@@ -1073,6 +1153,82 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CommentsApi#unlike_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Unpin comment
+    # Unpin a previously pinned comment. TikTok accounts connected through the TikTok for Business app only. 
+    # @param post_id [String] 
+    # @param comment_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [PinInboxComment200Response]
+    def unpin_inbox_comment(post_id, comment_id, account_id, opts = {})
+      data, _status_code, _headers = unpin_inbox_comment_with_http_info(post_id, comment_id, account_id, opts)
+      data
+    end
+
+    # Unpin comment
+    # Unpin a previously pinned comment. TikTok accounts connected through the TikTok for Business app only. 
+    # @param post_id [String] 
+    # @param comment_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(PinInboxComment200Response, Integer, Hash)>] PinInboxComment200Response data, response status code and response headers
+    def unpin_inbox_comment_with_http_info(post_id, comment_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CommentsApi.unpin_inbox_comment ...'
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling CommentsApi.unpin_inbox_comment"
+      end
+      # verify the required parameter 'comment_id' is set
+      if @api_client.config.client_side_validation && comment_id.nil?
+        fail ArgumentError, "Missing the required parameter 'comment_id' when calling CommentsApi.unpin_inbox_comment"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling CommentsApi.unpin_inbox_comment"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/comments/{postId}/{commentId}/pin'.sub('{' + 'postId' + '}', CGI.escape(post_id.to_s)).sub('{' + 'commentId' + '}', CGI.escape(comment_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PinInboxComment200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"CommentsApi.unpin_inbox_comment",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CommentsApi#unpin_inbox_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
