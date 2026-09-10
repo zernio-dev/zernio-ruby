@@ -24,6 +24,15 @@ module Zernio
     # Video mode (optional). Poster image for this rule's video; auto-generated when omitted.
     attr_accessor :thumbnail_url
 
+    # One headline pinned to this rule. Omit to inherit the top-level headline.
+    attr_accessor :headline
+
+    # One primary text pinned to this rule. Omit to inherit the top-level body.
+    attr_accessor :body
+
+    # One link description pinned to this rule. Omit to inherit the top-level description.
+    attr_accessor :description
+
     attr_accessor :placements
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -32,6 +41,9 @@ module Zernio
         :'image_url' => :'imageUrl',
         :'video_url' => :'videoUrl',
         :'thumbnail_url' => :'thumbnailUrl',
+        :'headline' => :'headline',
+        :'body' => :'body',
+        :'description' => :'description',
         :'placements' => :'placements'
       }
     end
@@ -52,6 +64,9 @@ module Zernio
         :'image_url' => :'String',
         :'video_url' => :'String',
         :'thumbnail_url' => :'String',
+        :'headline' => :'String',
+        :'body' => :'String',
+        :'description' => :'String',
         :'placements' => :'CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements'
       }
     end
@@ -90,6 +105,18 @@ module Zernio
         self.thumbnail_url = attributes[:'thumbnail_url']
       end
 
+      if attributes.key?(:'headline')
+        self.headline = attributes[:'headline']
+      end
+
+      if attributes.key?(:'body')
+        self.body = attributes[:'body']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
       if attributes.key?(:'placements')
         self.placements = attributes[:'placements']
       else
@@ -102,6 +129,26 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@headline.nil? && @headline.to_s.length > 255
+        invalid_properties.push('invalid value for "headline", the character length must be smaller than or equal to 255.')
+      end
+
+      if !@headline.nil? && @headline.to_s.length < 1
+        invalid_properties.push('invalid value for "headline", the character length must be greater than or equal to 1.')
+      end
+
+      if !@body.nil? && @body.to_s.length < 1
+        invalid_properties.push('invalid value for "body", the character length must be greater than or equal to 1.')
+      end
+
+      if !@description.nil? && @description.to_s.length > 255
+        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 255.')
+      end
+
+      if !@description.nil? && @description.to_s.length < 1
+        invalid_properties.push('invalid value for "description", the character length must be greater than or equal to 1.')
+      end
+
       if @placements.nil?
         invalid_properties.push('invalid value for "placements", placements cannot be nil.')
       end
@@ -113,8 +160,63 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@headline.nil? && @headline.to_s.length > 255
+      return false if !@headline.nil? && @headline.to_s.length < 1
+      return false if !@body.nil? && @body.to_s.length < 1
+      return false if !@description.nil? && @description.to_s.length > 255
+      return false if !@description.nil? && @description.to_s.length < 1
       return false if @placements.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] headline Value to be assigned
+    def headline=(headline)
+      if headline.nil?
+        fail ArgumentError, 'headline cannot be nil'
+      end
+
+      if headline.to_s.length > 255
+        fail ArgumentError, 'invalid value for "headline", the character length must be smaller than or equal to 255.'
+      end
+
+      if headline.to_s.length < 1
+        fail ArgumentError, 'invalid value for "headline", the character length must be greater than or equal to 1.'
+      end
+
+      @headline = headline
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] body Value to be assigned
+    def body=(body)
+      if body.nil?
+        fail ArgumentError, 'body cannot be nil'
+      end
+
+      if body.to_s.length < 1
+        fail ArgumentError, 'invalid value for "body", the character length must be greater than or equal to 1.'
+      end
+
+      @body = body
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if description.nil?
+        fail ArgumentError, 'description cannot be nil'
+      end
+
+      if description.to_s.length > 255
+        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 255.'
+      end
+
+      if description.to_s.length < 1
+        fail ArgumentError, 'invalid value for "description", the character length must be greater than or equal to 1.'
+      end
+
+      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -135,6 +237,9 @@ module Zernio
           image_url == o.image_url &&
           video_url == o.video_url &&
           thumbnail_url == o.thumbnail_url &&
+          headline == o.headline &&
+          body == o.body &&
+          description == o.description &&
           placements == o.placements
     end
 
@@ -147,7 +252,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [image_url, video_url, thumbnail_url, placements].hash
+      [image_url, video_url, thumbnail_url, headline, body, description, placements].hash
     end
 
     # Builds the object from hash
