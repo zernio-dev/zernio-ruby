@@ -40,6 +40,9 @@ module Zernio
     # Live carrier-stock snapshot (refreshed every 6h + on availability checks): false when NO offered type currently has deliverable inventory, so a purchase would fail. Treat as advisory; the purchase itself re-checks.
     attr_accessor :in_stock
 
+    # At least one out-of-stock type here can be pre-ordered (see `types[].preOrderable`).
+    attr_accessor :pre_orderable
+
     # Every number type offered in this country (default first). Capabilities, KYC tier, monthly price, and stock are per type. The country-level fields above mirror the first (default) entry. Pass the chosen `numberType` to POST /v1/phone-numbers/purchase. 
     attr_accessor :types
 
@@ -77,6 +80,7 @@ module Zernio
         :'sms_available' => :'smsAvailable',
         :'outbound_calling_available' => :'outboundCallingAvailable',
         :'in_stock' => :'inStock',
+        :'pre_orderable' => :'preOrderable',
         :'types' => :'types'
       }
     end
@@ -103,6 +107,7 @@ module Zernio
         :'sms_available' => :'Boolean',
         :'outbound_calling_available' => :'Boolean',
         :'in_stock' => :'Boolean',
+        :'pre_orderable' => :'Boolean',
         :'types' => :'Array<ListPhoneNumberCountries200ResponseCountriesInnerTypesInner>'
       }
     end
@@ -165,6 +170,10 @@ module Zernio
         self.in_stock = attributes[:'in_stock']
       end
 
+      if attributes.key?(:'pre_orderable')
+        self.pre_orderable = attributes[:'pre_orderable']
+      end
+
       if attributes.key?(:'types')
         if (value = attributes[:'types']).is_a?(Array)
           self.types = value
@@ -213,6 +222,7 @@ module Zernio
           sms_available == o.sms_available &&
           outbound_calling_available == o.outbound_calling_available &&
           in_stock == o.in_stock &&
+          pre_orderable == o.pre_orderable &&
           types == o.types
     end
 
@@ -225,7 +235,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, tier, monthly_cents, needs_kyc, calls_available, whatsapp_available, sms_available, outbound_calling_available, in_stock, types].hash
+      [code, tier, monthly_cents, needs_kyc, calls_available, whatsapp_available, sms_available, outbound_calling_available, in_stock, pre_orderable, types].hash
     end
 
     # Builds the object from hash

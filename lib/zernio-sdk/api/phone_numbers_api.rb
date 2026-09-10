@@ -361,7 +361,7 @@ module Zernio
     end
 
     # Watch an out-of-stock country
-    # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the `phone_number.stock_available` webhook. Stock is re-checked every 6h. One watch per country and number type; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 watches at once.  Countries and types marked `fulfilment: request` by GET /v1/phone-numbers/countries can also be watched. Those are sourced by a carrier request rather than held in stock, so a watch records interest and no date is implied. 
+    # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the `phone_number.stock_available` webhook. Stock is re-checked every 6h. One watch per country and number type; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 watches at once.  Countries and types marked `fulfilment: request` by GET /v1/phone-numbers/countries can also be watched, but anything with `preOrderable: true` does not need a watch: submit KYC and the carrier sources the number to order. 
     # @param create_phone_number_stock_watch_request [CreatePhoneNumberStockWatchRequest] 
     # @param [Hash] opts the optional parameters
     # @return [PhoneNumberStockWatch]
@@ -371,7 +371,7 @@ module Zernio
     end
 
     # Watch an out-of-stock country
-    # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the &#x60;phone_number.stock_available&#x60; webhook. Stock is re-checked every 6h. One watch per country and number type; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 watches at once.  Countries and types marked &#x60;fulfilment: request&#x60; by GET /v1/phone-numbers/countries can also be watched. Those are sourced by a carrier request rather than held in stock, so a watch records interest and no date is implied. 
+    # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the &#x60;phone_number.stock_available&#x60; webhook. Stock is re-checked every 6h. One watch per country and number type; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 watches at once.  Countries and types marked &#x60;fulfilment: request&#x60; by GET /v1/phone-numbers/countries can also be watched, but anything with &#x60;preOrderable: true&#x60; does not need a watch: submit KYC and the carrier sources the number to order. 
     # @param create_phone_number_stock_watch_request [CreatePhoneNumberStockWatchRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(PhoneNumberStockWatch, Integer, Hash)>] PhoneNumberStockWatch data, response status code and response headers

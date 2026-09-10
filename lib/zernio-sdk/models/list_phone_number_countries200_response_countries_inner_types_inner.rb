@@ -17,6 +17,7 @@ module Zernio
   class ListPhoneNumberCountries200ResponseCountriesInnerTypesInner < ApiModelBase
     attr_accessor :number_type
 
+    # Null on a `fulfilment: request` type, whose document tier is only known once its requirements are read.
     attr_accessor :tier
 
     attr_accessor :needs_kyc
@@ -32,6 +33,12 @@ module Zernio
     attr_accessor :calls_available
 
     attr_accessor :in_stock
+
+    # `request`: the carrier stocks this type nowhere and only sources it to order, so it is always a pre-order.
+    attr_accessor :fulfilment
+
+    # Out of stock but orderable anyway. Submit KYC as usual (POST /v1/phone-numbers/kyc) and the carrier sources the number after review, usually about 3 weeks and never guaranteed. Only document tiers (3/4) qualify, and nothing is billed until the number is active.
+    attr_accessor :pre_orderable
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -65,7 +72,9 @@ module Zernio
         :'whatsapp_available' => :'whatsappAvailable',
         :'sms_available' => :'smsAvailable',
         :'calls_available' => :'callsAvailable',
-        :'in_stock' => :'inStock'
+        :'in_stock' => :'inStock',
+        :'fulfilment' => :'fulfilment',
+        :'pre_orderable' => :'preOrderable'
       }
     end
 
@@ -89,13 +98,16 @@ module Zernio
         :'whatsapp_available' => :'Boolean',
         :'sms_available' => :'Boolean',
         :'calls_available' => :'Boolean',
-        :'in_stock' => :'Boolean'
+        :'in_stock' => :'Boolean',
+        :'fulfilment' => :'String',
+        :'pre_orderable' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'tier',
       ])
     end
 
@@ -146,6 +158,14 @@ module Zernio
       if attributes.key?(:'in_stock')
         self.in_stock = attributes[:'in_stock']
       end
+
+      if attributes.key?(:'fulfilment')
+        self.fulfilment = attributes[:'fulfilment']
+      end
+
+      if attributes.key?(:'pre_orderable')
+        self.pre_orderable = attributes[:'pre_orderable']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -164,6 +184,8 @@ module Zernio
       return false unless number_type_validator.valid?(@number_type)
       tier_validator = EnumAttributeValidator.new('Integer', [1, 2, 3, 4])
       return false unless tier_validator.valid?(@tier)
+      fulfilment_validator = EnumAttributeValidator.new('String', ["instant", "request"])
+      return false unless fulfilment_validator.valid?(@fulfilment)
       true
     end
 
@@ -187,6 +209,16 @@ module Zernio
       @tier = tier
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] fulfilment Object to be assigned
+    def fulfilment=(fulfilment)
+      validator = EnumAttributeValidator.new('String', ["instant", "request"])
+      unless validator.valid?(fulfilment)
+        fail ArgumentError, "invalid value for \"fulfilment\", must be one of #{validator.allowable_values}."
+      end
+      @fulfilment = fulfilment
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -199,7 +231,9 @@ module Zernio
           whatsapp_available == o.whatsapp_available &&
           sms_available == o.sms_available &&
           calls_available == o.calls_available &&
-          in_stock == o.in_stock
+          in_stock == o.in_stock &&
+          fulfilment == o.fulfilment &&
+          pre_orderable == o.pre_orderable
     end
 
     # @see the `==` method
@@ -211,7 +245,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [number_type, tier, needs_kyc, monthly_cents, whatsapp_available, sms_available, calls_available, in_stock].hash
+      [number_type, tier, needs_kyc, monthly_cents, whatsapp_available, sms_available, calls_available, in_stock, fulfilment, pre_orderable].hash
     end
 
     # Builds the object from hash

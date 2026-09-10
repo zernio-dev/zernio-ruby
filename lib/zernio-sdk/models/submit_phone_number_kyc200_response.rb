@@ -17,6 +17,9 @@ module Zernio
   class SubmitPhoneNumberKyc200Response < ApiModelBase
     attr_accessor :status
 
+    # True when nothing was in stock and this submission placed a pre-order. The number stays `pending_regulatory` until the carrier sources it (usually about 3 weeks) and is not billed until active. A pre-order is one number: `quantity` above 1 is rejected with 400.
+    attr_accessor :pre_order
+
     attr_accessor :phone_number
 
     # Every number provisioned from this submission. Length equals the requested `quantity` on full success (fewer if some orders failed; best-effort). The first element mirrors `phoneNumber`.
@@ -48,6 +51,7 @@ module Zernio
     def self.attribute_map
       {
         :'status' => :'status',
+        :'pre_order' => :'preOrder',
         :'phone_number' => :'phoneNumber',
         :'numbers' => :'numbers'
       }
@@ -67,6 +71,7 @@ module Zernio
     def self.openapi_types
       {
         :'status' => :'String',
+        :'pre_order' => :'Boolean',
         :'phone_number' => :'SubmitPhoneNumberKyc200ResponsePhoneNumber',
         :'numbers' => :'Array<SubmitPhoneNumberKyc200ResponseNumbersInner>'
       }
@@ -96,6 +101,10 @@ module Zernio
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'pre_order')
+        self.pre_order = attributes[:'pre_order']
       end
 
       if attributes.key?(:'phone_number')
@@ -142,6 +151,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           status == o.status &&
+          pre_order == o.pre_order &&
           phone_number == o.phone_number &&
           numbers == o.numbers
     end
@@ -155,7 +165,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, phone_number, numbers].hash
+      [status, pre_order, phone_number, numbers].hash
     end
 
     # Builds the object from hash

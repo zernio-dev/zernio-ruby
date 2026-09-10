@@ -22,6 +22,9 @@ module Zernio
     # Whether deliverable voice inventory exists right now.
     attr_accessor :available
 
+    # Nothing deliverable now, but this pair can be pre-ordered: submit KYC as usual and the carrier sources the number after review (usually about 3 weeks, never guaranteed). Only document tiers (3/4) qualify.
+    attr_accessor :pre_orderable
+
     attr_accessor :address_constraint
 
     # For `geo` only: the area(s) the registered address must be in.
@@ -58,6 +61,7 @@ module Zernio
         :'country' => :'country',
         :'number_type' => :'numberType',
         :'available' => :'available',
+        :'pre_orderable' => :'preOrderable',
         :'address_constraint' => :'addressConstraint',
         :'areas' => :'areas',
         :'area_options' => :'areaOptions'
@@ -80,6 +84,7 @@ module Zernio
         :'country' => :'String',
         :'number_type' => :'String',
         :'available' => :'Boolean',
+        :'pre_orderable' => :'Boolean',
         :'address_constraint' => :'String',
         :'areas' => :'Array<String>',
         :'area_options' => :'Array<CheckPhoneNumberAvailability200ResponseAreaOptionsInner>'
@@ -118,6 +123,10 @@ module Zernio
 
       if attributes.key?(:'available')
         self.available = attributes[:'available']
+      end
+
+      if attributes.key?(:'pre_orderable')
+        self.pre_orderable = attributes[:'pre_orderable']
       end
 
       if attributes.key?(:'address_constraint')
@@ -172,6 +181,7 @@ module Zernio
           country == o.country &&
           number_type == o.number_type &&
           available == o.available &&
+          pre_orderable == o.pre_orderable &&
           address_constraint == o.address_constraint &&
           areas == o.areas &&
           area_options == o.area_options
@@ -186,7 +196,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country, number_type, available, address_constraint, areas, area_options].hash
+      [country, number_type, available, pre_orderable, address_constraint, areas, area_options].hash
     end
 
     # Builds the object from hash
