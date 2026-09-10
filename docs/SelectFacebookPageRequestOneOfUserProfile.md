@@ -1,4 +1,4 @@
-# Zernio::SelectFacebookPageRequestUserProfile
+# Zernio::SelectFacebookPageRequestOneOfUserProfile
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SelectFacebookPageRequestUserProfile.new(
+instance = Zernio::SelectFacebookPageRequestOneOfUserProfile.new(
   id: null,
   name: null,
   profile_picture: null

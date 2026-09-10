@@ -14,20 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SelectFacebookPage200Response < ApiModelBase
-    attr_accessor :message
+  # Decoded user profile object from the OAuth callback.
+  class SelectFacebookPageRequestOneOfUserProfile < ApiModelBase
+    attr_accessor :id
 
-    # Redirect URL when a custom redirect_url was provided or a business Page was selected.
-    attr_accessor :redirect_url
+    attr_accessor :name
 
-    attr_accessor :account
+    attr_accessor :profile_picture
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message' => :'message',
-        :'redirect_url' => :'redirect_url',
-        :'account' => :'account'
+        :'id' => :'id',
+        :'name' => :'name',
+        :'profile_picture' => :'profilePicture'
       }
     end
 
@@ -44,9 +44,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'message' => :'String',
-        :'redirect_url' => :'String',
-        :'account' => :'SelectFacebookPage200ResponseAccount'
+        :'id' => :'String',
+        :'name' => :'String',
+        :'profile_picture' => :'String'
       }
     end
 
@@ -60,28 +60,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SelectFacebookPage200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SelectFacebookPageRequestOneOfUserProfile` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SelectFacebookPage200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SelectFacebookPageRequestOneOfUserProfile`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'redirect_url')
-        self.redirect_url = attributes[:'redirect_url']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'account')
-        self.account = attributes[:'account']
+      if attributes.key?(:'profile_picture')
+        self.profile_picture = attributes[:'profile_picture']
       end
     end
 
@@ -105,9 +105,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message == o.message &&
-          redirect_url == o.redirect_url &&
-          account == o.account
+          id == o.id &&
+          name == o.name &&
+          profile_picture == o.profile_picture
     end
 
     # @see the `==` method
@@ -119,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message, redirect_url, account].hash
+      [id, name, profile_picture].hash
     end
 
     # Builds the object from hash

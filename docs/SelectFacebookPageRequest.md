@@ -1,26 +1,49 @@
 # Zernio::SelectFacebookPageRequest
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **profile_id** | **String** | Profile ID from your connection flow |  |
-| **page_id** | **String** | The Facebook Page ID selected by the user |  |
-| **temp_token** | **String** | Temporary Facebook access token from OAuth |  |
-| **user_profile** | [**SelectFacebookPageRequestUserProfile**](SelectFacebookPageRequestUserProfile.md) |  |  |
-| **redirect_url** | **String** | Optional custom redirect URL to return to after selection | [optional] |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SelectFacebookPageRequest.new(
-  profile_id: null,
-  page_id: null,
-  temp_token: null,
-  user_profile: null,
-  redirect_url: null
-)
+Zernio::SelectFacebookPageRequest.openapi_one_of
+# =>
+# [
+#   :'SelectFacebookPageRequestOneOf',
+#   :'SelectFacebookPageRequestOneOf1'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::SelectFacebookPageRequest.build(data)
+# => #<SelectFacebookPageRequestOneOf:0x00007fdd4aab02a0>
+
+Zernio::SelectFacebookPageRequest.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `SelectFacebookPageRequestOneOf`
+- `SelectFacebookPageRequestOneOf1`
+- `nil` (if no type matches)
 

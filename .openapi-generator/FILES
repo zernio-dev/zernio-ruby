@@ -1478,7 +1478,10 @@ docs/SelectFacebookPage200Response.md
 docs/SelectFacebookPage200ResponseAccount.md
 docs/SelectFacebookPage409Response.md
 docs/SelectFacebookPageRequest.md
-docs/SelectFacebookPageRequestUserProfile.md
+docs/SelectFacebookPageRequestOneOf.md
+docs/SelectFacebookPageRequestOneOf1.md
+docs/SelectFacebookPageRequestOneOfNot.md
+docs/SelectFacebookPageRequestOneOfUserProfile.md
 docs/SelectGoogleBusinessLocation200Response.md
 docs/SelectGoogleBusinessLocation200ResponseAccount.md
 docs/SelectGoogleBusinessLocationRequest.md
@@ -3589,7 +3592,10 @@ lib/zernio-sdk/models/select_facebook_page200_response.rb
 lib/zernio-sdk/models/select_facebook_page200_response_account.rb
 lib/zernio-sdk/models/select_facebook_page409_response.rb
 lib/zernio-sdk/models/select_facebook_page_request.rb
-lib/zernio-sdk/models/select_facebook_page_request_user_profile.rb
+lib/zernio-sdk/models/select_facebook_page_request_one_of.rb
+lib/zernio-sdk/models/select_facebook_page_request_one_of1.rb
+lib/zernio-sdk/models/select_facebook_page_request_one_of_not.rb
+lib/zernio-sdk/models/select_facebook_page_request_one_of_user_profile.rb
 lib/zernio-sdk/models/select_google_business_location200_response.rb
 lib/zernio-sdk/models/select_google_business_location200_response_account.rb
 lib/zernio-sdk/models/select_google_business_location_request.rb
@@ -5674,8 +5680,11 @@ spec/models/search_tweets200_response_tweets_inner_spec.rb
 spec/models/select_facebook_page200_response_account_spec.rb
 spec/models/select_facebook_page200_response_spec.rb
 spec/models/select_facebook_page409_response_spec.rb
+spec/models/select_facebook_page_request_one_of1_spec.rb
+spec/models/select_facebook_page_request_one_of_not_spec.rb
+spec/models/select_facebook_page_request_one_of_spec.rb
+spec/models/select_facebook_page_request_one_of_user_profile_spec.rb
 spec/models/select_facebook_page_request_spec.rb
-spec/models/select_facebook_page_request_user_profile_spec.rb
 spec/models/select_google_business_location200_response_account_spec.rb
 spec/models/select_google_business_location200_response_spec.rb
 spec/models/select_google_business_location_request_spec.rb

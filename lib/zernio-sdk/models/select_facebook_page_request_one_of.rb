@@ -14,20 +14,29 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SelectFacebookPage200Response < ApiModelBase
-    attr_accessor :message
+  class SelectFacebookPageRequestOneOf < ApiModelBase
+    # Profile ID from your classic connection flow.
+    attr_accessor :profile_id
 
-    # Redirect URL when a custom redirect_url was provided or a business Page was selected.
+    # The Facebook Page ID selected by the user.
+    attr_accessor :page_id
+
+    # Temporary Facebook access token from OAuth.
+    attr_accessor :temp_token
+
+    attr_accessor :user_profile
+
+    # Optional custom redirect URL to return to after selection.
     attr_accessor :redirect_url
-
-    attr_accessor :account
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message' => :'message',
-        :'redirect_url' => :'redirect_url',
-        :'account' => :'account'
+        :'profile_id' => :'profileId',
+        :'page_id' => :'pageId',
+        :'temp_token' => :'tempToken',
+        :'user_profile' => :'userProfile',
+        :'redirect_url' => :'redirect_url'
       }
     end
 
@@ -44,9 +53,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'message' => :'String',
-        :'redirect_url' => :'String',
-        :'account' => :'SelectFacebookPage200ResponseAccount'
+        :'profile_id' => :'String',
+        :'page_id' => :'String',
+        :'temp_token' => :'String',
+        :'user_profile' => :'SelectFacebookPageRequestOneOfUserProfile',
+        :'redirect_url' => :'String'
       }
     end
 
@@ -60,28 +71,44 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SelectFacebookPage200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SelectFacebookPageRequestOneOf` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SelectFacebookPage200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SelectFacebookPageRequestOneOf`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.key?(:'profile_id')
+        self.profile_id = attributes[:'profile_id']
+      else
+        self.profile_id = nil
+      end
+
+      if attributes.key?(:'page_id')
+        self.page_id = attributes[:'page_id']
+      else
+        self.page_id = nil
+      end
+
+      if attributes.key?(:'temp_token')
+        self.temp_token = attributes[:'temp_token']
+      else
+        self.temp_token = nil
+      end
+
+      if attributes.key?(:'user_profile')
+        self.user_profile = attributes[:'user_profile']
+      else
+        self.user_profile = nil
       end
 
       if attributes.key?(:'redirect_url')
         self.redirect_url = attributes[:'redirect_url']
-      end
-
-      if attributes.key?(:'account')
-        self.account = attributes[:'account']
       end
     end
 
@@ -90,6 +117,22 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @profile_id.nil?
+        invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
+      end
+
+      if @page_id.nil?
+        invalid_properties.push('invalid value for "page_id", page_id cannot be nil.')
+      end
+
+      if @temp_token.nil?
+        invalid_properties.push('invalid value for "temp_token", temp_token cannot be nil.')
+      end
+
+      if @user_profile.nil?
+        invalid_properties.push('invalid value for "user_profile", user_profile cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -97,7 +140,51 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @profile_id.nil?
+      return false if @page_id.nil?
+      return false if @temp_token.nil?
+      return false if @user_profile.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] profile_id Value to be assigned
+    def profile_id=(profile_id)
+      if profile_id.nil?
+        fail ArgumentError, 'profile_id cannot be nil'
+      end
+
+      @profile_id = profile_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] page_id Value to be assigned
+    def page_id=(page_id)
+      if page_id.nil?
+        fail ArgumentError, 'page_id cannot be nil'
+      end
+
+      @page_id = page_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] temp_token Value to be assigned
+    def temp_token=(temp_token)
+      if temp_token.nil?
+        fail ArgumentError, 'temp_token cannot be nil'
+      end
+
+      @temp_token = temp_token
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] user_profile Value to be assigned
+    def user_profile=(user_profile)
+      if user_profile.nil?
+        fail ArgumentError, 'user_profile cannot be nil'
+      end
+
+      @user_profile = user_profile
     end
 
     # Checks equality by comparing each attribute.
@@ -105,9 +192,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message == o.message &&
-          redirect_url == o.redirect_url &&
-          account == o.account
+          profile_id == o.profile_id &&
+          page_id == o.page_id &&
+          temp_token == o.temp_token &&
+          user_profile == o.user_profile &&
+          redirect_url == o.redirect_url
     end
 
     # @see the `==` method
@@ -119,7 +208,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message, redirect_url, account].hash
+      [profile_id, page_id, temp_token, user_profile, redirect_url].hash
     end
 
     # Builds the object from hash

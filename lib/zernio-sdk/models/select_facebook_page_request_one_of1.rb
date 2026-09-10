@@ -14,20 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SelectFacebookPage200Response < ApiModelBase
-    attr_accessor :message
+  class SelectFacebookPageRequestOneOf1 < ApiModelBase
+    # Encrypted dashboard business-login grant. Expires after ten minutes.
+    attr_accessor :selection_token
 
-    # Redirect URL when a custom redirect_url was provided or a business Page was selected.
-    attr_accessor :redirect_url
-
-    attr_accessor :account
+    # A Page ID from the granted Pages returned by listFacebookPages.
+    attr_accessor :page_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message' => :'message',
-        :'redirect_url' => :'redirect_url',
-        :'account' => :'account'
+        :'selection_token' => :'selectionToken',
+        :'page_id' => :'pageId'
       }
     end
 
@@ -44,9 +42,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'message' => :'String',
-        :'redirect_url' => :'String',
-        :'account' => :'SelectFacebookPage200ResponseAccount'
+        :'selection_token' => :'String',
+        :'page_id' => :'String'
       }
     end
 
@@ -60,28 +57,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SelectFacebookPage200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SelectFacebookPageRequestOneOf1` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SelectFacebookPage200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SelectFacebookPageRequestOneOf1`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.key?(:'selection_token')
+        self.selection_token = attributes[:'selection_token']
+      else
+        self.selection_token = nil
       end
 
-      if attributes.key?(:'redirect_url')
-        self.redirect_url = attributes[:'redirect_url']
-      end
-
-      if attributes.key?(:'account')
-        self.account = attributes[:'account']
+      if attributes.key?(:'page_id')
+        self.page_id = attributes[:'page_id']
+      else
+        self.page_id = nil
       end
     end
 
@@ -90,6 +87,19 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @selection_token.nil?
+        invalid_properties.push('invalid value for "selection_token", selection_token cannot be nil.')
+      end
+
+      if @page_id.nil?
+        invalid_properties.push('invalid value for "page_id", page_id cannot be nil.')
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @page_id !~ pattern
+        invalid_properties.push("invalid value for \"page_id\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -97,7 +107,35 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @selection_token.nil?
+      return false if @page_id.nil?
+      return false if @page_id !~ Regexp.new(/^\d+$/)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] selection_token Value to be assigned
+    def selection_token=(selection_token)
+      if selection_token.nil?
+        fail ArgumentError, 'selection_token cannot be nil'
+      end
+
+      @selection_token = selection_token
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] page_id Value to be assigned
+    def page_id=(page_id)
+      if page_id.nil?
+        fail ArgumentError, 'page_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if page_id !~ pattern
+        fail ArgumentError, "invalid value for \"page_id\", must conform to the pattern #{pattern}."
+      end
+
+      @page_id = page_id
     end
 
     # Checks equality by comparing each attribute.
@@ -105,9 +143,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message == o.message &&
-          redirect_url == o.redirect_url &&
-          account == o.account
+          selection_token == o.selection_token &&
+          page_id == o.page_id
     end
 
     # @see the `==` method
@@ -119,7 +156,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message, redirect_url, account].hash
+      [selection_token, page_id].hash
     end
 
     # Builds the object from hash
