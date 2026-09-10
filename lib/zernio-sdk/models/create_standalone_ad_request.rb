@@ -55,16 +55,16 @@ module Zernio
     # Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers' in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a `creativeFeatures` key, and Meta rejects it there.
     attr_accessor :multi_advertiser
 
-    # Meta only. Validates the complete inline campaign, ad set, creative and ad with execution_options validate_only. Nothing is uploaded or created, and validation bypasses Idempotency-Key storage. Supports a single image, existing video.id or existingCreativeId; media pools, new video uploads, creatives[], adSetId and RESERVED buying return 400. Existing campaign or creative nodes are marked skipped. Success returns 200 with per-node results; Meta rejection returns an error.
+    # Google Performance Max validates the complete atomic campaign and asset group with no resource creation or local persistence. Google validation still downloads image URLs and consumes quota. On Meta, validates the complete inline campaign, ad set, creative and ad with execution_options validate_only. Nothing is uploaded or created, and validation bypasses Idempotency-Key storage. Supports a single image, existing video.id or existingCreativeId; media pools, new video uploads, creatives[], adSetId and RESERVED buying return 400. Existing campaign or creative nodes are marked skipped. Success returns 200 with per-node results; Meta rejection returns an error.
     attr_accessor :validate_only
 
-    # Budget in WHOLE currency units (USD: 50 = $50.00), NOT cents. Meta's own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Required on legacy + multi-creative shapes. Inherited on attach. OpenAI Ads requires a $1 minimum (its budget is lifetime-only, see budgetType).
+    # Budget in WHOLE currency units (USD: 50 = $50.00), NOT cents. Meta's own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Required on legacy, multi-creative and Performance Max shapes. Inherited on attach. OpenAI Ads requires a $1 minimum (its budget is lifetime-only, see budgetType).
     attr_accessor :budget_amount
 
-    # Required on legacy + multi-creative shapes. Inherited on attach. OpenAI Ads accepts lifetime only (no daily-budget concept on the platform); sending daily returns 422. OpenAI Ads lifetime budgets require `endDate` to give the lifetime cap a spend window.
+    # Required on legacy, multi-creative and Performance Max shapes. Inherited on attach. OpenAI Ads accepts lifetime only (no daily-budget concept on the platform); sending daily returns 422. OpenAI Ads lifetime budgets require `endDate` to give the lifetime cap a spend window.
     attr_accessor :budget_type
 
-    # Meta, TikTok, and LinkedIn. Publish state of the created entities. Omitted or ACTIVE publishes live (default, back-compat); PAUSED creates them paused so you can review before they spend. On Meta the pause is held on the campaign this call creates, leaving the ad set and ad switched on, so a single PUT /v1/ads/campaigns/{campaignId}/status with `active` brings the whole thing live. It is held at every level instead when the pause cannot rely on the campaign: `existingCampaignId` (that campaign may be running and is never touched) or `campaignStatus: ACTIVE`. On TikTok the whole campaign > ad group > ad hierarchy stays paused. On LinkedIn the whole campaign group, campaign, and creative hierarchy stays PAUSED (intendedStatus PAUSED on each).
+    # Google Performance Max accepts PAUSED only and always creates a paused campaign. Meta, TikTok, and LinkedIn: publish state of the created entities. Omitted or ACTIVE publishes live (default, back-compat); PAUSED creates them paused so you can review before they spend. On Meta the pause is held on the campaign this call creates, leaving the ad set and ad switched on, so a single PUT /v1/ads/campaigns/{campaignId}/status with `active` brings the whole thing live. It is held at every level instead when the pause cannot rely on the campaign: `existingCampaignId` (that campaign may be running and is never touched) or `campaignStatus: ACTIVE`. On TikTok the whole campaign > ad group > ad hierarchy stays paused. On LinkedIn the whole campaign group, campaign, and creative hierarchy stays PAUSED (intendedStatus PAUSED on each).
     attr_accessor :status
 
     # Meta only. Overrides `status` for the campaign level alone, so you can create a live campaign whose ad set and ad stay paused, or the reverse. Omitted, it follows `status`.
@@ -225,8 +225,10 @@ module Zernio
     # Custom audience ID for targeting
     attr_accessor :audience_id
 
-    # Google only
+    # Google only. Performance Max requires assetGroup and is always created PAUSED.
     attr_accessor :campaign_type
+
+    attr_accessor :asset_group
 
     # Google Search only. Keywords on the new ad group; entries are strings (BROAD) or { text, matchType }. Editable later via PUT /v1/ads/{adId} targeting.keywords.
     attr_accessor :keywords
@@ -270,7 +272,7 @@ module Zernio
     # Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sending it without `bidStrategy` is a 400. Sent to Meta as `bid_constraints.roas_average_floor` × 10000. Known gap: a CBO campaign's ROAS floor lives on the campaign only (set via `POST /v1/ads/campaigns`); there is no supported way to set it while joining a CBO campaign here. 
     attr_accessor :roas_average_floor
 
-    # Google only. Attach an existing portfolio bid strategy (numeric id from GET /v1/ads/bid-strategies) to the new campaign instead of a standard one. Exclusive with bidStrategy.
+    # Google Search and Display only. Performance Max rejects portfolio bidding. Attach an existing portfolio bid strategy (numeric id from GET /v1/ads/bid-strategies) to the new campaign instead of a standard one. Exclusive with bidStrategy.
     attr_accessor :portfolio_bid_strategy_id
 
     # Meta only (facebook, instagram; other platforms return 400). Value rule set to attach to the new ad set, from `/v1/ads/value-rule-sets`. Attachment is driven by this id, so `valueRulesApplied` is optional alongside it.  Rejected with 400 in `adSetId` attach mode: that shape inherits the existing ad set's attachment, so the field would be silently ignored. Use `PUT /v1/ads/ad-sets/{adSetId}` there instead.  Ignored (stripped before the ad-set create) when `buyingType` is `RESERVED`: value rules only apply to auction ad sets on `LOWEST_COST_WITHOUT_CAP` or `COST_CAP`, and a Reach & Frequency reservation has no auction bid strategy.  Read back with `GET /v1/ads/ad-sets/{adSetId}?fields=value_rule_set_id`; the attachment is not mirrored onto Zernio's ad documents. 
@@ -409,6 +411,7 @@ module Zernio
         :'placement_assets' => :'placementAssets',
         :'audience_id' => :'audienceId',
         :'campaign_type' => :'campaignType',
+        :'asset_group' => :'assetGroup',
         :'keywords' => :'keywords',
         :'negative_keywords' => :'negativeKeywords',
         :'campaign_negative_keywords' => :'campaignNegativeKeywords',
@@ -528,6 +531,7 @@ module Zernio
         :'placement_assets' => :'CreateStandaloneAdRequestPlacementAssets',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
+        :'asset_group' => :'GooglePmaxAssetGroupInput',
         :'keywords' => :'Array<KeywordEntry>',
         :'negative_keywords' => :'Array<KeywordEntry>',
         :'campaign_negative_keywords' => :'Array<KeywordEntry>',
@@ -939,6 +943,10 @@ module Zernio
         self.campaign_type = 'display'
       end
 
+      if attributes.key?(:'asset_group')
+        self.asset_group = attributes[:'asset_group']
+      end
+
       if attributes.key?(:'keywords')
         if (value = attributes[:'keywords']).is_a?(Array)
           self.keywords = value
@@ -1311,7 +1319,7 @@ module Zernio
       return false if !@carousel_cards.nil? && @carousel_cards.length < 2
       return false if !@translations.nil? && @translations.length > 10
       return false if !@translations.nil? && @translations.length < 1
-      campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search"])
+      campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search", "pmax"])
       return false unless campaign_type_validator.valid?(@campaign_type)
       return false if !@keywords.nil? && @keywords.length > 1000
       return false if !@negative_keywords.nil? && @negative_keywords.length > 1000
@@ -1710,7 +1718,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] campaign_type Object to be assigned
     def campaign_type=(campaign_type)
-      validator = EnumAttributeValidator.new('String', ["display", "search"])
+      validator = EnumAttributeValidator.new('String', ["display", "search", "pmax"])
       unless validator.valid?(campaign_type)
         fail ArgumentError, "invalid value for \"campaign_type\", must be one of #{validator.allowable_values}."
       end
@@ -2037,6 +2045,7 @@ module Zernio
           placement_assets == o.placement_assets &&
           audience_id == o.audience_id &&
           campaign_type == o.campaign_type &&
+          asset_group == o.asset_group &&
           keywords == o.keywords &&
           negative_keywords == o.negative_keywords &&
           campaign_negative_keywords == o.campaign_negative_keywords &&
@@ -2076,7 +2085,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, promotion, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, user_os, user_device, is_skadnetwork_attribution, campaign_attribution, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, promotion, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, asset_group, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, user_os, user_device, is_skadnetwork_attribution, campaign_attribution, promoted_object].hash
     end
 
     # Builds the object from hash

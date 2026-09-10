@@ -518,10 +518,16 @@ describe Zernio::CreateStandaloneAdRequest do
   describe 'test attribute "campaign_type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["display", "search"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["display", "search", "pmax"])
       # validator.allowable_values.each do |value|
       #   expect { instance.campaign_type = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "asset_group"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 

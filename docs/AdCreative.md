@@ -4,6 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **asset_group** | [**GooglePmaxAssetGroupInput**](GooglePmaxAssetGroupInput.md) | Initial Performance Max asset group input. Use the asset-groups endpoint for current Google assets. | [optional] |
+| **asset_group_resource_name** | **String** | Google resource name of the created Performance Max asset group. | [optional] |
 | **headlines** | [**Array&lt;GoogleRsaHeadline&gt;**](GoogleRsaHeadline.md) | Google RSA only. Replaces the complete headline list. No padding or truncation on update. | [optional] |
 | **descriptions** | [**Array&lt;GoogleRsaDescription&gt;**](GoogleRsaDescription.md) | Google RSA only. Replaces the complete description list. No padding or truncation on update. | [optional] |
 | **final_urls** | **Array&lt;String&gt;** | Google RSA only. Replaces final URLs. Omitted lists stay unchanged. | [optional] |
@@ -39,6 +41,8 @@
 require 'zernio-sdk'
 
 instance = Zernio::AdCreative.new(
+  asset_group: null,
+  asset_group_resource_name: customers/9122445560/assetGroups/123456789,
   headlines: null,
   descriptions: null,
   final_urls: null,

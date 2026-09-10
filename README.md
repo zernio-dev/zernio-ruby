@@ -188,6 +188,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**list_campaign_assets**](docs/AdCampaignsApi.md#list_campaign_assets) | **GET** /v1/ads/campaigns/{campaignId}/assets | List campaign assets
 *Zernio::AdCampaignsApi* | [**list_campaign_negative_keyword_lists**](docs/AdCampaignsApi.md#list_campaign_negative_keyword_lists) | **GET** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | List campaign negative lists
 *Zernio::AdCampaignsApi* | [**list_campaign_negative_keywords**](docs/AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords
+*Zernio::AdCampaignsApi* | [**list_google_asset_groups**](docs/AdCampaignsApi.md#list_google_asset_groups) | **GET** /v1/ads/campaigns/{campaignId}/asset-groups | List Performance Max asset groups
 *Zernio::AdCampaignsApi* | [**remove_ad_group_assets**](docs/AdCampaignsApi.md#remove_ad_group_assets) | **DELETE** /v1/ads/ad-sets/{adSetId}/assets | Remove ad-group assets
 *Zernio::AdCampaignsApi* | [**remove_ad_keyword**](docs/AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword
 *Zernio::AdCampaignsApi* | [**remove_campaign_assets**](docs/AdCampaignsApi.md#remove_campaign_assets) | **DELETE** /v1/ads/campaigns/{campaignId}/assets | Remove campaign assets
@@ -1699,6 +1700,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GoogleBusinessReview](docs/GoogleBusinessReview.md)
  - [Zernio::GoogleBusinessReviewReviewReply](docs/GoogleBusinessReviewReviewReply.md)
  - [Zernio::GoogleBusinessReviewReviewer](docs/GoogleBusinessReviewReviewer.md)
+ - [Zernio::GooglePmaxAssetGroup](docs/GooglePmaxAssetGroup.md)
+ - [Zernio::GooglePmaxAssetGroupAssetsInner](docs/GooglePmaxAssetGroupAssetsInner.md)
+ - [Zernio::GooglePmaxAssetGroupInput](docs/GooglePmaxAssetGroupInput.md)
+ - [Zernio::GooglePmaxAssetGroupInputImages](docs/GooglePmaxAssetGroupInputImages.md)
  - [Zernio::GoogleRsaDescription](docs/GoogleRsaDescription.md)
  - [Zernio::GoogleRsaHeadline](docs/GoogleRsaHeadline.md)
  - [Zernio::GoogleSitelink](docs/GoogleSitelink.md)
@@ -1871,6 +1876,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListFacebookPages200ResponsePagesInner](docs/ListFacebookPages200ResponsePagesInner.md)
  - [Zernio::ListFormLeads200Response](docs/ListFormLeads200Response.md)
  - [Zernio::ListFormLeads200ResponseLeadsInner](docs/ListFormLeads200ResponseLeadsInner.md)
+ - [Zernio::ListGoogleAssetGroups200Response](docs/ListGoogleAssetGroups200Response.md)
  - [Zernio::ListGoogleBusinessLocations200Response](docs/ListGoogleBusinessLocations200Response.md)
  - [Zernio::ListGoogleBusinessLocations200ResponseLocationsInner](docs/ListGoogleBusinessLocations200ResponseLocationsInner.md)
  - [Zernio::ListGoogleBusinessMedia200Response](docs/ListGoogleBusinessMedia200Response.md)

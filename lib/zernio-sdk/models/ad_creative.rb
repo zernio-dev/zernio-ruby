@@ -16,6 +16,12 @@ require 'time'
 module Zernio
   # Platform-specific creative data. Fields vary by platform.
   class AdCreative < ApiModelBase
+    # Initial Performance Max asset group input. Use the asset-groups endpoint for current Google assets.
+    attr_accessor :asset_group
+
+    # Google resource name of the created Performance Max asset group.
+    attr_accessor :asset_group_resource_name
+
     # Google RSA only. Replaces the complete headline list. No padding or truncation on update.
     attr_accessor :headlines
 
@@ -121,6 +127,8 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'asset_group' => :'assetGroup',
+        :'asset_group_resource_name' => :'assetGroupResourceName',
         :'headlines' => :'headlines',
         :'descriptions' => :'descriptions',
         :'final_urls' => :'finalUrls',
@@ -165,6 +173,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'asset_group' => :'GooglePmaxAssetGroupInput',
+        :'asset_group_resource_name' => :'String',
         :'headlines' => :'Array<GoogleRsaHeadline>',
         :'descriptions' => :'Array<GoogleRsaDescription>',
         :'final_urls' => :'Array<String>',
@@ -228,6 +238,14 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'asset_group')
+        self.asset_group = attributes[:'asset_group']
+      end
+
+      if attributes.key?(:'asset_group_resource_name')
+        self.asset_group_resource_name = attributes[:'asset_group_resource_name']
+      end
 
       if attributes.key?(:'headlines')
         if (value = attributes[:'headlines']).is_a?(Array)
@@ -447,6 +465,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          asset_group == o.asset_group &&
+          asset_group_resource_name == o.asset_group_resource_name &&
           headlines == o.headlines &&
           descriptions == o.descriptions &&
           final_urls == o.final_urls &&
@@ -486,7 +506,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headlines, descriptions, final_urls, thumbnail_url, image_url, video_id, video_url, promotion, promotion_status, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, whatsapp_phone_number, pinterest_image_url, pinterest_title, pinterest_description].hash
+      [asset_group, asset_group_resource_name, headlines, descriptions, final_urls, thumbnail_url, image_url, video_id, video_url, promotion, promotion_status, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, whatsapp_phone_number, pinterest_image_url, pinterest_title, pinterest_description].hash
     end
 
     # Builds the object from hash

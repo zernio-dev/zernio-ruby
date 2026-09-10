@@ -14,42 +14,29 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateStandaloneAd200ResponseResultsInner < ApiModelBase
-    attr_accessor :node
+  class GooglePmaxAssetGroup < ApiModelBase
+    attr_accessor :id
 
+    attr_accessor :resource_name
+
+    attr_accessor :name
+
+    # Asset-group status on Google. Campaign status independently controls delivery.
     attr_accessor :status
 
-    # Why the node could not be validated (only on skipped).
-    attr_accessor :reason
+    attr_accessor :final_urls
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :assets
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'node' => :'node',
+        :'id' => :'id',
+        :'resource_name' => :'resourceName',
+        :'name' => :'name',
         :'status' => :'status',
-        :'reason' => :'reason'
+        :'final_urls' => :'finalUrls',
+        :'assets' => :'assets'
       }
     end
 
@@ -66,9 +53,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'node' => :'String',
+        :'id' => :'String',
+        :'resource_name' => :'String',
+        :'name' => :'String',
         :'status' => :'String',
-        :'reason' => :'String'
+        :'final_urls' => :'Array<String>',
+        :'assets' => :'Array<GooglePmaxAssetGroupAssetsInner>'
       }
     end
 
@@ -82,28 +72,56 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateStandaloneAd200ResponseResultsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GooglePmaxAssetGroup` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateStandaloneAd200ResponseResultsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GooglePmaxAssetGroup`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'node')
-        self.node = attributes[:'node']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      else
+        self.id = nil
+      end
+
+      if attributes.key?(:'resource_name')
+        self.resource_name = attributes[:'resource_name']
+      else
+        self.resource_name = nil
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      else
+        self.status = nil
       end
 
-      if attributes.key?(:'reason')
-        self.reason = attributes[:'reason']
+      if attributes.key?(:'final_urls')
+        if (value = attributes[:'final_urls']).is_a?(Array)
+          self.final_urls = value
+        end
+      else
+        self.final_urls = nil
+      end
+
+      if attributes.key?(:'assets')
+        if (value = attributes[:'assets']).is_a?(Array)
+          self.assets = value
+        end
+      else
+        self.assets = nil
       end
     end
 
@@ -112,6 +130,30 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @resource_name.nil?
+        invalid_properties.push('invalid value for "resource_name", resource_name cannot be nil.')
+      end
+
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      end
+
+      if @final_urls.nil?
+        invalid_properties.push('invalid value for "final_urls", final_urls cannot be nil.')
+      end
+
+      if @assets.nil?
+        invalid_properties.push('invalid value for "assets", assets cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -119,31 +161,73 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      node_validator = EnumAttributeValidator.new('String', ["campaign", "adSet", "creative", "ad", "performanceMaxCampaign"])
-      return false unless node_validator.valid?(@node)
-      status_validator = EnumAttributeValidator.new('String', ["validated", "skipped"])
-      return false unless status_validator.valid?(@status)
+      return false if @id.nil?
+      return false if @resource_name.nil?
+      return false if @name.nil?
+      return false if @status.nil?
+      return false if @final_urls.nil?
+      return false if @assets.nil?
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] node Object to be assigned
-    def node=(node)
-      validator = EnumAttributeValidator.new('String', ["campaign", "adSet", "creative", "ad", "performanceMaxCampaign"])
-      unless validator.valid?(node)
-        fail ArgumentError, "invalid value for \"node\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
       end
-      @node = node
+
+      @id = id
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["validated", "skipped"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] resource_name Value to be assigned
+    def resource_name=(resource_name)
+      if resource_name.nil?
+        fail ArgumentError, 'resource_name cannot be nil'
       end
+
+      @resource_name = resource_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] status Value to be assigned
+    def status=(status)
+      if status.nil?
+        fail ArgumentError, 'status cannot be nil'
+      end
+
       @status = status
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] final_urls Value to be assigned
+    def final_urls=(final_urls)
+      if final_urls.nil?
+        fail ArgumentError, 'final_urls cannot be nil'
+      end
+
+      @final_urls = final_urls
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] assets Value to be assigned
+    def assets=(assets)
+      if assets.nil?
+        fail ArgumentError, 'assets cannot be nil'
+      end
+
+      @assets = assets
     end
 
     # Checks equality by comparing each attribute.
@@ -151,9 +235,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          node == o.node &&
+          id == o.id &&
+          resource_name == o.resource_name &&
+          name == o.name &&
           status == o.status &&
-          reason == o.reason
+          final_urls == o.final_urls &&
+          assets == o.assets
     end
 
     # @see the `==` method
@@ -165,7 +252,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [node, status, reason].hash
+      [id, resource_name, name, status, final_urls, assets].hash
     end
 
     # Builds the object from hash

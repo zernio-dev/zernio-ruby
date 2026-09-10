@@ -947,6 +947,10 @@ docs/GoogleBusinessPlatformDataOffer.md
 docs/GoogleBusinessReview.md
 docs/GoogleBusinessReviewReviewReply.md
 docs/GoogleBusinessReviewReviewer.md
+docs/GooglePmaxAssetGroup.md
+docs/GooglePmaxAssetGroupAssetsInner.md
+docs/GooglePmaxAssetGroupInput.md
+docs/GooglePmaxAssetGroupInputImages.md
 docs/GoogleRsaDescription.md
 docs/GoogleRsaHeadline.md
 docs/GoogleSitelink.md
@@ -1124,6 +1128,7 @@ docs/ListFacebookPages200Response.md
 docs/ListFacebookPages200ResponsePagesInner.md
 docs/ListFormLeads200Response.md
 docs/ListFormLeads200ResponseLeadsInner.md
+docs/ListGoogleAssetGroups200Response.md
 docs/ListGoogleBusinessLocations200Response.md
 docs/ListGoogleBusinessLocations200ResponseLocationsInner.md
 docs/ListGoogleBusinessMedia200Response.md
@@ -3056,6 +3061,10 @@ lib/zernio-sdk/models/google_business_platform_data_offer.rb
 lib/zernio-sdk/models/google_business_review.rb
 lib/zernio-sdk/models/google_business_review_review_reply.rb
 lib/zernio-sdk/models/google_business_review_reviewer.rb
+lib/zernio-sdk/models/google_pmax_asset_group.rb
+lib/zernio-sdk/models/google_pmax_asset_group_assets_inner.rb
+lib/zernio-sdk/models/google_pmax_asset_group_input.rb
+lib/zernio-sdk/models/google_pmax_asset_group_input_images.rb
 lib/zernio-sdk/models/google_rsa_description.rb
 lib/zernio-sdk/models/google_rsa_headline.rb
 lib/zernio-sdk/models/google_sitelink.rb
@@ -3228,6 +3237,7 @@ lib/zernio-sdk/models/list_facebook_pages200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response_pages_inner.rb
 lib/zernio-sdk/models/list_form_leads200_response.rb
 lib/zernio-sdk/models/list_form_leads200_response_leads_inner.rb
+lib/zernio-sdk/models/list_google_asset_groups200_response.rb
 lib/zernio-sdk/models/list_google_business_locations200_response.rb
 lib/zernio-sdk/models/list_google_business_locations200_response_locations_inner.rb
 lib/zernio-sdk/models/list_google_business_media200_response.rb
@@ -5123,6 +5133,10 @@ spec/models/google_business_platform_data_spec.rb
 spec/models/google_business_review_review_reply_spec.rb
 spec/models/google_business_review_reviewer_spec.rb
 spec/models/google_business_review_spec.rb
+spec/models/google_pmax_asset_group_assets_inner_spec.rb
+spec/models/google_pmax_asset_group_input_images_spec.rb
+spec/models/google_pmax_asset_group_input_spec.rb
+spec/models/google_pmax_asset_group_spec.rb
 spec/models/google_rsa_description_spec.rb
 spec/models/google_rsa_headline_spec.rb
 spec/models/google_sitelink_spec.rb
@@ -5295,6 +5309,7 @@ spec/models/list_facebook_pages200_response_pages_inner_spec.rb
 spec/models/list_facebook_pages200_response_spec.rb
 spec/models/list_form_leads200_response_leads_inner_spec.rb
 spec/models/list_form_leads200_response_spec.rb
+spec/models/list_google_asset_groups200_response_spec.rb
 spec/models/list_google_business_locations200_response_locations_inner_spec.rb
 spec/models/list_google_business_locations200_response_spec.rb
 spec/models/list_google_business_media200_response_media_items_inner_location_association_spec.rb
