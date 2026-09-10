@@ -31,7 +31,7 @@ module Zernio
 
     attr_accessor :promoted_object
 
-    # Meta only. SKAdNetwork app promotion requires AUCTION.
+    # Meta only. Defaults to AUCTION and is explicitly sent on new campaigns, including validateOnly. SKAdNetwork app promotion requires AUCTION.
     attr_accessor :buying_type
 
     # Meta only. Runs campaign validation without creating or persisting a campaign; Idempotency-Key storage is bypassed. Returns HTTP 200 with validateOnly true and status VALIDATED.
@@ -190,6 +190,8 @@ module Zernio
 
       if attributes.key?(:'buying_type')
         self.buying_type = attributes[:'buying_type']
+      else
+        self.buying_type = 'AUCTION'
       end
 
       if attributes.key?(:'validate_only')
