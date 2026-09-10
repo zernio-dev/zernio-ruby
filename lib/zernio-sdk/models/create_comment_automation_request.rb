@@ -26,7 +26,7 @@ module Zernio
     # Platform media/post ID (or story media id when trigger=story_reply). Omit for an account-wide (any-post / any-story) automation.
     attr_accessor :platform_post_id
 
-    # Zernio post ID. Optional and never required. Use it INSTEAD of platformPostId to bind a per-post automation to a not-yet-published Zernio post: the automation stays pending and arms itself when that post publishes. For a post already live on the platform, pass platformPostId alone and omit this.
+    # Zernio post ID (24 hexadecimal characters); platform IDs return 400. Optional and never required. Use it INSTEAD of platformPostId to bind a per-post automation to a not-yet-published Zernio post: the automation stays pending and arms itself when that post publishes. For a post already live on the platform, pass platformPostId alone and omit this.
     attr_accessor :post_id
 
     # Post content snippet for display
@@ -335,6 +335,11 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if !@post_id.nil? && @post_id !~ pattern
+        invalid_properties.push("invalid value for \"post_id\", must conform to the pattern #{pattern}.")
+      end
+
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
@@ -382,6 +387,7 @@ module Zernio
       return false if @account_id.nil?
       trigger_validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
       return false unless trigger_validator.valid?(@trigger)
+      return false if !@post_id.nil? && @post_id !~ Regexp.new(/^[a-fA-F0-9]{24}$/)
       return false if @name.nil?
       match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains", "word"])
       return false unless match_mode_validator.valid?(@match_mode)
@@ -424,6 +430,21 @@ module Zernio
         fail ArgumentError, "invalid value for \"trigger\", must be one of #{validator.allowable_values}."
       end
       @trigger = trigger
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] post_id Value to be assigned
+    def post_id=(post_id)
+      if post_id.nil?
+        fail ArgumentError, 'post_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if post_id !~ pattern
+        fail ArgumentError, "invalid value for \"post_id\", must conform to the pattern #{pattern}."
+      end
+
+      @post_id = post_id
     end
 
     # Custom attribute writer method with validation

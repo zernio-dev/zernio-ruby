@@ -474,7 +474,7 @@ module Zernio
     # @option opts [String] :account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch.
     # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder).
     # @option opts [Integer] :limit  (default to 25)
-    # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp.
+    # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp. Millisecond timestamps return 400 with instructions to divide by 1000.
     # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset).
     # @return [ListLeads200Response]
     def list_leads(opts = {})
@@ -489,7 +489,7 @@ module Zernio
     # @option opts [String] :account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch.
     # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder).
     # @option opts [Integer] :limit  (default to 25)
-    # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp.
+    # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp. Millisecond timestamps return 400 with instructions to divide by 1000.
     # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset).
     # @return [Array<(ListLeads200Response, Integer, Hash)>] ListLeads200Response data, response status code and response headers
     def list_leads_with_http_info(opts = {})
@@ -502,6 +502,14 @@ module Zernio
 
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
         fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LeadGenApi.list_leads, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'since'].nil? && opts[:'since'] > 253402300799
+        fail ArgumentError, 'invalid value for "opts[:"since"]" when calling LeadGenApi.list_leads, must be smaller than or equal to 253402300799.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'since'].nil? && opts[:'since'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"since"]" when calling LeadGenApi.list_leads, must be greater than or equal to 1.'
       end
 
       # resource path

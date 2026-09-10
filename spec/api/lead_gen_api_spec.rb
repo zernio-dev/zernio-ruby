@@ -121,7 +121,7 @@ describe 'LeadGenApi' do
   # @option opts [String] :account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch.
   # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder).
   # @option opts [Integer] :limit 
-  # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp.
+  # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp. Millisecond timestamps return 400 with instructions to divide by 1000.
   # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset).
   # @return [ListLeads200Response]
   describe 'list_leads test' do

@@ -474,7 +474,7 @@ opts = {
   account_id: 'account_id_example', # String | Filter to a single connected account. LinkedIn ads accounts switch to the live fetch.
   ad_account_id: 'ad_account_id_example', # String | LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder).
   limit: 56, # Integer | 
-  since: 56, # Integer | Unix seconds; only leads created at/after this timestamp.
+  since: 1757404800, # Integer | Unix seconds; only leads created at/after this timestamp. Millisecond timestamps return 400 with instructions to divide by 1000.
   cursor: 'cursor_example' # String | Keyset cursor from a previous response's pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset).
 }
 
@@ -513,7 +513,7 @@ end
 | **account_id** | **String** | Filter to a single connected account. LinkedIn ads accounts switch to the live fetch. | [optional] |
 | **ad_account_id** | **String** | LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder). | [optional] |
 | **limit** | **Integer** |  | [optional][default to 25] |
-| **since** | **Integer** | Unix seconds; only leads created at/after this timestamp. | [optional] |
+| **since** | **Integer** | Unix seconds; only leads created at/after this timestamp. Millisecond timestamps return 400 with instructions to divide by 1000. | [optional] |
 | **cursor** | **String** | Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset). | [optional] |
 
 ### Return type

@@ -628,6 +628,7 @@ Class | Method | HTTP request | Description
 *Zernio::SequencesApi* | [**unenroll_contact**](docs/SequencesApi.md#unenroll_contact) | **DELETE** /v1/sequences/{sequenceId}/enroll/{contactId} | Unenroll contact
 *Zernio::SequencesApi* | [**update_sequence**](docs/SequencesApi.md#update_sequence) | **PATCH** /v1/sequences/{sequenceId} | Update sequence
 *Zernio::SlackApi* | [**list_slack_members**](docs/SlackApi.md#list_slack_members) | **GET** /v1/accounts/{accountId}/slack-members | List Slack workspace members
+*Zernio::ToolsApi* | [**download_tik_tok_video**](docs/ToolsApi.md#download_tik_tok_video) | **GET** /v1/tools/tiktok/download | Download a TikTok video
 *Zernio::TrackingTagsApi* | [**add_tracking_tag_shared_account**](docs/TrackingTagsApi.md#add_tracking_tag_shared_account) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Share with an ad account
 *Zernio::TrackingTagsApi* | [**create_tracking_tag**](docs/TrackingTagsApi.md#create_tracking_tag) | **POST** /v1/accounts/{accountId}/tracking-tags | Create a tracking tag
 *Zernio::TrackingTagsApi* | [**get_ad_tracking_tags**](docs/TrackingTagsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
@@ -1276,6 +1277,8 @@ Class | Method | HTTP request | Description
  - [Zernio::DiscordScheduledEvent](docs/DiscordScheduledEvent.md)
  - [Zernio::DiscordScheduledEventEntityMetadata](docs/DiscordScheduledEventEntityMetadata.md)
  - [Zernio::DmButton](docs/DmButton.md)
+ - [Zernio::DownloadTikTokVideo200Response](docs/DownloadTikTokVideo200Response.md)
+ - [Zernio::DownloadTikTokVideo200ResponseFormatsInner](docs/DownloadTikTokVideo200ResponseFormatsInner.md)
  - [Zernio::DuplicateAd200Response](docs/DuplicateAd200Response.md)
  - [Zernio::DuplicateAdCampaign200Response](docs/DuplicateAdCampaign200Response.md)
  - [Zernio::DuplicateAdCampaignRequest](docs/DuplicateAdCampaignRequest.md)

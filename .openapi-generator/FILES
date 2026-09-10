@@ -510,6 +510,8 @@ docs/DiscordRole.md
 docs/DiscordScheduledEvent.md
 docs/DiscordScheduledEventEntityMetadata.md
 docs/DmButton.md
+docs/DownloadTikTokVideo200Response.md
+docs/DownloadTikTokVideo200ResponseFormatsInner.md
 docs/DuplicateAd200Response.md
 docs/DuplicateAdCampaign200Response.md
 docs/DuplicateAdCampaignRequest.md
@@ -1640,6 +1642,7 @@ docs/ThreadsPlatformData.md
 docs/TikTokDryRunVerdict.md
 docs/TikTokDryRunVerdictTiktokInner.md
 docs/TikTokPlatformData.md
+docs/ToolsApi.md
 docs/TrackingTag.md
 docs/TrackingTagsApi.md
 docs/TransferVoiceCall200Response.md
@@ -2141,6 +2144,7 @@ lib/zernio-sdk/api/reviews_api.rb
 lib/zernio-sdk/api/sequences_api.rb
 lib/zernio-sdk/api/slack_api.rb
 lib/zernio-sdk/api/sms_api.rb
+lib/zernio-sdk/api/tools_api.rb
 lib/zernio-sdk/api/tracking_tags_api.rb
 lib/zernio-sdk/api/twitter_engagement_api.rb
 lib/zernio-sdk/api/usage_api.rb
@@ -2641,6 +2645,8 @@ lib/zernio-sdk/models/discord_role.rb
 lib/zernio-sdk/models/discord_scheduled_event.rb
 lib/zernio-sdk/models/discord_scheduled_event_entity_metadata.rb
 lib/zernio-sdk/models/dm_button.rb
+lib/zernio-sdk/models/download_tik_tok_video200_response.rb
+lib/zernio-sdk/models/download_tik_tok_video200_response_formats_inner.rb
 lib/zernio-sdk/models/duplicate_ad200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign_request.rb
@@ -4227,6 +4233,7 @@ spec/api/reviews_api_spec.rb
 spec/api/sequences_api_spec.rb
 spec/api/slack_api_spec.rb
 spec/api/sms_api_spec.rb
+spec/api/tools_api_spec.rb
 spec/api/tracking_tags_api_spec.rb
 spec/api/twitter_engagement_api_spec.rb
 spec/api/usage_api_spec.rb
@@ -4722,6 +4729,8 @@ spec/models/discord_role_spec.rb
 spec/models/discord_scheduled_event_entity_metadata_spec.rb
 spec/models/discord_scheduled_event_spec.rb
 spec/models/dm_button_spec.rb
+spec/models/download_tik_tok_video200_response_formats_inner_spec.rb
+spec/models/download_tik_tok_video200_response_spec.rb
 spec/models/duplicate_ad200_response_spec.rb
 spec/models/duplicate_ad_campaign200_response_spec.rb
 spec/models/duplicate_ad_campaign_request_spec.rb
