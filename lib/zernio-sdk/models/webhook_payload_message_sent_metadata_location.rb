@@ -14,26 +14,27 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Platform-specific context for the sent message: a quote-reply reference, a WhatsApp location pin or WhatsApp contact cards. The key is present only when the send carried some context, and absent otherwise: it is never null and never an empty object. Read it to tell a location or contact-card message from a text one without a GET on the message.
-  class WebhookPayloadMessageSentMetadata < ApiModelBase
-    attr_accessor :location
+  # WhatsApp only. The location pin this message carries, in the same shape the inbox send API accepts. Present on API sends that passed `location`, and on Coexistence echoes of a pin shared from the WhatsApp Business app. The message `text` is only the emoji preview (`📍 <name>`); the pin itself lives here. 
+  class WebhookPayloadMessageSentMetadataLocation < ApiModelBase
+    # Latitude in decimal degrees.
+    attr_accessor :latitude
 
-    # WhatsApp only. The contact cards this message carries. On API sends this is the `contacts` array exactly as given to the inbox send API (`name`, `phones[].phone` / `type`, `emails[]`); on Coexistence echoes of a card shared from the WhatsApp Business app it is Meta's shape (`phones[].wa_id`, `vcard`). The message `text` is only the emoji preview (`👤 <name>`); the cards live here. 
-    attr_accessor :contacts
+    # Longitude in decimal degrees.
+    attr_accessor :longitude
 
-    # `platformMessageId` of the message this send is a quote-reply to.  Present when the reply was sent through Zernio with `replyTo` on the inbox send API (WhatsApp and Telegram). A WhatsApp API send fires its `message.sent` off the delivery status, and the quote reference is forwarded from the stored send there, so it arrives on the same `message.sent` as any other WhatsApp send.  Not delivered on Instagram echoes. Zernio forwards `reply_to.mid` whenever Meta puts it on an echo, but on Instagram Meta does not send it, so a reply the operator quoted in the Instagram app arrives with no `quotedMessageId`. Facebook Messenger rides a separate subscription (`message_echoes`) and has not been measured, so treat it as unverified rather than supported.  Absent on WhatsApp Coexistence echoes. Meta omits the quote context from `smb_message_echoes`, so a reply the operator sent from the WhatsApp Business app arrives with no `quotedMessageId` even though WhatsApp shows it as a quote-reply. Do not read the absence of this field as \"not a reply\". 
-    attr_accessor :quoted_message_id
+    # Location name, when one was given.
+    attr_accessor :name
 
-    # Slack only. Parent thread ts of the sent message. Pass it back as `replyTo` on the inbox send API to keep replying inside the thread. 
-    attr_accessor :thread_ts
+    # Street address, when one was given.
+    attr_accessor :address
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'location' => :'location',
-        :'contacts' => :'contacts',
-        :'quoted_message_id' => :'quotedMessageId',
-        :'thread_ts' => :'threadTs'
+        :'latitude' => :'latitude',
+        :'longitude' => :'longitude',
+        :'name' => :'name',
+        :'address' => :'address'
       }
     end
 
@@ -50,10 +51,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'location' => :'WebhookPayloadMessageSentMetadataLocation',
-        :'contacts' => :'Array<Hash<String, Object>>',
-        :'quoted_message_id' => :'String',
-        :'thread_ts' => :'String'
+        :'latitude' => :'Float',
+        :'longitude' => :'Float',
+        :'name' => :'String',
+        :'address' => :'String'
       }
     end
 
@@ -67,34 +68,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessageSentMetadata` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessageSentMetadataLocation` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessageSentMetadata`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessageSentMetadataLocation`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'location')
-        self.location = attributes[:'location']
+      if attributes.key?(:'latitude')
+        self.latitude = attributes[:'latitude']
       end
 
-      if attributes.key?(:'contacts')
-        if (value = attributes[:'contacts']).is_a?(Array)
-          self.contacts = value
-        end
+      if attributes.key?(:'longitude')
+        self.longitude = attributes[:'longitude']
       end
 
-      if attributes.key?(:'quoted_message_id')
-        self.quoted_message_id = attributes[:'quoted_message_id']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'thread_ts')
-        self.thread_ts = attributes[:'thread_ts']
+      if attributes.key?(:'address')
+        self.address = attributes[:'address']
       end
     end
 
@@ -118,10 +117,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          location == o.location &&
-          contacts == o.contacts &&
-          quoted_message_id == o.quoted_message_id &&
-          thread_ts == o.thread_ts
+          latitude == o.latitude &&
+          longitude == o.longitude &&
+          name == o.name &&
+          address == o.address
     end
 
     # @see the `==` method
@@ -133,7 +132,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [location, contacts, quoted_message_id, thread_ts].hash
+      [latitude, longitude, name, address].hash
     end
 
     # Builds the object from hash

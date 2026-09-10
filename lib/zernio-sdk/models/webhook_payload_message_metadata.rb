@@ -58,6 +58,8 @@ module Zernio
 
     attr_accessor :referred_product
 
+    attr_accessor :location
+
     # WhatsApp only. Contact cards the user shared, forwarded verbatim from Meta. Read `contactsOrigin` before treating any number here as the sender's own. 
     attr_accessor :contacts
 
@@ -116,6 +118,7 @@ module Zernio
         :'nfm_reply_name' => :'nfmReplyName',
         :'order' => :'order',
         :'referred_product' => :'referredProduct',
+        :'location' => :'location',
         :'contacts' => :'contacts',
         :'contacts_origin' => :'contactsOrigin',
         :'story_reply' => :'storyReply',
@@ -154,6 +157,7 @@ module Zernio
         :'nfm_reply_name' => :'String',
         :'order' => :'WebhookPayloadMessageMetadataOrder',
         :'referred_product' => :'WebhookPayloadMessageMetadataReferredProduct',
+        :'location' => :'WebhookPayloadMessageMetadataLocation',
         :'contacts' => :'Array<Hash<String, Object>>',
         :'contacts_origin' => :'String',
         :'story_reply' => :'WebhookPayloadMessageMetadataStoryReply',
@@ -248,6 +252,10 @@ module Zernio
         self.referred_product = attributes[:'referred_product']
       end
 
+      if attributes.key?(:'location')
+        self.location = attributes[:'location']
+      end
+
       if attributes.key?(:'contacts')
         if (value = attributes[:'contacts']).is_a?(Array)
           self.contacts = value
@@ -338,6 +346,7 @@ module Zernio
           nfm_reply_name == o.nfm_reply_name &&
           order == o.order &&
           referred_product == o.referred_product &&
+          location == o.location &&
           contacts == o.contacts &&
           contacts_origin == o.contacts_origin &&
           story_reply == o.story_reply &&
@@ -356,7 +365,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [standby, quoted_message_id, quoted_message, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, nfm_reply_name, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
+      [standby, quoted_message_id, quoted_message, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, nfm_reply_name, order, referred_product, location, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
     end
 
     # Builds the object from hash

@@ -19,6 +19,7 @@
 | **nfm_reply_name** | **String** | WhatsApp only. &#x60;nfm_reply.name&#x60; as Meta sent it, e.g. &#x60;flow&#x60; or &#x60;address_message&#x60;. Address submissions share the &#x60;nfm_reply&#x60; envelope with Flow submissions and are otherwise indistinguishable in &#x60;flowResponseData&#x60;; use this field to tell them apart.  | [optional] |
 | **order** | [**WebhookPayloadMessageMetadataOrder**](WebhookPayloadMessageMetadataOrder.md) |  | [optional] |
 | **referred_product** | [**WebhookPayloadMessageMetadataReferredProduct**](WebhookPayloadMessageMetadataReferredProduct.md) |  | [optional] |
+| **location** | [**WebhookPayloadMessageMetadataLocation**](WebhookPayloadMessageMetadataLocation.md) |  | [optional] |
 | **contacts** | **Array&lt;Hash&lt;String, Object&gt;&gt;** | WhatsApp only. Contact cards the user shared, forwarded verbatim from Meta. Read &#x60;contactsOrigin&#x60; before treating any number here as the sender&#39;s own.  | [optional] |
 | **contacts_origin** | **String** | WhatsApp only. How the contact card was shared. &#x60;contact_request&#x60; means the user tapped a &#x60;request_contact_info&#x60; button, so the number is their own and consented. &#x60;other&#x60; means they picked a card from their address book: it may be anyone&#39;s, and must NOT be stored as the sender&#39;s identity. Omitted when Meta sends no origin.  | [optional] |
 | **story_reply** | [**WebhookPayloadMessageMetadataStoryReply**](WebhookPayloadMessageMetadataStoryReply.md) |  | [optional] |
@@ -48,6 +49,7 @@ instance = Zernio::WebhookPayloadMessageMetadata.new(
   nfm_reply_name: null,
   order: null,
   referred_product: null,
+  location: null,
   contacts: null,
   contacts_origin: null,
   story_reply: null,
