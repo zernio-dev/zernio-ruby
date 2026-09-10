@@ -27,6 +27,12 @@ module Zernio
     # (Bluesky only) URI to use for unliking
     attr_accessor :like_uri
 
+    # LinkedIn only: the account already had this exact reaction, so nothing was created
+    attr_accessor :already_reacted
+
+    # LinkedIn only: the reaction type now in effect
+    attr_accessor :reaction_type
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -34,7 +40,9 @@ module Zernio
         :'post_id' => :'postId',
         :'platform' => :'platform',
         :'liked' => :'liked',
-        :'like_uri' => :'likeUri'
+        :'like_uri' => :'likeUri',
+        :'already_reacted' => :'alreadyReacted',
+        :'reaction_type' => :'reactionType'
       }
     end
 
@@ -55,7 +63,9 @@ module Zernio
         :'post_id' => :'String',
         :'platform' => :'String',
         :'liked' => :'Boolean',
-        :'like_uri' => :'String'
+        :'like_uri' => :'String',
+        :'already_reacted' => :'Boolean',
+        :'reaction_type' => :'String'
       }
     end
 
@@ -100,6 +110,14 @@ module Zernio
       if attributes.key?(:'like_uri')
         self.like_uri = attributes[:'like_uri']
       end
+
+      if attributes.key?(:'already_reacted')
+        self.already_reacted = attributes[:'already_reacted']
+      end
+
+      if attributes.key?(:'reaction_type')
+        self.reaction_type = attributes[:'reaction_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -126,7 +144,9 @@ module Zernio
           post_id == o.post_id &&
           platform == o.platform &&
           liked == o.liked &&
-          like_uri == o.like_uri
+          like_uri == o.like_uri &&
+          already_reacted == o.already_reacted &&
+          reaction_type == o.reaction_type
     end
 
     # @see the `==` method
@@ -138,7 +158,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, post_id, platform, liked, like_uri].hash
+      [status, post_id, platform, liked, like_uri, already_reacted, reaction_type].hash
     end
 
     # Builds the object from hash

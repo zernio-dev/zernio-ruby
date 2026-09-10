@@ -46,7 +46,7 @@ module Zernio
     # Whether this comment can be hidden (Facebook, Instagram, Threads)
     attr_accessor :can_hide
 
-    # Whether this comment can be liked (Facebook, X, Bluesky, Reddit)
+    # Whether this comment can be liked (Facebook, X, Bluesky, Reddit, LinkedIn)
     attr_accessor :can_like
 
     # Whether the comment is currently hidden
