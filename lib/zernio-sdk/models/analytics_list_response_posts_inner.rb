@@ -38,6 +38,9 @@ module Zernio
 
     attr_accessor :is_external
 
+    # True when this post's metrics include paid delivery, so organic reporting should exclude it. Set for LinkedIn dark posts and for TikTok posts that one of your TikTok ads promotes (Spark / boosted). TikTok exposes no ad flag of its own, so a video created by an uploaded-asset (non-Spark) TikTok ad is posted to the profile with a fresh organic id and cannot be detected: those still report as false.
+    attr_accessor :is_ad
+
     attr_accessor :profile_id
 
     attr_accessor :thumbnail_url
@@ -95,6 +98,7 @@ module Zernio
         :'platform' => :'platform',
         :'platform_post_url' => :'platformPostUrl',
         :'is_external' => :'isExternal',
+        :'is_ad' => :'isAd',
         :'profile_id' => :'profileId',
         :'thumbnail_url' => :'thumbnailUrl',
         :'media_type' => :'mediaType',
@@ -130,6 +134,7 @@ module Zernio
         :'platform' => :'String',
         :'platform_post_url' => :'String',
         :'is_external' => :'Boolean',
+        :'is_ad' => :'Boolean',
         :'profile_id' => :'String',
         :'thumbnail_url' => :'String',
         :'media_type' => :'String',
@@ -211,6 +216,10 @@ module Zernio
         self.is_external = attributes[:'is_external']
       end
 
+      if attributes.key?(:'is_ad')
+        self.is_ad = attributes[:'is_ad']
+      end
+
       if attributes.key?(:'profile_id')
         self.profile_id = attributes[:'profile_id']
       end
@@ -289,6 +298,7 @@ module Zernio
           platform == o.platform &&
           platform_post_url == o.platform_post_url &&
           is_external == o.is_external &&
+          is_ad == o.is_ad &&
           profile_id == o.profile_id &&
           thumbnail_url == o.thumbnail_url &&
           media_type == o.media_type &&
@@ -308,7 +318,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, late_post_id, content, scheduled_for, published_at, status, analytics, platforms, platform, platform_post_url, is_external, profile_id, thumbnail_url, media_type, media_items, media_product_type, is_ai_generated, is_shared_to_feed, media_audio_type].hash
+      [_id, late_post_id, content, scheduled_for, published_at, status, analytics, platforms, platform, platform_post_url, is_external, is_ad, profile_id, thumbnail_url, media_type, media_items, media_product_type, is_ai_generated, is_shared_to_feed, media_audio_type].hash
     end
 
     # Builds the object from hash
