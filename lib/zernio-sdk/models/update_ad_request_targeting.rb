@@ -29,7 +29,13 @@ module Zernio
 
     attr_accessor :age_max
 
+    # ISO 3166-1 alpha-2 codes. On Google this is the FULL new country set for the campaign (same contract as `locations`); on LinkedIn it replaces the campaign's geo criteria.
     attr_accessor :countries
+
+    attr_accessor :locations
+
+    # Google only. The FULL new language set for the campaign, as Google language codes (ISO 639-1, plus variants such as `zh_CN`). An unknown code returns 400.
+    attr_accessor :languages
 
     # Interest objects from /v1/ads/interests. Each must include id and name.
     attr_accessor :interests
@@ -68,6 +74,8 @@ module Zernio
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
         :'countries' => :'countries',
+        :'locations' => :'locations',
+        :'languages' => :'languages',
         :'interests' => :'interests',
         :'advantage_audience' => :'advantage_audience'
       }
@@ -92,6 +100,8 @@ module Zernio
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'countries' => :'Array<String>',
+        :'locations' => :'UpdateAdRequestTargetingLocations',
+        :'languages' => :'Array<String>',
         :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>',
         :'advantage_audience' => :'Integer'
       }
@@ -148,6 +158,16 @@ module Zernio
       if attributes.key?(:'countries')
         if (value = attributes[:'countries']).is_a?(Array)
           self.countries = value
+        end
+      end
+
+      if attributes.key?(:'locations')
+        self.locations = attributes[:'locations']
+      end
+
+      if attributes.key?(:'languages')
+        if (value = attributes[:'languages']).is_a?(Array)
+          self.languages = value
         end
       end
 
@@ -256,6 +276,8 @@ module Zernio
           age_min == o.age_min &&
           age_max == o.age_max &&
           countries == o.countries &&
+          locations == o.locations &&
+          languages == o.languages &&
           interests == o.interests &&
           advantage_audience == o.advantage_audience
     end
@@ -269,7 +291,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [keywords, negative_keywords, devices, age_min, age_max, countries, interests, advantage_audience].hash
+      [keywords, negative_keywords, devices, age_min, age_max, countries, locations, languages, interests, advantage_audience].hash
     end
 
     # Builds the object from hash

@@ -2452,6 +2452,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdRequestTargetingInterestsInner](docs/UpdateAdRequestTargetingInterestsInner.md)
  - [Zernio::UpdateAdRequestTargetingKeywordsInner](docs/UpdateAdRequestTargetingKeywordsInner.md)
  - [Zernio::UpdateAdRequestTargetingKeywordsInnerOneOf](docs/UpdateAdRequestTargetingKeywordsInnerOneOf.md)
+ - [Zernio::UpdateAdRequestTargetingLocations](docs/UpdateAdRequestTargetingLocations.md)
  - [Zernio::UpdateAdSet200Response](docs/UpdateAdSet200Response.md)
  - [Zernio::UpdateAdSetRequest](docs/UpdateAdSetRequest.md)
  - [Zernio::UpdateAdSetRequestBudget](docs/UpdateAdSetRequestBudget.md)
