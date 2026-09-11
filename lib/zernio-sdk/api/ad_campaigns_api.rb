@@ -1183,6 +1183,79 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get live campaign details
+    # Reads one campaign live from Meta, returned verbatim, so a caller that knows a campaign id no longer has to page `GET /v1/ads/campaigns` to find it. The default projection covers name, status, objective, buying type, bid strategy, budgets, spend cap, schedule and `issues_info`. `fields` is a raw-passthrough override; unknown fields return Meta's 400 verbatim. A campaign the resolved connection cannot see comes back as Meta's own 400, not a 404.
+    # @param campaign_id [String] Meta campaign id (platformCampaignId).
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers.
+    # @return [GetAdCampaignDetails200Response]
+    def get_ad_campaign_details(campaign_id, account_id, opts = {})
+      data, _status_code, _headers = get_ad_campaign_details_with_http_info(campaign_id, account_id, opts)
+      data
+    end
+
+    # Get live campaign details
+    # Reads one campaign live from Meta, returned verbatim, so a caller that knows a campaign id no longer has to page &#x60;GET /v1/ads/campaigns&#x60; to find it. The default projection covers name, status, objective, buying type, bid strategy, budgets, spend cap, schedule and &#x60;issues_info&#x60;. &#x60;fields&#x60; is a raw-passthrough override; unknown fields return Meta&#39;s 400 verbatim. A campaign the resolved connection cannot see comes back as Meta&#39;s own 400, not a 404.
+    # @param campaign_id [String] Meta campaign id (platformCampaignId).
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers.
+    # @return [Array<(GetAdCampaignDetails200Response, Integer, Hash)>] GetAdCampaignDetails200Response data, response status code and response headers
+    def get_ad_campaign_details_with_http_info(campaign_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.get_ad_campaign_details ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.get_ad_campaign_details"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdCampaignsApi.get_ad_campaign_details"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdCampaignDetails200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.get_ad_campaign_details",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#get_ad_campaign_details\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get live ad-set details
     # Reads the ad set live from Meta, returned verbatim. The default projection includes `learning_stage_info` (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING; Meta omits its `status` key on paused ad sets), delivery settings, budgets, schedule and targeting. `fields` is a raw-passthrough override; unknown fields return Meta's 400 verbatim.
     # @param ad_set_id [String] Meta ad set id (platformAdSetId).

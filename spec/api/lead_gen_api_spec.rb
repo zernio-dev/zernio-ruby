@@ -36,7 +36,7 @@ describe 'LeadGenApi' do
   # Archive a lead form
   # Neither platform hard-deletes a form; this archives it (Meta status&#x3D;ARCHIVED; LinkedIn state&#x3D;ARCHIVED via PARTIAL_UPDATE). Meta forms must belong to the Page the accountId manages.
   # @param form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
-  # @param account_id Connected facebook or linkedin ads account id (selects the platform).
+  # @param account_id Connected Meta ads, facebook or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile.
   # @param [Hash] opts the optional parameters
   # @return [ArchiveLeadForm200Response]
   describe 'archive_lead_form test' do
@@ -47,7 +47,7 @@ describe 'LeadGenApi' do
 
   # unit tests for create_lead_form
   # Create a lead form
-  # Creates a Lead Gen form. The form content goes inside &#x60;platformSpecificData&#x60; for both platforms (the shape is selected by the accountId&#39;s platform). Meta: created on the connected Facebook Page (a facebook account or a metaads business-login account with a selected Page) (POST /{page-id}/leadgen_forms); the old top-level Meta fields (questions, thankYou*, contextCard, …) are DEPRECATED but still accepted while platformSpecificData is absent; mixing both shapes is a 400. LinkedIn: created on the ad account&#39;s Company Page. NOT idempotent: a retry creates a second form. Meta prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. LinkedIn exposes only free-text and multiple-choice questions via API (prefilled-from-profile fields are Campaign Manager UI-only). Requires the Ads add-on. 
+  # Creates a Lead Gen form. The form content goes inside &#x60;platformSpecificData&#x60; for both platforms (the shape is selected by the accountId&#39;s platform). Meta: created on the connected Facebook Page (POST /{page-id}/leadgen_forms), where &#x60;accountId&#x60; may be the &#x60;metaads&#x60; ads connection (its Page comes from the Facebook account linked to the same profile) or the Facebook account itself; the old top-level Meta fields (questions, thankYou*, contextCard, …) are DEPRECATED but still accepted while platformSpecificData is absent; mixing both shapes is a 400. LinkedIn: created on the ad account&#39;s Company Page. NOT idempotent: a retry creates a second form. Meta prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. LinkedIn exposes only free-text and multiple-choice questions via API (prefilled-from-profile fields are Campaign Manager UI-only). Requires the Ads add-on. 
   # @param create_lead_form_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateLeadForm200Response]
@@ -74,7 +74,7 @@ describe 'LeadGenApi' do
   # Get a lead form
   # Returns the full form, including the thank-you page, so a form can be diffed against what was created. Meta forms are scoped to the Page the accountId manages: a form on any other Page is a 404, never a read. 
   # @param form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
-  # @param account_id Connected facebook or linkedin ads account id (selects the platform).
+  # @param account_id Connected Meta ads, facebook or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :fields Meta only. A Graph field selection passed through verbatim to GET /{form-id}, replacing the default projection, so fields Meta adds later are reachable without an API change. Field names, commas and {} expansion only; anything else (Graph field modifiers such as .limit(), or characters that could open another query parameter) is a 400. Ownership of the form is verified before the selection runs, so this cannot reach any Page but the one accountId manages. Unknown field names are rejected by Meta as a 400. 
   # @return [GetLeadForm200Response]
@@ -102,8 +102,8 @@ describe 'LeadGenApi' do
 
   # unit tests for list_lead_forms
   # List lead forms
-  # Lists the Lead Gen forms owned by the account. Meta: forms on the connected Facebook Page, including a Page selected on a metaads business-login connection. LinkedIn: forms owned by the ad account&#39;s Company Page. Pass &#x60;adAccountId&#x60; (LinkedIn forms are org-owned). Requires the Ads add-on. 
-  # @param account_id Connected Facebook, Meta ads business-login or LinkedIn ads account ID.
+  # Lists the Lead Gen forms owned by the account. Meta: forms on the connected Facebook Page. Pass either the &#x60;metaads&#x60; ads connection (the Page is taken from the Facebook account linked to it) or the Facebook account itself. LinkedIn: forms owned by the ad account&#39;s Company Page. Pass &#x60;adAccountId&#x60; (LinkedIn forms are org-owned). Requires the Ads add-on. 
+  # @param account_id Connected Meta ads, Facebook or LinkedIn ads account ID. A Meta ads connection resolves its Page through the Facebook account linked to the same profile.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn.
   # @option opts [Integer] :limit 

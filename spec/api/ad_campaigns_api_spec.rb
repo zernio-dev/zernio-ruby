@@ -237,6 +237,20 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for get_ad_campaign_details
+  # Get live campaign details
+  # Reads one campaign live from Meta, returned verbatim, so a caller that knows a campaign id no longer has to page &#x60;GET /v1/ads/campaigns&#x60; to find it. The default projection covers name, status, objective, buying type, bid strategy, budgets, spend cap, schedule and &#x60;issues_info&#x60;. &#x60;fields&#x60; is a raw-passthrough override; unknown fields return Meta&#39;s 400 verbatim. A campaign the resolved connection cannot see comes back as Meta&#39;s own 400, not a 404.
+  # @param campaign_id Meta campaign id (platformCampaignId).
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :fields Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers.
+  # @return [GetAdCampaignDetails200Response]
+  describe 'get_ad_campaign_details test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_ad_set_details
   # Get live ad-set details
   # Reads the ad set live from Meta, returned verbatim. The default projection includes &#x60;learning_stage_info&#x60; (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING; Meta omits its &#x60;status&#x60; key on paused ad sets), delivery settings, budgets, schedule and targeting. &#x60;fields&#x60; is a raw-passthrough override; unknown fields return Meta&#39;s 400 verbatim.

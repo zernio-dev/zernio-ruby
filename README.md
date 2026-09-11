@@ -175,6 +175,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**duplicate_ad_campaign**](docs/AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign
 *Zernio::AdCampaignsApi* | [**duplicate_ad_set**](docs/AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set
 *Zernio::AdCampaignsApi* | [**get_ad**](docs/AdCampaignsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
+*Zernio::AdCampaignsApi* | [**get_ad_campaign_details**](docs/AdCampaignsApi.md#get_ad_campaign_details) | **GET** /v1/ads/campaigns/{campaignId} | Get live campaign details
 *Zernio::AdCampaignsApi* | [**get_ad_set_details**](docs/AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Get live ad-set details
 *Zernio::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Zernio::AdCampaignsApi* | [**get_ads_timeline**](docs/AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics
@@ -1372,6 +1373,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdAccountFinance200ResponseFundingSource](docs/GetAdAccountFinance200ResponseFundingSource.md)
  - [Zernio::GetAdAnalytics202Response](docs/GetAdAnalytics202Response.md)
  - [Zernio::GetAdAudience200Response](docs/GetAdAudience200Response.md)
+ - [Zernio::GetAdCampaignDetails200Response](docs/GetAdCampaignDetails200Response.md)
  - [Zernio::GetAdComments200Response](docs/GetAdComments200Response.md)
  - [Zernio::GetAdComments200ResponseMeta](docs/GetAdComments200ResponseMeta.md)
  - [Zernio::GetAdComments200ResponsePagination](docs/GetAdComments200ResponsePagination.md)

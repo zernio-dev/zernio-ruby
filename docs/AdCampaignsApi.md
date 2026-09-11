@@ -20,6 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
 | [**duplicate_ad_set**](AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set |
 | [**get_ad**](AdCampaignsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
+| [**get_ad_campaign_details**](AdCampaignsApi.md#get_ad_campaign_details) | **GET** /v1/ads/campaigns/{campaignId} | Get live campaign details |
 | [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Get live ad-set details |
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
@@ -1186,6 +1187,81 @@ end
 ### Return type
 
 [**GetAd200Response**](GetAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_campaign_details
+
+> <GetAdCampaignDetails200Response> get_ad_campaign_details(campaign_id, account_id, opts)
+
+Get live campaign details
+
+Reads one campaign live from Meta, returned verbatim, so a caller that knows a campaign id no longer has to page `GET /v1/ads/campaigns` to find it. The default projection covers name, status, objective, buying type, bid strategy, budgets, spend cap, schedule and `issues_info`. `fields` is a raw-passthrough override; unknown fields return Meta's 400 verbatim. A campaign the resolved connection cannot see comes back as Meta's own 400, not a 404.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Meta campaign id (platformCampaignId).
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+opts = {
+  fields: 'id,name,status,daily_budget' # String | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers.
+}
+
+begin
+  # Get live campaign details
+  result = api_instance.get_ad_campaign_details(campaign_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_ad_campaign_details: #{e}"
+end
+```
+
+#### Using the get_ad_campaign_details_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdCampaignDetails200Response>, Integer, Hash)> get_ad_campaign_details_with_http_info(campaign_id, account_id, opts)
+
+```ruby
+begin
+  # Get live campaign details
+  data, status_code, headers = api_instance.get_ad_campaign_details_with_http_info(campaign_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdCampaignDetails200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_ad_campaign_details_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Meta campaign id (platformCampaignId). |  |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **fields** | **String** | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers. | [optional] |
+
+### Return type
+
+[**GetAdCampaignDetails200Response**](GetAdCampaignDetails200Response.md)
 
 ### Authorization
 
