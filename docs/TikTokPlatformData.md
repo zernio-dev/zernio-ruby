@@ -16,11 +16,11 @@
 | **express_consent_given** | **Boolean** | User has given express consent for posting | [optional] |
 | **media_type** | **String** | Optional override. Defaults based on provided media items. | [optional] |
 | **video_cover_timestamp_ms** | **Integer** | Optional for video posts. Timestamp in milliseconds to select which frame to use as thumbnail (defaults to 1000ms/1 second). Ignored when videoCoverImageUrl is provided. | [optional] |
-| **video_cover_image_url** | **String** | Optional for video posts. URL of a custom thumbnail image (JPG, PNG, or WebP, max 20MB). The image is stitched as a single frame at the start of the video and used as the cover. Overrides videoCoverTimestampMs when provided. | [optional] |
+| **video_cover_image_url** | **String** | Optional for video posts. URL of a custom thumbnail image (JPG, PNG, or WebP, max 20MB). The image is stitched as a single frame at the start of the video and used as the cover. Accounts connected through the TikTok for Business app instead pass the URL to TikTok as the cover directly, with no stitching, and the URL must resolve on a domain we have verified with TikTok. Overrides videoCoverTimestampMs when provided. | [optional] |
 | **photo_cover_index** | **Integer** | Optional for photo carousels. Index of image to use as cover, 0-based (defaults to 0/first image). | [optional] |
 | **auto_add_music** | **Boolean** | When true, TikTok may add recommended music (photos only) | [optional] |
-| **video_made_with_ai** | **Boolean** | Set true to disclose AI-generated content | [optional] |
-| **description** | **String** | Optional long-form description for photo posts (max 4000 chars). Recommended when content exceeds 90 chars, as photo titles are auto-truncated. | [optional] |
+| **video_made_with_ai** | **Boolean** | Set true to disclose AI-generated content. Accounts connected through the TikTok for Business app carry the disclosure on video posts only: the business photo endpoint has no AI disclosure field, so true on a direct photo post is rejected at creation rather than published undisclosed. Send draft true to publish such a photo post and set the disclosure in the TikTok app. | [optional] |
+| **description** | **String** | Optional long-form caption for photo posts (max 4000 chars). Recommended when content exceeds 90 chars, as photo titles are auto-truncated. Falls back to the post content when omitted. | [optional] |
 
 ## Example
 
