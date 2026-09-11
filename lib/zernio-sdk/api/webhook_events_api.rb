@@ -2858,7 +2858,7 @@ module Zernio
     end
 
     # WhatsApp number action required event
-    # Fired when the regulator asks for more information on an already-placed regulated number order. The number stays pending (nothing was rejected); the customer can provide the missing information from the dashboard, or via the remediation endpoint. `reason` carries the regulator's request verbatim when available. 
+    # Fired when the regulator asks for more information on an already-placed regulated number order. The number stays pending (nothing was rejected); the customer can provide the missing information from the dashboard, or via the remediation endpoint. `reason` carries the regulator's request verbatim when available. `requirements` lists every requirement on the order with the reviewer's current verdict; the `declined` ones are what to fix, keyed by the same `requirementId` the remediation endpoint uses. Verdicts only change when a reviewer acts, so they describe the review at `reviewedAt`, the time of the reviewer's last comment. 
     # @param on_whats_app_number_action_required_request [OnWhatsAppNumberActionRequiredRequest] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -2868,7 +2868,7 @@ module Zernio
     end
 
     # WhatsApp number action required event
-    # Fired when the regulator asks for more information on an already-placed regulated number order. The number stays pending (nothing was rejected); the customer can provide the missing information from the dashboard, or via the remediation endpoint. &#x60;reason&#x60; carries the regulator&#39;s request verbatim when available. 
+    # Fired when the regulator asks for more information on an already-placed regulated number order. The number stays pending (nothing was rejected); the customer can provide the missing information from the dashboard, or via the remediation endpoint. &#x60;reason&#x60; carries the regulator&#39;s request verbatim when available. &#x60;requirements&#x60; lists every requirement on the order with the reviewer&#39;s current verdict; the &#x60;declined&#x60; ones are what to fix, keyed by the same &#x60;requirementId&#x60; the remediation endpoint uses. Verdicts only change when a reviewer acts, so they describe the review at &#x60;reviewedAt&#x60;, the time of the reviewer&#39;s last comment. 
     # @param on_whats_app_number_action_required_request [OnWhatsAppNumberActionRequiredRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

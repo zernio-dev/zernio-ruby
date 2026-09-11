@@ -1299,6 +1299,7 @@ docs/OnVerificationFailedRequestVerification.md
 docs/OnWhatsAppAutomaticEventRequest.md
 docs/OnWhatsAppAutomaticEventRequestCustomData.md
 docs/OnWhatsAppNumberActionRequiredRequest.md
+docs/OnWhatsAppNumberActionRequiredRequestRequirementsInner.md
 docs/OnWhatsAppNumberActivatedRequest.md
 docs/OnWhatsAppNumberActivatedRequestNumber.md
 docs/OnWhatsAppNumberDeclinedRequest.md
@@ -3424,6 +3425,7 @@ lib/zernio-sdk/models/on_verification_failed_request_verification.rb
 lib/zernio-sdk/models/on_whats_app_automatic_event_request.rb
 lib/zernio-sdk/models/on_whats_app_automatic_event_request_custom_data.rb
 lib/zernio-sdk/models/on_whats_app_number_action_required_request.rb
+lib/zernio-sdk/models/on_whats_app_number_action_required_request_requirements_inner.rb
 lib/zernio-sdk/models/on_whats_app_number_activated_request.rb
 lib/zernio-sdk/models/on_whats_app_number_activated_request_number.rb
 lib/zernio-sdk/models/on_whats_app_number_declined_request.rb
@@ -5515,6 +5517,7 @@ spec/models/on_verification_failed_request_spec.rb
 spec/models/on_verification_failed_request_verification_spec.rb
 spec/models/on_whats_app_automatic_event_request_custom_data_spec.rb
 spec/models/on_whats_app_automatic_event_request_spec.rb
+spec/models/on_whats_app_number_action_required_request_requirements_inner_spec.rb
 spec/models/on_whats_app_number_action_required_request_spec.rb
 spec/models/on_whats_app_number_activated_request_number_spec.rb
 spec/models/on_whats_app_number_activated_request_spec.rb

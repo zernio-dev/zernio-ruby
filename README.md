@@ -2050,6 +2050,7 @@ Class | Method | HTTP request | Description
  - [Zernio::OnWhatsAppAutomaticEventRequest](docs/OnWhatsAppAutomaticEventRequest.md)
  - [Zernio::OnWhatsAppAutomaticEventRequestCustomData](docs/OnWhatsAppAutomaticEventRequestCustomData.md)
  - [Zernio::OnWhatsAppNumberActionRequiredRequest](docs/OnWhatsAppNumberActionRequiredRequest.md)
+ - [Zernio::OnWhatsAppNumberActionRequiredRequestRequirementsInner](docs/OnWhatsAppNumberActionRequiredRequestRequirementsInner.md)
  - [Zernio::OnWhatsAppNumberActivatedRequest](docs/OnWhatsAppNumberActivatedRequest.md)
  - [Zernio::OnWhatsAppNumberActivatedRequestNumber](docs/OnWhatsAppNumberActivatedRequestNumber.md)
  - [Zernio::OnWhatsAppNumberDeclinedRequest](docs/OnWhatsAppNumberDeclinedRequest.md)

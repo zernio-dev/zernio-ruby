@@ -14,23 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  class OnWhatsAppNumberActionRequiredRequest < ApiModelBase
-    attr_accessor :id
+  class OnWhatsAppNumberActionRequiredRequestRequirementsInner < ApiModelBase
+    # Same id as fields[].requirementId on the remediation endpoint.
+    attr_accessor :requirement_id
 
-    attr_accessor :event
+    attr_accessor :label
 
-    # UTC time at which Zernio generated this event (set once when the event payload is built, before delivery is queued). Retries and redeliveries keep the original value, so it reflects the event, not the delivery attempt.
-    attr_accessor :timestamp
-
-    attr_accessor :reason
-
-    # Every requirement on the order with the reviewer's current verdict. Omitted when the order's requirements could not be read.
-    attr_accessor :requirements
-
-    # When the reviewer last commented on the order. Omitted when there is no reviewer comment.
-    attr_accessor :reviewed_at
-
-    attr_accessor :number
+    attr_accessor :status
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -57,13 +47,9 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'event' => :'event',
-        :'timestamp' => :'timestamp',
-        :'reason' => :'reason',
-        :'requirements' => :'requirements',
-        :'reviewed_at' => :'reviewedAt',
-        :'number' => :'number'
+        :'requirement_id' => :'requirementId',
+        :'label' => :'label',
+        :'status' => :'status'
       }
     end
 
@@ -80,13 +66,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'event' => :'String',
-        :'timestamp' => :'Time',
-        :'reason' => :'String',
-        :'requirements' => :'Array<OnWhatsAppNumberActionRequiredRequestRequirementsInner>',
-        :'reviewed_at' => :'Time',
-        :'number' => :'OnWhatsAppNumberDeclinedRequestNumber'
+        :'requirement_id' => :'String',
+        :'label' => :'String',
+        :'status' => :'String'
       }
     end
 
@@ -100,46 +82,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::OnWhatsAppNumberActionRequiredRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::OnWhatsAppNumberActionRequiredRequestRequirementsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::OnWhatsAppNumberActionRequiredRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::OnWhatsAppNumberActionRequiredRequestRequirementsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'requirement_id')
+        self.requirement_id = attributes[:'requirement_id']
       end
 
-      if attributes.key?(:'event')
-        self.event = attributes[:'event']
+      if attributes.key?(:'label')
+        self.label = attributes[:'label']
       end
 
-      if attributes.key?(:'timestamp')
-        self.timestamp = attributes[:'timestamp']
-      end
-
-      if attributes.key?(:'reason')
-        self.reason = attributes[:'reason']
-      end
-
-      if attributes.key?(:'requirements')
-        if (value = attributes[:'requirements']).is_a?(Array)
-          self.requirements = value
-        end
-      end
-
-      if attributes.key?(:'reviewed_at')
-        self.reviewed_at = attributes[:'reviewed_at']
-      end
-
-      if attributes.key?(:'number')
-        self.number = attributes[:'number']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -155,19 +119,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      event_validator = EnumAttributeValidator.new('String', ["whatsapp.number.action_required"])
-      return false unless event_validator.valid?(@event)
+      status_validator = EnumAttributeValidator.new('String', ["approved", "pending", "declined"])
+      return false unless status_validator.valid?(@status)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] event Object to be assigned
-    def event=(event)
-      validator = EnumAttributeValidator.new('String', ["whatsapp.number.action_required"])
-      unless validator.valid?(event)
-        fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["approved", "pending", "declined"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
-      @event = event
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -175,13 +139,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          event == o.event &&
-          timestamp == o.timestamp &&
-          reason == o.reason &&
-          requirements == o.requirements &&
-          reviewed_at == o.reviewed_at &&
-          number == o.number
+          requirement_id == o.requirement_id &&
+          label == o.label &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -193,7 +153,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event, timestamp, reason, requirements, reviewed_at, number].hash
+      [requirement_id, label, status].hash
     end
 
     # Builds the object from hash
