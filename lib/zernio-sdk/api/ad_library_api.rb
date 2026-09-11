@@ -36,7 +36,7 @@ module Zernio
     # @option opts [Date] :since Earliest delivery date (YYYY-MM-DD).
     # @option opts [Date] :_until Latest delivery date (YYYY-MM-DD).
     # @option opts [String] :search_type Meta only. Whether q matches words in any order or as an exact phrase (comma-separate phrases to match all of them). (default to 'KEYWORD_UNORDERED')
-    # @option opts [String] :fields Meta only. Raw Graph projection override, e.g. add spend,impressions,demographic_distribution for political ads.
+    # @option opts [String] :fields Meta only. Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
     # @option opts [Integer] :limit Rows per page. LinkedIn accepts at most 25. (default to 25)
     # @option opts [String] :after paging.after of the previous page.
     # @return [SearchAdLibrary200Response]
@@ -62,7 +62,7 @@ module Zernio
     # @option opts [Date] :since Earliest delivery date (YYYY-MM-DD).
     # @option opts [Date] :_until Latest delivery date (YYYY-MM-DD).
     # @option opts [String] :search_type Meta only. Whether q matches words in any order or as an exact phrase (comma-separate phrases to match all of them). (default to 'KEYWORD_UNORDERED')
-    # @option opts [String] :fields Meta only. Raw Graph projection override, e.g. add spend,impressions,demographic_distribution for political ads.
+    # @option opts [String] :fields Meta only. Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
     # @option opts [Integer] :limit Rows per page. LinkedIn accepts at most 25. (default to 25)
     # @option opts [String] :after paging.after of the previous page.
     # @return [Array<(SearchAdLibrary200Response, Integer, Hash)>] SearchAdLibrary200Response data, response status code and response headers

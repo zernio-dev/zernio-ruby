@@ -244,7 +244,7 @@ describe 'AdCampaignsApi' do
   # @param ad_set_id Meta ad set id (platformAdSetId).
   # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+  # @option opts [String] :fields Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
   # @return [GetAdSetDetails200Response]
   describe 'get_ad_set_details test' do
     it 'should work' do

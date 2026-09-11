@@ -2038,7 +2038,7 @@ module Zernio
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
     # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [String] :fields Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
     # @option opts [Integer] :limit Rows per page (default to 25)
     # @option opts [String] :after Cursor from paging.after of the previous page.
     # @return [ListAdStudies200Response]
@@ -2052,7 +2052,7 @@ module Zernio
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
     # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [String] :fields Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
     # @option opts [Integer] :limit Rows per page (default to 25)
     # @option opts [String] :after Cursor from paging.after of the previous page.
     # @return [Array<(ListAdStudies200Response, Integer, Hash)>] ListAdStudies200Response data, response status code and response headers

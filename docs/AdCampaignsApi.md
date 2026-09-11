@@ -1224,7 +1224,7 @@ api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Meta ad set id (platformAdSetId).
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
 opts = {
-  fields: 'fields_example' # String | Comma-separated Graph field override (supports nested {} projections).
+  fields: 'id,status,ads.limit(100){id,name,status,issues_info}' # String | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
 }
 
 begin
@@ -1260,7 +1260,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **ad_set_id** | **String** | Meta ad set id (platformAdSetId). |  |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
-| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **fields** | **String** | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently. | [optional] |
 
 ### Return type
 

@@ -329,7 +329,7 @@ api_instance = Zernio::AdCreativesApi.new
 creative_id = 'creative_id_example' # String | Platform creative id
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
 opts = {
-  fields: 'fields_example' # String | Comma-separated Graph field override (supports nested {} projections).
+  fields: 'id,name,status,object_story_spec{page_id,link_data{link,message}}' # String | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
 }
 
 begin
@@ -365,7 +365,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **creative_id** | **String** | Platform creative id |  |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
-| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **fields** | **String** | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently. | [optional] |
 
 ### Return type
 
@@ -688,7 +688,7 @@ api_instance = Zernio::AdCreativesApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
 ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
 opts = {
-  fields: 'fields_example', # String | Comma-separated Graph field override (supports nested {} projections).
+  fields: 'id,name,status,object_story_spec{page_id,link_data{link,message}}', # String | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
   limit: 56, # Integer | Rows per page
   after: 'after_example' # String | Cursor from paging.after of the previous page.
 }
@@ -726,7 +726,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
 | **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
-| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **fields** | **String** | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently. | [optional] |
 | **limit** | **Integer** | Rows per page | [optional][default to 25] |
 | **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
 
@@ -767,7 +767,7 @@ api_instance = Zernio::AdCreativesApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
 ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
 opts = {
-  fields: 'fields_example', # String | Comma-separated Graph field override (supports nested {} projections).
+  fields: 'hash,url,name,width,height,status', # String | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
   limit: 56, # Integer | Rows per page
   after: 'after_example' # String | Cursor from paging.after of the previous page.
 }
@@ -805,7 +805,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
 | **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
-| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **fields** | **String** | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently. | [optional] |
 | **limit** | **Integer** | Rows per page | [optional][default to 25] |
 | **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
 
@@ -846,7 +846,7 @@ api_instance = Zernio::AdCreativesApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
 ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
 opts = {
-  fields: 'fields_example', # String | Comma-separated Graph field override (supports nested {} projections).
+  fields: 'id,title,status,thumbnails,length', # String | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
   limit: 56, # Integer | Rows per page
   after: 'after_example' # String | Cursor from paging.after of the previous page.
 }
@@ -884,7 +884,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
 | **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
-| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **fields** | **String** | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently. | [optional] |
 | **limit** | **Integer** | Rows per page | [optional][default to 25] |
 | **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
 

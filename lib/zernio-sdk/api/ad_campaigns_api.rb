@@ -1191,7 +1191,7 @@ module Zernio
     # @param ad_set_id [String] Meta ad set id (platformAdSetId).
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [String] :fields Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
     # @return [GetAdSetDetails200Response]
     def get_ad_set_details(ad_set_id, account_id, opts = {})
       data, _status_code, _headers = get_ad_set_details_with_http_info(ad_set_id, account_id, opts)
@@ -1203,7 +1203,7 @@ module Zernio
     # @param ad_set_id [String] Meta ad set id (platformAdSetId).
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [String] :fields Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
     # @return [Array<(GetAdSetDetails200Response, Integer, Hash)>] GetAdSetDetails200Response data, response status code and response headers
     def get_ad_set_details_with_http_info(ad_set_id, account_id, opts = {})
       if @api_client.config.debugging

@@ -42,7 +42,7 @@ opts = {
   since: Date.parse('2013-10-20'), # Date | Earliest delivery date (YYYY-MM-DD).
   _until: Date.parse('2013-10-20'), # Date | Latest delivery date (YYYY-MM-DD).
   search_type: 'KEYWORD_UNORDERED', # String | Meta only. Whether q matches words in any order or as an exact phrase (comma-separate phrases to match all of them).
-  fields: 'fields_example', # String | Meta only. Raw Graph projection override, e.g. add spend,impressions,demographic_distribution for political ads.
+  fields: 'id,page_name,ad_delivery_start_time,ad_creative_bodies', # String | Meta only. Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
   limit: 56, # Integer | Rows per page. LinkedIn accepts at most 25.
   after: 'after_example' # String | paging.after of the previous page.
 }
@@ -92,7 +92,7 @@ end
 | **since** | **Date** | Earliest delivery date (YYYY-MM-DD). | [optional] |
 | **_until** | **Date** | Latest delivery date (YYYY-MM-DD). | [optional] |
 | **search_type** | **String** | Meta only. Whether q matches words in any order or as an exact phrase (comma-separate phrases to match all of them). | [optional][default to &#39;KEYWORD_UNORDERED&#39;] |
-| **fields** | **String** | Meta only. Raw Graph projection override, e.g. add spend,impressions,demographic_distribution for political ads. | [optional] |
+| **fields** | **String** | Meta only. Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently. | [optional] |
 | **limit** | **Integer** | Rows per page. LinkedIn accepts at most 25. | [optional][default to 25] |
 | **after** | **String** | paging.after of the previous page. | [optional] |
 
