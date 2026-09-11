@@ -20,39 +20,11 @@ module Zernio
     # Platform creative id, reusable via existingCreativeId.
     attr_accessor :creative_id
 
-    attr_accessor :promotion
-
-    attr_accessor :promotion_status
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'ad_account_id' => :'adAccountId',
-        :'creative_id' => :'creativeId',
-        :'promotion' => :'promotion',
-        :'promotion_status' => :'promotionStatus'
+        :'creative_id' => :'creativeId'
       }
     end
 
@@ -70,9 +42,7 @@ module Zernio
     def self.openapi_types
       {
         :'ad_account_id' => :'String',
-        :'creative_id' => :'String',
-        :'promotion' => :'MetaPromotion',
-        :'promotion_status' => :'MetaPromotionStatus'
+        :'creative_id' => :'String'
       }
     end
 
@@ -105,14 +75,6 @@ module Zernio
       if attributes.key?(:'creative_id')
         self.creative_id = attributes[:'creative_id']
       end
-
-      if attributes.key?(:'promotion')
-        self.promotion = attributes[:'promotion']
-      end
-
-      if attributes.key?(:'promotion_status')
-        self.promotion_status = attributes[:'promotion_status']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -136,9 +98,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           ad_account_id == o.ad_account_id &&
-          creative_id == o.creative_id &&
-          promotion == o.promotion &&
-          promotion_status == o.promotion_status
+          creative_id == o.creative_id
     end
 
     # @see the `==` method
@@ -150,7 +110,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad_account_id, creative_id, promotion, promotion_status].hash
+      [ad_account_id, creative_id].hash
     end
 
     # Builds the object from hash

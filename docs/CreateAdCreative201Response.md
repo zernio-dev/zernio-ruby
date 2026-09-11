@@ -6,8 +6,6 @@
 | ---- | ---- | ----------- | ----- |
 | **ad_account_id** | **String** |  | [optional] |
 | **creative_id** | **String** | Platform creative id, reusable via existingCreativeId. | [optional] |
-| **promotion** | [**MetaPromotion**](MetaPromotion.md) |  | [optional] |
-| **promotion_status** | [**MetaPromotionStatus**](MetaPromotionStatus.md) |  | [optional] |
 
 ## Example
 
@@ -16,9 +14,7 @@ require 'zernio-sdk'
 
 instance = Zernio::CreateAdCreative201Response.new(
   ad_account_id: null,
-  creative_id: null,
-  promotion: null,
-  promotion_status: null
+  creative_id: null
 )
 ```
 

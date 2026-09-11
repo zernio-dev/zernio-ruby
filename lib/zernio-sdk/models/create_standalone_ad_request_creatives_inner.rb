@@ -16,9 +16,6 @@ require 'time'
 module Zernio
   # Each creative must supply EXACTLY ONE of `imageUrl` (image creative) or `video` (video creative).
   class CreateStandaloneAdRequestCreativesInner < ApiModelBase
-    # Overrides the top-level offer for this item. Omit to inherit; null disables the inherited offer.
-    attr_accessor :promotion
-
     # Replaces the entire top-level creativeFeatures map for this item. Omit to inherit; an empty map clears these defaults.
     attr_accessor :creative_features
 
@@ -66,7 +63,6 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'promotion' => :'promotion',
         :'creative_features' => :'creativeFeatures',
         :'name' => :'name',
         :'headline' => :'headline',
@@ -92,7 +88,6 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'promotion' => :'MetaPromotion',
         :'creative_features' => :'Hash<String, String>',
         :'name' => :'String',
         :'headline' => :'String',
@@ -126,10 +121,6 @@ module Zernio
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'promotion')
-        self.promotion = attributes[:'promotion']
-      end
 
       if attributes.key?(:'creative_features')
         if (value = attributes[:'creative_features']).is_a?(Hash)
@@ -307,7 +298,6 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          promotion == o.promotion &&
           creative_features == o.creative_features &&
           name == o.name &&
           headline == o.headline &&
@@ -328,7 +318,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [promotion, creative_features, name, headline, body, description, image_url, video, link_url, call_to_action].hash
+      [creative_features, name, headline, body, description, image_url, video, link_url, call_to_action].hash
     end
 
     # Builds the object from hash

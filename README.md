@@ -2037,8 +2037,6 @@ Class | Method | HTTP request | Description
  - [Zernio::MetaInstagramIdentityRef](docs/MetaInstagramIdentityRef.md)
  - [Zernio::MetaLeadFormPlatformData](docs/MetaLeadFormPlatformData.md)
  - [Zernio::MetaLeadFormPlatformDataContextCard](docs/MetaLeadFormPlatformDataContextCard.md)
- - [Zernio::MetaPromotion](docs/MetaPromotion.md)
- - [Zernio::MetaPromotionStatus](docs/MetaPromotionStatus.md)
  - [Zernio::Money](docs/Money.md)
  - [Zernio::MoneyAmount](docs/MoneyAmount.md)
  - [Zernio::MoveAccountToProfile200Response](docs/MoveAccountToProfile200Response.md)

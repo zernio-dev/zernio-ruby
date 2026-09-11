@@ -4,7 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **promotion** | [**MetaPromotion**](MetaPromotion.md) | Overrides the top-level offer for this item. Omit to inherit; null disables the inherited offer. | [optional] |
 | **creative_features** | **Hash&lt;String, String&gt;** | Replaces the entire top-level creativeFeatures map for this item. Omit to inherit; an empty map clears these defaults. | [optional] |
 | **name** | **String** | Exact name for this ad. Falls back to &#x60;&lt;name&gt; #N&#x60; (N &#x3D; 1-based position). | [optional] |
 | **headline** | **String** |  |  |
@@ -21,7 +20,6 @@
 require 'zernio-sdk'
 
 instance = Zernio::CreateStandaloneAdRequestCreativesInner.new(
-  promotion: null,
   creative_features: {auto_promotion_tag&#x3D;OPT_IN},
   name: null,
   headline: null,
