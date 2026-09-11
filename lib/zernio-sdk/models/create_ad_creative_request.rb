@@ -120,7 +120,7 @@ module Zernio
         :'image_hash' => :'String',
         :'carousel_cards' => :'Array<CreateAdCreativeRequestCarouselCardsInner>',
         :'url_tags' => :'String',
-        :'promotion' => :'Null',
+        :'promotion' => :'Object',
         :'creative_features' => :'Hash<String, String>',
         :'multi_advertiser' => :'String'
       }
@@ -129,6 +129,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'promotion',
       ])
     end
 

@@ -469,7 +469,7 @@ module Zernio
         :'billing_event' => :'String',
         :'buying_type' => :'String',
         :'rf_prediction_id' => :'String',
-        :'promotion' => :'Null',
+        :'promotion' => :'Object',
         :'creative_features' => :'Hash<String, String>',
         :'multi_advertiser' => :'String',
         :'validate_only' => :'Boolean',
@@ -567,6 +567,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'promotion',
       ])
     end
 

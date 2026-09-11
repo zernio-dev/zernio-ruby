@@ -108,7 +108,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'promotion' => :'Null',
+        :'promotion' => :'Object',
         :'creative_features' => :'Hash<String, String>',
         :'headline' => :'String',
         :'long_headline' => :'String',
@@ -128,6 +128,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'promotion',
       ])
     end
 
