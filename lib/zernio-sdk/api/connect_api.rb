@@ -1364,6 +1364,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Read a Facebook Page's webhook subscription
+    # Returns the webhook fields Zernio's app is subscribed to on the connected Page, read live from Meta. Use it to confirm `leadgen` is present: a Page missing it keeps delivering every other event while lead ads stop arriving, with nothing to indicate it. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetPageWebhookSubscription200Response]
+    def get_page_webhook_subscription(account_id, opts = {})
+      data, _status_code, _headers = get_page_webhook_subscription_with_http_info(account_id, opts)
+      data
+    end
+
+    # Read a Facebook Page&#39;s webhook subscription
+    # Returns the webhook fields Zernio&#39;s app is subscribed to on the connected Page, read live from Meta. Use it to confirm &#x60;leadgen&#x60; is present: a Page missing it keeps delivering every other event while lead ads stop arriving, with nothing to indicate it. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetPageWebhookSubscription200Response, Integer, Hash)>] GetPageWebhookSubscription200Response data, response status code and response headers
+    def get_page_webhook_subscription_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.get_page_webhook_subscription ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.get_page_webhook_subscription"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/webhook-subscription'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetPageWebhookSubscription200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.get_page_webhook_subscription",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#get_page_webhook_subscription\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get pending OAuth data
     # Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL.  **Scope**: This endpoint is used for LinkedIn organizations, Google Business Profile locations, Slack channels, Snapchat profiles, and Pinterest boards, where the selection list is too large to fit in URL params. The redirect carries a `pendingDataToken` instead of the full payload; the response includes the corresponding selection array (e.g. `boards` for Pinterest). WhatsApp, Facebook and other platforms pass selection state directly via URL query params on the redirect (`profileId`, `tempToken`, `step`), no pending record is created, so this endpoint will return 404 for those flows. Use the platform-specific selection endpoint instead (e.g. `/v1/connect/whatsapp/select-phone-number`).  Reading the token does not consume it, so this fetch is repeatable until the token expires 1 hour after issuance. Completing the platform selection deletes the pending record, so the token stops working from then on. No authentication required. 
     # @param token [String] The pending data token from the OAuth redirect URL (pendingDataToken parameter)
@@ -2771,6 +2834,69 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#list_whats_app_phone_numbers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Re-subscribe a Facebook Page to Zernio's webhooks
+    # Re-sends the full field set to Meta and returns the subscription read back afterwards. Meta only honours the field set sent at subscribe time, so a Page connected before a field existed stays without it until this runs. The response reflects what Meta actually granted, not what was requested. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [ResyncPageWebhookSubscription200Response]
+    def resync_page_webhook_subscription(account_id, opts = {})
+      data, _status_code, _headers = resync_page_webhook_subscription_with_http_info(account_id, opts)
+      data
+    end
+
+    # Re-subscribe a Facebook Page to Zernio&#39;s webhooks
+    # Re-sends the full field set to Meta and returns the subscription read back afterwards. Meta only honours the field set sent at subscribe time, so a Page connected before a field existed stays without it until this runs. The response reflects what Meta actually granted, not what was requested. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ResyncPageWebhookSubscription200Response, Integer, Hash)>] ResyncPageWebhookSubscription200Response data, response status code and response headers
+    def resync_page_webhook_subscription_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.resync_page_webhook_subscription ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.resync_page_webhook_subscription"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/webhook-subscription'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ResyncPageWebhookSubscription200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.resync_page_webhook_subscription",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#resync_page_webhook_subscription\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

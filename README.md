@@ -383,6 +383,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**get_facebook_pages**](docs/ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages
 *Zernio::ConnectApi* | [**get_gmb_locations**](docs/ConnectApi.md#get_gmb_locations) | **GET** /v1/accounts/{accountId}/gmb-locations | List Google Business Profile locations
 *Zernio::ConnectApi* | [**get_linked_in_organizations**](docs/ConnectApi.md#get_linked_in_organizations) | **GET** /v1/accounts/{accountId}/linkedin-organizations | List LinkedIn orgs
+*Zernio::ConnectApi* | [**get_page_webhook_subscription**](docs/ConnectApi.md#get_page_webhook_subscription) | **GET** /v1/accounts/{accountId}/webhook-subscription | Read a Facebook Page's webhook subscription
 *Zernio::ConnectApi* | [**get_pending_o_auth_data**](docs/ConnectApi.md#get_pending_o_auth_data) | **GET** /v1/connect/pending-data | Get pending OAuth data
 *Zernio::ConnectApi* | [**get_pinterest_boards**](docs/ConnectApi.md#get_pinterest_boards) | **GET** /v1/accounts/{accountId}/pinterest-boards | List Pinterest boards
 *Zernio::ConnectApi* | [**get_reddit_flairs**](docs/ConnectApi.md#get_reddit_flairs) | **GET** /v1/accounts/{accountId}/reddit-flairs | List subreddit flairs
@@ -403,6 +404,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**list_slack_channels**](docs/ConnectApi.md#list_slack_channels) | **GET** /v1/connect/slack | List Slack channels for the channel picker
 *Zernio::ConnectApi* | [**list_snapchat_profiles**](docs/ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles
 *Zernio::ConnectApi* | [**list_whats_app_phone_numbers**](docs/ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection
+*Zernio::ConnectApi* | [**resync_page_webhook_subscription**](docs/ConnectApi.md#resync_page_webhook_subscription) | **POST** /v1/accounts/{accountId}/webhook-subscription | Re-subscribe a Facebook Page to Zernio's webhooks
 *Zernio::ConnectApi* | [**select_facebook_page**](docs/ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page
 *Zernio::ConnectApi* | [**select_google_business_location**](docs/ConnectApi.md#select_google_business_location) | **POST** /v1/connect/googlebusiness/select-location | Select Google Business Profile location
 *Zernio::ConnectApi* | [**select_instagram_account**](docs/ConnectApi.md#select_instagram_account) | **POST** /v1/connect/instagram/select-account | Select the Page whose Instagram account to connect
@@ -1568,6 +1570,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetMediaPresignedUrlRequest](docs/GetMediaPresignedUrlRequest.md)
  - [Zernio::GetMessageAttachment200Response](docs/GetMessageAttachment200Response.md)
  - [Zernio::GetMessengerMenu200Response](docs/GetMessengerMenu200Response.md)
+ - [Zernio::GetPageWebhookSubscription200Response](docs/GetPageWebhookSubscription200Response.md)
  - [Zernio::GetPendingOAuthData200Response](docs/GetPendingOAuthData200Response.md)
  - [Zernio::GetPendingOAuthData200ResponseOrganizationsInner](docs/GetPendingOAuthData200ResponseOrganizationsInner.md)
  - [Zernio::GetPhoneNumber200Response](docs/GetPhoneNumber200Response.md)
@@ -2178,6 +2181,7 @@ Class | Method | HTTP request | Description
  - [Zernio::RespondToSmsRegistrationReviewRequest](docs/RespondToSmsRegistrationReviewRequest.md)
  - [Zernio::RestoreWorkflowVersion200Response](docs/RestoreWorkflowVersion200Response.md)
  - [Zernio::RestoreWorkflowVersion200ResponseWorkflow](docs/RestoreWorkflowVersion200ResponseWorkflow.md)
+ - [Zernio::ResyncPageWebhookSubscription200Response](docs/ResyncPageWebhookSubscription200Response.md)
  - [Zernio::RetryPost207Response](docs/RetryPost207Response.md)
  - [Zernio::RetweetPost200Response](docs/RetweetPost200Response.md)
  - [Zernio::RetweetPostRequest](docs/RetweetPostRequest.md)

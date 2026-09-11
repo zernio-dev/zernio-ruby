@@ -22,6 +22,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_facebook_pages**](ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages |
 | [**get_gmb_locations**](ConnectApi.md#get_gmb_locations) | **GET** /v1/accounts/{accountId}/gmb-locations | List Google Business Profile locations |
 | [**get_linked_in_organizations**](ConnectApi.md#get_linked_in_organizations) | **GET** /v1/accounts/{accountId}/linkedin-organizations | List LinkedIn orgs |
+| [**get_page_webhook_subscription**](ConnectApi.md#get_page_webhook_subscription) | **GET** /v1/accounts/{accountId}/webhook-subscription | Read a Facebook Page&#39;s webhook subscription |
 | [**get_pending_o_auth_data**](ConnectApi.md#get_pending_o_auth_data) | **GET** /v1/connect/pending-data | Get pending OAuth data |
 | [**get_pinterest_boards**](ConnectApi.md#get_pinterest_boards) | **GET** /v1/accounts/{accountId}/pinterest-boards | List Pinterest boards |
 | [**get_reddit_flairs**](ConnectApi.md#get_reddit_flairs) | **GET** /v1/accounts/{accountId}/reddit-flairs | List subreddit flairs |
@@ -42,6 +43,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_slack_channels**](ConnectApi.md#list_slack_channels) | **GET** /v1/connect/slack | List Slack channels for the channel picker |
 | [**list_snapchat_profiles**](ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles |
 | [**list_whats_app_phone_numbers**](ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection |
+| [**resync_page_webhook_subscription**](ConnectApi.md#resync_page_webhook_subscription) | **POST** /v1/accounts/{accountId}/webhook-subscription | Re-subscribe a Facebook Page to Zernio&#39;s webhooks |
 | [**select_facebook_page**](ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page |
 | [**select_google_business_location**](ConnectApi.md#select_google_business_location) | **POST** /v1/connect/googlebusiness/select-location | Select Google Business Profile location |
 | [**select_instagram_account**](ConnectApi.md#select_instagram_account) | **POST** /v1/connect/instagram/select-account | Select the Page whose Instagram account to connect |
@@ -1351,6 +1353,75 @@ end
 ### Return type
 
 [**GetLinkedInOrganizations200Response**](GetLinkedInOrganizations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_page_webhook_subscription
+
+> <GetPageWebhookSubscription200Response> get_page_webhook_subscription(account_id)
+
+Read a Facebook Page's webhook subscription
+
+Returns the webhook fields Zernio's app is subscribed to on the connected Page, read live from Meta. Use it to confirm `leadgen` is present: a Page missing it keeps delivering every other event while lead ads stop arriving, with nothing to indicate it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | 
+
+begin
+  # Read a Facebook Page's webhook subscription
+  result = api_instance.get_page_webhook_subscription(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_page_webhook_subscription: #{e}"
+end
+```
+
+#### Using the get_page_webhook_subscription_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetPageWebhookSubscription200Response>, Integer, Hash)> get_page_webhook_subscription_with_http_info(account_id)
+
+```ruby
+begin
+  # Read a Facebook Page's webhook subscription
+  data, status_code, headers = api_instance.get_page_webhook_subscription_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetPageWebhookSubscription200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_page_webhook_subscription_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**GetPageWebhookSubscription200Response**](GetPageWebhookSubscription200Response.md)
 
 ### Authorization
 
@@ -2811,6 +2882,75 @@ end
 ### Return type
 
 [**ListWhatsAppPhoneNumbers200Response**](ListWhatsAppPhoneNumbers200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## resync_page_webhook_subscription
+
+> <ResyncPageWebhookSubscription200Response> resync_page_webhook_subscription(account_id)
+
+Re-subscribe a Facebook Page to Zernio's webhooks
+
+Re-sends the full field set to Meta and returns the subscription read back afterwards. Meta only honours the field set sent at subscribe time, so a Page connected before a field existed stays without it until this runs. The response reflects what Meta actually granted, not what was requested. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | 
+
+begin
+  # Re-subscribe a Facebook Page to Zernio's webhooks
+  result = api_instance.resync_page_webhook_subscription(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->resync_page_webhook_subscription: #{e}"
+end
+```
+
+#### Using the resync_page_webhook_subscription_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ResyncPageWebhookSubscription200Response>, Integer, Hash)> resync_page_webhook_subscription_with_http_info(account_id)
+
+```ruby
+begin
+  # Re-subscribe a Facebook Page to Zernio's webhooks
+  data, status_code, headers = api_instance.resync_page_webhook_subscription_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ResyncPageWebhookSubscription200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->resync_page_webhook_subscription_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**ResyncPageWebhookSubscription200Response**](ResyncPageWebhookSubscription200Response.md)
 
 ### Authorization
 

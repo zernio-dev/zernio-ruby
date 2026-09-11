@@ -276,6 +276,18 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for get_page_webhook_subscription
+  # Read a Facebook Page&#39;s webhook subscription
+  # Returns the webhook fields Zernio&#39;s app is subscribed to on the connected Page, read live from Meta. Use it to confirm &#x60;leadgen&#x60; is present: a Page missing it keeps delivering every other event while lead ads stop arriving, with nothing to indicate it. 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetPageWebhookSubscription200Response]
+  describe 'get_page_webhook_subscription test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_pending_o_auth_data
   # Get pending OAuth data
   # Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL.  **Scope**: This endpoint is used for LinkedIn organizations, Google Business Profile locations, Slack channels, Snapchat profiles, and Pinterest boards, where the selection list is too large to fit in URL params. The redirect carries a &#x60;pendingDataToken&#x60; instead of the full payload; the response includes the corresponding selection array (e.g. &#x60;boards&#x60; for Pinterest). WhatsApp, Facebook and other platforms pass selection state directly via URL query params on the redirect (&#x60;profileId&#x60;, &#x60;tempToken&#x60;, &#x60;step&#x60;), no pending record is created, so this endpoint will return 404 for those flows. Use the platform-specific selection endpoint instead (e.g. &#x60;/v1/connect/whatsapp/select-phone-number&#x60;).  Reading the token does not consume it, so this fetch is repeatable until the token expires 1 hour after issuance. Completing the platform selection deletes the pending record, so the token stops working from then on. No authentication required. 
@@ -537,6 +549,18 @@ describe 'ConnectApi' do
   # @option opts [String] :x_connect_token Alternative auth for API users&#39; end customers (used when the bearer token is scoped to a different user)
   # @return [ListWhatsAppPhoneNumbers200Response]
   describe 'list_whats_app_phone_numbers test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for resync_page_webhook_subscription
+  # Re-subscribe a Facebook Page to Zernio&#39;s webhooks
+  # Re-sends the full field set to Meta and returns the subscription read back afterwards. Meta only honours the field set sent at subscribe time, so a Page connected before a field existed stays without it until this runs. The response reflects what Meta actually granted, not what was requested. 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [ResyncPageWebhookSubscription200Response]
+  describe 'resync_page_webhook_subscription test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
