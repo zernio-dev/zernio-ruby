@@ -14,16 +14,50 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetLeadForm200Response < ApiModelBase
-    attr_accessor :status
+  class MetaLeadFormContextCard < ApiModelBase
+    attr_accessor :id
 
-    attr_accessor :form
+    attr_accessor :title
+
+    attr_accessor :style
+
+    attr_accessor :content
+
+    attr_accessor :button_text
+
+    attr_accessor :cover_photo
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'form' => :'form'
+        :'id' => :'id',
+        :'title' => :'title',
+        :'style' => :'style',
+        :'content' => :'content',
+        :'button_text' => :'button_text',
+        :'cover_photo' => :'cover_photo'
       }
     end
 
@@ -40,8 +74,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'form' => :'GetLeadForm200ResponseForm'
+        :'id' => :'String',
+        :'title' => :'String',
+        :'style' => :'String',
+        :'content' => :'Array<String>',
+        :'button_text' => :'String',
+        :'cover_photo' => :'CreateTestLead200ResponseTestLead'
       }
     end
 
@@ -55,24 +93,42 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetLeadForm200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::MetaLeadFormContextCard` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetLeadForm200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::MetaLeadFormContextCard`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'form')
-        self.form = attributes[:'form']
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'style')
+        self.style = attributes[:'style']
+      end
+
+      if attributes.key?(:'content')
+        if (value = attributes[:'content']).is_a?(Array)
+          self.content = value
+        end
+      end
+
+      if attributes.key?(:'button_text')
+        self.button_text = attributes[:'button_text']
+      end
+
+      if attributes.key?(:'cover_photo')
+        self.cover_photo = attributes[:'cover_photo']
       end
     end
 
@@ -88,7 +144,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      style_validator = EnumAttributeValidator.new('String', ["LIST_STYLE", "PARAGRAPH_STYLE"])
+      return false unless style_validator.valid?(@style)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] style Object to be assigned
+    def style=(style)
+      validator = EnumAttributeValidator.new('String', ["LIST_STYLE", "PARAGRAPH_STYLE"])
+      unless validator.valid?(style)
+        fail ArgumentError, "invalid value for \"style\", must be one of #{validator.allowable_values}."
+      end
+      @style = style
     end
 
     # Checks equality by comparing each attribute.
@@ -96,8 +164,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          form == o.form
+          id == o.id &&
+          title == o.title &&
+          style == o.style &&
+          content == o.content &&
+          button_text == o.button_text &&
+          cover_photo == o.cover_photo
     end
 
     # @see the `==` method
@@ -109,7 +181,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, form].hash
+      [id, title, style, content, button_text, cover_photo].hash
     end
 
     # Builds the object from hash

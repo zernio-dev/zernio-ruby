@@ -34,7 +34,7 @@ describe 'LeadGenApi' do
 
   # unit tests for archive_lead_form
   # Archive a lead form
-  # Neither platform hard-deletes a form; this archives it (Meta status&#x3D;ARCHIVED; LinkedIn state&#x3D;ARCHIVED via PARTIAL_UPDATE).
+  # Neither platform hard-deletes a form; this archives it (Meta status&#x3D;ARCHIVED; LinkedIn state&#x3D;ARCHIVED via PARTIAL_UPDATE). Meta forms must belong to the Page the accountId manages.
   # @param form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
   # @param account_id Connected facebook or linkedin ads account id (selects the platform).
   # @param [Hash] opts the optional parameters
@@ -72,9 +72,11 @@ describe 'LeadGenApi' do
 
   # unit tests for get_lead_form
   # Get a lead form
+  # Returns the full form, including the thank-you page, so a form can be diffed against what was created. Meta forms are scoped to the Page the accountId manages: a form on any other Page is a 404, never a read. 
   # @param form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
   # @param account_id Connected facebook or linkedin ads account id (selects the platform).
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :fields Meta only. A Graph field selection passed through verbatim to GET /{form-id}, replacing the default projection, so fields Meta adds later are reachable without an API change. Field names, commas and {} expansion only; anything else (Graph field modifiers such as .limit(), or characters that could open another query parameter) is a 400. Ownership of the form is verified before the selection runs, so this cannot reach any Page but the one accountId manages. Unknown field names are rejected by Meta as a 400. 
   # @return [GetLeadForm200Response]
   describe 'get_lead_form test' do
     it 'should work' do

@@ -14,16 +14,41 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetLeadForm200Response < ApiModelBase
-    attr_accessor :status
+  class MetaLeadFormQuestionsInner < ApiModelBase
+    attr_accessor :id
 
-    attr_accessor :form
+    attr_accessor :key
+
+    attr_accessor :label
+
+    # EMAIL, PHONE, FULL_NAME, CUSTOM, ...
+    attr_accessor :type
+
+    attr_accessor :inline_context
+
+    attr_accessor :options
+
+    # READ-ONLY. Conditional logic can only be authored in Meta form builder; Meta has no create parameter for it.
+    attr_accessor :conditional_questions_group_id
+
+    # READ-ONLY. Which answers reveal the conditional group.
+    attr_accessor :conditional_questions_choices
+
+    # READ-ONLY. Questions revealed by the conditional group.
+    attr_accessor :dependent_conditional_questions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'form' => :'form'
+        :'id' => :'id',
+        :'key' => :'key',
+        :'label' => :'label',
+        :'type' => :'type',
+        :'inline_context' => :'inline_context',
+        :'options' => :'options',
+        :'conditional_questions_group_id' => :'conditional_questions_group_id',
+        :'conditional_questions_choices' => :'conditional_questions_choices',
+        :'dependent_conditional_questions' => :'dependent_conditional_questions'
       }
     end
 
@@ -40,8 +65,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'form' => :'GetLeadForm200ResponseForm'
+        :'id' => :'String',
+        :'key' => :'String',
+        :'label' => :'String',
+        :'type' => :'String',
+        :'inline_context' => :'String',
+        :'options' => :'Array<BoostPostRequestTrackingUrlTagsInner>',
+        :'conditional_questions_group_id' => :'String',
+        :'conditional_questions_choices' => :'Array<Object>',
+        :'dependent_conditional_questions' => :'Array<Object>'
       }
     end
 
@@ -55,24 +87,58 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetLeadForm200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::MetaLeadFormQuestionsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetLeadForm200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::MetaLeadFormQuestionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'form')
-        self.form = attributes[:'form']
+      if attributes.key?(:'key')
+        self.key = attributes[:'key']
+      end
+
+      if attributes.key?(:'label')
+        self.label = attributes[:'label']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'inline_context')
+        self.inline_context = attributes[:'inline_context']
+      end
+
+      if attributes.key?(:'options')
+        if (value = attributes[:'options']).is_a?(Array)
+          self.options = value
+        end
+      end
+
+      if attributes.key?(:'conditional_questions_group_id')
+        self.conditional_questions_group_id = attributes[:'conditional_questions_group_id']
+      end
+
+      if attributes.key?(:'conditional_questions_choices')
+        if (value = attributes[:'conditional_questions_choices']).is_a?(Array)
+          self.conditional_questions_choices = value
+        end
+      end
+
+      if attributes.key?(:'dependent_conditional_questions')
+        if (value = attributes[:'dependent_conditional_questions']).is_a?(Array)
+          self.dependent_conditional_questions = value
+        end
       end
     end
 
@@ -96,8 +162,15 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          form == o.form
+          id == o.id &&
+          key == o.key &&
+          label == o.label &&
+          type == o.type &&
+          inline_context == o.inline_context &&
+          options == o.options &&
+          conditional_questions_group_id == o.conditional_questions_group_id &&
+          conditional_questions_choices == o.conditional_questions_choices &&
+          dependent_conditional_questions == o.dependent_conditional_questions
     end
 
     # @see the `==` method
@@ -109,7 +182,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, form].hash
+      [id, key, label, type, inline_context, options, conditional_questions_group_id, conditional_questions_choices, dependent_conditional_questions].hash
     end
 
     # Builds the object from hash

@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Archive a lead form
-    # Neither platform hard-deletes a form; this archives it (Meta status=ARCHIVED; LinkedIn state=ARCHIVED via PARTIAL_UPDATE).
+    # Neither platform hard-deletes a form; this archives it (Meta status=ARCHIVED; LinkedIn state=ARCHIVED via PARTIAL_UPDATE). Meta forms must belong to the Page the accountId manages.
     # @param form_id [String] Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
     # @param account_id [String] Connected facebook or linkedin ads account id (selects the platform).
     # @param [Hash] opts the optional parameters
@@ -31,7 +31,7 @@ module Zernio
     end
 
     # Archive a lead form
-    # Neither platform hard-deletes a form; this archives it (Meta status&#x3D;ARCHIVED; LinkedIn state&#x3D;ARCHIVED via PARTIAL_UPDATE).
+    # Neither platform hard-deletes a form; this archives it (Meta status&#x3D;ARCHIVED; LinkedIn state&#x3D;ARCHIVED via PARTIAL_UPDATE). Meta forms must belong to the Page the accountId manages.
     # @param form_id [String] Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
     # @param account_id [String] Connected facebook or linkedin ads account id (selects the platform).
     # @param [Hash] opts the optional parameters
@@ -232,9 +232,11 @@ module Zernio
     end
 
     # Get a lead form
+    # Returns the full form, including the thank-you page, so a form can be diffed against what was created. Meta forms are scoped to the Page the accountId manages: a form on any other Page is a 404, never a read. 
     # @param form_id [String] Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
     # @param account_id [String] Connected facebook or linkedin ads account id (selects the platform).
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Meta only. A Graph field selection passed through verbatim to GET /{form-id}, replacing the default projection, so fields Meta adds later are reachable without an API change. Field names, commas and {} expansion only; anything else (Graph field modifiers such as .limit(), or characters that could open another query parameter) is a 400. Ownership of the form is verified before the selection runs, so this cannot reach any Page but the one accountId manages. Unknown field names are rejected by Meta as a 400. 
     # @return [GetLeadForm200Response]
     def get_lead_form(form_id, account_id, opts = {})
       data, _status_code, _headers = get_lead_form_with_http_info(form_id, account_id, opts)
@@ -242,9 +244,11 @@ module Zernio
     end
 
     # Get a lead form
+    # Returns the full form, including the thank-you page, so a form can be diffed against what was created. Meta forms are scoped to the Page the accountId manages: a form on any other Page is a 404, never a read. 
     # @param form_id [String] Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
     # @param account_id [String] Connected facebook or linkedin ads account id (selects the platform).
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Meta only. A Graph field selection passed through verbatim to GET /{form-id}, replacing the default projection, so fields Meta adds later are reachable without an API change. Field names, commas and {} expansion only; anything else (Graph field modifiers such as .limit(), or characters that could open another query parameter) is a 400. Ownership of the form is verified before the selection runs, so this cannot reach any Page but the one accountId manages. Unknown field names are rejected by Meta as a 400. 
     # @return [Array<(GetLeadForm200Response, Integer, Hash)>] GetLeadForm200Response data, response status code and response headers
     def get_lead_form_with_http_info(form_id, account_id, opts = {})
       if @api_client.config.debugging
@@ -258,12 +262,17 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling LeadGenApi.get_lead_form"
       end
+      if @api_client.config.client_side_validation && !opts[:'fields'].nil? && opts[:'fields'].to_s.length > 2000
+        fail ArgumentError, 'invalid value for "opts[:"fields"]" when calling LeadGenApi.get_lead_form, the character length must be smaller than or equal to 2000.'
+      end
+
       # resource path
       local_var_path = '/v1/ads/lead-forms/{formId}'.sub('{' + 'formId' + '}', CGI.escape(form_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

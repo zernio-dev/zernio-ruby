@@ -14,16 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetLeadForm200Response < ApiModelBase
-    attr_accessor :status
+  class MetaLeadFormLegalContentPrivacyPolicy < ApiModelBase
+    attr_accessor :url
 
-    attr_accessor :form
+    attr_accessor :link_text
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'form' => :'form'
+        :'url' => :'url',
+        :'link_text' => :'link_text'
       }
     end
 
@@ -40,8 +40,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'form' => :'GetLeadForm200ResponseForm'
+        :'url' => :'String',
+        :'link_text' => :'String'
       }
     end
 
@@ -55,24 +55,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetLeadForm200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::MetaLeadFormLegalContentPrivacyPolicy` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetLeadForm200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::MetaLeadFormLegalContentPrivacyPolicy`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
       end
 
-      if attributes.key?(:'form')
-        self.form = attributes[:'form']
+      if attributes.key?(:'link_text')
+        self.link_text = attributes[:'link_text']
       end
     end
 
@@ -96,8 +96,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          form == o.form
+          url == o.url &&
+          link_text == o.link_text
     end
 
     # @see the `==` method
@@ -109,7 +109,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, form].hash
+      [url, link_text].hash
     end
 
     # Builds the object from hash

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **status** | **String** |  | [optional] |
-| **form** | **Object** |  | [optional] |
+| **form** | [**GetLeadForm200ResponseForm**](GetLeadForm200ResponseForm.md) |  | [optional] |
 
 ## Example
 
@@ -13,7 +13,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::GetLeadForm200Response.new(
-  status: null,
+  status: success,
   form: null
 )
 ```

@@ -14,16 +14,44 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetLeadForm200Response < ApiModelBase
+  # The form's single ending page, mirroring the thankYou* create fields. Meta has exactly one per form; there is no multiple-ending-page API (thank_you_pages and ending_pages are not Graph fields). 
+  class MetaLeadFormThankYouPage < ApiModelBase
+    attr_accessor :id
+
+    attr_accessor :title
+
+    attr_accessor :body
+
+    attr_accessor :button_text
+
+    attr_accessor :button_type
+
+    attr_accessor :website_url
+
+    attr_accessor :enable_messenger
+
     attr_accessor :status
 
-    attr_accessor :form
+    attr_accessor :lead_gen_use_case
+
+    attr_accessor :business_phone_number
+
+    attr_accessor :country_code
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'title' => :'title',
+        :'body' => :'body',
+        :'button_text' => :'button_text',
+        :'button_type' => :'button_type',
+        :'website_url' => :'website_url',
+        :'enable_messenger' => :'enable_messenger',
         :'status' => :'status',
-        :'form' => :'form'
+        :'lead_gen_use_case' => :'lead_gen_use_case',
+        :'business_phone_number' => :'business_phone_number',
+        :'country_code' => :'country_code'
       }
     end
 
@@ -40,8 +68,17 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
+        :'title' => :'String',
+        :'body' => :'String',
+        :'button_text' => :'String',
+        :'button_type' => :'String',
+        :'website_url' => :'String',
+        :'enable_messenger' => :'Boolean',
         :'status' => :'String',
-        :'form' => :'GetLeadForm200ResponseForm'
+        :'lead_gen_use_case' => :'String',
+        :'business_phone_number' => :'String',
+        :'country_code' => :'String'
       }
     end
 
@@ -55,24 +92,60 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetLeadForm200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::MetaLeadFormThankYouPage` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetLeadForm200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::MetaLeadFormThankYouPage`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'body')
+        self.body = attributes[:'body']
+      end
+
+      if attributes.key?(:'button_text')
+        self.button_text = attributes[:'button_text']
+      end
+
+      if attributes.key?(:'button_type')
+        self.button_type = attributes[:'button_type']
+      end
+
+      if attributes.key?(:'website_url')
+        self.website_url = attributes[:'website_url']
+      end
+
+      if attributes.key?(:'enable_messenger')
+        self.enable_messenger = attributes[:'enable_messenger']
+      end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'form')
-        self.form = attributes[:'form']
+      if attributes.key?(:'lead_gen_use_case')
+        self.lead_gen_use_case = attributes[:'lead_gen_use_case']
+      end
+
+      if attributes.key?(:'business_phone_number')
+        self.business_phone_number = attributes[:'business_phone_number']
+      end
+
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
       end
     end
 
@@ -96,8 +169,17 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          title == o.title &&
+          body == o.body &&
+          button_text == o.button_text &&
+          button_type == o.button_type &&
+          website_url == o.website_url &&
+          enable_messenger == o.enable_messenger &&
           status == o.status &&
-          form == o.form
+          lead_gen_use_case == o.lead_gen_use_case &&
+          business_phone_number == o.business_phone_number &&
+          country_code == o.country_code
     end
 
     # @see the `==` method
@@ -109,7 +191,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, form].hash
+      [id, title, body, button_text, button_type, website_url, enable_messenger, status, lead_gen_use_case, business_phone_number, country_code].hash
     end
 
     # Builds the object from hash
