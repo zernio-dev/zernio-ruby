@@ -15,14 +15,17 @@ require 'time'
 
 module Zernio
   class UpdateAdRequest < ApiModelBase
-    # Google RSA only. Replaces the complete headline list. No padding or truncation on update.
+    # Google Search and Display only. Replaces the complete headline list. Search takes 3-15, Display 1-5 and rejects pinnedField; the count is checked once the ad's channel is known. No padding or truncation on update.
     attr_accessor :headlines
 
-    # Google RSA only. Replaces the complete description list. No padding or truncation on update.
+    # Google Search and Display only. Replaces the complete description list. Search takes 2-4, Display 1-5 and rejects pinnedField. No padding or truncation on update.
     attr_accessor :descriptions
 
-    # Google RSA only. Replaces final URLs. Omitted lists stay unchanged.
+    # Google Search and Display only. Replaces final URLs. Omitted lists stay unchanged. For Performance Max use assetGroup.finalUrl.
     attr_accessor :final_urls
+
+    # Google Performance Max only. Replaces whole asset roles on the ad's asset group. Returns 422 on any other platform or channel.
+    attr_accessor :asset_group
 
     attr_accessor :status
 
@@ -63,6 +66,7 @@ module Zernio
         :'headlines' => :'headlines',
         :'descriptions' => :'descriptions',
         :'final_urls' => :'finalUrls',
+        :'asset_group' => :'assetGroup',
         :'status' => :'status',
         :'budget' => :'budget',
         :'targeting' => :'targeting',
@@ -87,6 +91,7 @@ module Zernio
         :'headlines' => :'Array<GoogleRsaHeadline>',
         :'descriptions' => :'Array<GoogleRsaDescription>',
         :'final_urls' => :'Array<String>',
+        :'asset_group' => :'GooglePmaxAssetGroupUpdate',
         :'status' => :'String',
         :'budget' => :'UpdateAdRequestBudget',
         :'targeting' => :'UpdateAdRequestTargeting',
@@ -135,6 +140,10 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'asset_group')
+        self.asset_group = attributes[:'asset_group']
+      end
+
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
@@ -165,16 +174,16 @@ module Zernio
         invalid_properties.push('invalid value for "headlines", number of items must be less than or equal to 15.')
       end
 
-      if !@headlines.nil? && @headlines.length < 3
-        invalid_properties.push('invalid value for "headlines", number of items must be greater than or equal to 3.')
+      if !@headlines.nil? && @headlines.length < 1
+        invalid_properties.push('invalid value for "headlines", number of items must be greater than or equal to 1.')
       end
 
-      if !@descriptions.nil? && @descriptions.length > 4
-        invalid_properties.push('invalid value for "descriptions", number of items must be less than or equal to 4.')
+      if !@descriptions.nil? && @descriptions.length > 5
+        invalid_properties.push('invalid value for "descriptions", number of items must be less than or equal to 5.')
       end
 
-      if !@descriptions.nil? && @descriptions.length < 2
-        invalid_properties.push('invalid value for "descriptions", number of items must be greater than or equal to 2.')
+      if !@descriptions.nil? && @descriptions.length < 1
+        invalid_properties.push('invalid value for "descriptions", number of items must be greater than or equal to 1.')
       end
 
       if !@final_urls.nil? && @final_urls.length < 1
@@ -193,9 +202,9 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@headlines.nil? && @headlines.length > 15
-      return false if !@headlines.nil? && @headlines.length < 3
-      return false if !@descriptions.nil? && @descriptions.length > 4
-      return false if !@descriptions.nil? && @descriptions.length < 2
+      return false if !@headlines.nil? && @headlines.length < 1
+      return false if !@descriptions.nil? && @descriptions.length > 5
+      return false if !@descriptions.nil? && @descriptions.length < 1
       return false if !@final_urls.nil? && @final_urls.length < 1
       status_validator = EnumAttributeValidator.new('String', ["active", "paused"])
       return false unless status_validator.valid?(@status)
@@ -214,8 +223,8 @@ module Zernio
         fail ArgumentError, 'invalid value for "headlines", number of items must be less than or equal to 15.'
       end
 
-      if headlines.length < 3
-        fail ArgumentError, 'invalid value for "headlines", number of items must be greater than or equal to 3.'
+      if headlines.length < 1
+        fail ArgumentError, 'invalid value for "headlines", number of items must be greater than or equal to 1.'
       end
 
       @headlines = headlines
@@ -228,12 +237,12 @@ module Zernio
         fail ArgumentError, 'descriptions cannot be nil'
       end
 
-      if descriptions.length > 4
-        fail ArgumentError, 'invalid value for "descriptions", number of items must be less than or equal to 4.'
+      if descriptions.length > 5
+        fail ArgumentError, 'invalid value for "descriptions", number of items must be less than or equal to 5.'
       end
 
-      if descriptions.length < 2
-        fail ArgumentError, 'invalid value for "descriptions", number of items must be greater than or equal to 2.'
+      if descriptions.length < 1
+        fail ArgumentError, 'invalid value for "descriptions", number of items must be greater than or equal to 1.'
       end
 
       @descriptions = descriptions
@@ -285,6 +294,7 @@ module Zernio
           headlines == o.headlines &&
           descriptions == o.descriptions &&
           final_urls == o.final_urls &&
+          asset_group == o.asset_group &&
           status == o.status &&
           budget == o.budget &&
           targeting == o.targeting &&
@@ -301,7 +311,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headlines, descriptions, final_urls, status, budget, targeting, creative, name].hash
+      [headlines, descriptions, final_urls, asset_group, status, budget, targeting, creative, name].hash
     end
 
     # Builds the object from hash

@@ -956,6 +956,8 @@ docs/GooglePmaxAssetGroup.md
 docs/GooglePmaxAssetGroupAssetsInner.md
 docs/GooglePmaxAssetGroupInput.md
 docs/GooglePmaxAssetGroupInputImages.md
+docs/GooglePmaxAssetGroupUpdate.md
+docs/GooglePmaxAssetGroupUpdateImages.md
 docs/GoogleRsaDescription.md
 docs/GoogleRsaHeadline.md
 docs/GoogleSitelink.md
@@ -3093,6 +3095,8 @@ lib/zernio-sdk/models/google_pmax_asset_group.rb
 lib/zernio-sdk/models/google_pmax_asset_group_assets_inner.rb
 lib/zernio-sdk/models/google_pmax_asset_group_input.rb
 lib/zernio-sdk/models/google_pmax_asset_group_input_images.rb
+lib/zernio-sdk/models/google_pmax_asset_group_update.rb
+lib/zernio-sdk/models/google_pmax_asset_group_update_images.rb
 lib/zernio-sdk/models/google_rsa_description.rb
 lib/zernio-sdk/models/google_rsa_headline.rb
 lib/zernio-sdk/models/google_sitelink.rb
@@ -5187,6 +5191,8 @@ spec/models/google_pmax_asset_group_assets_inner_spec.rb
 spec/models/google_pmax_asset_group_input_images_spec.rb
 spec/models/google_pmax_asset_group_input_spec.rb
 spec/models/google_pmax_asset_group_spec.rb
+spec/models/google_pmax_asset_group_update_images_spec.rb
+spec/models/google_pmax_asset_group_update_spec.rb
 spec/models/google_rsa_description_spec.rb
 spec/models/google_rsa_headline_spec.rb
 spec/models/google_sitelink_spec.rb

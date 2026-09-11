@@ -1717,6 +1717,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GooglePmaxAssetGroupAssetsInner](docs/GooglePmaxAssetGroupAssetsInner.md)
  - [Zernio::GooglePmaxAssetGroupInput](docs/GooglePmaxAssetGroupInput.md)
  - [Zernio::GooglePmaxAssetGroupInputImages](docs/GooglePmaxAssetGroupInputImages.md)
+ - [Zernio::GooglePmaxAssetGroupUpdate](docs/GooglePmaxAssetGroupUpdate.md)
+ - [Zernio::GooglePmaxAssetGroupUpdateImages](docs/GooglePmaxAssetGroupUpdateImages.md)
  - [Zernio::GoogleRsaDescription](docs/GoogleRsaDescription.md)
  - [Zernio::GoogleRsaHeadline](docs/GoogleRsaHeadline.md)
  - [Zernio::GoogleSitelink](docs/GoogleSitelink.md)

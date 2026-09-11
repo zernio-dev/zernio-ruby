@@ -24,6 +24,15 @@ module Zernio
     # Meta and LinkedIn (TikTok has no headline slot)
     attr_accessor :headline
 
+    # Google Display only. Replaces the responsive display ad's long headline.
+    attr_accessor :long_headline
+
+    # Google Display only. Replaces the responsive display ad's business name.
+    attr_accessor :business_name
+
+    # Google Display only. Uploaded as a new square (1:1) marketing image asset that replaces the current one.
+    attr_accessor :square_image_url
+
     attr_accessor :body
 
     # Link description slot (Meta `link_data.description` / `video_data.link_description`, LinkedIn creative description).
@@ -71,6 +80,9 @@ module Zernio
         :'promotion' => :'promotion',
         :'creative_features' => :'creativeFeatures',
         :'headline' => :'headline',
+        :'long_headline' => :'longHeadline',
+        :'business_name' => :'businessName',
+        :'square_image_url' => :'squareImageUrl',
         :'body' => :'body',
         :'description' => :'description',
         :'call_to_action' => :'callToAction',
@@ -98,6 +110,9 @@ module Zernio
         :'promotion' => :'MetaPromotion',
         :'creative_features' => :'Hash<String, String>',
         :'headline' => :'String',
+        :'long_headline' => :'String',
+        :'business_name' => :'String',
+        :'square_image_url' => :'String',
         :'body' => :'String',
         :'description' => :'String',
         :'call_to_action' => :'String',
@@ -145,6 +160,18 @@ module Zernio
         self.headline = attributes[:'headline']
       end
 
+      if attributes.key?(:'long_headline')
+        self.long_headline = attributes[:'long_headline']
+      end
+
+      if attributes.key?(:'business_name')
+        self.business_name = attributes[:'business_name']
+      end
+
+      if attributes.key?(:'square_image_url')
+        self.square_image_url = attributes[:'square_image_url']
+      end
+
       if attributes.key?(:'body')
         self.body = attributes[:'body']
       end
@@ -183,6 +210,22 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@long_headline.nil? && @long_headline.to_s.length > 90
+        invalid_properties.push('invalid value for "long_headline", the character length must be smaller than or equal to 90.')
+      end
+
+      if !@long_headline.nil? && @long_headline.to_s.length < 1
+        invalid_properties.push('invalid value for "long_headline", the character length must be greater than or equal to 1.')
+      end
+
+      if !@business_name.nil? && @business_name.to_s.length > 25
+        invalid_properties.push('invalid value for "business_name", the character length must be smaller than or equal to 25.')
+      end
+
+      if !@business_name.nil? && @business_name.to_s.length < 1
+        invalid_properties.push('invalid value for "business_name", the character length must be greater than or equal to 1.')
+      end
+
       if !@description.nil? && @description.to_s.length > 255
         invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 255.')
       end
@@ -194,8 +237,48 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@long_headline.nil? && @long_headline.to_s.length > 90
+      return false if !@long_headline.nil? && @long_headline.to_s.length < 1
+      return false if !@business_name.nil? && @business_name.to_s.length > 25
+      return false if !@business_name.nil? && @business_name.to_s.length < 1
       return false if !@description.nil? && @description.to_s.length > 255
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] long_headline Value to be assigned
+    def long_headline=(long_headline)
+      if long_headline.nil?
+        fail ArgumentError, 'long_headline cannot be nil'
+      end
+
+      if long_headline.to_s.length > 90
+        fail ArgumentError, 'invalid value for "long_headline", the character length must be smaller than or equal to 90.'
+      end
+
+      if long_headline.to_s.length < 1
+        fail ArgumentError, 'invalid value for "long_headline", the character length must be greater than or equal to 1.'
+      end
+
+      @long_headline = long_headline
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] business_name Value to be assigned
+    def business_name=(business_name)
+      if business_name.nil?
+        fail ArgumentError, 'business_name cannot be nil'
+      end
+
+      if business_name.to_s.length > 25
+        fail ArgumentError, 'invalid value for "business_name", the character length must be smaller than or equal to 25.'
+      end
+
+      if business_name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "business_name", the character length must be greater than or equal to 1.'
+      end
+
+      @business_name = business_name
     end
 
     # Custom attribute writer method with validation
@@ -220,6 +303,9 @@ module Zernio
           promotion == o.promotion &&
           creative_features == o.creative_features &&
           headline == o.headline &&
+          long_headline == o.long_headline &&
+          business_name == o.business_name &&
+          square_image_url == o.square_image_url &&
           body == o.body &&
           description == o.description &&
           call_to_action == o.call_to_action &&
@@ -239,7 +325,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [promotion, creative_features, headline, body, description, call_to_action, link_url, image_url, video_url, video_id, existing_creative_id].hash
+      [promotion, creative_features, headline, long_headline, business_name, square_image_url, body, description, call_to_action, link_url, image_url, video_url, video_id, existing_creative_id].hash
     end
 
     # Builds the object from hash
