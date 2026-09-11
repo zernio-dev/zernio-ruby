@@ -17,7 +17,7 @@ module Zernio
   class UpdateAdRequestTargetingDevicesInnerOneOf < ApiModelBase
     attr_accessor :device
 
-    # Google device bid modifier, 0.1 to 10 (minus 90% to plus 900%). Omit a device to exclude it.
+    # Google device bid modifier. 0 switches the device off (minus 100%); otherwise 0.1 to 10 (minus 90% to plus 900%). Google rejects any value between 0 and 0.1.
     attr_accessor :bid_modifier
 
     class EnumAttributeValidator
@@ -114,8 +114,8 @@ module Zernio
         invalid_properties.push('invalid value for "bid_modifier", must be smaller than or equal to 10.')
       end
 
-      if !@bid_modifier.nil? && @bid_modifier < 0.1
-        invalid_properties.push('invalid value for "bid_modifier", must be greater than or equal to 0.1.')
+      if !@bid_modifier.nil? && @bid_modifier < 0
+        invalid_properties.push('invalid value for "bid_modifier", must be greater than or equal to 0.')
       end
 
       invalid_properties
@@ -129,7 +129,7 @@ module Zernio
       device_validator = EnumAttributeValidator.new('String', ["MOBILE", "DESKTOP", "TABLET", "CONNECTED_TV"])
       return false unless device_validator.valid?(@device)
       return false if !@bid_modifier.nil? && @bid_modifier > 10
-      return false if !@bid_modifier.nil? && @bid_modifier < 0.1
+      return false if !@bid_modifier.nil? && @bid_modifier < 0
       true
     end
 
@@ -154,8 +154,8 @@ module Zernio
         fail ArgumentError, 'invalid value for "bid_modifier", must be smaller than or equal to 10.'
       end
 
-      if bid_modifier < 0.1
-        fail ArgumentError, 'invalid value for "bid_modifier", must be greater than or equal to 0.1.'
+      if bid_modifier < 0
+        fail ArgumentError, 'invalid value for "bid_modifier", must be greater than or equal to 0.'
       end
 
       @bid_modifier = bid_modifier

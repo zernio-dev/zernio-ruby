@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **device** | **String** |  | [optional] |
 | **included** | **Boolean** |  | [optional] |
-| **bid_modifier** | **Float** | Always null on this read (see description). | [optional] |
+| **bid_modifier** | **Float** | Google&#39;s bid adjustment for this device: null when it has none, 0 when the device is switched off, otherwise 0.1 to 10. | [optional] |
 
 ## Example
 
