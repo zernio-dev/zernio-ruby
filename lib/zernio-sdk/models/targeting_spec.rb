@@ -72,16 +72,16 @@ module Zernio
     # Meta only. Work-industry entities from /v1/ads/targeting/search?dimension=workIndustry. Not interchangeable with the LinkedIn `industries` URN fragments.
     attr_accessor :work_industries
 
-    # LinkedIn B2B only. Industry URN id fragments.
+    # LinkedIn B2B only. Industry URN id fragments, or the full urn:li:industry:* URN from /v1/ads/targeting/search?dimension=industry.
     attr_accessor :industries
 
-    # LinkedIn B2B only.
+    # LinkedIn B2B only. Single-letter size codes (A to I), or the full urn:li:staffCountRange:* URN from /v1/ads/targeting/search?dimension=companySize.
     attr_accessor :company_sizes
 
-    # LinkedIn B2B only.
+    # LinkedIn B2B only. Seniority URN id fragments, or the full urn:li:seniority:* URN from /v1/ads/targeting/search?dimension=seniority.
     attr_accessor :seniorities
 
-    # LinkedIn B2B only.
+    # LinkedIn B2B only. Function URN id fragments, or the full urn:li:function:* URN from /v1/ads/targeting/search?dimension=jobFunction.
     attr_accessor :job_functions
 
     # Platform audience IDs to include, as returned by GET /v1/ads/audiences (Meta custom audience ids, TikTok audience ids, Pinterest customer list ids, LinkedIn segment ids (the platformAudienceId from GET /v1/ads/audiences; Zernio resolves it to the targetable LinkedIn ad segment, an unknown id returns 400), Google user list ids, X custom audience ids). Not supported on OpenAI (400).
