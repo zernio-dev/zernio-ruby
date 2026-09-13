@@ -380,6 +380,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**connect_whats_app_credentials**](docs/ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials
 *Zernio::ConnectApi* | [**connect_whats_app_embedded_signup**](docs/ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup
 *Zernio::ConnectApi* | [**create_pinterest_board**](docs/ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board
+*Zernio::ConnectApi* | [**create_youtube_playlist**](docs/ConnectApi.md#create_youtube_playlist) | **POST** /v1/accounts/{accountId}/youtube-playlists | Create YouTube playlist
 *Zernio::ConnectApi* | [**get_connect_url**](docs/ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL
 *Zernio::ConnectApi* | [**get_facebook_pages**](docs/ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages
 *Zernio::ConnectApi* | [**get_gmb_locations**](docs/ConnectApi.md#get_gmb_locations) | **GET** /v1/accounts/{accountId}/gmb-locations | List Google Business Profile locations
@@ -1229,6 +1230,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateWorkflow200Response](docs/CreateWorkflow200Response.md)
  - [Zernio::CreateWorkflow200ResponseWorkflow](docs/CreateWorkflow200ResponseWorkflow.md)
  - [Zernio::CreateWorkflowRequest](docs/CreateWorkflowRequest.md)
+ - [Zernio::CreateYoutubePlaylist201Response](docs/CreateYoutubePlaylist201Response.md)
+ - [Zernio::CreateYoutubePlaylist201ResponsePlaylist](docs/CreateYoutubePlaylist201ResponsePlaylist.md)
+ - [Zernio::CreateYoutubePlaylistRequest](docs/CreateYoutubePlaylistRequest.md)
  - [Zernio::CrosspostDiscordMessage200Response](docs/CrosspostDiscordMessage200Response.md)
  - [Zernio::CtwaAdRequestBody](docs/CtwaAdRequestBody.md)
  - [Zernio::CtwaAdRequestBodyCitiesInner](docs/CtwaAdRequestBodyCitiesInner.md)

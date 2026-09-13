@@ -18,6 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
 | [**connect_whats_app_embedded_signup**](ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup |
 | [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
+| [**create_youtube_playlist**](ConnectApi.md#create_youtube_playlist) | **POST** /v1/accounts/{accountId}/youtube-playlists | Create YouTube playlist |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**get_facebook_pages**](ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages |
 | [**get_gmb_locations**](ConnectApi.md#get_gmb_locations) | **GET** /v1/accounts/{accountId}/gmb-locations | List Google Business Profile locations |
@@ -1045,6 +1046,77 @@ end
 ### Return type
 
 [**CreatePinterestBoard201Response**](CreatePinterestBoard201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_youtube_playlist
+
+> <CreateYoutubePlaylist201Response> create_youtube_playlist(account_id, create_youtube_playlist_request)
+
+Create YouTube playlist
+
+Creates an empty playlist on the connected YouTube channel. Requires a title; privacy defaults to private. Returns the same playlist shape as the list endpoint. Pass the returned playlist.id as platformSpecificData.playlistId when publishing a video. Does not change the account's default playlist. Requires the youtube or youtube.force-ssl OAuth scope. Costs 50 YouTube quota units. This operation is not idempotent and is not automatically retried: repeating a request can create another playlist, including after a timeout. List playlists before retrying an ambiguous failure. Official series settings are not exposed by YouTube's public API and must be enabled manually in YouTube's desktop playlist settings. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | 
+create_youtube_playlist_request = Zernio::CreateYoutubePlaylistRequest.new({title: 'title_example'}) # CreateYoutubePlaylistRequest | 
+
+begin
+  # Create YouTube playlist
+  result = api_instance.create_youtube_playlist(account_id, create_youtube_playlist_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_youtube_playlist: #{e}"
+end
+```
+
+#### Using the create_youtube_playlist_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateYoutubePlaylist201Response>, Integer, Hash)> create_youtube_playlist_with_http_info(account_id, create_youtube_playlist_request)
+
+```ruby
+begin
+  # Create YouTube playlist
+  data, status_code, headers = api_instance.create_youtube_playlist_with_http_info(account_id, create_youtube_playlist_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateYoutubePlaylist201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_youtube_playlist_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **create_youtube_playlist_request** | [**CreateYoutubePlaylistRequest**](CreateYoutubePlaylistRequest.md) |  |  |
+
+### Return type
+
+[**CreateYoutubePlaylist201Response**](CreateYoutubePlaylist201Response.md)
 
 ### Authorization
 

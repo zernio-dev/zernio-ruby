@@ -455,6 +455,9 @@ docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.md
 docs/CreateWorkflow200Response.md
 docs/CreateWorkflow200ResponseWorkflow.md
 docs/CreateWorkflowRequest.md
+docs/CreateYoutubePlaylist201Response.md
+docs/CreateYoutubePlaylist201ResponsePlaylist.md
+docs/CreateYoutubePlaylistRequest.md
 docs/CrosspostDiscordMessage200Response.md
 docs/CtwaAdRequestBody.md
 docs/CtwaAdRequestBodyCitiesInner.md
@@ -2612,6 +2615,9 @@ lib/zernio-sdk/models/create_whats_app_template_request_library_template_button_
 lib/zernio-sdk/models/create_workflow200_response.rb
 lib/zernio-sdk/models/create_workflow200_response_workflow.rb
 lib/zernio-sdk/models/create_workflow_request.rb
+lib/zernio-sdk/models/create_youtube_playlist201_response.rb
+lib/zernio-sdk/models/create_youtube_playlist201_response_playlist.rb
+lib/zernio-sdk/models/create_youtube_playlist_request.rb
 lib/zernio-sdk/models/crosspost_discord_message200_response.rb
 lib/zernio-sdk/models/ctwa_ad_request_body.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_cities_inner.rb
@@ -4716,6 +4722,9 @@ spec/models/create_whats_app_template_request_spec.rb
 spec/models/create_workflow200_response_spec.rb
 spec/models/create_workflow200_response_workflow_spec.rb
 spec/models/create_workflow_request_spec.rb
+spec/models/create_youtube_playlist201_response_playlist_spec.rb
+spec/models/create_youtube_playlist201_response_spec.rb
+spec/models/create_youtube_playlist_request_spec.rb
 spec/models/crosspost_discord_message200_response_spec.rb
 spec/models/ctwa_ad_request_body_cities_inner_spec.rb
 spec/models/ctwa_ad_request_body_creatives_inner_spec.rb

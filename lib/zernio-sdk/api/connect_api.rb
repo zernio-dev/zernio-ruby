@@ -1027,6 +1027,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create YouTube playlist
+    # Creates an empty playlist on the connected YouTube channel. Requires a title; privacy defaults to private. Returns the same playlist shape as the list endpoint. Pass the returned playlist.id as platformSpecificData.playlistId when publishing a video. Does not change the account's default playlist. Requires the youtube or youtube.force-ssl OAuth scope. Costs 50 YouTube quota units. This operation is not idempotent and is not automatically retried: repeating a request can create another playlist, including after a timeout. List playlists before retrying an ambiguous failure. Official series settings are not exposed by YouTube's public API and must be enabled manually in YouTube's desktop playlist settings. 
+    # @param account_id [String] 
+    # @param create_youtube_playlist_request [CreateYoutubePlaylistRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateYoutubePlaylist201Response]
+    def create_youtube_playlist(account_id, create_youtube_playlist_request, opts = {})
+      data, _status_code, _headers = create_youtube_playlist_with_http_info(account_id, create_youtube_playlist_request, opts)
+      data
+    end
+
+    # Create YouTube playlist
+    # Creates an empty playlist on the connected YouTube channel. Requires a title; privacy defaults to private. Returns the same playlist shape as the list endpoint. Pass the returned playlist.id as platformSpecificData.playlistId when publishing a video. Does not change the account&#39;s default playlist. Requires the youtube or youtube.force-ssl OAuth scope. Costs 50 YouTube quota units. This operation is not idempotent and is not automatically retried: repeating a request can create another playlist, including after a timeout. List playlists before retrying an ambiguous failure. Official series settings are not exposed by YouTube&#39;s public API and must be enabled manually in YouTube&#39;s desktop playlist settings. 
+    # @param account_id [String] 
+    # @param create_youtube_playlist_request [CreateYoutubePlaylistRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateYoutubePlaylist201Response, Integer, Hash)>] CreateYoutubePlaylist201Response data, response status code and response headers
+    def create_youtube_playlist_with_http_info(account_id, create_youtube_playlist_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.create_youtube_playlist ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.create_youtube_playlist"
+      end
+      # verify the required parameter 'create_youtube_playlist_request' is set
+      if @api_client.config.client_side_validation && create_youtube_playlist_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_youtube_playlist_request' when calling ConnectApi.create_youtube_playlist"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/youtube-playlists'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_youtube_playlist_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateYoutubePlaylist201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.create_youtube_playlist",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#create_youtube_playlist\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get OAuth connect URL
     # Initiate an OAuth connection flow. Returns an authUrl to redirect the user to. Standard flow: Zernio hosts the selection UI, then redirects to your redirect_url. Headless mode (headless=true): user is redirected to your redirect_url with OAuth data for custom UI. Use the platform-specific selection endpoints to complete.  TikTok: every connection now goes through the TikTok for Business app. One TikTok account per profile, so connecting on a profile that already holds one replaces it. Reconnecting the SAME account keeps it and all of its history; authorizing a DIFFERENT TikTok account takes the slot over and permanently deletes the previous account's analytics, inbox and DM history. The two are told apart by the `@handle` stored at the last connect, so an account whose handle has been renamed on TikTok since then reads as a different account. An authorization that leaves out a permission the connected account needs changes nothing at all and comes back as `missing_tiktok_permissions`; connect again and accept every permission on TikTok's screen. 
     # @param platform [String] Social media platform to connect. &#x60;snapchat&#x60; is a closed beta with no public release date: it returns 403 &#x60;PLATFORM_BETA_RESTRICTED&#x60; until the account is approved.

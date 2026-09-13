@@ -215,6 +215,19 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for create_youtube_playlist
+  # Create YouTube playlist
+  # Creates an empty playlist on the connected YouTube channel. Requires a title; privacy defaults to private. Returns the same playlist shape as the list endpoint. Pass the returned playlist.id as platformSpecificData.playlistId when publishing a video. Does not change the account&#39;s default playlist. Requires the youtube or youtube.force-ssl OAuth scope. Costs 50 YouTube quota units. This operation is not idempotent and is not automatically retried: repeating a request can create another playlist, including after a timeout. List playlists before retrying an ambiguous failure. Official series settings are not exposed by YouTube&#39;s public API and must be enabled manually in YouTube&#39;s desktop playlist settings. 
+  # @param account_id 
+  # @param create_youtube_playlist_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateYoutubePlaylist201Response]
+  describe 'create_youtube_playlist test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_connect_url
   # Get OAuth connect URL
   # Initiate an OAuth connection flow. Returns an authUrl to redirect the user to. Standard flow: Zernio hosts the selection UI, then redirects to your redirect_url. Headless mode (headless&#x3D;true): user is redirected to your redirect_url with OAuth data for custom UI. Use the platform-specific selection endpoints to complete.  TikTok: every connection now goes through the TikTok for Business app. One TikTok account per profile, so connecting on a profile that already holds one replaces it. Reconnecting the SAME account keeps it and all of its history; authorizing a DIFFERENT TikTok account takes the slot over and permanently deletes the previous account&#39;s analytics, inbox and DM history. The two are told apart by the &#x60;@handle&#x60; stored at the last connect, so an account whose handle has been renamed on TikTok since then reads as a different account. An authorization that leaves out a permission the connected account needs changes nothing at all and comes back as &#x60;missing_tiktok_permissions&#x60;; connect again and accept every permission on TikTok&#39;s screen. 
