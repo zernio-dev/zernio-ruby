@@ -18,6 +18,9 @@ module Zernio
   class TargetingSpecExcludedLocations < ApiModelBase
     attr_accessor :countries
 
+    # Meta only. Continents and trade blocs to exclude (`excluded_geo_locations.country_groups`).
+    attr_accessor :country_groups
+
     attr_accessor :regions
 
     # Cities to exclude. Optional `radius` + `distanceUnit` exclude a catchment around the city (both must be set together or both omitted); Meta honours the radius on excluded cities.
@@ -34,10 +37,33 @@ module Zernio
     # Point-radius (lat/lng) pins to exclude (Meta excluded_geo_locations.custom_locations). Mirrors the inclusion customLocations shape.
     attr_accessor :custom_locations
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'countries' => :'countries',
+        :'country_groups' => :'countryGroups',
         :'regions' => :'regions',
         :'cities' => :'cities',
         :'zips' => :'zips',
@@ -61,6 +87,7 @@ module Zernio
     def self.openapi_types
       {
         :'countries' => :'Array<String>',
+        :'country_groups' => :'Array<String>',
         :'regions' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
         :'cities' => :'Array<TargetingSpecExcludedLocationsCitiesInner>',
         :'zips' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
@@ -95,6 +122,12 @@ module Zernio
       if attributes.key?(:'countries')
         if (value = attributes[:'countries']).is_a?(Array)
           self.countries = value
+        end
+      end
+
+      if attributes.key?(:'country_groups')
+        if (value = attributes[:'country_groups']).is_a?(Array)
+          self.country_groups = value
         end
       end
 
@@ -156,6 +189,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           countries == o.countries &&
+          country_groups == o.country_groups &&
           regions == o.regions &&
           cities == o.cities &&
           zips == o.zips &&
@@ -173,7 +207,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [countries, regions, cities, zips, places, neighborhoods, custom_locations].hash
+      [countries, country_groups, regions, cities, zips, places, neighborhoods, custom_locations].hash
     end
 
     # Builds the object from hash

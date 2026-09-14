@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **countries** | **Array&lt;String&gt;** |  | [optional] |
+| **country_groups** | **Array&lt;String&gt;** | Meta only. Continents and trade blocs to exclude (&#x60;excluded_geo_locations.country_groups&#x60;). | [optional] |
 | **regions** | [**Array&lt;UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner&gt;**](UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.md) |  | [optional] |
 | **cities** | [**Array&lt;TargetingSpecExcludedLocationsCitiesInner&gt;**](TargetingSpecExcludedLocationsCitiesInner.md) | Cities to exclude. Optional &#x60;radius&#x60; + &#x60;distanceUnit&#x60; exclude a catchment around the city (both must be set together or both omitted); Meta honours the radius on excluded cities. | [optional] |
 | **zips** | [**Array&lt;UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner&gt;**](UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.md) |  | [optional] |
@@ -19,6 +20,7 @@ require 'zernio-sdk'
 
 instance = Zernio::TargetingSpecExcludedLocations.new(
   countries: null,
+  country_groups: null,
   regions: null,
   cities: null,
   zips: null,

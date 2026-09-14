@@ -141,6 +141,9 @@ module Zernio
     # ISO 3166-1 alpha-2 country codes (e.g. ['NL']). Defaults to ['US'] when no other geo targeting (flat or nested `targeting`) is provided. (LinkedIn and OpenAI Ads currently honour country-level targeting only; any other targeting field returns 400 for OpenAI Ads.)
     attr_accessor :countries
 
+    # Meta only. Continents and trade blocs (`geo_locations.country_groups`), for targeting a whole region without listing its countries. Combines with `countries` rather than replacing it. Discoverable via `GET /v1/ads/targeting/search?dimension=geo&geoType=country_group`. 
+    attr_accessor :country_groups
+
     # City-level geo targeting (Meta and TikTok). Each city is targeted by the platform's opaque `key` (the city ID) which can be looked up via `GET /v1/ads/targeting/search?dimension=geo&q=<name>&countryCode=<ISO>`. Optional `radius` + `distance_unit` (Meta only) extend the targeting beyond the city limits (e.g. radius 25 km around the city center). Both must be set together, or both omitted (Meta defaults to ~16 km when omitted).  On Meta, cannot overlap with the same country in `countries` (Meta returns a \"locations overlap\" error). Either drop the country or scope it to a different country. On TikTok, keys are numeric location ids and can be sent without `countries`. 
     attr_accessor :cities
 
@@ -381,6 +384,7 @@ module Zernio
         :'organization_id' => :'organizationId',
         :'targeting' => :'targeting',
         :'countries' => :'countries',
+        :'country_groups' => :'countryGroups',
         :'cities' => :'cities',
         :'regions' => :'regions',
         :'age_min' => :'ageMin',
@@ -501,6 +505,7 @@ module Zernio
         :'organization_id' => :'String',
         :'targeting' => :'TargetingSpec',
         :'countries' => :'Array<String>',
+        :'country_groups' => :'Array<String>',
         :'cities' => :'Array<CreateStandaloneAdRequestCitiesInner>',
         :'regions' => :'Array<CreateStandaloneAdRequestRegionsInner>',
         :'age_min' => :'Integer',
@@ -782,6 +787,12 @@ module Zernio
       if attributes.key?(:'countries')
         if (value = attributes[:'countries']).is_a?(Array)
           self.countries = value
+        end
+      end
+
+      if attributes.key?(:'country_groups')
+        if (value = attributes[:'country_groups']).is_a?(Array)
+          self.country_groups = value
         end
       end
 
@@ -2018,6 +2029,7 @@ module Zernio
           organization_id == o.organization_id &&
           targeting == o.targeting &&
           countries == o.countries &&
+          country_groups == o.country_groups &&
           cities == o.cities &&
           regions == o.regions &&
           age_min == o.age_min &&
@@ -2089,7 +2101,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, promotion, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, asset_group, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, user_os, user_device, is_skadnetwork_attribution, campaign_attribution, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, promotion, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, country_groups, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, asset_group, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, user_os, user_device, is_skadnetwork_attribution, campaign_attribution, promoted_object].hash
     end
 
     # Builds the object from hash
