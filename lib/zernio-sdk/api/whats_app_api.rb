@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Add participants
-    # Add participants to a WhatsApp group. Maximum 8 participants per request.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
+    # Add participants to a WhatsApp group. Maximum 8 participants per request. A group holds at most 8 participants in total (a Meta limit), so later requests cannot grow a group past 8. Meta documents groups as invite-only, so people normally join through the group's invite link.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
     # @param account_id [String] WhatsApp account ID
     # @param add_whats_app_group_participants_request [AddWhatsAppGroupParticipantsRequest] 
@@ -32,7 +32,7 @@ module Zernio
     end
 
     # Add participants
-    # Add participants to a WhatsApp group. Maximum 8 participants per request.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
+    # Add participants to a WhatsApp group. Maximum 8 participants per request. A group holds at most 8 participants in total (a Meta limit), so later requests cannot grow a group past 8. Meta documents groups as invite-only, so people normally join through the group&#39;s invite link.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
     # @param account_id [String] WhatsApp account ID
     # @param add_whats_app_group_participants_request [AddWhatsAppGroupParticipantsRequest] 
