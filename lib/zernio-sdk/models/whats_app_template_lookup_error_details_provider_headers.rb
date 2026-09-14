@@ -14,27 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Instagram, Facebook, or WhatsApp. Meta's diagnostic fields for the rejected send or template lookup. WhatsApp lookup errors retain only code, message, and error_data.details. Absent when the failure did not come from Meta.
-  class SendInboxMessage400ResponsePlatformError < ApiModelBase
-    # Meta error code
-    attr_accessor :code
+  # Safe provider headers retained from the lookup response.
+  class WhatsAppTemplateLookupErrorDetailsProviderHeaders < ApiModelBase
+    attr_accessor :retry_after
 
-    # Meta error_subcode
-    attr_accessor :subcode
+    attr_accessor :x_app_usage
 
-    # Meta fbtrace_id, quote this in a Meta bug report
-    attr_accessor :fbtrace_id
-
-    # Meta error type (e.g. OAuthException)
-    attr_accessor :type
+    attr_accessor :x_business_use_case_usage
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'code' => :'code',
-        :'subcode' => :'subcode',
-        :'fbtrace_id' => :'fbtraceId',
-        :'type' => :'type'
+        :'retry_after' => :'retry-after',
+        :'x_app_usage' => :'x-app-usage',
+        :'x_business_use_case_usage' => :'x-business-use-case-usage'
       }
     end
 
@@ -51,10 +44,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'code' => :'Integer',
-        :'subcode' => :'Integer',
-        :'fbtrace_id' => :'String',
-        :'type' => :'String'
+        :'retry_after' => :'String',
+        :'x_app_usage' => :'String',
+        :'x_business_use_case_usage' => :'String'
       }
     end
 
@@ -68,32 +60,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessage400ResponsePlatformError` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WhatsAppTemplateLookupErrorDetailsProviderHeaders` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessage400ResponsePlatformError`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WhatsAppTemplateLookupErrorDetailsProviderHeaders`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
+      if attributes.key?(:'retry_after')
+        self.retry_after = attributes[:'retry_after']
       end
 
-      if attributes.key?(:'subcode')
-        self.subcode = attributes[:'subcode']
+      if attributes.key?(:'x_app_usage')
+        self.x_app_usage = attributes[:'x_app_usage']
       end
 
-      if attributes.key?(:'fbtrace_id')
-        self.fbtrace_id = attributes[:'fbtrace_id']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'x_business_use_case_usage')
+        self.x_business_use_case_usage = attributes[:'x_business_use_case_usage']
       end
     end
 
@@ -117,10 +105,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          code == o.code &&
-          subcode == o.subcode &&
-          fbtrace_id == o.fbtrace_id &&
-          type == o.type
+          retry_after == o.retry_after &&
+          x_app_usage == o.x_app_usage &&
+          x_business_use_case_usage == o.x_business_use_case_usage
     end
 
     # @see the `==` method
@@ -132,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, subcode, fbtrace_id, type].hash
+      [retry_after, x_app_usage, x_business_use_case_usage].hash
     end
 
     # Builds the object from hash

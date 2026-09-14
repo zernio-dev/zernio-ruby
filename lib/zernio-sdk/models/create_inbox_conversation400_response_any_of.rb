@@ -14,27 +14,38 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Instagram, Facebook, or WhatsApp. Meta's diagnostic fields for the rejected send or template lookup. WhatsApp lookup errors retain only code, message, and error_data.details. Absent when the failure did not come from Meta.
-  class SendInboxMessage400ResponsePlatformError < ApiModelBase
-    # Meta error code
+  class CreateInboxConversation400ResponseAnyOf < ApiModelBase
+    attr_accessor :error
+
     attr_accessor :code
 
-    # Meta error_subcode
-    attr_accessor :subcode
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # Meta fbtrace_id, quote this in a Meta bug report
-    attr_accessor :fbtrace_id
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # Meta error type (e.g. OAuthException)
-    attr_accessor :type
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'code' => :'code',
-        :'subcode' => :'subcode',
-        :'fbtrace_id' => :'fbtraceId',
-        :'type' => :'type'
+        :'error' => :'error',
+        :'code' => :'code'
       }
     end
 
@@ -51,10 +62,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'code' => :'Integer',
-        :'subcode' => :'Integer',
-        :'fbtrace_id' => :'String',
-        :'type' => :'String'
+        :'error' => :'String',
+        :'code' => :'String'
       }
     end
 
@@ -68,32 +77,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessage400ResponsePlatformError` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateInboxConversation400ResponseAnyOf` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessage400ResponsePlatformError`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateInboxConversation400ResponseAnyOf`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
+      end
+
       if attributes.key?(:'code')
         self.code = attributes[:'code']
-      end
-
-      if attributes.key?(:'subcode')
-        self.subcode = attributes[:'subcode']
-      end
-
-      if attributes.key?(:'fbtrace_id')
-        self.fbtrace_id = attributes[:'fbtrace_id']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
       end
     end
 
@@ -109,7 +110,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED", "PLATFORM_LIMITATION", "TEMPLATE_REQUIRED", "INVALID_TEMPLATE_PARAMS", "INVALID_TEMPLATE_BUTTON_PARAM", "INVALID_TEMPLATE_HEADER", "INVALID_TEMPLATE_CARD_PARAM", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
+      return false unless code_validator.valid?(@code)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] code Object to be assigned
+    def code=(code)
+      validator = EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED", "PLATFORM_LIMITATION", "TEMPLATE_REQUIRED", "INVALID_TEMPLATE_PARAMS", "INVALID_TEMPLATE_BUTTON_PARAM", "INVALID_TEMPLATE_HEADER", "INVALID_TEMPLATE_CARD_PARAM", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
+      unless validator.valid?(code)
+        fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
+      end
+      @code = code
     end
 
     # Checks equality by comparing each attribute.
@@ -117,10 +130,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          code == o.code &&
-          subcode == o.subcode &&
-          fbtrace_id == o.fbtrace_id &&
-          type == o.type
+          error == o.error &&
+          code == o.code
     end
 
     # @see the `==` method
@@ -132,7 +143,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, subcode, fbtrace_id, type].hash
+      [error, code].hash
     end
 
     # Builds the object from hash

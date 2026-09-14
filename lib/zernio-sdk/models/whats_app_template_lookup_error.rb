@@ -14,19 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SendInboxMessage400Response < ApiModelBase
+  class WhatsAppTemplateLookupError < ApiModelBase
     attr_accessor :error
 
-    # Present on Meta pass-through rejections: platform_error when Meta rejected the send (see platform/platformError below), invalid_request_error for validation failures.
     attr_accessor :type
 
-    # Stable machine-readable reason. PLATFORM_LIMITATION covers a capability the platform does not offer (e.g. Bluesky and Reddit DMs reject media); MISSING_PARTICIPANT means the stored conversation has no recipient to send to; DIRECT_SEND_NOT_ELIGIBLE and DIRECT_SEND_BLOCKED mean the WhatsApp Business Account needs Meta to grant or restore Direct Send access; DIRECT_SEND_LIMITED is temporary, Meta lifts it on its own; platform_api_error means Meta itself rejected the send (see platformError).
     attr_accessor :code
 
-    # Present alongside code platform_api_error. The platform that rejected the send (e.g. instagram, facebook, whatsapp).
     attr_accessor :platform
 
     attr_accessor :platform_error
+
+    attr_accessor :details
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -57,7 +56,8 @@ module Zernio
         :'type' => :'type',
         :'code' => :'code',
         :'platform' => :'platform',
-        :'platform_error' => :'platformError'
+        :'platform_error' => :'platformError',
+        :'details' => :'details'
       }
     end
 
@@ -78,7 +78,8 @@ module Zernio
         :'type' => :'String',
         :'code' => :'String',
         :'platform' => :'String',
-        :'platform_error' => :'SendInboxMessage400ResponsePlatformError'
+        :'platform_error' => :'WhatsAppTemplateLookupErrorPlatformError',
+        :'details' => :'WhatsAppTemplateLookupErrorDetails'
       }
     end
 
@@ -92,36 +93,50 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessage400Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WhatsAppTemplateLookupError` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessage400Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WhatsAppTemplateLookupError`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'error')
         self.error = attributes[:'error']
+      else
+        self.error = nil
       end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
+      else
+        self.type = nil
       end
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
+      else
+        self.code = nil
       end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
+      else
+        self.platform = nil
       end
 
       if attributes.key?(:'platform_error')
         self.platform_error = attributes[:'platform_error']
+      end
+
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
+      else
+        self.details = nil
       end
     end
 
@@ -130,6 +145,26 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @error.nil?
+        invalid_properties.push('invalid value for "error", error cannot be nil.')
+      end
+
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @code.nil?
+        invalid_properties.push('invalid value for "code", code cannot be nil.')
+      end
+
+      if @platform.nil?
+        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
+      end
+
+      if @details.nil?
+        invalid_properties.push('invalid value for "details", details cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -137,17 +172,34 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["platform_error", "invalid_request_error"])
+      return false if @error.nil?
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["platform_error"])
       return false unless type_validator.valid?(@type)
-      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT", "INVALID_TEMPLATE_HEADER", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED", "platform_api_error"])
+      return false if @code.nil?
+      code_validator = EnumAttributeValidator.new('String', ["platform_api_error"])
       return false unless code_validator.valid?(@code)
+      return false if @platform.nil?
+      platform_validator = EnumAttributeValidator.new('String', ["whatsapp"])
+      return false unless platform_validator.valid?(@platform)
+      return false if @details.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] error Value to be assigned
+    def error=(error)
+      if error.nil?
+        fail ArgumentError, 'error cannot be nil'
+      end
+
+      @error = error
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["platform_error", "invalid_request_error"])
+      validator = EnumAttributeValidator.new('String', ["platform_error"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -157,11 +209,31 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code)
-      validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT", "INVALID_TEMPLATE_HEADER", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED", "platform_api_error"])
+      validator = EnumAttributeValidator.new('String', ["platform_api_error"])
       unless validator.valid?(code)
         fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
       end
       @code = code
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] platform Object to be assigned
+    def platform=(platform)
+      validator = EnumAttributeValidator.new('String', ["whatsapp"])
+      unless validator.valid?(platform)
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
+      end
+      @platform = platform
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] details Value to be assigned
+    def details=(details)
+      if details.nil?
+        fail ArgumentError, 'details cannot be nil'
+      end
+
+      @details = details
     end
 
     # Checks equality by comparing each attribute.
@@ -173,7 +245,8 @@ module Zernio
           type == o.type &&
           code == o.code &&
           platform == o.platform &&
-          platform_error == o.platform_error
+          platform_error == o.platform_error &&
+          details == o.details
     end
 
     # @see the `==` method
@@ -185,7 +258,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, type, code, platform, platform_error].hash
+      [error, type, code, platform, platform_error, details].hash
     end
 
     # Builds the object from hash

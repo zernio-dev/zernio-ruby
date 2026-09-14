@@ -1,12 +1,12 @@
-# Zernio::CreateInboxConversation400Response
+# Zernio::WhatsAppTemplateLookupError
 
 ## Properties
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **error** | **String** |  |  |
-| **code** | **String** |  |  |
 | **type** | **String** |  |  |
+| **code** | **String** |  |  |
 | **platform** | **String** |  |  |
 | **platform_error** | [**WhatsAppTemplateLookupErrorPlatformError**](WhatsAppTemplateLookupErrorPlatformError.md) |  | [optional] |
 | **details** | [**WhatsAppTemplateLookupErrorDetails**](WhatsAppTemplateLookupErrorDetails.md) |  |  |
@@ -16,10 +16,10 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateInboxConversation400Response.new(
+instance = Zernio::WhatsAppTemplateLookupError.new(
   error: null,
-  code: null,
   type: null,
+  code: null,
   platform: null,
   platform_error: null,
   details: null

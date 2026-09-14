@@ -4,8 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **error** | **String** |  | [optional] |
-| **code** | **String** |  | [optional] |
+| **error** | **String** |  |  |
+| **code** | **String** |  |  |
+| **type** | **String** |  |  |
+| **platform** | **String** |  |  |
+| **platform_error** | [**WhatsAppTemplateLookupErrorPlatformError**](WhatsAppTemplateLookupErrorPlatformError.md) |  | [optional] |
+| **details** | [**WhatsAppTemplateLookupErrorDetails**](WhatsAppTemplateLookupErrorDetails.md) |  |  |
 
 ## Example
 
@@ -14,7 +18,11 @@ require 'zernio-sdk'
 
 instance = Zernio::CreateInboxConversation404Response.new(
   error: null,
-  code: null
+  code: null,
+  type: null,
+  platform: null,
+  platform_error: null,
+  details: null
 )
 ```
 
