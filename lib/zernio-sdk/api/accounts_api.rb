@@ -717,6 +717,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List trending commercial music
+    # Returns the 100 currently trending tracks of TikTok's Commercial Music Library for a TikTok account connected through the TikTok for Business app. Use a track id as tiktokSettings.musicSoundInfo.musicSoundId when creating a post. The list is not paged; countryCode selects the country chart.
+    # @param account_id [String] The TikTok account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :country_code Two-letter ISO 3166-1 country code of the chart to read (for example ES). Defaults to TikTok&#39;s global chart.
+    # @return [ListTikTokCommercialMusic200Response]
+    def list_tik_tok_commercial_music(account_id, opts = {})
+      data, _status_code, _headers = list_tik_tok_commercial_music_with_http_info(account_id, opts)
+      data
+    end
+
+    # List trending commercial music
+    # Returns the 100 currently trending tracks of TikTok&#39;s Commercial Music Library for a TikTok account connected through the TikTok for Business app. Use a track id as tiktokSettings.musicSoundInfo.musicSoundId when creating a post. The list is not paged; countryCode selects the country chart.
+    # @param account_id [String] The TikTok account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :country_code Two-letter ISO 3166-1 country code of the chart to read (for example ES). Defaults to TikTok&#39;s global chart.
+    # @return [Array<(ListTikTokCommercialMusic200Response, Integer, Hash)>] ListTikTokCommercialMusic200Response data, response status code and response headers
+    def list_tik_tok_commercial_music_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountsApi.list_tik_tok_commercial_music ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.list_tik_tok_commercial_music"
+      end
+      if @api_client.config.client_side_validation && !opts[:'country_code'].nil? && opts[:'country_code'].to_s.length > 2
+        fail ArgumentError, 'invalid value for "opts[:"country_code"]" when calling AccountsApi.list_tik_tok_commercial_music, the character length must be smaller than or equal to 2.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'country_code'].nil? && opts[:'country_code'].to_s.length < 2
+        fail ArgumentError, 'invalid value for "opts[:"country_code"]" when calling AccountsApi.list_tik_tok_commercial_music, the character length must be greater than or equal to 2.'
+      end
+
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/tiktok/commercial-music'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'countryCode'] = opts[:'country_code'] if !opts[:'country_code'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListTikTokCommercialMusic200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountsApi.list_tik_tok_commercial_music",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#list_tik_tok_commercial_music\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Move account to another profile
     # Moves a connected account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
     # @param account_id [String] 

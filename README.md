@@ -102,6 +102,7 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**get_slack_settings**](docs/AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings
 *Zernio::AccountsApi* | [**get_tik_tok_creator_info**](docs/AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info
 *Zernio::AccountsApi* | [**list_accounts**](docs/AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts
+*Zernio::AccountsApi* | [**list_tik_tok_commercial_music**](docs/AccountsApi.md#list_tik_tok_commercial_music) | **GET** /v1/accounts/{accountId}/tiktok/commercial-music | List trending commercial music
 *Zernio::AccountsApi* | [**move_account_to_profile**](docs/AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
 *Zernio::AccountsApi* | [**update_bluesky_settings**](docs/AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings
@@ -1999,6 +2000,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ListTikTokAdPixels200Response](docs/ListTikTokAdPixels200Response.md)
  - [Zernio::ListTikTokAdPixels200ResponsePixelsInner](docs/ListTikTokAdPixels200ResponsePixelsInner.md)
  - [Zernio::ListTikTokAdPixels200ResponsePixelsInnerEventDetailsInner](docs/ListTikTokAdPixels200ResponsePixelsInnerEventDetailsInner.md)
+ - [Zernio::ListTikTokCommercialMusic200Response](docs/ListTikTokCommercialMusic200Response.md)
+ - [Zernio::ListTikTokCommercialMusic200ResponseTracksInner](docs/ListTikTokCommercialMusic200ResponseTracksInner.md)
+ - [Zernio::ListTikTokCommercialMusic200ResponseTracksInnerClip](docs/ListTikTokCommercialMusic200ResponseTracksInnerClip.md)
  - [Zernio::ListTrackingTagSharedAccounts200Response](docs/ListTrackingTagSharedAccounts200Response.md)
  - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
@@ -2410,6 +2414,7 @@ Class | Method | HTTP request | Description
  - [Zernio::TikTokDryRunVerdict](docs/TikTokDryRunVerdict.md)
  - [Zernio::TikTokDryRunVerdictTiktokInner](docs/TikTokDryRunVerdictTiktokInner.md)
  - [Zernio::TikTokPlatformData](docs/TikTokPlatformData.md)
+ - [Zernio::TikTokPlatformDataMusicSoundInfo](docs/TikTokPlatformDataMusicSoundInfo.md)
  - [Zernio::TrackingTag](docs/TrackingTag.md)
  - [Zernio::TransferVoiceCall200Response](docs/TransferVoiceCall200Response.md)
  - [Zernio::TransferVoiceCallRequest](docs/TransferVoiceCallRequest.md)

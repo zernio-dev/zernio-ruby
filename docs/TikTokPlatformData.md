@@ -18,7 +18,9 @@
 | **video_cover_timestamp_ms** | **Integer** | Optional for video posts. Timestamp in milliseconds to select which frame to use as thumbnail (defaults to 1000ms/1 second). Ignored when videoCoverImageUrl is provided. | [optional] |
 | **video_cover_image_url** | **String** | Optional for video posts. URL of a custom thumbnail image (JPG, PNG, or WebP, max 20MB). Any downloadable URL works: we rehost it ourselves. The image is stitched as a single frame at the start of the video to serve as the cover. Accounts connected through the TikTok for Business app hand it to TikTok as the cover instead, with no stitching, falling back to videoCoverTimestampMs without it. Overrides videoCoverTimestampMs when provided. | [optional] |
 | **photo_cover_index** | **Integer** | Optional for photo carousels. Index of image to use as cover, 0-based (defaults to 0/first image). | [optional] |
-| **auto_add_music** | **Boolean** | When true, TikTok may add recommended music (photos only) | [optional] |
+| **auto_add_music** | **Boolean** | When true, TikTok may add recommended music (photos only). With the brand-organic or branded-content toggle on, TikTok allows Commercial Music Library tracks only, so this attaches nothing there; use musicSoundInfo instead. | [optional] |
+| **music_sound_info** | [**TikTokPlatformDataMusicSoundInfo**](TikTokPlatformDataMusicSoundInfo.md) |  | [optional] |
+| **video_original_sound_volume** | **Integer** | Volume of the video&#39;s own sound when a commercial track is attached (0 to 100). Requires musicSoundInfo. Video posts only. | [optional] |
 | **video_made_with_ai** | **Boolean** | Set true to disclose AI-generated content. Accounts connected through the TikTok for Business app carry the disclosure on video posts only: the business photo endpoint has no AI disclosure field, so true on a direct photo post is rejected at creation rather than published undisclosed. Send draft true to publish such a photo post and set the disclosure in the TikTok app. | [optional] |
 | **description** | **String** | Optional long-form caption for photo posts (max 4000 chars). Recommended when content exceeds 90 chars, as photo titles are auto-truncated. Falls back to the post content when omitted. | [optional] |
 
@@ -43,6 +45,8 @@ instance = Zernio::TikTokPlatformData.new(
   video_cover_image_url: null,
   photo_cover_index: null,
   auto_add_music: null,
+  music_sound_info: null,
+  video_original_sound_volume: null,
   video_made_with_ai: null,
   description: null
 )

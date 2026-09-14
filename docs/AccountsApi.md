@@ -14,6 +14,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_slack_settings**](AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings |
 | [**get_tik_tok_creator_info**](AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info |
 | [**list_accounts**](AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts |
+| [**list_tik_tok_commercial_music**](AccountsApi.md#list_tik_tok_commercial_music) | **GET** /v1/accounts/{accountId}/tiktok/commercial-music | List trending commercial music |
 | [**move_account_to_profile**](AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile |
 | [**update_account**](AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account |
 | [**update_bluesky_settings**](AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings |
@@ -737,6 +738,79 @@ end
 ### Return type
 
 [**AccountsListResponse**](AccountsListResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_tik_tok_commercial_music
+
+> <ListTikTokCommercialMusic200Response> list_tik_tok_commercial_music(account_id, opts)
+
+List trending commercial music
+
+Returns the 100 currently trending tracks of TikTok's Commercial Music Library for a TikTok account connected through the TikTok for Business app. Use a track id as tiktokSettings.musicSoundInfo.musicSoundId when creating a post. The list is not paged; countryCode selects the country chart.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | The TikTok account ID
+opts = {
+  country_code: 'country_code_example' # String | Two-letter ISO 3166-1 country code of the chart to read (for example ES). Defaults to TikTok's global chart.
+}
+
+begin
+  # List trending commercial music
+  result = api_instance.list_tik_tok_commercial_music(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->list_tik_tok_commercial_music: #{e}"
+end
+```
+
+#### Using the list_tik_tok_commercial_music_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListTikTokCommercialMusic200Response>, Integer, Hash)> list_tik_tok_commercial_music_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List trending commercial music
+  data, status_code, headers = api_instance.list_tik_tok_commercial_music_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListTikTokCommercialMusic200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->list_tik_tok_commercial_music_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The TikTok account ID |  |
+| **country_code** | **String** | Two-letter ISO 3166-1 country code of the chart to read (for example ES). Defaults to TikTok&#39;s global chart. | [optional] |
+
+### Return type
+
+[**ListTikTokCommercialMusic200Response**](ListTikTokCommercialMusic200Response.md)
 
 ### Authorization
 

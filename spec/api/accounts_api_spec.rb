@@ -166,6 +166,19 @@ describe 'AccountsApi' do
     end
   end
 
+  # unit tests for list_tik_tok_commercial_music
+  # List trending commercial music
+  # Returns the 100 currently trending tracks of TikTok&#39;s Commercial Music Library for a TikTok account connected through the TikTok for Business app. Use a track id as tiktokSettings.musicSoundInfo.musicSoundId when creating a post. The list is not paged; countryCode selects the country chart.
+  # @param account_id The TikTok account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :country_code Two-letter ISO 3166-1 country code of the chart to read (for example ES). Defaults to TikTok&#39;s global chart.
+  # @return [ListTikTokCommercialMusic200Response]
+  describe 'list_tik_tok_commercial_music test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for move_account_to_profile
   # Move account to another profile
   # Moves a connected account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 

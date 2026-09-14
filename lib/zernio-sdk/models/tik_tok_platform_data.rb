@@ -58,8 +58,13 @@ module Zernio
     # Optional for photo carousels. Index of image to use as cover, 0-based (defaults to 0/first image).
     attr_accessor :photo_cover_index
 
-    # When true, TikTok may add recommended music (photos only)
+    # When true, TikTok may add recommended music (photos only). With the brand-organic or branded-content toggle on, TikTok allows Commercial Music Library tracks only, so this attaches nothing there; use musicSoundInfo instead.
     attr_accessor :auto_add_music
+
+    attr_accessor :music_sound_info
+
+    # Volume of the video's own sound when a commercial track is attached (0 to 100). Requires musicSoundInfo. Video posts only.
+    attr_accessor :video_original_sound_volume
 
     # Set true to disclose AI-generated content. Accounts connected through the TikTok for Business app carry the disclosure on video posts only: the business photo endpoint has no AI disclosure field, so true on a direct photo post is rejected at creation rather than published undisclosed. Send draft true to publish such a photo post and set the disclosure in the TikTok app.
     attr_accessor :video_made_with_ai
@@ -107,6 +112,8 @@ module Zernio
         :'video_cover_image_url' => :'videoCoverImageUrl',
         :'photo_cover_index' => :'photoCoverIndex',
         :'auto_add_music' => :'autoAddMusic',
+        :'music_sound_info' => :'musicSoundInfo',
+        :'video_original_sound_volume' => :'videoOriginalSoundVolume',
         :'video_made_with_ai' => :'videoMadeWithAi',
         :'description' => :'description'
       }
@@ -140,6 +147,8 @@ module Zernio
         :'video_cover_image_url' => :'String',
         :'photo_cover_index' => :'Integer',
         :'auto_add_music' => :'Boolean',
+        :'music_sound_info' => :'TikTokPlatformDataMusicSoundInfo',
+        :'video_original_sound_volume' => :'Integer',
         :'video_made_with_ai' => :'Boolean',
         :'description' => :'String'
       }
@@ -227,6 +236,14 @@ module Zernio
         self.auto_add_music = attributes[:'auto_add_music']
       end
 
+      if attributes.key?(:'music_sound_info')
+        self.music_sound_info = attributes[:'music_sound_info']
+      end
+
+      if attributes.key?(:'video_original_sound_volume')
+        self.video_original_sound_volume = attributes[:'video_original_sound_volume']
+      end
+
       if attributes.key?(:'video_made_with_ai')
         self.video_made_with_ai = attributes[:'video_made_with_ai']
       end
@@ -249,6 +266,14 @@ module Zernio
         invalid_properties.push('invalid value for "photo_cover_index", must be greater than or equal to 0.')
       end
 
+      if !@video_original_sound_volume.nil? && @video_original_sound_volume > 100
+        invalid_properties.push('invalid value for "video_original_sound_volume", must be smaller than or equal to 100.')
+      end
+
+      if !@video_original_sound_volume.nil? && @video_original_sound_volume < 0
+        invalid_properties.push('invalid value for "video_original_sound_volume", must be greater than or equal to 0.')
+      end
+
       if !@description.nil? && @description.to_s.length > 4000
         invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 4000.')
       end
@@ -266,6 +291,8 @@ module Zernio
       return false unless media_type_validator.valid?(@media_type)
       return false if !@video_cover_timestamp_ms.nil? && @video_cover_timestamp_ms < 0
       return false if !@photo_cover_index.nil? && @photo_cover_index < 0
+      return false if !@video_original_sound_volume.nil? && @video_original_sound_volume > 100
+      return false if !@video_original_sound_volume.nil? && @video_original_sound_volume < 0
       return false if !@description.nil? && @description.to_s.length > 4000
       true
     end
@@ -319,6 +346,24 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] video_original_sound_volume Value to be assigned
+    def video_original_sound_volume=(video_original_sound_volume)
+      if video_original_sound_volume.nil?
+        fail ArgumentError, 'video_original_sound_volume cannot be nil'
+      end
+
+      if video_original_sound_volume > 100
+        fail ArgumentError, 'invalid value for "video_original_sound_volume", must be smaller than or equal to 100.'
+      end
+
+      if video_original_sound_volume < 0
+        fail ArgumentError, 'invalid value for "video_original_sound_volume", must be greater than or equal to 0.'
+      end
+
+      @video_original_sound_volume = video_original_sound_volume
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
     def description=(description)
       if description.nil?
@@ -352,6 +397,8 @@ module Zernio
           video_cover_image_url == o.video_cover_image_url &&
           photo_cover_index == o.photo_cover_index &&
           auto_add_music == o.auto_add_music &&
+          music_sound_info == o.music_sound_info &&
+          video_original_sound_volume == o.video_original_sound_volume &&
           video_made_with_ai == o.video_made_with_ai &&
           description == o.description
     end
@@ -365,7 +412,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [draft, privacy_level, allow_comment, allow_duet, allow_stitch, commercial_content_type, brand_partner_promote, is_brand_organic_post, content_preview_confirmed, express_consent_given, media_type, video_cover_timestamp_ms, video_cover_image_url, photo_cover_index, auto_add_music, video_made_with_ai, description].hash
+      [draft, privacy_level, allow_comment, allow_duet, allow_stitch, commercial_content_type, brand_partner_promote, is_brand_organic_post, content_preview_confirmed, express_consent_given, media_type, video_cover_timestamp_ms, video_cover_image_url, photo_cover_index, auto_add_music, music_sound_info, video_original_sound_volume, video_made_with_ai, description].hash
     end
 
     # Builds the object from hash
