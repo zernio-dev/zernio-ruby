@@ -179,6 +179,16 @@ describe Zernio::CreateMessagingAdRequest do
     end
   end
 
+  describe 'test attribute "country_groups"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["africa", "asia", "europe", "north_america", "south_america", "oceania", "central_america", "caribbean", "eea", "euro_area", "nafta", "mercosur", "afta", "apec", "gcc", "cisfta", "emerging_markets", "itunes_app_store", "android_free_store", "android_paid_store"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.country_groups = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "custom_locations"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

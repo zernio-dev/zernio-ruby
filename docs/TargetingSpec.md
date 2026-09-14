@@ -11,6 +11,7 @@
 | **cities** | [**Array&lt;TargetingSpecCitiesInner&gt;**](TargetingSpecCitiesInner.md) | City targeting. Optional &#x60;radius&#x60; + &#x60;distanceUnit&#x60; extend beyond the city limits; both must be set together or both omitted. &#x60;radius&#x60; is only honoured on platforms whose capability map allows city radius (Meta). | [optional] |
 | **zips** | [**Array&lt;UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner&gt;**](UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.md) | Postal/ZIP targeting. &#x60;key&#x60; is the platform&#39;s postal location ID (e.g. Meta &#x60;US:94304&#x60;). Supported on Meta, Google, TikTok, Pinterest, X. | [optional] |
 | **metros** | [**Array&lt;UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner&gt;**](UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.md) | DMA / metro-area targeting. &#x60;key&#x60; is the platform&#39;s metro ID (e.g. Meta &#x60;DMA:807&#x60;). | [optional] |
+| **country_groups** | **Array&lt;String&gt;** | Meta only. Continents and trade blocs (&#x60;geo_locations.country_groups&#x60;), for targeting a whole region without listing its countries. Combines with &#x60;countries&#x60; rather than replacing it, and is also accepted under &#x60;excludedLocations&#x60;. Discoverable via &#x60;GET /v1/ads/targeting/search?dimension&#x3D;geo&amp;geoType&#x3D;country_group&#x60;.  | [optional] |
 | **custom_locations** | [**Array&lt;TargetingSpecCustomLocationsInner&gt;**](TargetingSpecCustomLocationsInner.md) | Point-radius (lat/lng) targeting (Meta custom_locations / Google proximity). Honoured on Meta and Google; ignored on platforms without radius support. | [optional] |
 | **excluded_locations** | [**TargetingSpecExcludedLocations**](TargetingSpecExcludedLocations.md) |  | [optional] |
 | **age_min** | **Integer** | Minimum age. Applied on Meta, TikTok and Pinterest; ignored on Google, LinkedIn and X. Each platform clamps to its own range: Meta and Pinterest effectively cap at 65 (65 &#x3D; 65+), TikTok maps up to 100. Pinterest has no under-18 bucket, so an ageMin below 18 starts at 18 there. | [optional] |
@@ -43,6 +44,7 @@ instance = Zernio::TargetingSpec.new(
   cities: null,
   zips: null,
   metros: null,
+  country_groups: null,
   custom_locations: null,
   excluded_locations: null,
   age_min: null,

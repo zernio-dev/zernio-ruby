@@ -85,6 +85,9 @@ module Zernio
     # DMA / metro-area geo targeting. `key` is Meta's metro id (e.g. `DMA:807`). 
     attr_accessor :metros
 
+    # Meta only. Continents and trade blocs (`geo_locations.country_groups`), for targeting a whole region without listing its countries. Combines with `countries` rather than replacing it, and is also accepted under `excludedLocations`. Discoverable via `GET /v1/ads/targeting/search?dimension=geo&geoType=country_group`. 
+    attr_accessor :country_groups
+
     # Point-radius geo (Meta `geo_locations.custom_locations`). Use for targeting a radius around a specific lat/long when no Meta city/region key fits. `distanceUnit` is required. 
     attr_accessor :custom_locations
 
@@ -181,6 +184,7 @@ module Zernio
         :'regions' => :'regions',
         :'zips' => :'zips',
         :'metros' => :'metros',
+        :'country_groups' => :'countryGroups',
         :'custom_locations' => :'customLocations',
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
@@ -238,6 +242,7 @@ module Zernio
         :'regions' => :'Array<CtwaAdRequestBodyRegionsInner>',
         :'zips' => :'Array<CtwaAdRequestBodyZipsInner>',
         :'metros' => :'Array<CtwaAdRequestBodyZipsInner>',
+        :'country_groups' => :'Array<String>',
         :'custom_locations' => :'Array<CreateStandaloneAdRequestCustomLocationsInner>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
@@ -393,6 +398,12 @@ module Zernio
       if attributes.key?(:'metros')
         if (value = attributes[:'metros']).is_a?(Array)
           self.metros = value
+        end
+      end
+
+      if attributes.key?(:'country_groups')
+        if (value = attributes[:'country_groups']).is_a?(Array)
+          self.country_groups = value
         end
       end
 
@@ -910,6 +921,7 @@ module Zernio
           regions == o.regions &&
           zips == o.zips &&
           metros == o.metros &&
+          country_groups == o.country_groups &&
           custom_locations == o.custom_locations &&
           age_min == o.age_min &&
           age_max == o.age_max &&
@@ -938,7 +950,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [creative_features, tracking, account_id, ad_account_id, name, existing_post_id, object_story_id, whatsapp_phone_number, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, regional_regulation_identities].hash
+      [creative_features, tracking, account_id, ad_account_id, name, existing_post_id, object_story_id, whatsapp_phone_number, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, country_groups, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, regional_regulation_identities].hash
     end
 
     # Builds the object from hash

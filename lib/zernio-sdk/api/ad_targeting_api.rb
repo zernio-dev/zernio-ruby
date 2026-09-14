@@ -335,7 +335,7 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'dimension'] && !allowable_values.include?(opts[:'dimension'])
         fail ArgumentError, "invalid value for \"dimension\", must be one of #{allowable_values}"
       end
-      allowable_values = ["all", "country", "region", "city", "subcity", "neighborhood", "place", "zip", "metro_area", "geo_market"]
+      allowable_values = ["all", "country", "country_group", "region", "city", "subcity", "neighborhood", "place", "zip", "metro_area", "geo_market"]
       if @api_client.config.client_side_validation && opts[:'geo_type'] && !allowable_values.include?(opts[:'geo_type'])
         fail ArgumentError, "invalid value for \"geo_type\", must be one of #{allowable_values}"
       end
