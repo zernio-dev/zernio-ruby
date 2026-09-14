@@ -22,12 +22,20 @@ module Zernio
 
     attr_accessor :message
 
+    # Platform's extended detail for `code` (WhatsApp: Meta's `error_data.details`), when the platform sent one. Absent on SMS.
+    attr_accessor :details
+
+    # Link to the platform's documentation for `code`, when the platform sent one.
+    attr_accessor :href
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'code' => :'code',
         :'title' => :'title',
-        :'message' => :'message'
+        :'message' => :'message',
+        :'details' => :'details',
+        :'href' => :'href'
       }
     end
 
@@ -46,7 +54,9 @@ module Zernio
       {
         :'code' => :'Integer',
         :'title' => :'String',
-        :'message' => :'String'
+        :'message' => :'String',
+        :'details' => :'String',
+        :'href' => :'String'
       }
     end
 
@@ -83,6 +93,14 @@ module Zernio
       if attributes.key?(:'message')
         self.message = attributes[:'message']
       end
+
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
+      end
+
+      if attributes.key?(:'href')
+        self.href = attributes[:'href']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -107,7 +125,9 @@ module Zernio
       self.class == o.class &&
           code == o.code &&
           title == o.title &&
-          message == o.message
+          message == o.message &&
+          details == o.details &&
+          href == o.href
     end
 
     # @see the `==` method
@@ -119,7 +139,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, title, message].hash
+      [code, title, message, details, href].hash
     end
 
     # Builds the object from hash

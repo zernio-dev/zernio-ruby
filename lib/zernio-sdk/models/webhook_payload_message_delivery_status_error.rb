@@ -22,7 +22,13 @@ module Zernio
 
     attr_accessor :message
 
-    # Plain-language translation of `code` (e.g. for 131026, that the recipient has likely opted out of marketing messages while utility templates are unaffected). Null for unmapped codes; fall back to title/message. 
+    # Platform's extended detail for `code` (WhatsApp: Meta's `error_data.details`), when the platform sent one. Absent on SMS.
+    attr_accessor :details
+
+    # Link to the platform's documentation for `code`, when the platform sent one.
+    attr_accessor :href
+
+    # Plain-language translation of `code` (e.g. for 131026, that the recipient has likely opted out of marketing messages while utility templates are unaffected, or for 131031, that Meta restricted the WhatsApp Business Account). Null for unmapped codes; fall back to title/message. 
     attr_accessor :explanation
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -31,6 +37,8 @@ module Zernio
         :'code' => :'code',
         :'title' => :'title',
         :'message' => :'message',
+        :'details' => :'details',
+        :'href' => :'href',
         :'explanation' => :'explanation'
       }
     end
@@ -51,6 +59,8 @@ module Zernio
         :'code' => :'Integer',
         :'title' => :'String',
         :'message' => :'String',
+        :'details' => :'String',
+        :'href' => :'String',
         :'explanation' => :'String'
       }
     end
@@ -90,6 +100,14 @@ module Zernio
         self.message = attributes[:'message']
       end
 
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
+      end
+
+      if attributes.key?(:'href')
+        self.href = attributes[:'href']
+      end
+
       if attributes.key?(:'explanation')
         self.explanation = attributes[:'explanation']
       end
@@ -118,6 +136,8 @@ module Zernio
           code == o.code &&
           title == o.title &&
           message == o.message &&
+          details == o.details &&
+          href == o.href &&
           explanation == o.explanation
     end
 
@@ -130,7 +150,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, title, message, explanation].hash
+      [code, title, message, details, href, explanation].hash
     end
 
     # Builds the object from hash
