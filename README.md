@@ -1428,6 +1428,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetCommentAutomation200Response](docs/GetCommentAutomation200Response.md)
  - [Zernio::GetCommentAutomation200ResponseAutomation](docs/GetCommentAutomation200ResponseAutomation.md)
  - [Zernio::GetCommentAutomation200ResponseLogsInner](docs/GetCommentAutomation200ResponseLogsInner.md)
+ - [Zernio::GetCommentAutomation200ResponseLogsInnerPlatformError](docs/GetCommentAutomation200ResponseLogsInnerPlatformError.md)
  - [Zernio::GetConnectUrl200Response](docs/GetConnectUrl200Response.md)
  - [Zernio::GetContact200Response](docs/GetContact200Response.md)
  - [Zernio::GetContact200ResponseChannelsInner](docs/GetContact200ResponseChannelsInner.md)

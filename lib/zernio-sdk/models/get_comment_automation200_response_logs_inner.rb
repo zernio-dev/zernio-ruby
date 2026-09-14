@@ -42,6 +42,11 @@ module Zernio
     # DM error message if status is failed
     attr_accessor :error
 
+    attr_accessor :platform_error
+
+    # True when the failed send spent the comment's single Instagram private reply (subcode 1545133 or 2534023), the same rule as `details.privateReplyConsumed` on the private-reply endpoint. Absent on direct DMs, on Facebook, and on rows written before this field existed.
+    attr_accessor :private_reply_consumed
+
     # Outcome of the optional public reply on the triggering comment. 'skipped' if no commentReply was configured or if the DM failed (the public reply is not attempted in that case).
     attr_accessor :comment_reply_status
 
@@ -89,6 +94,8 @@ module Zernio
         :'commenter_is_follower' => :'commenterIsFollower',
         :'commenter_follower_count' => :'commenterFollowerCount',
         :'error' => :'error',
+        :'platform_error' => :'platformError',
+        :'private_reply_consumed' => :'privateReplyConsumed',
         :'comment_reply_status' => :'commentReplyStatus',
         :'comment_reply_error' => :'commentReplyError',
         :'next_due_at' => :'nextDueAt',
@@ -120,6 +127,8 @@ module Zernio
         :'commenter_is_follower' => :'Boolean',
         :'commenter_follower_count' => :'Integer',
         :'error' => :'String',
+        :'platform_error' => :'GetCommentAutomation200ResponseLogsInnerPlatformError',
+        :'private_reply_consumed' => :'Boolean',
         :'comment_reply_status' => :'String',
         :'comment_reply_error' => :'String',
         :'next_due_at' => :'Time',
@@ -191,6 +200,14 @@ module Zernio
 
       if attributes.key?(:'error')
         self.error = attributes[:'error']
+      end
+
+      if attributes.key?(:'platform_error')
+        self.platform_error = attributes[:'platform_error']
+      end
+
+      if attributes.key?(:'private_reply_consumed')
+        self.private_reply_consumed = attributes[:'private_reply_consumed']
       end
 
       if attributes.key?(:'comment_reply_status')
@@ -289,6 +306,8 @@ module Zernio
           commenter_is_follower == o.commenter_is_follower &&
           commenter_follower_count == o.commenter_follower_count &&
           error == o.error &&
+          platform_error == o.platform_error &&
+          private_reply_consumed == o.private_reply_consumed &&
           comment_reply_status == o.comment_reply_status &&
           comment_reply_error == o.comment_reply_error &&
           next_due_at == o.next_due_at &&
@@ -304,7 +323,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, comment_id, commenter_id, commenter_name, comment_text, source, status, audience_outcome, commenter_is_follower, commenter_follower_count, error, comment_reply_status, comment_reply_error, next_due_at, created_at].hash
+      [id, comment_id, commenter_id, commenter_name, comment_text, source, status, audience_outcome, commenter_is_follower, commenter_follower_count, error, platform_error, private_reply_consumed, comment_reply_status, comment_reply_error, next_due_at, created_at].hash
     end
 
     # Builds the object from hash

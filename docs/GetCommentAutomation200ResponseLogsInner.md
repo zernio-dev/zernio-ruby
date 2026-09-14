@@ -15,6 +15,8 @@
 | **commenter_is_follower** | **Boolean** | Follow relationship at decision time. Absent when Instagram would not tell us (the commenter never messaged the account). | [optional] |
 | **commenter_follower_count** | **Integer** |  | [optional] |
 | **error** | **String** | DM error message if status is failed | [optional] |
+| **platform_error** | [**GetCommentAutomation200ResponseLogsInnerPlatformError**](GetCommentAutomation200ResponseLogsInnerPlatformError.md) |  | [optional] |
+| **private_reply_consumed** | **Boolean** | True when the failed send spent the comment&#39;s single Instagram private reply (subcode 1545133 or 2534023), the same rule as &#x60;details.privateReplyConsumed&#x60; on the private-reply endpoint. Absent on direct DMs, on Facebook, and on rows written before this field existed. | [optional] |
 | **comment_reply_status** | **String** | Outcome of the optional public reply on the triggering comment. &#39;skipped&#39; if no commentReply was configured or if the DM failed (the public reply is not attempted in that case). | [optional] |
 | **comment_reply_error** | **String** | Public-reply error message if commentReplyStatus is failed | [optional] |
 | **next_due_at** | **Time** | When the next queued send fires. Present only while something is still pending. | [optional] |
@@ -37,6 +39,8 @@ instance = Zernio::GetCommentAutomation200ResponseLogsInner.new(
   commenter_is_follower: null,
   commenter_follower_count: null,
   error: null,
+  platform_error: null,
+  private_reply_consumed: null,
   comment_reply_status: null,
   comment_reply_error: null,
   next_due_at: null,
