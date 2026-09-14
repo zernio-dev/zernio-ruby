@@ -14,8 +14,10 @@ require 'date'
 require 'time'
 
 module Zernio
-  # The trending excerpt of the track, when TikTok provides one
+  # The trending excerpt of the track, when TikTok provides one. Its id is also accepted as musicSoundId.
   class ListTikTokCommercialMusic200ResponseTracksInnerClip < ApiModelBase
+    attr_accessor :id
+
     attr_accessor :duration_sec
 
     attr_accessor :preview_url
@@ -23,6 +25,7 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'duration_sec' => :'durationSec',
         :'preview_url' => :'previewUrl'
       }
@@ -41,6 +44,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
         :'duration_sec' => :'Integer',
         :'preview_url' => :'String'
       }
@@ -67,6 +71,10 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
 
       if attributes.key?(:'duration_sec')
         self.duration_sec = attributes[:'duration_sec']
@@ -97,6 +105,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           duration_sec == o.duration_sec &&
           preview_url == o.preview_url
     end
@@ -110,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [duration_sec, preview_url].hash
+      [id, duration_sec, preview_url].hash
     end
 
     # Builds the object from hash

@@ -4,7 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | The commercial_music_id to send as musicSoundId | [optional] |
+| **id** | **String** | The id to send as musicSoundId (the full track&#39;s song clip id). TikTok rejects the commercial music id itself at publish time. | [optional] |
+| **commercial_music_id** | **String** | TikTok&#39;s commercial_music_id, for reference only | [optional] |
 | **name** | **String** |  | [optional] |
 | **artist** | **String** |  | [optional] |
 | **duration_sec** | **Integer** |  | [optional] |
@@ -21,6 +22,7 @@ require 'zernio-sdk'
 
 instance = Zernio::ListTikTokCommercialMusic200ResponseTracksInner.new(
   id: null,
+  commercial_music_id: null,
   name: null,
   artist: null,
   duration_sec: null,

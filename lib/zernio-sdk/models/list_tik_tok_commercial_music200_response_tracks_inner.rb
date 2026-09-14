@@ -15,8 +15,11 @@ require 'time'
 
 module Zernio
   class ListTikTokCommercialMusic200ResponseTracksInner < ApiModelBase
-    # The commercial_music_id to send as musicSoundId
+    # The id to send as musicSoundId (the full track's song clip id). TikTok rejects the commercial music id itself at publish time.
     attr_accessor :id
+
+    # TikTok's commercial_music_id, for reference only
+    attr_accessor :commercial_music_id
 
     attr_accessor :name
 
@@ -40,6 +43,7 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
+        :'commercial_music_id' => :'commercialMusicId',
         :'name' => :'name',
         :'artist' => :'artist',
         :'duration_sec' => :'durationSec',
@@ -65,6 +69,7 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
+        :'commercial_music_id' => :'String',
         :'name' => :'String',
         :'artist' => :'String',
         :'duration_sec' => :'Integer',
@@ -100,6 +105,10 @@ module Zernio
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'commercial_music_id')
+        self.commercial_music_id = attributes[:'commercial_music_id']
       end
 
       if attributes.key?(:'name')
@@ -158,6 +167,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          commercial_music_id == o.commercial_music_id &&
           name == o.name &&
           artist == o.artist &&
           duration_sec == o.duration_sec &&
@@ -177,7 +187,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, artist, duration_sec, genres, preview_url, thumbnail_url, rank, clip].hash
+      [id, commercial_music_id, name, artist, duration_sec, genres, preview_url, thumbnail_url, rank, clip].hash
     end
 
     # Builds the object from hash

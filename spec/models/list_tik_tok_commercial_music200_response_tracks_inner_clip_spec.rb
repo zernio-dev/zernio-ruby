@@ -27,6 +27,12 @@ describe Zernio::ListTikTokCommercialMusic200ResponseTracksInnerClip do
     end
   end
 
+  describe 'test attribute "id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "duration_sec"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
