@@ -34,6 +34,7 @@ docs/AdFunnelCounts.md
 docs/AdInsightsApi.md
 docs/AdKeyword.md
 docs/AdKeywordMetrics.md
+docs/AdKeywordQuality.md
 docs/AdLibraryApi.md
 docs/AdMetrics.md
 docs/AdNegativeKeywordList.md
@@ -41,6 +42,7 @@ docs/AdNegativeKeywordListKeyword.md
 docs/AdPromotedObject.md
 docs/AdReviewStatus.md
 docs/AdSchedule.md
+docs/AdScheduleWindow.md
 docs/AdStatus.md
 docs/AdTargetingApi.md
 docs/AdTracking.md
@@ -658,6 +660,10 @@ docs/GetCall200Response.md
 docs/GetCallsUsage200Response.md
 docs/GetCallsUsage200ResponseGroupsInner.md
 docs/GetCallsUsage200ResponseTotals.md
+docs/GetCampaignAdSchedule200Response.md
+docs/GetCampaignAdSchedule200ResponsePerformance.md
+docs/GetCampaignAdSchedule200ResponsePerformanceByDayOfWeekInner.md
+docs/GetCampaignAdSchedule200ResponsePerformanceByHourInner.md
 docs/GetCampaignAnalytics202Response.md
 docs/GetCampaignBidding200Response.md
 docs/GetCampaignTargeting200Response.md
@@ -1765,6 +1771,9 @@ docs/UpdateBusinessAgentSettingsRequest.md
 docs/UpdateBusinessAgentSettingsRequestFollowup.md
 docs/UpdateBusinessAgentSettingsRequestHandoff.md
 docs/UpdateBusinessAgentSettingsRequestRollout.md
+docs/UpdateCampaignAdSchedule200Response.md
+docs/UpdateCampaignAdScheduleRequest.md
+docs/UpdateCampaignAdScheduleRequestScheduleInner.md
 docs/UpdateCampaignAssets200Response.md
 docs/UpdateCampaignAssetsRequest.md
 docs/UpdateCampaignTargeting200Response.md
@@ -2222,12 +2231,14 @@ lib/zernio-sdk/models/ad_engagement_counts.rb
 lib/zernio-sdk/models/ad_funnel_counts.rb
 lib/zernio-sdk/models/ad_keyword.rb
 lib/zernio-sdk/models/ad_keyword_metrics.rb
+lib/zernio-sdk/models/ad_keyword_quality.rb
 lib/zernio-sdk/models/ad_metrics.rb
 lib/zernio-sdk/models/ad_negative_keyword_list.rb
 lib/zernio-sdk/models/ad_negative_keyword_list_keyword.rb
 lib/zernio-sdk/models/ad_promoted_object.rb
 lib/zernio-sdk/models/ad_review_status.rb
 lib/zernio-sdk/models/ad_schedule.rb
+lib/zernio-sdk/models/ad_schedule_window.rb
 lib/zernio-sdk/models/ad_status.rb
 lib/zernio-sdk/models/ad_tracking.rb
 lib/zernio-sdk/models/ad_tree_ad_set.rb
@@ -2823,6 +2834,10 @@ lib/zernio-sdk/models/get_call200_response.rb
 lib/zernio-sdk/models/get_calls_usage200_response.rb
 lib/zernio-sdk/models/get_calls_usage200_response_groups_inner.rb
 lib/zernio-sdk/models/get_calls_usage200_response_totals.rb
+lib/zernio-sdk/models/get_campaign_ad_schedule200_response.rb
+lib/zernio-sdk/models/get_campaign_ad_schedule200_response_performance.rb
+lib/zernio-sdk/models/get_campaign_ad_schedule200_response_performance_by_day_of_week_inner.rb
+lib/zernio-sdk/models/get_campaign_ad_schedule200_response_performance_by_hour_inner.rb
 lib/zernio-sdk/models/get_campaign_analytics202_response.rb
 lib/zernio-sdk/models/get_campaign_bidding200_response.rb
 lib/zernio-sdk/models/get_campaign_targeting200_response.rb
@@ -3907,6 +3922,9 @@ lib/zernio-sdk/models/update_business_agent_settings_request.rb
 lib/zernio-sdk/models/update_business_agent_settings_request_followup.rb
 lib/zernio-sdk/models/update_business_agent_settings_request_handoff.rb
 lib/zernio-sdk/models/update_business_agent_settings_request_rollout.rb
+lib/zernio-sdk/models/update_campaign_ad_schedule200_response.rb
+lib/zernio-sdk/models/update_campaign_ad_schedule_request.rb
+lib/zernio-sdk/models/update_campaign_ad_schedule_request_schedule_inner.rb
 lib/zernio-sdk/models/update_campaign_assets200_response.rb
 lib/zernio-sdk/models/update_campaign_assets_request.rb
 lib/zernio-sdk/models/update_campaign_targeting200_response.rb
@@ -4342,6 +4360,7 @@ spec/models/ad_daily_metrics_spec.rb
 spec/models/ad_engagement_counts_spec.rb
 spec/models/ad_funnel_counts_spec.rb
 spec/models/ad_keyword_metrics_spec.rb
+spec/models/ad_keyword_quality_spec.rb
 spec/models/ad_keyword_spec.rb
 spec/models/ad_metrics_spec.rb
 spec/models/ad_negative_keyword_list_keyword_spec.rb
@@ -4349,6 +4368,7 @@ spec/models/ad_negative_keyword_list_spec.rb
 spec/models/ad_promoted_object_spec.rb
 spec/models/ad_review_status_spec.rb
 spec/models/ad_schedule_spec.rb
+spec/models/ad_schedule_window_spec.rb
 spec/models/ad_spec.rb
 spec/models/ad_status_spec.rb
 spec/models/ad_tracking_spec.rb
@@ -4945,6 +4965,10 @@ spec/models/get_call200_response_spec.rb
 spec/models/get_calls_usage200_response_groups_inner_spec.rb
 spec/models/get_calls_usage200_response_spec.rb
 spec/models/get_calls_usage200_response_totals_spec.rb
+spec/models/get_campaign_ad_schedule200_response_performance_by_day_of_week_inner_spec.rb
+spec/models/get_campaign_ad_schedule200_response_performance_by_hour_inner_spec.rb
+spec/models/get_campaign_ad_schedule200_response_performance_spec.rb
+spec/models/get_campaign_ad_schedule200_response_spec.rb
 spec/models/get_campaign_analytics202_response_spec.rb
 spec/models/get_campaign_bidding200_response_spec.rb
 spec/models/get_campaign_targeting200_response_devices_inner_spec.rb
@@ -6029,6 +6053,9 @@ spec/models/update_business_agent_settings_request_followup_spec.rb
 spec/models/update_business_agent_settings_request_handoff_spec.rb
 spec/models/update_business_agent_settings_request_rollout_spec.rb
 spec/models/update_business_agent_settings_request_spec.rb
+spec/models/update_campaign_ad_schedule200_response_spec.rb
+spec/models/update_campaign_ad_schedule_request_schedule_inner_spec.rb
+spec/models/update_campaign_ad_schedule_request_spec.rb
 spec/models/update_campaign_assets200_response_spec.rb
 spec/models/update_campaign_assets_request_spec.rb
 spec/models/update_campaign_targeting200_response_devices_inner_spec.rb

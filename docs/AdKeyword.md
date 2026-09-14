@@ -19,7 +19,8 @@
 | **match_type** | **String** |  | [optional] |
 | **status** | **String** |  | [optional] |
 | **negative** | **Boolean** |  | [optional] |
-| **quality_score** | **Integer** | Google Quality Score, 1-10. Null when unrated. | [optional] |
+| **quality_score** | **Integer** | Deprecated, use &#x60;quality.score&#x60;. Google Quality Score, 1-10. Null when unrated. | [optional] |
+| **quality** | [**AdKeywordQuality**](AdKeywordQuality.md) |  | [optional] |
 | **synced_at** | **Time** |  | [optional] |
 | **metrics** | [**AdKeywordMetrics**](AdKeywordMetrics.md) |  | [optional] |
 
@@ -45,6 +46,7 @@ instance = Zernio::AdKeyword.new(
   status: null,
   negative: null,
   quality_score: null,
+  quality: null,
   synced_at: null,
   metrics: null
 )

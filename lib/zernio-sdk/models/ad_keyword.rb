@@ -48,8 +48,10 @@ module Zernio
 
     attr_accessor :negative
 
-    # Google Quality Score, 1-10. Null when unrated.
+    # Deprecated, use `quality.score`. Google Quality Score, 1-10. Null when unrated.
     attr_accessor :quality_score
+
+    attr_accessor :quality
 
     attr_accessor :synced_at
 
@@ -96,6 +98,7 @@ module Zernio
         :'status' => :'status',
         :'negative' => :'negative',
         :'quality_score' => :'qualityScore',
+        :'quality' => :'quality',
         :'synced_at' => :'syncedAt',
         :'metrics' => :'metrics'
       }
@@ -130,6 +133,7 @@ module Zernio
         :'status' => :'String',
         :'negative' => :'Boolean',
         :'quality_score' => :'Integer',
+        :'quality' => :'AdKeywordQuality',
         :'synced_at' => :'Time',
         :'metrics' => :'AdKeywordMetrics'
       }
@@ -227,6 +231,10 @@ module Zernio
         self.quality_score = attributes[:'quality_score']
       end
 
+      if attributes.key?(:'quality')
+        self.quality = attributes[:'quality']
+      end
+
       if attributes.key?(:'synced_at')
         self.synced_at = attributes[:'synced_at']
       end
@@ -308,6 +316,7 @@ module Zernio
           status == o.status &&
           negative == o.negative &&
           quality_score == o.quality_score &&
+          quality == o.quality &&
           synced_at == o.synced_at &&
           metrics == o.metrics
     end
@@ -321,7 +330,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, profile_id, platform, ad_account_id, campaign_id, campaign_name, campaign_status, ad_set_id, ad_set_name, ad_set_status, keyword, match_type, status, negative, quality_score, synced_at, metrics].hash
+      [id, account_id, profile_id, platform, ad_account_id, campaign_id, campaign_name, campaign_status, ad_set_id, ad_set_name, ad_set_status, keyword, match_type, status, negative, quality_score, quality, synced_at, metrics].hash
     end
 
     # Builds the object from hash

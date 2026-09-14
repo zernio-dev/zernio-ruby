@@ -24,6 +24,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Get live ad-set details |
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
+| [**get_campaign_ad_schedule**](AdCampaignsApi.md#get_campaign_ad_schedule) | **GET** /v1/ads/campaigns/{campaignId}/ad-schedule | Read a campaign&#39;s ad schedule (dayparting) |
 | [**get_campaign_bidding**](AdCampaignsApi.md#get_campaign_bidding) | **GET** /v1/ads/campaigns/{campaignId}/bidding | Read a campaign&#39;s current bidding |
 | [**get_campaign_targeting**](AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign&#39;s device, location, and language targeting |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
@@ -50,6 +51,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_ad_set_status**](AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set |
 | [**update_ad_status**](AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
 | [**update_bid_strategy**](AdCampaignsApi.md#update_bid_strategy) | **PATCH** /v1/ads/bid-strategies/{strategyId} | Update portfolio bid strategy |
+| [**update_campaign_ad_schedule**](AdCampaignsApi.md#update_campaign_ad_schedule) | **PUT** /v1/ads/campaigns/{campaignId}/ad-schedule | Replace a campaign&#39;s ad schedule (dayparting) |
 | [**update_campaign_assets**](AdCampaignsApi.md#update_campaign_assets) | **PUT** /v1/ads/campaigns/{campaignId}/assets | Update campaign assets |
 | [**update_campaign_targeting**](AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign&#39;s device, location, or language targeting |
 
@@ -1519,6 +1521,87 @@ end
 ### Return type
 
 [**AdsTimelineResponse**](AdsTimelineResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_campaign_ad_schedule
+
+> <GetCampaignAdSchedule200Response> get_campaign_ad_schedule(campaign_id, opts)
+
+Read a campaign's ad schedule (dayparting)
+
+The windows a Google campaign serves in, with the bid modifier on each, plus the criterion ids Google minted for them.  An EMPTY `schedule` is meaningful and is not a failed lookup: Google has no \"all day\" criterion, so a campaign with no ad schedule serves around the clock. `servesAroundTheClock` states that explicitly.  Set `includePerformance=true` to also get delivery split by day of week and by hour, which is the evidence for deciding what the schedule should be. It is one extra Google call segmented by both dimensions at once, so the two views always agree.  Google Ads only. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Numeric Google platform campaign id.
+opts = {
+  platform: 'google', # String | Disambiguates the campaign id when the connection spans platforms.
+  include_performance: true, # Boolean | Also return delivery by day of week and by hour. Costs one extra Google call.
+  window_days: 56, # Integer | Trailing window for the performance split. Ignored when fromDate and toDate are both given.
+  from_date: Date.parse('2013-10-20'), # Date | Start of an explicit performance range (YYYY-MM-DD). Use together with toDate.
+  to_date: Date.parse('2013-10-20') # Date | End of an explicit performance range (YYYY-MM-DD). Must be on or after fromDate.
+}
+
+begin
+  # Read a campaign's ad schedule (dayparting)
+  result = api_instance.get_campaign_ad_schedule(campaign_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_campaign_ad_schedule: #{e}"
+end
+```
+
+#### Using the get_campaign_ad_schedule_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCampaignAdSchedule200Response>, Integer, Hash)> get_campaign_ad_schedule_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # Read a campaign's ad schedule (dayparting)
+  data, status_code, headers = api_instance.get_campaign_ad_schedule_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCampaignAdSchedule200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_campaign_ad_schedule_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Numeric Google platform campaign id. |  |
+| **platform** | **String** | Disambiguates the campaign id when the connection spans platforms. | [optional] |
+| **include_performance** | **Boolean** | Also return delivery by day of week and by hour. Costs one extra Google call. | [optional] |
+| **window_days** | **Integer** | Trailing window for the performance split. Ignored when fromDate and toDate are both given. | [optional][default to 30] |
+| **from_date** | **Date** | Start of an explicit performance range (YYYY-MM-DD). Use together with toDate. | [optional] |
+| **to_date** | **Date** | End of an explicit performance range (YYYY-MM-DD). Must be on or after fromDate. | [optional] |
+
+### Return type
+
+[**GetCampaignAdSchedule200Response**](GetCampaignAdSchedule200Response.md)
 
 ### Authorization
 
@@ -3467,6 +3550,77 @@ end
 ### Return type
 
 [**UpdateBidStrategy200Response**](UpdateBidStrategy200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_campaign_ad_schedule
+
+> <UpdateCampaignAdSchedule200Response> update_campaign_ad_schedule(campaign_id, update_campaign_ad_schedule_request)
+
+Replace a campaign's ad schedule (dayparting)
+
+Replaces the campaign's whole ad schedule with the windows you send. This is a REPLACE, not a merge: windows you leave out stop serving.  Send `schedule: []` to clear dayparting, which returns the campaign to serving around the clock.  Google rules enforced here, so you get a named field instead of a criterion error: at most 6 windows per day, a window must end after it starts, windows on the same day may not overlap, `endHour` 24 is midnight and cannot carry minutes, and minutes are quarter-hours only (0, 15, 30, 45). `bidModifier` is 0.1-10.0; Google's 0 means \"off\" for devices only, so a window is switched off by leaving it out.  Windows are half-open (Google is exclusive of the end minute), so 09:00-12:00 and 12:00-17:00 on the same day are adjacent and both valid.  Google cannot edit an ad schedule in place (every AdScheduleInfo field is prohibited on update), so this removes the live criteria and creates the new ones in a single atomic mutate. The response is read back from Google and carries the new criterion ids. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Numeric Google platform campaign id.
+update_campaign_ad_schedule_request = Zernio::UpdateCampaignAdScheduleRequest.new({schedule: [Zernio::UpdateCampaignAdScheduleRequestScheduleInner.new({day_of_week: 'MONDAY', start_hour: 37, end_hour: 37})]}) # UpdateCampaignAdScheduleRequest | 
+
+begin
+  # Replace a campaign's ad schedule (dayparting)
+  result = api_instance.update_campaign_ad_schedule(campaign_id, update_campaign_ad_schedule_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_campaign_ad_schedule: #{e}"
+end
+```
+
+#### Using the update_campaign_ad_schedule_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateCampaignAdSchedule200Response>, Integer, Hash)> update_campaign_ad_schedule_with_http_info(campaign_id, update_campaign_ad_schedule_request)
+
+```ruby
+begin
+  # Replace a campaign's ad schedule (dayparting)
+  data, status_code, headers = api_instance.update_campaign_ad_schedule_with_http_info(campaign_id, update_campaign_ad_schedule_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateCampaignAdSchedule200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_campaign_ad_schedule_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Numeric Google platform campaign id. |  |
+| **update_campaign_ad_schedule_request** | [**UpdateCampaignAdScheduleRequest**](UpdateCampaignAdScheduleRequest.md) |  |  |
+
+### Return type
+
+[**UpdateCampaignAdSchedule200Response**](UpdateCampaignAdSchedule200Response.md)
 
 ### Authorization
 

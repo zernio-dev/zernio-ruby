@@ -309,6 +309,23 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for get_campaign_ad_schedule
+  # Read a campaign&#39;s ad schedule (dayparting)
+  # The windows a Google campaign serves in, with the bid modifier on each, plus the criterion ids Google minted for them.  An EMPTY &#x60;schedule&#x60; is meaningful and is not a failed lookup: Google has no \&quot;all day\&quot; criterion, so a campaign with no ad schedule serves around the clock. &#x60;servesAroundTheClock&#x60; states that explicitly.  Set &#x60;includePerformance&#x3D;true&#x60; to also get delivery split by day of week and by hour, which is the evidence for deciding what the schedule should be. It is one extra Google call segmented by both dimensions at once, so the two views always agree.  Google Ads only. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read. 
+  # @param campaign_id Numeric Google platform campaign id.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :platform Disambiguates the campaign id when the connection spans platforms.
+  # @option opts [Boolean] :include_performance Also return delivery by day of week and by hour. Costs one extra Google call.
+  # @option opts [Integer] :window_days Trailing window for the performance split. Ignored when fromDate and toDate are both given.
+  # @option opts [Date] :from_date Start of an explicit performance range (YYYY-MM-DD). Use together with toDate.
+  # @option opts [Date] :to_date End of an explicit performance range (YYYY-MM-DD). Must be on or after fromDate.
+  # @return [GetCampaignAdSchedule200Response]
+  describe 'get_campaign_ad_schedule test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_campaign_bidding
   # Read a campaign&#39;s current bidding
   # Read of the campaign&#39;s bidding strategy on Google, cached for the quota window, for pre-filling the bid strategy block before a PUT to /v1/ads/campaigns/{campaignId}. Google Ads only; &#x60;platform&#x60; is required and rejected when it is anything else, since a &#x60;campaignId&#x60; is not globally unique. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.  Maps Google&#39;s bidding strategy onto the same triplet PUT accepts: &#x60;LOWEST_COST_WITHOUT_CAP&#x60; (Maximize Conversions, no target), &#x60;COST_CAP&#x60; + &#x60;bidAmount&#x60; (Target CPA), &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60; + &#x60;roasAverageFloor&#x60; (Target ROAS), &#x60;LOWEST_COST_WITH_BID_CAP&#x60; + &#x60;bidAmount&#x60; (Maximize Clicks with a CPC ceiling). A campaign on a portfolio strategy returns &#x60;portfolio&#x60; (id + name) and &#x60;bidSpec.portfolioBidStrategyId&#x60; instead of the triplet. Anything else (Manual CPC, Target Impression Share, ...) returns &#x60;bidSpec: null&#x60;; show &#x60;biddingStrategyType&#x60; as-is. 
@@ -682,6 +699,19 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateBidStrategy200Response]
   describe 'update_bid_strategy test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_campaign_ad_schedule
+  # Replace a campaign&#39;s ad schedule (dayparting)
+  # Replaces the campaign&#39;s whole ad schedule with the windows you send. This is a REPLACE, not a merge: windows you leave out stop serving.  Send &#x60;schedule: []&#x60; to clear dayparting, which returns the campaign to serving around the clock.  Google rules enforced here, so you get a named field instead of a criterion error: at most 6 windows per day, a window must end after it starts, windows on the same day may not overlap, &#x60;endHour&#x60; 24 is midnight and cannot carry minutes, and minutes are quarter-hours only (0, 15, 30, 45). &#x60;bidModifier&#x60; is 0.1-10.0; Google&#39;s 0 means \&quot;off\&quot; for devices only, so a window is switched off by leaving it out.  Windows are half-open (Google is exclusive of the end minute), so 09:00-12:00 and 12:00-17:00 on the same day are adjacent and both valid.  Google cannot edit an ad schedule in place (every AdScheduleInfo field is prohibited on update), so this removes the live criteria and creates the new ones in a single atomic mutate. The response is read back from Google and carries the new criterion ids. 
+  # @param campaign_id Numeric Google platform campaign id.
+  # @param update_campaign_ad_schedule_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateCampaignAdSchedule200Response]
+  describe 'update_campaign_ad_schedule test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

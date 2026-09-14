@@ -1553,6 +1553,96 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Read a campaign's ad schedule (dayparting)
+    # The windows a Google campaign serves in, with the bid modifier on each, plus the criterion ids Google minted for them.  An EMPTY `schedule` is meaningful and is not a failed lookup: Google has no \"all day\" criterion, so a campaign with no ad schedule serves around the clock. `servesAroundTheClock` states that explicitly.  Set `includePerformance=true` to also get delivery split by day of week and by hour, which is the evidence for deciding what the schedule should be. It is one extra Google call segmented by both dimensions at once, so the two views always agree.  Google Ads only. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read. 
+    # @param campaign_id [String] Numeric Google platform campaign id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Disambiguates the campaign id when the connection spans platforms.
+    # @option opts [Boolean] :include_performance Also return delivery by day of week and by hour. Costs one extra Google call.
+    # @option opts [Integer] :window_days Trailing window for the performance split. Ignored when fromDate and toDate are both given. (default to 30)
+    # @option opts [Date] :from_date Start of an explicit performance range (YYYY-MM-DD). Use together with toDate.
+    # @option opts [Date] :to_date End of an explicit performance range (YYYY-MM-DD). Must be on or after fromDate.
+    # @return [GetCampaignAdSchedule200Response]
+    def get_campaign_ad_schedule(campaign_id, opts = {})
+      data, _status_code, _headers = get_campaign_ad_schedule_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Read a campaign&#39;s ad schedule (dayparting)
+    # The windows a Google campaign serves in, with the bid modifier on each, plus the criterion ids Google minted for them.  An EMPTY &#x60;schedule&#x60; is meaningful and is not a failed lookup: Google has no \&quot;all day\&quot; criterion, so a campaign with no ad schedule serves around the clock. &#x60;servesAroundTheClock&#x60; states that explicitly.  Set &#x60;includePerformance&#x3D;true&#x60; to also get delivery split by day of week and by hour, which is the evidence for deciding what the schedule should be. It is one extra Google call segmented by both dimensions at once, so the two views always agree.  Google Ads only. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read. 
+    # @param campaign_id [String] Numeric Google platform campaign id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Disambiguates the campaign id when the connection spans platforms.
+    # @option opts [Boolean] :include_performance Also return delivery by day of week and by hour. Costs one extra Google call.
+    # @option opts [Integer] :window_days Trailing window for the performance split. Ignored when fromDate and toDate are both given. (default to 30)
+    # @option opts [Date] :from_date Start of an explicit performance range (YYYY-MM-DD). Use together with toDate.
+    # @option opts [Date] :to_date End of an explicit performance range (YYYY-MM-DD). Must be on or after fromDate.
+    # @return [Array<(GetCampaignAdSchedule200Response, Integer, Hash)>] GetCampaignAdSchedule200Response data, response status code and response headers
+    def get_campaign_ad_schedule_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.get_campaign_ad_schedule ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.get_campaign_ad_schedule"
+      end
+      allowable_values = ["google"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'window_days'].nil? && opts[:'window_days'] > 90
+        fail ArgumentError, 'invalid value for "opts[:"window_days"]" when calling AdCampaignsApi.get_campaign_ad_schedule, must be smaller than or equal to 90.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'window_days'].nil? && opts[:'window_days'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"window_days"]" when calling AdCampaignsApi.get_campaign_ad_schedule, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/ad-schedule'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'includePerformance'] = opts[:'include_performance'] if !opts[:'include_performance'].nil?
+      query_params[:'windowDays'] = opts[:'window_days'] if !opts[:'window_days'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetCampaignAdSchedule200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.get_campaign_ad_schedule",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#get_campaign_ad_schedule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Read a campaign's current bidding
     # Read of the campaign's bidding strategy on Google, cached for the quota window, for pre-filling the bid strategy block before a PUT to /v1/ads/campaigns/{campaignId}. Google Ads only; `platform` is required and rejected when it is anything else, since a `campaignId` is not globally unique. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.  Maps Google's bidding strategy onto the same triplet PUT accepts: `LOWEST_COST_WITHOUT_CAP` (Maximize Conversions, no target), `COST_CAP` + `bidAmount` (Target CPA), `LOWEST_COST_WITH_MIN_ROAS` + `roasAverageFloor` (Target ROAS), `LOWEST_COST_WITH_BID_CAP` + `bidAmount` (Maximize Clicks with a CPC ceiling). A campaign on a portfolio strategy returns `portfolio` (id + name) and `bidSpec.portfolioBidStrategyId` instead of the triplet. Anything else (Manual CPC, Target Impression Share, ...) returns `bidSpec: null`; show `biddingStrategyType` as-is. 
     # @param campaign_id [String] Numeric Google platform campaign id.
@@ -3643,6 +3733,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdCampaignsApi#update_bid_strategy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Replace a campaign's ad schedule (dayparting)
+    # Replaces the campaign's whole ad schedule with the windows you send. This is a REPLACE, not a merge: windows you leave out stop serving.  Send `schedule: []` to clear dayparting, which returns the campaign to serving around the clock.  Google rules enforced here, so you get a named field instead of a criterion error: at most 6 windows per day, a window must end after it starts, windows on the same day may not overlap, `endHour` 24 is midnight and cannot carry minutes, and minutes are quarter-hours only (0, 15, 30, 45). `bidModifier` is 0.1-10.0; Google's 0 means \"off\" for devices only, so a window is switched off by leaving it out.  Windows are half-open (Google is exclusive of the end minute), so 09:00-12:00 and 12:00-17:00 on the same day are adjacent and both valid.  Google cannot edit an ad schedule in place (every AdScheduleInfo field is prohibited on update), so this removes the live criteria and creates the new ones in a single atomic mutate. The response is read back from Google and carries the new criterion ids. 
+    # @param campaign_id [String] Numeric Google platform campaign id.
+    # @param update_campaign_ad_schedule_request [UpdateCampaignAdScheduleRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateCampaignAdSchedule200Response]
+    def update_campaign_ad_schedule(campaign_id, update_campaign_ad_schedule_request, opts = {})
+      data, _status_code, _headers = update_campaign_ad_schedule_with_http_info(campaign_id, update_campaign_ad_schedule_request, opts)
+      data
+    end
+
+    # Replace a campaign&#39;s ad schedule (dayparting)
+    # Replaces the campaign&#39;s whole ad schedule with the windows you send. This is a REPLACE, not a merge: windows you leave out stop serving.  Send &#x60;schedule: []&#x60; to clear dayparting, which returns the campaign to serving around the clock.  Google rules enforced here, so you get a named field instead of a criterion error: at most 6 windows per day, a window must end after it starts, windows on the same day may not overlap, &#x60;endHour&#x60; 24 is midnight and cannot carry minutes, and minutes are quarter-hours only (0, 15, 30, 45). &#x60;bidModifier&#x60; is 0.1-10.0; Google&#39;s 0 means \&quot;off\&quot; for devices only, so a window is switched off by leaving it out.  Windows are half-open (Google is exclusive of the end minute), so 09:00-12:00 and 12:00-17:00 on the same day are adjacent and both valid.  Google cannot edit an ad schedule in place (every AdScheduleInfo field is prohibited on update), so this removes the live criteria and creates the new ones in a single atomic mutate. The response is read back from Google and carries the new criterion ids. 
+    # @param campaign_id [String] Numeric Google platform campaign id.
+    # @param update_campaign_ad_schedule_request [UpdateCampaignAdScheduleRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateCampaignAdSchedule200Response, Integer, Hash)>] UpdateCampaignAdSchedule200Response data, response status code and response headers
+    def update_campaign_ad_schedule_with_http_info(campaign_id, update_campaign_ad_schedule_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_campaign_ad_schedule ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.update_campaign_ad_schedule"
+      end
+      # verify the required parameter 'update_campaign_ad_schedule_request' is set
+      if @api_client.config.client_side_validation && update_campaign_ad_schedule_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_campaign_ad_schedule_request' when calling AdCampaignsApi.update_campaign_ad_schedule"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/ad-schedule'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_campaign_ad_schedule_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateCampaignAdSchedule200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.update_campaign_ad_schedule",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#update_campaign_ad_schedule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

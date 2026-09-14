@@ -180,6 +180,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**get_ad_set_details**](docs/AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Get live ad-set details
 *Zernio::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Zernio::AdCampaignsApi* | [**get_ads_timeline**](docs/AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics
+*Zernio::AdCampaignsApi* | [**get_campaign_ad_schedule**](docs/AdCampaignsApi.md#get_campaign_ad_schedule) | **GET** /v1/ads/campaigns/{campaignId}/ad-schedule | Read a campaign's ad schedule (dayparting)
 *Zernio::AdCampaignsApi* | [**get_campaign_bidding**](docs/AdCampaignsApi.md#get_campaign_bidding) | **GET** /v1/ads/campaigns/{campaignId}/bidding | Read a campaign's current bidding
 *Zernio::AdCampaignsApi* | [**get_campaign_targeting**](docs/AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign's device, location, and language targeting
 *Zernio::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
@@ -206,6 +207,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
 *Zernio::AdCampaignsApi* | [**update_ad_status**](docs/AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
 *Zernio::AdCampaignsApi* | [**update_bid_strategy**](docs/AdCampaignsApi.md#update_bid_strategy) | **PATCH** /v1/ads/bid-strategies/{strategyId} | Update portfolio bid strategy
+*Zernio::AdCampaignsApi* | [**update_campaign_ad_schedule**](docs/AdCampaignsApi.md#update_campaign_ad_schedule) | **PUT** /v1/ads/campaigns/{campaignId}/ad-schedule | Replace a campaign's ad schedule (dayparting)
 *Zernio::AdCampaignsApi* | [**update_campaign_assets**](docs/AdCampaignsApi.md#update_campaign_assets) | **PUT** /v1/ads/campaigns/{campaignId}/assets | Update campaign assets
 *Zernio::AdCampaignsApi* | [**update_campaign_targeting**](docs/AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign's device, location, or language targeting
 *Zernio::AdCreativesApi* | [**create_ad_creative**](docs/AdCreativesApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative
@@ -823,12 +825,14 @@ Class | Method | HTTP request | Description
  - [Zernio::AdFunnelCounts](docs/AdFunnelCounts.md)
  - [Zernio::AdKeyword](docs/AdKeyword.md)
  - [Zernio::AdKeywordMetrics](docs/AdKeywordMetrics.md)
+ - [Zernio::AdKeywordQuality](docs/AdKeywordQuality.md)
  - [Zernio::AdMetrics](docs/AdMetrics.md)
  - [Zernio::AdNegativeKeywordList](docs/AdNegativeKeywordList.md)
  - [Zernio::AdNegativeKeywordListKeyword](docs/AdNegativeKeywordListKeyword.md)
  - [Zernio::AdPromotedObject](docs/AdPromotedObject.md)
  - [Zernio::AdReviewStatus](docs/AdReviewStatus.md)
  - [Zernio::AdSchedule](docs/AdSchedule.md)
+ - [Zernio::AdScheduleWindow](docs/AdScheduleWindow.md)
  - [Zernio::AdStatus](docs/AdStatus.md)
  - [Zernio::AdTracking](docs/AdTracking.md)
  - [Zernio::AdTreeAdSet](docs/AdTreeAdSet.md)
@@ -1424,6 +1428,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetCallsUsage200Response](docs/GetCallsUsage200Response.md)
  - [Zernio::GetCallsUsage200ResponseGroupsInner](docs/GetCallsUsage200ResponseGroupsInner.md)
  - [Zernio::GetCallsUsage200ResponseTotals](docs/GetCallsUsage200ResponseTotals.md)
+ - [Zernio::GetCampaignAdSchedule200Response](docs/GetCampaignAdSchedule200Response.md)
+ - [Zernio::GetCampaignAdSchedule200ResponsePerformance](docs/GetCampaignAdSchedule200ResponsePerformance.md)
+ - [Zernio::GetCampaignAdSchedule200ResponsePerformanceByDayOfWeekInner](docs/GetCampaignAdSchedule200ResponsePerformanceByDayOfWeekInner.md)
+ - [Zernio::GetCampaignAdSchedule200ResponsePerformanceByHourInner](docs/GetCampaignAdSchedule200ResponsePerformanceByHourInner.md)
  - [Zernio::GetCampaignAnalytics202Response](docs/GetCampaignAnalytics202Response.md)
  - [Zernio::GetCampaignBidding200Response](docs/GetCampaignBidding200Response.md)
  - [Zernio::GetCampaignTargeting200Response](docs/GetCampaignTargeting200Response.md)
@@ -2508,6 +2516,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateBusinessAgentSettingsRequestFollowup](docs/UpdateBusinessAgentSettingsRequestFollowup.md)
  - [Zernio::UpdateBusinessAgentSettingsRequestHandoff](docs/UpdateBusinessAgentSettingsRequestHandoff.md)
  - [Zernio::UpdateBusinessAgentSettingsRequestRollout](docs/UpdateBusinessAgentSettingsRequestRollout.md)
+ - [Zernio::UpdateCampaignAdSchedule200Response](docs/UpdateCampaignAdSchedule200Response.md)
+ - [Zernio::UpdateCampaignAdScheduleRequest](docs/UpdateCampaignAdScheduleRequest.md)
+ - [Zernio::UpdateCampaignAdScheduleRequestScheduleInner](docs/UpdateCampaignAdScheduleRequestScheduleInner.md)
  - [Zernio::UpdateCampaignAssets200Response](docs/UpdateCampaignAssets200Response.md)
  - [Zernio::UpdateCampaignAssetsRequest](docs/UpdateCampaignAssetsRequest.md)
  - [Zernio::UpdateCampaignTargeting200Response](docs/UpdateCampaignTargeting200Response.md)
