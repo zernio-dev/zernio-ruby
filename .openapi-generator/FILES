@@ -217,6 +217,7 @@ docs/ChannelPickerChannelsInner.md
 docs/ChannelPickerTeam.md
 docs/CheckPhoneNumberAvailability200Response.md
 docs/CheckPhoneNumberAvailability200ResponseAreaOptionsInner.md
+docs/CheckPhoneNumberAvailability200ResponseSoldOutAreasInner.md
 docs/CheckPhoneNumberPortability200Response.md
 docs/CheckPhoneNumberPortability200ResponseResultsInner.md
 docs/CheckPhoneNumberPortabilityRequest.md
@@ -2411,6 +2412,7 @@ lib/zernio-sdk/models/channel_picker_channels_inner.rb
 lib/zernio-sdk/models/channel_picker_team.rb
 lib/zernio-sdk/models/check_phone_number_availability200_response.rb
 lib/zernio-sdk/models/check_phone_number_availability200_response_area_options_inner.rb
+lib/zernio-sdk/models/check_phone_number_availability200_response_sold_out_areas_inner.rb
 lib/zernio-sdk/models/check_phone_number_portability200_response.rb
 lib/zernio-sdk/models/check_phone_number_portability200_response_results_inner.rb
 lib/zernio-sdk/models/check_phone_number_portability_request.rb
@@ -4545,6 +4547,7 @@ spec/models/channel_picker_channels_inner_spec.rb
 spec/models/channel_picker_spec.rb
 spec/models/channel_picker_team_spec.rb
 spec/models/check_phone_number_availability200_response_area_options_inner_spec.rb
+spec/models/check_phone_number_availability200_response_sold_out_areas_inner_spec.rb
 spec/models/check_phone_number_availability200_response_spec.rb
 spec/models/check_phone_number_portability200_response_results_inner_spec.rb
 spec/models/check_phone_number_portability200_response_spec.rb

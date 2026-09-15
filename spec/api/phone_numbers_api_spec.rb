@@ -96,7 +96,7 @@ describe 'PhoneNumbersApi' do
 
   # unit tests for create_phone_number_stock_watch
   # Watch an out-of-stock country
-  # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the &#x60;phone_number.stock_available&#x60; webhook. Stock is re-checked every 6h. One watch per country and number type; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 watches at once.  Countries and types marked &#x60;fulfilment: request&#x60; by GET /v1/phone-numbers/countries can also be watched, but anything with &#x60;preOrderable: true&#x60; does not need a watch: submit KYC and the carrier sources the number to order. 
+  # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the &#x60;phone_number.stock_available&#x60; webhook. Stock is re-checked every 6h. One watch per country and number type; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 watches at once.  Countries and types marked &#x60;fulfilment: request&#x60; by GET /v1/phone-numbers/countries can also be watched, but anything with &#x60;preOrderable: true&#x60; does not need a watch: submit KYC and the carrier sources the number to order.  Pass &#x60;areaCode&#x60; (with &#x60;numberType&#x60;) to watch one sold-out area, for example an entry of &#x60;soldOutAreas&#x60; from GET /v1/phone-numbers/availability. Area stock is checked live on the same 6h cadence. 
   # @param create_phone_number_stock_watch_request 
   # @param [Hash] opts the optional parameters
   # @return [PhoneNumberStockWatch]

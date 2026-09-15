@@ -33,6 +33,9 @@ module Zernio
     # Live inventory grouped by area code. For US and CA this is the full country inventory (every area code with stock, recognizable metros listed first, then alphabetical); other countries are ordered largest stock first; they list the areas in the latest inventory page (up to 500 numbers, which for most countries is the entire pool). Empty when out of stock (or the area lookup failed). Pass a chosen `ndc` as `areaCode` on POST /v1/phone-numbers/purchase (or on the KYC submit for regulated countries) to require that area. 
     attr_accessor :area_options
 
+    # Areas that had stock in the last 90 days and have none now. Pass one as `areaCode` with `preOrder: true` on the KYC submit when `preOrderable` is true, or watch it with POST /v1/phone-numbers/stock-watches. 
+    attr_accessor :sold_out_areas
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -64,7 +67,8 @@ module Zernio
         :'pre_orderable' => :'preOrderable',
         :'address_constraint' => :'addressConstraint',
         :'areas' => :'areas',
-        :'area_options' => :'areaOptions'
+        :'area_options' => :'areaOptions',
+        :'sold_out_areas' => :'soldOutAreas'
       }
     end
 
@@ -87,7 +91,8 @@ module Zernio
         :'pre_orderable' => :'Boolean',
         :'address_constraint' => :'String',
         :'areas' => :'Array<String>',
-        :'area_options' => :'Array<CheckPhoneNumberAvailability200ResponseAreaOptionsInner>'
+        :'area_options' => :'Array<CheckPhoneNumberAvailability200ResponseAreaOptionsInner>',
+        :'sold_out_areas' => :'Array<CheckPhoneNumberAvailability200ResponseSoldOutAreasInner>'
       }
     end
 
@@ -144,6 +149,12 @@ module Zernio
           self.area_options = value
         end
       end
+
+      if attributes.key?(:'sold_out_areas')
+        if (value = attributes[:'sold_out_areas']).is_a?(Array)
+          self.sold_out_areas = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -184,7 +195,8 @@ module Zernio
           pre_orderable == o.pre_orderable &&
           address_constraint == o.address_constraint &&
           areas == o.areas &&
-          area_options == o.area_options
+          area_options == o.area_options &&
+          sold_out_areas == o.sold_out_areas
     end
 
     # @see the `==` method
@@ -196,7 +208,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country, number_type, available, pre_orderable, address_constraint, areas, area_options].hash
+      [country, number_type, available, pre_orderable, address_constraint, areas, area_options, sold_out_areas].hash
     end
 
     # Builds the object from hash

@@ -25,6 +25,9 @@ module Zernio
     # The watched number type, or null when the watch covers every type in the country.
     attr_accessor :number_type
 
+    # The watched area code (NDC), or null when the watch covers every area.
+    attr_accessor :area_code
+
     attr_accessor :created_at
 
     class EnumAttributeValidator
@@ -56,6 +59,7 @@ module Zernio
         :'country' => :'country',
         :'country_name' => :'countryName',
         :'number_type' => :'numberType',
+        :'area_code' => :'areaCode',
         :'created_at' => :'createdAt'
       }
     end
@@ -77,6 +81,7 @@ module Zernio
         :'country' => :'String',
         :'country_name' => :'String',
         :'number_type' => :'String',
+        :'area_code' => :'String',
         :'created_at' => :'Time'
       }
     end
@@ -85,6 +90,7 @@ module Zernio
     def self.openapi_nullable
       Set.new([
         :'number_type',
+        :'area_code',
       ])
     end
 
@@ -126,6 +132,10 @@ module Zernio
         self.number_type = attributes[:'number_type']
       else
         self.number_type = nil
+      end
+
+      if attributes.key?(:'area_code')
+        self.area_code = attributes[:'area_code']
       end
 
       if attributes.key?(:'created_at')
@@ -231,6 +241,7 @@ module Zernio
           country == o.country &&
           country_name == o.country_name &&
           number_type == o.number_type &&
+          area_code == o.area_code &&
           created_at == o.created_at
     end
 
@@ -243,7 +254,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, country, country_name, number_type, created_at].hash
+      [id, country, country_name, number_type, area_code, created_at].hash
     end
 
     # Builds the object from hash

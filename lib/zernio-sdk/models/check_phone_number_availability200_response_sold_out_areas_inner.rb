@@ -14,26 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class WebhookPayloadPhoneNumberStockAvailableStock < ApiModelBase
-    # ISO 3166-1 alpha-2 country code of the watched country.
-    attr_accessor :country
+  class CheckPhoneNumberAvailability200ResponseSoldOutAreasInner < ApiModelBase
+    # Area code (national destination code).
+    attr_accessor :ndc
 
-    # Number types deliverable at sweep time. Only types with stock are listed.
-    attr_accessor :types
+    # Area name.
+    attr_accessor :name
 
-    # Set when the watch named an area: the area code (NDC) that is back in stock.
-    attr_accessor :area_code
-
-    # The name of that area, when known.
-    attr_accessor :area_name
+    # Whether this area can be pre-ordered: the carrier sources a number in it (usually 2 to 4 weeks, never guaranteed).
+    attr_accessor :pre_orderable
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'country' => :'country',
-        :'types' => :'types',
-        :'area_code' => :'areaCode',
-        :'area_name' => :'areaName'
+        :'ndc' => :'ndc',
+        :'name' => :'name',
+        :'pre_orderable' => :'preOrderable'
       }
     end
 
@@ -50,10 +46,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'country' => :'String',
-        :'types' => :'Array<WebhookPayloadPhoneNumberStockAvailableStockTypesInner>',
-        :'area_code' => :'String',
-        :'area_name' => :'String'
+        :'ndc' => :'String',
+        :'name' => :'String',
+        :'pre_orderable' => :'Boolean'
       }
     end
 
@@ -67,38 +62,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadPhoneNumberStockAvailableStock` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CheckPhoneNumberAvailability200ResponseSoldOutAreasInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadPhoneNumberStockAvailableStock`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CheckPhoneNumberAvailability200ResponseSoldOutAreasInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'country')
-        self.country = attributes[:'country']
-      else
-        self.country = nil
+      if attributes.key?(:'ndc')
+        self.ndc = attributes[:'ndc']
       end
 
-      if attributes.key?(:'types')
-        if (value = attributes[:'types']).is_a?(Array)
-          self.types = value
-        end
-      else
-        self.types = nil
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'area_code')
-        self.area_code = attributes[:'area_code']
-      end
-
-      if attributes.key?(:'area_name')
-        self.area_name = attributes[:'area_name']
+      if attributes.key?(:'pre_orderable')
+        self.pre_orderable = attributes[:'pre_orderable']
       end
     end
 
@@ -107,14 +92,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @country.nil?
-        invalid_properties.push('invalid value for "country", country cannot be nil.')
-      end
-
-      if @types.nil?
-        invalid_properties.push('invalid value for "types", types cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -122,29 +99,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @country.nil?
-      return false if @types.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] country Value to be assigned
-    def country=(country)
-      if country.nil?
-        fail ArgumentError, 'country cannot be nil'
-      end
-
-      @country = country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] types Value to be assigned
-    def types=(types)
-      if types.nil?
-        fail ArgumentError, 'types cannot be nil'
-      end
-
-      @types = types
     end
 
     # Checks equality by comparing each attribute.
@@ -152,10 +107,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          country == o.country &&
-          types == o.types &&
-          area_code == o.area_code &&
-          area_name == o.area_name
+          ndc == o.ndc &&
+          name == o.name &&
+          pre_orderable == o.pre_orderable
     end
 
     # @see the `==` method
@@ -167,7 +121,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country, types, area_code, area_name].hash
+      [ndc, name, pre_orderable].hash
     end
 
     # Builds the object from hash

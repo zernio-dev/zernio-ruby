@@ -21,6 +21,9 @@ module Zernio
     # Narrow the watch to one number type. Omit to be notified when any type in the country is back.
     attr_accessor :number_type
 
+    # Narrow the watch to one area code (NDC). Requires numberType.
+    attr_accessor :area_code
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -47,7 +50,8 @@ module Zernio
     def self.attribute_map
       {
         :'country' => :'country',
-        :'number_type' => :'numberType'
+        :'number_type' => :'numberType',
+        :'area_code' => :'areaCode'
       }
     end
 
@@ -65,7 +69,8 @@ module Zernio
     def self.openapi_types
       {
         :'country' => :'String',
-        :'number_type' => :'String'
+        :'number_type' => :'String',
+        :'area_code' => :'String'
       }
     end
 
@@ -100,6 +105,10 @@ module Zernio
       if attributes.key?(:'number_type')
         self.number_type = attributes[:'number_type']
       end
+
+      if attributes.key?(:'area_code')
+        self.area_code = attributes[:'area_code']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -119,6 +128,11 @@ module Zernio
         invalid_properties.push('invalid value for "country", the character length must be greater than or equal to 2.')
       end
 
+      pattern = Regexp.new(/^\d{1,4}$/)
+      if !@area_code.nil? && @area_code !~ pattern
+        invalid_properties.push("invalid value for \"area_code\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -131,6 +145,7 @@ module Zernio
       return false if @country.to_s.length < 2
       number_type_validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
       return false unless number_type_validator.valid?(@number_type)
+      return false if !@area_code.nil? && @area_code !~ Regexp.new(/^\d{1,4}$/)
       true
     end
 
@@ -162,13 +177,29 @@ module Zernio
       @number_type = number_type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] area_code Value to be assigned
+    def area_code=(area_code)
+      if area_code.nil?
+        fail ArgumentError, 'area_code cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d{1,4}$/)
+      if area_code !~ pattern
+        fail ArgumentError, "invalid value for \"area_code\", must conform to the pattern #{pattern}."
+      end
+
+      @area_code = area_code
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           country == o.country &&
-          number_type == o.number_type
+          number_type == o.number_type &&
+          area_code == o.area_code
     end
 
     # @see the `==` method
@@ -180,7 +211,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country, number_type].hash
+      [country, number_type, area_code].hash
     end
 
     # Builds the object from hash

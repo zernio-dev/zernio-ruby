@@ -1002,6 +1002,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ChannelPickerTeam](docs/ChannelPickerTeam.md)
  - [Zernio::CheckPhoneNumberAvailability200Response](docs/CheckPhoneNumberAvailability200Response.md)
  - [Zernio::CheckPhoneNumberAvailability200ResponseAreaOptionsInner](docs/CheckPhoneNumberAvailability200ResponseAreaOptionsInner.md)
+ - [Zernio::CheckPhoneNumberAvailability200ResponseSoldOutAreasInner](docs/CheckPhoneNumberAvailability200ResponseSoldOutAreasInner.md)
  - [Zernio::CheckPhoneNumberPortability200Response](docs/CheckPhoneNumberPortability200Response.md)
  - [Zernio::CheckPhoneNumberPortability200ResponseResultsInner](docs/CheckPhoneNumberPortability200ResponseResultsInner.md)
  - [Zernio::CheckPhoneNumberPortabilityRequest](docs/CheckPhoneNumberPortabilityRequest.md)
