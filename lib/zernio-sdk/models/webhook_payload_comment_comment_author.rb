@@ -24,7 +24,7 @@ module Zernio
 
     attr_accessor :picture
 
-    # True when this comment was authored by the connected account itself (Meta re-delivers the account's own replies as comments events). Populated on the Instagram and Facebook realtime webhooks only; absent means not evaluated, never \"not the account\".
+    # True when this comment was authored by the connected account itself. Populated on the Instagram and Facebook realtime webhooks (Meta re-delivers the account's own replies as comments events) and on TikTok, where it is inferred: comments created through this API are always flagged, and once the account's own author identifier is known (from one of those or from a comments listing) every author is compared against it. Absent means not evaluated, never \"not the account\".
     attr_accessor :is_own_account
 
     attr_accessor :instagram_profile
