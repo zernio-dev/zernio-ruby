@@ -93,6 +93,8 @@ module Zernio
     # TikTok-only. Spark Code (creator's `auth_code`) authorizing cross-creator Spark Ads: the advertiser can boost a video owned by a DIFFERENT TikTok account. Without this, boosts are limited to videos owned by the same account running the ads (same-BC creators only). The creator generates the code in their TikTok app's Promote settings and shares it with the advertiser. Maps to `auth_code` on the creative entry of /v2/ad/create/. 
     attr_accessor :spark_auth_code
 
+    attr_accessor :promoted_object
+
     # Legal entity that benefits from the ad. Required when targeting EU users (EU DSA, Article 26). Optional if the ad account has a default beneficiary: set it once via `PATCH /v1/ads/accounts` or in Meta Ads Manager, and Meta fills it in whenever the field is omitted. 
     attr_accessor :dsa_beneficiary
 
@@ -161,6 +163,7 @@ module Zernio
         :'link_url' => :'linkUrl',
         :'call_to_action' => :'callToAction',
         :'spark_auth_code' => :'sparkAuthCode',
+        :'promoted_object' => :'promotedObject',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor',
         :'lead_gen_form_id' => :'leadGenFormId',
@@ -210,6 +213,7 @@ module Zernio
         :'link_url' => :'String',
         :'call_to_action' => :'String',
         :'spark_auth_code' => :'String',
+        :'promoted_object' => :'BoostPostRequestPromotedObject',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String',
         :'lead_gen_form_id' => :'String',
@@ -370,6 +374,10 @@ module Zernio
 
       if attributes.key?(:'spark_auth_code')
         self.spark_auth_code = attributes[:'spark_auth_code']
+      end
+
+      if attributes.key?(:'promoted_object')
+        self.promoted_object = attributes[:'promoted_object']
       end
 
       if attributes.key?(:'dsa_beneficiary')
@@ -623,6 +631,7 @@ module Zernio
           link_url == o.link_url &&
           call_to_action == o.call_to_action &&
           spark_auth_code == o.spark_auth_code &&
+          promoted_object == o.promoted_object &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor &&
           lead_gen_form_id == o.lead_gen_form_id &&
@@ -639,7 +648,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [creative_features, post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, whatsapp_phone_number, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
+      [creative_features, post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, whatsapp_phone_number, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, promoted_object, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
     end
 
     # Builds the object from hash

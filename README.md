@@ -930,6 +930,7 @@ Class | Method | HTTP request | Description
  - [Zernio::BoostPostRequest](docs/BoostPostRequest.md)
  - [Zernio::BoostPostRequestBudget](docs/BoostPostRequestBudget.md)
  - [Zernio::BoostPostRequestPlatformSpecificData](docs/BoostPostRequestPlatformSpecificData.md)
+ - [Zernio::BoostPostRequestPromotedObject](docs/BoostPostRequestPromotedObject.md)
  - [Zernio::BoostPostRequestSchedule](docs/BoostPostRequestSchedule.md)
  - [Zernio::BoostPostRequestTargeting](docs/BoostPostRequestTargeting.md)
  - [Zernio::BoostPostRequestTargetingCitiesInner](docs/BoostPostRequestTargetingCitiesInner.md)
