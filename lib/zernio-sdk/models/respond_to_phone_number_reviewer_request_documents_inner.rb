@@ -25,13 +25,17 @@ module Zernio
     # Id of a document already uploaded out-of-band.
     attr_accessor :document_id
 
+    # Date printed on the document (YYYY-MM-DD), for slots the regulator windows such as proof of address. The pre-submit review trusts it over its own read of the PDF.
+    attr_accessor :issued_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'requirement_id' => :'requirementId',
         :'filename' => :'filename',
         :'base64' => :'base64',
-        :'document_id' => :'documentId'
+        :'document_id' => :'documentId',
+        :'issued_at' => :'issuedAt'
       }
     end
 
@@ -51,7 +55,8 @@ module Zernio
         :'requirement_id' => :'String',
         :'filename' => :'String',
         :'base64' => :'String',
-        :'document_id' => :'String'
+        :'document_id' => :'String',
+        :'issued_at' => :'Date'
       }
     end
 
@@ -94,6 +99,10 @@ module Zernio
       if attributes.key?(:'document_id')
         self.document_id = attributes[:'document_id']
       end
+
+      if attributes.key?(:'issued_at')
+        self.issued_at = attributes[:'issued_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -134,7 +143,8 @@ module Zernio
           requirement_id == o.requirement_id &&
           filename == o.filename &&
           base64 == o.base64 &&
-          document_id == o.document_id
+          document_id == o.document_id &&
+          issued_at == o.issued_at
     end
 
     # @see the `==` method
@@ -146,7 +156,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [requirement_id, filename, base64, document_id].hash
+      [requirement_id, filename, base64, document_id, issued_at].hash
     end
 
     # Builds the object from hash

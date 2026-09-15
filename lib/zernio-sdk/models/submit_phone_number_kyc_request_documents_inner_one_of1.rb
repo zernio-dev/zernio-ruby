@@ -20,11 +20,15 @@ module Zernio
     # Id from POST /v1/phone-numbers/kyc/upload-document.
     attr_accessor :document_id
 
+    # Date printed on the document (YYYY-MM-DD), for slots the regulator windows such as proof of address. The pre-submit review trusts it over its own read of the PDF.
+    attr_accessor :issued_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'requirement_id' => :'requirementId',
-        :'document_id' => :'documentId'
+        :'document_id' => :'documentId',
+        :'issued_at' => :'issuedAt'
       }
     end
 
@@ -42,7 +46,8 @@ module Zernio
     def self.openapi_types
       {
         :'requirement_id' => :'String',
-        :'document_id' => :'String'
+        :'document_id' => :'String',
+        :'issued_at' => :'Date'
       }
     end
 
@@ -78,6 +83,10 @@ module Zernio
         self.document_id = attributes[:'document_id']
       else
         self.document_id = nil
+      end
+
+      if attributes.key?(:'issued_at')
+        self.issued_at = attributes[:'issued_at']
       end
     end
 
@@ -132,7 +141,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           requirement_id == o.requirement_id &&
-          document_id == o.document_id
+          document_id == o.document_id &&
+          issued_at == o.issued_at
     end
 
     # @see the `==` method
@@ -144,7 +154,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [requirement_id, document_id].hash
+      [requirement_id, document_id, issued_at].hash
     end
 
     # Builds the object from hash
