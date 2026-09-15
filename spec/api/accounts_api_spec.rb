@@ -192,6 +192,19 @@ describe 'AccountsApi' do
     end
   end
 
+  # unit tests for search_tik_tok_locations
+  # Search TikTok location tags
+  # Searches the location tags a TikTok account connected through the TikTok for Business app can attach to a video post. Send a result&#39;s id and name as tiktokSettings.locationId and locationName when creating a post. TikTok answers the 20 closest matches and fills the list with fuzzy matches when nothing matches, so an unrelated result does not mean the place is missing.
+  # @param account_id The TikTok account ID
+  # @param query Place name to search, for example a city, a venue or an address
+  # @param [Hash] opts the optional parameters
+  # @return [SearchTikTokLocations200Response]
+  describe 'search_tik_tok_locations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_account
   # Update account
   # Updates a connected account&#39;s display name or username override.  For X accounts on usage-based billing, also accepts an &#x60;xCapabilities&#x60; object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default &#x60;false&#x60;). When off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting &#x60;xCapabilities&#x60; on a non-X account returns 400. 

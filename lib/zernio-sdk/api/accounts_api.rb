@@ -865,6 +865,84 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Search TikTok location tags
+    # Searches the location tags a TikTok account connected through the TikTok for Business app can attach to a video post. Send a result's id and name as tiktokSettings.locationId and locationName when creating a post. TikTok answers the 20 closest matches and fills the list with fuzzy matches when nothing matches, so an unrelated result does not mean the place is missing.
+    # @param account_id [String] The TikTok account ID
+    # @param query [String] Place name to search, for example a city, a venue or an address
+    # @param [Hash] opts the optional parameters
+    # @return [SearchTikTokLocations200Response]
+    def search_tik_tok_locations(account_id, query, opts = {})
+      data, _status_code, _headers = search_tik_tok_locations_with_http_info(account_id, query, opts)
+      data
+    end
+
+    # Search TikTok location tags
+    # Searches the location tags a TikTok account connected through the TikTok for Business app can attach to a video post. Send a result&#39;s id and name as tiktokSettings.locationId and locationName when creating a post. TikTok answers the 20 closest matches and fills the list with fuzzy matches when nothing matches, so an unrelated result does not mean the place is missing.
+    # @param account_id [String] The TikTok account ID
+    # @param query [String] Place name to search, for example a city, a venue or an address
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SearchTikTokLocations200Response, Integer, Hash)>] SearchTikTokLocations200Response data, response status code and response headers
+    def search_tik_tok_locations_with_http_info(account_id, query, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountsApi.search_tik_tok_locations ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.search_tik_tok_locations"
+      end
+      # verify the required parameter 'query' is set
+      if @api_client.config.client_side_validation && query.nil?
+        fail ArgumentError, "Missing the required parameter 'query' when calling AccountsApi.search_tik_tok_locations"
+      end
+      if @api_client.config.client_side_validation && query.to_s.length > 100
+        fail ArgumentError, 'invalid value for "query" when calling AccountsApi.search_tik_tok_locations, the character length must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && query.to_s.length < 1
+        fail ArgumentError, 'invalid value for "query" when calling AccountsApi.search_tik_tok_locations, the character length must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/tiktok/locations'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'query'] = query
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SearchTikTokLocations200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountsApi.search_tik_tok_locations",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#search_tik_tok_locations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update account
     # Updates a connected account's display name or username override.  For X accounts on usage-based billing, also accepts an `xCapabilities` object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default `false`). When off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting `xCapabilities` on a non-X account returns 400. 
     # @param account_id [String] 

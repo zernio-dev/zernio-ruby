@@ -16,6 +16,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_accounts**](AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts |
 | [**list_tik_tok_commercial_music**](AccountsApi.md#list_tik_tok_commercial_music) | **GET** /v1/accounts/{accountId}/tiktok/commercial-music | List trending commercial music |
 | [**move_account_to_profile**](AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile |
+| [**search_tik_tok_locations**](AccountsApi.md#search_tik_tok_locations) | **GET** /v1/accounts/{accountId}/tiktok/locations | Search TikTok location tags |
 | [**update_account**](AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account |
 | [**update_bluesky_settings**](AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings |
 | [**update_slack_settings**](AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings |
@@ -890,6 +891,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## search_tik_tok_locations
+
+> <SearchTikTokLocations200Response> search_tik_tok_locations(account_id, query)
+
+Search TikTok location tags
+
+Searches the location tags a TikTok account connected through the TikTok for Business app can attach to a video post. Send a result's id and name as tiktokSettings.locationId and locationName when creating a post. TikTok answers the 20 closest matches and fills the list with fuzzy matches when nothing matches, so an unrelated result does not mean the place is missing.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | The TikTok account ID
+query = 'query_example' # String | Place name to search, for example a city, a venue or an address
+
+begin
+  # Search TikTok location tags
+  result = api_instance.search_tik_tok_locations(account_id, query)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->search_tik_tok_locations: #{e}"
+end
+```
+
+#### Using the search_tik_tok_locations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchTikTokLocations200Response>, Integer, Hash)> search_tik_tok_locations_with_http_info(account_id, query)
+
+```ruby
+begin
+  # Search TikTok location tags
+  data, status_code, headers = api_instance.search_tik_tok_locations_with_http_info(account_id, query)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchTikTokLocations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->search_tik_tok_locations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The TikTok account ID |  |
+| **query** | **String** | Place name to search, for example a city, a venue or an address |  |
+
+### Return type
+
+[**SearchTikTokLocations200Response**](SearchTikTokLocations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

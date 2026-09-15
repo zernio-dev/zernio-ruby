@@ -104,6 +104,7 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**list_accounts**](docs/AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts
 *Zernio::AccountsApi* | [**list_tik_tok_commercial_music**](docs/AccountsApi.md#list_tik_tok_commercial_music) | **GET** /v1/accounts/{accountId}/tiktok/commercial-music | List trending commercial music
 *Zernio::AccountsApi* | [**move_account_to_profile**](docs/AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile
+*Zernio::AccountsApi* | [**search_tik_tok_locations**](docs/AccountsApi.md#search_tik_tok_locations) | **GET** /v1/accounts/{accountId}/tiktok/locations | Search TikTok location tags
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
 *Zernio::AccountsApi* | [**update_bluesky_settings**](docs/AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings
 *Zernio::AccountsApi* | [**update_slack_settings**](docs/AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
@@ -2251,6 +2252,8 @@ Class | Method | HTTP request | Description
  - [Zernio::SearchInboxConversations200ResponseMetaFailedAccountsInner](docs/SearchInboxConversations200ResponseMetaFailedAccountsInner.md)
  - [Zernio::SearchInstagramAudio200Response](docs/SearchInstagramAudio200Response.md)
  - [Zernio::SearchReddit200Response](docs/SearchReddit200Response.md)
+ - [Zernio::SearchTikTokLocations200Response](docs/SearchTikTokLocations200Response.md)
+ - [Zernio::SearchTikTokLocations200ResponseLocationsInner](docs/SearchTikTokLocations200ResponseLocationsInner.md)
  - [Zernio::SearchTweets200Response](docs/SearchTweets200Response.md)
  - [Zernio::SearchTweets200ResponseMeta](docs/SearchTweets200ResponseMeta.md)
  - [Zernio::SearchTweets200ResponsePagination](docs/SearchTweets200ResponsePagination.md)

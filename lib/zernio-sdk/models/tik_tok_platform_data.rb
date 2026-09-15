@@ -69,6 +69,15 @@ module Zernio
     # Set true to disclose AI-generated content. Accounts connected through the TikTok for Business app carry the disclosure on video posts only: the business photo endpoint has no AI disclosure field, so true on a direct photo post is rejected at creation rather than published undisclosed. Send draft true to publish such a photo post and set the disclosure in the TikTok app.
     attr_accessor :video_made_with_ai
 
+    # Location tag to attach, as the id of a result from GET /v1/accounts/{accountId}/tiktok/locations. Accounts connected through the TikTok for Business app and video posts only: a developer-app account rejects the post at publish time with a message that says so, and a direct photo post is rejected at creation since the business photo endpoint has no location field. Requires locationName. Ignored on drafts, where TikTok ignores every post_info field.
+    attr_accessor :location_id
+
+    # Display name of the location tag, as returned next to its id. Required with locationId; a locationId without it is rejected at creation.
+    attr_accessor :location_name
+
+    # Set true to publish the video as an \"Only show in ads\" post: it is kept off the profile and exists to be used as a Spark Ad. Accounts connected through the TikTok for Business app and video posts only, with the same rejections as locationId. Ignored on drafts.
+    attr_accessor :is_ads_only
+
     # Optional long-form caption for photo posts (max 4000 chars). Recommended when content exceeds 90 chars, as photo titles are auto-truncated. Falls back to the post content when omitted.
     attr_accessor :description
 
@@ -115,6 +124,9 @@ module Zernio
         :'music_sound_info' => :'musicSoundInfo',
         :'video_original_sound_volume' => :'videoOriginalSoundVolume',
         :'video_made_with_ai' => :'videoMadeWithAi',
+        :'location_id' => :'locationId',
+        :'location_name' => :'locationName',
+        :'is_ads_only' => :'isAdsOnly',
         :'description' => :'description'
       }
     end
@@ -150,6 +162,9 @@ module Zernio
         :'music_sound_info' => :'TikTokPlatformDataMusicSoundInfo',
         :'video_original_sound_volume' => :'Integer',
         :'video_made_with_ai' => :'Boolean',
+        :'location_id' => :'String',
+        :'location_name' => :'String',
+        :'is_ads_only' => :'Boolean',
         :'description' => :'String'
       }
     end
@@ -246,6 +261,18 @@ module Zernio
 
       if attributes.key?(:'video_made_with_ai')
         self.video_made_with_ai = attributes[:'video_made_with_ai']
+      end
+
+      if attributes.key?(:'location_id')
+        self.location_id = attributes[:'location_id']
+      end
+
+      if attributes.key?(:'location_name')
+        self.location_name = attributes[:'location_name']
+      end
+
+      if attributes.key?(:'is_ads_only')
+        self.is_ads_only = attributes[:'is_ads_only']
       end
 
       if attributes.key?(:'description')
@@ -400,6 +427,9 @@ module Zernio
           music_sound_info == o.music_sound_info &&
           video_original_sound_volume == o.video_original_sound_volume &&
           video_made_with_ai == o.video_made_with_ai &&
+          location_id == o.location_id &&
+          location_name == o.location_name &&
+          is_ads_only == o.is_ads_only &&
           description == o.description
     end
 
@@ -412,7 +442,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [draft, privacy_level, allow_comment, allow_duet, allow_stitch, commercial_content_type, brand_partner_promote, is_brand_organic_post, content_preview_confirmed, express_consent_given, media_type, video_cover_timestamp_ms, video_cover_image_url, photo_cover_index, auto_add_music, music_sound_info, video_original_sound_volume, video_made_with_ai, description].hash
+      [draft, privacy_level, allow_comment, allow_duet, allow_stitch, commercial_content_type, brand_partner_promote, is_brand_organic_post, content_preview_confirmed, express_consent_given, media_type, video_cover_timestamp_ms, video_cover_image_url, photo_cover_index, auto_add_music, music_sound_info, video_original_sound_volume, video_made_with_ai, location_id, location_name, is_ads_only, description].hash
     end
 
     # Builds the object from hash
