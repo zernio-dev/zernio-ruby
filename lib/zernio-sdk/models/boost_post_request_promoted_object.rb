@@ -14,12 +14,12 @@ require 'date'
 require 'time'
 
 module Zernio
-  # TikTok-only on this endpoint. The pixel a Website Conversion ad group optimizes toward, so a Spark Ad built from an existing organic post can optimize for a conversion instead of only engagement or traffic. Required when `goal` is `conversions`; ignored on every other goal, because only a WEB_CONVERSIONS ad group accepts these fields.  Combine freely with `platformPostId` + `sparkAuthCode`: the pixel lives on the ad group and the Spark item on the creative, so they never conflict. 
+  # TikTok-only on this endpoint. The pixel a Website Conversion ad group optimizes toward, so a Spark Ad built from an existing organic post can optimize for a conversion instead of only engagement or traffic.  Required when `goal` is `conversions`, and BOTH fields are required: TikTok refuses a conversion ad group with no pixel (\"Please select a pixel\") and equally one that has a pixel but no event (\"Select a pixel event.\"), because the event is what the ad group optimizes toward. Ignored on every other goal, since only a WEB_CONVERSIONS ad group accepts them.  Combine freely with `platformPostId` + `sparkAuthCode`: the pixel lives on the ad group and the Spark item on the creative, so they never conflict. 
   class BoostPostRequestPromotedObject < ApiModelBase
     # TikTok Pixel. Either the numeric pixel id or the alphanumeric pixel code from Events Manager, which is resolved for you.
     attr_accessor :pixel_id
 
-    # Optimization event, as a TikTok optimization_event code (e.g. ON_WEB_ORDER, SHOPPING, FORM) or the exact event name shown in Events Manager, which is resolved to its code. Omit to let TikTok optimize for the ad group default.
+    # Optimization event, as a TikTok optimization_event code (e.g. ON_WEB_ORDER, SHOPPING, FORM) or the exact event name shown in Events Manager, which is resolved to its code. The event must already exist on that pixel, or TikTok rejects the ad group.
     attr_accessor :custom_event_type
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -72,10 +72,14 @@ module Zernio
 
       if attributes.key?(:'pixel_id')
         self.pixel_id = attributes[:'pixel_id']
+      else
+        self.pixel_id = nil
       end
 
       if attributes.key?(:'custom_event_type')
         self.custom_event_type = attributes[:'custom_event_type']
+      else
+        self.custom_event_type = nil
       end
     end
 
@@ -84,6 +88,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @pixel_id.nil?
+        invalid_properties.push('invalid value for "pixel_id", pixel_id cannot be nil.')
+      end
+
+      if @custom_event_type.nil?
+        invalid_properties.push('invalid value for "custom_event_type", custom_event_type cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -91,7 +103,29 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @pixel_id.nil?
+      return false if @custom_event_type.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] pixel_id Value to be assigned
+    def pixel_id=(pixel_id)
+      if pixel_id.nil?
+        fail ArgumentError, 'pixel_id cannot be nil'
+      end
+
+      @pixel_id = pixel_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] custom_event_type Value to be assigned
+    def custom_event_type=(custom_event_type)
+      if custom_event_type.nil?
+        fail ArgumentError, 'custom_event_type cannot be nil'
+      end
+
+      @custom_event_type = custom_event_type
     end
 
     # Checks equality by comparing each attribute.

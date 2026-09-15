@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Delete comment
-    # Delete a comment on a post. Supported by Facebook, Instagram, Bluesky, Reddit, YouTube, and LinkedIn. Requires accountId and commentId query parameters. 
+    # Delete a comment on a post. Supported by Facebook, Instagram, Threads, LinkedIn, Reddit, Bluesky, X (Twitter), YouTube, and TikTok (accounts connected through the TikTok for Business app). Not supported on Google Business (reviews only). Requires accountId and commentId query parameters. 
     # @param post_id [String] Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
     # @param account_id [String] 
     # @param comment_id [String] For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id))
@@ -32,7 +32,7 @@ module Zernio
     end
 
     # Delete comment
-    # Delete a comment on a post. Supported by Facebook, Instagram, Bluesky, Reddit, YouTube, and LinkedIn. Requires accountId and commentId query parameters. 
+    # Delete a comment on a post. Supported by Facebook, Instagram, Threads, LinkedIn, Reddit, Bluesky, X (Twitter), YouTube, and TikTok (accounts connected through the TikTok for Business app). Not supported on Google Business (reviews only). Requires accountId and commentId query parameters. 
     # @param post_id [String] Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
     # @param account_id [String] 
     # @param comment_id [String] For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id))
