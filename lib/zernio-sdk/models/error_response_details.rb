@@ -14,27 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Canonical error envelope. `error` is the human-readable message; `type`, `code`, `param`, `platform`, and `platformError` are top-level siblings for programmatic handling. For upstream platform failures (`type: platform_error`), `platformError` carries the provider's raw payload verbatim (for Meta: `error_subcode`, `error_user_title`, `error_user_msg`). 
-  class ErrorResponse < ApiModelBase
-    # Human-readable error message.
-    attr_accessor :error
+  # Additional structured context (e.g. field-level validation errors), for example `privateReplyConsumed` on the private-reply endpoint's 400 when the comment's single reply is already spent.  On a Google Ads 429 it carries `quotaExhausted: true`, which marks the failure as Google's own ads quota rather than a Zernio rate limit, so you can keep calling other platforms instead of backing off everywhere. When Google names the scope it also carries `quotaScope`: `DEVELOPER` means the shared developer-token budget (every Google account is affected and there is nothing to change on your side), `ACCOUNT` means your own ad account. A Meta 429 carries neither field. 
+  class ErrorResponseDetails < ApiModelBase
+    # Google Ads 429 only. True when the upstream Google Ads quota is spent rather than a Zernio limit.
+    attr_accessor :quota_exhausted
 
-    # Error class for programmatic handling.
-    attr_accessor :type
-
-    # Stable machine-readable error code.
-    attr_accessor :code
-
-    # The request field that caused the error, when applicable.
-    attr_accessor :param
-
-    # Upstream platform (e.g. meta, google, tiktok), present when type is platform_error.
-    attr_accessor :platform
-
-    # Raw error payload from the upstream platform, passed through verbatim so integrators can read provider-specific codes. For Meta this includes error_subcode, error_user_title, and error_user_msg. 
-    attr_accessor :platform_error
-
-    attr_accessor :details
+    # Google Ads 429 only, when Google names the scope. DEVELOPER is the shared developer-token budget; ACCOUNT is your ad account.
+    attr_accessor :quota_scope
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -61,13 +47,8 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error',
-        :'type' => :'type',
-        :'code' => :'code',
-        :'param' => :'param',
-        :'platform' => :'platform',
-        :'platform_error' => :'platformError',
-        :'details' => :'details'
+        :'quota_exhausted' => :'quotaExhausted',
+        :'quota_scope' => :'quotaScope'
       }
     end
 
@@ -84,13 +65,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'String',
-        :'type' => :'String',
-        :'code' => :'String',
-        :'param' => :'String',
-        :'platform' => :'String',
-        :'platform_error' => :'Hash<String, Object>',
-        :'details' => :'ErrorResponseDetails'
+        :'quota_exhausted' => :'Boolean',
+        :'quota_scope' => :'String'
       }
     end
 
@@ -104,46 +80,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ErrorResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ErrorResponseDetails` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ErrorResponse`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ErrorResponseDetails`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.key?(:'quota_exhausted')
+        self.quota_exhausted = attributes[:'quota_exhausted']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
-      end
-
-      if attributes.key?(:'param')
-        self.param = attributes[:'param']
-      end
-
-      if attributes.key?(:'platform')
-        self.platform = attributes[:'platform']
-      end
-
-      if attributes.key?(:'platform_error')
-        if (value = attributes[:'platform_error']).is_a?(Hash)
-          self.platform_error = value
-        end
-      end
-
-      if attributes.key?(:'details')
-        self.details = attributes[:'details']
+      if attributes.key?(:'quota_scope')
+        self.quota_scope = attributes[:'quota_scope']
       end
     end
 
@@ -159,19 +113,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["invalid_request_error", "authentication_error", "permission_error", "not_found", "rate_limit_error", "platform_error", "api_error"])
-      return false unless type_validator.valid?(@type)
+      quota_scope_validator = EnumAttributeValidator.new('String', ["DEVELOPER", "ACCOUNT"])
+      return false unless quota_scope_validator.valid?(@quota_scope)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["invalid_request_error", "authentication_error", "permission_error", "not_found", "rate_limit_error", "platform_error", "api_error"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+    # @param [Object] quota_scope Object to be assigned
+    def quota_scope=(quota_scope)
+      validator = EnumAttributeValidator.new('String', ["DEVELOPER", "ACCOUNT"])
+      unless validator.valid?(quota_scope)
+        fail ArgumentError, "invalid value for \"quota_scope\", must be one of #{validator.allowable_values}."
       end
-      @type = type
+      @quota_scope = quota_scope
     end
 
     # Checks equality by comparing each attribute.
@@ -179,13 +133,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error &&
-          type == o.type &&
-          code == o.code &&
-          param == o.param &&
-          platform == o.platform &&
-          platform_error == o.platform_error &&
-          details == o.details
+          quota_exhausted == o.quota_exhausted &&
+          quota_scope == o.quota_scope
     end
 
     # @see the `==` method
@@ -197,7 +146,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, type, code, param, platform, platform_error, details].hash
+      [quota_exhausted, quota_scope].hash
     end
 
     # Builds the object from hash

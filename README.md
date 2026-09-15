@@ -1335,6 +1335,7 @@ Class | Method | HTTP request | Description
  - [Zernio::EnrollContacts200ResponseResultsInner](docs/EnrollContacts200ResponseResultsInner.md)
  - [Zernio::EnrollContactsRequest](docs/EnrollContactsRequest.md)
  - [Zernio::ErrorResponse](docs/ErrorResponse.md)
+ - [Zernio::ErrorResponseDetails](docs/ErrorResponseDetails.md)
  - [Zernio::EstimateAdReach200Response](docs/EstimateAdReach200Response.md)
  - [Zernio::EstimateAdReachRequest](docs/EstimateAdReachRequest.md)
  - [Zernio::Expired](docs/Expired.md)
