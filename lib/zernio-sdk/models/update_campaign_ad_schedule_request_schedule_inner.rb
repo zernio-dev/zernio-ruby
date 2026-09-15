@@ -142,8 +142,6 @@ module Zernio
 
       if attributes.key?(:'bid_modifier')
         self.bid_modifier = attributes[:'bid_modifier']
-      else
-        self.bid_modifier = null
       end
     end
 
