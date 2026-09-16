@@ -851,6 +851,7 @@ docs/GetPostTimeline403Response.md
 docs/GetPostTimeline404Response.md
 docs/GetPostingFrequency200Response.md
 docs/GetPostingFrequency200ResponseFrequencyInner.md
+docs/GetProduct200Response.md
 docs/GetRedditFlairs200Response.md
 docs/GetRedditFlairs200ResponseFlairsInner.md
 docs/GetRedditSubreddits200Response.md
@@ -1226,6 +1227,7 @@ docs/ListPhoneNumbers200ResponseSandbox.md
 docs/ListPhoneNumbers200ResponseSandboxTemplate.md
 docs/ListPinterestBoardsForSelection200Response.md
 docs/ListPinterestBoardsForSelection200ResponseBoardsInner.md
+docs/ListProducts200Response.md
 docs/ListQueueSlots200Response.md
 docs/ListQueueSlots200ResponseOneOf.md
 docs/ListSequenceEnrollments200Response.md
@@ -1368,6 +1370,13 @@ docs/PreflightSmsRegistration200Response.md
 docs/PreflightSmsRegistration200ResponseAdvisoriesInner.md
 docs/PreflightSmsRegistration200ResponseComposed.md
 docs/PreflightSmsRegistrationRequest.md
+docs/Product.md
+docs/ProductImage.md
+docs/ProductOptionsInner.md
+docs/ProductSeo.md
+docs/ProductVariant.md
+docs/ProductVariantSelectedOptionsInner.md
+docs/ProductsApi.md
 docs/Profile.md
 docs/ProfileCreateResponse.md
 docs/ProfileDeleteResponse.md
@@ -1858,6 +1867,11 @@ docs/UpdatePostMetadata200Response.md
 docs/UpdatePostMetadataRequest.md
 docs/UpdatePostRequest.md
 docs/UpdatePostRequestPlatformsInner.md
+docs/UpdateProductRequest.md
+docs/UpdateProductRequestSeo.md
+docs/UpdateProductRequestVariantsInner.md
+docs/UpdateProductRequestVariantsInnerCompareAtPrice.md
+docs/UpdateProductRequestVariantsInnerPrice.md
 docs/UpdateProfileRequest.md
 docs/UpdateQueueSlotRequest.md
 docs/UpdateRedditSubredditsRequest.md
@@ -2189,6 +2203,7 @@ lib/zernio-sdk/api/messages_api.rb
 lib/zernio-sdk/api/messaging_ads_api.rb
 lib/zernio-sdk/api/phone_numbers_api.rb
 lib/zernio-sdk/api/posts_api.rb
+lib/zernio-sdk/api/products_api.rb
 lib/zernio-sdk/api/profiles_api.rb
 lib/zernio-sdk/api/queue_api.rb
 lib/zernio-sdk/api/reach_and_frequency_api.rb
@@ -3031,6 +3046,7 @@ lib/zernio-sdk/models/get_post_timeline403_response.rb
 lib/zernio-sdk/models/get_post_timeline404_response.rb
 lib/zernio-sdk/models/get_posting_frequency200_response.rb
 lib/zernio-sdk/models/get_posting_frequency200_response_frequency_inner.rb
+lib/zernio-sdk/models/get_product200_response.rb
 lib/zernio-sdk/models/get_reddit_flairs200_response.rb
 lib/zernio-sdk/models/get_reddit_flairs200_response_flairs_inner.rb
 lib/zernio-sdk/models/get_reddit_subreddits200_response.rb
@@ -3401,6 +3417,7 @@ lib/zernio-sdk/models/list_phone_numbers200_response_sandbox.rb
 lib/zernio-sdk/models/list_phone_numbers200_response_sandbox_template.rb
 lib/zernio-sdk/models/list_pinterest_boards_for_selection200_response.rb
 lib/zernio-sdk/models/list_pinterest_boards_for_selection200_response_boards_inner.rb
+lib/zernio-sdk/models/list_products200_response.rb
 lib/zernio-sdk/models/list_queue_slots200_response.rb
 lib/zernio-sdk/models/list_queue_slots200_response_one_of.rb
 lib/zernio-sdk/models/list_sequence_enrollments200_response.rb
@@ -3536,6 +3553,12 @@ lib/zernio-sdk/models/preflight_sms_registration200_response.rb
 lib/zernio-sdk/models/preflight_sms_registration200_response_advisories_inner.rb
 lib/zernio-sdk/models/preflight_sms_registration200_response_composed.rb
 lib/zernio-sdk/models/preflight_sms_registration_request.rb
+lib/zernio-sdk/models/product.rb
+lib/zernio-sdk/models/product_image.rb
+lib/zernio-sdk/models/product_options_inner.rb
+lib/zernio-sdk/models/product_seo.rb
+lib/zernio-sdk/models/product_variant.rb
+lib/zernio-sdk/models/product_variant_selected_options_inner.rb
 lib/zernio-sdk/models/profile.rb
 lib/zernio-sdk/models/profile_create_response.rb
 lib/zernio-sdk/models/profile_delete_response.rb
@@ -4015,6 +4038,11 @@ lib/zernio-sdk/models/update_post_metadata200_response.rb
 lib/zernio-sdk/models/update_post_metadata_request.rb
 lib/zernio-sdk/models/update_post_request.rb
 lib/zernio-sdk/models/update_post_request_platforms_inner.rb
+lib/zernio-sdk/models/update_product_request.rb
+lib/zernio-sdk/models/update_product_request_seo.rb
+lib/zernio-sdk/models/update_product_request_variants_inner.rb
+lib/zernio-sdk/models/update_product_request_variants_inner_compare_at_price.rb
+lib/zernio-sdk/models/update_product_request_variants_inner_price.rb
 lib/zernio-sdk/models/update_profile_request.rb
 lib/zernio-sdk/models/update_queue_slot_request.rb
 lib/zernio-sdk/models/update_reddit_subreddits_request.rb
@@ -4331,6 +4359,7 @@ spec/api/messages_api_spec.rb
 spec/api/messaging_ads_api_spec.rb
 spec/api/phone_numbers_api_spec.rb
 spec/api/posts_api_spec.rb
+spec/api/products_api_spec.rb
 spec/api/profiles_api_spec.rb
 spec/api/queue_api_spec.rb
 spec/api/reach_and_frequency_api_spec.rb
@@ -5168,6 +5197,7 @@ spec/models/get_post_timeline403_response_spec.rb
 spec/models/get_post_timeline404_response_spec.rb
 spec/models/get_posting_frequency200_response_frequency_inner_spec.rb
 spec/models/get_posting_frequency200_response_spec.rb
+spec/models/get_product200_response_spec.rb
 spec/models/get_reddit_flairs200_response_flairs_inner_spec.rb
 spec/models/get_reddit_flairs200_response_spec.rb
 spec/models/get_reddit_subreddits200_response_spec.rb
@@ -5538,6 +5568,7 @@ spec/models/list_phone_numbers200_response_sandbox_template_spec.rb
 spec/models/list_phone_numbers200_response_spec.rb
 spec/models/list_pinterest_boards_for_selection200_response_boards_inner_spec.rb
 spec/models/list_pinterest_boards_for_selection200_response_spec.rb
+spec/models/list_products200_response_spec.rb
 spec/models/list_queue_slots200_response_one_of_spec.rb
 spec/models/list_queue_slots200_response_spec.rb
 spec/models/list_sequence_enrollments200_response_enrollments_inner_spec.rb
@@ -5673,6 +5704,12 @@ spec/models/preflight_sms_registration200_response_advisories_inner_spec.rb
 spec/models/preflight_sms_registration200_response_composed_spec.rb
 spec/models/preflight_sms_registration200_response_spec.rb
 spec/models/preflight_sms_registration_request_spec.rb
+spec/models/product_image_spec.rb
+spec/models/product_options_inner_spec.rb
+spec/models/product_seo_spec.rb
+spec/models/product_spec.rb
+spec/models/product_variant_selected_options_inner_spec.rb
+spec/models/product_variant_spec.rb
 spec/models/profile_create_response_spec.rb
 spec/models/profile_delete_response_spec.rb
 spec/models/profile_get_response_spec.rb
@@ -6152,6 +6189,11 @@ spec/models/update_post_metadata200_response_spec.rb
 spec/models/update_post_metadata_request_spec.rb
 spec/models/update_post_request_platforms_inner_spec.rb
 spec/models/update_post_request_spec.rb
+spec/models/update_product_request_seo_spec.rb
+spec/models/update_product_request_spec.rb
+spec/models/update_product_request_variants_inner_compare_at_price_spec.rb
+spec/models/update_product_request_variants_inner_price_spec.rb
+spec/models/update_product_request_variants_inner_spec.rb
 spec/models/update_profile_request_spec.rb
 spec/models/update_queue_slot_request_spec.rb
 spec/models/update_reddit_subreddits_request_spec.rb
