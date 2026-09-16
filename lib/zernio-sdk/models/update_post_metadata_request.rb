@@ -39,7 +39,7 @@ module Zernio
     # Video privacy setting
     attr_accessor :privacy_status
 
-    # Public URL of a custom thumbnail image (JPEG, PNG, or GIF, max 2 MB, recommended 1280x720). Works on any video you own, including existing videos not published through Zernio. The channel must be verified (phone verification) to set custom thumbnails.
+    # Public URL of a custom thumbnail image (JPEG, PNG, or GIF, max 50 MB, recommended 1280x720). Works on any video you own, including existing videos not published through Zernio. The channel must be verified (phone verification) to set custom thumbnails.
     attr_accessor :thumbnail_url
 
     # COPPA compliance flag. Set true for child-directed content (restricts comments, notifications, ad targeting).
