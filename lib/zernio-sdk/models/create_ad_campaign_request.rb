@@ -31,7 +31,7 @@ module Zernio
 
     attr_accessor :promoted_object
 
-    # Meta only. OMIT on non-Meta platforms (Google Ads, etc.): any value is rejected with a 400. On Meta the server applies AUCTION when omitted, so it does not need to be sent; RESERVED = Reach & Frequency. SKAdNetwork app promotion requires AUCTION.
+    # Every platform buys at auction by default, so this only needs sending on Meta, and only to choose RESERVED. `AUCTION` is accepted on every platform and changes nothing. `RESERVED` (Reach & Frequency) is Meta-only and is rejected with a 400 elsewhere. SKAdNetwork app promotion requires AUCTION.
     attr_accessor :buying_type
 
     # Meta only. Runs campaign validation without creating or persisting a campaign; Idempotency-Key storage is bypassed. Returns HTTP 200 with validateOnly true and status VALIDATED.
