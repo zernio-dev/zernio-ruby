@@ -1349,6 +1349,7 @@ require 'zernio-sdk/models/purchase_phone_number200_response_one_of1_phone_numbe
 require 'zernio-sdk/models/purchase_phone_number200_response_one_of2'
 require 'zernio-sdk/models/purchase_phone_number202_response'
 require 'zernio-sdk/models/purchase_phone_number409_response'
+require 'zernio-sdk/models/purchase_phone_number503_response'
 require 'zernio-sdk/models/purchase_phone_number_request'
 require 'zernio-sdk/models/purchase_whats_app_phone_number200_response'
 require 'zernio-sdk/models/purchase_whats_app_phone_number200_response_one_of'

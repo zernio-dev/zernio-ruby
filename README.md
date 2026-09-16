@@ -2138,6 +2138,7 @@ Class | Method | HTTP request | Description
  - [Zernio::PurchasePhoneNumber200ResponseOneOf2](docs/PurchasePhoneNumber200ResponseOneOf2.md)
  - [Zernio::PurchasePhoneNumber202Response](docs/PurchasePhoneNumber202Response.md)
  - [Zernio::PurchasePhoneNumber409Response](docs/PurchasePhoneNumber409Response.md)
+ - [Zernio::PurchasePhoneNumber503Response](docs/PurchasePhoneNumber503Response.md)
  - [Zernio::PurchasePhoneNumberRequest](docs/PurchasePhoneNumberRequest.md)
  - [Zernio::PurchaseWhatsAppPhoneNumber200Response](docs/PurchaseWhatsAppPhoneNumber200Response.md)
  - [Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf.md)
