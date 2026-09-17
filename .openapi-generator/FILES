@@ -256,6 +256,9 @@ docs/ConnectWhatsAppCredentialsRequest.md
 docs/ConnectWhatsAppEmbeddedSignup200Response.md
 docs/ConnectWhatsAppEmbeddedSignup200ResponseAccount.md
 docs/ConnectWhatsAppEmbeddedSignupRequest.md
+docs/ConnectWordPressWithApplicationPassword200Response.md
+docs/ConnectWordPressWithApplicationPassword200ResponseAccount.md
+docs/ConnectWordPressWithApplicationPasswordRequest.md
 docs/Connected.md
 docs/ConnectedAccount.md
 docs/ConnectedApp.md
@@ -652,6 +655,7 @@ docs/GetAnalytics402Response.md
 docs/GetBestTimeToPost200Response.md
 docs/GetBestTimeToPost200ResponseSlotsInner.md
 docs/GetBestTimeToPost403Response.md
+docs/GetBlog200Response.md
 docs/GetBlueskySettings200Response.md
 docs/GetBroadcast200Response.md
 docs/GetBroadcast200ResponseBroadcast.md
@@ -945,6 +949,7 @@ docs/GetWhatsAppTemplates200Response.md
 docs/GetWhatsAppTemplates200ResponseTemplatesInner.md
 docs/GetWhatsappBusinessUsername200Response.md
 docs/GetWhatsappBusinessUsernameSuggestions200Response.md
+docs/GetWordPressAuthUrl200Response.md
 docs/GetWorkflow200Response.md
 docs/GetWorkflow200ResponseWorkflow.md
 docs/GetWorkflowVersion200Response.md
@@ -1774,6 +1779,7 @@ docs/UpdateBidStrategy200Response.md
 docs/UpdateBidStrategy200ResponseStrategy.md
 docs/UpdateBidStrategyRequest.md
 docs/UpdateBlogArticleRequest.md
+docs/UpdateBlogArticleRequestImage.md
 docs/UpdateBlogRequest.md
 docs/UpdateBlueskySettingsRequest.md
 docs/UpdateBroadcast200Response.md
@@ -2464,6 +2470,9 @@ lib/zernio-sdk/models/connect_whats_app_credentials_request.rb
 lib/zernio-sdk/models/connect_whats_app_embedded_signup200_response.rb
 lib/zernio-sdk/models/connect_whats_app_embedded_signup200_response_account.rb
 lib/zernio-sdk/models/connect_whats_app_embedded_signup_request.rb
+lib/zernio-sdk/models/connect_word_press_with_application_password200_response.rb
+lib/zernio-sdk/models/connect_word_press_with_application_password200_response_account.rb
+lib/zernio-sdk/models/connect_word_press_with_application_password_request.rb
 lib/zernio-sdk/models/connected.rb
 lib/zernio-sdk/models/connected_account.rb
 lib/zernio-sdk/models/connected_app.rb
@@ -2847,6 +2856,7 @@ lib/zernio-sdk/models/get_analytics402_response.rb
 lib/zernio-sdk/models/get_best_time_to_post200_response.rb
 lib/zernio-sdk/models/get_best_time_to_post200_response_slots_inner.rb
 lib/zernio-sdk/models/get_best_time_to_post403_response.rb
+lib/zernio-sdk/models/get_blog200_response.rb
 lib/zernio-sdk/models/get_bluesky_settings200_response.rb
 lib/zernio-sdk/models/get_broadcast200_response.rb
 lib/zernio-sdk/models/get_broadcast200_response_broadcast.rb
@@ -3140,6 +3150,7 @@ lib/zernio-sdk/models/get_whats_app_templates200_response.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response_templates_inner.rb
 lib/zernio-sdk/models/get_whatsapp_business_username200_response.rb
 lib/zernio-sdk/models/get_whatsapp_business_username_suggestions200_response.rb
+lib/zernio-sdk/models/get_word_press_auth_url200_response.rb
 lib/zernio-sdk/models/get_workflow200_response.rb
 lib/zernio-sdk/models/get_workflow200_response_workflow.rb
 lib/zernio-sdk/models/get_workflow_version200_response.rb
@@ -3945,6 +3956,7 @@ lib/zernio-sdk/models/update_bid_strategy200_response.rb
 lib/zernio-sdk/models/update_bid_strategy200_response_strategy.rb
 lib/zernio-sdk/models/update_bid_strategy_request.rb
 lib/zernio-sdk/models/update_blog_article_request.rb
+lib/zernio-sdk/models/update_blog_article_request_image.rb
 lib/zernio-sdk/models/update_blog_request.rb
 lib/zernio-sdk/models/update_bluesky_settings_request.rb
 lib/zernio-sdk/models/update_broadcast200_response.rb
@@ -4615,6 +4627,9 @@ spec/models/connect_whats_app_credentials_request_spec.rb
 spec/models/connect_whats_app_embedded_signup200_response_account_spec.rb
 spec/models/connect_whats_app_embedded_signup200_response_spec.rb
 spec/models/connect_whats_app_embedded_signup_request_spec.rb
+spec/models/connect_word_press_with_application_password200_response_account_spec.rb
+spec/models/connect_word_press_with_application_password200_response_spec.rb
+spec/models/connect_word_press_with_application_password_request_spec.rb
 spec/models/connected_account_spec.rb
 spec/models/connected_app_spec.rb
 spec/models/connected_spec.rb
@@ -4998,6 +5013,7 @@ spec/models/get_analytics402_response_spec.rb
 spec/models/get_best_time_to_post200_response_slots_inner_spec.rb
 spec/models/get_best_time_to_post200_response_spec.rb
 spec/models/get_best_time_to_post403_response_spec.rb
+spec/models/get_blog200_response_spec.rb
 spec/models/get_bluesky_settings200_response_spec.rb
 spec/models/get_broadcast200_response_broadcast_message_spec.rb
 spec/models/get_broadcast200_response_broadcast_spec.rb
@@ -5291,6 +5307,7 @@ spec/models/get_whats_app_templates200_response_spec.rb
 spec/models/get_whats_app_templates200_response_templates_inner_spec.rb
 spec/models/get_whatsapp_business_username200_response_spec.rb
 spec/models/get_whatsapp_business_username_suggestions200_response_spec.rb
+spec/models/get_word_press_auth_url200_response_spec.rb
 spec/models/get_workflow200_response_spec.rb
 spec/models/get_workflow200_response_workflow_spec.rb
 spec/models/get_workflow_version200_response_spec.rb
@@ -6095,6 +6112,7 @@ spec/models/update_ad_tracking_tags_request_url_tags_inner_spec.rb
 spec/models/update_bid_strategy200_response_spec.rb
 spec/models/update_bid_strategy200_response_strategy_spec.rb
 spec/models/update_bid_strategy_request_spec.rb
+spec/models/update_blog_article_request_image_spec.rb
 spec/models/update_blog_article_request_spec.rb
 spec/models/update_blog_request_spec.rb
 spec/models/update_bluesky_settings_request_spec.rb

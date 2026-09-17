@@ -17,6 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_slack_channel**](ConnectApi.md#connect_slack_channel) | **POST** /v1/connect/slack | Connect a Slack channel |
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
 | [**connect_whats_app_embedded_signup**](ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup |
+| [**connect_word_press_with_application_password**](ConnectApi.md#connect_word_press_with_application_password) | **POST** /v1/connect/wordpress/token | Connect self-hosted WordPress with an application password |
 | [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
 | [**create_youtube_playlist**](ConnectApi.md#create_youtube_playlist) | **POST** /v1/accounts/{accountId}/youtube-playlists | Create YouTube playlist |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
@@ -32,6 +33,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_subreddit_rules**](ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules |
 | [**get_telegram_connect_status**](ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code |
 | [**get_whats_app_sdk_config**](ConnectApi.md#get_whats_app_sdk_config) | **GET** /v1/connect/whatsapp/sdk-config | Get Embedded Signup SDK config |
+| [**get_word_press_auth_url**](ConnectApi.md#get_word_press_auth_url) | **GET** /v1/connect/wordpress | Get WordPress.com OAuth connect URL |
 | [**get_youtube_captions**](ConnectApi.md#get_youtube_captions) | **GET** /v1/accounts/{accountId}/youtube-captions | Get a YouTube video transcript |
 | [**get_youtube_playlists**](ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists |
 | [**handle_o_auth_callback**](ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback |
@@ -981,6 +983,80 @@ end
 ### Authorization
 
 [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_word_press_with_application_password
+
+> <ConnectWordPressWithApplicationPassword200Response> connect_word_press_with_application_password(connect_word_press_with_application_password_request)
+
+Connect self-hosted WordPress with an application password
+
+Connects one self-hosted WordPress site using a WordPress username and application password. `siteUrl` must use HTTPS and may include the path where WordPress is installed. Zernio discovers the REST API, verifies the credentials and required post/media/taxonomy capabilities, then stores the password encrypted. Create an application password in the WordPress user's profile; do not send the user's login password. Reconnecting the same site and profile updates the connection in place. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_word_press_with_application_password_request = Zernio::ConnectWordPressWithApplicationPasswordRequest.new({profile_id: 'profile_id_example', site_url: 'site_url_example', username: 'username_example', application_password: 'application_password_example'}) # ConnectWordPressWithApplicationPasswordRequest | 
+
+begin
+  # Connect self-hosted WordPress with an application password
+  result = api_instance.connect_word_press_with_application_password(connect_word_press_with_application_password_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_word_press_with_application_password: #{e}"
+end
+```
+
+#### Using the connect_word_press_with_application_password_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectWordPressWithApplicationPassword200Response>, Integer, Hash)> connect_word_press_with_application_password_with_http_info(connect_word_press_with_application_password_request)
+
+```ruby
+begin
+  # Connect self-hosted WordPress with an application password
+  data, status_code, headers = api_instance.connect_word_press_with_application_password_with_http_info(connect_word_press_with_application_password_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectWordPressWithApplicationPassword200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_word_press_with_application_password_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_word_press_with_application_password_request** | [**ConnectWordPressWithApplicationPasswordRequest**](ConnectWordPressWithApplicationPasswordRequest.md) |  |  |
+
+### Return type
+
+[**ConnectWordPressWithApplicationPassword200Response**](ConnectWordPressWithApplicationPassword200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2064,6 +2140,84 @@ end
 ### Authorization
 
 [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_word_press_auth_url
+
+> <GetWordPressAuthUrl200Response> get_word_press_auth_url(profile_id, opts)
+
+Get WordPress.com OAuth connect URL
+
+Initiates OAuth for a WordPress.com site or a Jetpack-connected site. WordPress is a connect-only blog platform: the connected account powers the Blogs API (`/v1/accounts/{accountId}/blogs`) and does not support social posts, inbox, analytics, ads, or Shopify product operations. Redirect the user to `authUrl`; after authorization, WordPress returns the browser to Zernio's internal callback and Zernio redirects to `redirect_url` (or the dashboard when omitted). Reconnecting the same site and profile updates the stored connection in place. The consent request omits `scope` to use WordPress.com's default single-site grant. Granular scopes cannot access the `/wp/v2` article API. Zernio checks that API before saving the connection and does not request explicit `global` authorization across all sites. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+}
+
+begin
+  # Get WordPress.com OAuth connect URL
+  result = api_instance.get_word_press_auth_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_word_press_auth_url: #{e}"
+end
+```
+
+#### Using the get_word_press_auth_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWordPressAuthUrl200Response>, Integer, Hash)> get_word_press_auth_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get WordPress.com OAuth connect URL
+  data, status_code, headers = api_instance.get_word_press_auth_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWordPressAuthUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_word_press_auth_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+
+### Return type
+
+[**GetWordPressAuthUrl200Response**](GetWordPressAuthUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
