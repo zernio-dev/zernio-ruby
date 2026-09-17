@@ -20,7 +20,6 @@
 | **category** | **String** |  | [optional] |
 | **product_type** | **String** |  | [optional] |
 | **gtin** | **String** |  | [optional] |
-| **mpn** | **String** |  | [optional] |
 | **inventory** | **Integer** |  | [optional] |
 | **visibility** | **String** |  | [optional] |
 | **color** | **String** |  | [optional] |
@@ -54,7 +53,6 @@ instance = Zernio::MetaCatalogProduct.new(
   category: null,
   product_type: null,
   gtin: null,
-  mpn: null,
   inventory: null,
   visibility: null,
   color: null,
