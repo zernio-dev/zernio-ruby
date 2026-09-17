@@ -18,6 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_block_status**](WhatsAppApi.md#get_whats_app_block_status) | **GET** /v1/whatsapp/block-users/status | Check if a user is blocked |
 | [**get_whats_app_blocked_users**](WhatsAppApi.md#get_whats_app_blocked_users) | **GET** /v1/whatsapp/block-users | List blocked users |
 | [**get_whats_app_business_profile**](WhatsAppApi.md#get_whats_app_business_profile) | **GET** /v1/whatsapp/business-profile | Get business profile |
+| [**get_whats_app_commerce_settings**](WhatsAppApi.md#get_whats_app_commerce_settings) | **GET** /v1/whatsapp/commerce-settings | Get a number&#39;s commerce settings |
 | [**get_whats_app_dataset**](WhatsAppApi.md#get_whats_app_dataset) | **GET** /v1/whatsapp/dataset | Get CTWA conversions dataset |
 | [**get_whats_app_display_name**](WhatsAppApi.md#get_whats_app_display_name) | **GET** /v1/whatsapp/business-profile/display-name | Get display name status |
 | [**get_whats_app_group_chat**](WhatsAppApi.md#get_whats_app_group_chat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info |
@@ -27,7 +28,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_templates**](WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates |
 | [**get_whatsapp_business_username**](WhatsAppApi.md#get_whatsapp_business_username) | **GET** /v1/whatsapp/business-profile/username | Get business username |
 | [**get_whatsapp_business_username_suggestions**](WhatsAppApi.md#get_whatsapp_business_username_suggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions |
+| [**link_whats_app_catalog**](WhatsAppApi.md#link_whats_app_catalog) | **POST** /v1/whatsapp/catalogs | Link a catalog to a WhatsApp number |
 | [**list_whats_app_account_events**](WhatsAppApi.md#list_whats_app_account_events) | **GET** /v1/whatsapp/account-events | List account notifications |
+| [**list_whats_app_catalogs**](WhatsAppApi.md#list_whats_app_catalogs) | **GET** /v1/whatsapp/catalogs | List the catalogs linked to a WhatsApp number |
 | [**list_whats_app_conversions**](WhatsAppApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events |
 | [**list_whats_app_group_chats**](WhatsAppApi.md#list_whats_app_group_chats) | **GET** /v1/whatsapp/wa-groups | List active groups |
 | [**list_whats_app_group_join_requests**](WhatsAppApi.md#list_whats_app_group_join_requests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests |
@@ -38,7 +41,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**send_whats_app_conversion**](WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**set_whatsapp_business_username**](WhatsAppApi.md#set_whatsapp_business_username) | **POST** /v1/whatsapp/business-profile/username | Set business username |
 | [**unblock_whats_app_users**](WhatsAppApi.md#unblock_whats_app_users) | **DELETE** /v1/whatsapp/block-users | Unblock users |
+| [**unlink_whats_app_catalog**](WhatsAppApi.md#unlink_whats_app_catalog) | **DELETE** /v1/whatsapp/catalogs | Unlink a catalog from a WhatsApp number |
 | [**update_whats_app_business_profile**](WhatsAppApi.md#update_whats_app_business_profile) | **POST** /v1/whatsapp/business-profile | Update business profile |
+| [**update_whats_app_commerce_settings**](WhatsAppApi.md#update_whats_app_commerce_settings) | **PUT** /v1/whatsapp/commerce-settings | Update a number&#39;s commerce settings |
 | [**update_whats_app_display_name**](WhatsAppApi.md#update_whats_app_display_name) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change |
 | [**update_whats_app_group_chat**](WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings |
 | [**update_whats_app_template**](WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template |
@@ -1041,6 +1046,79 @@ end
 - **Accept**: application/json
 
 
+## get_whats_app_commerce_settings
+
+> <GetWhatsAppCommerceSettings200Response> get_whats_app_commerce_settings(account_id, opts)
+
+Get a number's commerce settings
+
+Whether the linked catalog is shown on the business profile (`isCatalogVisible`) and whether customers can build a cart (`isCartEnabled`).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | WhatsApp account ID
+opts = {
+  catalog_account_id: 'catalog_account_id_example' # String | A facebook, instagram or metaads account whose Meta login carries catalog_management; its token performs the call instead of the account's own
+}
+
+begin
+  # Get a number's commerce settings
+  result = api_instance.get_whats_app_commerce_settings(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whats_app_commerce_settings: #{e}"
+end
+```
+
+#### Using the get_whats_app_commerce_settings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppCommerceSettings200Response>, Integer, Hash)> get_whats_app_commerce_settings_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get a number's commerce settings
+  data, status_code, headers = api_instance.get_whats_app_commerce_settings_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppCommerceSettings200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whats_app_commerce_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp account ID |  |
+| **catalog_account_id** | **String** | A facebook, instagram or metaads account whose Meta login carries catalog_management; its token performs the call instead of the account&#39;s own | [optional] |
+
+### Return type
+
+[**GetWhatsAppCommerceSettings200Response**](GetWhatsAppCommerceSettings200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_whats_app_dataset
 
 > <GetWhatsAppDataset200Response> get_whats_app_dataset(account_id)
@@ -1682,6 +1760,75 @@ end
 - **Accept**: application/json
 
 
+## link_whats_app_catalog
+
+> <ListWhatsAppCatalogs200Response> link_whats_app_catalog(link_whats_app_catalog_request)
+
+Link a catalog to a WhatsApp number
+
+Connects a Meta Commerce catalog (owned by the same business portfolio as the WhatsApp Business Account) to the number's WABA. The WhatsApp connection's own token cannot do this, so pass `catalogAccountId` naming a facebook, instagram or metaads account whose Meta login carries catalog_management.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+link_whats_app_catalog_request = Zernio::LinkWhatsAppCatalogRequest.new({account_id: 'account_id_example', catalog_id: 'catalog_id_example'}) # LinkWhatsAppCatalogRequest | 
+
+begin
+  # Link a catalog to a WhatsApp number
+  result = api_instance.link_whats_app_catalog(link_whats_app_catalog_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->link_whats_app_catalog: #{e}"
+end
+```
+
+#### Using the link_whats_app_catalog_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWhatsAppCatalogs200Response>, Integer, Hash)> link_whats_app_catalog_with_http_info(link_whats_app_catalog_request)
+
+```ruby
+begin
+  # Link a catalog to a WhatsApp number
+  data, status_code, headers = api_instance.link_whats_app_catalog_with_http_info(link_whats_app_catalog_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWhatsAppCatalogs200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->link_whats_app_catalog_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **link_whats_app_catalog_request** | [**LinkWhatsAppCatalogRequest**](LinkWhatsAppCatalogRequest.md) |  |  |
+
+### Return type
+
+[**ListWhatsAppCatalogs200Response**](ListWhatsAppCatalogs200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## list_whats_app_account_events
 
 > <ListWhatsAppAccountEvents200Response> list_whats_app_account_events(account_id, opts)
@@ -1744,6 +1891,79 @@ end
 ### Return type
 
 [**ListWhatsAppAccountEvents200Response**](ListWhatsAppAccountEvents200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_whats_app_catalogs
+
+> <ListWhatsAppCatalogs200Response> list_whats_app_catalogs(account_id, opts)
+
+List the catalogs linked to a WhatsApp number
+
+The Meta Commerce catalogs connected to the number's WhatsApp Business Account. A linked catalog is what product, product_list and catalog_message interactive messages sell from (see POST /v1/inbox/conversations/{conversationId}/messages) and what customers browse in the WhatsApp app. Create and fill catalogs with the /v1/ads/catalogs endpoints.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | WhatsApp account ID
+opts = {
+  catalog_account_id: 'catalog_account_id_example' # String | A facebook, instagram or metaads account whose Meta login carries catalog_management; its token performs the call instead of the account's own
+}
+
+begin
+  # List the catalogs linked to a WhatsApp number
+  result = api_instance.list_whats_app_catalogs(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->list_whats_app_catalogs: #{e}"
+end
+```
+
+#### Using the list_whats_app_catalogs_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWhatsAppCatalogs200Response>, Integer, Hash)> list_whats_app_catalogs_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List the catalogs linked to a WhatsApp number
+  data, status_code, headers = api_instance.list_whats_app_catalogs_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWhatsAppCatalogs200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->list_whats_app_catalogs_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp account ID |  |
+| **catalog_account_id** | **String** | A facebook, instagram or metaads account whose Meta login carries catalog_management; its token performs the call instead of the account&#39;s own | [optional] |
+
+### Return type
+
+[**ListWhatsAppCatalogs200Response**](ListWhatsAppCatalogs200Response.md)
 
 ### Authorization
 
@@ -2473,6 +2693,79 @@ end
 - **Accept**: application/json
 
 
+## unlink_whats_app_catalog
+
+> <UnlinkWhatsAppCatalog200Response> unlink_whats_app_catalog(account_id, catalog_id, opts)
+
+Unlink a catalog from a WhatsApp number
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | WhatsApp account ID
+catalog_id = 'catalog_id_example' # String | Meta catalog ID
+opts = {
+  catalog_account_id: 'catalog_account_id_example' # String | A facebook, instagram or metaads account whose Meta login carries catalog_management; its token performs the call instead of the account's own
+}
+
+begin
+  # Unlink a catalog from a WhatsApp number
+  result = api_instance.unlink_whats_app_catalog(account_id, catalog_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->unlink_whats_app_catalog: #{e}"
+end
+```
+
+#### Using the unlink_whats_app_catalog_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UnlinkWhatsAppCatalog200Response>, Integer, Hash)> unlink_whats_app_catalog_with_http_info(account_id, catalog_id, opts)
+
+```ruby
+begin
+  # Unlink a catalog from a WhatsApp number
+  data, status_code, headers = api_instance.unlink_whats_app_catalog_with_http_info(account_id, catalog_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UnlinkWhatsAppCatalog200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->unlink_whats_app_catalog_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp account ID |  |
+| **catalog_id** | **String** | Meta catalog ID |  |
+| **catalog_account_id** | **String** | A facebook, instagram or metaads account whose Meta login carries catalog_management; its token performs the call instead of the account&#39;s own | [optional] |
+
+### Return type
+
+[**UnlinkWhatsAppCatalog200Response**](UnlinkWhatsAppCatalog200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## update_whats_app_business_profile
 
 > <UnpublishPost200Response> update_whats_app_business_profile(update_whats_app_business_profile_request)
@@ -2531,6 +2824,73 @@ end
 ### Return type
 
 [**UnpublishPost200Response**](UnpublishPost200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_whats_app_commerce_settings
+
+> <GetWhatsAppCommerceSettings200Response> update_whats_app_commerce_settings(update_whats_app_commerce_settings_request)
+
+Update a number's commerce settings
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+update_whats_app_commerce_settings_request = Zernio::UpdateWhatsAppCommerceSettingsRequest.new({account_id: 'account_id_example'}) # UpdateWhatsAppCommerceSettingsRequest | 
+
+begin
+  # Update a number's commerce settings
+  result = api_instance.update_whats_app_commerce_settings(update_whats_app_commerce_settings_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->update_whats_app_commerce_settings: #{e}"
+end
+```
+
+#### Using the update_whats_app_commerce_settings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppCommerceSettings200Response>, Integer, Hash)> update_whats_app_commerce_settings_with_http_info(update_whats_app_commerce_settings_request)
+
+```ruby
+begin
+  # Update a number's commerce settings
+  data, status_code, headers = api_instance.update_whats_app_commerce_settings_with_http_info(update_whats_app_commerce_settings_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppCommerceSettings200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->update_whats_app_commerce_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_whats_app_commerce_settings_request** | [**UpdateWhatsAppCommerceSettingsRequest**](UpdateWhatsAppCommerceSettingsRequest.md) |  |  |
+
+### Return type
+
+[**GetWhatsAppCommerceSettings200Response**](GetWhatsAppCommerceSettings200Response.md)
 
 ### Authorization
 

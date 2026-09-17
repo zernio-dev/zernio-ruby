@@ -117,6 +117,10 @@ docs/AttachCampaignAssets201Response.md
 docs/AttachCampaignAssetsRequest.md
 docs/AttachNumberToSipTrunk200Response.md
 docs/AttachNumberToSipTrunkRequest.md
+docs/BatchAdCatalogProducts202Response.md
+docs/BatchAdCatalogProductsRequest.md
+docs/BatchAdCatalogProductsRequestRequestsInner.md
+docs/BatchAdCatalogProductsRequestRequestsInnerProduct.md
 docs/BatchGetGoogleBusinessReviews200Response.md
 docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md
 docs/BatchGetGoogleBusinessReviewsRequest.md
@@ -284,6 +288,18 @@ docs/CreateAdAudienceRequest.md
 docs/CreateAdCampaign200Response.md
 docs/CreateAdCampaign201Response.md
 docs/CreateAdCampaignRequest.md
+docs/CreateAdCatalog201Response.md
+docs/CreateAdCatalogFeed201Response.md
+docs/CreateAdCatalogFeedRequest.md
+docs/CreateAdCatalogFeedRequestSchedule.md
+docs/CreateAdCatalogFeedUpload202Response.md
+docs/CreateAdCatalogFeedUploadRequest.md
+docs/CreateAdCatalogProduct201Response.md
+docs/CreateAdCatalogProductRequest.md
+docs/CreateAdCatalogProductRequestProduct.md
+docs/CreateAdCatalogProductSet201Response.md
+docs/CreateAdCatalogProductSetRequest.md
+docs/CreateAdCatalogRequest.md
 docs/CreateAdCreative201Response.md
 docs/CreateAdCreativeRequest.md
 docs/CreateAdCreativeRequestCarouselCardsInner.md
@@ -491,6 +507,9 @@ docs/DeactivateSmsRegistration200Response.md
 docs/DeleteAccountGroup200Response.md
 docs/DeleteAdCampaign200Response.md
 docs/DeleteAdCampaignRequest.md
+docs/DeleteAdCatalog200Response.md
+docs/DeleteAdCatalogProduct200Response.md
+docs/DeleteAdCatalogProductSet200Response.md
 docs/DeleteAdCreative200Response.md
 docs/DeleteAdNegativeKeywordList200Response.md
 docs/DeleteAdSet200Response.md
@@ -627,6 +646,9 @@ docs/GetAdAccountFinance200ResponseFundingSource.md
 docs/GetAdAnalytics202Response.md
 docs/GetAdAudience200Response.md
 docs/GetAdCampaignDetails200Response.md
+docs/GetAdCatalogBatch200Response.md
+docs/GetAdCatalogBatch200ResponseBatch.md
+docs/GetAdCatalogBatch200ResponseBatchErrorsInner.md
 docs/GetAdComments200Response.md
 docs/GetAdComments200ResponseMeta.md
 docs/GetAdComments200ResponsePagination.md
@@ -918,6 +940,7 @@ docs/GetWhatsAppCallPermissions200ResponsePermission.md
 docs/GetWhatsAppCallRecording200Response.md
 docs/GetWhatsAppCalling200Response.md
 docs/GetWhatsAppCallingConfig200Response.md
+docs/GetWhatsAppCommerceSettings200Response.md
 docs/GetWhatsAppDataset200Response.md
 docs/GetWhatsAppDisplayName200Response.md
 docs/GetWhatsAppDisplayName200ResponseDisplayName.md
@@ -1037,6 +1060,7 @@ docs/LikeInboxComment200Response.md
 docs/LikeInboxCommentRequest.md
 docs/LikePost200Response.md
 docs/LikePostRequest.md
+docs/LinkWhatsAppCatalogRequest.md
 docs/LinkedInAdsPlatformData.md
 docs/LinkedInAdsPlatformDataCarousel.md
 docs/LinkedInAdsPlatformDataCarouselCardsInner.md
@@ -1084,10 +1108,12 @@ docs/ListAdAccounts200ResponseAccountsInner.md
 docs/ListAdAudiences200Response.md
 docs/ListAdAudiences200ResponseAudiencesInner.md
 docs/ListAdCampaigns200Response.md
+docs/ListAdCatalogFeedUploads200Response.md
+docs/ListAdCatalogFeeds200Response.md
 docs/ListAdCatalogProductSets200Response.md
 docs/ListAdCatalogProductSets200ResponseProductSetsInner.md
+docs/ListAdCatalogProducts200Response.md
 docs/ListAdCatalogs200Response.md
-docs/ListAdCatalogs200ResponseCatalogsInner.md
 docs/ListAdCreatives200Response.md
 docs/ListAdGroupAssets200Response.md
 docs/ListAdGroupAssets200ResponseCalloutsInner.md
@@ -1278,6 +1304,7 @@ docs/ListWhatsAppAccountEvents200ResponseEventsInner.md
 docs/ListWhatsAppCalls200Response.md
 docs/ListWhatsAppCalls200ResponseCallsInner.md
 docs/ListWhatsAppCalls200ResponseCallsInnerBilling.md
+docs/ListWhatsAppCatalogs200Response.md
 docs/ListWhatsAppConversions200Response.md
 docs/ListWhatsAppConversions200ResponseEventsInner.md
 docs/ListWhatsAppFlowResponses200Response.md
@@ -1317,6 +1344,9 @@ docs/MentionsApi.md
 docs/MessagesApi.md
 docs/MessagingAdsApi.md
 docs/MetaAdsPlatformData.md
+docs/MetaCatalogProduct.md
+docs/MetaCatalogProductInput.md
+docs/MetaFeedUpload.md
 docs/MetaInstagramIdentityRef.md
 docs/MetaLeadForm.md
 docs/MetaLeadFormContextCard.md
@@ -1326,6 +1356,10 @@ docs/MetaLeadFormPlatformData.md
 docs/MetaLeadFormPlatformDataContextCard.md
 docs/MetaLeadFormQuestionsInner.md
 docs/MetaLeadFormThankYouPage.md
+docs/MetaProductCatalog.md
+docs/MetaProductFeed.md
+docs/MetaProductFeedSchedule.md
+docs/MetaProductSet.md
 docs/Money.md
 docs/MoneyAmount.md
 docs/MoveAccountToProfile200Response.md
@@ -1380,6 +1414,7 @@ docs/PreflightSmsRegistration200ResponseAdvisoriesInner.md
 docs/PreflightSmsRegistration200ResponseComposed.md
 docs/PreflightSmsRegistrationRequest.md
 docs/Product.md
+docs/ProductCatalogsApi.md
 docs/ProductImage.md
 docs/ProductOptionsInner.md
 docs/ProductSeo.md
@@ -1723,6 +1758,7 @@ docs/UndoRetweet200Response.md
 docs/UnfollowUser200Response.md
 docs/UnlikeInboxComment200Response.md
 docs/UnlikePost200Response.md
+docs/UnlinkWhatsAppCatalog200Response.md
 docs/UnpinDiscordMessage200Response.md
 docs/UnpublishPost200Response.md
 docs/UnpublishPostRequest.md
@@ -1752,6 +1788,8 @@ docs/UpdateAdCampaignRequestBudget.md
 docs/UpdateAdCampaignRequestPlatformSpecificData.md
 docs/UpdateAdCampaignStatus200Response.md
 docs/UpdateAdCampaignStatusRequest.md
+docs/UpdateAdCatalogProductRequest.md
+docs/UpdateAdCatalogProductSetRequest.md
 docs/UpdateAdCreative200Response.md
 docs/UpdateAdCreativeRequest.md
 docs/UpdateAdKeyword200Response.md
@@ -1898,6 +1936,7 @@ docs/UpdateWebhookSettings200Response.md
 docs/UpdateWebhookSettingsRequest.md
 docs/UpdateWhatsAppBusinessProfileRequest.md
 docs/UpdateWhatsAppCallingLegacyRequest.md
+docs/UpdateWhatsAppCommerceSettingsRequest.md
 docs/UpdateWhatsAppDisplayName200Response.md
 docs/UpdateWhatsAppDisplayName200ResponseDisplayName.md
 docs/UpdateWhatsAppDisplayNameRequest.md
@@ -2102,6 +2141,7 @@ docs/WhatsAppCallingApi.md
 docs/WhatsAppCarouselCardComponent.md
 docs/WhatsAppCarouselComponent.md
 docs/WhatsAppCarouselComponentCardsInner.md
+docs/WhatsAppCommerceSettings.md
 docs/WhatsAppFlowsApi.md
 docs/WhatsAppFooterComponent.md
 docs/WhatsAppHeaderComponent.md
@@ -2213,6 +2253,7 @@ lib/zernio-sdk/api/messages_api.rb
 lib/zernio-sdk/api/messaging_ads_api.rb
 lib/zernio-sdk/api/phone_numbers_api.rb
 lib/zernio-sdk/api/posts_api.rb
+lib/zernio-sdk/api/product_catalogs_api.rb
 lib/zernio-sdk/api/products_api.rb
 lib/zernio-sdk/api/profiles_api.rb
 lib/zernio-sdk/api/queue_api.rb
@@ -2342,6 +2383,10 @@ lib/zernio-sdk/models/attach_campaign_assets201_response.rb
 lib/zernio-sdk/models/attach_campaign_assets_request.rb
 lib/zernio-sdk/models/attach_number_to_sip_trunk200_response.rb
 lib/zernio-sdk/models/attach_number_to_sip_trunk_request.rb
+lib/zernio-sdk/models/batch_ad_catalog_products202_response.rb
+lib/zernio-sdk/models/batch_ad_catalog_products_request.rb
+lib/zernio-sdk/models/batch_ad_catalog_products_request_requests_inner.rb
+lib/zernio-sdk/models/batch_ad_catalog_products_request_requests_inner_product.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response_location_reviews_inner.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews_request.rb
@@ -2499,6 +2544,18 @@ lib/zernio-sdk/models/create_ad_audience_request.rb
 lib/zernio-sdk/models/create_ad_campaign200_response.rb
 lib/zernio-sdk/models/create_ad_campaign201_response.rb
 lib/zernio-sdk/models/create_ad_campaign_request.rb
+lib/zernio-sdk/models/create_ad_catalog201_response.rb
+lib/zernio-sdk/models/create_ad_catalog_feed201_response.rb
+lib/zernio-sdk/models/create_ad_catalog_feed_request.rb
+lib/zernio-sdk/models/create_ad_catalog_feed_request_schedule.rb
+lib/zernio-sdk/models/create_ad_catalog_feed_upload202_response.rb
+lib/zernio-sdk/models/create_ad_catalog_feed_upload_request.rb
+lib/zernio-sdk/models/create_ad_catalog_product201_response.rb
+lib/zernio-sdk/models/create_ad_catalog_product_request.rb
+lib/zernio-sdk/models/create_ad_catalog_product_request_product.rb
+lib/zernio-sdk/models/create_ad_catalog_product_set201_response.rb
+lib/zernio-sdk/models/create_ad_catalog_product_set_request.rb
+lib/zernio-sdk/models/create_ad_catalog_request.rb
 lib/zernio-sdk/models/create_ad_creative201_response.rb
 lib/zernio-sdk/models/create_ad_creative_request.rb
 lib/zernio-sdk/models/create_ad_creative_request_carousel_cards_inner.rb
@@ -2705,6 +2762,9 @@ lib/zernio-sdk/models/deactivate_sms_registration200_response.rb
 lib/zernio-sdk/models/delete_account_group200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign_request.rb
+lib/zernio-sdk/models/delete_ad_catalog200_response.rb
+lib/zernio-sdk/models/delete_ad_catalog_product200_response.rb
+lib/zernio-sdk/models/delete_ad_catalog_product_set200_response.rb
 lib/zernio-sdk/models/delete_ad_creative200_response.rb
 lib/zernio-sdk/models/delete_ad_negative_keyword_list200_response.rb
 lib/zernio-sdk/models/delete_ad_set200_response.rb
@@ -2832,6 +2892,9 @@ lib/zernio-sdk/models/get_ad_account_finance200_response_funding_source.rb
 lib/zernio-sdk/models/get_ad_analytics202_response.rb
 lib/zernio-sdk/models/get_ad_audience200_response.rb
 lib/zernio-sdk/models/get_ad_campaign_details200_response.rb
+lib/zernio-sdk/models/get_ad_catalog_batch200_response.rb
+lib/zernio-sdk/models/get_ad_catalog_batch200_response_batch.rb
+lib/zernio-sdk/models/get_ad_catalog_batch200_response_batch_errors_inner.rb
 lib/zernio-sdk/models/get_ad_comments200_response.rb
 lib/zernio-sdk/models/get_ad_comments200_response_meta.rb
 lib/zernio-sdk/models/get_ad_comments200_response_pagination.rb
@@ -3123,6 +3186,7 @@ lib/zernio-sdk/models/get_whats_app_call_permissions200_response_permission.rb
 lib/zernio-sdk/models/get_whats_app_call_recording200_response.rb
 lib/zernio-sdk/models/get_whats_app_calling200_response.rb
 lib/zernio-sdk/models/get_whats_app_calling_config200_response.rb
+lib/zernio-sdk/models/get_whats_app_commerce_settings200_response.rb
 lib/zernio-sdk/models/get_whats_app_dataset200_response.rb
 lib/zernio-sdk/models/get_whats_app_display_name200_response.rb
 lib/zernio-sdk/models/get_whats_app_display_name200_response_display_name.rb
@@ -3238,6 +3302,7 @@ lib/zernio-sdk/models/like_inbox_comment200_response.rb
 lib/zernio-sdk/models/like_inbox_comment_request.rb
 lib/zernio-sdk/models/like_post200_response.rb
 lib/zernio-sdk/models/like_post_request.rb
+lib/zernio-sdk/models/link_whats_app_catalog_request.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data_carousel.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data_carousel_cards_inner.rb
@@ -3284,10 +3349,12 @@ lib/zernio-sdk/models/list_ad_accounts200_response_accounts_inner.rb
 lib/zernio-sdk/models/list_ad_audiences200_response.rb
 lib/zernio-sdk/models/list_ad_audiences200_response_audiences_inner.rb
 lib/zernio-sdk/models/list_ad_campaigns200_response.rb
+lib/zernio-sdk/models/list_ad_catalog_feed_uploads200_response.rb
+lib/zernio-sdk/models/list_ad_catalog_feeds200_response.rb
 lib/zernio-sdk/models/list_ad_catalog_product_sets200_response.rb
 lib/zernio-sdk/models/list_ad_catalog_product_sets200_response_product_sets_inner.rb
+lib/zernio-sdk/models/list_ad_catalog_products200_response.rb
 lib/zernio-sdk/models/list_ad_catalogs200_response.rb
-lib/zernio-sdk/models/list_ad_catalogs200_response_catalogs_inner.rb
 lib/zernio-sdk/models/list_ad_creatives200_response.rb
 lib/zernio-sdk/models/list_ad_group_assets200_response.rb
 lib/zernio-sdk/models/list_ad_group_assets200_response_callouts_inner.rb
@@ -3478,6 +3545,7 @@ lib/zernio-sdk/models/list_whats_app_account_events200_response_events_inner.rb
 lib/zernio-sdk/models/list_whats_app_calls200_response.rb
 lib/zernio-sdk/models/list_whats_app_calls200_response_calls_inner.rb
 lib/zernio-sdk/models/list_whats_app_calls200_response_calls_inner_billing.rb
+lib/zernio-sdk/models/list_whats_app_catalogs200_response.rb
 lib/zernio-sdk/models/list_whats_app_conversions200_response.rb
 lib/zernio-sdk/models/list_whats_app_conversions200_response_events_inner.rb
 lib/zernio-sdk/models/list_whats_app_flow_responses200_response.rb
@@ -3512,6 +3580,9 @@ lib/zernio-sdk/models/media_content_type.rb
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/meta_ads_platform_data.rb
+lib/zernio-sdk/models/meta_catalog_product.rb
+lib/zernio-sdk/models/meta_catalog_product_input.rb
+lib/zernio-sdk/models/meta_feed_upload.rb
 lib/zernio-sdk/models/meta_instagram_identity_ref.rb
 lib/zernio-sdk/models/meta_lead_form.rb
 lib/zernio-sdk/models/meta_lead_form_context_card.rb
@@ -3521,6 +3592,10 @@ lib/zernio-sdk/models/meta_lead_form_platform_data.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data_context_card.rb
 lib/zernio-sdk/models/meta_lead_form_questions_inner.rb
 lib/zernio-sdk/models/meta_lead_form_thank_you_page.rb
+lib/zernio-sdk/models/meta_product_catalog.rb
+lib/zernio-sdk/models/meta_product_feed.rb
+lib/zernio-sdk/models/meta_product_feed_schedule.rb
+lib/zernio-sdk/models/meta_product_set.rb
 lib/zernio-sdk/models/money.rb
 lib/zernio-sdk/models/money_amount.rb
 lib/zernio-sdk/models/move_account_to_profile200_response.rb
@@ -3904,6 +3979,7 @@ lib/zernio-sdk/models/undo_retweet200_response.rb
 lib/zernio-sdk/models/unfollow_user200_response.rb
 lib/zernio-sdk/models/unlike_inbox_comment200_response.rb
 lib/zernio-sdk/models/unlike_post200_response.rb
+lib/zernio-sdk/models/unlink_whats_app_catalog200_response.rb
 lib/zernio-sdk/models/unpin_discord_message200_response.rb
 lib/zernio-sdk/models/unpublish_post200_response.rb
 lib/zernio-sdk/models/unpublish_post_request.rb
@@ -3933,6 +4009,8 @@ lib/zernio-sdk/models/update_ad_campaign_request_budget.rb
 lib/zernio-sdk/models/update_ad_campaign_request_platform_specific_data.rb
 lib/zernio-sdk/models/update_ad_campaign_status200_response.rb
 lib/zernio-sdk/models/update_ad_campaign_status_request.rb
+lib/zernio-sdk/models/update_ad_catalog_product_request.rb
+lib/zernio-sdk/models/update_ad_catalog_product_set_request.rb
 lib/zernio-sdk/models/update_ad_creative200_response.rb
 lib/zernio-sdk/models/update_ad_creative_request.rb
 lib/zernio-sdk/models/update_ad_keyword200_response.rb
@@ -4079,6 +4157,7 @@ lib/zernio-sdk/models/update_webhook_settings200_response.rb
 lib/zernio-sdk/models/update_webhook_settings_request.rb
 lib/zernio-sdk/models/update_whats_app_business_profile_request.rb
 lib/zernio-sdk/models/update_whats_app_calling_legacy_request.rb
+lib/zernio-sdk/models/update_whats_app_commerce_settings_request.rb
 lib/zernio-sdk/models/update_whats_app_display_name200_response.rb
 lib/zernio-sdk/models/update_whats_app_display_name200_response_display_name.rb
 lib/zernio-sdk/models/update_whats_app_display_name_request.rb
@@ -4274,6 +4353,7 @@ lib/zernio-sdk/models/whats_app_buttons_component.rb
 lib/zernio-sdk/models/whats_app_carousel_card_component.rb
 lib/zernio-sdk/models/whats_app_carousel_component.rb
 lib/zernio-sdk/models/whats_app_carousel_component_cards_inner.rb
+lib/zernio-sdk/models/whats_app_commerce_settings.rb
 lib/zernio-sdk/models/whats_app_footer_component.rb
 lib/zernio-sdk/models/whats_app_header_component.rb
 lib/zernio-sdk/models/whats_app_header_component_example.rb
@@ -4379,6 +4459,7 @@ spec/api/messages_api_spec.rb
 spec/api/messaging_ads_api_spec.rb
 spec/api/phone_numbers_api_spec.rb
 spec/api/posts_api_spec.rb
+spec/api/product_catalogs_api_spec.rb
 spec/api/products_api_spec.rb
 spec/api/profiles_api_spec.rb
 spec/api/queue_api_spec.rb
@@ -4503,6 +4584,10 @@ spec/models/attach_campaign_assets201_response_spec.rb
 spec/models/attach_campaign_assets_request_spec.rb
 spec/models/attach_number_to_sip_trunk200_response_spec.rb
 spec/models/attach_number_to_sip_trunk_request_spec.rb
+spec/models/batch_ad_catalog_products202_response_spec.rb
+spec/models/batch_ad_catalog_products_request_requests_inner_product_spec.rb
+spec/models/batch_ad_catalog_products_request_requests_inner_spec.rb
+spec/models/batch_ad_catalog_products_request_spec.rb
 spec/models/batch_get_google_business_reviews200_response_location_reviews_inner_spec.rb
 spec/models/batch_get_google_business_reviews200_response_spec.rb
 spec/models/batch_get_google_business_reviews_request_spec.rb
@@ -4660,6 +4745,18 @@ spec/models/create_ad_audience_request_spec.rb
 spec/models/create_ad_campaign200_response_spec.rb
 spec/models/create_ad_campaign201_response_spec.rb
 spec/models/create_ad_campaign_request_spec.rb
+spec/models/create_ad_catalog201_response_spec.rb
+spec/models/create_ad_catalog_feed201_response_spec.rb
+spec/models/create_ad_catalog_feed_request_schedule_spec.rb
+spec/models/create_ad_catalog_feed_request_spec.rb
+spec/models/create_ad_catalog_feed_upload202_response_spec.rb
+spec/models/create_ad_catalog_feed_upload_request_spec.rb
+spec/models/create_ad_catalog_product201_response_spec.rb
+spec/models/create_ad_catalog_product_request_product_spec.rb
+spec/models/create_ad_catalog_product_request_spec.rb
+spec/models/create_ad_catalog_product_set201_response_spec.rb
+spec/models/create_ad_catalog_product_set_request_spec.rb
+spec/models/create_ad_catalog_request_spec.rb
 spec/models/create_ad_creative201_response_spec.rb
 spec/models/create_ad_creative_request_carousel_cards_inner_spec.rb
 spec/models/create_ad_creative_request_spec.rb
@@ -4866,6 +4963,9 @@ spec/models/deactivate_sms_registration200_response_spec.rb
 spec/models/delete_account_group200_response_spec.rb
 spec/models/delete_ad_campaign200_response_spec.rb
 spec/models/delete_ad_campaign_request_spec.rb
+spec/models/delete_ad_catalog200_response_spec.rb
+spec/models/delete_ad_catalog_product200_response_spec.rb
+spec/models/delete_ad_catalog_product_set200_response_spec.rb
 spec/models/delete_ad_creative200_response_spec.rb
 spec/models/delete_ad_negative_keyword_list200_response_spec.rb
 spec/models/delete_ad_set200_response_spec.rb
@@ -4993,6 +5093,9 @@ spec/models/get_ad_account_finance200_response_spec.rb
 spec/models/get_ad_analytics202_response_spec.rb
 spec/models/get_ad_audience200_response_spec.rb
 spec/models/get_ad_campaign_details200_response_spec.rb
+spec/models/get_ad_catalog_batch200_response_batch_errors_inner_spec.rb
+spec/models/get_ad_catalog_batch200_response_batch_spec.rb
+spec/models/get_ad_catalog_batch200_response_spec.rb
 spec/models/get_ad_comments200_response_meta_spec.rb
 spec/models/get_ad_comments200_response_pagination_spec.rb
 spec/models/get_ad_comments200_response_spec.rb
@@ -5284,6 +5387,7 @@ spec/models/get_whats_app_call_permissions200_response_spec.rb
 spec/models/get_whats_app_call_recording200_response_spec.rb
 spec/models/get_whats_app_calling200_response_spec.rb
 spec/models/get_whats_app_calling_config200_response_spec.rb
+spec/models/get_whats_app_commerce_settings200_response_spec.rb
 spec/models/get_whats_app_dataset200_response_spec.rb
 spec/models/get_whats_app_display_name200_response_display_name_spec.rb
 spec/models/get_whats_app_display_name200_response_spec.rb
@@ -5399,6 +5503,7 @@ spec/models/like_inbox_comment200_response_spec.rb
 spec/models/like_inbox_comment_request_spec.rb
 spec/models/like_post200_response_spec.rb
 spec/models/like_post_request_spec.rb
+spec/models/link_whats_app_catalog_request_spec.rb
 spec/models/linked_in_ads_platform_data_carousel_cards_inner_spec.rb
 spec/models/linked_in_ads_platform_data_carousel_spec.rb
 spec/models/linked_in_ads_platform_data_conversation_messages_inner_buttons_inner_spec.rb
@@ -5445,9 +5550,11 @@ spec/models/list_ad_accounts200_response_spec.rb
 spec/models/list_ad_audiences200_response_audiences_inner_spec.rb
 spec/models/list_ad_audiences200_response_spec.rb
 spec/models/list_ad_campaigns200_response_spec.rb
+spec/models/list_ad_catalog_feed_uploads200_response_spec.rb
+spec/models/list_ad_catalog_feeds200_response_spec.rb
 spec/models/list_ad_catalog_product_sets200_response_product_sets_inner_spec.rb
 spec/models/list_ad_catalog_product_sets200_response_spec.rb
-spec/models/list_ad_catalogs200_response_catalogs_inner_spec.rb
+spec/models/list_ad_catalog_products200_response_spec.rb
 spec/models/list_ad_catalogs200_response_spec.rb
 spec/models/list_ad_creatives200_response_spec.rb
 spec/models/list_ad_group_assets200_response_callouts_inner_spec.rb
@@ -5639,6 +5746,7 @@ spec/models/list_whats_app_account_events200_response_spec.rb
 spec/models/list_whats_app_calls200_response_calls_inner_billing_spec.rb
 spec/models/list_whats_app_calls200_response_calls_inner_spec.rb
 spec/models/list_whats_app_calls200_response_spec.rb
+spec/models/list_whats_app_catalogs200_response_spec.rb
 spec/models/list_whats_app_conversions200_response_events_inner_spec.rb
 spec/models/list_whats_app_conversions200_response_spec.rb
 spec/models/list_whats_app_flow_responses200_response_responses_inner_spec.rb
@@ -5673,6 +5781,9 @@ spec/models/media_content_type_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
 spec/models/meta_ads_platform_data_spec.rb
+spec/models/meta_catalog_product_input_spec.rb
+spec/models/meta_catalog_product_spec.rb
+spec/models/meta_feed_upload_spec.rb
 spec/models/meta_instagram_identity_ref_spec.rb
 spec/models/meta_lead_form_context_card_spec.rb
 spec/models/meta_lead_form_legal_content_privacy_policy_spec.rb
@@ -5682,6 +5793,10 @@ spec/models/meta_lead_form_platform_data_spec.rb
 spec/models/meta_lead_form_questions_inner_spec.rb
 spec/models/meta_lead_form_spec.rb
 spec/models/meta_lead_form_thank_you_page_spec.rb
+spec/models/meta_product_catalog_spec.rb
+spec/models/meta_product_feed_schedule_spec.rb
+spec/models/meta_product_feed_spec.rb
+spec/models/meta_product_set_spec.rb
 spec/models/money_amount_spec.rb
 spec/models/money_spec.rb
 spec/models/move_account_to_profile200_response_spec.rb
@@ -6065,6 +6180,7 @@ spec/models/undo_retweet200_response_spec.rb
 spec/models/unfollow_user200_response_spec.rb
 spec/models/unlike_inbox_comment200_response_spec.rb
 spec/models/unlike_post200_response_spec.rb
+spec/models/unlink_whats_app_catalog200_response_spec.rb
 spec/models/unpin_discord_message200_response_spec.rb
 spec/models/unpublish_post200_response_spec.rb
 spec/models/unpublish_post_request_spec.rb
@@ -6094,6 +6210,8 @@ spec/models/update_ad_campaign_request_platform_specific_data_spec.rb
 spec/models/update_ad_campaign_request_spec.rb
 spec/models/update_ad_campaign_status200_response_spec.rb
 spec/models/update_ad_campaign_status_request_spec.rb
+spec/models/update_ad_catalog_product_request_spec.rb
+spec/models/update_ad_catalog_product_set_request_spec.rb
 spec/models/update_ad_creative200_response_spec.rb
 spec/models/update_ad_creative_request_spec.rb
 spec/models/update_ad_keyword200_response_spec.rb
@@ -6240,6 +6358,7 @@ spec/models/update_webhook_settings200_response_spec.rb
 spec/models/update_webhook_settings_request_spec.rb
 spec/models/update_whats_app_business_profile_request_spec.rb
 spec/models/update_whats_app_calling_legacy_request_spec.rb
+spec/models/update_whats_app_commerce_settings_request_spec.rb
 spec/models/update_whats_app_display_name200_response_display_name_spec.rb
 spec/models/update_whats_app_display_name200_response_spec.rb
 spec/models/update_whats_app_display_name_request_spec.rb
@@ -6435,6 +6554,7 @@ spec/models/whats_app_buttons_component_spec.rb
 spec/models/whats_app_carousel_card_component_spec.rb
 spec/models/whats_app_carousel_component_cards_inner_spec.rb
 spec/models/whats_app_carousel_component_spec.rb
+spec/models/whats_app_commerce_settings_spec.rb
 spec/models/whats_app_footer_component_spec.rb
 spec/models/whats_app_header_component_example_spec.rb
 spec/models/whats_app_header_component_spec.rb

@@ -1,4 +1,4 @@
-# Zernio::ListAdCatalogs200ResponseCatalogsInner
+# Zernio::MetaProductSet
 
 ## Properties
 
@@ -6,19 +6,19 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
-| **vertical** | **String** | Catalog vertical (e.g. commerce, vehicles, hotels) | [optional] |
 | **product_count** | **Integer** |  | [optional] |
+| **filter** | **Hash&lt;String, Object&gt;** |  | [optional] |
 
 ## Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ListAdCatalogs200ResponseCatalogsInner.new(
+instance = Zernio::MetaProductSet.new(
   id: null,
   name: null,
-  vertical: null,
-  product_count: null
+  product_count: null,
+  filter: null
 )
 ```
 

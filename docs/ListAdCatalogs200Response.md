@@ -4,7 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **catalogs** | [**Array&lt;ListAdCatalogs200ResponseCatalogsInner&gt;**](ListAdCatalogs200ResponseCatalogsInner.md) |  | [optional] |
+| **business_id** | **String** |  | [optional] |
+| **catalogs** | [**Array&lt;MetaProductCatalog&gt;**](MetaProductCatalog.md) |  | [optional] |
 
 ## Example
 
@@ -12,6 +13,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::ListAdCatalogs200Response.new(
+  business_id: null,
   catalogs: null
 )
 ```
