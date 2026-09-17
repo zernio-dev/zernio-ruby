@@ -12,7 +12,7 @@
 | **analytics** | [**PostAnalytics**](PostAnalytics.md) |  | [optional] |
 | **sync_status** | **String** | Sync state of analytics for this platform | [optional] |
 | **platform_post_url** | **String** |  | [optional] |
-| **error_message** | **String** | Error details when status is failed | [optional] |
+| **error_message** | **String** | Error details when status is failed, or why analytics are unavailable for a published entry (e.g. Google Business Profile, a TikTok upload that never received a video id) | [optional] |
 
 ## Example
 
