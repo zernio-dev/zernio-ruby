@@ -8,7 +8,7 @@
 | **code** | **String** | Machine-readable error code. Stable across versions. |  |
 | **reason** | **String** | Discriminator for which gate fired. |  |
 | **documentation_url** | **String** | Link to the relevant documentation page. | [optional] |
-| **dashboard_url** | **String** | Deep-link to send the end-user to. For &#x60;free_tier_exceeded&#x60; and &#x60;twitter_passthrough&#x60; this is the Zernio billing tab. For &#x60;enterprise_required&#x60; this is the Zernio enterprise contact page.  | [optional] |
+| **dashboard_url** | **String** | Deep-link to send the end-user to. For &#x60;free_tier_exceeded&#x60; and &#x60;twitter_passthrough&#x60; this opens the add-payment-method drawer on the Zernio billing page. For &#x60;enterprise_required&#x60; this is the Zernio enterprise contact page.  | [optional] |
 | **details** | [**InlineObject4Details**](InlineObject4Details.md) |  | [optional] |
 
 ## Example
@@ -21,7 +21,7 @@ instance = Zernio::InlineObject4.new(
   code: null,
   reason: null,
   documentation_url: https://docs.zernio.com/billing/payment-method-required,
-  dashboard_url: https://zernio.com/dashboard?tab&#x3D;billing,
+  dashboard_url: https://zernio.com/dashboard/billing?add_payment_method&#x3D;1,
   details: null
 )
 ```
