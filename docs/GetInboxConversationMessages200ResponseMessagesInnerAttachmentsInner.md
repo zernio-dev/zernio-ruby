@@ -11,6 +11,7 @@
 | **refresh_url** | **String** | Instagram and Facebook only. Endpoint that resolves this attachment to a working url every time, re-minting it from Meta when the stored one has expired. Safe to store and render indefinitely. | [optional] |
 | **filename** | **String** |  | [optional] |
 | **preview_url** | **String** |  | [optional] |
+| **payload** | **Hash&lt;String, Object&gt;** | Template content (title, subtitle, image, buttons) when type is template | [optional] |
 
 ## Example
 
@@ -24,7 +25,8 @@ instance = Zernio::GetInboxConversationMessages200ResponseMessagesInnerAttachmen
   url: null,
   refresh_url: null,
   filename: null,
-  preview_url: null
+  preview_url: null,
+  payload: null
 )
 ```
 
