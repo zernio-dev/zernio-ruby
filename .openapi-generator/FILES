@@ -143,6 +143,7 @@ docs/BookmarkPostRequest.md
 docs/BoostPostRequest.md
 docs/BoostPostRequestBudget.md
 docs/BoostPostRequestPlatformSpecificData.md
+docs/BoostPostRequestPromoCodesInner.md
 docs/BoostPostRequestPromotedObject.md
 docs/BoostPostRequestSchedule.md
 docs/BoostPostRequestSparkPostsInner.md
@@ -2364,6 +2365,7 @@ lib/zernio-sdk/models/bookmark_post_request.rb
 lib/zernio-sdk/models/boost_post_request.rb
 lib/zernio-sdk/models/boost_post_request_budget.rb
 lib/zernio-sdk/models/boost_post_request_platform_specific_data.rb
+lib/zernio-sdk/models/boost_post_request_promo_codes_inner.rb
 lib/zernio-sdk/models/boost_post_request_promoted_object.rb
 lib/zernio-sdk/models/boost_post_request_schedule.rb
 lib/zernio-sdk/models/boost_post_request_spark_posts_inner.rb
@@ -4521,6 +4523,7 @@ spec/models/bookmark_post200_response_spec.rb
 spec/models/bookmark_post_request_spec.rb
 spec/models/boost_post_request_budget_spec.rb
 spec/models/boost_post_request_platform_specific_data_spec.rb
+spec/models/boost_post_request_promo_codes_inner_spec.rb
 spec/models/boost_post_request_promoted_object_spec.rb
 spec/models/boost_post_request_schedule_spec.rb
 spec/models/boost_post_request_spark_posts_inner_spec.rb
