@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
+| **integration_lane** | **String** | TikTok only. The TikTok integration the account is connected through: business (TikTok for Business, Accounts API) or developer (the original integration). Absent on other platforms. | [optional] |
 | **username** | **String** |  | [optional] |
 | **display_name** | **String** |  | [optional] |
 | **status** | **String** | Overall health status | [optional] |
@@ -24,6 +25,7 @@ require 'zernio-sdk'
 instance = Zernio::GetAccountHealth200Response.new(
   account_id: null,
   platform: null,
+  integration_lane: null,
   username: null,
   display_name: null,
   status: null,
