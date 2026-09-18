@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Internal conversation ID |  |
+| **id** | **String** | The platform&#39;s conversation id, equal to &#x60;conversation.platformConversationId&#x60; on inbox webhooks (whose &#x60;conversation.id&#x60; is Zernio&#39;s internal id). Both are accepted by the conversation endpoints. |  |
 | **platform** | **String** |  |  |
-| **platform_conversation_id** | **String** |  |  |
+| **platform_conversation_id** | **String** | Same value as &#x60;id&#x60;. |  |
 | **participant_id** | **String** | Contact&#39;s platform identifier (IGSID, PSID, wa_id, etc.) | [optional] |
 | **participant_name** | **String** |  |  |
 | **participant_username** | **String** | Contact&#39;s handle when the platform exposes one | [optional] |
