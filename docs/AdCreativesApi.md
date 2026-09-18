@@ -14,6 +14,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_creatives**](AdCreativesApi.md#list_ad_creatives) | **GET** /v1/ads/creatives | Creative library |
 | [**list_ad_images**](AdCreativesApi.md#list_ad_images) | **GET** /v1/ads/images | Ad image library |
 | [**list_ad_videos**](AdCreativesApi.md#list_ad_videos) | **GET** /v1/ads/videos | Ad video library |
+| [**list_ads_tik_tok_identities**](AdCreativesApi.md#list_ads_tik_tok_identities) | **GET** /v1/ads/tiktok-identities | List TikTok ad identities |
 | [**list_partnership_ad_content**](AdCreativesApi.md#list_partnership_ad_content) | **GET** /v1/ads/partnership-content | List partnership ad content |
 | [**list_partnership_ad_permissions**](AdCreativesApi.md#list_partnership_ad_permissions) | **GET** /v1/ads/partnership-permissions | List partnership permissions |
 | [**set_partnership_ad_permission**](AdCreativesApi.md#set_partnership_ad_permission) | **POST** /v1/ads/partnership-permissions | Set partnership permission |
@@ -747,6 +748,77 @@ end
 ### Return type
 
 [**ListAdVideos200Response**](ListAdVideos200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ads_tik_tok_identities
+
+> <ListAdsTikTokIdentities200Response> list_ads_tik_tok_identities(account_id, ad_account_id)
+
+List TikTok ad identities
+
+The identities an ad on this TikTok advertiser may run as (the profile shown on the ad): the advertiser's own TikTok accounts (TT_USER), Business Center authorized accounts (BC_AUTH_TT) and custom brand identities (CUSTOMIZED_USER). Pass the chosen `identityId` on POST /v1/ads/create or POST /v1/ads/boost. Spark-post identities (AUTH_CODE) are not listed; a Spark code creates its own.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCreativesApi.new
+account_id = 'account_id_example' # String | A tiktok or tiktokads account ID
+ad_account_id = 'ad_account_id_example' # String | TikTok advertiser ID
+
+begin
+  # List TikTok ad identities
+  result = api_instance.list_ads_tik_tok_identities(account_id, ad_account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->list_ads_tik_tok_identities: #{e}"
+end
+```
+
+#### Using the list_ads_tik_tok_identities_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdsTikTokIdentities200Response>, Integer, Hash)> list_ads_tik_tok_identities_with_http_info(account_id, ad_account_id)
+
+```ruby
+begin
+  # List TikTok ad identities
+  data, status_code, headers = api_instance.list_ads_tik_tok_identities_with_http_info(account_id, ad_account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdsTikTokIdentities200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->list_ads_tik_tok_identities_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | A tiktok or tiktokads account ID |  |
+| **ad_account_id** | **String** | TikTok advertiser ID |  |
+
+### Return type
+
+[**ListAdsTikTokIdentities200Response**](ListAdsTikTokIdentities200Response.md)
 
 ### Authorization
 
