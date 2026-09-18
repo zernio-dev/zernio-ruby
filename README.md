@@ -1304,6 +1304,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CtwaAdRequestBodyRegionsInner](docs/CtwaAdRequestBodyRegionsInner.md)
  - [Zernio::CtwaAdRequestBodyVideo](docs/CtwaAdRequestBodyVideo.md)
  - [Zernio::CtwaAdRequestBodyWelcomeMessage](docs/CtwaAdRequestBodyWelcomeMessage.md)
+ - [Zernio::CtwaAdRequestBodyWelcomeMessageQuickRepliesInner](docs/CtwaAdRequestBodyWelcomeMessageQuickRepliesInner.md)
  - [Zernio::CtwaAdRequestBodyZipsInner](docs/CtwaAdRequestBodyZipsInner.md)
  - [Zernio::CtwaMultiResponse](docs/CtwaMultiResponse.md)
  - [Zernio::CtwaSingleResponse](docs/CtwaSingleResponse.md)

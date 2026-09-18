@@ -497,6 +497,7 @@ docs/CtwaAdRequestBodyPlacements.md
 docs/CtwaAdRequestBodyRegionsInner.md
 docs/CtwaAdRequestBodyVideo.md
 docs/CtwaAdRequestBodyWelcomeMessage.md
+docs/CtwaAdRequestBodyWelcomeMessageQuickRepliesInner.md
 docs/CtwaAdRequestBodyZipsInner.md
 docs/CtwaMultiResponse.md
 docs/CtwaSingleResponse.md
@@ -2755,6 +2756,7 @@ lib/zernio-sdk/models/ctwa_ad_request_body_placements.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_regions_inner.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_video.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_welcome_message.rb
+lib/zernio-sdk/models/ctwa_ad_request_body_welcome_message_quick_replies_inner.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_zips_inner.rb
 lib/zernio-sdk/models/ctwa_multi_response.rb
 lib/zernio-sdk/models/ctwa_single_response.rb
@@ -4957,6 +4959,7 @@ spec/models/ctwa_ad_request_body_placements_spec.rb
 spec/models/ctwa_ad_request_body_regions_inner_spec.rb
 spec/models/ctwa_ad_request_body_spec.rb
 spec/models/ctwa_ad_request_body_video_spec.rb
+spec/models/ctwa_ad_request_body_welcome_message_quick_replies_inner_spec.rb
 spec/models/ctwa_ad_request_body_welcome_message_spec.rb
 spec/models/ctwa_ad_request_body_zips_inner_spec.rb
 spec/models/ctwa_multi_response_spec.rb

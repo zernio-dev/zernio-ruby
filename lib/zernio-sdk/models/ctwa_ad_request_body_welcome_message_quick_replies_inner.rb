@@ -14,23 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Custom chat welcome message (Meta's `page_welcome_message`, \"Mensaje de bienvenida\" / \"Mensaje predefinido\" in Ads Manager). Single-creative shape only; for `creatives[]` set it per entry. 
-  class CtwaAdRequestBodyWelcomeMessage < ApiModelBase
-    # Greeting shown when the chat opens. Replaces Meta's default (\"Hi! Can we help you?\").
-    attr_accessor :text
+  class CtwaAdRequestBodyWelcomeMessageQuickRepliesInner < ApiModelBase
+    # Chip label the person taps.
+    attr_accessor :title
 
-    # Message put into the user's text input, ready to send. Replaces Meta's default (\"Hi! I want more info.\"). Lets one ad steer the opening message toward what it promotes (e.g. a specific product). Exactly one of prefillText or quickReplies.
-    attr_accessor :prefill_text
-
-    # Tappable chips under the greeting instead of a prefilled message. Exactly one of prefillText or quickReplies. Put your own campaign or ad key in each payload: the tap arrives on the messages webhook with that payload even where Meta delivers no ad referral (Pages owned by an EU business under the Europe/Japan Messenger restrictions). 
-    attr_accessor :quick_replies
+    # Opaque string you choose; delivered on the message.received webhook as interactiveMetadata.quickReplyPayload when the chip is tapped.
+    attr_accessor :payload
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'text' => :'text',
-        :'prefill_text' => :'prefillText',
-        :'quick_replies' => :'quickReplies'
+        :'title' => :'title',
+        :'payload' => :'payload'
       }
     end
 
@@ -47,9 +42,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'text' => :'String',
-        :'prefill_text' => :'String',
-        :'quick_replies' => :'Array<CtwaAdRequestBodyWelcomeMessageQuickRepliesInner>'
+        :'title' => :'String',
+        :'payload' => :'String'
       }
     end
 
@@ -63,32 +57,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CtwaAdRequestBodyWelcomeMessage` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CtwaAdRequestBodyWelcomeMessageQuickRepliesInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CtwaAdRequestBodyWelcomeMessage`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CtwaAdRequestBodyWelcomeMessageQuickRepliesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'text')
-        self.text = attributes[:'text']
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       else
-        self.text = nil
+        self.title = nil
       end
 
-      if attributes.key?(:'prefill_text')
-        self.prefill_text = attributes[:'prefill_text']
-      end
-
-      if attributes.key?(:'quick_replies')
-        if (value = attributes[:'quick_replies']).is_a?(Array)
-          self.quick_replies = value
-        end
+      if attributes.key?(:'payload')
+        self.payload = attributes[:'payload']
+      else
+        self.payload = nil
       end
     end
 
@@ -97,24 +87,28 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @text.nil?
-        invalid_properties.push('invalid value for "text", text cannot be nil.')
+      if @title.nil?
+        invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
 
-      if @text.to_s.length < 1
-        invalid_properties.push('invalid value for "text", the character length must be greater than or equal to 1.')
+      if @title.to_s.length > 20
+        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 20.')
       end
 
-      if !@prefill_text.nil? && @prefill_text.to_s.length < 1
-        invalid_properties.push('invalid value for "prefill_text", the character length must be greater than or equal to 1.')
+      if @title.to_s.length < 1
+        invalid_properties.push('invalid value for "title", the character length must be greater than or equal to 1.')
       end
 
-      if !@quick_replies.nil? && @quick_replies.length > 13
-        invalid_properties.push('invalid value for "quick_replies", number of items must be less than or equal to 13.')
+      if @payload.nil?
+        invalid_properties.push('invalid value for "payload", payload cannot be nil.')
       end
 
-      if !@quick_replies.nil? && @quick_replies.length < 1
-        invalid_properties.push('invalid value for "quick_replies", number of items must be greater than or equal to 1.')
+      if @payload.to_s.length > 1000
+        invalid_properties.push('invalid value for "payload", the character length must be smaller than or equal to 1000.')
+      end
+
+      if @payload.to_s.length < 1
+        invalid_properties.push('invalid value for "payload", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -124,58 +118,49 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @text.nil?
-      return false if @text.to_s.length < 1
-      return false if !@prefill_text.nil? && @prefill_text.to_s.length < 1
-      return false if !@quick_replies.nil? && @quick_replies.length > 13
-      return false if !@quick_replies.nil? && @quick_replies.length < 1
+      return false if @title.nil?
+      return false if @title.to_s.length > 20
+      return false if @title.to_s.length < 1
+      return false if @payload.nil?
+      return false if @payload.to_s.length > 1000
+      return false if @payload.to_s.length < 1
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] text Value to be assigned
-    def text=(text)
-      if text.nil?
-        fail ArgumentError, 'text cannot be nil'
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
       end
 
-      if text.to_s.length < 1
-        fail ArgumentError, 'invalid value for "text", the character length must be greater than or equal to 1.'
+      if title.to_s.length > 20
+        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 20.'
       end
 
-      @text = text
+      if title.to_s.length < 1
+        fail ArgumentError, 'invalid value for "title", the character length must be greater than or equal to 1.'
+      end
+
+      @title = title
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] prefill_text Value to be assigned
-    def prefill_text=(prefill_text)
-      if prefill_text.nil?
-        fail ArgumentError, 'prefill_text cannot be nil'
+    # @param [Object] payload Value to be assigned
+    def payload=(payload)
+      if payload.nil?
+        fail ArgumentError, 'payload cannot be nil'
       end
 
-      if prefill_text.to_s.length < 1
-        fail ArgumentError, 'invalid value for "prefill_text", the character length must be greater than or equal to 1.'
+      if payload.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "payload", the character length must be smaller than or equal to 1000.'
       end
 
-      @prefill_text = prefill_text
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] quick_replies Value to be assigned
-    def quick_replies=(quick_replies)
-      if quick_replies.nil?
-        fail ArgumentError, 'quick_replies cannot be nil'
+      if payload.to_s.length < 1
+        fail ArgumentError, 'invalid value for "payload", the character length must be greater than or equal to 1.'
       end
 
-      if quick_replies.length > 13
-        fail ArgumentError, 'invalid value for "quick_replies", number of items must be less than or equal to 13.'
-      end
-
-      if quick_replies.length < 1
-        fail ArgumentError, 'invalid value for "quick_replies", number of items must be greater than or equal to 1.'
-      end
-
-      @quick_replies = quick_replies
+      @payload = payload
     end
 
     # Checks equality by comparing each attribute.
@@ -183,9 +168,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          text == o.text &&
-          prefill_text == o.prefill_text &&
-          quick_replies == o.quick_replies
+          title == o.title &&
+          payload == o.payload
     end
 
     # @see the `==` method
@@ -197,7 +181,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [text, prefill_text, quick_replies].hash
+      [title, payload].hash
     end
 
     # Builds the object from hash
