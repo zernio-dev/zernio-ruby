@@ -13,7 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Search the public Ad Library
 
-Competitor and market research over the public ad archives. Meta's Ad Library (`GET /ads_archive`) is searched with Zernio's own developer access, so `platform=meta` needs no connected account at all. LinkedIn's Ad Library (`GET /rest/adLibrary`) runs on a connected `linkedin` / `linkedinads` account, passed as `accountId`. Passing a Meta account as `accountId` also selects Meta. Rows are returned in the platform's raw shape under `data`; `paging.after` is an opaque cursor on both (`null` when exhausted).  **Meta coverage.** Political and social-issue ads are searchable worldwide. Every other ad is in the archive only if it was delivered to the EU or UK within the last year, so a US-only commercial advertiser is invisible. Spend, impressions and demographics are political-only fields and are left out of the default projection; request them via `fields`. All customers share Zernio's Meta quota, so a `429` means back off for a minute.  **LinkedIn coverage.** Ads served after June 1 2023, worldwide, kept for a year after their last impression. EU-delivered ads carry impression ranges and the disclosed targeting facets. Pages are capped at 25 ads (`limit` > 25 is a 400); `after` is the next offset.  Which params apply: `q`, `countries`, `since`, `until`, `limit`, `after` on both; `pageIds`, `adType`, `status`, `platforms`, `mediaType`, `languages`, `searchType`, `fields` are Meta-only; `advertiser` is LinkedIn-only. Passing a param the account's platform does not support is a 400 naming the param.
+Competitor and market research over the public ad archives. Meta's Ad Library (`GET /ads_archive`) is searched with Zernio's own developer access, so `platform=meta` needs no connected account at all. LinkedIn's Ad Library (`GET /rest/adLibrary`) runs on a connected `linkedin` / `linkedinads` account, passed as `accountId`. Passing a Meta account as `accountId` also selects Meta. Rows are returned in the platform's raw shape under `data`; `paging.after` is an opaque cursor on both (`null` when exhausted).  **Meta coverage.** Political and social-issue ads are searchable worldwide. Every other ad is in the archive only if it was delivered to the EU or UK within the last year, so a US-only commercial advertiser is invisible. Spend, impressions and demographics are political-only fields and are left out of the default projection; request them via `fields`. All customers share Zernio's Meta quota, so a `429` means back off for a minute.  **LinkedIn coverage.** Ads served after June 1 2023, worldwide, kept for a year after their last impression. EU-delivered ads carry impression ranges and the disclosed targeting facets. Pages are capped at 25 ads (`limit` > 25 is a 400); `after` is the next offset.  Which params apply: `q`, `countries`, `limit`, `after` on both; `pageIds`, `adType`, `status`, `platforms`, `mediaType`, `languages`, `searchType`, `fields`, `since`, `until` are Meta-only; `advertiser` is LinkedIn-only. Passing a param the account's platform does not support is a 400 naming the param.
 
 ### Examples
 
@@ -39,8 +39,8 @@ opts = {
   platforms: 'platforms_example', # String | Meta only. Comma-separated publisher platforms: FACEBOOK, INSTAGRAM, AUDIENCE_NETWORK, MESSENGER, WHATSAPP, OCULUS, THREADS, STREAMING_SERVICES.
   media_type: 'ALL', # String | Meta only.
   languages: 'languages_example', # String | Meta only. Comma-separated ISO 639-1 codes of the ad text.
-  since: Date.parse('2013-10-20'), # Date | Earliest delivery date (YYYY-MM-DD).
-  _until: Date.parse('2013-10-20'), # Date | Latest delivery date (YYYY-MM-DD).
+  since: Date.parse('2013-10-20'), # Date | Meta only. Earliest delivery date (YYYY-MM-DD). LinkedIn's archive does not filter by date, so it is a 400 there: filter on details.adStatistics.firstImpressionAt / latestImpressionAt instead (EU-delivered ads only).
+  _until: Date.parse('2013-10-20'), # Date | Meta only. Latest delivery date (YYYY-MM-DD); a 400 on LinkedIn, see since.
   search_type: 'KEYWORD_UNORDERED', # String | Meta only. Whether q matches words in any order or as an exact phrase (comma-separate phrases to match all of them).
   fields: 'id,page_name,ad_delivery_start_time,ad_creative_bodies', # String | Meta only. Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
   limit: 56, # Integer | Rows per page. LinkedIn accepts at most 25.
@@ -89,8 +89,8 @@ end
 | **platforms** | **String** | Meta only. Comma-separated publisher platforms: FACEBOOK, INSTAGRAM, AUDIENCE_NETWORK, MESSENGER, WHATSAPP, OCULUS, THREADS, STREAMING_SERVICES. | [optional] |
 | **media_type** | **String** | Meta only. | [optional] |
 | **languages** | **String** | Meta only. Comma-separated ISO 639-1 codes of the ad text. | [optional] |
-| **since** | **Date** | Earliest delivery date (YYYY-MM-DD). | [optional] |
-| **_until** | **Date** | Latest delivery date (YYYY-MM-DD). | [optional] |
+| **since** | **Date** | Meta only. Earliest delivery date (YYYY-MM-DD). LinkedIn&#39;s archive does not filter by date, so it is a 400 there: filter on details.adStatistics.firstImpressionAt / latestImpressionAt instead (EU-delivered ads only). | [optional] |
+| **_until** | **Date** | Meta only. Latest delivery date (YYYY-MM-DD); a 400 on LinkedIn, see since. | [optional] |
 | **search_type** | **String** | Meta only. Whether q matches words in any order or as an exact phrase (comma-separate phrases to match all of them). | [optional][default to &#39;KEYWORD_UNORDERED&#39;] |
 | **fields** | **String** | Meta only. Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently. | [optional] |
 | **limit** | **Integer** | Rows per page. LinkedIn accepts at most 25. | [optional][default to 25] |
