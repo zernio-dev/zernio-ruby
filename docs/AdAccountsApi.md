@@ -33,6 +33,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_studies**](AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies |
 | [**list_ads_business_centers**](AdAccountsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
 | [**list_ads_instagram_accounts**](AdAccountsApi.md#list_ads_instagram_accounts) | **GET** /v1/ads/instagram-accounts | List Instagram ad identities |
+| [**list_ads_instagram_posts**](AdAccountsApi.md#list_ads_instagram_posts) | **GET** /v1/ads/instagram-posts | List Instagram posts to boost |
 | [**list_advertisable_applications**](AdAccountsApi.md#list_advertisable_applications) | **GET** /v1/ads/advertisable-applications | List advertisable apps |
 | [**list_custom_conversions**](AdAccountsApi.md#list_custom_conversions) | **GET** /v1/accounts/{accountId}/custom-conversions | List custom conversions |
 | [**list_high_demand_periods**](AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | List high-demand periods |
@@ -2162,6 +2163,85 @@ end
 ### Return type
 
 [**ListAdsInstagramAccounts200Response**](ListAdsInstagramAccounts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ads_instagram_posts
+
+> <ListAdsInstagramPosts200Response> list_ads_instagram_posts(account_id, opts)
+
+List Instagram posts to boost
+
+Lists the media of the Instagram account this Meta connection can reach, so an existing Instagram post can be boosted without connecting the Instagram account separately. Each `posts[].id` is the existing-post id to send as `platformPostId` when creating the ad; Meta turns it into `source_instagram_media_id` on the creative. Identity resolution reuses the same resolver as `/v1/ads/instagram-accounts`. `igUserId` is always checked against the identities the connection can reach and is never trusted as sent. When no identity is reachable the endpoint fails instead of returning an empty list, and the two causes stay apart: `403 reconnect_required` means the connection predates Instagram access (Meta then omits `instagram_business_account` from the Page read rather than erroring, so it looks identical to having no data) and the account must be reconnected granting Instagram access, while `422 instagram_business_account_unresolved` means the Page genuinely has no Instagram professional account linked.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio Meta Ads, Facebook or Instagram SocialAccount ID.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Meta ad account ID including the act_ prefix. Narrows identity resolution to the Instagram accounts reachable from this ad account.
+  ig_user_id: 'ig_user_id_example', # String | Instagram identity to list. Must be one this connection can reach, otherwise the request is rejected with a 400.
+  limit: 56, # Integer | Number of posts to return per page.
+  after: 'after_example' # String | Opaque Meta cursor from a previous response's paging.after.
+}
+
+begin
+  # List Instagram posts to boost
+  result = api_instance.list_ads_instagram_posts(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_ads_instagram_posts: #{e}"
+end
+```
+
+#### Using the list_ads_instagram_posts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdsInstagramPosts200Response>, Integer, Hash)> list_ads_instagram_posts_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List Instagram posts to boost
+  data, status_code, headers = api_instance.list_ads_instagram_posts_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdsInstagramPosts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_ads_instagram_posts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio Meta Ads, Facebook or Instagram SocialAccount ID. |  |
+| **ad_account_id** | **String** | Meta ad account ID including the act_ prefix. Narrows identity resolution to the Instagram accounts reachable from this ad account. | [optional] |
+| **ig_user_id** | **String** | Instagram identity to list. Must be one this connection can reach, otherwise the request is rejected with a 400. | [optional] |
+| **limit** | **Integer** | Number of posts to return per page. | [optional][default to 25] |
+| **after** | **String** | Opaque Meta cursor from a previous response&#39;s paging.after. | [optional] |
+
+### Return type
+
+[**ListAdsInstagramPosts200Response**](ListAdsInstagramPosts200Response.md)
 
 ### Authorization
 
