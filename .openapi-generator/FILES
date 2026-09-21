@@ -1126,6 +1126,9 @@ docs/ListAdLabels200Response.md
 docs/ListAdNegativeKeywordLists200Response.md
 docs/ListAdSets200Response.md
 docs/ListAdSets200ResponseAdSetsInner.md
+docs/ListAdSets200ResponseAdSetsInnerBudget.md
+docs/ListAdSets200ResponseAdSetsInnerSchedule.md
+docs/ListAdSets200ResponseAdSetsInnerTargeting.md
 docs/ListAdStudies200Response.md
 docs/ListAdVideos200Response.md
 docs/ListAds202Response.md
@@ -3370,6 +3373,9 @@ lib/zernio-sdk/models/list_ad_labels200_response.rb
 lib/zernio-sdk/models/list_ad_negative_keyword_lists200_response.rb
 lib/zernio-sdk/models/list_ad_sets200_response.rb
 lib/zernio-sdk/models/list_ad_sets200_response_ad_sets_inner.rb
+lib/zernio-sdk/models/list_ad_sets200_response_ad_sets_inner_budget.rb
+lib/zernio-sdk/models/list_ad_sets200_response_ad_sets_inner_schedule.rb
+lib/zernio-sdk/models/list_ad_sets200_response_ad_sets_inner_targeting.rb
 lib/zernio-sdk/models/list_ad_studies200_response.rb
 lib/zernio-sdk/models/list_ad_videos200_response.rb
 lib/zernio-sdk/models/list_ads202_response.rb
@@ -5572,7 +5578,10 @@ spec/models/list_ad_images200_response_spec.rb
 spec/models/list_ad_keywords200_response_spec.rb
 spec/models/list_ad_labels200_response_spec.rb
 spec/models/list_ad_negative_keyword_lists200_response_spec.rb
+spec/models/list_ad_sets200_response_ad_sets_inner_budget_spec.rb
+spec/models/list_ad_sets200_response_ad_sets_inner_schedule_spec.rb
 spec/models/list_ad_sets200_response_ad_sets_inner_spec.rb
+spec/models/list_ad_sets200_response_ad_sets_inner_targeting_spec.rb
 spec/models/list_ad_sets200_response_spec.rb
 spec/models/list_ad_studies200_response_spec.rb
 spec/models/list_ad_videos200_response_spec.rb

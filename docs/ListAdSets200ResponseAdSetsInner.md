@@ -14,7 +14,9 @@
 | **account_id** | **String** |  | [optional] |
 | **profile_id** | **String** |  | [optional] |
 | **currency** | **String** |  | [optional] |
-| **budget** | **Object** |  | [optional] |
+| **budget** | [**ListAdSets200ResponseAdSetsInnerBudget**](ListAdSets200ResponseAdSetsInnerBudget.md) |  | [optional] |
+| **schedule** | [**ListAdSets200ResponseAdSetsInnerSchedule**](ListAdSets200ResponseAdSetsInnerSchedule.md) |  | [optional] |
+| **targeting** | [**ListAdSets200ResponseAdSetsInnerTargeting**](ListAdSets200ResponseAdSetsInnerTargeting.md) |  | [optional] |
 | **is_external** | **Boolean** |  | [optional] |
 | **platform_created_at** | **Time** |  | [optional] |
 
@@ -35,6 +37,8 @@ instance = Zernio::ListAdSets200ResponseAdSetsInner.new(
   profile_id: null,
   currency: null,
   budget: null,
+  schedule: null,
+  targeting: null,
   is_external: null,
   platform_created_at: null
 )
