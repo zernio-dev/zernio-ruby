@@ -1122,6 +1122,7 @@ docs/ListAccountStructuredSnippets200Response.md
 docs/ListAccountStructuredSnippets200ResponseStructuredSnippetsInner.md
 docs/ListAdAccounts200Response.md
 docs/ListAdAccounts200ResponseAccountsInner.md
+docs/ListAdAccounts200ResponseAccountsInnerFundingSourceDetails.md
 docs/ListAdAudiences200Response.md
 docs/ListAdAudiences200ResponseAudiencesInner.md
 docs/ListAdCampaigns200Response.md
@@ -3405,6 +3406,7 @@ lib/zernio-sdk/models/list_account_structured_snippets200_response.rb
 lib/zernio-sdk/models/list_account_structured_snippets200_response_structured_snippets_inner.rb
 lib/zernio-sdk/models/list_ad_accounts200_response.rb
 lib/zernio-sdk/models/list_ad_accounts200_response_accounts_inner.rb
+lib/zernio-sdk/models/list_ad_accounts200_response_accounts_inner_funding_source_details.rb
 lib/zernio-sdk/models/list_ad_audiences200_response.rb
 lib/zernio-sdk/models/list_ad_audiences200_response_audiences_inner.rb
 lib/zernio-sdk/models/list_ad_campaigns200_response.rb
@@ -5646,6 +5648,7 @@ spec/models/list_account_sitelinks200_response_sitelinks_inner_spec.rb
 spec/models/list_account_sitelinks200_response_spec.rb
 spec/models/list_account_structured_snippets200_response_spec.rb
 spec/models/list_account_structured_snippets200_response_structured_snippets_inner_spec.rb
+spec/models/list_ad_accounts200_response_accounts_inner_funding_source_details_spec.rb
 spec/models/list_ad_accounts200_response_accounts_inner_spec.rb
 spec/models/list_ad_accounts200_response_spec.rb
 spec/models/list_ad_audiences200_response_audiences_inner_spec.rb

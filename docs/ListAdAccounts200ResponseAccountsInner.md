@@ -16,6 +16,8 @@
 | **timezone_name** | **String** | IANA timezone of the ad account (Meta only). Drives daily-budget reset and Insights day boundaries. | [optional] |
 | **timezone_offset_hours_utc** | **Float** | Signed UTC offset in hours, reflecting current DST (Meta only). | [optional] |
 | **minimum_daily_budget** | **Float** | Meta only. Minimum daily budget for the account, in the account currency&#39;s major units. This is the impressions-billed minimum; other billing events have higher minimums. Absent when the connected token cannot read it. | [optional] |
+| **funding_source** | **String** | Meta only. Meta&#39;s &#x60;funding_source&#x60; ID for the ad account, forwarded unchanged. ABSENT when this connection&#39;s token cannot see billing on the account, which is not the same as the account having no payment method: never read the missing key as &#x60;no payment method configured&#x60;. | [optional] |
+| **funding_source_details** | [**ListAdAccounts200ResponseAccountsInnerFundingSourceDetails**](ListAdAccounts200ResponseAccountsInnerFundingSourceDetails.md) |  | [optional] |
 | **selectable** | **Boolean** | Meta and X only. Whether the account can create/run ads now. Absent (treat as true) on other platforms. | [optional] |
 | **unusable_reason** | **String** | Meta and X only. Human-readable reason when selectable is false; null when selectable. | [optional] |
 
@@ -37,6 +39,8 @@ instance = Zernio::ListAdAccounts200ResponseAccountsInner.new(
   timezone_name: null,
   timezone_offset_hours_utc: null,
   minimum_daily_budget: null,
+  funding_source: null,
+  funding_source_details: null,
   selectable: null,
   unusable_reason: null
 )
