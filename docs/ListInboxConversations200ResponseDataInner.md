@@ -17,6 +17,7 @@
 | **status** | **String** |  | [optional] |
 | **unread_count** | **Integer** | Number of unread messages | [optional] |
 | **thread_control** | **String** | WhatsApp only, present once Meta Business Agent has touched the thread. ai_agent: the agent answers and new inbound arrive flagged metadata.standby; app: you hold control; other: another partner app does. Change it with POST /v1/inbox/conversations/{conversationId}/thread-control. | [optional] |
+| **is_group** | **Boolean** | iMessage only, true for a group thread. Manage it through the /v1/imessage/groups/{conversationId} endpoints. | [optional] |
 | **url** | **String** | Direct link to open the conversation on the platform (if available) | [optional] |
 | **instagram_profile** | [**ListInboxConversations200ResponseDataInnerInstagramProfile**](ListInboxConversations200ResponseDataInnerInstagramProfile.md) |  | [optional] |
 | **metadata** | [**ListInboxConversations200ResponseDataInnerMetadata**](ListInboxConversations200ResponseDataInnerMetadata.md) |  | [optional] |
@@ -40,6 +41,7 @@ instance = Zernio::ListInboxConversations200ResponseDataInner.new(
   status: null,
   unread_count: null,
   thread_control: null,
+  is_group: null,
   url: null,
   instagram_profile: null,
   metadata: null

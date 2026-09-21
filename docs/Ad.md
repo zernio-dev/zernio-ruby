@@ -71,7 +71,7 @@ instance = Zernio::Ad.new(
   platform_created_at: null,
   bid_strategy: null,
   bid_amount: 5,
-  roas_average_floor: 2.0,
+  roas_average_floor: 2,
   promoted_object: null,
   creative: null,
   targeting: null,
