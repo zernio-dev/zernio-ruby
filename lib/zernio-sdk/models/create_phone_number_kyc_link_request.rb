@@ -23,10 +23,35 @@ module Zernio
     # Area code (NDC) the eventual number must be in. Hard constraint carried by the link; the end customer filling the form makes no area choice. Options come from GET /v1/phone-numbers/availability (areaOptions).
     attr_accessor :area_code
 
+    # Language of the hosted page: its copy, the carrier requirement texts (translated once per country and cached), the pre-submit review notes and the status emails to the end customer. Omitted: the browser language of the end customer, falling back to English. The end customer can also switch with `?lang=` on the page.
+    attr_accessor :language
+
     attr_accessor :branding
 
     # Where to send the end customer's browser after a successful submit. On completion Zernio appends `kyc=submitted` and `country=<ISO-2>` as query params. When omitted, the hosted page shows a built-in confirmation screen instead. 
     attr_accessor :redirect_url
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -34,6 +59,7 @@ module Zernio
         :'profile_id' => :'profileId',
         :'country' => :'country',
         :'area_code' => :'areaCode',
+        :'language' => :'language',
         :'branding' => :'branding',
         :'redirect_url' => :'redirect_url'
       }
@@ -55,6 +81,7 @@ module Zernio
         :'profile_id' => :'String',
         :'country' => :'String',
         :'area_code' => :'String',
+        :'language' => :'String',
         :'branding' => :'CreatePhoneNumberKycLinkRequestBranding',
         :'redirect_url' => :'String'
       }
@@ -96,6 +123,10 @@ module Zernio
 
       if attributes.key?(:'area_code')
         self.area_code = attributes[:'area_code']
+      end
+
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
       end
 
       if attributes.key?(:'branding')
@@ -145,6 +176,8 @@ module Zernio
       return false if @country.to_s.length > 2
       return false if @country.to_s.length < 2
       return false if !@area_code.nil? && @area_code !~ Regexp.new(/^\d{1,4}$/)
+      language_validator = EnumAttributeValidator.new('String', ["en", "es", "pt-BR"])
+      return false unless language_validator.valid?(@language)
       true
     end
 
@@ -191,6 +224,16 @@ module Zernio
       @area_code = area_code
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] language Object to be assigned
+    def language=(language)
+      validator = EnumAttributeValidator.new('String', ["en", "es", "pt-BR"])
+      unless validator.valid?(language)
+        fail ArgumentError, "invalid value for \"language\", must be one of #{validator.allowable_values}."
+      end
+      @language = language
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -199,6 +242,7 @@ module Zernio
           profile_id == o.profile_id &&
           country == o.country &&
           area_code == o.area_code &&
+          language == o.language &&
           branding == o.branding &&
           redirect_url == o.redirect_url
     end
@@ -212,7 +256,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, area_code, branding, redirect_url].hash
+      [profile_id, country, area_code, language, branding, redirect_url].hash
     end
 
     # Builds the object from hash

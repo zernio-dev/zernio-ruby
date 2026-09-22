@@ -123,7 +123,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      language_validator = EnumAttributeValidator.new('String', ["en", "es"])
+      language_validator = EnumAttributeValidator.new('String', ["en", "es", "pt-BR"])
       return false unless language_validator.valid?(@language)
       true
     end
@@ -131,7 +131,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] language Object to be assigned
     def language=(language)
-      validator = EnumAttributeValidator.new('String', ["en", "es"])
+      validator = EnumAttributeValidator.new('String', ["en", "es", "pt-BR"])
       unless validator.valid?(language)
         fail ArgumentError, "invalid value for \"language\", must be one of #{validator.allowable_values}."
       end

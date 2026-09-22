@@ -1251,7 +1251,7 @@ module Zernio
         fail ArgumentError, "invalid value for 'opts[:\"primary_color\"]' when calling ConnectApi.get_connect_url, must conform to the pattern #{pattern}."
       end
 
-      allowable_values = ["en", "es"]
+      allowable_values = ["en", "es", "pt-BR"]
       if @api_client.config.client_side_validation && opts[:'language'] && !allowable_values.include?(opts[:'language'])
         fail ArgumentError, "invalid value for \"language\", must be one of #{allowable_values}"
       end

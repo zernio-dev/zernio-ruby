@@ -42,7 +42,7 @@ describe Zernio::GetWhatsAppSdkConfig200ResponseBranding do
   describe 'test attribute "language"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["en", "es"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["en", "es", "pt-BR"])
       # validator.allowable_values.each do |value|
       #   expect { instance.language = value }.not_to raise_error
       # end
