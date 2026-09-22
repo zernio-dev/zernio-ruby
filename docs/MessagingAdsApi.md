@@ -153,7 +153,7 @@ end
 
 Create messaging ad
 
-Creates a click-to-message ad; `destination` selects where the tapped ad opens a conversation: WhatsApp, the Page's Messenger inbox or the linked Instagram account's Direct inbox. The ad set is created with the matching destination_type and CONVERSATIONS optimization; the campaign objective defaults to OUTCOME_ENGAGEMENT. Supports single-creative and multi-creative shapes. Supersedes POST /v1/ads/ctwa (deprecated, equivalent to `destination: whatsapp`). Existing posts and reels are supported through `platformPostId` (alias `existingPostId`) or `objectStoryId`, either per creative or at the top level. Omit fresh media and copy for that creative. Optional `whatsappPhoneNumber` selects a number already paired with the Page (WhatsApp destination only). `accountId` is a Facebook, Instagram or Meta ads (business login) connection; `pageId` picks the Page when that connection was granted several.
+Creates a click-to-message ad; `destination` selects where the tapped ad opens a conversation: WhatsApp, the Page's Messenger inbox or the linked Instagram account's Direct inbox. `destinations` puts two or three of them on one ad set and lets Meta pick the app per viewer. The ad set is created with the matching destination_type and CONVERSATIONS optimization; the campaign objective defaults to OUTCOME_ENGAGEMENT. Supports single-creative and multi-creative shapes. Supersedes POST /v1/ads/ctwa (deprecated, equivalent to `destination: whatsapp`). Existing posts and reels are supported through `platformPostId` (alias `existingPostId`) or `objectStoryId`, either per creative or at the top level. Omit fresh media and copy for that creative. Optional `whatsappPhoneNumber` selects a number already paired with the Page (WhatsApp destination only). `accountId` is a Facebook, Instagram or Meta ads (business login) connection; `pageId` picks the Page when that connection was granted several.
 
 ### Examples
 
@@ -167,7 +167,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagingAdsApi.new
-create_messaging_ad_request = Zernio::CreateMessagingAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', destination: 'whatsapp'}) # CreateMessagingAdRequest | 
+create_messaging_ad_request = Zernio::CreateMessagingAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CreateMessagingAdRequest | 
 
 begin
   # Create messaging ad
