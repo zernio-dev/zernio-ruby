@@ -377,7 +377,7 @@ end
 
 List posts
 
-Returns a paginated list of posts. Published posts include platformPostUrl with the public URL on each platform.
+Returns a paginated list of posts. Published posts include platformPostUrl with the public URL on each platform. A query parameter that is not listed here returns 400 naming it and the accepted parameters, so a misspelled filter never silently returns the unfiltered list.
 
 ### Examples
 
@@ -394,13 +394,16 @@ api_instance = Zernio::PostsApi.new
 opts = {
   page: 56, # Integer | Page number (1-based)
   limit: 56, # Integer | Page size. Values above the maximum return 400 rather than being clamped.
+  offset: 56, # Integer | Row offset. Takes precedence over page when both are sent; the response pagination.page is derived from it.
   source: 'zernio', # String | Which collection to read. `zernio` (default) returns posts authored through Zernio. `external` returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with `accountId` and paginate via `page`/`limit` to walk the full synced history (we keep up to the last ~12 months per account).
   status: 'draft', # String | 
   platform: 'twitter', # String | 
   profile_id: 'profile_id_example', # String | Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send `all` or an empty value, to list posts across every profile.
   created_by: 'created_by_example', # String | Filter posts to those created by a specific team user (24-char hex ObjectId).
-  date_from: Date.parse('2013-10-20'), # Date | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
-  date_to: Date.parse('2013-10-20'), # Date | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
+  from_date: Date.parse('2013-10-20'), # Date | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. The same name the other date-window filters use (ads, analytics).
+  to_date: Date.parse('2013-10-20'), # Date | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. The same name the other date-window filters use (ads, analytics).
+  date_from: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  date_to: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   include_hidden: true, # Boolean | 
   search: 'search_example', # String | Search posts by text content.
   sort_by: 'scheduled-desc', # String | Sort order for results.
@@ -440,13 +443,16 @@ end
 | ---- | ---- | ----------- | ----- |
 | **page** | **Integer** | Page number (1-based) | [optional][default to 1] |
 | **limit** | **Integer** | Page size. Values above the maximum return 400 rather than being clamped. | [optional][default to 10] |
+| **offset** | **Integer** | Row offset. Takes precedence over page when both are sent; the response pagination.page is derived from it. | [optional] |
 | **source** | **String** | Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). | [optional][default to &#39;zernio&#39;] |
 | **status** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **profile_id** | **String** | Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send &#x60;all&#x60; or an empty value, to list posts across every profile. | [optional] |
 | **created_by** | **String** | Filter posts to those created by a specific team user (24-char hex ObjectId). | [optional] |
-| **date_from** | **Date** | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. | [optional] |
-| **date_to** | **Date** | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. | [optional] |
+| **from_date** | **Date** | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. The same name the other date-window filters use (ads, analytics). | [optional] |
+| **to_date** | **Date** | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. The same name the other date-window filters use (ads, analytics). | [optional] |
+| **date_from** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **date_to** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **include_hidden** | **Boolean** |  | [optional][default to false] |
 | **search** | **String** | Search posts by text content. | [optional] |
 | **sort_by** | **String** | Sort order for results. | [optional][default to &#39;scheduled-desc&#39;] |
