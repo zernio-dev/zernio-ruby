@@ -10,6 +10,7 @@
 | **rename_prefix** | **String** |  | [optional] |
 | **rename_suffix** | **String** |  | [optional] |
 | **sync_after** | **Boolean** |  | [optional][default to true] |
+| **reuse_source_creative** | **Boolean** | Point the copy at the source ad&#39;s creative object instead of copying it, so the copy keeps the same Facebook post, the same Instagram media, their existing likes, comments and shares, and the full creative setup (text variations included). This is what Ads Manager&#39;s \&quot;show existing reactions, comments and shares\&quot; does. Meta&#39;s native copy always publishes new posts. A creative belongs to one ad account, so &#x60;adSetId&#x60; must be in the source ad&#39;s account. 400 when the source ad has no creative yet. | [optional][default to false] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::DuplicateAdRequest.new(
   rename_strategy: null,
   rename_prefix: null,
   rename_suffix: null,
-  sync_after: null
+  sync_after: null,
+  reuse_source_creative: null
 )
 ```
 
