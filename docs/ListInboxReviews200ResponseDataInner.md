@@ -12,6 +12,7 @@
 | **location_name** | **String** | Human-readable Google Business Profile location display name. Google Business Profile only; absent for other platforms. | [optional] |
 | **reviewer** | [**ListInboxReviews200ResponseDataInnerReviewer**](ListInboxReviews200ResponseDataInnerReviewer.md) |  | [optional] |
 | **rating** | **Integer** |  | [optional] |
+| **recommendation_type** | **String** | Facebook recommendation: positive means recommends, negative means does not recommend. Null or absent when unavailable; absent for other platforms. Independent of the numeric rating. | [optional] |
 | **text** | **String** |  | [optional] |
 | **created** | **Time** |  | [optional] |
 | **has_reply** | **Boolean** |  | [optional] |
@@ -35,6 +36,7 @@ instance = Zernio::ListInboxReviews200ResponseDataInner.new(
   location_name: null,
   reviewer: null,
   rating: null,
+  recommendation_type: null,
   text: null,
   created: null,
   has_reply: null,
