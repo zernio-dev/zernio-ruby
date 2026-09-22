@@ -460,8 +460,10 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the connected Facebook Page.
 opts = {
   metrics: 'metrics_example', # String | Comma-separated list of metrics. Defaults to \"page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\".  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \"micro_amount\" plus an ISO 4217 \"currency\". monetization_approximate_earnings returns a bare number per day, so its unit is always \"unspecified\" and its \"currency\" is always null. The two are on different scales and are not comparable to each other. Both keep their daily \"values\" on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \"total\" is their sum. Meta does not document whether a bucket carries that day's earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \"total\" against the Page's own Meta export before relying on it; the daily \"values\" are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \"metrics\": Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \"unavailableMetrics\" covers the narrower case where Meta returned no bucket for the metric at all (\"no_data\") or rejected the request outright, and the metric is then omitted from \"metrics\" rather than reported as 0. 
-  since: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
-  _until: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   metric_type: 'time_series' # String | \"total_value\" (default) returns aggregated totals only. \"time_series\" returns daily values in the \"values\" array. 
 }
 
@@ -498,8 +500,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the connected Facebook Page. |  |
 | **metrics** | **String** | Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings returns a bare number per day, so its unit is always \&quot;unspecified\&quot; and its \&quot;currency\&quot; is always null. The two are on different scales and are not comparable to each other. Both keep their daily \&quot;values\&quot; on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \&quot;total\&quot; is their sum. Meta does not document whether a bucket carries that day&#39;s earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \&quot;total\&quot; against the Page&#39;s own Meta export before relying on it; the daily \&quot;values\&quot; are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \&quot;metrics\&quot;: Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \&quot;unavailableMetrics\&quot; covers the narrower case where Meta returned no bucket for the metric at all (\&quot;no_data\&quot;) or rejected the request outright, and the metric is then omitted from \&quot;metrics\&quot; rather than reported as 0.  | [optional] |
-| **since** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
-| **_until** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **metric_type** | **String** | \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array.  | [optional][default to &#39;total_value&#39;] |
 
 ### Return type
@@ -764,8 +768,10 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Google Business Profile account.
 opts = {
   metrics: 'metrics_example', # String | Comma-separated metric names. Defaults to all available metrics. Valid values: BUSINESS_IMPRESSIONS_DESKTOP_MAPS, BUSINESS_IMPRESSIONS_DESKTOP_SEARCH, BUSINESS_IMPRESSIONS_MOBILE_MAPS, BUSINESS_IMPRESSIONS_MOBILE_SEARCH, BUSINESS_CONVERSATIONS, BUSINESS_DIRECTION_REQUESTS, CALL_CLICKS, WEBSITE_CLICKS, BUSINESS_BOOKINGS, BUSINESS_FOOD_ORDERS, BUSINESS_FOOD_MENU_CLICKS 
-  start_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back.
-  end_date: Date.parse('2013-10-20') # Date | End date (YYYY-MM-DD). Defaults to today.
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  start_date: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  end_date: Date.parse('2013-10-20') # Date | Alias of toDate, kept for existing callers
 }
 
 begin
@@ -801,8 +807,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the Google Business Profile account. |  |
 | **metrics** | **String** | Comma-separated metric names. Defaults to all available metrics. Valid values: BUSINESS_IMPRESSIONS_DESKTOP_MAPS, BUSINESS_IMPRESSIONS_DESKTOP_SEARCH, BUSINESS_IMPRESSIONS_MOBILE_MAPS, BUSINESS_IMPRESSIONS_MOBILE_SEARCH, BUSINESS_CONVERSATIONS, BUSINESS_DIRECTION_REQUESTS, CALL_CLICKS, WEBSITE_CLICKS, BUSINESS_BOOKINGS, BUSINESS_FOOD_ORDERS, BUSINESS_FOOD_MENU_CLICKS  | [optional] |
-| **start_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back. | [optional] |
-| **end_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **start_date** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **end_date** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -916,8 +924,10 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Instagram account
 opts = {
   metrics: 'metrics_example', # String | Comma-separated list of metrics. Defaults to \"reach,views,accounts_engaged,total_interactions\". Valid metrics: reach, views, accounts_engaged, total_interactions, comments, likes, saves, shares, replies, reposts, follows_and_unfollows, profile_links_taps. Note: only \"reach\" supports metricType=time_series. All other metrics (including follows_and_unfollows) are total_value only. This is an Instagram Graph API limitation, not a Zernio limitation - the IG API does not return time-series data for these metrics. For a daily running follower count, use /v1/analytics/instagram/follower-history instead. 
-  since: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
-  _until: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   metric_type: 'time_series', # String | \"total_value\" (default) returns aggregated totals and supports breakdowns. \"time_series\" returns daily values but only works with the \"reach\" metric. 
   breakdown: 'breakdown_example' # String | Breakdown dimension (only valid with metricType=total_value). Valid values depend on the metric: media_product_type, follow_type, follower_type, contact_button_type. 
 }
@@ -955,8 +965,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the Instagram account |  |
 | **metrics** | **String** | Comma-separated list of metrics. Defaults to \&quot;reach,views,accounts_engaged,total_interactions\&quot;. Valid metrics: reach, views, accounts_engaged, total_interactions, comments, likes, saves, shares, replies, reposts, follows_and_unfollows, profile_links_taps. Note: only \&quot;reach\&quot; supports metricType&#x3D;time_series. All other metrics (including follows_and_unfollows) are total_value only. This is an Instagram Graph API limitation, not a Zernio limitation - the IG API does not return time-series data for these metrics. For a daily running follower count, use /v1/analytics/instagram/follower-history instead.  | [optional] |
-| **since** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
-| **_until** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **metric_type** | **String** | \&quot;total_value\&quot; (default) returns aggregated totals and supports breakdowns. \&quot;time_series\&quot; returns daily values but only works with the \&quot;reach\&quot; metric.  | [optional][default to &#39;total_value&#39;] |
 | **breakdown** | **String** | Breakdown dimension (only valid with metricType&#x3D;total_value). Valid values depend on the metric: media_product_type, follow_type, follower_type, contact_button_type.  | [optional] |
 
@@ -1074,8 +1086,10 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Instagram account.
 opts = {
   metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"follower_count,followers_gained,followers_lost\".   - follower_count   : per-day raw follower count   - followers_gained : sum of positive daily deltas   - followers_lost   : sum of absolute negative daily deltas 
-  since: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
-  _until: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   metric_type: 'time_series' # String | \"total_value\" returns aggregated totals (latest for follower_count, sum for gained/lost). \"time_series\" returns per-day values in the \"values\" array. 
 }
 
@@ -1112,8 +1126,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the Instagram account. |  |
 | **metrics** | **String** | Comma-separated list. Defaults to \&quot;follower_count,followers_gained,followers_lost\&quot;.   - follower_count   : per-day raw follower count   - followers_gained : sum of positive daily deltas   - followers_lost   : sum of absolute negative daily deltas  | [optional] |
-| **since** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
-| **_until** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **metric_type** | **String** | \&quot;total_value\&quot; returns aggregated totals (latest for follower_count, sum for gained/lost). \&quot;time_series\&quot; returns per-day values in the \&quot;values\&quot; array.  | [optional][default to &#39;total_value&#39;] |
 
 ### Return type
@@ -1153,8 +1169,10 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The ID of the LinkedIn personal account
 opts = {
   aggregation: 'TOTAL', # String | TOTAL (default, lifetime totals) or DAILY (time series). MEMBERS_REACHED not available with DAILY.
-  start_date: Date.parse('2024-01-01'), # Date | Start date (YYYY-MM-DD). If omitted, returns lifetime analytics.
-  end_date: Date.parse('2024-01-31'), # Date | End date (YYYY-MM-DD, exclusive). Defaults to today if omitted.
+  from_date: Date.parse('2024-01-01'), # Date | Start date (YYYY-MM-DD). If omitted, returns lifetime analytics.
+  to_date: Date.parse('2024-01-31'), # Date | End date (YYYY-MM-DD, exclusive). Defaults to today if omitted.
+  start_date: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  end_date: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   metrics: 'IMPRESSION,REACTION,COMMENT,POST_SAVE,POST_SEND' # String | Comma-separated metrics: IMPRESSION, MEMBERS_REACHED, REACTION, COMMENT, RESHARE, POST_SAVE, POST_SEND. Omit for all.
 }
 
@@ -1191,8 +1209,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The ID of the LinkedIn personal account |  |
 | **aggregation** | **String** | TOTAL (default, lifetime totals) or DAILY (time series). MEMBERS_REACHED not available with DAILY. | [optional][default to &#39;TOTAL&#39;] |
-| **start_date** | **Date** | Start date (YYYY-MM-DD). If omitted, returns lifetime analytics. | [optional] |
-| **end_date** | **Date** | End date (YYYY-MM-DD, exclusive). Defaults to today if omitted. | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). If omitted, returns lifetime analytics. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD, exclusive). Defaults to today if omitted. | [optional] |
+| **start_date** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **end_date** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **metrics** | **String** | Comma-separated metrics: IMPRESSION, MEMBERS_REACHED, REACTION, COMMENT, RESHARE, POST_SAVE, POST_SEND. Omit for all. | [optional] |
 
 ### Return type
@@ -1232,8 +1252,10 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the LinkedIn organization account.
 opts = {
   metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"impressions,clicks,engagement_rate,organic_followers_gained,followers_gained,followers_lost\".  Share statistics (support both total_value and time_series):   - impressions   - unique_impressions   - clicks   - likes   - comments   - shares   - engagement_rate       (0..1, LinkedIn-computed)  Follower-gain statistics (support total_value and time_series):   - organic_followers_gained   (per-day organic gains for time_series; sum of organic gains over the range for total_value)   - paid_followers_gained      (per-day paid gains for time_series; sum of paid gains over the range for total_value)  Page-view statistics (total_value ONLY - LinkedIn platform limit):   - page_views_total   - page_views_overview   - page_views_careers   - page_views_jobs   - page_views_life  Zernio-synthesized from daily follower snapshots:   - followers_gained   - followers_lost 
-  since: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
-  _until: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   metric_type: 'time_series' # String | 
 }
 
@@ -1270,8 +1292,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the LinkedIn organization account. |  |
 | **metrics** | **String** | Comma-separated list. Defaults to \&quot;impressions,clicks,engagement_rate,organic_followers_gained,followers_gained,followers_lost\&quot;.  Share statistics (support both total_value and time_series):   - impressions   - unique_impressions   - clicks   - likes   - comments   - shares   - engagement_rate       (0..1, LinkedIn-computed)  Follower-gain statistics (support total_value and time_series):   - organic_followers_gained   (per-day organic gains for time_series; sum of organic gains over the range for total_value)   - paid_followers_gained      (per-day paid gains for time_series; sum of paid gains over the range for total_value)  Page-view statistics (total_value ONLY - LinkedIn platform limit):   - page_views_total   - page_views_overview   - page_views_careers   - page_views_jobs   - page_views_life  Zernio-synthesized from daily follower snapshots:   - followers_gained   - followers_lost  | [optional] |
-| **since** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
-| **_until** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **metric_type** | **String** |  | [optional][default to &#39;total_value&#39;] |
 
 ### Return type
@@ -1611,8 +1635,10 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the TikTok account.
 opts = {
   metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"follower_count,likes_count,video_count,followers_gained,followers_lost\".  Live from /v2/user/info/ (requires user.info.stats scope):   - follower_count  (cumulative; time series joined from AccountStats)   - following_count (cumulative; time series joined from AccountStats.metadata)   - likes_count     (cumulative; time series joined from AccountStats.metadata)   - video_count     (cumulative; time series joined from AccountStats.metadata)  Zernio-synthesized:   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas) 
-  since: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
-  _until: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   metric_type: 'time_series' # String | \"total_value\" returns the latest cumulative counter value. \"time_series\" returns daily values joined from AccountStats snapshots. 
 }
 
@@ -1649,8 +1675,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the TikTok account. |  |
 | **metrics** | **String** | Comma-separated list. Defaults to \&quot;follower_count,likes_count,video_count,followers_gained,followers_lost\&quot;.  Live from /v2/user/info/ (requires user.info.stats scope):   - follower_count  (cumulative; time series joined from AccountStats)   - following_count (cumulative; time series joined from AccountStats.metadata)   - likes_count     (cumulative; time series joined from AccountStats.metadata)   - video_count     (cumulative; time series joined from AccountStats.metadata)  Zernio-synthesized:   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas)  | [optional] |
-| **since** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
-| **_until** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **metric_type** | **String** | \&quot;total_value\&quot; returns the latest cumulative counter value. \&quot;time_series\&quot; returns daily values joined from AccountStats snapshots.  | [optional][default to &#39;total_value&#39;] |
 
 ### Return type
@@ -1690,8 +1718,10 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the YouTube account.
 opts = {
   metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"views,estimatedMinutesWatched,subscribersGained,subscribersLost\".  Live YouTube Analytics v2 metrics:   - views   - estimatedMinutesWatched   - averageViewDuration          (ratio - weighted mean computed across days)   - subscribersGained   - subscribersLost  Zernio-synthesized from daily follower snapshots (cross-platform parity):   - followers_gained   - followers_lost 
-  since: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
-  _until: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today. YouTube Analytics has a 2-3 day delay, so the fetch is internally clamped to 3 days ago; any requested range extending beyond that returns zero values for the tail days. The response's dateRange.until field reflects your requested value. 
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today. YouTube Analytics has a 2-3 day delay, so the fetch is internally clamped to 3 days ago; any requested range extending beyond that returns zero values for the tail days. The response's dateRange.until field reflects your requested value. 
+  since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   metric_type: 'time_series' # String | \"total_value\" (default) returns aggregated totals. \"time_series\" returns per-day values in the \"values\" array. 
 }
 
@@ -1728,8 +1758,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the YouTube account. |  |
 | **metrics** | **String** | Comma-separated list. Defaults to \&quot;views,estimatedMinutesWatched,subscribersGained,subscribersLost\&quot;.  Live YouTube Analytics v2 metrics:   - views   - estimatedMinutesWatched   - averageViewDuration          (ratio - weighted mean computed across days)   - subscribersGained   - subscribersLost  Zernio-synthesized from daily follower snapshots (cross-platform parity):   - followers_gained   - followers_lost  | [optional] |
-| **since** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
-| **_until** | **Date** | End date (YYYY-MM-DD). Defaults to today. YouTube Analytics has a 2-3 day delay, so the fetch is internally clamped to 3 days ago; any requested range extending beyond that returns zero values for the tail days. The response&#39;s dateRange.until field reflects your requested value.  | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. YouTube Analytics has a 2-3 day delay, so the fetch is internally clamped to 3 days ago; any requested range extending beyond that returns zero values for the tail days. The response&#39;s dateRange.until field reflects your requested value.  | [optional] |
+| **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **metric_type** | **String** | \&quot;total_value\&quot; (default) returns aggregated totals. \&quot;time_series\&quot; returns per-day values in the \&quot;values\&quot; array.  | [optional][default to &#39;total_value&#39;] |
 
 ### Return type
@@ -1769,8 +1801,10 @@ api_instance = Zernio::AnalyticsApi.new
 video_id = 'video_id_example' # String | The YouTube video ID (e.g., \"dQw4w9WgXcQ\")
 account_id = 'account_id_example' # String | The Zernio account ID for the YouTube account
 opts = {
-  start_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
-  end_date: Date.parse('2013-10-20') # Date | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response), and days YouTube has not processed yet are omitted from dailyViews. 
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit toDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response), and days YouTube has not processed yet are omitted from dailyViews. 
+  start_date: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  end_date: Date.parse('2013-10-20') # Date | Alias of toDate, kept for existing callers
 }
 
 begin
@@ -1806,8 +1840,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **video_id** | **String** | The YouTube video ID (e.g., \&quot;dQw4w9WgXcQ\&quot;) |  |
 | **account_id** | **String** | The Zernio account ID for the YouTube account |  |
-| **start_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
-| **end_date** | **Date** | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response), and days YouTube has not processed yet are omitted from dailyViews.  | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit toDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response), and days YouTube has not processed yet are omitted from dailyViews.  | [optional] |
+| **start_date** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **end_date** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -1847,8 +1883,10 @@ account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the
 opts = {
   video_id: 'video_id_example', # String | YouTube video ID. When provided, demographics are scoped to this single video (must belong to the connected channel; otherwise 404 video_not_found). 
   breakdown: 'breakdown_example', # String | Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
-  start_date: Date.parse('2013-10-20'), # Date | Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video's publish date (lifetime) when videoId is provided. 
-  end_date: Date.parse('2013-10-20') # Date | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response). 
+  from_date: Date.parse('2013-10-20'), # Date | Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video's publish date (lifetime) when videoId is provided. 
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit toDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response). 
+  start_date: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  end_date: Date.parse('2013-10-20') # Date | Alias of toDate, kept for existing callers
 }
 
 begin
@@ -1885,8 +1923,10 @@ end
 | **account_id** | **String** | The Zernio SocialAccount ID for the YouTube account |  |
 | **video_id** | **String** | YouTube video ID. When provided, demographics are scoped to this single video (must belong to the connected channel; otherwise 404 video_not_found).  | [optional] |
 | **breakdown** | **String** | Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted.  | [optional] |
-| **start_date** | **Date** | Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video&#39;s publish date (lifetime) when videoId is provided.  | [optional] |
-| **end_date** | **Date** | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response).  | [optional] |
+| **from_date** | **Date** | Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video&#39;s publish date (lifetime) when videoId is provided.  | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit toDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response).  | [optional] |
+| **start_date** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **end_date** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -1925,8 +1965,10 @@ api_instance = Zernio::AnalyticsApi.new
 video_id = 'video_id_example' # String | The YouTube video ID (e.g., \"dQw4w9WgXcQ\")
 account_id = 'account_id_example' # String | The Zernio account ID for the YouTube account
 opts = {
-  start_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to the video's publish date (lifetime curve).
-  end_date: Date.parse('2013-10-20') # Date | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response). 
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to the video's publish date (lifetime curve).
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit toDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response). 
+  start_date: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  end_date: Date.parse('2013-10-20') # Date | Alias of toDate, kept for existing callers
 }
 
 begin
@@ -1962,8 +2004,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **video_id** | **String** | The YouTube video ID (e.g., \&quot;dQw4w9WgXcQ\&quot;) |  |
 | **account_id** | **String** | The Zernio account ID for the YouTube account |  |
-| **start_date** | **Date** | Start date (YYYY-MM-DD). Defaults to the video&#39;s publish date (lifetime curve). | [optional] |
-| **end_date** | **Date** | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response).  | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to the video&#39;s publish date (lifetime curve). | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit toDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response).  | [optional] |
+| **start_date** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **end_date** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 
 ### Return type
 

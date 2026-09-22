@@ -6,7 +6,8 @@
 | ---- | ---- | ----------- | ----- |
 | **error** | **String** |  | [optional] |
 | **code** | **String** |  | [optional] |
-| **valid_options** | **Array&lt;String&gt;** |  | [optional] |
+| **param** | **String** | The query parameter at fault on a validation failure | [optional] |
+| **type** | **String** |  | [optional] |
 
 ## Example
 
@@ -16,7 +17,8 @@ require 'zernio-sdk'
 instance = Zernio::GetLinkedInAggregateAnalytics400Response.new(
   error: null,
   code: null,
-  valid_options: null
+  param: null,
+  type: null
 )
 ```
 
