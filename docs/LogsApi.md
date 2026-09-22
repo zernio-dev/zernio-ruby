@@ -13,7 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 
 List activity logs
 
-Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 
+Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. Legacy query aliases remain accepted: `account_id` for `accountId`, `request_id` for `requestId`, `status_code` for `statusCode`, `api_key_id` for `apiKeyId`, and `include_read_receipts` for `includeReadReceipts`. 
 
 ### Examples
 
@@ -37,18 +37,13 @@ opts = {
   limit: 56, # Integer | Maximum number of logs to return (max 100)
   skip: 56, # Integer | Number of logs to skip (for pagination)
   account_id: 'account_id_example', # String | Filter by connected account ID
-  account_id2: 'account_id_example', # String | Alias of accountId, kept for existing callers
   event: 'event_example', # String | Filter webhook logs by event (e.g. post.published, message.received)
   request_id: 'request_id_example', # String | Correlation ID. Returns every log spawned by a single API request
-  request_id2: 'request_id_example', # String | Alias of requestId, kept for existing callers
   from: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Precise start instant (ISO 8601); narrows within the day range
   to: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Precise end instant (ISO 8601)
   status_code: 56, # Integer | Filter by exact HTTP status code (api_request logs)
-  status_code2: 56, # Integer | Alias of statusCode, kept for existing callers
   api_key_id: 'api_key_id_example', # String | Filter by the API key that made the request (api_request logs)
-  api_key_id2: 'api_key_id_example', # String | Alias of apiKeyId, kept for existing callers
-  include_read_receipts: true, # Boolean | Include message.read / message.delivered events (hidden by default for messaging logs)
-  include_read_receipts2: true # Boolean | Alias of includeReadReceipts, kept for existing callers
+  include_read_receipts: true # Boolean | Include message.read / message.delivered events (hidden by default for messaging logs)
 }
 
 begin
@@ -91,18 +86,13 @@ end
 | **limit** | **Integer** | Maximum number of logs to return (max 100) | [optional][default to 50] |
 | **skip** | **Integer** | Number of logs to skip (for pagination) | [optional][default to 0] |
 | **account_id** | **String** | Filter by connected account ID | [optional] |
-| **account_id2** | **String** | Alias of accountId, kept for existing callers | [optional] |
 | **event** | **String** | Filter webhook logs by event (e.g. post.published, message.received) | [optional] |
 | **request_id** | **String** | Correlation ID. Returns every log spawned by a single API request | [optional] |
-| **request_id2** | **String** | Alias of requestId, kept for existing callers | [optional] |
 | **from** | **Time** | Precise start instant (ISO 8601); narrows within the day range | [optional] |
 | **to** | **Time** | Precise end instant (ISO 8601) | [optional] |
 | **status_code** | **Integer** | Filter by exact HTTP status code (api_request logs) | [optional] |
-| **status_code2** | **Integer** | Alias of statusCode, kept for existing callers | [optional] |
 | **api_key_id** | **String** | Filter by the API key that made the request (api_request logs) | [optional] |
-| **api_key_id2** | **String** | Alias of apiKeyId, kept for existing callers | [optional] |
 | **include_read_receipts** | **Boolean** | Include message.read / message.delivered events (hidden by default for messaging logs) | [optional][default to false] |
-| **include_read_receipts2** | **Boolean** | Alias of includeReadReceipts, kept for existing callers | [optional][default to false] |
 
 ### Return type
 
