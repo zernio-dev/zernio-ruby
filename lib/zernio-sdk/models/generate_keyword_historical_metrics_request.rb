@@ -18,7 +18,10 @@ module Zernio
     # Zernio googleads SocialAccount id.
     attr_accessor :account_id
 
-    # Numeric Google Ads customer id (no dashes); only needed when the connection has several accounts.
+    # Platform ad account ID (Google customer ID, digits only).
+    attr_accessor :ad_account_id
+
+    # Alias of adAccountId, kept for existing callers
     attr_accessor :customer_id
 
     attr_accessor :keywords
@@ -62,6 +65,7 @@ module Zernio
     def self.attribute_map
       {
         :'account_id' => :'accountId',
+        :'ad_account_id' => :'adAccountId',
         :'customer_id' => :'customerId',
         :'keywords' => :'keywords',
         :'countries' => :'countries',
@@ -86,6 +90,7 @@ module Zernio
     def self.openapi_types
       {
         :'account_id' => :'String',
+        :'ad_account_id' => :'String',
         :'customer_id' => :'String',
         :'keywords' => :'Array<String>',
         :'countries' => :'Array<String>',
@@ -122,6 +127,10 @@ module Zernio
         self.account_id = attributes[:'account_id']
       else
         self.account_id = nil
+      end
+
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
       end
 
       if attributes.key?(:'customer_id')
@@ -272,6 +281,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           account_id == o.account_id &&
+          ad_account_id == o.ad_account_id &&
           customer_id == o.customer_id &&
           keywords == o.keywords &&
           countries == o.countries &&
@@ -290,7 +300,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, customer_id, keywords, countries, language_constant_id, network, include_adult_keywords, include_average_cpc].hash
+      [account_id, ad_account_id, customer_id, keywords, countries, language_constant_id, network, include_adult_keywords, include_average_cpc].hash
     end
 
     # Builds the object from hash

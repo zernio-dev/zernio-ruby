@@ -28,7 +28,10 @@ module Zernio
 
     attr_accessor :status
 
-    # Numeric Google Ads customer id. Only required when the connection has more than one.
+    # Platform ad account ID (Google customer ID, digits only). Only required when the connection has more than one.
+    attr_accessor :ad_account_id
+
+    # Alias of adAccountId, kept for existing callers
     attr_accessor :customer_id
 
     class EnumAttributeValidator
@@ -61,6 +64,7 @@ module Zernio
         :'campaign_id' => :'campaignId',
         :'name' => :'name',
         :'status' => :'status',
+        :'ad_account_id' => :'adAccountId',
         :'customer_id' => :'customerId'
       }
     end
@@ -83,6 +87,7 @@ module Zernio
         :'campaign_id' => :'String',
         :'name' => :'String',
         :'status' => :'String',
+        :'ad_account_id' => :'String',
         :'customer_id' => :'String'
       }
     end
@@ -137,6 +142,10 @@ module Zernio
         self.status = attributes[:'status']
       else
         self.status = 'PAUSED'
+      end
+
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
       end
 
       if attributes.key?(:'customer_id')
@@ -261,6 +270,7 @@ module Zernio
           campaign_id == o.campaign_id &&
           name == o.name &&
           status == o.status &&
+          ad_account_id == o.ad_account_id &&
           customer_id == o.customer_id
     end
 
@@ -273,7 +283,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, platform, campaign_id, name, status, customer_id].hash
+      [account_id, platform, campaign_id, name, status, ad_account_id, customer_id].hash
     end
 
     # Builds the object from hash

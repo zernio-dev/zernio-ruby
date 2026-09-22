@@ -333,7 +333,8 @@ describe 'AdCampaignsApi' do
   # @param account_id Zernio Google Ads SocialAccount id: resolves the customer id + refresh token.
   # @param platform Required: campaign IDs are not globally unique. Only \&quot;google\&quot; is supported today.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+  # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+  # @option opts [String] :customer_id Alias of adAccountId, kept for existing callers
   # @return [GetCampaignBidding200Response]
   describe 'get_campaign_bidding test' do
     it 'should work' do
@@ -385,6 +386,7 @@ describe 'AdCampaignsApi' do
   # @param ad_set_id Numeric Google platform id.
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id 
   # @option opts [String] :customer_id 
   # @return [ListAdGroupAssets200Response]
   describe 'list_ad_group_assets test' do
@@ -461,7 +463,8 @@ describe 'AdCampaignsApi' do
   # Bidding strategy report: type, status, campaign count, clicks, cost, cost per conversion, impressions, average CPC and conversions over the date range (default last 30 days). Reads Google&#39;s &#x60;bidding_strategy&#x60; resource, cached for the quota window. Draws on the shared Google Ads operations budget. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
   # @param account_id Google ads SocialAccount id.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+  # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer.
+  # @option opts [String] :customer_id Alias of adAccountId, kept for existing callers
   # @option opts [Date] :from_date Defaults to 30 days ago.
   # @option opts [Date] :to_date Defaults to today.
   # @return [ListBidStrategies200Response]
@@ -477,6 +480,7 @@ describe 'AdCampaignsApi' do
   # @param campaign_id Numeric Google platform id.
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id 
   # @option opts [String] :customer_id 
   # @return [ListCampaignAssets200Response]
   describe 'list_campaign_assets test' do

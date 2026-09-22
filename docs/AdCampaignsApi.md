@@ -1637,7 +1637,8 @@ campaign_id = 'campaign_id_example' # String | Numeric Google platform campaign 
 account_id = 'account_id_example' # String | Zernio Google Ads SocialAccount id: resolves the customer id + refresh token.
 platform = 'google' # String | Required: campaign IDs are not globally unique. Only \"google\" is supported today.
 opts = {
-  customer_id: 'customer_id_example' # String | Numeric Google Ads customer id (no dashes). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
 }
 
 begin
@@ -1674,7 +1675,8 @@ end
 | **campaign_id** | **String** | Numeric Google platform campaign id. |  |
 | **account_id** | **String** | Zernio Google Ads SocialAccount id: resolves the customer id + refresh token. |  |
 | **platform** | **String** | Required: campaign IDs are not globally unique. Only \&quot;google\&quot; is supported today. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one. | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -1883,6 +1885,7 @@ api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Numeric Google platform id.
 account_id = 'account_id_example' # String | 
 opts = {
+  ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example' # String | 
 }
 
@@ -1919,6 +1922,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **ad_set_id** | **String** | Numeric Google platform id. |  |
 | **account_id** | **String** |  |  |
+| **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 
 ### Return type
@@ -2224,7 +2228,8 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 account_id = 'account_id_example' # String | Google ads SocialAccount id.
 opts = {
-  customer_id: 'customer_id_example', # String | Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Defaults to the account's connected customer.
+  customer_id: 'customer_id_example', # String | Alias of adAccountId, kept for existing callers
   from_date: Date.parse('2013-10-20'), # Date | Defaults to 30 days ago.
   to_date: Date.parse('2013-10-20') # Date | Defaults to today.
 }
@@ -2261,7 +2266,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Google ads SocialAccount id. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 | **from_date** | **Date** | Defaults to 30 days ago. | [optional] |
 | **to_date** | **Date** | Defaults to today. | [optional] |
 
@@ -2302,6 +2308,7 @@ api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Numeric Google platform id.
 account_id = 'account_id_example' # String | 
 opts = {
+  ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example' # String | 
 }
 
@@ -2338,6 +2345,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Numeric Google platform id. |  |
 | **account_id** | **String** |  |  |
+| **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 
 ### Return type

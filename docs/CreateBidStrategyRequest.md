@@ -5,7 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Google ads SocialAccount id. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 | **name** | **String** |  |  |
 | **type** | **String** |  |  |
 | **target_cpa** | **Float** | Required when type is TARGET_CPA, in the account&#39;s currency units. | [optional] |
@@ -18,6 +19,7 @@ require 'zernio-sdk'
 
 instance = Zernio::CreateBidStrategyRequest.new(
   account_id: null,
+  ad_account_id: null,
   customer_id: null,
   name: null,
   type: null,

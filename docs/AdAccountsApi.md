@@ -707,6 +707,7 @@ api_instance = Zernio::AdAccountsApi.new
 list_id = 'list_id_example' # String | 
 account_id = 'account_id_example' # String | 
 opts = {
+  ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example', # String | 
   platform: 'facebook' # String | 
 }
@@ -744,6 +745,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **list_id** | **String** |  |  |
 | **account_id** | **String** |  |  |
+| **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 
@@ -1007,6 +1009,7 @@ api_instance = Zernio::AdAccountsApi.new
 list_id = 'list_id_example' # String | 
 account_id = 'account_id_example' # String | 
 opts = {
+  ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example', # String | 
   platform: 'facebook' # String | 
 }
@@ -1044,6 +1047,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **list_id** | **String** |  |  |
 | **account_id** | **String** |  |  |
+| **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 
@@ -1531,6 +1535,7 @@ end
 api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | 
 opts = {
+  ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example' # String | 
 }
 
@@ -1566,6 +1571,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 
 ### Return type
@@ -1604,6 +1610,7 @@ end
 api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | 
 opts = {
+  ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example' # String | 
 }
 
@@ -1639,6 +1646,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 
 ### Return type
@@ -1677,6 +1685,7 @@ end
 api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | 
 opts = {
+  ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example' # String | 
 }
 
@@ -1712,6 +1721,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 
 ### Return type
@@ -1902,6 +1912,7 @@ end
 api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | 
 opts = {
+  ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example', # String | 
   platform: 'facebook' # String | 
 }
@@ -1938,6 +1949,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 
@@ -2571,7 +2583,8 @@ end
 api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount ID.
 opts = {
-  advertiser_id: 'advertiser_id_example', # String | Advertiser belonging to this connection.
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (TikTok advertiser id, digits only). Defaults to the first advertiser on the connection.
+  advertiser_id: 'advertiser_id_example', # String | Alias of adAccountId, kept for existing callers
   code: 'code_example' # String | Filter by a Pixel Code.
 }
 
@@ -2607,7 +2620,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio SocialAccount ID. |  |
-| **advertiser_id** | **String** | Advertiser belonging to this connection. | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (TikTok advertiser id, digits only). Defaults to the first advertiser on the connection. | [optional] |
+| **advertiser_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 | **code** | **String** | Filter by a Pixel Code. | [optional] |
 
 ### Return type

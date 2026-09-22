@@ -150,6 +150,7 @@ describe 'AdAccountsApi' do
   # @param list_id 
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id 
   # @option opts [String] :customer_id 
   # @option opts [String] :platform 
   # @return [DeleteAdNegativeKeywordList200Response]
@@ -208,6 +209,7 @@ describe 'AdAccountsApi' do
   # @param list_id 
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id 
   # @option opts [String] :customer_id 
   # @option opts [String] :platform 
   # @return [GetAdNegativeKeywordList200Response]
@@ -309,6 +311,7 @@ describe 'AdAccountsApi' do
   # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included. Preserves Google RMF C.75 account-level callouts.
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id 
   # @option opts [String] :customer_id 
   # @return [ListAccountCallouts200Response]
   describe 'list_account_callouts test' do
@@ -322,6 +325,7 @@ describe 'AdAccountsApi' do
   # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id 
   # @option opts [String] :customer_id 
   # @return [ListAccountSitelinks200Response]
   describe 'list_account_sitelinks test' do
@@ -335,6 +339,7 @@ describe 'AdAccountsApi' do
   # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id 
   # @option opts [String] :customer_id 
   # @return [ListAccountStructuredSnippets200Response]
   describe 'list_account_structured_snippets test' do
@@ -377,6 +382,7 @@ describe 'AdAccountsApi' do
   # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope.
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id 
   # @option opts [String] :customer_id 
   # @option opts [String] :platform 
   # @return [ListAdNegativeKeywordLists200Response]
@@ -504,7 +510,8 @@ describe 'AdAccountsApi' do
   # Lists pixels and their supported optimization events for a connected TikTok Ads account. The advertiser defaults to the first advertiser on the connection. Reconnect if Pixel Management permission has not been granted.
   # @param account_id Zernio SocialAccount ID.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :advertiser_id Advertiser belonging to this connection.
+  # @option opts [String] :ad_account_id Platform ad account ID (TikTok advertiser id, digits only). Defaults to the first advertiser on the connection.
+  # @option opts [String] :advertiser_id Alias of adAccountId, kept for existing callers
   # @option opts [String] :code Filter by a Pixel Code.
   # @return [ListTikTokAdPixels200Response]
   describe 'list_tik_tok_ad_pixels test' do

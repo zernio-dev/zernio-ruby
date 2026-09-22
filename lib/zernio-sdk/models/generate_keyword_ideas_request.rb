@@ -18,7 +18,10 @@ module Zernio
     # Zernio googleads SocialAccount id.
     attr_accessor :account_id
 
-    # Numeric Google Ads customer id (no dashes); only needed when the connection has several accounts.
+    # Platform ad account ID (Google customer ID, digits only).
+    attr_accessor :ad_account_id
+
+    # Alias of adAccountId, kept for existing callers
     attr_accessor :customer_id
 
     # Seed terms. Provide these, seedUrl, or both.
@@ -68,6 +71,7 @@ module Zernio
     def self.attribute_map
       {
         :'account_id' => :'accountId',
+        :'ad_account_id' => :'adAccountId',
         :'customer_id' => :'customerId',
         :'seed_keywords' => :'seedKeywords',
         :'seed_url' => :'seedUrl',
@@ -94,6 +98,7 @@ module Zernio
     def self.openapi_types
       {
         :'account_id' => :'String',
+        :'ad_account_id' => :'String',
         :'customer_id' => :'String',
         :'seed_keywords' => :'Array<String>',
         :'seed_url' => :'String',
@@ -132,6 +137,10 @@ module Zernio
         self.account_id = attributes[:'account_id']
       else
         self.account_id = nil
+      end
+
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
       end
 
       if attributes.key?(:'customer_id')
@@ -311,6 +320,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           account_id == o.account_id &&
+          ad_account_id == o.ad_account_id &&
           customer_id == o.customer_id &&
           seed_keywords == o.seed_keywords &&
           seed_url == o.seed_url &&
@@ -331,7 +341,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, customer_id, seed_keywords, seed_url, countries, language_constant_id, network, include_adult_keywords, page_size, page_token].hash
+      [account_id, ad_account_id, customer_id, seed_keywords, seed_url, countries, language_constant_id, network, include_adult_keywords, page_size, page_token].hash
     end
 
     # Builds the object from hash

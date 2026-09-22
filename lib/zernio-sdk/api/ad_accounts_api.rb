@@ -654,6 +654,7 @@ module Zernio
     # @param list_id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @option opts [String] :platform 
     # @return [DeleteAdNegativeKeywordList200Response]
@@ -667,6 +668,7 @@ module Zernio
     # @param list_id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @option opts [String] :platform 
     # @return [Array<(DeleteAdNegativeKeywordList200Response, Integer, Hash)>] DeleteAdNegativeKeywordList200Response data, response status code and response headers
@@ -693,6 +695,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdAccountsApi.delete_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
         fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.delete_ad_negative_keyword_list, must conform to the pattern #{pattern}."
       end
@@ -707,6 +714,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
 
@@ -980,6 +988,7 @@ module Zernio
     # @param list_id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @option opts [String] :platform 
     # @return [GetAdNegativeKeywordList200Response]
@@ -993,6 +1002,7 @@ module Zernio
     # @param list_id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @option opts [String] :platform 
     # @return [Array<(GetAdNegativeKeywordList200Response, Integer, Hash)>] GetAdNegativeKeywordList200Response data, response status code and response headers
@@ -1019,6 +1029,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdAccountsApi.get_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
         fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.get_ad_negative_keyword_list, must conform to the pattern #{pattern}."
       end
@@ -1033,6 +1048,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
 
@@ -1559,6 +1575,7 @@ module Zernio
     # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included. Preserves Google RMF C.75 account-level callouts.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [ListAccountCallouts200Response]
     def list_account_callouts(account_id, opts = {})
@@ -1570,6 +1587,7 @@ module Zernio
     # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included. Preserves Google RMF C.75 account-level callouts.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [Array<(ListAccountCallouts200Response, Integer, Hash)>] ListAccountCallouts200Response data, response status code and response headers
     def list_account_callouts_with_http_info(account_id, opts = {})
@@ -1586,6 +1604,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdAccountsApi.list_account_callouts, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
         fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_account_callouts, must conform to the pattern #{pattern}."
       end
@@ -1596,6 +1619,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
 
       # header parameters
@@ -1636,6 +1660,7 @@ module Zernio
     # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [ListAccountSitelinks200Response]
     def list_account_sitelinks(account_id, opts = {})
@@ -1647,6 +1672,7 @@ module Zernio
     # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [Array<(ListAccountSitelinks200Response, Integer, Hash)>] ListAccountSitelinks200Response data, response status code and response headers
     def list_account_sitelinks_with_http_info(account_id, opts = {})
@@ -1663,6 +1689,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdAccountsApi.list_account_sitelinks, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
         fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_account_sitelinks, must conform to the pattern #{pattern}."
       end
@@ -1673,6 +1704,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
 
       # header parameters
@@ -1713,6 +1745,7 @@ module Zernio
     # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [ListAccountStructuredSnippets200Response]
     def list_account_structured_snippets(account_id, opts = {})
@@ -1724,6 +1757,7 @@ module Zernio
     # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [Array<(ListAccountStructuredSnippets200Response, Integer, Hash)>] ListAccountStructuredSnippets200Response data, response status code and response headers
     def list_account_structured_snippets_with_http_info(account_id, opts = {})
@@ -1740,6 +1774,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdAccountsApi.list_account_structured_snippets, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
         fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_account_structured_snippets, must conform to the pattern #{pattern}."
       end
@@ -1750,6 +1789,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
 
       # header parameters
@@ -1953,6 +1993,7 @@ module Zernio
     # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale=true. Customer selection is limited to this connection and its account scope.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @option opts [String] :platform 
     # @return [ListAdNegativeKeywordLists200Response]
@@ -1965,6 +2006,7 @@ module Zernio
     # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @option opts [String] :platform 
     # @return [Array<(ListAdNegativeKeywordLists200Response, Integer, Hash)>] ListAdNegativeKeywordLists200Response data, response status code and response headers
@@ -1982,6 +2024,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdAccountsApi.list_ad_negative_keyword_lists, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
         fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_ad_negative_keyword_lists, must conform to the pattern #{pattern}."
       end
@@ -1996,6 +2043,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
 
@@ -2662,7 +2710,8 @@ module Zernio
     # Lists pixels and their supported optimization events for a connected TikTok Ads account. The advertiser defaults to the first advertiser on the connection. Reconnect if Pixel Management permission has not been granted.
     # @param account_id [String] Zernio SocialAccount ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :advertiser_id Advertiser belonging to this connection.
+    # @option opts [String] :ad_account_id Platform ad account ID (TikTok advertiser id, digits only). Defaults to the first advertiser on the connection.
+    # @option opts [String] :advertiser_id Alias of adAccountId, kept for existing callers
     # @option opts [String] :code Filter by a Pixel Code.
     # @return [ListTikTokAdPixels200Response]
     def list_tik_tok_ad_pixels(account_id, opts = {})
@@ -2674,7 +2723,8 @@ module Zernio
     # Lists pixels and their supported optimization events for a connected TikTok Ads account. The advertiser defaults to the first advertiser on the connection. Reconnect if Pixel Management permission has not been granted.
     # @param account_id [String] Zernio SocialAccount ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :advertiser_id Advertiser belonging to this connection.
+    # @option opts [String] :ad_account_id Platform ad account ID (TikTok advertiser id, digits only). Defaults to the first advertiser on the connection.
+    # @option opts [String] :advertiser_id Alias of adAccountId, kept for existing callers
     # @option opts [String] :code Filter by a Pixel Code.
     # @return [Array<(ListTikTokAdPixels200Response, Integer, Hash)>] ListTikTokAdPixels200Response data, response status code and response headers
     def list_tik_tok_ad_pixels_with_http_info(account_id, opts = {})
@@ -2696,6 +2746,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'advertiserId'] = opts[:'advertiser_id'] if !opts[:'advertiser_id'].nil?
       query_params[:'code'] = opts[:'code'] if !opts[:'code'].nil?
 

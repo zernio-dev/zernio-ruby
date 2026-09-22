@@ -9,7 +9,8 @@
 | **campaign_id** | **String** | Google platform campaign ID (numeric) the ad group is created under. |  |
 | **name** | **String** |  |  |
 | **status** | **String** |  | [optional][default to &#39;PAUSED&#39;] |
-| **customer_id** | **String** | Numeric Google Ads customer id. Only required when the connection has more than one. | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Only required when the connection has more than one. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
 ## Example
 
@@ -22,6 +23,7 @@ instance = Zernio::CreateAdSetRequest.new(
   campaign_id: null,
   name: null,
   status: null,
+  ad_account_id: null,
   customer_id: null
 )
 ```

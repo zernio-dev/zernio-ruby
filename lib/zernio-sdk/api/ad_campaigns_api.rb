@@ -1649,7 +1649,8 @@ module Zernio
     # @param account_id [String] Zernio Google Ads SocialAccount id: resolves the customer id + refresh token.
     # @param platform [String] Required: campaign IDs are not globally unique. Only \&quot;google\&quot; is supported today.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+    # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+    # @option opts [String] :customer_id Alias of adAccountId, kept for existing callers
     # @return [GetCampaignBidding200Response]
     def get_campaign_bidding(campaign_id, account_id, platform, opts = {})
       data, _status_code, _headers = get_campaign_bidding_with_http_info(campaign_id, account_id, platform, opts)
@@ -1662,7 +1663,8 @@ module Zernio
     # @param account_id [String] Zernio Google Ads SocialAccount id: resolves the customer id + refresh token.
     # @param platform [String] Required: campaign IDs are not globally unique. Only \&quot;google\&quot; is supported today.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+    # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+    # @option opts [String] :customer_id Alias of adAccountId, kept for existing callers
     # @return [Array<(GetCampaignBidding200Response, Integer, Hash)>] GetCampaignBidding200Response data, response status code and response headers
     def get_campaign_bidding_with_http_info(campaign_id, account_id, platform, opts = {})
       if @api_client.config.debugging
@@ -1692,6 +1694,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
       query_params[:'platform'] = platform
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
 
       # header parameters
@@ -1926,6 +1929,7 @@ module Zernio
     # @param ad_set_id [String] Numeric Google platform id.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [ListAdGroupAssets200Response]
     def list_ad_group_assets(ad_set_id, account_id, opts = {})
@@ -1938,6 +1942,7 @@ module Zernio
     # @param ad_set_id [String] Numeric Google platform id.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [Array<(ListAdGroupAssets200Response, Integer, Hash)>] ListAdGroupAssets200Response data, response status code and response headers
     def list_ad_group_assets_with_http_info(ad_set_id, account_id, opts = {})
@@ -1963,6 +1968,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdCampaignsApi.list_ad_group_assets, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
         fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdCampaignsApi.list_ad_group_assets, must conform to the pattern #{pattern}."
       end
@@ -1973,6 +1983,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
 
       # header parameters
@@ -2322,7 +2333,8 @@ module Zernio
     # Bidding strategy report: type, status, campaign count, clicks, cost, cost per conversion, impressions, average CPC and conversions over the date range (default last 30 days). Reads Google's `bidding_strategy` resource, cached for the quota window. Draws on the shared Google Ads operations budget. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
     # @param account_id [String] Google ads SocialAccount id.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+    # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer.
+    # @option opts [String] :customer_id Alias of adAccountId, kept for existing callers
     # @option opts [Date] :from_date Defaults to 30 days ago.
     # @option opts [Date] :to_date Defaults to today.
     # @return [ListBidStrategies200Response]
@@ -2335,7 +2347,8 @@ module Zernio
     # Bidding strategy report: type, status, campaign count, clicks, cost, cost per conversion, impressions, average CPC and conversions over the date range (default last 30 days). Reads Google&#39;s &#x60;bidding_strategy&#x60; resource, cached for the quota window. Draws on the shared Google Ads operations budget. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
     # @param account_id [String] Google ads SocialAccount id.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+    # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer.
+    # @option opts [String] :customer_id Alias of adAccountId, kept for existing callers
     # @option opts [Date] :from_date Defaults to 30 days ago.
     # @option opts [Date] :to_date Defaults to today.
     # @return [Array<(ListBidStrategies200Response, Integer, Hash)>] ListBidStrategies200Response data, response status code and response headers
@@ -2353,6 +2366,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
@@ -2396,6 +2410,7 @@ module Zernio
     # @param campaign_id [String] Numeric Google platform id.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [ListCampaignAssets200Response]
     def list_campaign_assets(campaign_id, account_id, opts = {})
@@ -2408,6 +2423,7 @@ module Zernio
     # @param campaign_id [String] Numeric Google platform id.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id 
     # @option opts [String] :customer_id 
     # @return [Array<(ListCampaignAssets200Response, Integer, Hash)>] ListCampaignAssets200Response data, response status code and response headers
     def list_campaign_assets_with_http_info(campaign_id, account_id, opts = {})
@@ -2433,6 +2449,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdCampaignsApi.list_campaign_assets, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
         fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdCampaignsApi.list_campaign_assets, must conform to the pattern #{pattern}."
       end
@@ -2443,6 +2464,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
 
       # header parameters

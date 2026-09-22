@@ -399,7 +399,8 @@ end
 api_instance = Zernio::AdInsightsApi.new
 account_id = 'account_id_example' # String | Google ads SocialAccount id.
 opts = {
-  customer_id: 'customer_id_example', # String | Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Defaults to the account's connected customer.
+  customer_id: 'customer_id_example', # String | Alias of adAccountId, kept for existing callers
   from_date: Date.parse('2013-10-20'), # Date | Defaults to 30 days ago.
   to_date: Date.parse('2013-10-20'), # Date | Defaults to today.
   campaign_id: 'campaign_id_example', # String | Numeric Google campaign id filter.
@@ -440,7 +441,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Google ads SocialAccount id. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 | **from_date** | **Date** | Defaults to 30 days ago. | [optional] |
 | **to_date** | **Date** | Defaults to today. | [optional] |
 | **campaign_id** | **String** | Numeric Google campaign id filter. | [optional] |
@@ -564,7 +566,8 @@ api_instance = Zernio::AdInsightsApi.new
 lead_id = 'lead_id_example' # String | Numeric lead id from /v1/ads/local-services/leads.
 account_id = 'account_id_example' # String | Google ads SocialAccount id.
 opts = {
-  customer_id: 'customer_id_example', # String | Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Defaults to the account's connected customer.
+  customer_id: 'customer_id_example', # String | Alias of adAccountId, kept for existing callers
   page_token: 'page_token_example' # String | Cursor from paging.nextPageToken of the previous page.
 }
 
@@ -601,7 +604,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **lead_id** | **String** | Numeric lead id from /v1/ads/local-services/leads. |  |
 | **account_id** | **String** | Google ads SocialAccount id. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 | **page_token** | **String** | Cursor from paging.nextPageToken of the previous page. | [optional] |
 
 ### Return type
@@ -640,7 +644,8 @@ end
 api_instance = Zernio::AdInsightsApi.new
 account_id = 'account_id_example' # String | Google ads SocialAccount id.
 opts = {
-  customer_id: 'customer_id_example', # String | Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Defaults to the account's connected customer.
+  customer_id: 'customer_id_example', # String | Alias of adAccountId, kept for existing callers
   from_date: Date.parse('2013-10-20'), # Date | Leads created at/after this day.
   to_date: Date.parse('2013-10-20'), # Date | Leads created at/before this day.
   lead_type: 'PHONE_CALL', # String | 
@@ -681,7 +686,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Google ads SocialAccount id. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 | **from_date** | **Date** | Leads created at/after this day. | [optional] |
 | **to_date** | **Date** | Leads created at/before this day. | [optional] |
 | **lead_type** | **String** |  | [optional] |
@@ -709,7 +715,7 @@ end
 
 Flexible live insights query
 
-Live, flexible insights query. The account's platform picks the contract:  **Meta (facebook/instagram)**: forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim. `objectId` (required) selects the node; `level` sets row granularity. Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).  **Google Ads (googleads)**: raw GAQL passthrough. Send any read-only GAQL SELECT via `query` (campaign/keyword/search-term/geo/demographic/asset/shopping resources, `change_event`, any `segments.*`) and rows come back verbatim (camelCase, counters as strings). Results are paged at a fixed 10,000 rows; follow `paging.nextPageToken` with `pageToken`. `customerId` is only needed when the connection has several Google Ads accounts. Semantic validation is Google's: an invalid query returns a 400 carrying Google's message (note: selecting `segments.date` requires a finite date filter). 
+Live, flexible insights query. The account's platform picks the contract:  **Meta (facebook/instagram)**: forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim. `objectId` (required) selects the node; `level` sets row granularity. Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).  **Google Ads (googleads)**: raw GAQL passthrough. Send any read-only GAQL SELECT via `query` (campaign/keyword/search-term/geo/demographic/asset/shopping resources, `change_event`, any `segments.*`) and rows come back verbatim (camelCase, counters as strings). Results are paged at a fixed 10,000 rows; follow `paging.nextPageToken` with `pageToken`. `adAccountId` (alias `customerId`) is only needed when the connection has several Google Ads accounts. Semantic validation is Google's: an invalid query returns a 400 carrying Google's message (note: selecting `segments.date` requires a finite date filter). 
 
 ### Examples
 
@@ -727,7 +733,8 @@ account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or
 opts = {
   object_id: 'object_id_example', # String | Meta only (required there): insights node (act_<n>, campaign id, ad set id or ad id).
   query: 'query_example', # String | Google only (required there): the GAQL SELECT statement to run.
-  customer_id: 'customer_id_example', # String | Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts.
+  ad_account_id: 'ad_account_id_example', # String | Google only: platform ad account ID (Google customer ID, digits only) when the connection has several Google Ads accounts.
+  customer_id: 'customer_id_example', # String | Alias of adAccountId, kept for existing callers
   page_token: 'page_token_example', # String | Google only: cursor from paging.nextPageToken of the previous page.
   level: 'ad', # String | Row granularity
   fields: 'fields_example', # String | Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted = Meta's default set.
@@ -779,7 +786,8 @@ end
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract. |  |
 | **object_id** | **String** | Meta only (required there): insights node (act_&lt;n&gt;, campaign id, ad set id or ad id). | [optional] |
 | **query** | **String** | Google only (required there): the GAQL SELECT statement to run. | [optional] |
-| **customer_id** | **String** | Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts. | [optional] |
+| **ad_account_id** | **String** | Google only: platform ad account ID (Google customer ID, digits only) when the connection has several Google Ads accounts. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 | **page_token** | **String** | Google only: cursor from paging.nextPageToken of the previous page. | [optional] |
 | **level** | **String** | Row granularity | [optional] |
 | **fields** | **String** | Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. | [optional] |

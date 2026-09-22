@@ -18,7 +18,10 @@ module Zernio
     # Google ads SocialAccount id.
     attr_accessor :account_id
 
-    # Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+    # Platform ad account ID (Google customer ID, digits only). Defaults to the account's connected customer.
+    attr_accessor :ad_account_id
+
+    # Alias of adAccountId, kept for existing callers
     attr_accessor :customer_id
 
     attr_accessor :name
@@ -55,6 +58,7 @@ module Zernio
     def self.attribute_map
       {
         :'account_id' => :'accountId',
+        :'ad_account_id' => :'adAccountId',
         :'customer_id' => :'customerId',
         :'name' => :'name',
         :'type' => :'type',
@@ -77,6 +81,7 @@ module Zernio
     def self.openapi_types
       {
         :'account_id' => :'String',
+        :'ad_account_id' => :'String',
         :'customer_id' => :'String',
         :'name' => :'String',
         :'type' => :'String',
@@ -111,6 +116,10 @@ module Zernio
         self.account_id = attributes[:'account_id']
       else
         self.account_id = nil
+      end
+
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
       end
 
       if attributes.key?(:'customer_id')
@@ -210,6 +219,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           account_id == o.account_id &&
+          ad_account_id == o.ad_account_id &&
           customer_id == o.customer_id &&
           name == o.name &&
           type == o.type &&
@@ -226,7 +236,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, customer_id, name, type, target_cpa, target_roas].hash
+      [account_id, ad_account_id, customer_id, name, type, target_cpa, target_roas].hash
     end
 
     # Builds the object from hash

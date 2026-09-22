@@ -18,7 +18,10 @@ module Zernio
     # Zernio SocialAccount id.
     attr_accessor :account_id
 
-    # Connected Google Ads customer id, without dashes. Required when the connection has multiple customers.
+    # Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
+    attr_accessor :ad_account_id
+
+    # Alias of adAccountId, kept for existing callers
     attr_accessor :customer_id
 
     # Optional courtesy field. The resolved account or campaign determines support; other platforms return 501.
@@ -56,6 +59,7 @@ module Zernio
     def self.attribute_map
       {
         :'account_id' => :'accountId',
+        :'ad_account_id' => :'adAccountId',
         :'customer_id' => :'customerId',
         :'platform' => :'platform',
         :'name' => :'name',
@@ -77,6 +81,7 @@ module Zernio
     def self.openapi_types
       {
         :'account_id' => :'String',
+        :'ad_account_id' => :'String',
         :'customer_id' => :'String',
         :'platform' => :'String',
         :'name' => :'String',
@@ -110,6 +115,10 @@ module Zernio
         self.account_id = attributes[:'account_id']
       else
         self.account_id = nil
+      end
+
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
       end
 
       if attributes.key?(:'customer_id')
@@ -148,6 +157,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if !@ad_account_id.nil? && @ad_account_id !~ pattern
+        invalid_properties.push("invalid value for \"ad_account_id\", must conform to the pattern #{pattern}.")
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if !@customer_id.nil? && @customer_id !~ pattern
         invalid_properties.push("invalid value for \"customer_id\", must conform to the pattern #{pattern}.")
       end
@@ -177,6 +191,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
       return false if @account_id !~ Regexp.new(/^[a-fA-F0-9]{24}$/)
+      return false if !@ad_account_id.nil? && @ad_account_id !~ Regexp.new(/^\d+$/)
       return false if !@customer_id.nil? && @customer_id !~ Regexp.new(/^\d+$/)
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"])
       return false unless platform_validator.valid?(@platform)
@@ -200,6 +215,21 @@ module Zernio
       end
 
       @account_id = account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] ad_account_id Value to be assigned
+    def ad_account_id=(ad_account_id)
+      if ad_account_id.nil?
+        fail ArgumentError, 'ad_account_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if ad_account_id !~ pattern
+        fail ArgumentError, "invalid value for \"ad_account_id\", must conform to the pattern #{pattern}."
+      end
+
+      @ad_account_id = ad_account_id
     end
 
     # Custom attribute writer method with validation
@@ -265,6 +295,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           account_id == o.account_id &&
+          ad_account_id == o.ad_account_id &&
           customer_id == o.customer_id &&
           platform == o.platform &&
           name == o.name &&
@@ -280,7 +311,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, customer_id, platform, name, keywords].hash
+      [account_id, ad_account_id, customer_id, platform, name, keywords].hash
     end
 
     # Builds the object from hash
