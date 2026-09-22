@@ -154,7 +154,7 @@ end
 
 ## get_tweet
 
-> <GetTweet200Response> get_tweet(account_id, id)
+> <GetTweet200Response> get_tweet(account_id, tweet_id, opts)
 
 Look up a tweet
 
@@ -173,11 +173,14 @@ end
 
 api_instance = Zernio::TwitterEngagementApi.new
 account_id = 'account_id_example' # String | The account ID whose X token is used for the lookup
-id = 'id_example' # String | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
+tweet_id = 'tweet_id_example' # String | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...). The same name the other /v1/twitter operations use (retweet, bookmark).
+opts = {
+  id: 'id_example' # String | Alias of tweetId, kept for existing callers
+}
 
 begin
   # Look up a tweet
-  result = api_instance.get_tweet(account_id, id)
+  result = api_instance.get_tweet(account_id, tweet_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->get_tweet: #{e}"
@@ -188,12 +191,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetTweet200Response>, Integer, Hash)> get_tweet_with_http_info(account_id, id)
+> <Array(<GetTweet200Response>, Integer, Hash)> get_tweet_with_http_info(account_id, tweet_id, opts)
 
 ```ruby
 begin
   # Look up a tweet
-  data, status_code, headers = api_instance.get_tweet_with_http_info(account_id, id)
+  data, status_code, headers = api_instance.get_tweet_with_http_info(account_id, tweet_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetTweet200Response>
@@ -207,7 +210,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The account ID whose X token is used for the lookup |  |
-| **id** | **String** | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...) |  |
+| **tweet_id** | **String** | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...). The same name the other /v1/twitter operations use (retweet, bookmark). |  |
+| **id** | **String** | Alias of tweetId, kept for existing callers | [optional] |
 
 ### Return type
 
