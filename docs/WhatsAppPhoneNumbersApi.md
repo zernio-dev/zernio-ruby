@@ -885,8 +885,10 @@ end
 api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 opts = {
   country: 'country_example', # String | 
-  type: 'type_example', # String | Number type; defaults to the country's WhatsApp-safe type
-  prefix: 'prefix_example', # String | Area code
+  number_type: 'local', # String | Number type; defaults to the country's WhatsApp-safe type (the same name as on purchase, availability and kyc)
+  area_code: 'area_code_example', # String | Area code or national dialing code the number must start with, e.g. 415 or 91
+  type: 'type_example', # String | Alias of numberType, kept for existing callers
+  prefix: 'prefix_example', # String | Alias of areaCode, kept for existing callers
   locality: 'locality_example', # String | City
   contains: 'contains_example', # String | Pattern to match within the number
   limit: 56 # Integer | 
@@ -924,8 +926,10 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **country** | **String** |  | [optional][default to &#39;US&#39;] |
-| **type** | **String** | Number type; defaults to the country&#39;s WhatsApp-safe type | [optional] |
-| **prefix** | **String** | Area code | [optional] |
+| **number_type** | **String** | Number type; defaults to the country&#39;s WhatsApp-safe type (the same name as on purchase, availability and kyc) | [optional] |
+| **area_code** | **String** | Area code or national dialing code the number must start with, e.g. 415 or 91 | [optional] |
+| **type** | **String** | Alias of numberType, kept for existing callers | [optional] |
+| **prefix** | **String** | Alias of areaCode, kept for existing callers | [optional] |
 | **locality** | **String** | City | [optional] |
 | **contains** | **String** | Pattern to match within the number | [optional] |
 | **limit** | **Integer** |  | [optional][default to 20] |
