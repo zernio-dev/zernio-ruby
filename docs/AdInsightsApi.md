@@ -403,7 +403,8 @@ opts = {
   from_date: Date.parse('2013-10-20'), # Date | Defaults to 30 days ago.
   to_date: Date.parse('2013-10-20'), # Date | Defaults to today.
   campaign_id: 'campaign_id_example', # String | Numeric Google campaign id filter.
-  ad_group_id: 'ad_group_id_example', # String | Numeric Google ad group id filter.
+  ad_set_id: 'ad_set_id_example', # String | Platform ad set ID (Google ad group). Same value as adSetId on listAdKeywords and /ad-sets/{adSetId}/assets.
+  ad_group_id: 'ad_group_id_example', # String | Alias of adSetId, kept for existing callers.
   page_token: 'page_token_example' # String | Cursor from paging.nextPageToken of the previous page.
 }
 
@@ -443,7 +444,8 @@ end
 | **from_date** | **Date** | Defaults to 30 days ago. | [optional] |
 | **to_date** | **Date** | Defaults to today. | [optional] |
 | **campaign_id** | **String** | Numeric Google campaign id filter. | [optional] |
-| **ad_group_id** | **String** | Numeric Google ad group id filter. | [optional] |
+| **ad_set_id** | **String** | Platform ad set ID (Google ad group). Same value as adSetId on listAdKeywords and /ad-sets/{adSetId}/assets. | [optional] |
+| **ad_group_id** | **String** | Alias of adSetId, kept for existing callers. | [optional] |
 | **page_token** | **String** | Cursor from paging.nextPageToken of the previous page. | [optional] |
 
 ### Return type
