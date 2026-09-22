@@ -4,7 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **_id** | **String** | Webhook ID to update (required) |  |
+| **webhook_id** | **String** | Webhook ID to update. Required unless the deprecated &#x60;_id&#x60; is sent instead. | [optional] |
+| **_id** | **String** | Alias of webhookId, kept for existing callers | [optional] |
 | **name** | **String** | Webhook name (1-50 characters). Must be non-empty if provided. | [optional] |
 | **url** | **String** | Webhook endpoint URL (must be a valid URL, whitespace trimmed). Must be a valid URL if provided. | [optional] |
 | **secret** | **String** | Secret key for HMAC-SHA256 signature verification | [optional] |
@@ -19,6 +20,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::UpdateWebhookSettingsRequest.new(
+  webhook_id: null,
   _id: null,
   name: null,
   url: null,
