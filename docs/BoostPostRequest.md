@@ -17,6 +17,8 @@
 | **existing_campaign_id** | **String** | TikTok only. Create the ad group and the Spark ad under this existing TikTok campaign instead of creating a new campaign. The campaign keeps its own status and objective (the objective must fit &#x60;goal&#x60;). Cannot be combined with adSetId or smartPlus. On Meta use POST /v1/ads/create with existingCampaignId. | [optional] |
 | **identity_id** | **String** | TikTok only. The identity the ad runs as (the profile shown on the ad), from GET /v1/ads/tiktok-identities. Default: the connected TikTok account&#39;s own identity. Must be authorized on the advertiser or the call fails naming the available ones. | [optional] |
 | **identity_type** | **String** | TikTok only. Type of identityId; resolved from the advertiser&#39;s identity list when omitted. | [optional] |
+| **budget_amount** | **Float** | Budget in whole currency units, the same flat field as POST /v1/ads/create. Required unless adSetId is set. Minimum varies: TikTok&#x3D;$20, Pinterest&#x3D;$5, others&#x3D;$1 | [optional] |
+| **budget_type** | **String** | Goes together with budgetAmount. lifetime requires schedule.endDate. | [optional] |
 | **budget** | [**BoostPostRequestBudget**](BoostPostRequestBudget.md) |  | [optional] |
 | **instagram_account_id** | **String** | Meta only. Instagram identity the ad runs AS (creative.instagram_user_id), overriding the account linked to the Page. Live-verified against a Page-post creative. | [optional] |
 | **destination_type** | **String** | Meta only. Ad-set destination_type: where the click LANDS, as opposed to instagramAccountId which is who the ad runs as. Independent of plain link CTAs and their goal. A messaging callToAction selects its destination automatically; an explicit destinationType must then match. Lead ads use ON_AD. | [optional] |
@@ -66,6 +68,8 @@ instance = Zernio::BoostPostRequest.new(
   existing_campaign_id: null,
   identity_id: null,
   identity_type: null,
+  budget_amount: null,
+  budget_type: null,
   budget: null,
   instagram_account_id: null,
   destination_type: null,
