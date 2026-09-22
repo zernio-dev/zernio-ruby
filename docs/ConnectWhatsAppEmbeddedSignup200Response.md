@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **message** | **String** |  | [optional] |
 | **account** | [**ConnectWhatsAppEmbeddedSignup200ResponseAccount**](ConnectWhatsAppEmbeddedSignup200ResponseAccount.md) |  | [optional] |
-| **redirect_url** | **String** | Present only when &#x60;redirectUrl&#x60; was sent; also present on error responses. | [optional] |
+| **redirect_url** | **String** | Present only when &#x60;redirect_url&#x60; was sent; also present on error responses. | [optional] |
 
 ## Example
 
