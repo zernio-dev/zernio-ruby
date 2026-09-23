@@ -148,6 +148,7 @@ docs/BlueskyPlatformData.md
 docs/BookmarkPost200Response.md
 docs/BookmarkPostRequest.md
 docs/BoostPostRequest.md
+docs/BoostPostRequestAttributionSpecInner.md
 docs/BoostPostRequestBudget.md
 docs/BoostPostRequestPlatformSpecificData.md
 docs/BoostPostRequestPromoCodesInner.md
@@ -441,7 +442,6 @@ docs/CreateStandaloneAd201ResponseOneOf1.md
 docs/CreateStandaloneAdRequest.md
 docs/CreateStandaloneAdRequestAdditionalDescriptionsInner.md
 docs/CreateStandaloneAdRequestAdditionalHeadlinesInner.md
-docs/CreateStandaloneAdRequestAttributionSpecInner.md
 docs/CreateStandaloneAdRequestBehaviorsInner.md
 docs/CreateStandaloneAdRequestBrandIdentity.md
 docs/CreateStandaloneAdRequestCarouselCardsInner.md
@@ -2458,6 +2458,7 @@ lib/zernio-sdk/models/bluesky_platform_data.rb
 lib/zernio-sdk/models/bookmark_post200_response.rb
 lib/zernio-sdk/models/bookmark_post_request.rb
 lib/zernio-sdk/models/boost_post_request.rb
+lib/zernio-sdk/models/boost_post_request_attribution_spec_inner.rb
 lib/zernio-sdk/models/boost_post_request_budget.rb
 lib/zernio-sdk/models/boost_post_request_platform_specific_data.rb
 lib/zernio-sdk/models/boost_post_request_promo_codes_inner.rb
@@ -2742,7 +2743,6 @@ lib/zernio-sdk/models/create_standalone_ad201_response_one_of1.rb
 lib/zernio-sdk/models/create_standalone_ad_request.rb
 lib/zernio-sdk/models/create_standalone_ad_request_additional_descriptions_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_additional_headlines_inner.rb
-lib/zernio-sdk/models/create_standalone_ad_request_attribution_spec_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_behaviors_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_brand_identity.rb
 lib/zernio-sdk/models/create_standalone_ad_request_carousel_cards_inner.rb
@@ -4702,6 +4702,7 @@ spec/models/blog_spec.rb
 spec/models/bluesky_platform_data_spec.rb
 spec/models/bookmark_post200_response_spec.rb
 spec/models/bookmark_post_request_spec.rb
+spec/models/boost_post_request_attribution_spec_inner_spec.rb
 spec/models/boost_post_request_budget_spec.rb
 spec/models/boost_post_request_platform_specific_data_spec.rb
 spec/models/boost_post_request_promo_codes_inner_spec.rb
@@ -4986,7 +4987,6 @@ spec/models/create_standalone_ad201_response_one_of_spec.rb
 spec/models/create_standalone_ad201_response_spec.rb
 spec/models/create_standalone_ad_request_additional_descriptions_inner_spec.rb
 spec/models/create_standalone_ad_request_additional_headlines_inner_spec.rb
-spec/models/create_standalone_ad_request_attribution_spec_inner_spec.rb
 spec/models/create_standalone_ad_request_behaviors_inner_spec.rb
 spec/models/create_standalone_ad_request_brand_identity_spec.rb
 spec/models/create_standalone_ad_request_carousel_cards_inner_spec.rb

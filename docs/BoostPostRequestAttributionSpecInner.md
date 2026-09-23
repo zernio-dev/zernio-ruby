@@ -1,4 +1,4 @@
-# Zernio::CreateStandaloneAdRequestAttributionSpecInner
+# Zernio::BoostPostRequestAttributionSpecInner
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateStandaloneAdRequestAttributionSpecInner.new(
+instance = Zernio::BoostPostRequestAttributionSpecInner.new(
   event_type: null,
   window_days: null
 )
