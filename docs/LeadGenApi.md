@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**archive_lead_form**](LeadGenApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form |
 | [**create_lead_form**](LeadGenApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form |
 | [**create_test_lead**](LeadGenApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a test lead |
+| [**delete_test_lead**](LeadGenApi.md#delete_test_lead) | **DELETE** /v1/ads/lead-forms/{formId}/test-leads | Delete a test lead |
 | [**get_lead_form**](LeadGenApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a lead form |
 | [**list_form_leads**](LeadGenApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form |
 | [**list_lead_forms**](LeadGenApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List lead forms |
@@ -221,6 +222,81 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## delete_test_lead
+
+> <DeleteTestLead200Response> delete_test_lead(form_id, account_id, opts)
+
+Delete a test lead
+
+Removes a test lead created for the form (DELETE /{leadgen_id}), so a new one can be submitted: Meta keeps one test lead per form and refuses a second until the first is gone. The same test lead appears in Meta's Lead Ads Testing Tool. Meta only deletes test leads; a real lead is refused. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::LeadGenApi.new
+form_id = 'form_id_example' # String | 
+account_id = 'account_id_example' # String | The facebook or metaads account whose Page owns the form.
+opts = {
+  lead_id: 'lead_id_example' # String | The test lead id returned by createTestLead (or shown in the Testing Tool). Omitted = the test lead currently on the form.
+}
+
+begin
+  # Delete a test lead
+  result = api_instance.delete_test_lead(form_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling LeadGenApi->delete_test_lead: #{e}"
+end
+```
+
+#### Using the delete_test_lead_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteTestLead200Response>, Integer, Hash)> delete_test_lead_with_http_info(form_id, account_id, opts)
+
+```ruby
+begin
+  # Delete a test lead
+  data, status_code, headers = api_instance.delete_test_lead_with_http_info(form_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteTestLead200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling LeadGenApi->delete_test_lead_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **form_id** | **String** |  |  |
+| **account_id** | **String** | The facebook or metaads account whose Page owns the form. |  |
+| **lead_id** | **String** | The test lead id returned by createTestLead (or shown in the Testing Tool). Omitted &#x3D; the test lead currently on the form. | [optional] |
+
+### Return type
+
+[**DeleteTestLead200Response**](DeleteTestLead200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
