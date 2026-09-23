@@ -379,6 +379,7 @@ docs/CreateInboxConversation400Response.md
 docs/CreateInboxConversation400ResponseAnyOf.md
 docs/CreateInboxConversation404Response.md
 docs/CreateInboxConversation404ResponseAnyOf.md
+docs/CreateInboxConversation409Response.md
 docs/CreateInboxConversation422Response.md
 docs/CreateInboxConversation422ResponseAnyOf.md
 docs/CreateInboxConversation429Response.md
@@ -2681,6 +2682,7 @@ lib/zernio-sdk/models/create_inbox_conversation400_response.rb
 lib/zernio-sdk/models/create_inbox_conversation400_response_any_of.rb
 lib/zernio-sdk/models/create_inbox_conversation404_response.rb
 lib/zernio-sdk/models/create_inbox_conversation404_response_any_of.rb
+lib/zernio-sdk/models/create_inbox_conversation409_response.rb
 lib/zernio-sdk/models/create_inbox_conversation422_response.rb
 lib/zernio-sdk/models/create_inbox_conversation422_response_any_of.rb
 lib/zernio-sdk/models/create_inbox_conversation429_response.rb
@@ -4927,6 +4929,7 @@ spec/models/create_inbox_conversation400_response_any_of_spec.rb
 spec/models/create_inbox_conversation400_response_spec.rb
 spec/models/create_inbox_conversation404_response_any_of_spec.rb
 spec/models/create_inbox_conversation404_response_spec.rb
+spec/models/create_inbox_conversation409_response_spec.rb
 spec/models/create_inbox_conversation422_response_any_of_spec.rb
 spec/models/create_inbox_conversation422_response_spec.rb
 spec/models/create_inbox_conversation429_response_any_of_spec.rb
