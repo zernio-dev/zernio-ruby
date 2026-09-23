@@ -1227,7 +1227,7 @@ account_id = 'account_id_example' # String | A facebook, instagram, metaads or w
 opts = {
   catalog_account_id: 'catalog_account_id_example', # String | A facebook, instagram or metaads account whose Meta login carries catalog_management; its token is used instead of the account's own (needed for WhatsApp connections, whose token cannot manage catalogs).
   ad_account_id: 'ad_account_id_example', # String | Meta ad account ID (act_...) whose owner business to list
-  business_id: 'business_id_example' # String | Meta business portfolio ID to list
+  business_id: 'business_id_example' # String | Meta business portfolio ID to list. When it is omitted and the Meta login can see several portfolios, the 400 carries `details.businesses` (id + name) so a client can offer the choice.
 }
 
 begin
@@ -1264,7 +1264,7 @@ end
 | **account_id** | **String** | A facebook, instagram, metaads or whatsapp account ID |  |
 | **catalog_account_id** | **String** | A facebook, instagram or metaads account whose Meta login carries catalog_management; its token is used instead of the account&#39;s own (needed for WhatsApp connections, whose token cannot manage catalogs). | [optional] |
 | **ad_account_id** | **String** | Meta ad account ID (act_...) whose owner business to list | [optional] |
-| **business_id** | **String** | Meta business portfolio ID to list | [optional] |
+| **business_id** | **String** | Meta business portfolio ID to list. When it is omitted and the Meta login can see several portfolios, the 400 carries &#x60;details.businesses&#x60; (id + name) so a client can offer the choice. | [optional] |
 
 ### Return type
 
