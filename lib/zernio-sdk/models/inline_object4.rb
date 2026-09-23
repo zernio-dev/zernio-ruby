@@ -170,7 +170,7 @@ module Zernio
       code_validator = EnumAttributeValidator.new('String', ["PAYMENT_REQUIRED"])
       return false unless code_validator.valid?(@code)
       return false if @reason.nil?
-      reason_validator = EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required"])
+      reason_validator = EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required", "card_verification_required"])
       return false unless reason_validator.valid?(@reason)
       true
     end
@@ -198,7 +198,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
     def reason=(reason)
-      validator = EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required"])
+      validator = EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required", "card_verification_required"])
       unless validator.valid?(reason)
         fail ArgumentError, "invalid value for \"reason\", must be one of #{validator.allowable_values}."
       end

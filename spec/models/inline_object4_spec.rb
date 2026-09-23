@@ -46,7 +46,7 @@ describe Zernio::InlineObject4 do
   describe 'test attribute "reason"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required", "card_verification_required"])
       # validator.allowable_values.each do |value|
       #   expect { instance.reason = value }.not_to raise_error
       # end

@@ -25,6 +25,9 @@ module Zernio
     # Whether the team currently has a card on file in Stripe. Set when reason=free_tier_exceeded or reason=twitter_passthrough.
     attr_accessor :has_payment_method
 
+    # One-time card verification charge in USD cents, credited to usage. Only set when reason=card_verification_required.
+    attr_accessor :verification_amount_cents
+
     # The negotiated connected-account cap from the team's enterprise contract. Self-service teams have no cap and never receive this reason. Only set when reason=enterprise_required. 
     attr_accessor :effective_account_limit
 
@@ -34,6 +37,7 @@ module Zernio
         :'free_tier_account_limit' => :'free_tier_account_limit',
         :'current_account_count' => :'current_account_count',
         :'has_payment_method' => :'has_payment_method',
+        :'verification_amount_cents' => :'verification_amount_cents',
         :'effective_account_limit' => :'effective_account_limit'
       }
     end
@@ -54,6 +58,7 @@ module Zernio
         :'free_tier_account_limit' => :'Integer',
         :'current_account_count' => :'Integer',
         :'has_payment_method' => :'Boolean',
+        :'verification_amount_cents' => :'Integer',
         :'effective_account_limit' => :'Integer'
       }
     end
@@ -92,6 +97,10 @@ module Zernio
         self.has_payment_method = attributes[:'has_payment_method']
       end
 
+      if attributes.key?(:'verification_amount_cents')
+        self.verification_amount_cents = attributes[:'verification_amount_cents']
+      end
+
       if attributes.key?(:'effective_account_limit')
         self.effective_account_limit = attributes[:'effective_account_limit']
       end
@@ -120,6 +129,7 @@ module Zernio
           free_tier_account_limit == o.free_tier_account_limit &&
           current_account_count == o.current_account_count &&
           has_payment_method == o.has_payment_method &&
+          verification_amount_cents == o.verification_amount_cents &&
           effective_account_limit == o.effective_account_limit
     end
 
@@ -132,7 +142,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [free_tier_account_limit, current_account_count, has_payment_method, effective_account_limit].hash
+      [free_tier_account_limit, current_account_count, has_payment_method, verification_amount_cents, effective_account_limit].hash
     end
 
     # Builds the object from hash
