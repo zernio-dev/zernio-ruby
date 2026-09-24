@@ -36,6 +36,9 @@ module Zernio
     # Resource groups this subscription does not receive (opt-out denylist). Omit or send an empty array to receive every event in `events`. Listing a group here drops its events before delivery and on every replay path. Set at creation it applies to everything this subscription ever receives; changed later via PUT it applies to events emitted after the change, with a five-minute tail for events already queued (see that operation). When the caller is a restricted (zrk_) key, that key's own disabled groups are unioned into whatever you send here, so a restricted key can never create a subscription wider than itself.
     attr_accessor :disabled_resource_groups
 
+    # Profiles this subscription receives events for. Omit or send an empty array to receive every profile. Every id must be a profile in your team, otherwise the request fails with 404 `profile_not_found` and nothing is created. Typical use is routing the profile that holds test accounts to a staging endpoint.
+    attr_accessor :profile_ids
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -67,7 +70,8 @@ module Zernio
         :'events' => :'events',
         :'is_active' => :'isActive',
         :'custom_headers' => :'customHeaders',
-        :'disabled_resource_groups' => :'disabledResourceGroups'
+        :'disabled_resource_groups' => :'disabledResourceGroups',
+        :'profile_ids' => :'profileIds'
       }
     end
 
@@ -90,7 +94,8 @@ module Zernio
         :'events' => :'Array<String>',
         :'is_active' => :'Boolean',
         :'custom_headers' => :'Hash<String, String>',
-        :'disabled_resource_groups' => :'Array<String>'
+        :'disabled_resource_groups' => :'Array<String>',
+        :'profile_ids' => :'Array<String>'
       }
     end
 
@@ -157,6 +162,12 @@ module Zernio
           self.disabled_resource_groups = value
         end
       end
+
+      if attributes.key?(:'profile_ids')
+        if (value = attributes[:'profile_ids']).is_a?(Array)
+          self.profile_ids = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -188,6 +199,10 @@ module Zernio
         invalid_properties.push('invalid value for "events", number of items must be greater than or equal to 1.')
       end
 
+      if !@profile_ids.nil? && @profile_ids.length > 50
+        invalid_properties.push('invalid value for "profile_ids", number of items must be less than or equal to 50.')
+      end
+
       invalid_properties
     end
 
@@ -201,6 +216,7 @@ module Zernio
       return false if @url.nil?
       return false if @events.nil?
       return false if @events.length < 1
+      return false if !@profile_ids.nil? && @profile_ids.length > 50
       true
     end
 
@@ -232,6 +248,20 @@ module Zernio
       @url = url
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] profile_ids Value to be assigned
+    def profile_ids=(profile_ids)
+      if profile_ids.nil?
+        fail ArgumentError, 'profile_ids cannot be nil'
+      end
+
+      if profile_ids.length > 50
+        fail ArgumentError, 'invalid value for "profile_ids", number of items must be less than or equal to 50.'
+      end
+
+      @profile_ids = profile_ids
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -243,7 +273,8 @@ module Zernio
           events == o.events &&
           is_active == o.is_active &&
           custom_headers == o.custom_headers &&
-          disabled_resource_groups == o.disabled_resource_groups
+          disabled_resource_groups == o.disabled_resource_groups &&
+          profile_ids == o.profile_ids
     end
 
     # @see the `==` method
@@ -255,7 +286,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, url, secret, events, is_active, custom_headers, disabled_resource_groups].hash
+      [name, url, secret, events, is_active, custom_headers, disabled_resource_groups, profile_ids].hash
     end
 
     # Builds the object from hash

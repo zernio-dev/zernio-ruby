@@ -46,6 +46,9 @@ module Zernio
     # Resource groups this subscription does not receive (opt-out denylist, same vocabulary and same semantics as the field on API keys). Absent or empty means the subscription receives every event listed in `events`, which is how every subscription created before this field existed behaves. An event whose group is listed here is dropped before delivery even when it is still present in `events`, and the same check runs on every replay path (test fire, redelivery, dead-letter requeue). Editing the denylist applies to every event emitted afterwards; events already queued when the edit landed can still be delivered for up to five minutes after they were enqueued.
     attr_accessor :disabled_resource_groups
 
+    # Profiles this subscription receives events for (allowlist). Absent or empty means every profile, which is how every subscription created before this field existed behaves. A scoped subscription is only sent events attributable to a listed profile; events with no profile behind them (`verification.*`, `phone_number.*`) are not delivered to it. Applied when the event is emitted: a redelivery replays a delivery already made to this endpoint, and a test fire ignores the list.
+    attr_accessor :profile_ids
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -80,7 +83,8 @@ module Zernio
         :'last_fired_at' => :'lastFiredAt',
         :'failure_count' => :'failureCount',
         :'custom_headers' => :'customHeaders',
-        :'disabled_resource_groups' => :'disabledResourceGroups'
+        :'disabled_resource_groups' => :'disabledResourceGroups',
+        :'profile_ids' => :'profileIds'
       }
     end
 
@@ -106,7 +110,8 @@ module Zernio
         :'last_fired_at' => :'Time',
         :'failure_count' => :'Integer',
         :'custom_headers' => :'Hash<String, String>',
-        :'disabled_resource_groups' => :'Array<String>'
+        :'disabled_resource_groups' => :'Array<String>',
+        :'profile_ids' => :'Array<String>'
       }
     end
 
@@ -177,6 +182,12 @@ module Zernio
           self.disabled_resource_groups = value
         end
       end
+
+      if attributes.key?(:'profile_ids')
+        if (value = attributes[:'profile_ids']).is_a?(Array)
+          self.profile_ids = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -227,7 +238,8 @@ module Zernio
           last_fired_at == o.last_fired_at &&
           failure_count == o.failure_count &&
           custom_headers == o.custom_headers &&
-          disabled_resource_groups == o.disabled_resource_groups
+          disabled_resource_groups == o.disabled_resource_groups &&
+          profile_ids == o.profile_ids
     end
 
     # @see the `==` method
@@ -239,7 +251,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, url, secret, events, is_active, last_fired_at, failure_count, custom_headers, disabled_resource_groups].hash
+      [_id, name, url, secret, events, is_active, last_fired_at, failure_count, custom_headers, disabled_resource_groups, profile_ids].hash
     end
 
     # Builds the object from hash
