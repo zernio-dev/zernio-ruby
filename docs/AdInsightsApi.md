@@ -11,6 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad_insights_report**](AdInsightsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run |
 | [**get_ads_search_terms**](AdInsightsApi.md#get_ads_search_terms) | **GET** /v1/ads/search-terms | Google Ads search terms report |
 | [**get_campaign_analytics**](AdInsightsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics |
+| [**get_tik_tok_smart_plus_material_report**](AdInsightsApi.md#get_tik_tok_smart_plus_material_report) | **GET** /v1/ads/tiktok-smart-plus-materials | Per-creative performance inside TikTok Smart+ ads |
 | [**list_local_services_lead_conversations**](AdInsightsApi.md#list_local_services_lead_conversations) | **GET** /v1/ads/local-services/leads/{leadId}/conversations | List lead conversations |
 | [**list_local_services_leads**](AdInsightsApi.md#list_local_services_leads) | **GET** /v1/ads/local-services/leads | Google Local Services Ads leads |
 | [**query_ad_insights**](AdInsightsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query |
@@ -532,6 +533,93 @@ end
 ### Return type
 
 [**CampaignAnalyticsResponse**](CampaignAnalyticsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_tik_tok_smart_plus_material_report
+
+> <GetTikTokSmartPlusMaterialReport200Response> get_tik_tok_smart_plus_material_report(account_id, ad_account_id, start_date, end_date, opts)
+
+Per-creative performance inside TikTok Smart+ ads
+
+Breaks a Smart+ ad (or ad group) down by creative material, one row per Spark post, video or image, from TikTok's Smart+ material report. For a Spark post `tiktokItemId` is the TikTok post id. Conversion metrics are TikTok web (pixel) events. TikTok allows two dimensions per report, so rows are keyed by the Smart+ ad (`level=ad`) or by the ad group (`level=adGroup`), not both. Metrics TikTok returns empty come back as null.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdInsightsApi.new
+account_id = 'account_id_example' # String | A tiktok or tiktokads account ID
+ad_account_id = 'ad_account_id_example' # String | TikTok advertiser ID
+start_date = Date.parse('2013-10-20') # Date | YYYY-MM-DD, in the advertiser's time zone
+end_date = Date.parse('2013-10-20') # Date | YYYY-MM-DD, on or after startDate
+opts = {
+  level: 'ad', # String | Key each row by Smart+ ad or by ad group
+  smart_plus_ad_ids: 'smart_plus_ad_ids_example', # String | Comma-separated Smart+ ad ids to filter by (up to 100)
+  ad_group_ids: 'ad_group_ids_example', # String | Comma-separated ad group ids to filter by (up to 100)
+  page: 56, # Integer | 
+  page_size: 56 # Integer | 
+}
+
+begin
+  # Per-creative performance inside TikTok Smart+ ads
+  result = api_instance.get_tik_tok_smart_plus_material_report(account_id, ad_account_id, start_date, end_date, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdInsightsApi->get_tik_tok_smart_plus_material_report: #{e}"
+end
+```
+
+#### Using the get_tik_tok_smart_plus_material_report_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetTikTokSmartPlusMaterialReport200Response>, Integer, Hash)> get_tik_tok_smart_plus_material_report_with_http_info(account_id, ad_account_id, start_date, end_date, opts)
+
+```ruby
+begin
+  # Per-creative performance inside TikTok Smart+ ads
+  data, status_code, headers = api_instance.get_tik_tok_smart_plus_material_report_with_http_info(account_id, ad_account_id, start_date, end_date, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetTikTokSmartPlusMaterialReport200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdInsightsApi->get_tik_tok_smart_plus_material_report_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | A tiktok or tiktokads account ID |  |
+| **ad_account_id** | **String** | TikTok advertiser ID |  |
+| **start_date** | **Date** | YYYY-MM-DD, in the advertiser&#39;s time zone |  |
+| **end_date** | **Date** | YYYY-MM-DD, on or after startDate |  |
+| **level** | **String** | Key each row by Smart+ ad or by ad group | [optional][default to &#39;ad&#39;] |
+| **smart_plus_ad_ids** | **String** | Comma-separated Smart+ ad ids to filter by (up to 100) | [optional] |
+| **ad_group_ids** | **String** | Comma-separated ad group ids to filter by (up to 100) | [optional] |
+| **page** | **Integer** |  | [optional][default to 1] |
+| **page_size** | **Integer** |  | [optional][default to 100] |
+
+### Return type
+
+[**GetTikTokSmartPlusMaterialReport200Response**](GetTikTokSmartPlusMaterialReport200Response.md)
 
 ### Authorization
 
