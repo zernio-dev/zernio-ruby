@@ -16,8 +16,9 @@
 | **created_at** | **Time** |  | [optional] |
 | **attachments** | [**Array&lt;GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner&gt;**](GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner.md) |  | [optional] |
 | **subject** | **String** | Reddit message subject | [optional] |
-| **story_reply** | **Boolean** | Instagram story reply | [optional] |
-| **is_story_mention** | **Boolean** | Instagram story mention | [optional] |
+| **story_reply** | [**GetInboxConversationMessages200ResponseMessagesInnerStoryReply**](GetInboxConversationMessages200ResponseMessagesInnerStoryReply.md) |  | [optional] |
+| **is_story_mention** | **Boolean** | Instagram only. True when the message is the user mentioning the account in their own story. The story itself is the &#x60;share&#x60; attachment with &#x60;originalType: \&quot;story_mention\&quot;&#x60;. Also set on imported history, read off Meta&#39;s &#x60;story.mention&#x60;. | [optional] |
+| **no_renderable_content** | **Boolean** | Instagram and Facebook Messenger only. True when Meta withholds the content of this message from the API (its &#x60;is_unsupported&#x60; flag): &#x60;message&#x60; is empty, &#x60;attachments&#x60; is empty, and there is nothing to fetch, now or later. Distinguishes such a message from an ordinary empty one such as a story reply with no text. Absent on other platforms. | [optional] |
 | **is_edited** | **Boolean** | True if the sender has edited this message at least once. | [optional] |
 | **edited_at** | **Time** | When the most recent edit happened. | [optional] |
 | **edit_count** | **Integer** | Total number of edits applied. | [optional] |
@@ -53,6 +54,7 @@ instance = Zernio::GetInboxConversationMessages200ResponseMessagesInner.new(
   subject: null,
   story_reply: null,
   is_story_mention: null,
+  no_renderable_content: null,
   is_edited: null,
   edited_at: null,
   edit_count: null,
