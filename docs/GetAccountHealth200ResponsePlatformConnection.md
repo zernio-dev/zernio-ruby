@@ -8,6 +8,7 @@
 | **checked_at** | **Time** | When this live probe ran (always the current request; never cached) | [optional] |
 | **phone_status** | **String** | Meta&#39;s own &#x60;status&#x60; field from the phone-number node (for example CONNECTED), when the object was readable | [optional] |
 | **meta_error** | [**GetAccountHealth200ResponsePlatformConnectionMetaError**](GetAccountHealth200ResponsePlatformConnectionMetaError.md) |  | [optional] |
+| **inbound_webhook_subscribed** | **Boolean** | From the phone number&#39;s Meta health_status. &#x60;false&#x60; &#x3D; Meta says Zernio is not subscribed to the message webhook for this number, so inbound messages are not delivered even though the number is CONNECTED and can still send. Fix by re-subscribing (reconnect the number); if it stays &#x60;false&#x60;, the number is routed to a different WhatsApp Business Account (typically after linking it to a Facebook Page). &#x60;true&#x60; &#x3D; Meta reports no such problem. &#x60;null&#x60; &#x3D; Meta did not report it (read failed or no health_status), not evidence either way. | [optional] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = Zernio::GetAccountHealth200ResponsePlatformConnection.new(
   status: null,
   checked_at: null,
   phone_status: null,
-  meta_error: null
+  meta_error: null,
+  inbound_webhook_subscribed: null
 )
 ```
 
