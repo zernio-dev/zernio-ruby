@@ -12,6 +12,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_phone_number_stock_watch**](PhoneNumbersApi.md#create_phone_number_stock_watch) | **POST** /v1/phone-numbers/stock-watches | Watch an out-of-stock country |
 | [**delete_phone_number_stock_watch**](PhoneNumbersApi.md#delete_phone_number_stock_watch) | **DELETE** /v1/phone-numbers/stock-watches/{id} | Stop watching a country |
 | [**get_phone_number**](PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number |
+| [**get_phone_number_claim**](PhoneNumbersApi.md#get_phone_number_claim) | **GET** /v1/phone-numbers/claims/{claimId} | Resolve a number claim |
 | [**get_phone_number_kyc_form**](PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec |
 | [**get_phone_number_port_in_order_requirements**](PhoneNumbersApi.md#get_phone_number_port_in_order_requirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order&#39;s pending requirements |
 | [**get_phone_number_port_in_requirements**](PhoneNumbersApi.md#get_phone_number_port_in_requirements) | **GET** /v1/phone-numbers/port-in/requirements | Country porting requirements |
@@ -109,7 +110,7 @@ end
 
 Check country availability
 
-Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
+Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries.  Without an API key it answers from cache only and returns just `country`, `numberType` and `areaOptions`, for building an area picker before signup. 
 
 ### Examples
 
@@ -590,6 +591,75 @@ end
 - **Accept**: application/json
 
 
+## get_phone_number_claim
+
+> <GetPhoneNumberClaim200Response> get_phone_number_claim(claim_id)
+
+Resolve a number claim
+
+Resolves a `claimId` from a keyless search or purchase into the selection it carries (country, number type, area and exact number) priced at today's rate. The dashboard calls it when a person lands from a `claimUrl`. The number is not held, so buying it can still fail with 409 PHONE_NUMBER_UNAVAILABLE. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+claim_id = 'claim_id_example' # String | 
+
+begin
+  # Resolve a number claim
+  result = api_instance.get_phone_number_claim(claim_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->get_phone_number_claim: #{e}"
+end
+```
+
+#### Using the get_phone_number_claim_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetPhoneNumberClaim200Response>, Integer, Hash)> get_phone_number_claim_with_http_info(claim_id)
+
+```ruby
+begin
+  # Resolve a number claim
+  data, status_code, headers = api_instance.get_phone_number_claim_with_http_info(claim_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetPhoneNumberClaim200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->get_phone_number_claim_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **claim_id** | **String** |  |  |
+
+### Return type
+
+[**GetPhoneNumberClaim200Response**](GetPhoneNumberClaim200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_phone_number_kyc_form
 
 > <GetPhoneNumberKycForm200Response> get_phone_number_kyc_form(country, opts)
@@ -880,18 +950,13 @@ end
 
 List offerable number countries
 
-The phone number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and per-feature availability (PSTN calls, WhatsApp, SMS, and WhatsApp Business Calling outbound). Drives the country picker. Tier-4 countries appear only when enabled. 
+The phone number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and per-feature availability (PSTN calls, WhatsApp, SMS, and WhatsApp Business Calling outbound). Drives the country picker. Tier-4 countries appear only when enabled. No API key needed: the catalog is public so you can browse it before you have an account. 
 
 ### Examples
 
 ```ruby
 require 'time'
 require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
 
 api_instance = Zernio::PhoneNumbersApi.new
 
@@ -932,7 +997,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -1569,7 +1634,7 @@ end
 
 Search available numbers
 
-Search the provider's inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/phone-numbers/countries). Voice capability is always required; pass `sms=true` to only see numbers that can also text (SMS support is per-number, not per-country). Numbers a purchase would refuse are left out, and any result's `phoneNumber` can be bought exactly by passing it to POST /v1/phone-numbers/purchase. 
+Search the provider's inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/phone-numbers/countries). Voice capability is always required; pass `sms=true` to only see numbers that can also text (SMS support is per-number, not per-country). Numbers a purchase would refuse are left out, and any result's `phoneNumber` can be bought exactly by passing it to POST /v1/phone-numbers/purchase.  Works without an API key. Keyless calls get up to 12 results with the middle digits masked (`maskedNumber`), each with a `claimId` and a `claimUrl`: a signup link that lands a person on the dashboard's confirm step with that number picked, so an agent can search for a user and hand them one link. Keyless calls are rate limited per IP and results are cached for a few minutes. With an API key you get full numbers and no claim fields. 
 
 ### Examples
 
@@ -1584,7 +1649,7 @@ end
 
 api_instance = Zernio::PhoneNumbersApi.new
 opts = {
-  country: 'country_example', # String | 
+  country: 'country_example', # String | ISO code, or `auto` on the keyless shape to search the caller's own country (from their IP) near their city, falling back to US.
   number_type: 'local', # String | Number type; defaults to the country's WhatsApp-safe type (the same name as on purchase, availability and kyc)
   area_code: 'area_code_example', # String | Area code or national dialing code the number must start with, e.g. 415 or 91
   type: 'type_example', # String | Alias of numberType, kept for existing callers
@@ -1592,7 +1657,8 @@ opts = {
   locality: 'locality_example', # String | City
   contains: 'contains_example', # String | Pattern to match within the number
   sms: true, # Boolean | true narrows the pool to SMS-capable numbers. Each result still carries its full `features` list for per-number capability badging.
-  limit: 56 # Integer | 
+  limit: 56, # Integer | 
+  masked: true # Boolean | true returns the keyless shape (masked numbers with claimId and claimUrl) even when you send an API key, e.g. to hand a user a signup link for a number.
 }
 
 begin
@@ -1626,7 +1692,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **country** | **String** |  | [optional][default to &#39;US&#39;] |
+| **country** | **String** | ISO code, or &#x60;auto&#x60; on the keyless shape to search the caller&#39;s own country (from their IP) near their city, falling back to US. | [optional][default to &#39;US&#39;] |
 | **number_type** | **String** | Number type; defaults to the country&#39;s WhatsApp-safe type (the same name as on purchase, availability and kyc) | [optional] |
 | **area_code** | **String** | Area code or national dialing code the number must start with, e.g. 415 or 91 | [optional] |
 | **type** | **String** | Alias of numberType, kept for existing callers | [optional] |
@@ -1635,6 +1701,7 @@ end
 | **contains** | **String** | Pattern to match within the number | [optional] |
 | **sms** | **Boolean** | true narrows the pool to SMS-capable numbers. Each result still carries its full &#x60;features&#x60; list for per-number capability badging. | [optional] |
 | **limit** | **Integer** |  | [optional][default to 20] |
+| **masked** | **Boolean** | true returns the keyless shape (masked numbers with claimId and claimUrl) even when you send an API key, e.g. to hand a user a signup link for a number. | [optional] |
 
 ### Return type
 

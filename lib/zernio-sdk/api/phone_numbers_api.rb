@@ -83,7 +83,7 @@ module Zernio
     end
 
     # Check country availability
-    # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
+    # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries.  Without an API key it answers from cache only and returns just `country`, `numberType` and `areaOptions`, for building an area picker before signup. 
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :number_type Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type.
@@ -95,7 +95,7 @@ module Zernio
     end
 
     # Check country availability
-    # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
+    # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries.  Without an API key it answers from cache only and returns just &#x60;country&#x60;, &#x60;numberType&#x60; and &#x60;areaOptions&#x60;, for building an area picker before signup. 
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :number_type Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type.
@@ -552,6 +552,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Resolve a number claim
+    # Resolves a `claimId` from a keyless search or purchase into the selection it carries (country, number type, area and exact number) priced at today's rate. The dashboard calls it when a person lands from a `claimUrl`. The number is not held, so buying it can still fail with 409 PHONE_NUMBER_UNAVAILABLE. 
+    # @param claim_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetPhoneNumberClaim200Response]
+    def get_phone_number_claim(claim_id, opts = {})
+      data, _status_code, _headers = get_phone_number_claim_with_http_info(claim_id, opts)
+      data
+    end
+
+    # Resolve a number claim
+    # Resolves a &#x60;claimId&#x60; from a keyless search or purchase into the selection it carries (country, number type, area and exact number) priced at today&#39;s rate. The dashboard calls it when a person lands from a &#x60;claimUrl&#x60;. The number is not held, so buying it can still fail with 409 PHONE_NUMBER_UNAVAILABLE. 
+    # @param claim_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetPhoneNumberClaim200Response, Integer, Hash)>] GetPhoneNumberClaim200Response data, response status code and response headers
+    def get_phone_number_claim_with_http_info(claim_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.get_phone_number_claim ...'
+      end
+      # verify the required parameter 'claim_id' is set
+      if @api_client.config.client_side_validation && claim_id.nil?
+        fail ArgumentError, "Missing the required parameter 'claim_id' when calling PhoneNumbersApi.get_phone_number_claim"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/claims/{claimId}'.sub('{' + 'claimId' + '}', CGI.escape(claim_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetPhoneNumberClaim200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.get_phone_number_claim",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#get_phone_number_claim\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get KYC form spec
     # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
     # @param country [String] 
@@ -829,7 +892,7 @@ module Zernio
     end
 
     # List offerable number countries
-    # The phone number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and per-feature availability (PSTN calls, WhatsApp, SMS, and WhatsApp Business Calling outbound). Drives the country picker. Tier-4 countries appear only when enabled. 
+    # The phone number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and per-feature availability (PSTN calls, WhatsApp, SMS, and WhatsApp Business Calling outbound). Drives the country picker. Tier-4 countries appear only when enabled. No API key needed: the catalog is public so you can browse it before you have an account. 
     # @param [Hash] opts the optional parameters
     # @return [ListPhoneNumberCountries200Response]
     def list_phone_number_countries(opts = {})
@@ -838,7 +901,7 @@ module Zernio
     end
 
     # List offerable number countries
-    # The phone number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and per-feature availability (PSTN calls, WhatsApp, SMS, and WhatsApp Business Calling outbound). Drives the country picker. Tier-4 countries appear only when enabled. 
+    # The phone number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and per-feature availability (PSTN calls, WhatsApp, SMS, and WhatsApp Business Calling outbound). Drives the country picker. Tier-4 countries appear only when enabled. No API key needed: the catalog is public so you can browse it before you have an account. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListPhoneNumberCountries200Response, Integer, Hash)>] ListPhoneNumberCountries200Response data, response status code and response headers
     def list_phone_number_countries_with_http_info(opts = {})
@@ -866,7 +929,7 @@ module Zernio
       return_type = opts[:debug_return_type] || 'ListPhoneNumberCountries200Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+      auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
         :operation => :"PhoneNumbersApi.list_phone_number_countries",
@@ -1486,9 +1549,9 @@ module Zernio
     end
 
     # Search available numbers
-    # Search the provider's inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/phone-numbers/countries). Voice capability is always required; pass `sms=true` to only see numbers that can also text (SMS support is per-number, not per-country). Numbers a purchase would refuse are left out, and any result's `phoneNumber` can be bought exactly by passing it to POST /v1/phone-numbers/purchase. 
+    # Search the provider's inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/phone-numbers/countries). Voice capability is always required; pass `sms=true` to only see numbers that can also text (SMS support is per-number, not per-country). Numbers a purchase would refuse are left out, and any result's `phoneNumber` can be bought exactly by passing it to POST /v1/phone-numbers/purchase.  Works without an API key. Keyless calls get up to 12 results with the middle digits masked (`maskedNumber`), each with a `claimId` and a `claimUrl`: a signup link that lands a person on the dashboard's confirm step with that number picked, so an agent can search for a user and hand them one link. Keyless calls are rate limited per IP and results are cached for a few minutes. With an API key you get full numbers and no claim fields. 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :country  (default to 'US')
+    # @option opts [String] :country ISO code, or &#x60;auto&#x60; on the keyless shape to search the caller&#39;s own country (from their IP) near their city, falling back to US. (default to 'US')
     # @option opts [String] :number_type Number type; defaults to the country&#39;s WhatsApp-safe type (the same name as on purchase, availability and kyc)
     # @option opts [String] :area_code Area code or national dialing code the number must start with, e.g. 415 or 91
     # @option opts [String] :type Alias of numberType, kept for existing callers
@@ -1497,6 +1560,7 @@ module Zernio
     # @option opts [String] :contains Pattern to match within the number
     # @option opts [Boolean] :sms true narrows the pool to SMS-capable numbers. Each result still carries its full &#x60;features&#x60; list for per-number capability badging.
     # @option opts [Integer] :limit  (default to 20)
+    # @option opts [Boolean] :masked true returns the keyless shape (masked numbers with claimId and claimUrl) even when you send an API key, e.g. to hand a user a signup link for a number.
     # @return [SearchAvailablePhoneNumbers200Response]
     def search_available_phone_numbers(opts = {})
       data, _status_code, _headers = search_available_phone_numbers_with_http_info(opts)
@@ -1504,9 +1568,9 @@ module Zernio
     end
 
     # Search available numbers
-    # Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/phone-numbers/countries). Voice capability is always required; pass &#x60;sms&#x3D;true&#x60; to only see numbers that can also text (SMS support is per-number, not per-country). Numbers a purchase would refuse are left out, and any result&#39;s &#x60;phoneNumber&#x60; can be bought exactly by passing it to POST /v1/phone-numbers/purchase. 
+    # Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/phone-numbers/countries). Voice capability is always required; pass &#x60;sms&#x3D;true&#x60; to only see numbers that can also text (SMS support is per-number, not per-country). Numbers a purchase would refuse are left out, and any result&#39;s &#x60;phoneNumber&#x60; can be bought exactly by passing it to POST /v1/phone-numbers/purchase.  Works without an API key. Keyless calls get up to 12 results with the middle digits masked (&#x60;maskedNumber&#x60;), each with a &#x60;claimId&#x60; and a &#x60;claimUrl&#x60;: a signup link that lands a person on the dashboard&#39;s confirm step with that number picked, so an agent can search for a user and hand them one link. Keyless calls are rate limited per IP and results are cached for a few minutes. With an API key you get full numbers and no claim fields. 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :country  (default to 'US')
+    # @option opts [String] :country ISO code, or &#x60;auto&#x60; on the keyless shape to search the caller&#39;s own country (from their IP) near their city, falling back to US. (default to 'US')
     # @option opts [String] :number_type Number type; defaults to the country&#39;s WhatsApp-safe type (the same name as on purchase, availability and kyc)
     # @option opts [String] :area_code Area code or national dialing code the number must start with, e.g. 415 or 91
     # @option opts [String] :type Alias of numberType, kept for existing callers
@@ -1515,6 +1579,7 @@ module Zernio
     # @option opts [String] :contains Pattern to match within the number
     # @option opts [Boolean] :sms true narrows the pool to SMS-capable numbers. Each result still carries its full &#x60;features&#x60; list for per-number capability badging.
     # @option opts [Integer] :limit  (default to 20)
+    # @option opts [Boolean] :masked true returns the keyless shape (masked numbers with claimId and claimUrl) even when you send an API key, e.g. to hand a user a signup link for a number.
     # @return [Array<(SearchAvailablePhoneNumbers200Response, Integer, Hash)>] SearchAvailablePhoneNumbers200Response data, response status code and response headers
     def search_available_phone_numbers_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1542,6 +1607,7 @@ module Zernio
       query_params[:'contains'] = opts[:'contains'] if !opts[:'contains'].nil?
       query_params[:'sms'] = opts[:'sms'] if !opts[:'sms'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'masked'] = opts[:'masked'] if !opts[:'masked'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

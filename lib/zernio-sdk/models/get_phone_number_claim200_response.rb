@@ -14,42 +14,24 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SearchAvailablePhoneNumbers200ResponseNumbersInner < ApiModelBase
-    # E.164. Pass it as `phoneNumber` on POST /v1/phone-numbers/purchase to buy this exact number.
+  class GetPhoneNumberClaim200Response < ApiModelBase
+    attr_accessor :country
+
+    # The claimed number type, in the shape of `types[]` on GET /v1/phone-numbers/countries.
+    attr_accessor :type
+
+    attr_accessor :area
+
+    # E.164, or null for an any-number claim.
     attr_accessor :phone_number
-
-    # Provider capability list for this number (e.g. voice, sms, mms).
-    attr_accessor :features
-
-    # Town or rate center the number belongs to, as the carrier names it (e.g. WACO).
-    attr_accessor :locality
-
-    # true when the carrier added this number because too few matched your filters, so it may be outside the requested prefix or locality.
-    attr_accessor :best_effort
-
-    # Keyless calls only, in place of `phoneNumber`: the number with its middle digits masked, e.g. +44 20 •••• 0123.
-    attr_accessor :masked_number
-
-    # Keyless calls only. Without a `numberType` filter a keyless search mixes every type the country sells, so each result names its own.
-    attr_accessor :number_type
-
-    # Keyless calls only. Opaque, expires after 7 days. Pass it as `claimId` on a keyless POST /v1/phone-numbers/purchase.
-    attr_accessor :claim_id
-
-    # Keyless calls only. Signup link that opens the dashboard's confirm step for this number. The number is not held: if it is gone by then, the buyer picks another in the same area.
-    attr_accessor :claim_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'phone_number' => :'phoneNumber',
-        :'features' => :'features',
-        :'locality' => :'locality',
-        :'best_effort' => :'bestEffort',
-        :'masked_number' => :'maskedNumber',
-        :'number_type' => :'numberType',
-        :'claim_id' => :'claimId',
-        :'claim_url' => :'claimUrl'
+        :'country' => :'country',
+        :'type' => :'type',
+        :'area' => :'area',
+        :'phone_number' => :'phoneNumber'
       }
     end
 
@@ -66,20 +48,17 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'phone_number' => :'String',
-        :'features' => :'Array<String>',
-        :'locality' => :'String',
-        :'best_effort' => :'Boolean',
-        :'masked_number' => :'String',
-        :'number_type' => :'String',
-        :'claim_id' => :'String',
-        :'claim_url' => :'String'
+        :'country' => :'GetPhoneNumberClaim200ResponseCountry',
+        :'type' => :'Object',
+        :'area' => :'GetPhoneNumberClaim200ResponseArea',
+        :'phone_number' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'phone_number'
       ])
     end
 
@@ -87,50 +66,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SearchAvailablePhoneNumbers200ResponseNumbersInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetPhoneNumberClaim200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SearchAvailablePhoneNumbers200ResponseNumbersInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetPhoneNumberClaim200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'country')
+        self.country = attributes[:'country']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'area')
+        self.area = attributes[:'area']
+      end
+
       if attributes.key?(:'phone_number')
         self.phone_number = attributes[:'phone_number']
-      end
-
-      if attributes.key?(:'features')
-        if (value = attributes[:'features']).is_a?(Array)
-          self.features = value
-        end
-      end
-
-      if attributes.key?(:'locality')
-        self.locality = attributes[:'locality']
-      end
-
-      if attributes.key?(:'best_effort')
-        self.best_effort = attributes[:'best_effort']
-      end
-
-      if attributes.key?(:'masked_number')
-        self.masked_number = attributes[:'masked_number']
-      end
-
-      if attributes.key?(:'number_type')
-        self.number_type = attributes[:'number_type']
-      end
-
-      if attributes.key?(:'claim_id')
-        self.claim_id = attributes[:'claim_id']
-      end
-
-      if attributes.key?(:'claim_url')
-        self.claim_url = attributes[:'claim_url']
       end
     end
 
@@ -154,14 +115,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          phone_number == o.phone_number &&
-          features == o.features &&
-          locality == o.locality &&
-          best_effort == o.best_effort &&
-          masked_number == o.masked_number &&
-          number_type == o.number_type &&
-          claim_id == o.claim_id &&
-          claim_url == o.claim_url
+          country == o.country &&
+          type == o.type &&
+          area == o.area &&
+          phone_number == o.phone_number
     end
 
     # @see the `==` method
@@ -173,7 +130,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_number, features, locality, best_effort, masked_number, number_type, claim_id, claim_url].hash
+      [country, type, area, phone_number].hash
     end
 
     # Builds the object from hash

@@ -580,6 +580,7 @@ Class | Method | HTTP request | Description
 *Zernio::PhoneNumbersApi* | [**create_phone_number_stock_watch**](docs/PhoneNumbersApi.md#create_phone_number_stock_watch) | **POST** /v1/phone-numbers/stock-watches | Watch an out-of-stock country
 *Zernio::PhoneNumbersApi* | [**delete_phone_number_stock_watch**](docs/PhoneNumbersApi.md#delete_phone_number_stock_watch) | **DELETE** /v1/phone-numbers/stock-watches/{id} | Stop watching a country
 *Zernio::PhoneNumbersApi* | [**get_phone_number**](docs/PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number
+*Zernio::PhoneNumbersApi* | [**get_phone_number_claim**](docs/PhoneNumbersApi.md#get_phone_number_claim) | **GET** /v1/phone-numbers/claims/{claimId} | Resolve a number claim
 *Zernio::PhoneNumbersApi* | [**get_phone_number_kyc_form**](docs/PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec
 *Zernio::PhoneNumbersApi* | [**get_phone_number_port_in_order_requirements**](docs/PhoneNumbersApi.md#get_phone_number_port_in_order_requirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order's pending requirements
 *Zernio::PhoneNumbersApi* | [**get_phone_number_port_in_requirements**](docs/PhoneNumbersApi.md#get_phone_number_port_in_requirements) | **GET** /v1/phone-numbers/port-in/requirements | Country porting requirements
@@ -1698,6 +1699,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetPendingOAuthData200ResponseOrganizationsInner](docs/GetPendingOAuthData200ResponseOrganizationsInner.md)
  - [Zernio::GetPhoneNumber200Response](docs/GetPhoneNumber200Response.md)
  - [Zernio::GetPhoneNumber200ResponsePhoneNumber](docs/GetPhoneNumber200ResponsePhoneNumber.md)
+ - [Zernio::GetPhoneNumberClaim200Response](docs/GetPhoneNumberClaim200Response.md)
+ - [Zernio::GetPhoneNumberClaim200ResponseArea](docs/GetPhoneNumberClaim200ResponseArea.md)
+ - [Zernio::GetPhoneNumberClaim200ResponseCountry](docs/GetPhoneNumberClaim200ResponseCountry.md)
  - [Zernio::GetPhoneNumberKycForm200Response](docs/GetPhoneNumberKycForm200Response.md)
  - [Zernio::GetPhoneNumberKycForm200ResponseFieldsInner](docs/GetPhoneNumberKycForm200ResponseFieldsInner.md)
  - [Zernio::GetPhoneNumberKycForm200ResponseReusable](docs/GetPhoneNumberKycForm200ResponseReusable.md)
@@ -2283,6 +2287,8 @@ Class | Method | HTTP request | Description
  - [Zernio::PurchasePhoneNumber200ResponseOneOf1PhoneNumber](docs/PurchasePhoneNumber200ResponseOneOf1PhoneNumber.md)
  - [Zernio::PurchasePhoneNumber200ResponseOneOf2](docs/PurchasePhoneNumber200ResponseOneOf2.md)
  - [Zernio::PurchasePhoneNumber202Response](docs/PurchasePhoneNumber202Response.md)
+ - [Zernio::PurchasePhoneNumber401Response](docs/PurchasePhoneNumber401Response.md)
+ - [Zernio::PurchasePhoneNumber401ResponseDetails](docs/PurchasePhoneNumber401ResponseDetails.md)
  - [Zernio::PurchasePhoneNumber409Response](docs/PurchasePhoneNumber409Response.md)
  - [Zernio::PurchasePhoneNumber503Response](docs/PurchasePhoneNumber503Response.md)
  - [Zernio::PurchasePhoneNumberRequest](docs/PurchasePhoneNumberRequest.md)

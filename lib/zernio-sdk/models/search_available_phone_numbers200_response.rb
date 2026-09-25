@@ -24,13 +24,29 @@ module Zernio
 
     attr_accessor :numbers
 
+    # true on keyless calls.
+    attr_accessor :masked
+
+    # With `country=auto`: the caller's city the results were narrowed to, or null when there was no stock there.
+    attr_accessor :near
+
+    # Keyless calls only: a claim for any number matching this search's country, type and area.
+    attr_accessor :claim_id
+
+    # Keyless calls only: signup link for any number matching this search.
+    attr_accessor :claim_url
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'country' => :'country',
         :'number_type' => :'numberType',
         :'require_sms' => :'requireSms',
-        :'numbers' => :'numbers'
+        :'numbers' => :'numbers',
+        :'masked' => :'masked',
+        :'near' => :'near',
+        :'claim_id' => :'claimId',
+        :'claim_url' => :'claimUrl'
       }
     end
 
@@ -50,13 +66,18 @@ module Zernio
         :'country' => :'String',
         :'number_type' => :'String',
         :'require_sms' => :'Boolean',
-        :'numbers' => :'Array<SearchAvailablePhoneNumbers200ResponseNumbersInner>'
+        :'numbers' => :'Array<SearchAvailablePhoneNumbers200ResponseNumbersInner>',
+        :'masked' => :'Boolean',
+        :'near' => :'String',
+        :'claim_id' => :'String',
+        :'claim_url' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'near',
       ])
     end
 
@@ -93,6 +114,22 @@ module Zernio
           self.numbers = value
         end
       end
+
+      if attributes.key?(:'masked')
+        self.masked = attributes[:'masked']
+      end
+
+      if attributes.key?(:'near')
+        self.near = attributes[:'near']
+      end
+
+      if attributes.key?(:'claim_id')
+        self.claim_id = attributes[:'claim_id']
+      end
+
+      if attributes.key?(:'claim_url')
+        self.claim_url = attributes[:'claim_url']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -118,7 +155,11 @@ module Zernio
           country == o.country &&
           number_type == o.number_type &&
           require_sms == o.require_sms &&
-          numbers == o.numbers
+          numbers == o.numbers &&
+          masked == o.masked &&
+          near == o.near &&
+          claim_id == o.claim_id &&
+          claim_url == o.claim_url
     end
 
     # @see the `==` method
@@ -130,7 +171,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country, number_type, require_sms, numbers].hash
+      [country, number_type, require_sms, numbers, masked, near, claim_id, claim_url].hash
     end
 
     # Builds the object from hash

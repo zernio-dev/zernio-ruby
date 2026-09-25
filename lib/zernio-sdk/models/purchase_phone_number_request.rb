@@ -27,6 +27,9 @@ module Zernio
     # Area code (national destination code, e.g. 11 for Sao Paulo) the number must be in. Hard constraint: when the area has no deliverable inventory the purchase fails with 409 code AREA_CODE_UNAVAILABLE instead of assigning a number from another area, and later replacements stay in this area too. Omit for any area. Get live options from GET /v1/phone-numbers/availability (areaOptions). 
     attr_accessor :area_code
 
+    # Keyless calls only: a `claimId` from a keyless GET /v1/phone-numbers/available. The 401 then carries a `claimUrl` for that exact number. Ignored when an API key is sent. 
+    attr_accessor :claim_id
+
     # One exact number to buy, in E.164, taken from GET /v1/phone-numbers/available. Hard constraint: when it is no longer available (bought by someone else, or WhatsApp's buy-time check rejects it) the purchase fails with 409 code PHONE_NUMBER_UNAVAILABLE instead of assigning another number; search again and pick another. Only for countries and types that activate instantly: a regulated one (202 kyc_required) returns 400 when phoneNumber is set. 
     attr_accessor :phone_number
 
@@ -74,6 +77,7 @@ module Zernio
         :'country' => :'country',
         :'number_type' => :'numberType',
         :'area_code' => :'areaCode',
+        :'claim_id' => :'claimId',
         :'phone_number' => :'phoneNumber',
         :'connect_whatsapp' => :'connectWhatsapp',
         :'wants_sms' => :'wantsSms',
@@ -100,6 +104,7 @@ module Zernio
         :'country' => :'String',
         :'number_type' => :'String',
         :'area_code' => :'String',
+        :'claim_id' => :'String',
         :'phone_number' => :'String',
         :'connect_whatsapp' => :'Boolean',
         :'wants_sms' => :'Boolean',
@@ -149,6 +154,10 @@ module Zernio
 
       if attributes.key?(:'area_code')
         self.area_code = attributes[:'area_code']
+      end
+
+      if attributes.key?(:'claim_id')
+        self.claim_id = attributes[:'claim_id']
       end
 
       if attributes.key?(:'phone_number')
@@ -296,6 +305,7 @@ module Zernio
           country == o.country &&
           number_type == o.number_type &&
           area_code == o.area_code &&
+          claim_id == o.claim_id &&
           phone_number == o.phone_number &&
           connect_whatsapp == o.connect_whatsapp &&
           wants_sms == o.wants_sms &&
@@ -313,7 +323,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, number_type, area_code, phone_number, connect_whatsapp, wants_sms, wants_whatsapp, purchase_intent_id, allow_multiple].hash
+      [profile_id, country, number_type, area_code, claim_id, phone_number, connect_whatsapp, wants_sms, wants_whatsapp, purchase_intent_id, allow_multiple].hash
     end
 
     # Builds the object from hash
