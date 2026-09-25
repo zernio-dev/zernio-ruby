@@ -8,7 +8,7 @@
 | **tier** | **Integer** | Null on a &#x60;fulfilment: request&#x60; type, whose document tier is only known once its requirements are read. | [optional] |
 | **needs_kyc** | **Boolean** |  | [optional] |
 | **monthly_cents** | **Integer** | Price a NEW number of this type costs per month, in cents. | [optional] |
-| **whatsapp_available** | **Boolean** | Always false for toll_free (WhatsApp does not reliably register toll-free numbers). | [optional] |
+| **whatsapp_available** | **Boolean** | False for toll_free (WhatsApp does not reliably register toll-free numbers) and for pairs Meta refuses, such as Chilean local (+56 2). | [optional] |
 | **sms_available** | **Boolean** |  | [optional] |
 | **calls_available** | **Boolean** |  | [optional] |
 | **in_stock** | **Boolean** |  | [optional] |
