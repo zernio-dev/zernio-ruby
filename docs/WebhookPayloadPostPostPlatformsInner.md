@@ -10,6 +10,7 @@
 | **platform_post_id** | **String** |  | [optional] |
 | **published_url** | **String** |  | [optional] |
 | **error** | **String** |  | [optional] |
+| **platform_error** | [**PostPlatformError**](PostPlatformError.md) |  | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::WebhookPayloadPostPostPlatformsInner.new(
   account_id: null,
   platform_post_id: null,
   published_url: null,
-  error: null
+  error: null,
+  platform_error: null
 )
 ```
 
