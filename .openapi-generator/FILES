@@ -1658,7 +1658,7 @@ docs/SendInboxMessage200ResponseDataPartialFailurePlatformError.md
 docs/SendInboxMessage200ResponseWarningsInner.md
 docs/SendInboxMessage400Response.md
 docs/SendInboxMessage400ResponsePlatformError.md
-docs/SendInboxMessage502Response.md
+docs/SendInboxMessage429Response.md
 docs/SendInboxMessageRequest.md
 docs/SendInboxMessageRequestButtonsInner.md
 docs/SendInboxMessageRequestContactsInner.md
@@ -3936,7 +3936,7 @@ lib/zernio-sdk/models/send_inbox_message200_response_data_partial_failure_platfo
 lib/zernio-sdk/models/send_inbox_message200_response_warnings_inner.rb
 lib/zernio-sdk/models/send_inbox_message400_response.rb
 lib/zernio-sdk/models/send_inbox_message400_response_platform_error.rb
-lib/zernio-sdk/models/send_inbox_message502_response.rb
+lib/zernio-sdk/models/send_inbox_message429_response.rb
 lib/zernio-sdk/models/send_inbox_message_request.rb
 lib/zernio-sdk/models/send_inbox_message_request_buttons_inner.rb
 lib/zernio-sdk/models/send_inbox_message_request_contacts_inner.rb
@@ -6189,7 +6189,7 @@ spec/models/send_inbox_message200_response_spec.rb
 spec/models/send_inbox_message200_response_warnings_inner_spec.rb
 spec/models/send_inbox_message400_response_platform_error_spec.rb
 spec/models/send_inbox_message400_response_spec.rb
-spec/models/send_inbox_message502_response_spec.rb
+spec/models/send_inbox_message429_response_spec.rb
 spec/models/send_inbox_message_request_buttons_inner_spec.rb
 spec/models/send_inbox_message_request_contacts_inner_emails_inner_spec.rb
 spec/models/send_inbox_message_request_contacts_inner_name_spec.rb

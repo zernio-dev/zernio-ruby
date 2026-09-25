@@ -1,4 +1,4 @@
-# Zernio::SendInboxMessage502Response
+# Zernio::SendInboxMessage429Response
 
 ## Properties
 
@@ -17,7 +17,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SendInboxMessage502Response.new(
+instance = Zernio::SendInboxMessage429Response.new(
   error: null,
   type: null,
   code: null,
