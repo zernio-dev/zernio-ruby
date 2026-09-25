@@ -1413,6 +1413,8 @@ docs/MoveAccountToProfile200Response.md
 docs/MoveAccountToProfileRequest.md
 docs/MoveWhatsAppNumberToProfile200Response.md
 docs/MoveWhatsAppNumberToProfileRequest.md
+docs/OnSmsRegistrationActionRequiredRequest.md
+docs/OnSmsRegistrationActionRequiredRequestRegistration.md
 docs/OnVerificationApprovedRequest.md
 docs/OnVerificationApprovedRequestVerification.md
 docs/OnVerificationFailedRequest.md
@@ -1570,6 +1572,7 @@ docs/RespondToPhoneNumberReviewerRequest.md
 docs/RespondToPhoneNumberReviewerRequestDocumentsInner.md
 docs/RespondToSmsRegistrationReview200Response.md
 docs/RespondToSmsRegistrationReviewRequest.md
+docs/RespondToSmsRegistrationReviewRequestAnswersInner.md
 docs/RestoreWorkflowVersion200Response.md
 docs/RestoreWorkflowVersion200ResponseWorkflow.md
 docs/ResyncPageWebhookSubscription200Response.md
@@ -1753,6 +1756,8 @@ docs/ShareSmsRegistrationRequest.md
 docs/SharedAdAccount.md
 docs/SlackApi.md
 docs/SlackPlatformData.md
+docs/SmsRegistrationReviewRequest.md
+docs/SmsRegistrationReviewRequestPointsInner.md
 docs/SnapchatPlatformData.md
 docs/SocialAccount.md
 docs/SocialAccountProfileId.md
@@ -3713,6 +3718,8 @@ lib/zernio-sdk/models/move_account_to_profile200_response.rb
 lib/zernio-sdk/models/move_account_to_profile_request.rb
 lib/zernio-sdk/models/move_whats_app_number_to_profile200_response.rb
 lib/zernio-sdk/models/move_whats_app_number_to_profile_request.rb
+lib/zernio-sdk/models/on_sms_registration_action_required_request.rb
+lib/zernio-sdk/models/on_sms_registration_action_required_request_registration.rb
 lib/zernio-sdk/models/on_verification_approved_request.rb
 lib/zernio-sdk/models/on_verification_approved_request_verification.rb
 lib/zernio-sdk/models/on_verification_failed_request.rb
@@ -3862,6 +3869,7 @@ lib/zernio-sdk/models/respond_to_phone_number_reviewer_request.rb
 lib/zernio-sdk/models/respond_to_phone_number_reviewer_request_documents_inner.rb
 lib/zernio-sdk/models/respond_to_sms_registration_review200_response.rb
 lib/zernio-sdk/models/respond_to_sms_registration_review_request.rb
+lib/zernio-sdk/models/respond_to_sms_registration_review_request_answers_inner.rb
 lib/zernio-sdk/models/restore_workflow_version200_response.rb
 lib/zernio-sdk/models/restore_workflow_version200_response_workflow.rb
 lib/zernio-sdk/models/resync_page_webhook_subscription200_response.rb
@@ -4041,6 +4049,8 @@ lib/zernio-sdk/models/share_sms_registration200_response.rb
 lib/zernio-sdk/models/share_sms_registration_request.rb
 lib/zernio-sdk/models/shared_ad_account.rb
 lib/zernio-sdk/models/slack_platform_data.rb
+lib/zernio-sdk/models/sms_registration_review_request.rb
+lib/zernio-sdk/models/sms_registration_review_request_points_inner.rb
 lib/zernio-sdk/models/snapchat_platform_data.rb
 lib/zernio-sdk/models/social_account.rb
 lib/zernio-sdk/models/social_account_profile_id.rb
@@ -5978,6 +5988,8 @@ spec/models/move_account_to_profile200_response_spec.rb
 spec/models/move_account_to_profile_request_spec.rb
 spec/models/move_whats_app_number_to_profile200_response_spec.rb
 spec/models/move_whats_app_number_to_profile_request_spec.rb
+spec/models/on_sms_registration_action_required_request_registration_spec.rb
+spec/models/on_sms_registration_action_required_request_spec.rb
 spec/models/on_verification_approved_request_spec.rb
 spec/models/on_verification_approved_request_verification_spec.rb
 spec/models/on_verification_failed_request_spec.rb
@@ -6126,6 +6138,7 @@ spec/models/respond_to_phone_number_reviewer200_response_spec.rb
 spec/models/respond_to_phone_number_reviewer_request_documents_inner_spec.rb
 spec/models/respond_to_phone_number_reviewer_request_spec.rb
 spec/models/respond_to_sms_registration_review200_response_spec.rb
+spec/models/respond_to_sms_registration_review_request_answers_inner_spec.rb
 spec/models/respond_to_sms_registration_review_request_spec.rb
 spec/models/restore_workflow_version200_response_spec.rb
 spec/models/restore_workflow_version200_response_workflow_spec.rb
@@ -6306,6 +6319,8 @@ spec/models/share_sms_registration200_response_spec.rb
 spec/models/share_sms_registration_request_spec.rb
 spec/models/shared_ad_account_spec.rb
 spec/models/slack_platform_data_spec.rb
+spec/models/sms_registration_review_request_points_inner_spec.rb
+spec/models/sms_registration_review_request_spec.rb
 spec/models/snapchat_platform_data_spec.rb
 spec/models/social_account_profile_id_spec.rb
 spec/models/social_account_spec.rb

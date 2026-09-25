@@ -42,6 +42,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_referral_received**](WebhookEventsApi.md#on_referral_received) | **POST** /referral.received | Referral received event |
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
+| [**on_sms_registration_action_required**](WebhookEventsApi.md#on_sms_registration_action_required) | **POST** /sms.registration.action_required | SMS registration action required event |
 | [**on_verification_approved**](WebhookEventsApi.md#on_verification_approved) | **POST** /verification.approved | Verification approved event |
 | [**on_verification_failed**](WebhookEventsApi.md#on_verification_failed) | **POST** /verification.failed | Verification failed event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
@@ -2628,6 +2629,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_review_updated** | [**WebhookPayloadReviewUpdated**](WebhookPayloadReviewUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_sms_registration_action_required
+
+> on_sms_registration_action_required(on_sms_registration_action_required_request)
+
+SMS registration action required event
+
+Fired when an SMS registration starts waiting on its owner. `reason` says why: `changes_requested` (our review asked for changes; `message` is the reviewer's note, answer with POST /v1/sms/registrations/{id}/respond), `otp_required` (a sole-proprietor brand needs the code texted to its mobile, submit it with POST /v1/sms/registrations/{id}/verify-otp), `carrier_info_required` (the toll-free carrier asked for more information; the request expires after 7 days) or `rejected` (the carriers rejected it; `message` is the reason). Fires once per new request (not on follow-up messages) and once per OTP or carrier request. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_sms_registration_action_required_request =  # OnSmsRegistrationActionRequiredRequest | 
+
+begin
+  # SMS registration action required event
+  api_instance.on_sms_registration_action_required(on_sms_registration_action_required_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_sms_registration_action_required: #{e}"
+end
+```
+
+#### Using the on_sms_registration_action_required_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_sms_registration_action_required_with_http_info(on_sms_registration_action_required_request)
+
+```ruby
+begin
+  # SMS registration action required event
+  data, status_code, headers = api_instance.on_sms_registration_action_required_with_http_info(on_sms_registration_action_required_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_sms_registration_action_required_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_sms_registration_action_required_request** | [**OnSmsRegistrationActionRequiredRequest**](OnSmsRegistrationActionRequiredRequest.md) |  |  |
 
 ### Return type
 

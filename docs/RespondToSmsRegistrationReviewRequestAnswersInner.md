@@ -1,0 +1,24 @@
+# Zernio::RespondToSmsRegistrationReviewRequestAnswersInner
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **point_id** | **String** |  |  |
+| **text** | **String** | For &#x60;text&#x60; points (at least 3 characters). | [optional] |
+| **url** | **String** | For &#x60;link&#x60; and &#x60;link_or_file&#x60; points. | [optional] |
+| **files** | **Array&lt;String&gt;** | Hosted document URLs from POST /v1/sms/opt-in-proof, for &#x60;file&#x60; and &#x60;link_or_file&#x60; points. | [optional] |
+
+## Example
+
+```ruby
+require 'zernio-sdk'
+
+instance = Zernio::RespondToSmsRegistrationReviewRequestAnswersInner.new(
+  point_id: null,
+  text: null,
+  url: null,
+  files: null
+)
+```
+

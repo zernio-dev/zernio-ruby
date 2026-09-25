@@ -16,6 +16,8 @@
 | **tf_action_required_at** | **Time** | Toll-free only: when the carrier requested changes (\&quot;Waiting For Customer\&quot;). The request must be resubmitted within 7 days of this timestamp or it expires. | [optional] |
 | **phone_numbers** | **Array&lt;String&gt;** |  | [optional] |
 | **awaiting_otp** | **Boolean** | Sole-prop 10DLC only; the OTP step is still pending. | [optional] |
+| **admin_review_note** | **String** | The open change request as text (status changes_requested). | [optional] |
+| **review_request** | [**SmsRegistrationReviewRequest**](SmsRegistrationReviewRequest.md) |  | [optional] |
 | **trust_score** | **Float** | Carrier-assigned brand trust score; drives throughput. | [optional] |
 | **throughput** | [**ListSmsRegistrations200ResponseRegistrationsInnerThroughput**](ListSmsRegistrations200ResponseRegistrationsInnerThroughput.md) |  | [optional] |
 
@@ -37,6 +39,8 @@ instance = Zernio::ListSmsRegistrations200ResponseRegistrationsInner.new(
   tf_action_required_at: null,
   phone_numbers: null,
   awaiting_otp: null,
+  admin_review_note: null,
+  review_request: null,
   trust_score: null,
   throughput: null
 )
