@@ -1,20 +1,49 @@
 # Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **key** | **String** |  |  |
-| **name** | **String** |  | [optional] |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.new(
-  key: null,
-  name: null
-)
+Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.openapi_one_of
+# =>
+# [
+#   :'String',
+#   :'UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInnerOneOf'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.build(data)
+# => #<String:0x00007fdd4aab02a0>
+
+Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `String`
+- `UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInnerOneOf`
+- `nil` (if no type matches)
 

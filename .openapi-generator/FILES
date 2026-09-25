@@ -447,6 +447,7 @@ docs/CreateStandaloneAdRequestBehaviorsInner.md
 docs/CreateStandaloneAdRequestBrandIdentity.md
 docs/CreateStandaloneAdRequestCarouselCardsInner.md
 docs/CreateStandaloneAdRequestCitiesInner.md
+docs/CreateStandaloneAdRequestCitiesInnerOneOf.md
 docs/CreateStandaloneAdRequestCreativesInner.md
 docs/CreateStandaloneAdRequestCreativesInnerVideo.md
 docs/CreateStandaloneAdRequestCustomLocationsInner.md
@@ -458,10 +459,12 @@ docs/CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.md
 docs/CreateStandaloneAdRequestPlacements.md
 docs/CreateStandaloneAdRequestPlatformSpecificData.md
 docs/CreateStandaloneAdRequestRegionsInner.md
+docs/CreateStandaloneAdRequestRegionsInnerOneOf.md
 docs/CreateStandaloneAdRequestSitelinksInner.md
 docs/CreateStandaloneAdRequestStructuredSnippetsInner.md
 docs/CreateStandaloneAdRequestTranslationsInner.md
 docs/CreateStandaloneAdRequestVideo.md
+docs/CreateStandaloneAdRequestZipsInner.md
 docs/CreateTestLead200Response.md
 docs/CreateTestLead200ResponseTestLead.md
 docs/CreateTestLeadRequest.md
@@ -1027,6 +1030,7 @@ docs/GoogleBusinessPlatformDataOffer.md
 docs/GoogleBusinessReview.md
 docs/GoogleBusinessReviewReviewReply.md
 docs/GoogleBusinessReviewReviewer.md
+docs/GoogleLocationTargetingType.md
 docs/GooglePmaxAssetGroup.md
 docs/GooglePmaxAssetGroupAssetsInner.md
 docs/GooglePmaxAssetGroupInput.md
@@ -1781,6 +1785,7 @@ docs/SyncExternalPosts200ResponseSynced.md
 docs/SyncExternalPostsRequest.md
 docs/TargetingSpec.md
 docs/TargetingSpecCitiesInner.md
+docs/TargetingSpecCitiesInnerOneOf.md
 docs/TargetingSpecCustomLocationsInner.md
 docs/TargetingSpecExcludedLocations.md
 docs/TargetingSpecExcludedLocationsCitiesInner.md
@@ -1859,6 +1864,7 @@ docs/UpdateAdRequestTargetingInterestsInner.md
 docs/UpdateAdRequestTargetingKeywordsInner.md
 docs/UpdateAdRequestTargetingKeywordsInnerOneOf.md
 docs/UpdateAdRequestTargetingLocations.md
+docs/UpdateAdRequestTargetingLocationsOneOf.md
 docs/UpdateAdSet200Response.md
 docs/UpdateAdSetRequest.md
 docs/UpdateAdSetRequestBudget.md
@@ -1903,6 +1909,7 @@ docs/UpdateCampaignTargetingRequestTargetingDevicesInnerOneOf.md
 docs/UpdateCampaignTargetingRequestTargetingLocations.md
 docs/UpdateCampaignTargetingRequestTargetingLocationsOneOf.md
 docs/UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.md
+docs/UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInnerOneOf.md
 docs/UpdateCommentAutomation200Response.md
 docs/UpdateCommentAutomation200ResponseAutomation.md
 docs/UpdateCommentAutomationRequest.md
@@ -2761,6 +2768,7 @@ lib/zernio-sdk/models/create_standalone_ad_request_behaviors_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_brand_identity.rb
 lib/zernio-sdk/models/create_standalone_ad_request_carousel_cards_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_cities_inner.rb
+lib/zernio-sdk/models/create_standalone_ad_request_cities_inner_one_of.rb
 lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner_video.rb
 lib/zernio-sdk/models/create_standalone_ad_request_custom_locations_inner.rb
@@ -2772,10 +2780,12 @@ lib/zernio-sdk/models/create_standalone_ad_request_placement_assets_rules_inner_
 lib/zernio-sdk/models/create_standalone_ad_request_placements.rb
 lib/zernio-sdk/models/create_standalone_ad_request_platform_specific_data.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner.rb
+lib/zernio-sdk/models/create_standalone_ad_request_regions_inner_one_of.rb
 lib/zernio-sdk/models/create_standalone_ad_request_sitelinks_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_structured_snippets_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_translations_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
+lib/zernio-sdk/models/create_standalone_ad_request_zips_inner.rb
 lib/zernio-sdk/models/create_test_lead200_response.rb
 lib/zernio-sdk/models/create_test_lead200_response_test_lead.rb
 lib/zernio-sdk/models/create_test_lead_request.rb
@@ -3331,6 +3341,7 @@ lib/zernio-sdk/models/google_business_platform_data_offer.rb
 lib/zernio-sdk/models/google_business_review.rb
 lib/zernio-sdk/models/google_business_review_review_reply.rb
 lib/zernio-sdk/models/google_business_review_reviewer.rb
+lib/zernio-sdk/models/google_location_targeting_type.rb
 lib/zernio-sdk/models/google_pmax_asset_group.rb
 lib/zernio-sdk/models/google_pmax_asset_group_assets_inner.rb
 lib/zernio-sdk/models/google_pmax_asset_group_input.rb
@@ -4062,6 +4073,7 @@ lib/zernio-sdk/models/sync_external_posts200_response_synced.rb
 lib/zernio-sdk/models/sync_external_posts_request.rb
 lib/zernio-sdk/models/targeting_spec.rb
 lib/zernio-sdk/models/targeting_spec_cities_inner.rb
+lib/zernio-sdk/models/targeting_spec_cities_inner_one_of.rb
 lib/zernio-sdk/models/targeting_spec_custom_locations_inner.rb
 lib/zernio-sdk/models/targeting_spec_excluded_locations.rb
 lib/zernio-sdk/models/targeting_spec_excluded_locations_cities_inner.rb
@@ -4137,6 +4149,7 @@ lib/zernio-sdk/models/update_ad_request_targeting_interests_inner.rb
 lib/zernio-sdk/models/update_ad_request_targeting_keywords_inner.rb
 lib/zernio-sdk/models/update_ad_request_targeting_keywords_inner_one_of.rb
 lib/zernio-sdk/models/update_ad_request_targeting_locations.rb
+lib/zernio-sdk/models/update_ad_request_targeting_locations_one_of.rb
 lib/zernio-sdk/models/update_ad_set200_response.rb
 lib/zernio-sdk/models/update_ad_set_request.rb
 lib/zernio-sdk/models/update_ad_set_request_budget.rb
@@ -4181,6 +4194,7 @@ lib/zernio-sdk/models/update_campaign_targeting_request_targeting_devices_inner_
 lib/zernio-sdk/models/update_campaign_targeting_request_targeting_locations.rb
 lib/zernio-sdk/models/update_campaign_targeting_request_targeting_locations_one_of.rb
 lib/zernio-sdk/models/update_campaign_targeting_request_targeting_locations_one_of_regions_inner.rb
+lib/zernio-sdk/models/update_campaign_targeting_request_targeting_locations_one_of_regions_inner_one_of.rb
 lib/zernio-sdk/models/update_comment_automation200_response.rb
 lib/zernio-sdk/models/update_comment_automation200_response_automation.rb
 lib/zernio-sdk/models/update_comment_automation_request.rb
@@ -5017,6 +5031,7 @@ spec/models/create_standalone_ad_request_additional_headlines_inner_spec.rb
 spec/models/create_standalone_ad_request_behaviors_inner_spec.rb
 spec/models/create_standalone_ad_request_brand_identity_spec.rb
 spec/models/create_standalone_ad_request_carousel_cards_inner_spec.rb
+spec/models/create_standalone_ad_request_cities_inner_one_of_spec.rb
 spec/models/create_standalone_ad_request_cities_inner_spec.rb
 spec/models/create_standalone_ad_request_creatives_inner_spec.rb
 spec/models/create_standalone_ad_request_creatives_inner_video_spec.rb
@@ -5028,12 +5043,14 @@ spec/models/create_standalone_ad_request_placement_assets_rules_inner_spec.rb
 spec/models/create_standalone_ad_request_placement_assets_spec.rb
 spec/models/create_standalone_ad_request_placements_spec.rb
 spec/models/create_standalone_ad_request_platform_specific_data_spec.rb
+spec/models/create_standalone_ad_request_regions_inner_one_of_spec.rb
 spec/models/create_standalone_ad_request_regions_inner_spec.rb
 spec/models/create_standalone_ad_request_sitelinks_inner_spec.rb
 spec/models/create_standalone_ad_request_spec.rb
 spec/models/create_standalone_ad_request_structured_snippets_inner_spec.rb
 spec/models/create_standalone_ad_request_translations_inner_spec.rb
 spec/models/create_standalone_ad_request_video_spec.rb
+spec/models/create_standalone_ad_request_zips_inner_spec.rb
 spec/models/create_test_lead200_response_spec.rb
 spec/models/create_test_lead200_response_test_lead_spec.rb
 spec/models/create_test_lead_request_field_data_inner_spec.rb
@@ -5589,6 +5606,7 @@ spec/models/google_business_platform_data_spec.rb
 spec/models/google_business_review_review_reply_spec.rb
 spec/models/google_business_review_reviewer_spec.rb
 spec/models/google_business_review_spec.rb
+spec/models/google_location_targeting_type_spec.rb
 spec/models/google_pmax_asset_group_assets_inner_spec.rb
 spec/models/google_pmax_asset_group_input_images_spec.rb
 spec/models/google_pmax_asset_group_input_spec.rb
@@ -6318,6 +6336,7 @@ spec/models/submit_whats_app_number_kyc_request_spec.rb
 spec/models/sync_external_posts200_response_spec.rb
 spec/models/sync_external_posts200_response_synced_spec.rb
 spec/models/sync_external_posts_request_spec.rb
+spec/models/targeting_spec_cities_inner_one_of_spec.rb
 spec/models/targeting_spec_cities_inner_spec.rb
 spec/models/targeting_spec_custom_locations_inner_spec.rb
 spec/models/targeting_spec_excluded_locations_cities_inner_spec.rb
@@ -6393,6 +6412,7 @@ spec/models/update_ad_request_targeting_devices_inner_spec.rb
 spec/models/update_ad_request_targeting_interests_inner_spec.rb
 spec/models/update_ad_request_targeting_keywords_inner_one_of_spec.rb
 spec/models/update_ad_request_targeting_keywords_inner_spec.rb
+spec/models/update_ad_request_targeting_locations_one_of_spec.rb
 spec/models/update_ad_request_targeting_locations_spec.rb
 spec/models/update_ad_request_targeting_spec.rb
 spec/models/update_ad_set200_response_spec.rb
@@ -6435,6 +6455,7 @@ spec/models/update_campaign_targeting200_response_spec.rb
 spec/models/update_campaign_targeting_request_spec.rb
 spec/models/update_campaign_targeting_request_targeting_devices_inner_one_of_spec.rb
 spec/models/update_campaign_targeting_request_targeting_devices_inner_spec.rb
+spec/models/update_campaign_targeting_request_targeting_locations_one_of_regions_inner_one_of_spec.rb
 spec/models/update_campaign_targeting_request_targeting_locations_one_of_regions_inner_spec.rb
 spec/models/update_campaign_targeting_request_targeting_locations_one_of_spec.rb
 spec/models/update_campaign_targeting_request_targeting_locations_spec.rb

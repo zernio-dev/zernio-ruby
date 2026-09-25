@@ -15,7 +15,7 @@ Zernio::UpdateAdRequestTargetingLocations.openapi_one_of
 # =>
 # [
 #   :'Array<String>',
-#   :'UpdateCampaignTargetingRequestTargetingLocationsOneOf'
+#   :'UpdateAdRequestTargetingLocationsOneOf'
 # ]
 ```
 
@@ -44,6 +44,6 @@ Zernio::UpdateAdRequestTargetingLocations.build(data_that_doesnt_match)
 #### Return type
 
 - `Array<String>`
-- `UpdateCampaignTargetingRequestTargetingLocationsOneOf`
+- `UpdateAdRequestTargetingLocationsOneOf`
 - `nil` (if no type matches)
 

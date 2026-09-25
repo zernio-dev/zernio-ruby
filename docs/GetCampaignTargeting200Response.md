@@ -7,6 +7,7 @@
 | **devices** | [**Array&lt;GetCampaignTargeting200ResponseDevicesInner&gt;**](GetCampaignTargeting200ResponseDevicesInner.md) |  | [optional] |
 | **locations** | [**Array&lt;GetCampaignTargeting200ResponseLocationsInner&gt;**](GetCampaignTargeting200ResponseLocationsInner.md) |  | [optional] |
 | **languages** | [**Array&lt;GetCampaignTargeting200ResponseLanguagesInner&gt;**](GetCampaignTargeting200ResponseLanguagesInner.md) |  | [optional] |
+| **location_targeting_type** | **String** | Who the location targeting reaches, see GoogleLocationTargetingType. Null when Google reports a legacy value (SEARCH_INTEREST) this API does not set. | [optional] |
 | **cached_at** | **Time** | When this targeting was fetched from Google. Null when it was never served from cache. | [optional] |
 | **stale** | **Boolean** | True when Google&#39;s daily API quota was exhausted and this is the last successful fetch, not a live read. | [optional] |
 
@@ -19,6 +20,7 @@ instance = Zernio::GetCampaignTargeting200Response.new(
   devices: null,
   locations: null,
   languages: null,
+  location_targeting_type: null,
   cached_at: null,
   stale: null
 )

@@ -1,22 +1,49 @@
 # Zernio::CreateStandaloneAdRequestCitiesInner
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **key** | **String** | Meta city ID, from /v1/ads/targeting/search results. |  |
-| **radius** | **Float** | Optional radius around the city. Must be set together with distance_unit. Meta enforces a minimum city radius (~17 km / 10 mi); smaller values resolve to a 0-size audience and the ad fails at launch. For a tighter catchment use customLocations (lat/lng). | [optional] |
-| **distance_unit** | **String** | Unit for radius. Required if radius is set. | [optional] |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateStandaloneAdRequestCitiesInner.new(
-  key: null,
-  radius: null,
-  distance_unit: null
-)
+Zernio::CreateStandaloneAdRequestCitiesInner.openapi_one_of
+# =>
+# [
+#   :'CreateStandaloneAdRequestCitiesInnerOneOf',
+#   :'String'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::CreateStandaloneAdRequestCitiesInner.build(data)
+# => #<CreateStandaloneAdRequestCitiesInnerOneOf:0x00007fdd4aab02a0>
+
+Zernio::CreateStandaloneAdRequestCitiesInner.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `CreateStandaloneAdRequestCitiesInnerOneOf`
+- `String`
+- `nil` (if no type matches)
 

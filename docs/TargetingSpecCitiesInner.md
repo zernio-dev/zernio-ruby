@@ -1,24 +1,49 @@
 # Zernio::TargetingSpecCitiesInner
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **key** | **String** |  |  |
-| **name** | **String** |  | [optional] |
-| **radius** | **Float** | Radius around the city. Requires distanceUnit. Meta enforces a minimum city radius (~17 km / 10 mi); smaller values resolve to a 0-size audience and the ad fails at launch. For a tighter catchment use customLocations (lat/lng), which allows a smaller radius. | [optional] |
-| **distance_unit** | **String** | Required if radius is set. | [optional] |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::TargetingSpecCitiesInner.new(
-  key: null,
-  name: null,
-  radius: null,
-  distance_unit: null
-)
+Zernio::TargetingSpecCitiesInner.openapi_one_of
+# =>
+# [
+#   :'String',
+#   :'TargetingSpecCitiesInnerOneOf'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::TargetingSpecCitiesInner.build(data)
+# => #<String:0x00007fdd4aab02a0>
+
+Zernio::TargetingSpecCitiesInner.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `String`
+- `TargetingSpecCitiesInnerOneOf`
+- `nil` (if no type matches)
 
