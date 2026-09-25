@@ -17,6 +17,11 @@
 | **phone_numbers** | **Array&lt;String&gt;** |  | [optional] |
 | **awaiting_otp** | **Boolean** | Sole-prop 10DLC only; the OTP step is still pending. | [optional] |
 | **admin_review_note** | **String** | The open change request as text (status changes_requested). | [optional] |
+| **last_response_at** | **Time** | When you last answered a change request. | [optional] |
+| **previously_rejected** | **Boolean** | Rejected by the carriers at least once. A pending registration with this set is our fix, back with the carriers. | [optional] |
+| **last_rejected_at** | **Time** | When the carriers last rejected it. | [optional] |
+| **rejected_before_submission** | **Boolean** | Rejected in our review before anything was filed with the carriers (not a carrier rejection; nothing to fix or appeal). | [optional] |
+| **otp_expired** | **Boolean** | Sole proprietor only: the verification code was never entered within 30 days. Start SMS setup again; it revives the same brand with no second brand fee. | [optional] |
 | **review_request** | [**SmsRegistrationReviewRequest**](SmsRegistrationReviewRequest.md) |  | [optional] |
 | **trust_score** | **Float** | Carrier-assigned brand trust score; drives throughput. | [optional] |
 | **throughput** | [**ListSmsRegistrations200ResponseRegistrationsInnerThroughput**](ListSmsRegistrations200ResponseRegistrationsInnerThroughput.md) |  | [optional] |
@@ -40,6 +45,11 @@ instance = Zernio::ListSmsRegistrations200ResponseRegistrationsInner.new(
   phone_numbers: null,
   awaiting_otp: null,
   admin_review_note: null,
+  last_response_at: null,
+  previously_rejected: null,
+  last_rejected_at: null,
+  rejected_before_submission: null,
+  otp_expired: null,
   review_request: null,
   trust_score: null,
   throughput: null

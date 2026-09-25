@@ -1415,6 +1415,8 @@ docs/MoveWhatsAppNumberToProfile200Response.md
 docs/MoveWhatsAppNumberToProfileRequest.md
 docs/OnSmsRegistrationActionRequiredRequest.md
 docs/OnSmsRegistrationActionRequiredRequestRegistration.md
+docs/OnSmsRegistrationStatusUpdatedRequest.md
+docs/OnSmsRegistrationStatusUpdatedRequestRegistration.md
 docs/OnVerificationApprovedRequest.md
 docs/OnVerificationApprovedRequestVerification.md
 docs/OnVerificationFailedRequest.md
@@ -3720,6 +3722,8 @@ lib/zernio-sdk/models/move_whats_app_number_to_profile200_response.rb
 lib/zernio-sdk/models/move_whats_app_number_to_profile_request.rb
 lib/zernio-sdk/models/on_sms_registration_action_required_request.rb
 lib/zernio-sdk/models/on_sms_registration_action_required_request_registration.rb
+lib/zernio-sdk/models/on_sms_registration_status_updated_request.rb
+lib/zernio-sdk/models/on_sms_registration_status_updated_request_registration.rb
 lib/zernio-sdk/models/on_verification_approved_request.rb
 lib/zernio-sdk/models/on_verification_approved_request_verification.rb
 lib/zernio-sdk/models/on_verification_failed_request.rb
@@ -5990,6 +5994,8 @@ spec/models/move_whats_app_number_to_profile200_response_spec.rb
 spec/models/move_whats_app_number_to_profile_request_spec.rb
 spec/models/on_sms_registration_action_required_request_registration_spec.rb
 spec/models/on_sms_registration_action_required_request_spec.rb
+spec/models/on_sms_registration_status_updated_request_registration_spec.rb
+spec/models/on_sms_registration_status_updated_request_spec.rb
 spec/models/on_verification_approved_request_spec.rb
 spec/models/on_verification_approved_request_verification_spec.rb
 spec/models/on_verification_failed_request_spec.rb
