@@ -60,7 +60,7 @@ describe 'PhoneNumbersApi' do
 
   # unit tests for check_phone_number_portability
   # Check portability
-  # Pre-flight portability check: whether each number can be ported in and whether it qualifies for FastPort, BEFORE the user commits to a port order (LOA, invoice, service address). Read-only; creates no order and bills nothing. 
+  # Pre-flight portability check: whether each number can be ported in, whether it qualifies for FastPort, and its current carrier and line type where the carrier lookup knows them, BEFORE the user commits to a port order (LOA, invoice, service address). Read-only; creates no order and bills nothing.  Works without an API key for one number per request. Keyless calls are what the checker at https://zernio.com/port-your-number makes: they must come from that page (a browser bot check rejects scripted callers with 401), are limited per IP (3 a minute, 10 a day) and by a shared daily budget (429 once spent), because each check runs a paid carrier lookup. Each portable keyless result carries a &#x60;claimId&#x60; and a &#x60;claimUrl&#x60;: a signup link that opens the dashboard&#39;s port form with the number filled in. Send an API key to check up to 50 numbers without those limits. 
   # @param check_phone_number_portability_request 
   # @param [Hash] opts the optional parameters
   # @return [CheckPhoneNumberPortability200Response]
@@ -149,6 +149,18 @@ describe 'PhoneNumbersApi' do
   # @option opts [String] :number_type Requirements and reuse eligibility are per (country, type). Omitted &#x3D; the country&#39;s default type. Pass the same value on the POST.
   # @return [GetPhoneNumberKycForm200Response]
   describe 'get_phone_number_kyc_form test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_phone_number_port_claim
+  # Resolve a port claim
+  # Resolves a &#x60;claimId&#x60; from a keyless portability check into the number it carries. The dashboard calls it when a person lands from a port &#x60;claimUrl&#x60;, to open the port form with that number filled in. It does not start a port. 
+  # @param claim_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetPhoneNumberPortClaim200Response]
+  describe 'get_phone_number_port_claim test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

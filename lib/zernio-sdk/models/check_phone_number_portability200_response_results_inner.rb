@@ -22,17 +22,29 @@ module Zernio
     # Qualifies for the carrier's accelerated FastPort lane.
     attr_accessor :fast_portable
 
-    # Line type when known (mobile, landline, voip…). A US/CA mobile number requires the transfer PIN at submit.
+    # Whether texting can be enabled on the number once ported; null when the carrier does not say.
+    attr_accessor :messaging_capable
+
+    # Line type when known (mobile, landline, voip, toll-free, unknown). US/CA portable numbers only. A US/CA mobile number requires the transfer PIN at submit.
     attr_accessor :line_type
+
+    # The number's current carrier, when the lookup knows it. US/CA portable numbers only.
+    attr_accessor :carrier_name
 
     # ISO country of the number. Pass it to GET /v1/phone-numbers/port-in/requirements for international numbers.
     attr_accessor :country_code
 
-    # Carrier number-type classification (local, mobile, national, toll_free…), the numberType for the requirements endpoint.
+    # Carrier number-type classification (local, mobile, national, toll_free...), the numberType for the requirements endpoint.
     attr_accessor :phone_number_type
 
     # Carrier reason when not portable; null when portable.
     attr_accessor :not_portable_reason
+
+    # Keyless calls and claimLinks=true only, on portable results. Resolve it with GET /v1/phone-numbers/port-in/claims/{claimId}. Expires after 7 days.
+    attr_accessor :claim_id
+
+    # Keyless calls and claimLinks=true only, on portable results. A signup link that lands on the dashboard's port form with this number filled in.
+    attr_accessor :claim_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -40,10 +52,14 @@ module Zernio
         :'phone_number' => :'phoneNumber',
         :'portable' => :'portable',
         :'fast_portable' => :'fastPortable',
+        :'messaging_capable' => :'messagingCapable',
         :'line_type' => :'lineType',
+        :'carrier_name' => :'carrierName',
         :'country_code' => :'countryCode',
         :'phone_number_type' => :'phoneNumberType',
-        :'not_portable_reason' => :'notPortableReason'
+        :'not_portable_reason' => :'notPortableReason',
+        :'claim_id' => :'claimId',
+        :'claim_url' => :'claimUrl'
       }
     end
 
@@ -63,20 +79,26 @@ module Zernio
         :'phone_number' => :'String',
         :'portable' => :'Boolean',
         :'fast_portable' => :'Boolean',
+        :'messaging_capable' => :'Boolean',
         :'line_type' => :'String',
+        :'carrier_name' => :'String',
         :'country_code' => :'String',
         :'phone_number_type' => :'String',
-        :'not_portable_reason' => :'String'
+        :'not_portable_reason' => :'String',
+        :'claim_id' => :'String',
+        :'claim_url' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'messaging_capable',
         :'line_type',
+        :'carrier_name',
         :'country_code',
         :'phone_number_type',
-        :'not_portable_reason'
+        :'not_portable_reason',
       ])
     end
 
@@ -108,8 +130,16 @@ module Zernio
         self.fast_portable = attributes[:'fast_portable']
       end
 
+      if attributes.key?(:'messaging_capable')
+        self.messaging_capable = attributes[:'messaging_capable']
+      end
+
       if attributes.key?(:'line_type')
         self.line_type = attributes[:'line_type']
+      end
+
+      if attributes.key?(:'carrier_name')
+        self.carrier_name = attributes[:'carrier_name']
       end
 
       if attributes.key?(:'country_code')
@@ -122,6 +152,14 @@ module Zernio
 
       if attributes.key?(:'not_portable_reason')
         self.not_portable_reason = attributes[:'not_portable_reason']
+      end
+
+      if attributes.key?(:'claim_id')
+        self.claim_id = attributes[:'claim_id']
+      end
+
+      if attributes.key?(:'claim_url')
+        self.claim_url = attributes[:'claim_url']
       end
     end
 
@@ -148,10 +186,14 @@ module Zernio
           phone_number == o.phone_number &&
           portable == o.portable &&
           fast_portable == o.fast_portable &&
+          messaging_capable == o.messaging_capable &&
           line_type == o.line_type &&
+          carrier_name == o.carrier_name &&
           country_code == o.country_code &&
           phone_number_type == o.phone_number_type &&
-          not_portable_reason == o.not_portable_reason
+          not_portable_reason == o.not_portable_reason &&
+          claim_id == o.claim_id &&
+          claim_url == o.claim_url
     end
 
     # @see the `==` method
@@ -163,7 +205,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_number, portable, fast_portable, line_type, country_code, phone_number_type, not_portable_reason].hash
+      [phone_number, portable, fast_portable, messaging_capable, line_type, carrier_name, country_code, phone_number_type, not_portable_reason, claim_id, claim_url].hash
     end
 
     # Builds the object from hash

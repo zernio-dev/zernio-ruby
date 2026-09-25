@@ -582,6 +582,7 @@ Class | Method | HTTP request | Description
 *Zernio::PhoneNumbersApi* | [**get_phone_number**](docs/PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number
 *Zernio::PhoneNumbersApi* | [**get_phone_number_claim**](docs/PhoneNumbersApi.md#get_phone_number_claim) | **GET** /v1/phone-numbers/claims/{claimId} | Resolve a number claim
 *Zernio::PhoneNumbersApi* | [**get_phone_number_kyc_form**](docs/PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec
+*Zernio::PhoneNumbersApi* | [**get_phone_number_port_claim**](docs/PhoneNumbersApi.md#get_phone_number_port_claim) | **GET** /v1/phone-numbers/port-in/claims/{claimId} | Resolve a port claim
 *Zernio::PhoneNumbersApi* | [**get_phone_number_port_in_order_requirements**](docs/PhoneNumbersApi.md#get_phone_number_port_in_order_requirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order's pending requirements
 *Zernio::PhoneNumbersApi* | [**get_phone_number_port_in_requirements**](docs/PhoneNumbersApi.md#get_phone_number_port_in_requirements) | **GET** /v1/phone-numbers/port-in/requirements | Country porting requirements
 *Zernio::PhoneNumbersApi* | [**get_phone_number_remediation**](docs/PhoneNumbersApi.md#get_phone_number_remediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements
@@ -1711,6 +1712,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetPhoneNumberKycForm200ResponseReusableDetailsInner](docs/GetPhoneNumberKycForm200ResponseReusableDetailsInner.md)
  - [Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInner](docs/GetPhoneNumberKycForm200ResponseReusableOptionsInner.md)
  - [Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInnerDetailsInner](docs/GetPhoneNumberKycForm200ResponseReusableOptionsInnerDetailsInner.md)
+ - [Zernio::GetPhoneNumberPortClaim200Response](docs/GetPhoneNumberPortClaim200Response.md)
  - [Zernio::GetPhoneNumberPortInOrderRequirements200Response](docs/GetPhoneNumberPortInOrderRequirements200Response.md)
  - [Zernio::GetPhoneNumberPortInOrderRequirements200ResponseRequirementsInner](docs/GetPhoneNumberPortInOrderRequirements200ResponseRequirementsInner.md)
  - [Zernio::GetPhoneNumberPortInRequirements200Response](docs/GetPhoneNumberPortInRequirements200Response.md)

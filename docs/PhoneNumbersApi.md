@@ -14,6 +14,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_phone_number**](PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number |
 | [**get_phone_number_claim**](PhoneNumbersApi.md#get_phone_number_claim) | **GET** /v1/phone-numbers/claims/{claimId} | Resolve a number claim |
 | [**get_phone_number_kyc_form**](PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec |
+| [**get_phone_number_port_claim**](PhoneNumbersApi.md#get_phone_number_port_claim) | **GET** /v1/phone-numbers/port-in/claims/{claimId} | Resolve a port claim |
 | [**get_phone_number_port_in_order_requirements**](PhoneNumbersApi.md#get_phone_number_port_in_order_requirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order&#39;s pending requirements |
 | [**get_phone_number_port_in_requirements**](PhoneNumbersApi.md#get_phone_number_port_in_requirements) | **GET** /v1/phone-numbers/port-in/requirements | Country porting requirements |
 | [**get_phone_number_remediation**](PhoneNumbersApi.md#get_phone_number_remediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements |
@@ -185,7 +186,7 @@ end
 
 Check portability
 
-Pre-flight portability check: whether each number can be ported in and whether it qualifies for FastPort, BEFORE the user commits to a port order (LOA, invoice, service address). Read-only; creates no order and bills nothing. 
+Pre-flight portability check: whether each number can be ported in, whether it qualifies for FastPort, and its current carrier and line type where the carrier lookup knows them, BEFORE the user commits to a port order (LOA, invoice, service address). Read-only; creates no order and bills nothing.  Works without an API key for one number per request. Keyless calls are what the checker at https://zernio.com/port-your-number makes: they must come from that page (a browser bot check rejects scripted callers with 401), are limited per IP (3 a minute, 10 a day) and by a shared daily budget (429 once spent), because each check runs a paid carrier lookup. Each portable keyless result carries a `claimId` and a `claimUrl`: a signup link that opens the dashboard's port form with the number filled in. Send an API key to check up to 50 numbers without those limits. 
 
 ### Examples
 
@@ -722,6 +723,75 @@ end
 ### Return type
 
 [**GetPhoneNumberKycForm200Response**](GetPhoneNumberKycForm200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_phone_number_port_claim
+
+> <GetPhoneNumberPortClaim200Response> get_phone_number_port_claim(claim_id)
+
+Resolve a port claim
+
+Resolves a `claimId` from a keyless portability check into the number it carries. The dashboard calls it when a person lands from a port `claimUrl`, to open the port form with that number filled in. It does not start a port. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+claim_id = 'claim_id_example' # String | 
+
+begin
+  # Resolve a port claim
+  result = api_instance.get_phone_number_port_claim(claim_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->get_phone_number_port_claim: #{e}"
+end
+```
+
+#### Using the get_phone_number_port_claim_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetPhoneNumberPortClaim200Response>, Integer, Hash)> get_phone_number_port_claim_with_http_info(claim_id)
+
+```ruby
+begin
+  # Resolve a port claim
+  data, status_code, headers = api_instance.get_phone_number_port_claim_with_http_info(claim_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetPhoneNumberPortClaim200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->get_phone_number_port_claim_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **claim_id** | **String** |  |  |
+
+### Return type
+
+[**GetPhoneNumberPortClaim200Response**](GetPhoneNumberPortClaim200Response.md)
 
 ### Authorization
 

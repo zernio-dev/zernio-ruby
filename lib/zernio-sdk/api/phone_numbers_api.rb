@@ -157,7 +157,7 @@ module Zernio
     end
 
     # Check portability
-    # Pre-flight portability check: whether each number can be ported in and whether it qualifies for FastPort, BEFORE the user commits to a port order (LOA, invoice, service address). Read-only; creates no order and bills nothing. 
+    # Pre-flight portability check: whether each number can be ported in, whether it qualifies for FastPort, and its current carrier and line type where the carrier lookup knows them, BEFORE the user commits to a port order (LOA, invoice, service address). Read-only; creates no order and bills nothing.  Works without an API key for one number per request. Keyless calls are what the checker at https://zernio.com/port-your-number makes: they must come from that page (a browser bot check rejects scripted callers with 401), are limited per IP (3 a minute, 10 a day) and by a shared daily budget (429 once spent), because each check runs a paid carrier lookup. Each portable keyless result carries a `claimId` and a `claimUrl`: a signup link that opens the dashboard's port form with the number filled in. Send an API key to check up to 50 numbers without those limits. 
     # @param check_phone_number_portability_request [CheckPhoneNumberPortabilityRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CheckPhoneNumberPortability200Response]
@@ -167,7 +167,7 @@ module Zernio
     end
 
     # Check portability
-    # Pre-flight portability check: whether each number can be ported in and whether it qualifies for FastPort, BEFORE the user commits to a port order (LOA, invoice, service address). Read-only; creates no order and bills nothing. 
+    # Pre-flight portability check: whether each number can be ported in, whether it qualifies for FastPort, and its current carrier and line type where the carrier lookup knows them, BEFORE the user commits to a port order (LOA, invoice, service address). Read-only; creates no order and bills nothing.  Works without an API key for one number per request. Keyless calls are what the checker at https://zernio.com/port-your-number makes: they must come from that page (a browser bot check rejects scripted callers with 401), are limited per IP (3 a minute, 10 a day) and by a shared daily budget (429 once spent), because each check runs a paid carrier lookup. Each portable keyless result carries a &#x60;claimId&#x60; and a &#x60;claimUrl&#x60;: a signup link that opens the dashboard&#39;s port form with the number filled in. Send an API key to check up to 50 numbers without those limits. 
     # @param check_phone_number_portability_request [CheckPhoneNumberPortabilityRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CheckPhoneNumberPortability200Response, Integer, Hash)>] CheckPhoneNumberPortability200Response data, response status code and response headers
@@ -682,6 +682,69 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PhoneNumbersApi#get_phone_number_kyc_form\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Resolve a port claim
+    # Resolves a `claimId` from a keyless portability check into the number it carries. The dashboard calls it when a person lands from a port `claimUrl`, to open the port form with that number filled in. It does not start a port. 
+    # @param claim_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetPhoneNumberPortClaim200Response]
+    def get_phone_number_port_claim(claim_id, opts = {})
+      data, _status_code, _headers = get_phone_number_port_claim_with_http_info(claim_id, opts)
+      data
+    end
+
+    # Resolve a port claim
+    # Resolves a &#x60;claimId&#x60; from a keyless portability check into the number it carries. The dashboard calls it when a person lands from a port &#x60;claimUrl&#x60;, to open the port form with that number filled in. It does not start a port. 
+    # @param claim_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetPhoneNumberPortClaim200Response, Integer, Hash)>] GetPhoneNumberPortClaim200Response data, response status code and response headers
+    def get_phone_number_port_claim_with_http_info(claim_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.get_phone_number_port_claim ...'
+      end
+      # verify the required parameter 'claim_id' is set
+      if @api_client.config.client_side_validation && claim_id.nil?
+        fail ArgumentError, "Missing the required parameter 'claim_id' when calling PhoneNumbersApi.get_phone_number_port_claim"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/port-in/claims/{claimId}'.sub('{' + 'claimId' + '}', CGI.escape(claim_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetPhoneNumberPortClaim200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.get_phone_number_port_claim",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#get_phone_number_port_claim\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

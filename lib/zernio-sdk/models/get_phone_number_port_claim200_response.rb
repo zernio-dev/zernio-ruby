@@ -14,18 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CheckPhoneNumberPortabilityRequest < ApiModelBase
-    # E.164 numbers to check, e.g. +13035550000. At most one without an API key.
-    attr_accessor :phone_numbers
+  class GetPhoneNumberPortClaim200Response < ApiModelBase
+    # E.164.
+    attr_accessor :phone_number
 
-    # true adds `claimId` and `claimUrl` to portable results even when you send an API key, e.g. to hand a user a signup link that opens the port form with their number.
-    attr_accessor :claim_links
+    # ISO country of the number.
+    attr_accessor :country_code
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'phone_numbers' => :'phoneNumbers',
-        :'claim_links' => :'claimLinks'
+        :'phone_number' => :'phoneNumber',
+        :'country_code' => :'countryCode'
       }
     end
 
@@ -42,14 +42,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'phone_numbers' => :'Array<String>',
-        :'claim_links' => :'Boolean'
+        :'phone_number' => :'String',
+        :'country_code' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'country_code'
       ])
     end
 
@@ -57,28 +58,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CheckPhoneNumberPortabilityRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetPhoneNumberPortClaim200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CheckPhoneNumberPortabilityRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetPhoneNumberPortClaim200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'phone_numbers')
-        if (value = attributes[:'phone_numbers']).is_a?(Array)
-          self.phone_numbers = value
-        end
-      else
-        self.phone_numbers = nil
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
       end
 
-      if attributes.key?(:'claim_links')
-        self.claim_links = attributes[:'claim_links']
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
       end
     end
 
@@ -87,18 +84,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @phone_numbers.nil?
-        invalid_properties.push('invalid value for "phone_numbers", phone_numbers cannot be nil.')
-      end
-
-      if @phone_numbers.length > 50
-        invalid_properties.push('invalid value for "phone_numbers", number of items must be less than or equal to 50.')
-      end
-
-      if @phone_numbers.length < 1
-        invalid_properties.push('invalid value for "phone_numbers", number of items must be greater than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -106,28 +91,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @phone_numbers.nil?
-      return false if @phone_numbers.length > 50
-      return false if @phone_numbers.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] phone_numbers Value to be assigned
-    def phone_numbers=(phone_numbers)
-      if phone_numbers.nil?
-        fail ArgumentError, 'phone_numbers cannot be nil'
-      end
-
-      if phone_numbers.length > 50
-        fail ArgumentError, 'invalid value for "phone_numbers", number of items must be less than or equal to 50.'
-      end
-
-      if phone_numbers.length < 1
-        fail ArgumentError, 'invalid value for "phone_numbers", number of items must be greater than or equal to 1.'
-      end
-
-      @phone_numbers = phone_numbers
     end
 
     # Checks equality by comparing each attribute.
@@ -135,8 +99,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          phone_numbers == o.phone_numbers &&
-          claim_links == o.claim_links
+          phone_number == o.phone_number &&
+          country_code == o.country_code
     end
 
     # @see the `==` method
@@ -148,7 +112,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_numbers, claim_links].hash
+      [phone_number, country_code].hash
     end
 
     # Builds the object from hash
