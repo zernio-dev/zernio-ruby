@@ -1305,7 +1305,6 @@ docs/ListPhoneNumberPortIns200ResponseOrdersInner.md
 docs/ListPhoneNumberStockWatches200Response.md
 docs/ListPhoneNumbers200Response.md
 docs/ListPhoneNumbers200ResponseConnectedInner.md
-docs/ListPhoneNumbers200ResponseNumbersInner.md
 docs/ListPhoneNumbers200ResponseSandbox.md
 docs/ListPhoneNumbers200ResponseSandboxTemplate.md
 docs/ListPinterestBoardsForSelection200Response.md
@@ -1439,6 +1438,10 @@ docs/OnboardBusinessAgent201Response.md
 docs/OrderImessageSender202Response.md
 docs/OrderImessageSenderRequest.md
 docs/OrderImessageSenderRequestContact.md
+docs/OwnedPhoneNumber.md
+docs/OwnedPhoneNumberFeatures.md
+docs/OwnedPhoneNumberProfileId.md
+docs/OwnedPhoneNumberProfileIdOneOf.md
 docs/Pagination.md
 docs/PauseWorkflow200Response.md
 docs/Pending.md
@@ -3618,7 +3621,6 @@ lib/zernio-sdk/models/list_phone_number_port_ins200_response_orders_inner.rb
 lib/zernio-sdk/models/list_phone_number_stock_watches200_response.rb
 lib/zernio-sdk/models/list_phone_numbers200_response.rb
 lib/zernio-sdk/models/list_phone_numbers200_response_connected_inner.rb
-lib/zernio-sdk/models/list_phone_numbers200_response_numbers_inner.rb
 lib/zernio-sdk/models/list_phone_numbers200_response_sandbox.rb
 lib/zernio-sdk/models/list_phone_numbers200_response_sandbox_template.rb
 lib/zernio-sdk/models/list_pinterest_boards_for_selection200_response.rb
@@ -3747,6 +3749,10 @@ lib/zernio-sdk/models/onboard_business_agent201_response.rb
 lib/zernio-sdk/models/order_imessage_sender202_response.rb
 lib/zernio-sdk/models/order_imessage_sender_request.rb
 lib/zernio-sdk/models/order_imessage_sender_request_contact.rb
+lib/zernio-sdk/models/owned_phone_number.rb
+lib/zernio-sdk/models/owned_phone_number_features.rb
+lib/zernio-sdk/models/owned_phone_number_profile_id.rb
+lib/zernio-sdk/models/owned_phone_number_profile_id_one_of.rb
 lib/zernio-sdk/models/pagination.rb
 lib/zernio-sdk/models/pause_workflow200_response.rb
 lib/zernio-sdk/models/pending.rb
@@ -5890,7 +5896,6 @@ spec/models/list_phone_number_port_ins200_response_orders_inner_spec.rb
 spec/models/list_phone_number_port_ins200_response_spec.rb
 spec/models/list_phone_number_stock_watches200_response_spec.rb
 spec/models/list_phone_numbers200_response_connected_inner_spec.rb
-spec/models/list_phone_numbers200_response_numbers_inner_spec.rb
 spec/models/list_phone_numbers200_response_sandbox_spec.rb
 spec/models/list_phone_numbers200_response_sandbox_template_spec.rb
 spec/models/list_phone_numbers200_response_spec.rb
@@ -6020,6 +6025,10 @@ spec/models/onboard_business_agent201_response_spec.rb
 spec/models/order_imessage_sender202_response_spec.rb
 spec/models/order_imessage_sender_request_contact_spec.rb
 spec/models/order_imessage_sender_request_spec.rb
+spec/models/owned_phone_number_features_spec.rb
+spec/models/owned_phone_number_profile_id_one_of_spec.rb
+spec/models/owned_phone_number_profile_id_spec.rb
+spec/models/owned_phone_number_spec.rb
 spec/models/pagination_spec.rb
 spec/models/pause_workflow200_response_spec.rb
 spec/models/pending_spec.rb
