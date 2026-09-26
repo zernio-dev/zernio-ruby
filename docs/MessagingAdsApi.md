@@ -11,11 +11,11 @@ All URIs are relative to *https://zernio.com/api*
 
 ## create_call_ad
 
-> <CreateMessagingAd201Response> create_call_ad(create_call_ad_request)
+> <CreateMessagingAd201Response> create_call_ad(create_call_ad_request, opts)
 
 Create Click-to-Call ad
 
-Same shape and flow as POST /v1/ads/ctwa, but the CTA is CALL_NOW dialing `phoneNumber` via a tel: link. The ad set is destination_type PHONE_CALL optimizing QUALITY_CALL and the campaign objective defaults to OUTCOME_LEADS. Supports the same single-creative and multi-creative shapes as CTWA.
+Same shape and flow as POST /v1/ads/ctwa, but the CTA is CALL_NOW dialing `phoneNumber` via a tel: link. The ad set is destination_type PHONE_CALL optimizing QUALITY_CALL and the campaign objective defaults to OUTCOME_LEADS. Supports the same single-creative and multi-creative shapes as CTWA.  **Idempotency:** this endpoint is not idempotent at the platform level (a blind retry creates a second campaign/ad set/ad). Send an `Idempotency-Key` header to make retries safe: the first request with a given key creates the ad and we store the response; a retry with the same key replays that exact response (with `Idempotent-Replayed: true`) instead of creating duplicates. Reusing a key with a different body returns 422; a key whose first request is still in flight returns 409 (retry after a short backoff). Keys are scoped to your credential and expire after 24h.
 
 ### Examples
 
@@ -30,10 +30,13 @@ end
 
 api_instance = Zernio::MessagingAdsApi.new
 create_call_ad_request = Zernio::CreateCallAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', phone_number: 'phone_number_example', link_url: 'link_url_example'}) # CreateCallAdRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+}
 
 begin
   # Create Click-to-Call ad
-  result = api_instance.create_call_ad(create_call_ad_request)
+  result = api_instance.create_call_ad(create_call_ad_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_call_ad: #{e}"
@@ -44,12 +47,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_call_ad_with_http_info(create_call_ad_request)
+> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_call_ad_with_http_info(create_call_ad_request, opts)
 
 ```ruby
 begin
   # Create Click-to-Call ad
-  data, status_code, headers = api_instance.create_call_ad_with_http_info(create_call_ad_request)
+  data, status_code, headers = api_instance.create_call_ad_with_http_info(create_call_ad_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateMessagingAd201Response>
@@ -63,6 +66,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_call_ad_request** | [**CreateCallAdRequest**](CreateCallAdRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 
@@ -80,11 +84,11 @@ end
 
 ## create_ctwa_ad
 
-> <CreateMessagingAd201Response> create_ctwa_ad(ctwa_ad_request_body)
+> <CreateMessagingAd201Response> create_ctwa_ad(ctwa_ad_request_body, opts)
 
 Create CTWA ad (deprecated)
 
-Deprecated: use POST /v1/ads/messaging with `destination: whatsapp`. This endpoint stays available for back-compat; no removal planned.  Creates one or more Click-to-WhatsApp (CTWA) ads on Meta under a single campaign and ad set. When tapped, each ad opens a WhatsApp conversation with the business attached to the supplied Facebook Page. The full hierarchy (campaign, ad set, creative(s), ad(s)) is created and activated in one call. The CTA is locked to WHATSAPP_MESSAGE and the destination is hard-coded to api.whatsapp.com/send; Meta resolves the actual WhatsApp number from the Page-to-WA pairing configured in Page settings or Business Manager.  Supports two mutually-exclusive shapes:  - **Single-creative**: supply top-level `headline`, `body`, and one of `imageUrl` / `video`, or a `platformPostId` / `objectStoryId` reference. Creates 1 campaign + 1 ad set + 1 ad.  - **Multi-creative**: supply a `creatives[]` array with N entries (each carrying fresh media and copy or an existing post reference). Creates 1 campaign + 1 ad set + N ads sharing budget and targeting so Meta A/Bs the creatives inside a single auction instead of fragmenting budget across N parallel campaigns. Recommended when launching multiple creative variants for the same campaign.  **Attach shape.** Send `adSetId` (with either creative shape) to add the ads to an EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase, the way to refresh a CTWA creative without resetting delivery. The ad set then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests` and `audienceId` are rejected with a 400 alongside it rather than silently dropped. The target ad set's `destination_type` must match the ad's destination (a WhatsApp ad needs a `WHATSAPP` ad set), otherwise Meta would accept an ad that never delivers.  Prerequisites enforced by Meta (surfaced as platform_error on failure): the Facebook Page must be paired with a verified WhatsApp Business number, the WhatsApp Business Account must be business-verified, and the Meta access token must carry ads_management. Existing posts and reels are supported through `platformPostId` (alias `existingPostId`) or `objectStoryId`, either per creative or at the top level. Omit fresh media and copy for that creative. Optional `whatsappPhoneNumber` selects a number already paired with the Page (WhatsApp destination only).
+Deprecated: use POST /v1/ads/messaging with `destination: whatsapp`. This endpoint stays available for back-compat; no removal planned.  Creates one or more Click-to-WhatsApp (CTWA) ads on Meta under a single campaign and ad set. When tapped, each ad opens a WhatsApp conversation with the business attached to the supplied Facebook Page. The full hierarchy (campaign, ad set, creative(s), ad(s)) is created and activated in one call. The CTA is locked to WHATSAPP_MESSAGE and the destination is hard-coded to api.whatsapp.com/send; Meta resolves the actual WhatsApp number from the Page-to-WA pairing configured in Page settings or Business Manager.  Supports two mutually-exclusive shapes:  - **Single-creative**: supply top-level `headline`, `body`, and one of `imageUrl` / `video`, or a `platformPostId` / `objectStoryId` reference. Creates 1 campaign + 1 ad set + 1 ad.  - **Multi-creative**: supply a `creatives[]` array with N entries (each carrying fresh media and copy or an existing post reference). Creates 1 campaign + 1 ad set + N ads sharing budget and targeting so Meta A/Bs the creatives inside a single auction instead of fragmenting budget across N parallel campaigns. Recommended when launching multiple creative variants for the same campaign.  **Attach shape.** Send `adSetId` (with either creative shape) to add the ads to an EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase, the way to refresh a CTWA creative without resetting delivery. The ad set then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests` and `audienceId` are rejected with a 400 alongside it rather than silently dropped. The target ad set's `destination_type` must match the ad's destination (a WhatsApp ad needs a `WHATSAPP` ad set), otherwise Meta would accept an ad that never delivers.  Prerequisites enforced by Meta (surfaced as platform_error on failure): the Facebook Page must be paired with a verified WhatsApp Business number, the WhatsApp Business Account must be business-verified, and the Meta access token must carry ads_management. Existing posts and reels are supported through `platformPostId` (alias `existingPostId`) or `objectStoryId`, either per creative or at the top level. Omit fresh media and copy for that creative. Optional `whatsappPhoneNumber` selects a number already paired with the Page (WhatsApp destination only).  **Idempotency:** this endpoint is not idempotent at the platform level (a blind retry creates a second campaign/ad set/ad). Send an `Idempotency-Key` header to make retries safe: the first request with a given key creates the ad and we store the response; a retry with the same key replays that exact response (with `Idempotent-Replayed: true`) instead of creating duplicates. Reusing a key with a different body returns 422; a key whose first request is still in flight returns 409 (retry after a short backoff). Keys are scoped to your credential and expire after 24h.
 
 ### Examples
 
@@ -99,10 +103,13 @@ end
 
 api_instance = Zernio::MessagingAdsApi.new
 ctwa_ad_request_body = Zernio::CtwaAdRequestBody.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CtwaAdRequestBody | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+}
 
 begin
   # Create CTWA ad (deprecated)
-  result = api_instance.create_ctwa_ad(ctwa_ad_request_body)
+  result = api_instance.create_ctwa_ad(ctwa_ad_request_body, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_ctwa_ad: #{e}"
@@ -113,12 +120,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_ctwa_ad_with_http_info(ctwa_ad_request_body)
+> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_ctwa_ad_with_http_info(ctwa_ad_request_body, opts)
 
 ```ruby
 begin
   # Create CTWA ad (deprecated)
-  data, status_code, headers = api_instance.create_ctwa_ad_with_http_info(ctwa_ad_request_body)
+  data, status_code, headers = api_instance.create_ctwa_ad_with_http_info(ctwa_ad_request_body, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateMessagingAd201Response>
@@ -132,6 +139,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ctwa_ad_request_body** | [**CtwaAdRequestBody**](CtwaAdRequestBody.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 
@@ -149,11 +157,11 @@ end
 
 ## create_messaging_ad
 
-> <CreateMessagingAd201Response> create_messaging_ad(create_messaging_ad_request)
+> <CreateMessagingAd201Response> create_messaging_ad(create_messaging_ad_request, opts)
 
 Create messaging ad
 
-Creates a click-to-message ad; `destination` selects where the tapped ad opens a conversation: WhatsApp, the Page's Messenger inbox or the linked Instagram account's Direct inbox. `destinations` puts two or three of them on one ad set and lets Meta pick the app per viewer. The ad set is created with the matching destination_type and CONVERSATIONS optimization; the campaign objective defaults to OUTCOME_ENGAGEMENT. Supports single-creative and multi-creative shapes. Supersedes POST /v1/ads/ctwa (deprecated, equivalent to `destination: whatsapp`). Existing posts and reels are supported through `platformPostId` (alias `existingPostId`) or `objectStoryId`, either per creative or at the top level. Omit fresh media and copy for that creative. Optional `whatsappPhoneNumber` selects a number already paired with the Page (WhatsApp destination only). `accountId` is a Facebook, Instagram or Meta ads (business login) connection; `pageId` picks the Page when that connection was granted several.
+Creates a click-to-message ad; `destination` selects where the tapped ad opens a conversation: WhatsApp, the Page's Messenger inbox or the linked Instagram account's Direct inbox. `destinations` puts two or three of them on one ad set and lets Meta pick the app per viewer. The ad set is created with the matching destination_type and CONVERSATIONS optimization; the campaign objective defaults to OUTCOME_ENGAGEMENT. Supports single-creative and multi-creative shapes. Supersedes POST /v1/ads/ctwa (deprecated, equivalent to `destination: whatsapp`). Existing posts and reels are supported through `platformPostId` (alias `existingPostId`) or `objectStoryId`, either per creative or at the top level. Omit fresh media and copy for that creative. Optional `whatsappPhoneNumber` selects a number already paired with the Page (WhatsApp destination only). `accountId` is a Facebook, Instagram or Meta ads (business login) connection; `pageId` picks the Page when that connection was granted several.  **Idempotency:** this endpoint is not idempotent at the platform level (a blind retry creates a second campaign/ad set/ad). Send an `Idempotency-Key` header to make retries safe: the first request with a given key creates the ad and we store the response; a retry with the same key replays that exact response (with `Idempotent-Replayed: true`) instead of creating duplicates. Reusing a key with a different body returns 422; a key whose first request is still in flight returns 409 (retry after a short backoff). Keys are scoped to your credential and expire after 24h.
 
 ### Examples
 
@@ -168,10 +176,13 @@ end
 
 api_instance = Zernio::MessagingAdsApi.new
 create_messaging_ad_request = Zernio::CreateMessagingAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CreateMessagingAdRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+}
 
 begin
   # Create messaging ad
-  result = api_instance.create_messaging_ad(create_messaging_ad_request)
+  result = api_instance.create_messaging_ad(create_messaging_ad_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_messaging_ad: #{e}"
@@ -182,12 +193,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_messaging_ad_with_http_info(create_messaging_ad_request)
+> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_messaging_ad_with_http_info(create_messaging_ad_request, opts)
 
 ```ruby
 begin
   # Create messaging ad
-  data, status_code, headers = api_instance.create_messaging_ad_with_http_info(create_messaging_ad_request)
+  data, status_code, headers = api_instance.create_messaging_ad_with_http_info(create_messaging_ad_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateMessagingAd201Response>
@@ -201,6 +212,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_messaging_ad_request** | [**CreateMessagingAdRequest**](CreateMessagingAdRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 
