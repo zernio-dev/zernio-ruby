@@ -12,6 +12,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_ad_campaign**](AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign |
 | [**create_ad_set**](AdCampaignsApi.md#create_ad_set) | **POST** /v1/ads/ad-sets | Create a standalone ad group |
 | [**create_bid_strategy**](AdCampaignsApi.md#create_bid_strategy) | **POST** /v1/ads/bid-strategies | Create portfolio bid strategy |
+| [**create_google_asset_group**](AdCampaignsApi.md#create_google_asset_group) | **POST** /v1/ads/campaigns/{campaignId}/asset-groups | Create a Performance Max asset group |
 | [**create_standalone_ad**](AdCampaignsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad |
 | [**delete_ad**](AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
@@ -19,6 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**duplicate_ad**](AdCampaignsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad |
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
 | [**duplicate_ad_set**](AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set |
+| [**edit_google_asset_group_assets**](AdCampaignsApi.md#edit_google_asset_group_assets) | **POST** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId}/assets | Link or unlink asset group assets |
 | [**get_ad**](AdCampaignsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
 | [**get_ad_campaign_details**](AdCampaignsApi.md#get_ad_campaign_details) | **GET** /v1/ads/campaigns/{campaignId} | Get live campaign details |
 | [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Get live ad-set details |
@@ -27,6 +29,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_campaign_ad_schedule**](AdCampaignsApi.md#get_campaign_ad_schedule) | **GET** /v1/ads/campaigns/{campaignId}/ad-schedule | Read a campaign&#39;s ad schedule (dayparting) |
 | [**get_campaign_bidding**](AdCampaignsApi.md#get_campaign_bidding) | **GET** /v1/ads/campaigns/{campaignId}/bidding | Read a campaign&#39;s current bidding |
 | [**get_campaign_targeting**](AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign&#39;s device, location, and language targeting |
+| [**get_google_asset_group**](AdCampaignsApi.md#get_google_asset_group) | **GET** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId} | Get a Performance Max asset group |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
 | [**list_ad_group_assets**](AdCampaignsApi.md#list_ad_group_assets) | **GET** /v1/ads/ad-sets/{adSetId}/assets | List ad-group assets |
 | [**list_ad_keywords**](AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords |
@@ -40,8 +43,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**remove_ad_group_assets**](AdCampaignsApi.md#remove_ad_group_assets) | **DELETE** /v1/ads/ad-sets/{adSetId}/assets | Remove ad-group assets |
 | [**remove_ad_keyword**](AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword |
 | [**remove_campaign_assets**](AdCampaignsApi.md#remove_campaign_assets) | **DELETE** /v1/ads/campaigns/{campaignId}/assets | Remove campaign assets |
+| [**remove_google_asset_group**](AdCampaignsApi.md#remove_google_asset_group) | **DELETE** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId} | Remove a Performance Max asset group |
 | [**replace_campaign_negative_keyword_lists**](AdCampaignsApi.md#replace_campaign_negative_keyword_lists) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | Replace campaign negative lists |
 | [**replace_campaign_negative_keywords**](AdCampaignsApi.md#replace_campaign_negative_keywords) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keywords | Replace campaign-level negative keywords |
+| [**replace_google_listing_group_filters**](AdCampaignsApi.md#replace_google_listing_group_filters) | **PUT** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId}/listing-group-filters | Replace an asset group&#39;s listing-group tree |
 | [**update_ad**](AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 | [**update_ad_campaign**](AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign |
 | [**update_ad_campaign_status**](AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign |
@@ -54,6 +59,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_campaign_ad_schedule**](AdCampaignsApi.md#update_campaign_ad_schedule) | **PUT** /v1/ads/campaigns/{campaignId}/ad-schedule | Replace a campaign&#39;s ad schedule (dayparting) |
 | [**update_campaign_assets**](AdCampaignsApi.md#update_campaign_assets) | **PUT** /v1/ads/campaigns/{campaignId}/assets | Update campaign assets |
 | [**update_campaign_targeting**](AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign&#39;s device, location, or language targeting |
+| [**update_google_asset_group**](AdCampaignsApi.md#update_google_asset_group) | **PATCH** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId} | Update a Performance Max asset group |
 
 
 ## add_ad_keywords
@@ -624,6 +630,77 @@ end
 - **Accept**: application/json
 
 
+## create_google_asset_group
+
+> <CreateGoogleAssetGroup200Response> create_google_asset_group(campaign_id, create_google_asset_group_request)
+
+Create a Performance Max asset group
+
+Add an asset group to an existing Performance Max campaign. The group, any new assets, their links and an optional listing-group tree are created in one atomic request, so Google checks the asset minimums (for non-retail campaigns) against the whole set. Created PAUSED unless status is ENABLED. validateOnly: true runs Google's validation without creating anything.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Google Ads campaign id.
+create_google_asset_group_request = Zernio::CreateGoogleAssetGroupRequest.new({name: 'name_example', final_urls: ['final_urls_example']}) # CreateGoogleAssetGroupRequest | 
+
+begin
+  # Create a Performance Max asset group
+  result = api_instance.create_google_asset_group(campaign_id, create_google_asset_group_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->create_google_asset_group: #{e}"
+end
+```
+
+#### Using the create_google_asset_group_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateGoogleAssetGroup200Response>, Integer, Hash)> create_google_asset_group_with_http_info(campaign_id, create_google_asset_group_request)
+
+```ruby
+begin
+  # Create a Performance Max asset group
+  data, status_code, headers = api_instance.create_google_asset_group_with_http_info(campaign_id, create_google_asset_group_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateGoogleAssetGroup200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->create_google_asset_group_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Google Ads campaign id. |  |
+| **create_google_asset_group_request** | [**CreateGoogleAssetGroupRequest**](CreateGoogleAssetGroupRequest.md) |  |  |
+
+### Return type
+
+[**CreateGoogleAssetGroup200Response**](CreateGoogleAssetGroup200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## create_standalone_ad
 
 > <CreateStandaloneAd200Response> create_standalone_ad(create_standalone_ad_request, opts)
@@ -1120,6 +1197,79 @@ end
 ### Return type
 
 [**DuplicateAdSet200Response**](DuplicateAdSet200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## edit_google_asset_group_assets
+
+> <EditGoogleAssetGroupAssets200Response> edit_google_asset_group_assets(campaign_id, asset_group_id, edit_google_asset_group_assets_request)
+
+Link or unlink asset group assets
+
+Link existing assets or new content to the asset group, and unlink assets, in one atomic request. Links are applied before unlinks, so swapping the last asset of a role does not trip Google's per-role minimum. Unlinking removes the link only; the asset stays in the account library. validateOnly: true validates without writing.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Google Ads campaign id.
+asset_group_id = 'asset_group_id_example' # String | Google asset group id.
+edit_google_asset_group_assets_request = Zernio::EditGoogleAssetGroupAssetsRequest.new # EditGoogleAssetGroupAssetsRequest | 
+
+begin
+  # Link or unlink asset group assets
+  result = api_instance.edit_google_asset_group_assets(campaign_id, asset_group_id, edit_google_asset_group_assets_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->edit_google_asset_group_assets: #{e}"
+end
+```
+
+#### Using the edit_google_asset_group_assets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<EditGoogleAssetGroupAssets200Response>, Integer, Hash)> edit_google_asset_group_assets_with_http_info(campaign_id, asset_group_id, edit_google_asset_group_assets_request)
+
+```ruby
+begin
+  # Link or unlink asset group assets
+  data, status_code, headers = api_instance.edit_google_asset_group_assets_with_http_info(campaign_id, asset_group_id, edit_google_asset_group_assets_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <EditGoogleAssetGroupAssets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->edit_google_asset_group_assets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Google Ads campaign id. |  |
+| **asset_group_id** | **String** | Google asset group id. |  |
+| **edit_google_asset_group_assets_request** | [**EditGoogleAssetGroupAssetsRequest**](EditGoogleAssetGroupAssetsRequest.md) |  |  |
+
+### Return type
+
+[**EditGoogleAssetGroupAssets200Response**](EditGoogleAssetGroupAssets200Response.md)
 
 ### Authorization
 
@@ -1754,6 +1904,77 @@ end
 ### Return type
 
 [**GetCampaignTargeting200Response**](GetCampaignTargeting200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_google_asset_group
+
+> <GetGoogleAssetGroup200Response> get_google_asset_group(campaign_id, asset_group_id)
+
+Get a Performance Max asset group
+
+One asset group with its linked assets, ad strength, primary status and listing-group tree. Uses a 10-minute cache, served stale when Google quota is exhausted; any write below clears it.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Google Ads campaign id.
+asset_group_id = 'asset_group_id_example' # String | Google asset group id.
+
+begin
+  # Get a Performance Max asset group
+  result = api_instance.get_google_asset_group(campaign_id, asset_group_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_google_asset_group: #{e}"
+end
+```
+
+#### Using the get_google_asset_group_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetGoogleAssetGroup200Response>, Integer, Hash)> get_google_asset_group_with_http_info(campaign_id, asset_group_id)
+
+```ruby
+begin
+  # Get a Performance Max asset group
+  data, status_code, headers = api_instance.get_google_asset_group_with_http_info(campaign_id, asset_group_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetGoogleAssetGroup200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_google_asset_group_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Google Ads campaign id. |  |
+| **asset_group_id** | **String** | Google asset group id. |  |
+
+### Return type
+
+[**GetGoogleAssetGroup200Response**](GetGoogleAssetGroup200Response.md)
 
 ### Authorization
 
@@ -2788,6 +3009,81 @@ end
 - **Accept**: application/json
 
 
+## remove_google_asset_group
+
+> <RemoveGoogleAssetGroup200Response> remove_google_asset_group(campaign_id, asset_group_id, opts)
+
+Remove a Performance Max asset group
+
+Removes the asset group on Google (status REMOVED, not reversible). Pass validateOnly=true to validate without removing.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | 
+asset_group_id = 'asset_group_id_example' # String | 
+opts = {
+  validate_only: true # Boolean | 
+}
+
+begin
+  # Remove a Performance Max asset group
+  result = api_instance.remove_google_asset_group(campaign_id, asset_group_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->remove_google_asset_group: #{e}"
+end
+```
+
+#### Using the remove_google_asset_group_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveGoogleAssetGroup200Response>, Integer, Hash)> remove_google_asset_group_with_http_info(campaign_id, asset_group_id, opts)
+
+```ruby
+begin
+  # Remove a Performance Max asset group
+  data, status_code, headers = api_instance.remove_google_asset_group_with_http_info(campaign_id, asset_group_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveGoogleAssetGroup200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->remove_google_asset_group_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** |  |  |
+| **asset_group_id** | **String** |  |  |
+| **validate_only** | **Boolean** |  | [optional][default to false] |
+
+### Return type
+
+[**RemoveGoogleAssetGroup200Response**](RemoveGoogleAssetGroup200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## replace_campaign_negative_keyword_lists
 
 > <ReplaceAdNegativeKeywordListKeywords200Response> replace_campaign_negative_keyword_lists(campaign_id, replace_campaign_negative_keyword_lists_request)
@@ -2919,6 +3215,79 @@ end
 ### Return type
 
 [**ReplaceCampaignNegativeKeywords200Response**](ReplaceCampaignNegativeKeywords200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## replace_google_listing_group_filters
+
+> <ReplaceGoogleListingGroupFilters200Response> replace_google_listing_group_filters(campaign_id, asset_group_id, replace_google_listing_group_filters_request)
+
+Replace an asset group's listing-group tree
+
+Replace the product (listing-group) tree of a Performance Max retail asset group. The current tree is removed and the new one created in one atomic request. Read the current tree with GET on the asset group. Requires a campaign linked to Merchant Center; other campaigns return 400 LISTING_SOURCE_NOT_ALLOWED from Google. validateOnly: true validates without writing.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Google Ads campaign id.
+asset_group_id = 'asset_group_id_example' # String | Google asset group id.
+replace_google_listing_group_filters_request = Zernio::ReplaceGoogleListingGroupFiltersRequest.new({tree: Zernio::GoogleListingGroupTree.new}) # ReplaceGoogleListingGroupFiltersRequest | 
+
+begin
+  # Replace an asset group's listing-group tree
+  result = api_instance.replace_google_listing_group_filters(campaign_id, asset_group_id, replace_google_listing_group_filters_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->replace_google_listing_group_filters: #{e}"
+end
+```
+
+#### Using the replace_google_listing_group_filters_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ReplaceGoogleListingGroupFilters200Response>, Integer, Hash)> replace_google_listing_group_filters_with_http_info(campaign_id, asset_group_id, replace_google_listing_group_filters_request)
+
+```ruby
+begin
+  # Replace an asset group's listing-group tree
+  data, status_code, headers = api_instance.replace_google_listing_group_filters_with_http_info(campaign_id, asset_group_id, replace_google_listing_group_filters_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ReplaceGoogleListingGroupFilters200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->replace_google_listing_group_filters_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Google Ads campaign id. |  |
+| **asset_group_id** | **String** | Google asset group id. |  |
+| **replace_google_listing_group_filters_request** | [**ReplaceGoogleListingGroupFiltersRequest**](ReplaceGoogleListingGroupFiltersRequest.md) |  |  |
+
+### Return type
+
+[**ReplaceGoogleListingGroupFilters200Response**](ReplaceGoogleListingGroupFilters200Response.md)
 
 ### Authorization
 
@@ -3771,6 +4140,79 @@ end
 ### Return type
 
 [**UpdateCampaignTargeting200Response**](UpdateCampaignTargeting200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_google_asset_group
+
+> <UpdateGoogleAssetGroup200Response> update_google_asset_group(campaign_id, asset_group_id, update_google_asset_group_request)
+
+Update a Performance Max asset group
+
+Change the name, status (ENABLED or PAUSED), final URLs or display paths. Only the fields sent are written; null on path1 or path2 clears it. Change assets with the /assets endpoint and product targeting with /listing-group-filters. validateOnly: true validates without writing.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Google Ads campaign id.
+asset_group_id = 'asset_group_id_example' # String | Google asset group id.
+update_google_asset_group_request = Zernio::UpdateGoogleAssetGroupRequest.new # UpdateGoogleAssetGroupRequest | 
+
+begin
+  # Update a Performance Max asset group
+  result = api_instance.update_google_asset_group(campaign_id, asset_group_id, update_google_asset_group_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_google_asset_group: #{e}"
+end
+```
+
+#### Using the update_google_asset_group_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateGoogleAssetGroup200Response>, Integer, Hash)> update_google_asset_group_with_http_info(campaign_id, asset_group_id, update_google_asset_group_request)
+
+```ruby
+begin
+  # Update a Performance Max asset group
+  data, status_code, headers = api_instance.update_google_asset_group_with_http_info(campaign_id, asset_group_id, update_google_asset_group_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateGoogleAssetGroup200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_google_asset_group_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Google Ads campaign id. |  |
+| **asset_group_id** | **String** | Google asset group id. |  |
+| **update_google_asset_group_request** | [**UpdateGoogleAssetGroupRequest**](UpdateGoogleAssetGroupRequest.md) |  |  |
+
+### Return type
+
+[**UpdateGoogleAssetGroup200Response**](UpdateGoogleAssetGroup200Response.md)
 
 ### Authorization
 
