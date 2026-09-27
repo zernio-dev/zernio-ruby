@@ -1066,6 +1066,8 @@ docs/GoogleCustomerConversionGoalConversionActionsInner.md
 docs/GoogleDemandGenInput.md
 docs/GoogleDemandGenInputAudience.md
 docs/GoogleDemandGenInputAudienceAgeRangesInner.md
+docs/GoogleDemandGenInputCarouselCardsInner.md
+docs/GoogleDemandGenInputCarouselCardsInnerImages.md
 docs/GoogleDemandGenInputImages.md
 docs/GoogleListingGroupDimension.md
 docs/GoogleListingGroupDimensionProductBrand.md
@@ -3460,6 +3462,8 @@ lib/zernio-sdk/models/google_customer_conversion_goal_conversion_actions_inner.r
 lib/zernio-sdk/models/google_demand_gen_input.rb
 lib/zernio-sdk/models/google_demand_gen_input_audience.rb
 lib/zernio-sdk/models/google_demand_gen_input_audience_age_ranges_inner.rb
+lib/zernio-sdk/models/google_demand_gen_input_carousel_cards_inner.rb
+lib/zernio-sdk/models/google_demand_gen_input_carousel_cards_inner_images.rb
 lib/zernio-sdk/models/google_demand_gen_input_images.rb
 lib/zernio-sdk/models/google_listing_group_dimension.rb
 lib/zernio-sdk/models/google_listing_group_dimension_product_brand.rb
@@ -5807,6 +5811,8 @@ spec/models/google_customer_conversion_goal_conversion_actions_inner_spec.rb
 spec/models/google_customer_conversion_goal_spec.rb
 spec/models/google_demand_gen_input_audience_age_ranges_inner_spec.rb
 spec/models/google_demand_gen_input_audience_spec.rb
+spec/models/google_demand_gen_input_carousel_cards_inner_images_spec.rb
+spec/models/google_demand_gen_input_carousel_cards_inner_spec.rb
 spec/models/google_demand_gen_input_images_spec.rb
 spec/models/google_demand_gen_input_spec.rb
 spec/models/google_listing_group_dimension_product_brand_spec.rb
