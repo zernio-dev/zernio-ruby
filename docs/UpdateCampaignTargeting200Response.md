@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** |  | [optional] |
+| **ad_group_id** | **String** | Demand Gen only: the ad group that received the locations and languages. | [optional] |
 | **updated** | **Array&lt;String&gt;** | Which targeting fields were applied. | [optional] |
 | **location_targeting_type** | **String** | The value read back from Google after the edit. | [optional] |
 | **devices** | [**Array&lt;UpdateCampaignTargeting200ResponseDevicesInner&gt;**](UpdateCampaignTargeting200ResponseDevicesInner.md) |  | [optional] |
@@ -18,6 +19,7 @@ require 'zernio-sdk'
 
 instance = Zernio::UpdateCampaignTargeting200Response.new(
   campaign_id: null,
+  ad_group_id: null,
   updated: null,
   location_targeting_type: null,
   devices: null,
