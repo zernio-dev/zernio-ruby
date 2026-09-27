@@ -2668,7 +2668,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdCampaignsApi.new
-keyword_id = 'keyword_id_example' # String | Zernio keyword ID (not the Google criterion ID)
+keyword_id = 'keyword_id_example' # String | Zernio keyword ID (`id`), or Google's native `{adSetId}~{platformCriterionId}` (the tail of `resourceName`, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group.
 
 begin
   # Remove a Search keyword
@@ -2701,7 +2701,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **keyword_id** | **String** | Zernio keyword ID (not the Google criterion ID) |  |
+| **keyword_id** | **String** | Zernio keyword ID (&#x60;id&#x60;), or Google&#39;s native &#x60;{adSetId}~{platformCriterionId}&#x60; (the tail of &#x60;resourceName&#x60;, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group. |  |
 
 ### Return type
 
@@ -3234,7 +3234,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdCampaignsApi.new
-keyword_id = 'keyword_id_example' # String | Zernio keyword ID (not the Google criterion ID)
+keyword_id = 'keyword_id_example' # String | Zernio keyword ID (`id`), or Google's native `{adSetId}~{platformCriterionId}` (the tail of `resourceName`, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group.
 update_ad_keyword_request = Zernio::UpdateAdKeywordRequest.new({status: 'active'}) # UpdateAdKeywordRequest | 
 
 begin
@@ -3268,7 +3268,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **keyword_id** | **String** | Zernio keyword ID (not the Google criterion ID) |  |
+| **keyword_id** | **String** | Zernio keyword ID (&#x60;id&#x60;), or Google&#39;s native &#x60;{adSetId}~{platformCriterionId}&#x60; (the tail of &#x60;resourceName&#x60;, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group. |  |
 | **update_ad_keyword_request** | [**UpdateAdKeywordRequest**](UpdateAdKeywordRequest.md) |  |  |
 
 ### Return type

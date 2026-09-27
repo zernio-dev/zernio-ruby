@@ -4,7 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  | [optional] |
+| **id** | **String** | Zernio keyword ID. Accepted as &#x60;keywordId&#x60; by PATCH/DELETE /v1/ads/keywords/{keywordId}. | [optional] |
+| **platform_criterion_id** | **String** | Google ad_group_criterion.criterion_id. Unique only within its ad group (&#x60;adSetId&#x60;), not across the account. | [optional] |
+| **resource_name** | **String** | Google resource name, customers/{adAccountId}/adGroupCriteria/{adSetId}~{platformCriterionId}. | [optional] |
 | **account_id** | **String** | Account ID owning the sync | [optional] |
 | **profile_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
@@ -31,6 +33,8 @@ require 'zernio-sdk'
 
 instance = Zernio::AdKeyword.new(
   id: null,
+  platform_criterion_id: null,
+  resource_name: null,
   account_id: null,
   profile_id: null,
   platform: null,
