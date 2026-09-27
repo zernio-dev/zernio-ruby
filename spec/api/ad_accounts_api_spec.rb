@@ -68,6 +68,19 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for attach_ad_label
+  # Attach a Google Ads label
+  # Attaches the label to campaigns, ad groups, ads and keywords (Google CampaignLabel, AdGroupLabel, AdGroupAdLabel and AdGroupCriterionLabel) in one mutate. Idempotent: a target that already carries the label is counted in &#x60;unchanged&#x60; instead of failing the call. All ids are Google&#39;s own: ads and keywords use the composite id Google puts in their resource names, &#x60;{adGroupId}~{adId}&#x60; and &#x60;{adGroupId}~{criterionId}&#x60; (the keyword form is the tail of &#x60;resourceName&#x60; on &#x60;GET /v1/ads/keywords&#x60;).
+  # @param label_id Google label id
+  # @param google_ad_label_assignments 
+  # @param [Hash] opts the optional parameters
+  # @return [AttachAdLabel200Response]
+  describe 'attach_ad_label test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_ad_account
   # Create Meta ad account
   # Creates a durable Meta ad account in the end user&#39;s own business portfolio using their connected Meta Ads token. Requires an active metaads accountId, Ads access, business_management permission and business admin access. Discover portfolios with GET /v1/ads/businesses. System-user tokens may return an empty businesses list; supply the known business ID in that case.  The self-serve account starts without a payment method. The user must add a payment method in Ads Manager before ads can deliver. Zernio cannot add payment methods. Meta may require business verification and limits how many accounts a business can create. Closing an account does not guarantee more capacity. An ad account cannot truly be deleted, even after closing it and removing it from a business.  timezoneId is Meta&#39;s numeric ID, not an IANA timezone name. Select it from https://developers.facebook.com/docs/marketing-api/reference/ad-account/timezone-ids/. For example, 1 is America/Los_Angeles. Meta validates supported currencies and IDs. endAdvertiser, mediaAgency and partner default to NONE for the self-serve flow.  The new account is added atomically to an existing scoped ad-account allowlist. Unrestricted connections stay unrestricted. Reconnecting the same Meta identity preserves this scope unless a caller explicitly replaces it. Discovery is nudged immediately. Use the returned adAccountId with the existing ads endpoints.  This operation is not idempotent and Zernio never automatically retries it. Unknown body fields are rejected. No validateOnly or dry-run option is supported. After a timeout or a 502 with details.creationStatus&#x3D;unknown, check the business in Ads Manager before attempting another creation. A 201 with connectionUpdated&#x3D;false means the account exists but needs reconnecting with adAccountIds containing the returned ID and the previous scoped IDs via GET /v1/connect/facebook/ads. Do not repeat the create call. 
@@ -75,6 +88,18 @@ describe 'AdAccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [CreateAdAccount201Response]
   describe 'create_ad_account test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_ad_label
+  # Create a Google Ads label
+  # Creates a label on a Google Ads customer. Attach it to campaigns, ad groups, ads and keywords with &#x60;POST /v1/ads/labels/{labelId}/assignments&#x60;. Label names are unique per customer; a duplicate is a 400.
+  # @param create_ad_label_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateAdLabel201Response]
+  describe 'create_ad_label test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -168,6 +193,19 @@ describe 'AdAccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [DeleteValueRuleSet200Response]
   describe 'delete_value_rule_set test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for detach_ad_label
+  # Detach a Google Ads label
+  # Removes the label from the given targets. Idempotent; a target without the label is counted in &#x60;unchanged&#x60;.
+  # @param label_id Google label id
+  # @param google_ad_label_assignments 
+  # @param [Hash] opts the optional parameters
+  # @return [DetachAdLabel200Response]
+  describe 'detach_ad_label test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -363,13 +401,14 @@ describe 'AdAccountsApi' do
   end
 
   # unit tests for list_ad_labels
-  # Ad labels
-  # Lists the ad account&#39;s organizational labels (Meta&#39;s &#x60;/act_X/adlabels&#x60;), rows returned verbatim (id, name, created/updated time).
-  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-  # @param ad_account_id Meta ad account id (act_&lt;n&gt;).
+  # List ad labels
+  # Lists the organizational labels on an ad account.  - **Meta**: pass &#x60;adAccountId&#x3D;act_&lt;n&gt;&#x60;. Rows are Meta&#39;s &#x60;/act_X/adlabels&#x60; returned verbatim   (id, name, created/updated time), paginated with &#x60;limit&#x60; / &#x60;after&#x60;. - **Google Ads**: pass the numeric customer id as &#x60;adAccountId&#x60; (optional when the   connection has a single customer). Returns every non-removed label as a &#x60;GoogleAdLabel&#x60;   in one page (&#x60;paging.after&#x60; is always null). Reads are cached for 10 minutes; when the   shared Google quota is exhausted the last successful result is served with &#x60;stale: true&#x60;.
+  # @param account_id Zernio SocialAccount id. For Meta, the posting or ads variant used to resolve the token.
   # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :limit Rows per page
-  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @option opts [String] :ad_account_id Meta ad account id (act_&lt;n&gt;), or the Google Ads customer id (digits only).
+  # @option opts [String] :customer_id Google only. Alias of adAccountId, kept for existing callers.
+  # @option opts [Integer] :limit Meta only. Rows per page.
+  # @option opts [String] :after Meta only. Cursor from paging.after of the previous page.
   # @return [ListAdLabels200Response]
   describe 'list_ad_labels test' do
     it 'should work' do
@@ -571,6 +610,21 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for remove_ad_label
+  # Remove a Google Ads label
+  # Removes the label. Google drops it from every campaign, ad group, ad and keyword it was attached to.
+  # @param label_id Google label id
+  # @param account_id Zernio SocialAccount id (Google Ads)
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id Google customer id. Required when the connection has multiple customers.
+  # @option opts [String] :customer_id Alias of adAccountId
+  # @return [RemoveAdLabel200Response]
+  describe 'remove_ad_label test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for replace_ad_negative_keyword_list_keywords
   # Replace negative list keywords
   # Replaces the full desired keyword set. Existing keywords are diffed by normalized text and match type; creates and removals are applied atomically in one mutation. Unchanged criteria retain their ids. Send an empty keywords array to clear the list. Changes affect every campaign using this list. Each create or removal consumes one daily operation; the entire batch must fit the remaining quota.
@@ -643,6 +697,19 @@ describe 'AdAccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAdAccount200Response]
   describe 'update_ad_account test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_label
+  # Update a Google Ads label
+  # Changes the name, color or description of a label. Only the fields sent are written.
+  # @param label_id Google label id
+  # @param update_ad_label_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdLabel200Response]
+  describe 'update_ad_label test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

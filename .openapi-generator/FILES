@@ -116,6 +116,7 @@ docs/AssignGoogleBusinessLocation200Response.md
 docs/AssignGoogleBusinessLocation200ResponseAccount.md
 docs/AssignGoogleBusinessLocationRequest.md
 docs/AttachAdGroupAssets201Response.md
+docs/AttachAdLabel200Response.md
 docs/AttachCampaignAssets201Response.md
 docs/AttachCampaignAssetsRequest.md
 docs/AttachNumberToSipTrunk200Response.md
@@ -311,6 +312,8 @@ docs/CreateAdInsightsReport202Response.md
 docs/CreateAdInsightsReportRequest.md
 docs/CreateAdInsightsReportRequestFilteringInner.md
 docs/CreateAdInsightsReportRequestTimeIncrement.md
+docs/CreateAdLabel201Response.md
+docs/CreateAdLabelRequest.md
 docs/CreateAdNegativeKeywordList201Response.md
 docs/CreateAdNegativeKeywordListRequest.md
 docs/CreateAdSet201Response.md
@@ -544,6 +547,7 @@ docs/DeleteValueRuleSet200Response.md
 docs/DeleteWhatsAppTemplate200Response.md
 docs/DeleteWhatsAppTemplateById200Response.md
 docs/DeleteWhatsappBusinessUsernameRequest.md
+docs/DetachAdLabel200Response.md
 docs/DetachNumberFromSipTrunk200Response.md
 docs/DialVoiceWebCall200Response.md
 docs/DialVoiceWebCallRequest.md
@@ -1025,6 +1029,8 @@ docs/GetYoutubeCaptions200ResponseAvailableTracksInner.md
 docs/GetYoutubeCaptions200ResponseCuesInner.md
 docs/GetYoutubePlaylists200Response.md
 docs/GetYoutubePlaylists200ResponsePlaylistsInner.md
+docs/GoogleAdLabel.md
+docs/GoogleAdLabelAssignments.md
 docs/GoogleAssetGroupAssetLink.md
 docs/GoogleAssetGroupAssetUnlink.md
 docs/GoogleAssetUpdate.md
@@ -1177,6 +1183,8 @@ docs/ListAdGroupAssets200ResponseStructuredSnippetsInner.md
 docs/ListAdImages200Response.md
 docs/ListAdKeywords200Response.md
 docs/ListAdLabels200Response.md
+docs/ListAdLabels200ResponseDataInner.md
+docs/ListAdLabels200ResponsePaging.md
 docs/ListAdNegativeKeywordLists200Response.md
 docs/ListAdSets200Response.md
 docs/ListAdSets200ResponseAdSetsInner.md
@@ -1557,6 +1565,7 @@ docs/RemoveAccountCallout200Response.md
 docs/RemoveAccountCalloutRequest.md
 docs/RemoveAdGroupAssetsRequest.md
 docs/RemoveAdKeyword200Response.md
+docs/RemoveAdLabel200Response.md
 docs/RemoveBookmark200Response.md
 docs/RemoveCampaignAssets200Response.md
 docs/RemoveCampaignAssetsRequest.md
@@ -1887,6 +1896,8 @@ docs/UpdateAdCreative200Response.md
 docs/UpdateAdCreativeRequest.md
 docs/UpdateAdKeyword200Response.md
 docs/UpdateAdKeywordRequest.md
+docs/UpdateAdLabel200Response.md
+docs/UpdateAdLabelRequest.md
 docs/UpdateAdNegativeKeywordList200Response.md
 docs/UpdateAdNegativeKeywordListRequest.md
 docs/UpdateAdRequest.md
@@ -2484,6 +2495,7 @@ lib/zernio-sdk/models/assign_google_business_location200_response.rb
 lib/zernio-sdk/models/assign_google_business_location200_response_account.rb
 lib/zernio-sdk/models/assign_google_business_location_request.rb
 lib/zernio-sdk/models/attach_ad_group_assets201_response.rb
+lib/zernio-sdk/models/attach_ad_label200_response.rb
 lib/zernio-sdk/models/attach_campaign_assets201_response.rb
 lib/zernio-sdk/models/attach_campaign_assets_request.rb
 lib/zernio-sdk/models/attach_number_to_sip_trunk200_response.rb
@@ -2669,6 +2681,8 @@ lib/zernio-sdk/models/create_ad_insights_report202_response.rb
 lib/zernio-sdk/models/create_ad_insights_report_request.rb
 lib/zernio-sdk/models/create_ad_insights_report_request_filtering_inner.rb
 lib/zernio-sdk/models/create_ad_insights_report_request_time_increment.rb
+lib/zernio-sdk/models/create_ad_label201_response.rb
+lib/zernio-sdk/models/create_ad_label_request.rb
 lib/zernio-sdk/models/create_ad_negative_keyword_list201_response.rb
 lib/zernio-sdk/models/create_ad_negative_keyword_list_request.rb
 lib/zernio-sdk/models/create_ad_set201_response.rb
@@ -2901,6 +2915,7 @@ lib/zernio-sdk/models/delete_value_rule_set200_response.rb
 lib/zernio-sdk/models/delete_whats_app_template200_response.rb
 lib/zernio-sdk/models/delete_whats_app_template_by_id200_response.rb
 lib/zernio-sdk/models/delete_whatsapp_business_username_request.rb
+lib/zernio-sdk/models/detach_ad_label200_response.rb
 lib/zernio-sdk/models/detach_number_from_sip_trunk200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call_request.rb
@@ -3373,6 +3388,8 @@ lib/zernio-sdk/models/get_youtube_captions200_response_available_tracks_inner.rb
 lib/zernio-sdk/models/get_youtube_captions200_response_cues_inner.rb
 lib/zernio-sdk/models/get_youtube_playlists200_response.rb
 lib/zernio-sdk/models/get_youtube_playlists200_response_playlists_inner.rb
+lib/zernio-sdk/models/google_ad_label.rb
+lib/zernio-sdk/models/google_ad_label_assignments.rb
 lib/zernio-sdk/models/google_asset_group_asset_link.rb
 lib/zernio-sdk/models/google_asset_group_asset_unlink.rb
 lib/zernio-sdk/models/google_asset_update.rb
@@ -3519,6 +3536,8 @@ lib/zernio-sdk/models/list_ad_group_assets200_response_structured_snippets_inner
 lib/zernio-sdk/models/list_ad_images200_response.rb
 lib/zernio-sdk/models/list_ad_keywords200_response.rb
 lib/zernio-sdk/models/list_ad_labels200_response.rb
+lib/zernio-sdk/models/list_ad_labels200_response_data_inner.rb
+lib/zernio-sdk/models/list_ad_labels200_response_paging.rb
 lib/zernio-sdk/models/list_ad_negative_keyword_lists200_response.rb
 lib/zernio-sdk/models/list_ad_sets200_response.rb
 lib/zernio-sdk/models/list_ad_sets200_response_ad_sets_inner.rb
@@ -3886,6 +3905,7 @@ lib/zernio-sdk/models/remove_account_callout200_response.rb
 lib/zernio-sdk/models/remove_account_callout_request.rb
 lib/zernio-sdk/models/remove_ad_group_assets_request.rb
 lib/zernio-sdk/models/remove_ad_keyword200_response.rb
+lib/zernio-sdk/models/remove_ad_label200_response.rb
 lib/zernio-sdk/models/remove_bookmark200_response.rb
 lib/zernio-sdk/models/remove_campaign_assets200_response.rb
 lib/zernio-sdk/models/remove_campaign_assets_request.rb
@@ -4209,6 +4229,8 @@ lib/zernio-sdk/models/update_ad_creative200_response.rb
 lib/zernio-sdk/models/update_ad_creative_request.rb
 lib/zernio-sdk/models/update_ad_keyword200_response.rb
 lib/zernio-sdk/models/update_ad_keyword_request.rb
+lib/zernio-sdk/models/update_ad_label200_response.rb
+lib/zernio-sdk/models/update_ad_label_request.rb
 lib/zernio-sdk/models/update_ad_negative_keyword_list200_response.rb
 lib/zernio-sdk/models/update_ad_negative_keyword_list_request.rb
 lib/zernio-sdk/models/update_ad_request.rb
@@ -4786,6 +4808,7 @@ spec/models/assign_google_business_location200_response_account_spec.rb
 spec/models/assign_google_business_location200_response_spec.rb
 spec/models/assign_google_business_location_request_spec.rb
 spec/models/attach_ad_group_assets201_response_spec.rb
+spec/models/attach_ad_label200_response_spec.rb
 spec/models/attach_campaign_assets201_response_spec.rb
 spec/models/attach_campaign_assets_request_spec.rb
 spec/models/attach_number_to_sip_trunk200_response_spec.rb
@@ -4971,6 +4994,8 @@ spec/models/create_ad_insights_report202_response_spec.rb
 spec/models/create_ad_insights_report_request_filtering_inner_spec.rb
 spec/models/create_ad_insights_report_request_spec.rb
 spec/models/create_ad_insights_report_request_time_increment_spec.rb
+spec/models/create_ad_label201_response_spec.rb
+spec/models/create_ad_label_request_spec.rb
 spec/models/create_ad_negative_keyword_list201_response_spec.rb
 spec/models/create_ad_negative_keyword_list_request_spec.rb
 spec/models/create_ad_set201_response_spec.rb
@@ -5203,6 +5228,7 @@ spec/models/delete_value_rule_set200_response_spec.rb
 spec/models/delete_whats_app_template200_response_spec.rb
 spec/models/delete_whats_app_template_by_id200_response_spec.rb
 spec/models/delete_whatsapp_business_username_request_spec.rb
+spec/models/detach_ad_label200_response_spec.rb
 spec/models/detach_number_from_sip_trunk200_response_spec.rb
 spec/models/dial_voice_web_call200_response_spec.rb
 spec/models/dial_voice_web_call_request_spec.rb
@@ -5675,6 +5701,8 @@ spec/models/get_youtube_captions200_response_cues_inner_spec.rb
 spec/models/get_youtube_captions200_response_spec.rb
 spec/models/get_youtube_playlists200_response_playlists_inner_spec.rb
 spec/models/get_youtube_playlists200_response_spec.rb
+spec/models/google_ad_label_assignments_spec.rb
+spec/models/google_ad_label_spec.rb
 spec/models/google_asset_group_asset_link_spec.rb
 spec/models/google_asset_group_asset_unlink_spec.rb
 spec/models/google_asset_update_spec.rb
@@ -5820,6 +5848,8 @@ spec/models/list_ad_group_assets200_response_spec.rb
 spec/models/list_ad_group_assets200_response_structured_snippets_inner_spec.rb
 spec/models/list_ad_images200_response_spec.rb
 spec/models/list_ad_keywords200_response_spec.rb
+spec/models/list_ad_labels200_response_data_inner_spec.rb
+spec/models/list_ad_labels200_response_paging_spec.rb
 spec/models/list_ad_labels200_response_spec.rb
 spec/models/list_ad_negative_keyword_lists200_response_spec.rb
 spec/models/list_ad_sets200_response_ad_sets_inner_budget_spec.rb
@@ -6188,6 +6218,7 @@ spec/models/remove_account_callout200_response_spec.rb
 spec/models/remove_account_callout_request_spec.rb
 spec/models/remove_ad_group_assets_request_spec.rb
 spec/models/remove_ad_keyword200_response_spec.rb
+spec/models/remove_ad_label200_response_spec.rb
 spec/models/remove_bookmark200_response_spec.rb
 spec/models/remove_campaign_assets200_response_spec.rb
 spec/models/remove_campaign_assets_request_spec.rb
@@ -6511,6 +6542,8 @@ spec/models/update_ad_creative200_response_spec.rb
 spec/models/update_ad_creative_request_spec.rb
 spec/models/update_ad_keyword200_response_spec.rb
 spec/models/update_ad_keyword_request_spec.rb
+spec/models/update_ad_label200_response_spec.rb
+spec/models/update_ad_label_request_spec.rb
 spec/models/update_ad_negative_keyword_list200_response_spec.rb
 spec/models/update_ad_negative_keyword_list_request_spec.rb
 spec/models/update_ad_request_budget_spec.rb

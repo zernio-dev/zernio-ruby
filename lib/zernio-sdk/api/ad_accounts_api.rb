@@ -223,6 +223,85 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Attach a Google Ads label
+    # Attaches the label to campaigns, ad groups, ads and keywords (Google CampaignLabel, AdGroupLabel, AdGroupAdLabel and AdGroupCriterionLabel) in one mutate. Idempotent: a target that already carries the label is counted in `unchanged` instead of failing the call. All ids are Google's own: ads and keywords use the composite id Google puts in their resource names, `{adGroupId}~{adId}` and `{adGroupId}~{criterionId}` (the keyword form is the tail of `resourceName` on `GET /v1/ads/keywords`).
+    # @param label_id [String] Google label id
+    # @param google_ad_label_assignments [GoogleAdLabelAssignments] 
+    # @param [Hash] opts the optional parameters
+    # @return [AttachAdLabel200Response]
+    def attach_ad_label(label_id, google_ad_label_assignments, opts = {})
+      data, _status_code, _headers = attach_ad_label_with_http_info(label_id, google_ad_label_assignments, opts)
+      data
+    end
+
+    # Attach a Google Ads label
+    # Attaches the label to campaigns, ad groups, ads and keywords (Google CampaignLabel, AdGroupLabel, AdGroupAdLabel and AdGroupCriterionLabel) in one mutate. Idempotent: a target that already carries the label is counted in &#x60;unchanged&#x60; instead of failing the call. All ids are Google&#39;s own: ads and keywords use the composite id Google puts in their resource names, &#x60;{adGroupId}~{adId}&#x60; and &#x60;{adGroupId}~{criterionId}&#x60; (the keyword form is the tail of &#x60;resourceName&#x60; on &#x60;GET /v1/ads/keywords&#x60;).
+    # @param label_id [String] Google label id
+    # @param google_ad_label_assignments [GoogleAdLabelAssignments] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AttachAdLabel200Response, Integer, Hash)>] AttachAdLabel200Response data, response status code and response headers
+    def attach_ad_label_with_http_info(label_id, google_ad_label_assignments, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.attach_ad_label ...'
+      end
+      # verify the required parameter 'label_id' is set
+      if @api_client.config.client_side_validation && label_id.nil?
+        fail ArgumentError, "Missing the required parameter 'label_id' when calling AdAccountsApi.attach_ad_label"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && label_id !~ pattern
+        fail ArgumentError, "invalid value for 'label_id' when calling AdAccountsApi.attach_ad_label, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'google_ad_label_assignments' is set
+      if @api_client.config.client_side_validation && google_ad_label_assignments.nil?
+        fail ArgumentError, "Missing the required parameter 'google_ad_label_assignments' when calling AdAccountsApi.attach_ad_label"
+      end
+      # resource path
+      local_var_path = '/v1/ads/labels/{labelId}/assignments'.sub('{' + 'labelId' + '}', CGI.escape(label_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(google_ad_label_assignments)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AttachAdLabel200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.attach_ad_label",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#attach_ad_label\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create Meta ad account
     # Creates a durable Meta ad account in the end user's own business portfolio using their connected Meta Ads token. Requires an active metaads accountId, Ads access, business_management permission and business admin access. Discover portfolios with GET /v1/ads/businesses. System-user tokens may return an empty businesses list; supply the known business ID in that case.  The self-serve account starts without a payment method. The user must add a payment method in Ads Manager before ads can deliver. Zernio cannot add payment methods. Meta may require business verification and limits how many accounts a business can create. Closing an account does not guarantee more capacity. An ad account cannot truly be deleted, even after closing it and removing it from a business.  timezoneId is Meta's numeric ID, not an IANA timezone name. Select it from https://developers.facebook.com/docs/marketing-api/reference/ad-account/timezone-ids/. For example, 1 is America/Los_Angeles. Meta validates supported currencies and IDs. endAdvertiser, mediaAgency and partner default to NONE for the self-serve flow.  The new account is added atomically to an existing scoped ad-account allowlist. Unrestricted connections stay unrestricted. Reconnecting the same Meta identity preserves this scope unless a caller explicitly replaces it. Discovery is nudged immediately. Use the returned adAccountId with the existing ads endpoints.  This operation is not idempotent and Zernio never automatically retries it. Unknown body fields are rejected. No validateOnly or dry-run option is supported. After a timeout or a 502 with details.creationStatus=unknown, check the business in Ads Manager before attempting another creation. A 201 with connectionUpdated=false means the account exists but needs reconnecting with adAccountIds containing the returned ID and the previous scoped IDs via GET /v1/connect/facebook/ads. Do not repeat the create call. 
     # @param create_ad_account_request [CreateAdAccountRequest] 
@@ -287,6 +366,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#create_ad_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create a Google Ads label
+    # Creates a label on a Google Ads customer. Attach it to campaigns, ad groups, ads and keywords with `POST /v1/ads/labels/{labelId}/assignments`. Label names are unique per customer; a duplicate is a 400.
+    # @param create_ad_label_request [CreateAdLabelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateAdLabel201Response]
+    def create_ad_label(create_ad_label_request, opts = {})
+      data, _status_code, _headers = create_ad_label_with_http_info(create_ad_label_request, opts)
+      data
+    end
+
+    # Create a Google Ads label
+    # Creates a label on a Google Ads customer. Attach it to campaigns, ad groups, ads and keywords with &#x60;POST /v1/ads/labels/{labelId}/assignments&#x60;. Label names are unique per customer; a duplicate is a 400.
+    # @param create_ad_label_request [CreateAdLabelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateAdLabel201Response, Integer, Hash)>] CreateAdLabel201Response data, response status code and response headers
+    def create_ad_label_with_http_info(create_ad_label_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.create_ad_label ...'
+      end
+      # verify the required parameter 'create_ad_label_request' is set
+      if @api_client.config.client_side_validation && create_ad_label_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_ad_label_request' when calling AdAccountsApi.create_ad_label"
+      end
+      # resource path
+      local_var_path = '/v1/ads/labels'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_ad_label_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateAdLabel201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.create_ad_label",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#create_ad_label\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -818,6 +965,85 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#delete_value_rule_set\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Detach a Google Ads label
+    # Removes the label from the given targets. Idempotent; a target without the label is counted in `unchanged`.
+    # @param label_id [String] Google label id
+    # @param google_ad_label_assignments [GoogleAdLabelAssignments] 
+    # @param [Hash] opts the optional parameters
+    # @return [DetachAdLabel200Response]
+    def detach_ad_label(label_id, google_ad_label_assignments, opts = {})
+      data, _status_code, _headers = detach_ad_label_with_http_info(label_id, google_ad_label_assignments, opts)
+      data
+    end
+
+    # Detach a Google Ads label
+    # Removes the label from the given targets. Idempotent; a target without the label is counted in &#x60;unchanged&#x60;.
+    # @param label_id [String] Google label id
+    # @param google_ad_label_assignments [GoogleAdLabelAssignments] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DetachAdLabel200Response, Integer, Hash)>] DetachAdLabel200Response data, response status code and response headers
+    def detach_ad_label_with_http_info(label_id, google_ad_label_assignments, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.detach_ad_label ...'
+      end
+      # verify the required parameter 'label_id' is set
+      if @api_client.config.client_side_validation && label_id.nil?
+        fail ArgumentError, "Missing the required parameter 'label_id' when calling AdAccountsApi.detach_ad_label"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && label_id !~ pattern
+        fail ArgumentError, "invalid value for 'label_id' when calling AdAccountsApi.detach_ad_label, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'google_ad_label_assignments' is set
+      if @api_client.config.client_side_validation && google_ad_label_assignments.nil?
+        fail ArgumentError, "Missing the required parameter 'google_ad_label_assignments' when calling AdAccountsApi.detach_ad_label"
+      end
+      # resource path
+      local_var_path = '/v1/ads/labels/{labelId}/assignments'.sub('{' + 'labelId' + '}', CGI.escape(label_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(google_ad_label_assignments)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DetachAdLabel200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.detach_ad_label",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#detach_ad_label\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1904,28 +2130,30 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Ad labels
-    # Lists the ad account's organizational labels (Meta's `/act_X/adlabels`), rows returned verbatim (id, name, created/updated time).
-    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # List ad labels
+    # Lists the organizational labels on an ad account.  - **Meta**: pass `adAccountId=act_<n>`. Rows are Meta's `/act_X/adlabels` returned verbatim   (id, name, created/updated time), paginated with `limit` / `after`. - **Google Ads**: pass the numeric customer id as `adAccountId` (optional when the   connection has a single customer). Returns every non-removed label as a `GoogleAdLabel`   in one page (`paging.after` is always null). Reads are cached for 10 minutes; when the   shared Google quota is exhausted the last successful result is served with `stale: true`.
+    # @param account_id [String] Zernio SocialAccount id. For Meta, the posting or ads variant used to resolve the token.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Rows per page (default to 25)
-    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @option opts [String] :ad_account_id Meta ad account id (act_&lt;n&gt;), or the Google Ads customer id (digits only).
+    # @option opts [String] :customer_id Google only. Alias of adAccountId, kept for existing callers.
+    # @option opts [Integer] :limit Meta only. Rows per page. (default to 25)
+    # @option opts [String] :after Meta only. Cursor from paging.after of the previous page.
     # @return [ListAdLabels200Response]
-    def list_ad_labels(account_id, ad_account_id, opts = {})
-      data, _status_code, _headers = list_ad_labels_with_http_info(account_id, ad_account_id, opts)
+    def list_ad_labels(account_id, opts = {})
+      data, _status_code, _headers = list_ad_labels_with_http_info(account_id, opts)
       data
     end
 
-    # Ad labels
-    # Lists the ad account&#39;s organizational labels (Meta&#39;s &#x60;/act_X/adlabels&#x60;), rows returned verbatim (id, name, created/updated time).
-    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # List ad labels
+    # Lists the organizational labels on an ad account.  - **Meta**: pass &#x60;adAccountId&#x3D;act_&lt;n&gt;&#x60;. Rows are Meta&#39;s &#x60;/act_X/adlabels&#x60; returned verbatim   (id, name, created/updated time), paginated with &#x60;limit&#x60; / &#x60;after&#x60;. - **Google Ads**: pass the numeric customer id as &#x60;adAccountId&#x60; (optional when the   connection has a single customer). Returns every non-removed label as a &#x60;GoogleAdLabel&#x60;   in one page (&#x60;paging.after&#x60; is always null). Reads are cached for 10 minutes; when the   shared Google quota is exhausted the last successful result is served with &#x60;stale: true&#x60;.
+    # @param account_id [String] Zernio SocialAccount id. For Meta, the posting or ads variant used to resolve the token.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Rows per page (default to 25)
-    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @option opts [String] :ad_account_id Meta ad account id (act_&lt;n&gt;), or the Google Ads customer id (digits only).
+    # @option opts [String] :customer_id Google only. Alias of adAccountId, kept for existing callers.
+    # @option opts [Integer] :limit Meta only. Rows per page. (default to 25)
+    # @option opts [String] :after Meta only. Cursor from paging.after of the previous page.
     # @return [Array<(ListAdLabels200Response, Integer, Hash)>] ListAdLabels200Response data, response status code and response headers
-    def list_ad_labels_with_http_info(account_id, ad_account_id, opts = {})
+    def list_ad_labels_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdAccountsApi.list_ad_labels ...'
       end
@@ -1933,10 +2161,16 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_ad_labels"
       end
-      # verify the required parameter 'ad_account_id' is set
-      if @api_client.config.client_side_validation && ad_account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdAccountsApi.list_ad_labels"
+      pattern = Regexp.new(/^(act_)?\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdAccountsApi.list_ad_labels, must conform to the pattern #{pattern}."
       end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_ad_labels, must conform to the pattern #{pattern}."
+      end
+
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
         fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdAccountsApi.list_ad_labels, must be smaller than or equal to 100.'
       end
@@ -1951,7 +2185,8 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
-      query_params[:'adAccountId'] = ad_account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
 
@@ -3073,6 +3308,97 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Remove a Google Ads label
+    # Removes the label. Google drops it from every campaign, ad group, ad and keyword it was attached to.
+    # @param label_id [String] Google label id
+    # @param account_id [String] Zernio SocialAccount id (Google Ads)
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id Google customer id. Required when the connection has multiple customers.
+    # @option opts [String] :customer_id Alias of adAccountId
+    # @return [RemoveAdLabel200Response]
+    def remove_ad_label(label_id, account_id, opts = {})
+      data, _status_code, _headers = remove_ad_label_with_http_info(label_id, account_id, opts)
+      data
+    end
+
+    # Remove a Google Ads label
+    # Removes the label. Google drops it from every campaign, ad group, ad and keyword it was attached to.
+    # @param label_id [String] Google label id
+    # @param account_id [String] Zernio SocialAccount id (Google Ads)
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id Google customer id. Required when the connection has multiple customers.
+    # @option opts [String] :customer_id Alias of adAccountId
+    # @return [Array<(RemoveAdLabel200Response, Integer, Hash)>] RemoveAdLabel200Response data, response status code and response headers
+    def remove_ad_label_with_http_info(label_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.remove_ad_label ...'
+      end
+      # verify the required parameter 'label_id' is set
+      if @api_client.config.client_side_validation && label_id.nil?
+        fail ArgumentError, "Missing the required parameter 'label_id' when calling AdAccountsApi.remove_ad_label"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && label_id !~ pattern
+        fail ArgumentError, "invalid value for 'label_id' when calling AdAccountsApi.remove_ad_label, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.remove_ad_label"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling AdAccountsApi.remove_ad_label, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.remove_ad_label, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/labels/{labelId}'.sub('{' + 'labelId' + '}', CGI.escape(label_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveAdLabel200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.remove_ad_label",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#remove_ad_label\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Replace negative list keywords
     # Replaces the full desired keyword set. Existing keywords are diffed by normalized text and match type; creates and removals are applied atomically in one mutation. Unchanged criteria retain their ids. Send an empty keywords array to clear the list. Changes affect every campaign using this list. Each create or removal consumes one daily operation; the entire batch must fit the remaining quota.
     # @param list_id [String] 
@@ -3511,6 +3837,85 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#update_ad_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update a Google Ads label
+    # Changes the name, color or description of a label. Only the fields sent are written.
+    # @param label_id [String] Google label id
+    # @param update_ad_label_request [UpdateAdLabelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAdLabel200Response]
+    def update_ad_label(label_id, update_ad_label_request, opts = {})
+      data, _status_code, _headers = update_ad_label_with_http_info(label_id, update_ad_label_request, opts)
+      data
+    end
+
+    # Update a Google Ads label
+    # Changes the name, color or description of a label. Only the fields sent are written.
+    # @param label_id [String] Google label id
+    # @param update_ad_label_request [UpdateAdLabelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAdLabel200Response, Integer, Hash)>] UpdateAdLabel200Response data, response status code and response headers
+    def update_ad_label_with_http_info(label_id, update_ad_label_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.update_ad_label ...'
+      end
+      # verify the required parameter 'label_id' is set
+      if @api_client.config.client_side_validation && label_id.nil?
+        fail ArgumentError, "Missing the required parameter 'label_id' when calling AdAccountsApi.update_ad_label"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && label_id !~ pattern
+        fail ArgumentError, "invalid value for 'label_id' when calling AdAccountsApi.update_ad_label, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'update_ad_label_request' is set
+      if @api_client.config.client_side_validation && update_ad_label_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_label_request' when calling AdAccountsApi.update_ad_label"
+      end
+      # resource path
+      local_var_path = '/v1/ads/labels/{labelId}'.sub('{' + 'labelId' + '}', CGI.escape(label_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_label_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAdLabel200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.update_ad_label",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#update_ad_label\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -14,28 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdLabels200Response < ApiModelBase
-    # Meta act_<n>, or the resolved Google customer id
-    attr_accessor :ad_account_id
+  class UpdateAdLabel200Response < ApiModelBase
+    attr_accessor :customer_id
 
-    attr_accessor :data
-
-    attr_accessor :paging
-
-    # Google only. When the served list was fetched from Google.
-    attr_accessor :cached_at
-
-    # Google only. True when Google quota was exhausted and the last cached list was served.
-    attr_accessor :stale
+    attr_accessor :label
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'ad_account_id' => :'adAccountId',
-        :'data' => :'data',
-        :'paging' => :'paging',
-        :'cached_at' => :'cachedAt',
-        :'stale' => :'stale'
+        :'customer_id' => :'customerId',
+        :'label' => :'label'
       }
     end
 
@@ -52,18 +40,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ad_account_id' => :'String',
-        :'data' => :'Array<ListAdLabels200ResponseDataInner>',
-        :'paging' => :'ListAdLabels200ResponsePaging',
-        :'cached_at' => :'Time',
-        :'stale' => :'Boolean'
+        :'customer_id' => :'String',
+        :'label' => :'GoogleAdLabel'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'cached_at',
       ])
     end
 
@@ -71,38 +55,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdLabels200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdLabel200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdLabels200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdLabel200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'ad_account_id')
-        self.ad_account_id = attributes[:'ad_account_id']
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
       end
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
-      end
-
-      if attributes.key?(:'paging')
-        self.paging = attributes[:'paging']
-      end
-
-      if attributes.key?(:'cached_at')
-        self.cached_at = attributes[:'cached_at']
-      end
-
-      if attributes.key?(:'stale')
-        self.stale = attributes[:'stale']
+      if attributes.key?(:'label')
+        self.label = attributes[:'label']
       end
     end
 
@@ -126,11 +96,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          ad_account_id == o.ad_account_id &&
-          data == o.data &&
-          paging == o.paging &&
-          cached_at == o.cached_at &&
-          stale == o.stale
+          customer_id == o.customer_id &&
+          label == o.label
     end
 
     # @see the `==` method
@@ -142,7 +109,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad_account_id, data, paging, cached_at, stale].hash
+      [customer_id, label].hash
     end
 
     # Builds the object from hash

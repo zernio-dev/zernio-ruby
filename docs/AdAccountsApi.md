@@ -7,7 +7,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**add_account_callouts**](AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account callouts |
 | [**add_account_sitelinks**](AdAccountsApi.md#add_account_sitelinks) | **POST** /v1/ads/accounts/sitelinks | Add account sitelinks |
 | [**add_account_structured_snippets**](AdAccountsApi.md#add_account_structured_snippets) | **POST** /v1/ads/accounts/structured-snippets | Add account snippets |
+| [**attach_ad_label**](AdAccountsApi.md#attach_ad_label) | **POST** /v1/ads/labels/{labelId}/assignments | Attach a Google Ads label |
 | [**create_ad_account**](AdAccountsApi.md#create_ad_account) | **POST** /v1/ads/accounts | Create Meta ad account |
+| [**create_ad_label**](AdAccountsApi.md#create_ad_label) | **POST** /v1/ads/labels | Create a Google Ads label |
 | [**create_ad_negative_keyword_list**](AdAccountsApi.md#create_ad_negative_keyword_list) | **POST** /v1/ads/accounts/negative-keyword-lists | Create a negative keyword list |
 | [**create_custom_conversion**](AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create custom conversion |
 | [**create_high_demand_period**](AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase |
@@ -15,6 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad_comment**](AdAccountsApi.md#delete_ad_comment) | **DELETE** /v1/ads/{adId}/comments/{commentId} | Delete an ad comment |
 | [**delete_ad_negative_keyword_list**](AdAccountsApi.md#delete_ad_negative_keyword_list) | **DELETE** /v1/ads/accounts/negative-keyword-lists/{listId} | Delete a negative keyword list |
 | [**delete_value_rule_set**](AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set |
+| [**detach_ad_label**](AdAccountsApi.md#detach_ad_label) | **DELETE** /v1/ads/labels/{labelId}/assignments | Detach a Google Ads label |
 | [**get_ad_account_finance**](AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances |
 | [**get_ad_comments**](AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
 | [**get_ad_negative_keyword_list**](AdAccountsApi.md#get_ad_negative_keyword_list) | **GET** /v1/ads/accounts/negative-keyword-lists/{listId} | Get a negative keyword list |
@@ -28,7 +31,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_account_sitelinks**](AdAccountsApi.md#list_account_sitelinks) | **GET** /v1/ads/accounts/sitelinks | List account sitelinks |
 | [**list_account_structured_snippets**](AdAccountsApi.md#list_account_structured_snippets) | **GET** /v1/ads/accounts/structured-snippets | List account snippets |
 | [**list_ad_accounts**](AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
-| [**list_ad_labels**](AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels |
+| [**list_ad_labels**](AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | List ad labels |
 | [**list_ad_negative_keyword_lists**](AdAccountsApi.md#list_ad_negative_keyword_lists) | **GET** /v1/ads/accounts/negative-keyword-lists | List negative keyword lists |
 | [**list_ad_studies**](AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies |
 | [**list_ads_business_centers**](AdAccountsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
@@ -43,12 +46,14 @@ All URIs are relative to *https://zernio.com/api*
 | [**remove_account_callout**](AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove account callout |
 | [**remove_account_sitelink**](AdAccountsApi.md#remove_account_sitelink) | **DELETE** /v1/ads/accounts/sitelinks | Remove account sitelink |
 | [**remove_account_structured_snippet**](AdAccountsApi.md#remove_account_structured_snippet) | **DELETE** /v1/ads/accounts/structured-snippets | Remove account snippet |
+| [**remove_ad_label**](AdAccountsApi.md#remove_ad_label) | **DELETE** /v1/ads/labels/{labelId} | Remove a Google Ads label |
 | [**replace_ad_negative_keyword_list_keywords**](AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords |
 | [**reply_to_ad_comment**](AdAccountsApi.md#reply_to_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/reply | Reply to an ad comment |
 | [**update_account_callouts**](AdAccountsApi.md#update_account_callouts) | **PUT** /v1/ads/accounts/callouts | Update account callouts |
 | [**update_account_sitelinks**](AdAccountsApi.md#update_account_sitelinks) | **PUT** /v1/ads/accounts/sitelinks | Update account sitelinks |
 | [**update_account_structured_snippets**](AdAccountsApi.md#update_account_structured_snippets) | **PUT** /v1/ads/accounts/structured-snippets | Update account snippets |
 | [**update_ad_account**](AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings |
+| [**update_ad_label**](AdAccountsApi.md#update_ad_label) | **PATCH** /v1/ads/labels/{labelId} | Update a Google Ads label |
 | [**update_ad_negative_keyword_list**](AdAccountsApi.md#update_ad_negative_keyword_list) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId} | Rename a negative keyword list |
 | [**update_value_rule_set**](AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set |
 
@@ -260,6 +265,77 @@ end
 - **Accept**: application/json
 
 
+## attach_ad_label
+
+> <AttachAdLabel200Response> attach_ad_label(label_id, google_ad_label_assignments)
+
+Attach a Google Ads label
+
+Attaches the label to campaigns, ad groups, ads and keywords (Google CampaignLabel, AdGroupLabel, AdGroupAdLabel and AdGroupCriterionLabel) in one mutate. Idempotent: a target that already carries the label is counted in `unchanged` instead of failing the call. All ids are Google's own: ads and keywords use the composite id Google puts in their resource names, `{adGroupId}~{adId}` and `{adGroupId}~{criterionId}` (the keyword form is the tail of `resourceName` on `GET /v1/ads/keywords`).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+label_id = 'label_id_example' # String | Google label id
+google_ad_label_assignments = Zernio::GoogleAdLabelAssignments.new({account_id: 'account_id_example'}) # GoogleAdLabelAssignments | 
+
+begin
+  # Attach a Google Ads label
+  result = api_instance.attach_ad_label(label_id, google_ad_label_assignments)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->attach_ad_label: #{e}"
+end
+```
+
+#### Using the attach_ad_label_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AttachAdLabel200Response>, Integer, Hash)> attach_ad_label_with_http_info(label_id, google_ad_label_assignments)
+
+```ruby
+begin
+  # Attach a Google Ads label
+  data, status_code, headers = api_instance.attach_ad_label_with_http_info(label_id, google_ad_label_assignments)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AttachAdLabel200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->attach_ad_label_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **label_id** | **String** | Google label id |  |
+| **google_ad_label_assignments** | [**GoogleAdLabelAssignments**](GoogleAdLabelAssignments.md) |  |  |
+
+### Return type
+
+[**AttachAdLabel200Response**](AttachAdLabel200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## create_ad_account
 
 > <CreateAdAccount201Response> create_ad_account(create_ad_account_request)
@@ -318,6 +394,75 @@ end
 ### Return type
 
 [**CreateAdAccount201Response**](CreateAdAccount201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_ad_label
+
+> <CreateAdLabel201Response> create_ad_label(create_ad_label_request)
+
+Create a Google Ads label
+
+Creates a label on a Google Ads customer. Attach it to campaigns, ad groups, ads and keywords with `POST /v1/ads/labels/{labelId}/assignments`. Label names are unique per customer; a duplicate is a 400.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+create_ad_label_request = Zernio::CreateAdLabelRequest.new({account_id: 'account_id_example', name: 'name_example'}) # CreateAdLabelRequest | 
+
+begin
+  # Create a Google Ads label
+  result = api_instance.create_ad_label(create_ad_label_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->create_ad_label: #{e}"
+end
+```
+
+#### Using the create_ad_label_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateAdLabel201Response>, Integer, Hash)> create_ad_label_with_http_info(create_ad_label_request)
+
+```ruby
+begin
+  # Create a Google Ads label
+  data, status_code, headers = api_instance.create_ad_label_with_http_info(create_ad_label_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateAdLabel201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->create_ad_label_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_ad_label_request** | [**CreateAdLabelRequest**](CreateAdLabelRequest.md) |  |  |
+
+### Return type
+
+[**CreateAdLabel201Response**](CreateAdLabel201Response.md)
 
 ### Authorization
 
@@ -831,6 +976,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## detach_ad_label
+
+> <DetachAdLabel200Response> detach_ad_label(label_id, google_ad_label_assignments)
+
+Detach a Google Ads label
+
+Removes the label from the given targets. Idempotent; a target without the label is counted in `unchanged`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+label_id = 'label_id_example' # String | Google label id
+google_ad_label_assignments = Zernio::GoogleAdLabelAssignments.new({account_id: 'account_id_example'}) # GoogleAdLabelAssignments | 
+
+begin
+  # Detach a Google Ads label
+  result = api_instance.detach_ad_label(label_id, google_ad_label_assignments)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->detach_ad_label: #{e}"
+end
+```
+
+#### Using the detach_ad_label_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DetachAdLabel200Response>, Integer, Hash)> detach_ad_label_with_http_info(label_id, google_ad_label_assignments)
+
+```ruby
+begin
+  # Detach a Google Ads label
+  data, status_code, headers = api_instance.detach_ad_label_with_http_info(label_id, google_ad_label_assignments)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DetachAdLabel200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->detach_ad_label_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **label_id** | **String** | Google label id |  |
+| **google_ad_label_assignments** | [**GoogleAdLabelAssignments**](GoogleAdLabelAssignments.md) |  |  |
+
+### Return type
+
+[**DetachAdLabel200Response**](DetachAdLabel200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -1815,11 +2031,11 @@ end
 
 ## list_ad_labels
 
-> <ListAdLabels200Response> list_ad_labels(account_id, ad_account_id, opts)
+> <ListAdLabels200Response> list_ad_labels(account_id, opts)
 
-Ad labels
+List ad labels
 
-Lists the ad account's organizational labels (Meta's `/act_X/adlabels`), rows returned verbatim (id, name, created/updated time).
+Lists the organizational labels on an ad account.  - **Meta**: pass `adAccountId=act_<n>`. Rows are Meta's `/act_X/adlabels` returned verbatim   (id, name, created/updated time), paginated with `limit` / `after`. - **Google Ads**: pass the numeric customer id as `adAccountId` (optional when the   connection has a single customer). Returns every non-removed label as a `GoogleAdLabel`   in one page (`paging.after` is always null). Reads are cached for 10 minutes; when the   shared Google quota is exhausted the last successful result is served with `stale: true`.
 
 ### Examples
 
@@ -1833,16 +2049,17 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAccountsApi.new
-account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+account_id = 'account_id_example' # String | Zernio SocialAccount id. For Meta, the posting or ads variant used to resolve the token.
 opts = {
-  limit: 56, # Integer | Rows per page
-  after: 'after_example' # String | Cursor from paging.after of the previous page.
+  ad_account_id: 'ad_account_id_example', # String | Meta ad account id (act_<n>), or the Google Ads customer id (digits only).
+  customer_id: 'customer_id_example', # String | Google only. Alias of adAccountId, kept for existing callers.
+  limit: 56, # Integer | Meta only. Rows per page.
+  after: 'after_example' # String | Meta only. Cursor from paging.after of the previous page.
 }
 
 begin
-  # Ad labels
-  result = api_instance.list_ad_labels(account_id, ad_account_id, opts)
+  # List ad labels
+  result = api_instance.list_ad_labels(account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->list_ad_labels: #{e}"
@@ -1853,12 +2070,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListAdLabels200Response>, Integer, Hash)> list_ad_labels_with_http_info(account_id, ad_account_id, opts)
+> <Array(<ListAdLabels200Response>, Integer, Hash)> list_ad_labels_with_http_info(account_id, opts)
 
 ```ruby
 begin
-  # Ad labels
-  data, status_code, headers = api_instance.list_ad_labels_with_http_info(account_id, ad_account_id, opts)
+  # List ad labels
+  data, status_code, headers = api_instance.list_ad_labels_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListAdLabels200Response>
@@ -1871,10 +2088,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
-| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
-| **limit** | **Integer** | Rows per page | [optional][default to 25] |
-| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+| **account_id** | **String** | Zernio SocialAccount id. For Meta, the posting or ads variant used to resolve the token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;), or the Google Ads customer id (digits only). | [optional] |
+| **customer_id** | **String** | Google only. Alias of adAccountId, kept for existing callers. | [optional] |
+| **limit** | **Integer** | Meta only. Rows per page. | [optional][default to 25] |
+| **after** | **String** | Meta only. Cursor from paging.after of the previous page. | [optional] |
 
 ### Return type
 
@@ -2922,6 +3140,83 @@ end
 - **Accept**: application/json
 
 
+## remove_ad_label
+
+> <RemoveAdLabel200Response> remove_ad_label(label_id, account_id, opts)
+
+Remove a Google Ads label
+
+Removes the label. Google drops it from every campaign, ad group, ad and keyword it was attached to.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+label_id = 'label_id_example' # String | Google label id
+account_id = 'account_id_example' # String | Zernio SocialAccount id (Google Ads)
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Google customer id. Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId
+}
+
+begin
+  # Remove a Google Ads label
+  result = api_instance.remove_ad_label(label_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_ad_label: #{e}"
+end
+```
+
+#### Using the remove_ad_label_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveAdLabel200Response>, Integer, Hash)> remove_ad_label_with_http_info(label_id, account_id, opts)
+
+```ruby
+begin
+  # Remove a Google Ads label
+  data, status_code, headers = api_instance.remove_ad_label_with_http_info(label_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveAdLabel200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_ad_label_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **label_id** | **String** | Google label id |  |
+| **account_id** | **String** | Zernio SocialAccount id (Google Ads) |  |
+| **ad_account_id** | **String** | Google customer id. Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId | [optional] |
+
+### Return type
+
+[**RemoveAdLabel200Response**](RemoveAdLabel200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## replace_ad_negative_keyword_list_keywords
 
 > <ReplaceAdNegativeKeywordListKeywords200Response> replace_ad_negative_keyword_list_keywords(list_id, replace_ad_negative_keyword_list_keywords_request)
@@ -3337,6 +3632,77 @@ end
 ### Return type
 
 [**UpdateAdAccount200Response**](UpdateAdAccount200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ad_label
+
+> <UpdateAdLabel200Response> update_ad_label(label_id, update_ad_label_request)
+
+Update a Google Ads label
+
+Changes the name, color or description of a label. Only the fields sent are written.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+label_id = 'label_id_example' # String | Google label id
+update_ad_label_request = Zernio::UpdateAdLabelRequest.new({account_id: 'account_id_example'}) # UpdateAdLabelRequest | 
+
+begin
+  # Update a Google Ads label
+  result = api_instance.update_ad_label(label_id, update_ad_label_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_ad_label: #{e}"
+end
+```
+
+#### Using the update_ad_label_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAdLabel200Response>, Integer, Hash)> update_ad_label_with_http_info(label_id, update_ad_label_request)
+
+```ruby
+begin
+  # Update a Google Ads label
+  data, status_code, headers = api_instance.update_ad_label_with_http_info(label_id, update_ad_label_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAdLabel200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_ad_label_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **label_id** | **String** | Google label id |  |
+| **update_ad_label_request** | [**UpdateAdLabelRequest**](UpdateAdLabelRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAdLabel200Response**](UpdateAdLabel200Response.md)
 
 ### Authorization
 
