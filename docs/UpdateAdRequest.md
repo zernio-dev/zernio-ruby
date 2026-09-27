@@ -8,6 +8,7 @@
 | **descriptions** | [**Array&lt;GoogleRsaDescription&gt;**](GoogleRsaDescription.md) | Google Search and Display only. Replaces the complete description list. Search takes 2-4, Display 1-5 and rejects pinnedField. No padding or truncation on update. | [optional] |
 | **final_urls** | **Array&lt;String&gt;** | Google Search and Display only. Replaces final URLs. Omitted lists stay unchanged. For Performance Max use assetGroup.finalUrl. | [optional] |
 | **asset_group** | [**GooglePmaxAssetGroupUpdate**](GooglePmaxAssetGroupUpdate.md) | Google Performance Max only. Replaces whole asset roles on the ad&#39;s asset group. Returns 422 on any other platform or channel. | [optional] |
+| **demand_gen** | [**GoogleDemandGenUpdate**](GoogleDemandGenUpdate.md) | Google Demand Gen only. Returns 422 on any other platform or channel. | [optional] |
 | **status** | **String** |  | [optional] |
 | **budget** | [**UpdateAdRequestBudget**](UpdateAdRequestBudget.md) |  | [optional] |
 | **targeting** | [**UpdateAdRequestTargeting**](UpdateAdRequestTargeting.md) |  | [optional] |
@@ -24,6 +25,7 @@ instance = Zernio::UpdateAdRequest.new(
   descriptions: null,
   final_urls: null,
   asset_group: null,
+  demand_gen: null,
   status: null,
   budget: null,
   targeting: null,

@@ -1,4 +1,4 @@
-# Zernio::GoogleDemandGenInputAudience
+# Zernio::GoogleDemandGenAudience
 
 ## Properties
 
@@ -7,7 +7,7 @@
 | **user_lists** | **Array&lt;String&gt;** |  | [optional] |
 | **user_interests** | **Array&lt;String&gt;** |  | [optional] |
 | **custom_audiences** | **Array&lt;String&gt;** |  | [optional] |
-| **age_ranges** | [**Array&lt;GoogleDemandGenInputAudienceAgeRangesInner&gt;**](GoogleDemandGenInputAudienceAgeRangesInner.md) |  | [optional] |
+| **age_ranges** | [**Array&lt;GoogleDemandGenAudienceAgeRangesInner&gt;**](GoogleDemandGenAudienceAgeRangesInner.md) |  | [optional] |
 | **genders** | **Array&lt;String&gt;** |  | [optional] |
 
 ## Example
@@ -15,7 +15,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GoogleDemandGenInputAudience.new(
+instance = Zernio::GoogleDemandGenAudience.new(
   user_lists: null,
   user_interests: null,
   custom_audiences: null,

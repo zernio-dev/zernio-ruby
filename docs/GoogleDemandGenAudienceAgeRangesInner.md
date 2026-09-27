@@ -1,4 +1,4 @@
-# Zernio::GoogleDemandGenInputAudienceAgeRangesInner
+# Zernio::GoogleDemandGenAudienceAgeRangesInner
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GoogleDemandGenInputAudienceAgeRangesInner.new(
+instance = Zernio::GoogleDemandGenAudienceAgeRangesInner.new(
   min: null,
   max: null
 )
