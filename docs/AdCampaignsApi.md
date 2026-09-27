@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**add_ad_keywords**](AdCampaignsApi.md#add_ad_keywords) | **POST** /v1/ads/keywords | Add Search ad-group keywords |
+| [**apply_google_recommendations**](AdCampaignsApi.md#apply_google_recommendations) | **POST** /v1/ads/recommendations/apply | Apply Google Ads recommendations |
 | [**attach_ad_group_assets**](AdCampaignsApi.md#attach_ad_group_assets) | **POST** /v1/ads/ad-sets/{adSetId}/assets | Attach ad-group assets |
 | [**attach_campaign_assets**](AdCampaignsApi.md#attach_campaign_assets) | **POST** /v1/ads/campaigns/{campaignId}/assets | Attach campaign assets |
 | [**boost_post**](AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
@@ -17,6 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad**](AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
 | [**delete_ad_set**](AdCampaignsApi.md#delete_ad_set) | **DELETE** /v1/ads/ad-sets/{adSetId} | Delete an ad set |
+| [**dismiss_google_recommendations**](AdCampaignsApi.md#dismiss_google_recommendations) | **POST** /v1/ads/recommendations/dismiss | Dismiss Google Ads recommendations |
 | [**duplicate_ad**](AdCampaignsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad |
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
 | [**duplicate_ad_set**](AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set |
@@ -40,6 +42,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_campaign_negative_keyword_lists**](AdCampaignsApi.md#list_campaign_negative_keyword_lists) | **GET** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | List campaign negative lists |
 | [**list_campaign_negative_keywords**](AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords |
 | [**list_google_asset_groups**](AdCampaignsApi.md#list_google_asset_groups) | **GET** /v1/ads/campaigns/{campaignId}/asset-groups | List Performance Max asset groups |
+| [**list_google_recommendations**](AdCampaignsApi.md#list_google_recommendations) | **GET** /v1/ads/recommendations | List Google Ads recommendations |
 | [**remove_ad_group_assets**](AdCampaignsApi.md#remove_ad_group_assets) | **DELETE** /v1/ads/ad-sets/{adSetId}/assets | Remove ad-group assets |
 | [**remove_ad_keyword**](AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword |
 | [**remove_campaign_assets**](AdCampaignsApi.md#remove_campaign_assets) | **DELETE** /v1/ads/campaigns/{campaignId}/assets | Remove campaign assets |
@@ -120,6 +123,75 @@ end
 ### Return type
 
 [**AddAdKeywords201Response**](AddAdKeywords201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## apply_google_recommendations
+
+> <ApplyGoogleRecommendations200Response> apply_google_recommendations(apply_google_recommendations_request)
+
+Apply Google Ads recommendations
+
+Apply up to 100 recommendations. This changes the account (budgets, bidding, keywords, assets) and is not reversible or idempotent; Google offers no validate-only mode for it. Items run in partial-failure mode, so one stale recommendation does not block the rest. `parameters` is optional and takes exactly one key named for the recommendation type, in Google's ApplyRecommendationOperation shape (for example `campaignBudget: { newBudgetAmountMicros }` or `keyword: { matchType, cpcBidMicros }`); omit it to apply Google's suggested values.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+apply_google_recommendations_request = Zernio::ApplyGoogleRecommendationsRequest.new({account_id: 'account_id_example', recommendations: [Zernio::ApplyGoogleRecommendationsRequestRecommendationsInner.new({resource_name: 'resource_name_example'})]}) # ApplyGoogleRecommendationsRequest | 
+
+begin
+  # Apply Google Ads recommendations
+  result = api_instance.apply_google_recommendations(apply_google_recommendations_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->apply_google_recommendations: #{e}"
+end
+```
+
+#### Using the apply_google_recommendations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ApplyGoogleRecommendations200Response>, Integer, Hash)> apply_google_recommendations_with_http_info(apply_google_recommendations_request)
+
+```ruby
+begin
+  # Apply Google Ads recommendations
+  data, status_code, headers = api_instance.apply_google_recommendations_with_http_info(apply_google_recommendations_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ApplyGoogleRecommendations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->apply_google_recommendations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **apply_google_recommendations_request** | [**ApplyGoogleRecommendationsRequest**](ApplyGoogleRecommendationsRequest.md) |  |  |
+
+### Return type
+
+[**ApplyGoogleRecommendations200Response**](ApplyGoogleRecommendations200Response.md)
 
 ### Authorization
 
@@ -980,6 +1052,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## dismiss_google_recommendations
+
+> <ApplyGoogleRecommendations200Response> dismiss_google_recommendations(dismiss_google_recommendations_request)
+
+Dismiss Google Ads recommendations
+
+Dismiss up to 100 recommendations so Google stops suggesting them. Items run in partial-failure mode.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+dismiss_google_recommendations_request = Zernio::DismissGoogleRecommendationsRequest.new({account_id: 'account_id_example', resource_names: ['resource_names_example']}) # DismissGoogleRecommendationsRequest | 
+
+begin
+  # Dismiss Google Ads recommendations
+  result = api_instance.dismiss_google_recommendations(dismiss_google_recommendations_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->dismiss_google_recommendations: #{e}"
+end
+```
+
+#### Using the dismiss_google_recommendations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ApplyGoogleRecommendations200Response>, Integer, Hash)> dismiss_google_recommendations_with_http_info(dismiss_google_recommendations_request)
+
+```ruby
+begin
+  # Dismiss Google Ads recommendations
+  data, status_code, headers = api_instance.dismiss_google_recommendations_with_http_info(dismiss_google_recommendations_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ApplyGoogleRecommendations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->dismiss_google_recommendations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **dismiss_google_recommendations_request** | [**DismissGoogleRecommendationsRequest**](DismissGoogleRecommendationsRequest.md) |  |  |
+
+### Return type
+
+[**ApplyGoogleRecommendations200Response**](ApplyGoogleRecommendations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -2787,6 +2928,85 @@ end
 ### Return type
 
 [**ListGoogleAssetGroups200Response**](ListGoogleAssetGroups200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_google_recommendations
+
+> <ListGoogleRecommendations200Response> list_google_recommendations(account_id, opts)
+
+List Google Ads recommendations
+
+Google's optimization recommendations for one ad account: type, estimated impact (base vs potential metrics, cost in account currency units), the campaign, ad group or budget they target, and the type-specific payload Google returns (`details`, in Google's own shape with micros). Filter by campaignId and types. Cached for 10 minutes and cleared by apply or dismiss; served stale when Google quota is exhausted.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+account_id = 'account_id_example' # String | Google ads SocialAccount id.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Google customer id, digits only. Defaults to the connection's only customer.
+  customer_id: 'customer_id_example', # String | Alias of adAccountId, kept for consistency with other Google endpoints.
+  campaign_id: 'campaign_id_example', # String | Only recommendations targeting this campaign.
+  types: 'types_example' # String | Comma-separated Google RecommendationType values, for example CAMPAIGN_BUDGET,KEYWORD,SET_TARGET_CPA.
+}
+
+begin
+  # List Google Ads recommendations
+  result = api_instance.list_google_recommendations(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_google_recommendations: #{e}"
+end
+```
+
+#### Using the list_google_recommendations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListGoogleRecommendations200Response>, Integer, Hash)> list_google_recommendations_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List Google Ads recommendations
+  data, status_code, headers = api_instance.list_google_recommendations_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListGoogleRecommendations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_google_recommendations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Google ads SocialAccount id. |  |
+| **ad_account_id** | **String** | Google customer id, digits only. Defaults to the connection&#39;s only customer. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for consistency with other Google endpoints. | [optional] |
+| **campaign_id** | **String** | Only recommendations targeting this campaign. | [optional] |
+| **types** | **String** | Comma-separated Google RecommendationType values, for example CAMPAIGN_BUDGET,KEYWORD,SET_TARGET_CPA. | [optional] |
+
+### Return type
+
+[**ListGoogleRecommendations200Response**](ListGoogleRecommendations200Response.md)
 
 ### Authorization
 

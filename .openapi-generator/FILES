@@ -110,6 +110,9 @@ docs/ApiKeyCreatedBy.md
 docs/ApiKeyProfileIdsInner.md
 docs/AppealSmsRegistration200Response.md
 docs/AppealSmsRegistrationRequest.md
+docs/ApplyGoogleRecommendations200Response.md
+docs/ApplyGoogleRecommendationsRequest.md
+docs/ApplyGoogleRecommendationsRequestRecommendationsInner.md
 docs/ApproveWhatsAppGroupJoinRequestsRequest.md
 docs/ArchiveLeadForm200Response.md
 docs/AssignGoogleBusinessLocation200Response.md
@@ -569,6 +572,7 @@ docs/DiscordPlatformDataThreadFromMessage.md
 docs/DiscordRole.md
 docs/DiscordScheduledEvent.md
 docs/DiscordScheduledEventEntityMetadata.md
+docs/DismissGoogleRecommendationsRequest.md
 docs/DmButton.md
 docs/DownloadTikTokVideo200Response.md
 docs/DownloadTikTokVideo200ResponseFormatsInner.md
@@ -1064,6 +1068,10 @@ docs/GooglePmaxAssetGroupInput.md
 docs/GooglePmaxAssetGroupInputImages.md
 docs/GooglePmaxAssetGroupUpdate.md
 docs/GooglePmaxAssetGroupUpdateImages.md
+docs/GoogleRecommendation.md
+docs/GoogleRecommendationImpact.md
+docs/GoogleRecommendationMetrics.md
+docs/GoogleRecommendationResult.md
 docs/GoogleRsaDescription.md
 docs/GoogleRsaHeadline.md
 docs/GoogleSitelink.md
@@ -1271,6 +1279,7 @@ docs/ListGoogleBusinessMedia200ResponseMediaItemsInner.md
 docs/ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation.md
 docs/ListGoogleBusinessPlaceActions200Response.md
 docs/ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner.md
+docs/ListGoogleRecommendations200Response.md
 docs/ListHighDemandPeriods200Response.md
 docs/ListImessageAudience200Response.md
 docs/ListImessageAvailableNumbers200Response.md
@@ -2489,6 +2498,9 @@ lib/zernio-sdk/models/api_key_created_by.rb
 lib/zernio-sdk/models/api_key_profile_ids_inner.rb
 lib/zernio-sdk/models/appeal_sms_registration200_response.rb
 lib/zernio-sdk/models/appeal_sms_registration_request.rb
+lib/zernio-sdk/models/apply_google_recommendations200_response.rb
+lib/zernio-sdk/models/apply_google_recommendations_request.rb
+lib/zernio-sdk/models/apply_google_recommendations_request_recommendations_inner.rb
 lib/zernio-sdk/models/approve_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/archive_lead_form200_response.rb
 lib/zernio-sdk/models/assign_google_business_location200_response.rb
@@ -2936,6 +2948,7 @@ lib/zernio-sdk/models/discord_platform_data_thread_from_message.rb
 lib/zernio-sdk/models/discord_role.rb
 lib/zernio-sdk/models/discord_scheduled_event.rb
 lib/zernio-sdk/models/discord_scheduled_event_entity_metadata.rb
+lib/zernio-sdk/models/dismiss_google_recommendations_request.rb
 lib/zernio-sdk/models/dm_button.rb
 lib/zernio-sdk/models/download_tik_tok_video200_response.rb
 lib/zernio-sdk/models/download_tik_tok_video200_response_formats_inner.rb
@@ -3423,6 +3436,10 @@ lib/zernio-sdk/models/google_pmax_asset_group_input.rb
 lib/zernio-sdk/models/google_pmax_asset_group_input_images.rb
 lib/zernio-sdk/models/google_pmax_asset_group_update.rb
 lib/zernio-sdk/models/google_pmax_asset_group_update_images.rb
+lib/zernio-sdk/models/google_recommendation.rb
+lib/zernio-sdk/models/google_recommendation_impact.rb
+lib/zernio-sdk/models/google_recommendation_metrics.rb
+lib/zernio-sdk/models/google_recommendation_result.rb
 lib/zernio-sdk/models/google_rsa_description.rb
 lib/zernio-sdk/models/google_rsa_headline.rb
 lib/zernio-sdk/models/google_sitelink.rb
@@ -3624,6 +3641,7 @@ lib/zernio-sdk/models/list_google_business_media200_response_media_items_inner.r
 lib/zernio-sdk/models/list_google_business_media200_response_media_items_inner_location_association.rb
 lib/zernio-sdk/models/list_google_business_place_actions200_response.rb
 lib/zernio-sdk/models/list_google_business_place_actions200_response_place_action_links_inner.rb
+lib/zernio-sdk/models/list_google_recommendations200_response.rb
 lib/zernio-sdk/models/list_high_demand_periods200_response.rb
 lib/zernio-sdk/models/list_imessage_audience200_response.rb
 lib/zernio-sdk/models/list_imessage_available_numbers200_response.rb
@@ -4802,6 +4820,9 @@ spec/models/api_key_profile_ids_inner_spec.rb
 spec/models/api_key_spec.rb
 spec/models/appeal_sms_registration200_response_spec.rb
 spec/models/appeal_sms_registration_request_spec.rb
+spec/models/apply_google_recommendations200_response_spec.rb
+spec/models/apply_google_recommendations_request_recommendations_inner_spec.rb
+spec/models/apply_google_recommendations_request_spec.rb
 spec/models/approve_whats_app_group_join_requests_request_spec.rb
 spec/models/archive_lead_form200_response_spec.rb
 spec/models/assign_google_business_location200_response_account_spec.rb
@@ -5249,6 +5270,7 @@ spec/models/discord_platform_data_thread_from_message_spec.rb
 spec/models/discord_role_spec.rb
 spec/models/discord_scheduled_event_entity_metadata_spec.rb
 spec/models/discord_scheduled_event_spec.rb
+spec/models/dismiss_google_recommendations_request_spec.rb
 spec/models/dm_button_spec.rb
 spec/models/download_tik_tok_video200_response_formats_inner_spec.rb
 spec/models/download_tik_tok_video200_response_spec.rb
@@ -5736,6 +5758,10 @@ spec/models/google_pmax_asset_group_input_spec.rb
 spec/models/google_pmax_asset_group_spec.rb
 spec/models/google_pmax_asset_group_update_images_spec.rb
 spec/models/google_pmax_asset_group_update_spec.rb
+spec/models/google_recommendation_impact_spec.rb
+spec/models/google_recommendation_metrics_spec.rb
+spec/models/google_recommendation_result_spec.rb
+spec/models/google_recommendation_spec.rb
 spec/models/google_rsa_description_spec.rb
 spec/models/google_rsa_headline_spec.rb
 spec/models/google_sitelink_spec.rb
@@ -5937,6 +5963,7 @@ spec/models/list_google_business_media200_response_media_items_inner_spec.rb
 spec/models/list_google_business_media200_response_spec.rb
 spec/models/list_google_business_place_actions200_response_place_action_links_inner_spec.rb
 spec/models/list_google_business_place_actions200_response_spec.rb
+spec/models/list_google_recommendations200_response_spec.rb
 spec/models/list_high_demand_periods200_response_spec.rb
 spec/models/list_imessage_audience200_response_spec.rb
 spec/models/list_imessage_available_numbers200_response_numbers_inner_spec.rb
