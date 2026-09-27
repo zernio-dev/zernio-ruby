@@ -19,6 +19,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_value_rule_set**](AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set |
 | [**detach_ad_label**](AdAccountsApi.md#detach_ad_label) | **DELETE** /v1/ads/labels/{labelId}/assignments | Detach a Google Ads label |
 | [**get_ad_account_finance**](AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances |
+| [**get_ad_account_hierarchy**](AdAccountsApi.md#get_ad_account_hierarchy) | **GET** /v1/ads/accounts/hierarchy | Get manager account hierarchy |
 | [**get_ad_comments**](AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
 | [**get_ad_negative_keyword_list**](AdAccountsApi.md#get_ad_negative_keyword_list) | **GET** /v1/ads/accounts/negative-keyword-lists/{listId} | Get a negative keyword list |
 | [**get_ads_activity_log**](AdAccountsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log |
@@ -27,6 +28,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ios_fourteen_campaign_limits**](AdAccountsApi.md#get_ios_fourteen_campaign_limits) | **GET** /v1/ads/ios-fourteen-campaign-limits | Get iOS 14 campaign limits |
 | [**get_value_rule_set**](AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set |
 | [**hide_ad_comment**](AdAccountsApi.md#hide_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/hide | Hide or unhide an ad comment |
+| [**invite_ad_account_to_manager**](AdAccountsApi.md#invite_ad_account_to_manager) | **POST** /v1/ads/accounts/manager-links | Invite a client account to a manager |
 | [**list_account_callouts**](AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account callouts |
 | [**list_account_sitelinks**](AdAccountsApi.md#list_account_sitelinks) | **GET** /v1/ads/accounts/sitelinks | List account sitelinks |
 | [**list_account_structured_snippets**](AdAccountsApi.md#list_account_structured_snippets) | **GET** /v1/ads/accounts/structured-snippets | List account snippets |
@@ -53,6 +55,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_account_sitelinks**](AdAccountsApi.md#update_account_sitelinks) | **PUT** /v1/ads/accounts/sitelinks | Update account sitelinks |
 | [**update_account_structured_snippets**](AdAccountsApi.md#update_account_structured_snippets) | **PUT** /v1/ads/accounts/structured-snippets | Update account snippets |
 | [**update_ad_account**](AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings |
+| [**update_ad_account_manager_link**](AdAccountsApi.md#update_ad_account_manager_link) | **PATCH** /v1/ads/accounts/manager-links | Accept, decline, cancel or end a manager link |
 | [**update_ad_label**](AdAccountsApi.md#update_ad_label) | **PATCH** /v1/ads/labels/{labelId} | Update a Google Ads label |
 | [**update_ad_negative_keyword_list**](AdAccountsApi.md#update_ad_negative_keyword_list) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId} | Rename a negative keyword list |
 | [**update_value_rule_set**](AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set |
@@ -1121,6 +1124,81 @@ end
 - **Accept**: application/json
 
 
+## get_ad_account_hierarchy
+
+> <GetAdAccountHierarchy200Response> get_ad_account_hierarchy(account_id, opts)
+
+Get manager account hierarchy
+
+Live manager (MCC) and client tree for a Google Ads connection. Starts from every customer the Google user behind the connection can access directly and walks each tree to any depth with `customer_client`, then reads each manager's own client links so every client carries its direct parent, the `managerLinkId` and the link status. Invitations a manager sent that the client has not accepted yet appear as clients with `linkStatus: PENDING` (Google returns no name or currency for them). Refused, canceled and ended links are history and are omitted. `managerLinks` on a root lists the managers linked to that account, including invitations it can still accept with PATCH /v1/ads/accounts/manager-links. A directly accessible account that is also nested in another tree appears only once, inside that tree. Customers Google refuses to read (for example a cancelled account) are listed in `unavailable` with Google's reason instead of failing the call. Up to 50 roots and 50 managers per root are read; `truncated` is true when more exist. Cached for 10 minutes per connection; the response carries `cachedAt` and `stale`. When the connection is scoped to specific ad accounts, client accounts outside that scope are hidden (managers stay visible).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Google ads SocialAccount id.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Only return the tree rooted at this customer id (digits only). It must be an account the Google user accesses directly. Omit to list every tree.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for consistency with the other Google Ads account endpoints.
+}
+
+begin
+  # Get manager account hierarchy
+  result = api_instance.get_ad_account_hierarchy(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_ad_account_hierarchy: #{e}"
+end
+```
+
+#### Using the get_ad_account_hierarchy_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdAccountHierarchy200Response>, Integer, Hash)> get_ad_account_hierarchy_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get manager account hierarchy
+  data, status_code, headers = api_instance.get_ad_account_hierarchy_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdAccountHierarchy200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_ad_account_hierarchy_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Google ads SocialAccount id. |  |
+| **ad_account_id** | **String** | Only return the tree rooted at this customer id (digits only). It must be an account the Google user accesses directly. Omit to list every tree. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for consistency with the other Google Ads account endpoints. | [optional] |
+
+### Return type
+
+[**GetAdAccountHierarchy200Response**](GetAdAccountHierarchy200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_ad_comments
 
 > <GetAdComments200Response> get_ad_comments(ad_id, opts)
@@ -1718,6 +1796,75 @@ end
 ### Return type
 
 [**HideAdComment200Response**](HideAdComment200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## invite_ad_account_to_manager
+
+> <GoogleAdsManagerLink> invite_ad_account_to_manager(invite_ad_account_to_manager_request)
+
+Invite a client account to a manager
+
+Sends a manager-to-client link invitation from `managerCustomerId` to `clientCustomerId` (Google's CustomerClientLinkService). The manager must be one the connection's Google user reaches, directly or under another manager (see GET /v1/ads/accounts/hierarchy); the client can be any Google Ads account. The link stays `PENDING` until someone with access to the client accepts it in Google Ads or through PATCH on this path. Not idempotent: Google refuses a second invitation while one is pending. Send `validateOnly: true` to have Google check the request without sending anything.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+invite_ad_account_to_manager_request = Zernio::InviteAdAccountToManagerRequest.new({account_id: 'account_id_example', manager_customer_id: 'manager_customer_id_example', client_customer_id: 'client_customer_id_example'}) # InviteAdAccountToManagerRequest | 
+
+begin
+  # Invite a client account to a manager
+  result = api_instance.invite_ad_account_to_manager(invite_ad_account_to_manager_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->invite_ad_account_to_manager: #{e}"
+end
+```
+
+#### Using the invite_ad_account_to_manager_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GoogleAdsManagerLink>, Integer, Hash)> invite_ad_account_to_manager_with_http_info(invite_ad_account_to_manager_request)
+
+```ruby
+begin
+  # Invite a client account to a manager
+  data, status_code, headers = api_instance.invite_ad_account_to_manager_with_http_info(invite_ad_account_to_manager_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GoogleAdsManagerLink>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->invite_ad_account_to_manager_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **invite_ad_account_to_manager_request** | [**InviteAdAccountToManagerRequest**](InviteAdAccountToManagerRequest.md) |  |  |
+
+### Return type
+
+[**GoogleAdsManagerLink**](GoogleAdsManagerLink.md)
 
 ### Authorization
 
@@ -3632,6 +3779,75 @@ end
 ### Return type
 
 [**UpdateAdAccount200Response**](UpdateAdAccount200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ad_account_manager_link
+
+> <GoogleAdsManagerLink> update_ad_account_manager_link(update_ad_account_manager_link_request)
+
+Accept, decline, cancel or end a manager link
+
+Changes one manager-client link, identified by `managerCustomerId`, `clientCustomerId` and `managerLinkId` (all from GET /v1/ads/accounts/hierarchy). `accept` and `decline` answer a pending invitation as the client (CustomerManagerLinkService), so the connection's Google user needs direct access to the client account; access through a manager is not enough, because the link does not exist yet. `cancel` withdraws a pending invitation and `unlink` ends an active link, both as the manager (CustomerClientLinkService). Send `validateOnly: true` to have Google check the change without applying it.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+update_ad_account_manager_link_request = Zernio::UpdateAdAccountManagerLinkRequest.new({account_id: 'account_id_example', manager_customer_id: 'manager_customer_id_example', client_customer_id: 'client_customer_id_example', manager_link_id: 'manager_link_id_example', action: 'accept'}) # UpdateAdAccountManagerLinkRequest | 
+
+begin
+  # Accept, decline, cancel or end a manager link
+  result = api_instance.update_ad_account_manager_link(update_ad_account_manager_link_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_ad_account_manager_link: #{e}"
+end
+```
+
+#### Using the update_ad_account_manager_link_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GoogleAdsManagerLink>, Integer, Hash)> update_ad_account_manager_link_with_http_info(update_ad_account_manager_link_request)
+
+```ruby
+begin
+  # Accept, decline, cancel or end a manager link
+  data, status_code, headers = api_instance.update_ad_account_manager_link_with_http_info(update_ad_account_manager_link_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GoogleAdsManagerLink>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_ad_account_manager_link_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_ad_account_manager_link_request** | [**UpdateAdAccountManagerLinkRequest**](UpdateAdAccountManagerLinkRequest.md) |  |  |
+
+### Return type
+
+[**GoogleAdsManagerLink**](GoogleAdsManagerLink.md)
 
 ### Authorization
 

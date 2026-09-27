@@ -673,6 +673,10 @@ docs/GetAccountPosts200ResponsePostsInner.md
 docs/GetAd200Response.md
 docs/GetAdAccountFinance200Response.md
 docs/GetAdAccountFinance200ResponseFundingSource.md
+docs/GetAdAccountHierarchy200Response.md
+docs/GetAdAccountHierarchy200ResponseRootsInner.md
+docs/GetAdAccountHierarchy200ResponseRootsInnerManagerLinksInner.md
+docs/GetAdAccountHierarchy200ResponseUnavailableInner.md
 docs/GetAdAnalytics202Response.md
 docs/GetAdAudience200Response.md
 docs/GetAdCampaignDetails200Response.md
@@ -1035,6 +1039,8 @@ docs/GetYoutubePlaylists200Response.md
 docs/GetYoutubePlaylists200ResponsePlaylistsInner.md
 docs/GoogleAdLabel.md
 docs/GoogleAdLabelAssignments.md
+docs/GoogleAdsHierarchyClient.md
+docs/GoogleAdsManagerLink.md
 docs/GoogleAssetGroupAssetLink.md
 docs/GoogleAssetGroupAssetUnlink.md
 docs/GoogleAssetUpdate.md
@@ -1121,6 +1127,7 @@ docs/InstagramPlatformData.md
 docs/InstagramPlatformDataAudioConfiguration.md
 docs/InstagramPlatformDataTrialParams.md
 docs/InstagramPlatformDataUserTagsInner.md
+docs/InviteAdAccountToManagerRequest.md
 docs/InvitesApi.md
 docs/KeywordEntry.md
 docs/LeadGenApi.md
@@ -1891,6 +1898,7 @@ docs/UpdateAccountStructuredSnippetsRequestUpdatesInner.md
 docs/UpdateAd200Response.md
 docs/UpdateAdAccount200Response.md
 docs/UpdateAdAccount200ResponseDsaDefaults.md
+docs/UpdateAdAccountManagerLinkRequest.md
 docs/UpdateAdAccountRequest.md
 docs/UpdateAdAudienceRequest.md
 docs/UpdateAdCampaign200Response.md
@@ -3041,6 +3049,10 @@ lib/zernio-sdk/models/get_account_posts200_response_posts_inner.rb
 lib/zernio-sdk/models/get_ad200_response.rb
 lib/zernio-sdk/models/get_ad_account_finance200_response.rb
 lib/zernio-sdk/models/get_ad_account_finance200_response_funding_source.rb
+lib/zernio-sdk/models/get_ad_account_hierarchy200_response.rb
+lib/zernio-sdk/models/get_ad_account_hierarchy200_response_roots_inner.rb
+lib/zernio-sdk/models/get_ad_account_hierarchy200_response_roots_inner_manager_links_inner.rb
+lib/zernio-sdk/models/get_ad_account_hierarchy200_response_unavailable_inner.rb
 lib/zernio-sdk/models/get_ad_analytics202_response.rb
 lib/zernio-sdk/models/get_ad_audience200_response.rb
 lib/zernio-sdk/models/get_ad_campaign_details200_response.rb
@@ -3403,6 +3415,8 @@ lib/zernio-sdk/models/get_youtube_playlists200_response.rb
 lib/zernio-sdk/models/get_youtube_playlists200_response_playlists_inner.rb
 lib/zernio-sdk/models/google_ad_label.rb
 lib/zernio-sdk/models/google_ad_label_assignments.rb
+lib/zernio-sdk/models/google_ads_hierarchy_client.rb
+lib/zernio-sdk/models/google_ads_manager_link.rb
 lib/zernio-sdk/models/google_asset_group_asset_link.rb
 lib/zernio-sdk/models/google_asset_group_asset_unlink.rb
 lib/zernio-sdk/models/google_asset_update.rb
@@ -3486,6 +3500,7 @@ lib/zernio-sdk/models/instagram_platform_data.rb
 lib/zernio-sdk/models/instagram_platform_data_audio_configuration.rb
 lib/zernio-sdk/models/instagram_platform_data_trial_params.rb
 lib/zernio-sdk/models/instagram_platform_data_user_tags_inner.rb
+lib/zernio-sdk/models/invite_ad_account_to_manager_request.rb
 lib/zernio-sdk/models/keyword_entry.rb
 lib/zernio-sdk/models/like_inbox_comment200_response.rb
 lib/zernio-sdk/models/like_inbox_comment_request.rb
@@ -4233,6 +4248,7 @@ lib/zernio-sdk/models/update_account_structured_snippets_request_updates_inner.r
 lib/zernio-sdk/models/update_ad200_response.rb
 lib/zernio-sdk/models/update_ad_account200_response.rb
 lib/zernio-sdk/models/update_ad_account200_response_dsa_defaults.rb
+lib/zernio-sdk/models/update_ad_account_manager_link_request.rb
 lib/zernio-sdk/models/update_ad_account_request.rb
 lib/zernio-sdk/models/update_ad_audience_request.rb
 lib/zernio-sdk/models/update_ad_campaign200_response.rb
@@ -5363,6 +5379,10 @@ spec/models/get_account_posts200_response_spec.rb
 spec/models/get_ad200_response_spec.rb
 spec/models/get_ad_account_finance200_response_funding_source_spec.rb
 spec/models/get_ad_account_finance200_response_spec.rb
+spec/models/get_ad_account_hierarchy200_response_roots_inner_manager_links_inner_spec.rb
+spec/models/get_ad_account_hierarchy200_response_roots_inner_spec.rb
+spec/models/get_ad_account_hierarchy200_response_spec.rb
+spec/models/get_ad_account_hierarchy200_response_unavailable_inner_spec.rb
 spec/models/get_ad_analytics202_response_spec.rb
 spec/models/get_ad_audience200_response_spec.rb
 spec/models/get_ad_campaign_details200_response_spec.rb
@@ -5725,6 +5745,8 @@ spec/models/get_youtube_playlists200_response_playlists_inner_spec.rb
 spec/models/get_youtube_playlists200_response_spec.rb
 spec/models/google_ad_label_assignments_spec.rb
 spec/models/google_ad_label_spec.rb
+spec/models/google_ads_hierarchy_client_spec.rb
+spec/models/google_ads_manager_link_spec.rb
 spec/models/google_asset_group_asset_link_spec.rb
 spec/models/google_asset_group_asset_unlink_spec.rb
 spec/models/google_asset_update_spec.rb
@@ -5808,6 +5830,7 @@ spec/models/instagram_platform_data_audio_configuration_spec.rb
 spec/models/instagram_platform_data_spec.rb
 spec/models/instagram_platform_data_trial_params_spec.rb
 spec/models/instagram_platform_data_user_tags_inner_spec.rb
+spec/models/invite_ad_account_to_manager_request_spec.rb
 spec/models/keyword_entry_spec.rb
 spec/models/like_inbox_comment200_response_spec.rb
 spec/models/like_inbox_comment_request_spec.rb
@@ -6555,6 +6578,7 @@ spec/models/update_account_structured_snippets_request_updates_inner_spec.rb
 spec/models/update_ad200_response_spec.rb
 spec/models/update_ad_account200_response_dsa_defaults_spec.rb
 spec/models/update_ad_account200_response_spec.rb
+spec/models/update_ad_account_manager_link_request_spec.rb
 spec/models/update_ad_account_request_spec.rb
 spec/models/update_ad_audience_request_spec.rb
 spec/models/update_ad_campaign200_response_spec.rb
