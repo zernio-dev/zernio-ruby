@@ -8,16 +8,23 @@ All URIs are relative to *https://zernio.com/api*
 | [**adjust_conversions**](ConversionsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust uploaded conversions |
 | [**create_conversion_action**](ConversionsApi.md#create_conversion_action) | **POST** /v1/ads/conversions/actions | Create website conversion action |
 | [**create_conversion_destination**](ConversionsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination |
+| [**create_custom_conversion_goal**](ConversionsApi.md#create_custom_conversion_goal) | **POST** /v1/ads/conversions/custom-goals | Create a custom conversion goal |
 | [**delete_conversion_destination**](ConversionsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Delete a conversion destination |
 | [**get_conversion_destination**](ConversionsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination |
 | [**get_conversion_metrics**](ConversionsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics |
 | [**get_conversions_quality**](ConversionsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Get Event Match Quality |
+| [**list_ad_conversion_goals**](ConversionsApi.md#list_ad_conversion_goals) | **GET** /v1/ads/conversions/goals | List account conversion goals |
 | [**list_conversion_actions**](ConversionsApi.md#list_conversion_actions) | **GET** /v1/ads/conversions/actions | List conversion actions |
 | [**list_conversion_associations**](ConversionsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List associated campaigns |
 | [**list_conversion_destinations**](ConversionsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List conversion destinations |
+| [**list_custom_conversion_goals**](ConversionsApi.md#list_custom_conversion_goals) | **GET** /v1/ads/conversions/custom-goals | List custom conversion goals |
 | [**remove_conversion_associations**](ConversionsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns |
+| [**remove_custom_conversion_goal**](ConversionsApi.md#remove_custom_conversion_goal) | **DELETE** /v1/ads/conversions/custom-goals/{goalId} | Remove a custom conversion goal |
 | [**send_conversions**](ConversionsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events |
+| [**update_ad_conversion_goals**](ConversionsApi.md#update_ad_conversion_goals) | **PATCH** /v1/ads/conversions/goals | Update account conversion goals |
+| [**update_conversion_action**](ConversionsApi.md#update_conversion_action) | **PATCH** /v1/ads/conversions/actions/{actionId} | Set a conversion action primary or secondary |
 | [**update_conversion_destination**](ConversionsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination |
+| [**update_custom_conversion_goal**](ConversionsApi.md#update_custom_conversion_goal) | **PATCH** /v1/ads/conversions/custom-goals/{goalId} | Update a custom conversion goal |
 
 
 ## add_conversion_associations
@@ -291,6 +298,75 @@ end
 ### Return type
 
 [**CreateConversionDestination201Response**](CreateConversionDestination201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_custom_conversion_goal
+
+> <CreateCustomConversionGoal201Response> create_custom_conversion_goal(create_custom_conversion_goal_request)
+
+Create a custom conversion goal
+
+Creates a custom conversion goal from conversion action ids. Point a campaign at it with `PATCH /v1/ads/campaigns/{campaignId}/conversion-goals`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConversionsApi.new
+create_custom_conversion_goal_request = Zernio::CreateCustomConversionGoalRequest.new({account_id: 'account_id_example', name: 'name_example', conversion_action_ids: ['conversion_action_ids_example']}) # CreateCustomConversionGoalRequest | 
+
+begin
+  # Create a custom conversion goal
+  result = api_instance.create_custom_conversion_goal(create_custom_conversion_goal_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->create_custom_conversion_goal: #{e}"
+end
+```
+
+#### Using the create_custom_conversion_goal_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateCustomConversionGoal201Response>, Integer, Hash)> create_custom_conversion_goal_with_http_info(create_custom_conversion_goal_request)
+
+```ruby
+begin
+  # Create a custom conversion goal
+  data, status_code, headers = api_instance.create_custom_conversion_goal_with_http_info(create_custom_conversion_goal_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateCustomConversionGoal201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->create_custom_conversion_goal_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_custom_conversion_goal_request** | [**CreateCustomConversionGoalRequest**](CreateCustomConversionGoalRequest.md) |  |  |
+
+### Return type
+
+[**CreateCustomConversionGoal201Response**](CreateCustomConversionGoal201Response.md)
 
 ### Authorization
 
@@ -601,6 +677,81 @@ end
 - **Accept**: application/json
 
 
+## list_ad_conversion_goals
+
+> <ListAdConversionGoals200Response> list_ad_conversion_goals(account_id, opts)
+
+List account conversion goals
+
+Google Ads account-default conversion goals (CustomerConversionGoal), one per category and origin, with `biddable` (whether the goal is used for bidding and reported in the Conversions column) and the conversion actions that belong to it, each flagged `primaryForGoal` (primary) or not (secondary). Reads are cached for 10 minutes; when the shared Google quota is exhausted the last successful result is served with `stale: true`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConversionsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (Google Ads)
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Google customer id. Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId
+}
+
+begin
+  # List account conversion goals
+  result = api_instance.list_ad_conversion_goals(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->list_ad_conversion_goals: #{e}"
+end
+```
+
+#### Using the list_ad_conversion_goals_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdConversionGoals200Response>, Integer, Hash)> list_ad_conversion_goals_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List account conversion goals
+  data, status_code, headers = api_instance.list_ad_conversion_goals_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdConversionGoals200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->list_ad_conversion_goals_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (Google Ads) |  |
+| **ad_account_id** | **String** | Google customer id. Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId | [optional] |
+
+### Return type
+
+[**ListAdConversionGoals200Response**](ListAdConversionGoals200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_conversion_actions
 
 > <ListConversionActions200Response> list_conversion_actions(account_id, opts)
@@ -820,6 +971,81 @@ end
 - **Accept**: application/json
 
 
+## list_custom_conversion_goals
+
+> <ListCustomConversionGoals200Response> list_custom_conversion_goals(account_id, opts)
+
+List custom conversion goals
+
+Google Ads custom conversion goals (a named set of conversion actions a campaign can bid on). Removed goals are excluded. Cached like the other Google reads.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConversionsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (Google Ads)
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Google customer id. Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId
+}
+
+begin
+  # List custom conversion goals
+  result = api_instance.list_custom_conversion_goals(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->list_custom_conversion_goals: #{e}"
+end
+```
+
+#### Using the list_custom_conversion_goals_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCustomConversionGoals200Response>, Integer, Hash)> list_custom_conversion_goals_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List custom conversion goals
+  data, status_code, headers = api_instance.list_custom_conversion_goals_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCustomConversionGoals200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->list_custom_conversion_goals_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (Google Ads) |  |
+| **ad_account_id** | **String** | Google customer id. Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId | [optional] |
+
+### Return type
+
+[**ListCustomConversionGoals200Response**](ListCustomConversionGoals200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## remove_conversion_associations
 
 > <RemoveConversionAssociations200Response> remove_conversion_associations(account_id, destination_id, ad_account_id, campaign_ids)
@@ -884,6 +1110,83 @@ end
 ### Return type
 
 [**RemoveConversionAssociations200Response**](RemoveConversionAssociations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_custom_conversion_goal
+
+> <RemoveCustomConversionGoal200Response> remove_custom_conversion_goal(goal_id, account_id, opts)
+
+Remove a custom conversion goal
+
+Removes the goal. Google refuses (400) while any campaign still uses it: switch those campaigns to another goal first.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConversionsApi.new
+goal_id = 'goal_id_example' # String | Google custom conversion goal id
+account_id = 'account_id_example' # String | Zernio SocialAccount id (Google Ads)
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Google customer id. Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId
+}
+
+begin
+  # Remove a custom conversion goal
+  result = api_instance.remove_custom_conversion_goal(goal_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->remove_custom_conversion_goal: #{e}"
+end
+```
+
+#### Using the remove_custom_conversion_goal_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveCustomConversionGoal200Response>, Integer, Hash)> remove_custom_conversion_goal_with_http_info(goal_id, account_id, opts)
+
+```ruby
+begin
+  # Remove a custom conversion goal
+  data, status_code, headers = api_instance.remove_custom_conversion_goal_with_http_info(goal_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveCustomConversionGoal200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->remove_custom_conversion_goal_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **goal_id** | **String** | Google custom conversion goal id |  |
+| **account_id** | **String** | Zernio SocialAccount id (Google Ads) |  |
+| **ad_account_id** | **String** | Google customer id. Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId | [optional] |
+
+### Return type
+
+[**RemoveCustomConversionGoal200Response**](RemoveCustomConversionGoal200Response.md)
 
 ### Authorization
 
@@ -964,6 +1267,146 @@ end
 - **Accept**: application/json
 
 
+## update_ad_conversion_goals
+
+> <UpdateAdConversionGoals200Response> update_ad_conversion_goals(update_ad_conversion_goals_request)
+
+Update account conversion goals
+
+Sets `biddable` on one or more account-default goals, addressed by category and origin, in one mutate. Campaigns that use account-level goals (`goalConfigLevel: CUSTOMER`) follow the change. Returns the re-read goal list.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConversionsApi.new
+update_ad_conversion_goals_request = Zernio::UpdateAdConversionGoalsRequest.new({account_id: 'account_id_example', goals: [Zernio::GoogleBiddableGoalInput.new({category: 'category_example', origin: 'origin_example', biddable: false})]}) # UpdateAdConversionGoalsRequest | 
+
+begin
+  # Update account conversion goals
+  result = api_instance.update_ad_conversion_goals(update_ad_conversion_goals_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->update_ad_conversion_goals: #{e}"
+end
+```
+
+#### Using the update_ad_conversion_goals_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAdConversionGoals200Response>, Integer, Hash)> update_ad_conversion_goals_with_http_info(update_ad_conversion_goals_request)
+
+```ruby
+begin
+  # Update account conversion goals
+  data, status_code, headers = api_instance.update_ad_conversion_goals_with_http_info(update_ad_conversion_goals_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAdConversionGoals200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->update_ad_conversion_goals_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_ad_conversion_goals_request** | [**UpdateAdConversionGoalsRequest**](UpdateAdConversionGoalsRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAdConversionGoals200Response**](UpdateAdConversionGoals200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_conversion_action
+
+> <UpdateConversionAction200Response> update_conversion_action(action_id, update_conversion_action_request)
+
+Set a conversion action primary or secondary
+
+Sets `primary_for_goal` on a Google Ads conversion action. A primary action counts toward its goal's bidding and the Conversions column; a secondary one is observation-only (All conversions).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConversionsApi.new
+action_id = 'action_id_example' # String | Google conversion action id
+update_conversion_action_request = Zernio::UpdateConversionActionRequest.new({account_id: 'account_id_example', primary_for_goal: false}) # UpdateConversionActionRequest | 
+
+begin
+  # Set a conversion action primary or secondary
+  result = api_instance.update_conversion_action(action_id, update_conversion_action_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->update_conversion_action: #{e}"
+end
+```
+
+#### Using the update_conversion_action_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateConversionAction200Response>, Integer, Hash)> update_conversion_action_with_http_info(action_id, update_conversion_action_request)
+
+```ruby
+begin
+  # Set a conversion action primary or secondary
+  data, status_code, headers = api_instance.update_conversion_action_with_http_info(action_id, update_conversion_action_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateConversionAction200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->update_conversion_action_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **action_id** | **String** | Google conversion action id |  |
+| **update_conversion_action_request** | [**UpdateConversionActionRequest**](UpdateConversionActionRequest.md) |  |  |
+
+### Return type
+
+[**UpdateConversionAction200Response**](UpdateConversionAction200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_conversion_destination
 
 > <GetConversionDestination200Response> update_conversion_destination(account_id, destination_id, update_conversion_destination_request)
@@ -1026,6 +1469,77 @@ end
 ### Return type
 
 [**GetConversionDestination200Response**](GetConversionDestination200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_custom_conversion_goal
+
+> <UpdateCustomConversionGoal200Response> update_custom_conversion_goal(goal_id, update_custom_conversion_goal_request)
+
+Update a custom conversion goal
+
+Renames the goal and/or replaces its conversion actions. Returns the re-read goal.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConversionsApi.new
+goal_id = 'goal_id_example' # String | Google custom conversion goal id
+update_custom_conversion_goal_request = Zernio::UpdateCustomConversionGoalRequest.new({account_id: 'account_id_example'}) # UpdateCustomConversionGoalRequest | 
+
+begin
+  # Update a custom conversion goal
+  result = api_instance.update_custom_conversion_goal(goal_id, update_custom_conversion_goal_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->update_custom_conversion_goal: #{e}"
+end
+```
+
+#### Using the update_custom_conversion_goal_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateCustomConversionGoal200Response>, Integer, Hash)> update_custom_conversion_goal_with_http_info(goal_id, update_custom_conversion_goal_request)
+
+```ruby
+begin
+  # Update a custom conversion goal
+  data, status_code, headers = api_instance.update_custom_conversion_goal_with_http_info(goal_id, update_custom_conversion_goal_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateCustomConversionGoal200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->update_custom_conversion_goal_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **goal_id** | **String** | Google custom conversion goal id |  |
+| **update_custom_conversion_goal_request** | [**UpdateCustomConversionGoalRequest**](UpdateCustomConversionGoalRequest.md) |  |  |
+
+### Return type
+
+[**UpdateCustomConversionGoal200Response**](UpdateCustomConversionGoal200Response.md)
 
 ### Authorization
 

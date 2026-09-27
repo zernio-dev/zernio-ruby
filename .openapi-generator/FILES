@@ -110,9 +110,6 @@ docs/ApiKeyCreatedBy.md
 docs/ApiKeyProfileIdsInner.md
 docs/AppealSmsRegistration200Response.md
 docs/AppealSmsRegistrationRequest.md
-docs/ApplyGoogleRecommendations200Response.md
-docs/ApplyGoogleRecommendationsRequest.md
-docs/ApplyGoogleRecommendationsRequestRecommendationsInner.md
 docs/ApproveWhatsAppGroupJoinRequestsRequest.md
 docs/ArchiveLeadForm200Response.md
 docs/AssignGoogleBusinessLocation200Response.md
@@ -354,6 +351,8 @@ docs/CreateConversionActionRequest.md
 docs/CreateConversionDestination201Response.md
 docs/CreateConversionDestinationRequest.md
 docs/CreateConversionDestinationRequestValue.md
+docs/CreateCustomConversionGoal201Response.md
+docs/CreateCustomConversionGoalRequest.md
 docs/CreateCustomConversionRequest.md
 docs/CreateCustomField200Response.md
 docs/CreateCustomFieldRequest.md
@@ -572,7 +571,6 @@ docs/DiscordPlatformDataThreadFromMessage.md
 docs/DiscordRole.md
 docs/DiscordScheduledEvent.md
 docs/DiscordScheduledEventEntityMetadata.md
-docs/DismissGoogleRecommendationsRequest.md
 docs/DmButton.md
 docs/DownloadTikTokVideo200Response.md
 docs/DownloadTikTokVideo200ResponseFormatsInner.md
@@ -731,6 +729,7 @@ docs/GetCampaignAdSchedule200ResponsePerformanceByDayOfWeekInner.md
 docs/GetCampaignAdSchedule200ResponsePerformanceByHourInner.md
 docs/GetCampaignAnalytics202Response.md
 docs/GetCampaignBidding200Response.md
+docs/GetCampaignConversionGoals200Response.md
 docs/GetCampaignTargeting200Response.md
 docs/GetCampaignTargeting200ResponseDevicesInner.md
 docs/GetCampaignTargeting200ResponseLanguagesInner.md
@@ -1044,6 +1043,7 @@ docs/GoogleAdsManagerLink.md
 docs/GoogleAssetGroupAssetLink.md
 docs/GoogleAssetGroupAssetUnlink.md
 docs/GoogleAssetUpdate.md
+docs/GoogleBiddableGoalInput.md
 docs/GoogleBusinessPlatformData.md
 docs/GoogleBusinessPlatformDataCallToAction.md
 docs/GoogleBusinessPlatformDataEvent.md
@@ -1056,6 +1056,11 @@ docs/GoogleBusinessPlatformDataOffer.md
 docs/GoogleBusinessReview.md
 docs/GoogleBusinessReviewReviewReply.md
 docs/GoogleBusinessReviewReviewer.md
+docs/GoogleCampaignConversionGoals.md
+docs/GoogleCampaignConversionGoalsGoalsInner.md
+docs/GoogleCustomConversionGoal.md
+docs/GoogleCustomerConversionGoal.md
+docs/GoogleCustomerConversionGoalConversionActionsInner.md
 docs/GoogleListingGroupDimension.md
 docs/GoogleListingGroupDimensionProductBrand.md
 docs/GoogleListingGroupDimensionProductCategory.md
@@ -1074,10 +1079,6 @@ docs/GooglePmaxAssetGroupInput.md
 docs/GooglePmaxAssetGroupInputImages.md
 docs/GooglePmaxAssetGroupUpdate.md
 docs/GooglePmaxAssetGroupUpdateImages.md
-docs/GoogleRecommendation.md
-docs/GoogleRecommendationImpact.md
-docs/GoogleRecommendationMetrics.md
-docs/GoogleRecommendationResult.md
 docs/GoogleRsaDescription.md
 docs/GoogleRsaHeadline.md
 docs/GoogleSitelink.md
@@ -1190,6 +1191,7 @@ docs/ListAdCatalogProductSets200Response.md
 docs/ListAdCatalogProductSets200ResponseProductSetsInner.md
 docs/ListAdCatalogProducts200Response.md
 docs/ListAdCatalogs200Response.md
+docs/ListAdConversionGoals200Response.md
 docs/ListAdCreatives200Response.md
 docs/ListAdGroupAssets200Response.md
 docs/ListAdGroupAssets200ResponseCalloutsInner.md
@@ -1264,6 +1266,7 @@ docs/ListConversionAssociations200ResponseAssociationsInner.md
 docs/ListConversionDestinations200Response.md
 docs/ListConversionDestinations200ResponseDestinationsInner.md
 docs/ListConversionDestinations200ResponseDestinationsInnerConversionEventsInner.md
+docs/ListCustomConversionGoals200Response.md
 docs/ListCustomConversions200Response.md
 docs/ListCustomFields200Response.md
 docs/ListCustomFields200ResponseFieldsInner.md
@@ -1286,7 +1289,6 @@ docs/ListGoogleBusinessMedia200ResponseMediaItemsInner.md
 docs/ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation.md
 docs/ListGoogleBusinessPlaceActions200Response.md
 docs/ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner.md
-docs/ListGoogleRecommendations200Response.md
 docs/ListHighDemandPeriods200Response.md
 docs/ListImessageAudience200Response.md
 docs/ListImessageAvailableNumbers200Response.md
@@ -1586,6 +1588,7 @@ docs/RemoveBookmark200Response.md
 docs/RemoveCampaignAssets200Response.md
 docs/RemoveCampaignAssetsRequest.md
 docs/RemoveConversionAssociations200Response.md
+docs/RemoveCustomConversionGoal200Response.md
 docs/RemoveDiscordMemberRole200Response.md
 docs/RemoveGoogleAssetGroup200Response.md
 docs/RemoveMessageReaction200Response.md
@@ -1909,6 +1912,8 @@ docs/UpdateAdCampaignStatus200Response.md
 docs/UpdateAdCampaignStatusRequest.md
 docs/UpdateAdCatalogProductRequest.md
 docs/UpdateAdCatalogProductSetRequest.md
+docs/UpdateAdConversionGoals200Response.md
+docs/UpdateAdConversionGoalsRequest.md
 docs/UpdateAdCreative200Response.md
 docs/UpdateAdCreativeRequest.md
 docs/UpdateAdKeyword200Response.md
@@ -1961,6 +1966,8 @@ docs/UpdateCampaignAdScheduleRequest.md
 docs/UpdateCampaignAdScheduleRequestScheduleInner.md
 docs/UpdateCampaignAssets200Response.md
 docs/UpdateCampaignAssetsRequest.md
+docs/UpdateCampaignConversionGoals200Response.md
+docs/UpdateCampaignConversionGoalsRequest.md
 docs/UpdateCampaignTargeting200Response.md
 docs/UpdateCampaignTargeting200ResponseDevicesInner.md
 docs/UpdateCampaignTargeting200ResponseLanguagesInner.md
@@ -1979,8 +1986,13 @@ docs/UpdateCommentAutomationRequest.md
 docs/UpdateContact200Response.md
 docs/UpdateContact200ResponseContact.md
 docs/UpdateContactRequest.md
+docs/UpdateConversionAction200Response.md
+docs/UpdateConversionAction200ResponseAction.md
+docs/UpdateConversionActionRequest.md
 docs/UpdateConversionDestinationRequest.md
 docs/UpdateConversionDestinationRequestValue.md
+docs/UpdateCustomConversionGoal200Response.md
+docs/UpdateCustomConversionGoalRequest.md
 docs/UpdateCustomField200Response.md
 docs/UpdateCustomField200ResponseField.md
 docs/UpdateCustomFieldRequest.md
@@ -2506,9 +2518,6 @@ lib/zernio-sdk/models/api_key_created_by.rb
 lib/zernio-sdk/models/api_key_profile_ids_inner.rb
 lib/zernio-sdk/models/appeal_sms_registration200_response.rb
 lib/zernio-sdk/models/appeal_sms_registration_request.rb
-lib/zernio-sdk/models/apply_google_recommendations200_response.rb
-lib/zernio-sdk/models/apply_google_recommendations_request.rb
-lib/zernio-sdk/models/apply_google_recommendations_request_recommendations_inner.rb
 lib/zernio-sdk/models/approve_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/archive_lead_form200_response.rb
 lib/zernio-sdk/models/assign_google_business_location200_response.rb
@@ -2740,6 +2749,8 @@ lib/zernio-sdk/models/create_conversion_action_request.rb
 lib/zernio-sdk/models/create_conversion_destination201_response.rb
 lib/zernio-sdk/models/create_conversion_destination_request.rb
 lib/zernio-sdk/models/create_conversion_destination_request_value.rb
+lib/zernio-sdk/models/create_custom_conversion_goal201_response.rb
+lib/zernio-sdk/models/create_custom_conversion_goal_request.rb
 lib/zernio-sdk/models/create_custom_conversion_request.rb
 lib/zernio-sdk/models/create_custom_field200_response.rb
 lib/zernio-sdk/models/create_custom_field_request.rb
@@ -2956,7 +2967,6 @@ lib/zernio-sdk/models/discord_platform_data_thread_from_message.rb
 lib/zernio-sdk/models/discord_role.rb
 lib/zernio-sdk/models/discord_scheduled_event.rb
 lib/zernio-sdk/models/discord_scheduled_event_entity_metadata.rb
-lib/zernio-sdk/models/dismiss_google_recommendations_request.rb
 lib/zernio-sdk/models/dm_button.rb
 lib/zernio-sdk/models/download_tik_tok_video200_response.rb
 lib/zernio-sdk/models/download_tik_tok_video200_response_formats_inner.rb
@@ -3107,6 +3117,7 @@ lib/zernio-sdk/models/get_campaign_ad_schedule200_response_performance_by_day_of
 lib/zernio-sdk/models/get_campaign_ad_schedule200_response_performance_by_hour_inner.rb
 lib/zernio-sdk/models/get_campaign_analytics202_response.rb
 lib/zernio-sdk/models/get_campaign_bidding200_response.rb
+lib/zernio-sdk/models/get_campaign_conversion_goals200_response.rb
 lib/zernio-sdk/models/get_campaign_targeting200_response.rb
 lib/zernio-sdk/models/get_campaign_targeting200_response_devices_inner.rb
 lib/zernio-sdk/models/get_campaign_targeting200_response_languages_inner.rb
@@ -3420,6 +3431,7 @@ lib/zernio-sdk/models/google_ads_manager_link.rb
 lib/zernio-sdk/models/google_asset_group_asset_link.rb
 lib/zernio-sdk/models/google_asset_group_asset_unlink.rb
 lib/zernio-sdk/models/google_asset_update.rb
+lib/zernio-sdk/models/google_biddable_goal_input.rb
 lib/zernio-sdk/models/google_business_platform_data.rb
 lib/zernio-sdk/models/google_business_platform_data_call_to_action.rb
 lib/zernio-sdk/models/google_business_platform_data_event.rb
@@ -3432,6 +3444,11 @@ lib/zernio-sdk/models/google_business_platform_data_offer.rb
 lib/zernio-sdk/models/google_business_review.rb
 lib/zernio-sdk/models/google_business_review_review_reply.rb
 lib/zernio-sdk/models/google_business_review_reviewer.rb
+lib/zernio-sdk/models/google_campaign_conversion_goals.rb
+lib/zernio-sdk/models/google_campaign_conversion_goals_goals_inner.rb
+lib/zernio-sdk/models/google_custom_conversion_goal.rb
+lib/zernio-sdk/models/google_customer_conversion_goal.rb
+lib/zernio-sdk/models/google_customer_conversion_goal_conversion_actions_inner.rb
 lib/zernio-sdk/models/google_listing_group_dimension.rb
 lib/zernio-sdk/models/google_listing_group_dimension_product_brand.rb
 lib/zernio-sdk/models/google_listing_group_dimension_product_category.rb
@@ -3450,10 +3467,6 @@ lib/zernio-sdk/models/google_pmax_asset_group_input.rb
 lib/zernio-sdk/models/google_pmax_asset_group_input_images.rb
 lib/zernio-sdk/models/google_pmax_asset_group_update.rb
 lib/zernio-sdk/models/google_pmax_asset_group_update_images.rb
-lib/zernio-sdk/models/google_recommendation.rb
-lib/zernio-sdk/models/google_recommendation_impact.rb
-lib/zernio-sdk/models/google_recommendation_metrics.rb
-lib/zernio-sdk/models/google_recommendation_result.rb
 lib/zernio-sdk/models/google_rsa_description.rb
 lib/zernio-sdk/models/google_rsa_headline.rb
 lib/zernio-sdk/models/google_sitelink.rb
@@ -3560,6 +3573,7 @@ lib/zernio-sdk/models/list_ad_catalog_product_sets200_response.rb
 lib/zernio-sdk/models/list_ad_catalog_product_sets200_response_product_sets_inner.rb
 lib/zernio-sdk/models/list_ad_catalog_products200_response.rb
 lib/zernio-sdk/models/list_ad_catalogs200_response.rb
+lib/zernio-sdk/models/list_ad_conversion_goals200_response.rb
 lib/zernio-sdk/models/list_ad_creatives200_response.rb
 lib/zernio-sdk/models/list_ad_group_assets200_response.rb
 lib/zernio-sdk/models/list_ad_group_assets200_response_callouts_inner.rb
@@ -3634,6 +3648,7 @@ lib/zernio-sdk/models/list_conversion_associations200_response_associations_inne
 lib/zernio-sdk/models/list_conversion_destinations200_response.rb
 lib/zernio-sdk/models/list_conversion_destinations200_response_destinations_inner.rb
 lib/zernio-sdk/models/list_conversion_destinations200_response_destinations_inner_conversion_events_inner.rb
+lib/zernio-sdk/models/list_custom_conversion_goals200_response.rb
 lib/zernio-sdk/models/list_custom_conversions200_response.rb
 lib/zernio-sdk/models/list_custom_fields200_response.rb
 lib/zernio-sdk/models/list_custom_fields200_response_fields_inner.rb
@@ -3656,7 +3671,6 @@ lib/zernio-sdk/models/list_google_business_media200_response_media_items_inner.r
 lib/zernio-sdk/models/list_google_business_media200_response_media_items_inner_location_association.rb
 lib/zernio-sdk/models/list_google_business_place_actions200_response.rb
 lib/zernio-sdk/models/list_google_business_place_actions200_response_place_action_links_inner.rb
-lib/zernio-sdk/models/list_google_recommendations200_response.rb
 lib/zernio-sdk/models/list_high_demand_periods200_response.rb
 lib/zernio-sdk/models/list_imessage_audience200_response.rb
 lib/zernio-sdk/models/list_imessage_available_numbers200_response.rb
@@ -3943,6 +3957,7 @@ lib/zernio-sdk/models/remove_bookmark200_response.rb
 lib/zernio-sdk/models/remove_campaign_assets200_response.rb
 lib/zernio-sdk/models/remove_campaign_assets_request.rb
 lib/zernio-sdk/models/remove_conversion_associations200_response.rb
+lib/zernio-sdk/models/remove_custom_conversion_goal200_response.rb
 lib/zernio-sdk/models/remove_discord_member_role200_response.rb
 lib/zernio-sdk/models/remove_google_asset_group200_response.rb
 lib/zernio-sdk/models/remove_message_reaction200_response.rb
@@ -4259,6 +4274,8 @@ lib/zernio-sdk/models/update_ad_campaign_status200_response.rb
 lib/zernio-sdk/models/update_ad_campaign_status_request.rb
 lib/zernio-sdk/models/update_ad_catalog_product_request.rb
 lib/zernio-sdk/models/update_ad_catalog_product_set_request.rb
+lib/zernio-sdk/models/update_ad_conversion_goals200_response.rb
+lib/zernio-sdk/models/update_ad_conversion_goals_request.rb
 lib/zernio-sdk/models/update_ad_creative200_response.rb
 lib/zernio-sdk/models/update_ad_creative_request.rb
 lib/zernio-sdk/models/update_ad_keyword200_response.rb
@@ -4311,6 +4328,8 @@ lib/zernio-sdk/models/update_campaign_ad_schedule_request.rb
 lib/zernio-sdk/models/update_campaign_ad_schedule_request_schedule_inner.rb
 lib/zernio-sdk/models/update_campaign_assets200_response.rb
 lib/zernio-sdk/models/update_campaign_assets_request.rb
+lib/zernio-sdk/models/update_campaign_conversion_goals200_response.rb
+lib/zernio-sdk/models/update_campaign_conversion_goals_request.rb
 lib/zernio-sdk/models/update_campaign_targeting200_response.rb
 lib/zernio-sdk/models/update_campaign_targeting200_response_devices_inner.rb
 lib/zernio-sdk/models/update_campaign_targeting200_response_languages_inner.rb
@@ -4329,8 +4348,13 @@ lib/zernio-sdk/models/update_comment_automation_request.rb
 lib/zernio-sdk/models/update_contact200_response.rb
 lib/zernio-sdk/models/update_contact200_response_contact.rb
 lib/zernio-sdk/models/update_contact_request.rb
+lib/zernio-sdk/models/update_conversion_action200_response.rb
+lib/zernio-sdk/models/update_conversion_action200_response_action.rb
+lib/zernio-sdk/models/update_conversion_action_request.rb
 lib/zernio-sdk/models/update_conversion_destination_request.rb
 lib/zernio-sdk/models/update_conversion_destination_request_value.rb
+lib/zernio-sdk/models/update_custom_conversion_goal200_response.rb
+lib/zernio-sdk/models/update_custom_conversion_goal_request.rb
 lib/zernio-sdk/models/update_custom_field200_response.rb
 lib/zernio-sdk/models/update_custom_field200_response_field.rb
 lib/zernio-sdk/models/update_custom_field_request.rb
@@ -4836,9 +4860,6 @@ spec/models/api_key_profile_ids_inner_spec.rb
 spec/models/api_key_spec.rb
 spec/models/appeal_sms_registration200_response_spec.rb
 spec/models/appeal_sms_registration_request_spec.rb
-spec/models/apply_google_recommendations200_response_spec.rb
-spec/models/apply_google_recommendations_request_recommendations_inner_spec.rb
-spec/models/apply_google_recommendations_request_spec.rb
 spec/models/approve_whats_app_group_join_requests_request_spec.rb
 spec/models/archive_lead_form200_response_spec.rb
 spec/models/assign_google_business_location200_response_account_spec.rb
@@ -5070,6 +5091,8 @@ spec/models/create_conversion_action_request_spec.rb
 spec/models/create_conversion_destination201_response_spec.rb
 spec/models/create_conversion_destination_request_spec.rb
 spec/models/create_conversion_destination_request_value_spec.rb
+spec/models/create_custom_conversion_goal201_response_spec.rb
+spec/models/create_custom_conversion_goal_request_spec.rb
 spec/models/create_custom_conversion_request_spec.rb
 spec/models/create_custom_field200_response_spec.rb
 spec/models/create_custom_field_request_spec.rb
@@ -5286,7 +5309,6 @@ spec/models/discord_platform_data_thread_from_message_spec.rb
 spec/models/discord_role_spec.rb
 spec/models/discord_scheduled_event_entity_metadata_spec.rb
 spec/models/discord_scheduled_event_spec.rb
-spec/models/dismiss_google_recommendations_request_spec.rb
 spec/models/dm_button_spec.rb
 spec/models/download_tik_tok_video200_response_formats_inner_spec.rb
 spec/models/download_tik_tok_video200_response_spec.rb
@@ -5437,6 +5459,7 @@ spec/models/get_campaign_ad_schedule200_response_performance_spec.rb
 spec/models/get_campaign_ad_schedule200_response_spec.rb
 spec/models/get_campaign_analytics202_response_spec.rb
 spec/models/get_campaign_bidding200_response_spec.rb
+spec/models/get_campaign_conversion_goals200_response_spec.rb
 spec/models/get_campaign_targeting200_response_devices_inner_spec.rb
 spec/models/get_campaign_targeting200_response_languages_inner_spec.rb
 spec/models/get_campaign_targeting200_response_locations_inner_spec.rb
@@ -5750,6 +5773,7 @@ spec/models/google_ads_manager_link_spec.rb
 spec/models/google_asset_group_asset_link_spec.rb
 spec/models/google_asset_group_asset_unlink_spec.rb
 spec/models/google_asset_update_spec.rb
+spec/models/google_biddable_goal_input_spec.rb
 spec/models/google_business_platform_data_call_to_action_spec.rb
 spec/models/google_business_platform_data_event_schedule_end_date_spec.rb
 spec/models/google_business_platform_data_event_schedule_end_time_spec.rb
@@ -5762,6 +5786,11 @@ spec/models/google_business_platform_data_spec.rb
 spec/models/google_business_review_review_reply_spec.rb
 spec/models/google_business_review_reviewer_spec.rb
 spec/models/google_business_review_spec.rb
+spec/models/google_campaign_conversion_goals_goals_inner_spec.rb
+spec/models/google_campaign_conversion_goals_spec.rb
+spec/models/google_custom_conversion_goal_spec.rb
+spec/models/google_customer_conversion_goal_conversion_actions_inner_spec.rb
+spec/models/google_customer_conversion_goal_spec.rb
 spec/models/google_listing_group_dimension_product_brand_spec.rb
 spec/models/google_listing_group_dimension_product_category_spec.rb
 spec/models/google_listing_group_dimension_product_channel_spec.rb
@@ -5780,10 +5809,6 @@ spec/models/google_pmax_asset_group_input_spec.rb
 spec/models/google_pmax_asset_group_spec.rb
 spec/models/google_pmax_asset_group_update_images_spec.rb
 spec/models/google_pmax_asset_group_update_spec.rb
-spec/models/google_recommendation_impact_spec.rb
-spec/models/google_recommendation_metrics_spec.rb
-spec/models/google_recommendation_result_spec.rb
-spec/models/google_recommendation_spec.rb
 spec/models/google_rsa_description_spec.rb
 spec/models/google_rsa_headline_spec.rb
 spec/models/google_sitelink_spec.rb
@@ -5890,6 +5915,7 @@ spec/models/list_ad_catalog_product_sets200_response_product_sets_inner_spec.rb
 spec/models/list_ad_catalog_product_sets200_response_spec.rb
 spec/models/list_ad_catalog_products200_response_spec.rb
 spec/models/list_ad_catalogs200_response_spec.rb
+spec/models/list_ad_conversion_goals200_response_spec.rb
 spec/models/list_ad_creatives200_response_spec.rb
 spec/models/list_ad_group_assets200_response_callouts_inner_spec.rb
 spec/models/list_ad_group_assets200_response_sitelinks_inner_spec.rb
@@ -5964,6 +5990,7 @@ spec/models/list_conversion_associations200_response_spec.rb
 spec/models/list_conversion_destinations200_response_destinations_inner_conversion_events_inner_spec.rb
 spec/models/list_conversion_destinations200_response_destinations_inner_spec.rb
 spec/models/list_conversion_destinations200_response_spec.rb
+spec/models/list_custom_conversion_goals200_response_spec.rb
 spec/models/list_custom_conversions200_response_spec.rb
 spec/models/list_custom_fields200_response_fields_inner_spec.rb
 spec/models/list_custom_fields200_response_spec.rb
@@ -5986,7 +6013,6 @@ spec/models/list_google_business_media200_response_media_items_inner_spec.rb
 spec/models/list_google_business_media200_response_spec.rb
 spec/models/list_google_business_place_actions200_response_place_action_links_inner_spec.rb
 spec/models/list_google_business_place_actions200_response_spec.rb
-spec/models/list_google_recommendations200_response_spec.rb
 spec/models/list_high_demand_periods200_response_spec.rb
 spec/models/list_imessage_audience200_response_spec.rb
 spec/models/list_imessage_available_numbers200_response_numbers_inner_spec.rb
@@ -6273,6 +6299,7 @@ spec/models/remove_bookmark200_response_spec.rb
 spec/models/remove_campaign_assets200_response_spec.rb
 spec/models/remove_campaign_assets_request_spec.rb
 spec/models/remove_conversion_associations200_response_spec.rb
+spec/models/remove_custom_conversion_goal200_response_spec.rb
 spec/models/remove_discord_member_role200_response_spec.rb
 spec/models/remove_google_asset_group200_response_spec.rb
 spec/models/remove_message_reaction200_response_spec.rb
@@ -6589,6 +6616,8 @@ spec/models/update_ad_campaign_status200_response_spec.rb
 spec/models/update_ad_campaign_status_request_spec.rb
 spec/models/update_ad_catalog_product_request_spec.rb
 spec/models/update_ad_catalog_product_set_request_spec.rb
+spec/models/update_ad_conversion_goals200_response_spec.rb
+spec/models/update_ad_conversion_goals_request_spec.rb
 spec/models/update_ad_creative200_response_spec.rb
 spec/models/update_ad_creative_request_spec.rb
 spec/models/update_ad_keyword200_response_spec.rb
@@ -6641,6 +6670,8 @@ spec/models/update_campaign_ad_schedule_request_schedule_inner_spec.rb
 spec/models/update_campaign_ad_schedule_request_spec.rb
 spec/models/update_campaign_assets200_response_spec.rb
 spec/models/update_campaign_assets_request_spec.rb
+spec/models/update_campaign_conversion_goals200_response_spec.rb
+spec/models/update_campaign_conversion_goals_request_spec.rb
 spec/models/update_campaign_targeting200_response_devices_inner_spec.rb
 spec/models/update_campaign_targeting200_response_languages_inner_spec.rb
 spec/models/update_campaign_targeting200_response_locations_inner_spec.rb
@@ -6659,8 +6690,13 @@ spec/models/update_comment_automation_request_spec.rb
 spec/models/update_contact200_response_contact_spec.rb
 spec/models/update_contact200_response_spec.rb
 spec/models/update_contact_request_spec.rb
+spec/models/update_conversion_action200_response_action_spec.rb
+spec/models/update_conversion_action200_response_spec.rb
+spec/models/update_conversion_action_request_spec.rb
 spec/models/update_conversion_destination_request_spec.rb
 spec/models/update_conversion_destination_request_value_spec.rb
+spec/models/update_custom_conversion_goal200_response_spec.rb
+spec/models/update_custom_conversion_goal_request_spec.rb
 spec/models/update_custom_field200_response_field_spec.rb
 spec/models/update_custom_field200_response_spec.rb
 spec/models/update_custom_field_request_spec.rb
