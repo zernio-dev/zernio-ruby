@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **object_id** | **String** | Meta responses only. | [optional] |
+| **ad_account_id** | **String** | TikTok responses only: the advertiser queried. | [optional] |
 | **customer_id** | **String** | Google responses only: the customer the query ran against. | [optional] |
 | **field_mask** | **String** | Google responses only: the selected fields echoed by Google. | [optional] |
 | **data** | **Array&lt;Object&gt;** |  | [optional] |
@@ -17,6 +18,7 @@ require 'zernio-sdk'
 
 instance = Zernio::QueryAdInsights200Response.new(
   object_id: null,
+  ad_account_id: null,
   customer_id: null,
   field_mask: null,
   data: null,
