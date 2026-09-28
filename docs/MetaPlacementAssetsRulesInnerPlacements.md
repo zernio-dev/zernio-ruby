@@ -1,4 +1,4 @@
-# Zernio::CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements
+# Zernio::MetaPlacementAssetsRulesInnerPlacements
 
 ## Properties
 
@@ -18,7 +18,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.new(
+instance = Zernio::MetaPlacementAssetsRulesInnerPlacements.new(
   publisher_platforms: null,
   facebook_positions: null,
   instagram_positions: null,

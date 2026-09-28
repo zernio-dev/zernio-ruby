@@ -428,6 +428,8 @@ docs/CreateLeadForm200Response.md
 docs/CreateLeadFormRequest.md
 docs/CreateLeadFormRequestPlatformSpecificData.md
 docs/CreateLeadFormRequestQuestionsInner.md
+docs/CreateMessagingAd200Response.md
+docs/CreateMessagingAd200ResponseResultsInner.md
 docs/CreateMessagingAd201Response.md
 docs/CreateMessagingAdRequest.md
 docs/CreatePhoneNumberKycLink200Response.md
@@ -484,9 +486,6 @@ docs/CreateStandaloneAdRequestCreativesInnerVideo.md
 docs/CreateStandaloneAdRequestCustomLocationsInner.md
 docs/CreateStandaloneAdRequestDynamicCreative.md
 docs/CreateStandaloneAdRequestImages.md
-docs/CreateStandaloneAdRequestPlacementAssets.md
-docs/CreateStandaloneAdRequestPlacementAssetsRulesInner.md
-docs/CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.md
 docs/CreateStandaloneAdRequestPlacements.md
 docs/CreateStandaloneAdRequestPlatformSpecificData.md
 docs/CreateStandaloneAdRequestRegionsInner.md
@@ -1497,6 +1496,9 @@ docs/MetaLeadFormPlatformData.md
 docs/MetaLeadFormPlatformDataContextCard.md
 docs/MetaLeadFormQuestionsInner.md
 docs/MetaLeadFormThankYouPage.md
+docs/MetaPlacementAssets.md
+docs/MetaPlacementAssetsRulesInner.md
+docs/MetaPlacementAssetsRulesInnerPlacements.md
 docs/MetaProductCatalog.md
 docs/MetaProductFeed.md
 docs/MetaProductFeedSchedule.md
@@ -2892,6 +2894,8 @@ lib/zernio-sdk/models/create_lead_form200_response.rb
 lib/zernio-sdk/models/create_lead_form_request.rb
 lib/zernio-sdk/models/create_lead_form_request_platform_specific_data.rb
 lib/zernio-sdk/models/create_lead_form_request_questions_inner.rb
+lib/zernio-sdk/models/create_messaging_ad200_response.rb
+lib/zernio-sdk/models/create_messaging_ad200_response_results_inner.rb
 lib/zernio-sdk/models/create_messaging_ad201_response.rb
 lib/zernio-sdk/models/create_messaging_ad_request.rb
 lib/zernio-sdk/models/create_phone_number_kyc_link200_response.rb
@@ -2948,9 +2952,6 @@ lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner_video.rb
 lib/zernio-sdk/models/create_standalone_ad_request_custom_locations_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_dynamic_creative.rb
 lib/zernio-sdk/models/create_standalone_ad_request_images.rb
-lib/zernio-sdk/models/create_standalone_ad_request_placement_assets.rb
-lib/zernio-sdk/models/create_standalone_ad_request_placement_assets_rules_inner.rb
-lib/zernio-sdk/models/create_standalone_ad_request_placement_assets_rules_inner_placements.rb
 lib/zernio-sdk/models/create_standalone_ad_request_placements.rb
 lib/zernio-sdk/models/create_standalone_ad_request_platform_specific_data.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner.rb
@@ -3939,6 +3940,9 @@ lib/zernio-sdk/models/meta_lead_form_platform_data.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data_context_card.rb
 lib/zernio-sdk/models/meta_lead_form_questions_inner.rb
 lib/zernio-sdk/models/meta_lead_form_thank_you_page.rb
+lib/zernio-sdk/models/meta_placement_assets.rb
+lib/zernio-sdk/models/meta_placement_assets_rules_inner.rb
+lib/zernio-sdk/models/meta_placement_assets_rules_inner_placements.rb
 lib/zernio-sdk/models/meta_product_catalog.rb
 lib/zernio-sdk/models/meta_product_feed.rb
 lib/zernio-sdk/models/meta_product_feed_schedule.rb
@@ -5299,6 +5303,8 @@ spec/models/create_lead_form200_response_spec.rb
 spec/models/create_lead_form_request_platform_specific_data_spec.rb
 spec/models/create_lead_form_request_questions_inner_spec.rb
 spec/models/create_lead_form_request_spec.rb
+spec/models/create_messaging_ad200_response_results_inner_spec.rb
+spec/models/create_messaging_ad200_response_spec.rb
 spec/models/create_messaging_ad201_response_spec.rb
 spec/models/create_messaging_ad_request_spec.rb
 spec/models/create_phone_number_kyc_link200_response_spec.rb
@@ -5354,9 +5360,6 @@ spec/models/create_standalone_ad_request_creatives_inner_video_spec.rb
 spec/models/create_standalone_ad_request_custom_locations_inner_spec.rb
 spec/models/create_standalone_ad_request_dynamic_creative_spec.rb
 spec/models/create_standalone_ad_request_images_spec.rb
-spec/models/create_standalone_ad_request_placement_assets_rules_inner_placements_spec.rb
-spec/models/create_standalone_ad_request_placement_assets_rules_inner_spec.rb
-spec/models/create_standalone_ad_request_placement_assets_spec.rb
 spec/models/create_standalone_ad_request_placements_spec.rb
 spec/models/create_standalone_ad_request_platform_specific_data_spec.rb
 spec/models/create_standalone_ad_request_regions_inner_one_of_spec.rb
@@ -6346,6 +6349,9 @@ spec/models/meta_lead_form_platform_data_spec.rb
 spec/models/meta_lead_form_questions_inner_spec.rb
 spec/models/meta_lead_form_spec.rb
 spec/models/meta_lead_form_thank_you_page_spec.rb
+spec/models/meta_placement_assets_rules_inner_placements_spec.rb
+spec/models/meta_placement_assets_rules_inner_spec.rb
+spec/models/meta_placement_assets_spec.rb
 spec/models/meta_product_catalog_spec.rb
 spec/models/meta_product_feed_schedule_spec.rb
 spec/models/meta_product_feed_spec.rb

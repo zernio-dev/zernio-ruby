@@ -157,7 +157,7 @@ end
 
 ## create_messaging_ad
 
-> <CreateMessagingAd201Response> create_messaging_ad(create_messaging_ad_request, opts)
+> <CreateMessagingAd200Response> create_messaging_ad(create_messaging_ad_request, opts)
 
 Create messaging ad
 
@@ -193,7 +193,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_messaging_ad_with_http_info(create_messaging_ad_request, opts)
+> <Array(<CreateMessagingAd200Response>, Integer, Hash)> create_messaging_ad_with_http_info(create_messaging_ad_request, opts)
 
 ```ruby
 begin
@@ -201,7 +201,7 @@ begin
   data, status_code, headers = api_instance.create_messaging_ad_with_http_info(create_messaging_ad_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateMessagingAd201Response>
+  p data # => <CreateMessagingAd200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_messaging_ad_with_http_info: #{e}"
 end
@@ -216,7 +216,7 @@ end
 
 ### Return type
 
-[**CreateMessagingAd201Response**](CreateMessagingAd201Response.md)
+[**CreateMessagingAd200Response**](CreateMessagingAd200Response.md)
 
 ### Authorization
 

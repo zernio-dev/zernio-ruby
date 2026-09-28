@@ -1,4 +1,4 @@
-# Zernio::CreateStandaloneAdRequestPlacementAssetsRulesInner
+# Zernio::MetaPlacementAssetsRulesInner
 
 ## Properties
 
@@ -10,14 +10,14 @@
 | **headline** | **String** | One headline pinned to this rule. Omit to inherit the top-level headline. | [optional] |
 | **body** | **String** | One primary text pinned to this rule. Omit to inherit the top-level body. | [optional] |
 | **description** | **String** | One link description pinned to this rule. Omit to inherit the top-level description. | [optional] |
-| **placements** | [**CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements**](CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.md) |  |  |
+| **placements** | [**MetaPlacementAssetsRulesInnerPlacements**](MetaPlacementAssetsRulesInnerPlacements.md) |  |  |
 
 ## Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateStandaloneAdRequestPlacementAssetsRulesInner.new(
+instance = Zernio::MetaPlacementAssetsRulesInner.new(
   image_url: null,
   video_url: null,
   thumbnail_url: null,
