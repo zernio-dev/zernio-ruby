@@ -15,6 +15,9 @@
 | **click_window_days** | **Integer** |  | [optional] |
 | **view_window_days** | **Integer** |  | [optional] |
 | **url_contains** | **String** | Fires only on pages whose URL contains this text (case-insensitive). | [optional] |
+| **always_use_default_value** | **Boolean** | &#x60;defaultValue&#x60; is recorded even when the conversion sends its own value. | [optional] |
+| **primary** | **Boolean** | Primary conversions count toward bidding and the Conversions column; secondary ones are observation only (Google &#x60;primary_for_goal&#x60;). | [optional] |
+| **counting_type** | **String** | &#x60;one&#x60; counts at most one conversion per ad interaction (leads), &#x60;every&#x60; counts each (purchases). | [optional] |
 
 ## Example
 
@@ -32,7 +35,10 @@ instance = Zernio::TrackingTagEvent.new(
   currency: null,
   click_window_days: null,
   view_window_days: null,
-  url_contains: null
+  url_contains: null,
+  always_use_default_value: null,
+  primary: null,
+  counting_type: null
 )
 ```
 
