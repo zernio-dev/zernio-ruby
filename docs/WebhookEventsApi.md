@@ -11,6 +11,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
 | [**on_ad_status_changed**](WebhookEventsApi.md#on_ad_status_changed) | **POST** /ad.status_changed | Ad status changed event |
 | [**on_analytics_synced**](WebhookEventsApi.md#on_analytics_synced) | **POST** /analytics.synced | Analytics synced event |
+| [**on_branded_calling_identity_action_required**](WebhookEventsApi.md#on_branded_calling_identity_action_required) | **POST** /branded_calling.identity.action_required | Caller identity action required event |
+| [**on_branded_calling_identity_status_updated**](WebhookEventsApi.md#on_branded_calling_identity_status_updated) | **POST** /branded_calling.identity.status_updated | Caller identity status updated event |
+| [**on_branded_calling_number_status_updated**](WebhookEventsApi.md#on_branded_calling_number_status_updated) | **POST** /branded_calling.number.status_updated | Branded number status updated event |
 | [**on_call_ended**](WebhookEventsApi.md#on_call_ended) | **POST** /call.ended | Call ended event |
 | [**on_call_failed**](WebhookEventsApi.md#on_call_failed) | **POST** /call.failed | Call failed event |
 | [**on_call_permission_request**](WebhookEventsApi.md#on_call_permission_request) | **POST** /call.permission_request | Call permission request reply event |
@@ -524,6 +527,210 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_analytics_synced** | [**WebhookPayloadAnalyticsSynced**](WebhookPayloadAnalyticsSynced.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_branded_calling_identity_action_required
+
+> on_branded_calling_identity_action_required(on_branded_calling_identity_action_required_request)
+
+Caller identity action required event
+
+Fired when a caller identity waits on you. `reason` says what: `changes_requested` (answer the review with PATCH), `email_code` (the authorizer got a 6-digit code from the carrier; confirm it with the verify-email endpoint), `rejected` (the carrier rejected it; fix and PATCH), `infringement_claim` (a third party disputes the name or logo; reply to our email with evidence) or `expired` (resubmit). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_branded_calling_identity_action_required_request =  # OnBrandedCallingIdentityActionRequiredRequest | 
+
+begin
+  # Caller identity action required event
+  api_instance.on_branded_calling_identity_action_required(on_branded_calling_identity_action_required_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_branded_calling_identity_action_required: #{e}"
+end
+```
+
+#### Using the on_branded_calling_identity_action_required_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_branded_calling_identity_action_required_with_http_info(on_branded_calling_identity_action_required_request)
+
+```ruby
+begin
+  # Caller identity action required event
+  data, status_code, headers = api_instance.on_branded_calling_identity_action_required_with_http_info(on_branded_calling_identity_action_required_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_branded_calling_identity_action_required_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_branded_calling_identity_action_required_request** | [**OnBrandedCallingIdentityActionRequiredRequest**](OnBrandedCallingIdentityActionRequiredRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_branded_calling_identity_status_updated
+
+> on_branded_calling_identity_status_updated(on_branded_calling_identity_status_updated_request)
+
+Caller identity status updated event
+
+Fired on every status change of a Branded Calling caller identity: `requested` (a new submission or resubmit, in our review), `changes_requested` (we need answers, see `branded_calling.identity.action_required`), `rejected` (by our review or by the carrier; `reason` says why), `pending_email_verification` (filed with the carrier; the authorizer enters the emailed code), `in_review` (carrier vetting), `verified` (live for a year: attach numbers), `suspended` (an infringement claim is open), `expired` and `permanently_rejected`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_branded_calling_identity_status_updated_request =  # OnBrandedCallingIdentityStatusUpdatedRequest | 
+
+begin
+  # Caller identity status updated event
+  api_instance.on_branded_calling_identity_status_updated(on_branded_calling_identity_status_updated_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_branded_calling_identity_status_updated: #{e}"
+end
+```
+
+#### Using the on_branded_calling_identity_status_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_branded_calling_identity_status_updated_with_http_info(on_branded_calling_identity_status_updated_request)
+
+```ruby
+begin
+  # Caller identity status updated event
+  data, status_code, headers = api_instance.on_branded_calling_identity_status_updated_with_http_info(on_branded_calling_identity_status_updated_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_branded_calling_identity_status_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_branded_calling_identity_status_updated_request** | [**OnBrandedCallingIdentityStatusUpdatedRequest**](OnBrandedCallingIdentityStatusUpdatedRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_branded_calling_number_status_updated
+
+> on_branded_calling_number_status_updated(on_branded_calling_number_status_updated_request)
+
+Branded number status updated event
+
+Fired when a number attached to a caller identity changes vetting status: `in_review`, `verified` (calls from it now show the identity), `unsuccessful` (refused; detach and re-add to retry), `suspended`, `expired` or `permanently_rejected` (can never be branded again). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_branded_calling_number_status_updated_request =  # OnBrandedCallingNumberStatusUpdatedRequest | 
+
+begin
+  # Branded number status updated event
+  api_instance.on_branded_calling_number_status_updated(on_branded_calling_number_status_updated_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_branded_calling_number_status_updated: #{e}"
+end
+```
+
+#### Using the on_branded_calling_number_status_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_branded_calling_number_status_updated_with_http_info(on_branded_calling_number_status_updated_request)
+
+```ruby
+begin
+  # Branded number status updated event
+  data, status_code, headers = api_instance.on_branded_calling_number_status_updated_with_http_info(on_branded_calling_number_status_updated_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_branded_calling_number_status_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_branded_calling_number_status_updated_request** | [**OnBrandedCallingNumberStatusUpdatedRequest**](OnBrandedCallingNumberStatusUpdatedRequest.md) |  |  |
 
 ### Return type
 
