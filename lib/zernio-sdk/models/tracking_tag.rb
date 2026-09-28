@@ -256,7 +256,7 @@ module Zernio
       return false if @id.nil?
       return false if @name.nil?
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["metaads", "openaiads", "tiktokads", "googleads", "xads", "linkedinads"])
+      platform_validator = EnumAttributeValidator.new('String', ["metaads", "openaiads", "tiktokads", "googleads", "xads", "linkedinads", "pinterestads"])
       return false unless platform_validator.valid?(@platform)
       return false if @kind.nil?
       kind_validator = EnumAttributeValidator.new('String', ["pixel", "tag", "insight_tag"])
@@ -290,7 +290,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["metaads", "openaiads", "tiktokads", "googleads", "xads", "linkedinads"])
+      validator = EnumAttributeValidator.new('String', ["metaads", "openaiads", "tiktokads", "googleads", "xads", "linkedinads", "pinterestads"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
