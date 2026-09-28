@@ -115,9 +115,14 @@ docs/ApplyGoogleRecommendationsRequest.md
 docs/ApplyGoogleRecommendationsRequestRecommendationsInner.md
 docs/ApproveWhatsAppGroupJoinRequestsRequest.md
 docs/ArchiveLeadForm200Response.md
+docs/AssignAdAccountUser201Response.md
+docs/AssignAdAccountUserRequest.md
 docs/AssignGoogleBusinessLocation200Response.md
 docs/AssignGoogleBusinessLocation200ResponseAccount.md
 docs/AssignGoogleBusinessLocationRequest.md
+docs/AssignPageUser201Response.md
+docs/AssignPageUser201ResponseUser.md
+docs/AssignPageUserRequest.md
 docs/AttachAdGroupAssets201Response.md
 docs/AttachAdLabel200Response.md
 docs/AttachBrandedCallingNumbersRequest.md
@@ -791,6 +796,8 @@ docs/GetDiscordChannels200ResponseChannelsInner.md
 docs/GetDiscordGuildMember200Response.md
 docs/GetDiscordSettings200Response.md
 docs/GetDiscordSettings200ResponseAccount.md
+docs/GetDsaDefaults200Response.md
+docs/GetDsaDefaults200ResponseDsaDefaults.md
 docs/GetDsaRecommendations200Response.md
 docs/GetFacebookPages200Response.md
 docs/GetFacebookPages200ResponsePagesInner.md
@@ -1127,6 +1134,9 @@ docs/GoogleRsaDescription.md
 docs/GoogleRsaHeadline.md
 docs/GoogleSitelink.md
 docs/GoogleStructuredSnippet.md
+docs/GrantBusinessPartner201Response.md
+docs/GrantBusinessPartner201ResponsePartner.md
+docs/GrantBusinessPartnerRequest.md
 docs/HandleOAuthCallbackRequest.md
 docs/HideAdComment200Response.md
 docs/HideAdCommentRequest.md
@@ -1228,6 +1238,7 @@ docs/ListAccountSitelinks200Response.md
 docs/ListAccountSitelinks200ResponseSitelinksInner.md
 docs/ListAccountStructuredSnippets200Response.md
 docs/ListAccountStructuredSnippets200ResponseStructuredSnippetsInner.md
+docs/ListAdAccountUsers200Response.md
 docs/ListAdAccounts200Response.md
 docs/ListAdAccounts200ResponseAccountsInner.md
 docs/ListAdAccounts200ResponseAccountsInnerFundingSourceDetails.md
@@ -1294,6 +1305,7 @@ docs/ListBusinessAgentSettings200Response.md
 docs/ListBusinessAgentSkills200Response.md
 docs/ListBusinessAgentUiSkills200Response.md
 docs/ListBusinessAgentWebsites200Response.md
+docs/ListBusinessPartners200Response.md
 docs/ListCalls200Response.md
 docs/ListCalls200ResponseCallsInner.md
 docs/ListCampaignAssets200Response.md
@@ -1393,7 +1405,9 @@ docs/ListLocalServicesLeads200ResponseDataInnerContact.md
 docs/ListLogs200Response.md
 docs/ListLogs200ResponseLogsInner.md
 docs/ListLogs200ResponsePagination.md
+docs/ListMetaBusinessUsers200Response.md
 docs/ListMetaBusinesses200Response.md
+docs/ListPageUsers200Response.md
 docs/ListPartnershipAdContent200Response.md
 docs/ListPartnershipAdContent200ResponseMediaInner.md
 docs/ListPartnershipAdPermissions200Response.md
@@ -1492,6 +1506,8 @@ docs/MentionsApi.md
 docs/MessagesApi.md
 docs/MessagingAdsApi.md
 docs/MetaAdsPlatformData.md
+docs/MetaAssignedUser.md
+docs/MetaBusinessUser.md
 docs/MetaCatalogProduct.md
 docs/MetaCatalogProductInput.md
 docs/MetaFeedUpload.md
@@ -1504,6 +1520,10 @@ docs/MetaLeadFormPlatformData.md
 docs/MetaLeadFormPlatformDataContextCard.md
 docs/MetaLeadFormQuestionsInner.md
 docs/MetaLeadFormThankYouPage.md
+docs/MetaPageOwnership.md
+docs/MetaPageOwnershipBusiness.md
+docs/MetaPageOwnershipInstagramBusinessAccount.md
+docs/MetaPagePartner.md
 docs/MetaPlacementAssets.md
 docs/MetaPlacementAssetsRulesInner.md
 docs/MetaPlacementAssetsRulesInnerPlacements.md
@@ -1649,6 +1669,7 @@ docs/RemediatePhoneNumberRequestDocumentsInner.md
 docs/RemediatePhoneNumberRequestDocumentsInnerOneOf.md
 docs/RemoveAccountCallout200Response.md
 docs/RemoveAccountCalloutRequest.md
+docs/RemoveAdAccountUser200Response.md
 docs/RemoveAdGroupAssetsRequest.md
 docs/RemoveAdKeyword200Response.md
 docs/RemoveAdLabel200Response.md
@@ -1660,6 +1681,7 @@ docs/RemoveCustomConversionGoal200Response.md
 docs/RemoveDiscordMemberRole200Response.md
 docs/RemoveGoogleAssetGroup200Response.md
 docs/RemoveMessageReaction200Response.md
+docs/RemovePageUser200Response.md
 docs/RemoveTrackingTagFromStore200Response.md
 docs/RemoveTrackingTagFromStore200ResponseInstall.md
 docs/RemoveWhatsAppGroupParticipantsRequest.md
@@ -1716,6 +1738,7 @@ docs/ReviewWebhookReview.md
 docs/ReviewWebhookReviewReply.md
 docs/ReviewWebhookReviewReviewer.md
 docs/ReviewsApi.md
+docs/RevokeBusinessPartner200Response.md
 docs/RevokeConnectedApp200Response.md
 docs/RfPrediction.md
 docs/RotateSipTrunkCredentials200Response.md
@@ -1977,6 +2000,8 @@ docs/UpdateAccountStructuredSnippetsRequestUpdatesInner.md
 docs/UpdateAd200Response.md
 docs/UpdateAdAccount200Response.md
 docs/UpdateAdAccount200ResponseDsaDefaults.md
+docs/UpdateAdAccount200ResponseSettings.md
+docs/UpdateAdAccount200ResponseSettingsFundingSource.md
 docs/UpdateAdAccountManagerLinkRequest.md
 docs/UpdateAdAccountRequest.md
 docs/UpdateAdAudienceRequest.md
@@ -2609,9 +2634,14 @@ lib/zernio-sdk/models/apply_google_recommendations_request.rb
 lib/zernio-sdk/models/apply_google_recommendations_request_recommendations_inner.rb
 lib/zernio-sdk/models/approve_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/archive_lead_form200_response.rb
+lib/zernio-sdk/models/assign_ad_account_user201_response.rb
+lib/zernio-sdk/models/assign_ad_account_user_request.rb
 lib/zernio-sdk/models/assign_google_business_location200_response.rb
 lib/zernio-sdk/models/assign_google_business_location200_response_account.rb
 lib/zernio-sdk/models/assign_google_business_location_request.rb
+lib/zernio-sdk/models/assign_page_user201_response.rb
+lib/zernio-sdk/models/assign_page_user201_response_user.rb
+lib/zernio-sdk/models/assign_page_user_request.rb
 lib/zernio-sdk/models/attach_ad_group_assets201_response.rb
 lib/zernio-sdk/models/attach_ad_label200_response.rb
 lib/zernio-sdk/models/attach_branded_calling_numbers_request.rb
@@ -3263,6 +3293,8 @@ lib/zernio-sdk/models/get_discord_channels200_response_channels_inner.rb
 lib/zernio-sdk/models/get_discord_guild_member200_response.rb
 lib/zernio-sdk/models/get_discord_settings200_response.rb
 lib/zernio-sdk/models/get_discord_settings200_response_account.rb
+lib/zernio-sdk/models/get_dsa_defaults200_response.rb
+lib/zernio-sdk/models/get_dsa_defaults200_response_dsa_defaults.rb
 lib/zernio-sdk/models/get_dsa_recommendations200_response.rb
 lib/zernio-sdk/models/get_facebook_pages200_response.rb
 lib/zernio-sdk/models/get_facebook_pages200_response_pages_inner.rb
@@ -3599,6 +3631,9 @@ lib/zernio-sdk/models/google_rsa_description.rb
 lib/zernio-sdk/models/google_rsa_headline.rb
 lib/zernio-sdk/models/google_sitelink.rb
 lib/zernio-sdk/models/google_structured_snippet.rb
+lib/zernio-sdk/models/grant_business_partner201_response.rb
+lib/zernio-sdk/models/grant_business_partner201_response_partner.rb
+lib/zernio-sdk/models/grant_business_partner_request.rb
 lib/zernio-sdk/models/handle_o_auth_callback_request.rb
 lib/zernio-sdk/models/hide_ad_comment200_response.rb
 lib/zernio-sdk/models/hide_ad_comment_request.rb
@@ -3694,6 +3729,7 @@ lib/zernio-sdk/models/list_account_sitelinks200_response.rb
 lib/zernio-sdk/models/list_account_sitelinks200_response_sitelinks_inner.rb
 lib/zernio-sdk/models/list_account_structured_snippets200_response.rb
 lib/zernio-sdk/models/list_account_structured_snippets200_response_structured_snippets_inner.rb
+lib/zernio-sdk/models/list_ad_account_users200_response.rb
 lib/zernio-sdk/models/list_ad_accounts200_response.rb
 lib/zernio-sdk/models/list_ad_accounts200_response_accounts_inner.rb
 lib/zernio-sdk/models/list_ad_accounts200_response_accounts_inner_funding_source_details.rb
@@ -3760,6 +3796,7 @@ lib/zernio-sdk/models/list_business_agent_settings200_response.rb
 lib/zernio-sdk/models/list_business_agent_skills200_response.rb
 lib/zernio-sdk/models/list_business_agent_ui_skills200_response.rb
 lib/zernio-sdk/models/list_business_agent_websites200_response.rb
+lib/zernio-sdk/models/list_business_partners200_response.rb
 lib/zernio-sdk/models/list_calls200_response.rb
 lib/zernio-sdk/models/list_calls200_response_calls_inner.rb
 lib/zernio-sdk/models/list_campaign_assets200_response.rb
@@ -3859,7 +3896,9 @@ lib/zernio-sdk/models/list_local_services_leads200_response_data_inner_contact.r
 lib/zernio-sdk/models/list_logs200_response.rb
 lib/zernio-sdk/models/list_logs200_response_logs_inner.rb
 lib/zernio-sdk/models/list_logs200_response_pagination.rb
+lib/zernio-sdk/models/list_meta_business_users200_response.rb
 lib/zernio-sdk/models/list_meta_businesses200_response.rb
+lib/zernio-sdk/models/list_page_users200_response.rb
 lib/zernio-sdk/models/list_partnership_ad_content200_response.rb
 lib/zernio-sdk/models/list_partnership_ad_content200_response_media_inner.rb
 lib/zernio-sdk/models/list_partnership_ad_permissions200_response.rb
@@ -3953,6 +3992,8 @@ lib/zernio-sdk/models/media_content_type.rb
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/meta_ads_platform_data.rb
+lib/zernio-sdk/models/meta_assigned_user.rb
+lib/zernio-sdk/models/meta_business_user.rb
 lib/zernio-sdk/models/meta_catalog_product.rb
 lib/zernio-sdk/models/meta_catalog_product_input.rb
 lib/zernio-sdk/models/meta_feed_upload.rb
@@ -3965,6 +4006,10 @@ lib/zernio-sdk/models/meta_lead_form_platform_data.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data_context_card.rb
 lib/zernio-sdk/models/meta_lead_form_questions_inner.rb
 lib/zernio-sdk/models/meta_lead_form_thank_you_page.rb
+lib/zernio-sdk/models/meta_page_ownership.rb
+lib/zernio-sdk/models/meta_page_ownership_business.rb
+lib/zernio-sdk/models/meta_page_ownership_instagram_business_account.rb
+lib/zernio-sdk/models/meta_page_partner.rb
 lib/zernio-sdk/models/meta_placement_assets.rb
 lib/zernio-sdk/models/meta_placement_assets_rules_inner.rb
 lib/zernio-sdk/models/meta_placement_assets_rules_inner_placements.rb
@@ -4102,6 +4147,7 @@ lib/zernio-sdk/models/remediate_phone_number_request_documents_inner.rb
 lib/zernio-sdk/models/remediate_phone_number_request_documents_inner_one_of.rb
 lib/zernio-sdk/models/remove_account_callout200_response.rb
 lib/zernio-sdk/models/remove_account_callout_request.rb
+lib/zernio-sdk/models/remove_ad_account_user200_response.rb
 lib/zernio-sdk/models/remove_ad_group_assets_request.rb
 lib/zernio-sdk/models/remove_ad_keyword200_response.rb
 lib/zernio-sdk/models/remove_ad_label200_response.rb
@@ -4113,6 +4159,7 @@ lib/zernio-sdk/models/remove_custom_conversion_goal200_response.rb
 lib/zernio-sdk/models/remove_discord_member_role200_response.rb
 lib/zernio-sdk/models/remove_google_asset_group200_response.rb
 lib/zernio-sdk/models/remove_message_reaction200_response.rb
+lib/zernio-sdk/models/remove_page_user200_response.rb
 lib/zernio-sdk/models/remove_tracking_tag_from_store200_response.rb
 lib/zernio-sdk/models/remove_tracking_tag_from_store200_response_install.rb
 lib/zernio-sdk/models/remove_whats_app_group_participants_request.rb
@@ -4168,6 +4215,7 @@ lib/zernio-sdk/models/review_phone_number_kyc_packet_request.rb
 lib/zernio-sdk/models/review_webhook_review.rb
 lib/zernio-sdk/models/review_webhook_review_reply.rb
 lib/zernio-sdk/models/review_webhook_review_reviewer.rb
+lib/zernio-sdk/models/revoke_business_partner200_response.rb
 lib/zernio-sdk/models/revoke_connected_app200_response.rb
 lib/zernio-sdk/models/rf_prediction.rb
 lib/zernio-sdk/models/rotate_sip_trunk_credentials200_response.rb
@@ -4423,6 +4471,8 @@ lib/zernio-sdk/models/update_account_structured_snippets_request_updates_inner.r
 lib/zernio-sdk/models/update_ad200_response.rb
 lib/zernio-sdk/models/update_ad_account200_response.rb
 lib/zernio-sdk/models/update_ad_account200_response_dsa_defaults.rb
+lib/zernio-sdk/models/update_ad_account200_response_settings.rb
+lib/zernio-sdk/models/update_ad_account200_response_settings_funding_source.rb
 lib/zernio-sdk/models/update_ad_account_manager_link_request.rb
 lib/zernio-sdk/models/update_ad_account_request.rb
 lib/zernio-sdk/models/update_ad_audience_request.rb
@@ -5035,9 +5085,14 @@ spec/models/apply_google_recommendations_request_recommendations_inner_spec.rb
 spec/models/apply_google_recommendations_request_spec.rb
 spec/models/approve_whats_app_group_join_requests_request_spec.rb
 spec/models/archive_lead_form200_response_spec.rb
+spec/models/assign_ad_account_user201_response_spec.rb
+spec/models/assign_ad_account_user_request_spec.rb
 spec/models/assign_google_business_location200_response_account_spec.rb
 spec/models/assign_google_business_location200_response_spec.rb
 spec/models/assign_google_business_location_request_spec.rb
+spec/models/assign_page_user201_response_spec.rb
+spec/models/assign_page_user201_response_user_spec.rb
+spec/models/assign_page_user_request_spec.rb
 spec/models/attach_ad_group_assets201_response_spec.rb
 spec/models/attach_ad_label200_response_spec.rb
 spec/models/attach_branded_calling_numbers_request_signature_spec.rb
@@ -5689,6 +5744,8 @@ spec/models/get_discord_channels200_response_spec.rb
 spec/models/get_discord_guild_member200_response_spec.rb
 spec/models/get_discord_settings200_response_account_spec.rb
 spec/models/get_discord_settings200_response_spec.rb
+spec/models/get_dsa_defaults200_response_dsa_defaults_spec.rb
+spec/models/get_dsa_defaults200_response_spec.rb
 spec/models/get_dsa_recommendations200_response_spec.rb
 spec/models/get_facebook_pages200_response_pages_inner_spec.rb
 spec/models/get_facebook_pages200_response_spec.rb
@@ -6025,6 +6082,9 @@ spec/models/google_rsa_description_spec.rb
 spec/models/google_rsa_headline_spec.rb
 spec/models/google_sitelink_spec.rb
 spec/models/google_structured_snippet_spec.rb
+spec/models/grant_business_partner201_response_partner_spec.rb
+spec/models/grant_business_partner201_response_spec.rb
+spec/models/grant_business_partner_request_spec.rb
 spec/models/handle_o_auth_callback_request_spec.rb
 spec/models/hide_ad_comment200_response_spec.rb
 spec/models/hide_ad_comment_request_spec.rb
@@ -6120,6 +6180,7 @@ spec/models/list_account_sitelinks200_response_sitelinks_inner_spec.rb
 spec/models/list_account_sitelinks200_response_spec.rb
 spec/models/list_account_structured_snippets200_response_spec.rb
 spec/models/list_account_structured_snippets200_response_structured_snippets_inner_spec.rb
+spec/models/list_ad_account_users200_response_spec.rb
 spec/models/list_ad_accounts200_response_accounts_inner_funding_source_details_spec.rb
 spec/models/list_ad_accounts200_response_accounts_inner_spec.rb
 spec/models/list_ad_accounts200_response_spec.rb
@@ -6186,6 +6247,7 @@ spec/models/list_business_agent_settings200_response_spec.rb
 spec/models/list_business_agent_skills200_response_spec.rb
 spec/models/list_business_agent_ui_skills200_response_spec.rb
 spec/models/list_business_agent_websites200_response_spec.rb
+spec/models/list_business_partners200_response_spec.rb
 spec/models/list_calls200_response_calls_inner_spec.rb
 spec/models/list_calls200_response_spec.rb
 spec/models/list_campaign_assets200_response_callouts_inner_spec.rb
@@ -6285,7 +6347,9 @@ spec/models/list_local_services_leads200_response_spec.rb
 spec/models/list_logs200_response_logs_inner_spec.rb
 spec/models/list_logs200_response_pagination_spec.rb
 spec/models/list_logs200_response_spec.rb
+spec/models/list_meta_business_users200_response_spec.rb
 spec/models/list_meta_businesses200_response_spec.rb
+spec/models/list_page_users200_response_spec.rb
 spec/models/list_partnership_ad_content200_response_media_inner_spec.rb
 spec/models/list_partnership_ad_content200_response_spec.rb
 spec/models/list_partnership_ad_permissions200_response_permissions_inner_spec.rb
@@ -6379,6 +6443,8 @@ spec/models/media_content_type_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
 spec/models/meta_ads_platform_data_spec.rb
+spec/models/meta_assigned_user_spec.rb
+spec/models/meta_business_user_spec.rb
 spec/models/meta_catalog_product_input_spec.rb
 spec/models/meta_catalog_product_spec.rb
 spec/models/meta_feed_upload_spec.rb
@@ -6391,6 +6457,10 @@ spec/models/meta_lead_form_platform_data_spec.rb
 spec/models/meta_lead_form_questions_inner_spec.rb
 spec/models/meta_lead_form_spec.rb
 spec/models/meta_lead_form_thank_you_page_spec.rb
+spec/models/meta_page_ownership_business_spec.rb
+spec/models/meta_page_ownership_instagram_business_account_spec.rb
+spec/models/meta_page_ownership_spec.rb
+spec/models/meta_page_partner_spec.rb
 spec/models/meta_placement_assets_rules_inner_placements_spec.rb
 spec/models/meta_placement_assets_rules_inner_spec.rb
 spec/models/meta_placement_assets_spec.rb
@@ -6528,6 +6598,7 @@ spec/models/remediate_phone_number_request_documents_inner_spec.rb
 spec/models/remediate_phone_number_request_spec.rb
 spec/models/remove_account_callout200_response_spec.rb
 spec/models/remove_account_callout_request_spec.rb
+spec/models/remove_ad_account_user200_response_spec.rb
 spec/models/remove_ad_group_assets_request_spec.rb
 spec/models/remove_ad_keyword200_response_spec.rb
 spec/models/remove_ad_label200_response_spec.rb
@@ -6539,6 +6610,7 @@ spec/models/remove_custom_conversion_goal200_response_spec.rb
 spec/models/remove_discord_member_role200_response_spec.rb
 spec/models/remove_google_asset_group200_response_spec.rb
 spec/models/remove_message_reaction200_response_spec.rb
+spec/models/remove_page_user200_response_spec.rb
 spec/models/remove_tracking_tag_from_store200_response_install_spec.rb
 spec/models/remove_tracking_tag_from_store200_response_spec.rb
 spec/models/remove_whats_app_group_participants_request_spec.rb
@@ -6594,6 +6666,7 @@ spec/models/review_phone_number_kyc_packet_request_spec.rb
 spec/models/review_webhook_review_reply_spec.rb
 spec/models/review_webhook_review_reviewer_spec.rb
 spec/models/review_webhook_review_spec.rb
+spec/models/revoke_business_partner200_response_spec.rb
 spec/models/revoke_connected_app200_response_spec.rb
 spec/models/rf_prediction_spec.rb
 spec/models/rotate_sip_trunk_credentials200_response_spec.rb
@@ -6848,6 +6921,8 @@ spec/models/update_account_structured_snippets_request_spec.rb
 spec/models/update_account_structured_snippets_request_updates_inner_spec.rb
 spec/models/update_ad200_response_spec.rb
 spec/models/update_ad_account200_response_dsa_defaults_spec.rb
+spec/models/update_ad_account200_response_settings_funding_source_spec.rb
+spec/models/update_ad_account200_response_settings_spec.rb
 spec/models/update_ad_account200_response_spec.rb
 spec/models/update_ad_account_manager_link_request_spec.rb
 spec/models/update_ad_account_request_spec.rb

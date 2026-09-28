@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **ad_account_id** | **String** |  | [optional] |
 | **dsa_defaults** | [**UpdateAdAccount200ResponseDsaDefaults**](UpdateAdAccount200ResponseDsaDefaults.md) |  | [optional] |
+| **settings** | [**UpdateAdAccount200ResponseSettings**](UpdateAdAccount200ResponseSettings.md) |  | [optional] |
 
 ## Example
 
@@ -14,7 +15,8 @@ require 'zernio-sdk'
 
 instance = Zernio::UpdateAdAccount200Response.new(
   ad_account_id: null,
-  dsa_defaults: null
+  dsa_defaults: null,
+  settings: null
 )
 ```
 

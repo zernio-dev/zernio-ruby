@@ -13,9 +13,12 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_instagram_follow_status**](AccountsApi.md#get_instagram_follow_status) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account |
 | [**get_slack_settings**](AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings |
 | [**get_tik_tok_creator_info**](AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info |
+| [**grant_business_partner**](AccountsApi.md#grant_business_partner) | **POST** /v1/accounts/{accountId}/business-partners | Share the Page with a partner business |
 | [**list_accounts**](AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts |
+| [**list_business_partners**](AccountsApi.md#list_business_partners) | **GET** /v1/accounts/{accountId}/business-partners | List partner businesses of the Page |
 | [**list_tik_tok_commercial_music**](AccountsApi.md#list_tik_tok_commercial_music) | **GET** /v1/accounts/{accountId}/tiktok/commercial-music | List trending commercial music |
 | [**move_account_to_profile**](AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile |
+| [**revoke_business_partner**](AccountsApi.md#revoke_business_partner) | **DELETE** /v1/accounts/{accountId}/business-partners | Revoke a partner business from the Page |
 | [**search_tik_tok_locations**](AccountsApi.md#search_tik_tok_locations) | **GET** /v1/accounts/{accountId}/tiktok/locations | Search TikTok location tags |
 | [**update_account**](AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account |
 | [**update_bluesky_settings**](AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings |
@@ -669,6 +672,77 @@ end
 - **Accept**: application/json
 
 
+## grant_business_partner
+
+> <GrantBusinessPartner201Response> grant_business_partner(account_id, grant_business_partner_request)
+
+Share the Page with a partner business
+
+Grants a partner business portfolio tasks on the Facebook Page behind this account. With `ADVERTISE`, the partner can run ads for the Page from ad accounts in its own portfolio, which is how an integrator advertises for an end user without touching the end user's ad accounts.  Meta only lets a user token share a Page that a business portfolio owns. A Page outside any portfolio must first be claimed into one at business.facebook.com; this endpoint answers `422` until that is done. Granting to a portfolio that already has access replaces its task set, so the call is safe to repeat.  After the grant, the partner assigns its own people to the Page with `POST /v1/ads/page-users`; Meta does not assign partner admins automatically. The Instagram professional account linked to the Page is returned in `page` so the partner can reference it; Meta exposes no API to share Instagram accounts, that is done in Business Settings. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id of the Facebook or Instagram account.
+grant_business_partner_request = Zernio::GrantBusinessPartnerRequest.new({business_id: 'business_id_example'}) # GrantBusinessPartnerRequest | 
+
+begin
+  # Share the Page with a partner business
+  result = api_instance.grant_business_partner(account_id, grant_business_partner_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->grant_business_partner: #{e}"
+end
+```
+
+#### Using the grant_business_partner_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GrantBusinessPartner201Response>, Integer, Hash)> grant_business_partner_with_http_info(account_id, grant_business_partner_request)
+
+```ruby
+begin
+  # Share the Page with a partner business
+  data, status_code, headers = api_instance.grant_business_partner_with_http_info(account_id, grant_business_partner_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GrantBusinessPartner201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->grant_business_partner_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id of the Facebook or Instagram account. |  |
+| **grant_business_partner_request** | [**GrantBusinessPartnerRequest**](GrantBusinessPartnerRequest.md) |  |  |
+
+### Return type
+
+[**GrantBusinessPartner201Response**](GrantBusinessPartner201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## list_accounts
 
 > <AccountsListResponse> list_accounts(opts)
@@ -739,6 +813,75 @@ end
 ### Return type
 
 [**AccountsListResponse**](AccountsListResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_business_partners
+
+> <ListBusinessPartners200Response> list_business_partners(account_id)
+
+List partner businesses of the Page
+
+The business portfolios (Meta Business Managers) that may act on the Facebook Page behind this account, plus the Page's owning portfolio and linked Instagram professional account. Works on Facebook accounts and on Instagram accounts connected through Facebook Login. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id of the Facebook or Instagram account.
+
+begin
+  # List partner businesses of the Page
+  result = api_instance.list_business_partners(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->list_business_partners: #{e}"
+end
+```
+
+#### Using the list_business_partners_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListBusinessPartners200Response>, Integer, Hash)> list_business_partners_with_http_info(account_id)
+
+```ruby
+begin
+  # List partner businesses of the Page
+  data, status_code, headers = api_instance.list_business_partners_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListBusinessPartners200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->list_business_partners_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id of the Facebook or Instagram account. |  |
+
+### Return type
+
+[**ListBusinessPartners200Response**](ListBusinessPartners200Response.md)
 
 ### Authorization
 
@@ -891,6 +1034,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## revoke_business_partner
+
+> <RevokeBusinessPartner200Response> revoke_business_partner(account_id, business_id)
+
+Revoke a partner business from the Page
+
+Removes every task the partner business portfolio held on the Page.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id of the Facebook or Instagram account.
+business_id = 'business_id_example' # String | Meta business portfolio id of the partner (numeric string).
+
+begin
+  # Revoke a partner business from the Page
+  result = api_instance.revoke_business_partner(account_id, business_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->revoke_business_partner: #{e}"
+end
+```
+
+#### Using the revoke_business_partner_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RevokeBusinessPartner200Response>, Integer, Hash)> revoke_business_partner_with_http_info(account_id, business_id)
+
+```ruby
+begin
+  # Revoke a partner business from the Page
+  data, status_code, headers = api_instance.revoke_business_partner_with_http_info(account_id, business_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RevokeBusinessPartner200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->revoke_business_partner_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id of the Facebook or Instagram account. |  |
+| **business_id** | **String** | Meta business portfolio id of the partner (numeric string). |  |
+
+### Return type
+
+[**RevokeBusinessPartner200Response**](RevokeBusinessPartner200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

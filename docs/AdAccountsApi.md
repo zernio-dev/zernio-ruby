@@ -7,6 +7,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**add_account_callouts**](AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account callouts |
 | [**add_account_sitelinks**](AdAccountsApi.md#add_account_sitelinks) | **POST** /v1/ads/accounts/sitelinks | Add account sitelinks |
 | [**add_account_structured_snippets**](AdAccountsApi.md#add_account_structured_snippets) | **POST** /v1/ads/accounts/structured-snippets | Add account snippets |
+| [**assign_ad_account_user**](AdAccountsApi.md#assign_ad_account_user) | **POST** /v1/ads/accounts/users | Assign a user to an ad account |
+| [**assign_page_user**](AdAccountsApi.md#assign_page_user) | **POST** /v1/ads/page-users | Assign a user to a Page |
 | [**attach_ad_label**](AdAccountsApi.md#attach_ad_label) | **POST** /v1/ads/labels/{labelId}/assignments | Attach a Google Ads label |
 | [**create_ad_account**](AdAccountsApi.md#create_ad_account) | **POST** /v1/ads/accounts | Create Meta ad account |
 | [**create_ad_label**](AdAccountsApi.md#create_ad_label) | **POST** /v1/ads/labels | Create a Google Ads label |
@@ -32,6 +34,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_account_callouts**](AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account callouts |
 | [**list_account_sitelinks**](AdAccountsApi.md#list_account_sitelinks) | **GET** /v1/ads/accounts/sitelinks | List account sitelinks |
 | [**list_account_structured_snippets**](AdAccountsApi.md#list_account_structured_snippets) | **GET** /v1/ads/accounts/structured-snippets | List account snippets |
+| [**list_ad_account_users**](AdAccountsApi.md#list_ad_account_users) | **GET** /v1/ads/accounts/users | Ad account users |
 | [**list_ad_accounts**](AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_labels**](AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | List ad labels |
 | [**list_ad_negative_keyword_lists**](AdAccountsApi.md#list_ad_negative_keyword_lists) | **GET** /v1/ads/accounts/negative-keyword-lists | List negative keyword lists |
@@ -42,13 +45,17 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_advertisable_applications**](AdAccountsApi.md#list_advertisable_applications) | **GET** /v1/ads/advertisable-applications | List advertisable apps |
 | [**list_custom_conversions**](AdAccountsApi.md#list_custom_conversions) | **GET** /v1/accounts/{accountId}/custom-conversions | List custom conversions |
 | [**list_high_demand_periods**](AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | List high-demand periods |
+| [**list_meta_business_users**](AdAccountsApi.md#list_meta_business_users) | **GET** /v1/ads/businesses/users | Business users |
 | [**list_meta_businesses**](AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list |
+| [**list_page_users**](AdAccountsApi.md#list_page_users) | **GET** /v1/ads/page-users | Page users of a business |
 | [**list_tik_tok_ad_pixels**](AdAccountsApi.md#list_tik_tok_ad_pixels) | **GET** /v1/ads/pixels | List TikTok ad pixels |
 | [**list_value_rule_sets**](AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets |
 | [**remove_account_callout**](AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove account callout |
 | [**remove_account_sitelink**](AdAccountsApi.md#remove_account_sitelink) | **DELETE** /v1/ads/accounts/sitelinks | Remove account sitelink |
 | [**remove_account_structured_snippet**](AdAccountsApi.md#remove_account_structured_snippet) | **DELETE** /v1/ads/accounts/structured-snippets | Remove account snippet |
+| [**remove_ad_account_user**](AdAccountsApi.md#remove_ad_account_user) | **DELETE** /v1/ads/accounts/users | Remove a user from an ad account |
 | [**remove_ad_label**](AdAccountsApi.md#remove_ad_label) | **DELETE** /v1/ads/labels/{labelId} | Remove a Google Ads label |
+| [**remove_page_user**](AdAccountsApi.md#remove_page_user) | **DELETE** /v1/ads/page-users | Remove a user from a Page |
 | [**replace_ad_negative_keyword_list_keywords**](AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords |
 | [**reply_to_ad_comment**](AdAccountsApi.md#reply_to_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/reply | Reply to an ad comment |
 | [**update_account_callouts**](AdAccountsApi.md#update_account_callouts) | **PUT** /v1/ads/accounts/callouts | Update account callouts |
@@ -257,6 +264,144 @@ end
 ### Return type
 
 [**AddAccountStructuredSnippets201Response**](AddAccountStructuredSnippets201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## assign_ad_account_user
+
+> <AssignAdAccountUser201Response> assign_ad_account_user(assign_ad_account_user_request)
+
+Assign a user to an ad account
+
+Gives a person of the portfolio tasks on the ad account. `MANAGE` is admin, `ADVERTISE` creates and edits ads, `ANALYZE` reads reports, `DRAFT` edits drafts only. Assigning an already assigned user replaces their task set.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+assign_ad_account_user_request = Zernio::AssignAdAccountUserRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', user_id: 'user_id_example', tasks: ['MANAGE']}) # AssignAdAccountUserRequest | 
+
+begin
+  # Assign a user to an ad account
+  result = api_instance.assign_ad_account_user(assign_ad_account_user_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->assign_ad_account_user: #{e}"
+end
+```
+
+#### Using the assign_ad_account_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AssignAdAccountUser201Response>, Integer, Hash)> assign_ad_account_user_with_http_info(assign_ad_account_user_request)
+
+```ruby
+begin
+  # Assign a user to an ad account
+  data, status_code, headers = api_instance.assign_ad_account_user_with_http_info(assign_ad_account_user_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AssignAdAccountUser201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->assign_ad_account_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **assign_ad_account_user_request** | [**AssignAdAccountUserRequest**](AssignAdAccountUserRequest.md) |  |  |
+
+### Return type
+
+[**AssignAdAccountUser201Response**](AssignAdAccountUser201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## assign_page_user
+
+> <AssignPageUser201Response> assign_page_user(assign_page_user_request)
+
+Assign a user to a Page
+
+Gives a person of the portfolio tasks on a Page the portfolio owns or was granted as a partner. Meta does not assign partner admins automatically, so after an owner shares a Page the partner calls this for the people whose tokens will advertise for it. `ADVERTISE` is what ad creation needs. Assigning an already assigned user replaces their task set.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+assign_page_user_request = Zernio::AssignPageUserRequest.new({account_id: 'account_id_example', page_id: 'page_id_example', business_id: 'business_id_example', user_id: 'user_id_example', tasks: ['MANAGE']}) # AssignPageUserRequest | 
+
+begin
+  # Assign a user to a Page
+  result = api_instance.assign_page_user(assign_page_user_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->assign_page_user: #{e}"
+end
+```
+
+#### Using the assign_page_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AssignPageUser201Response>, Integer, Hash)> assign_page_user_with_http_info(assign_page_user_request)
+
+```ruby
+begin
+  # Assign a user to a Page
+  data, status_code, headers = api_instance.assign_page_user_with_http_info(assign_page_user_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AssignPageUser201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->assign_page_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **assign_page_user_request** | [**AssignPageUserRequest**](AssignPageUserRequest.md) |  |  |
+
+### Return type
+
+[**AssignPageUser201Response**](AssignPageUser201Response.md)
 
 ### Authorization
 
@@ -1444,7 +1589,7 @@ end
 
 ## get_dsa_defaults
 
-> <UpdateAdAccount200Response> get_dsa_defaults(account_id, ad_account_id)
+> <GetDsaDefaults200Response> get_dsa_defaults(account_id, ad_account_id)
 
 Get ad account DSA defaults
 
@@ -1478,7 +1623,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdAccount200Response>, Integer, Hash)> get_dsa_defaults_with_http_info(account_id, ad_account_id)
+> <Array(<GetDsaDefaults200Response>, Integer, Hash)> get_dsa_defaults_with_http_info(account_id, ad_account_id)
 
 ```ruby
 begin
@@ -1486,7 +1631,7 @@ begin
   data, status_code, headers = api_instance.get_dsa_defaults_with_http_info(account_id, ad_account_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateAdAccount200Response>
+  p data # => <GetDsaDefaults200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->get_dsa_defaults_with_http_info: #{e}"
 end
@@ -1501,7 +1646,7 @@ end
 
 ### Return type
 
-[**UpdateAdAccount200Response**](UpdateAdAccount200Response.md)
+[**GetDsaDefaults200Response**](GetDsaDefaults200Response.md)
 
 ### Authorization
 
@@ -2090,6 +2235,79 @@ end
 ### Return type
 
 [**ListAccountStructuredSnippets200Response**](ListAccountStructuredSnippets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_account_users
+
+> <ListAdAccountUsers200Response> list_ad_account_users(account_id, ad_account_id, business_id)
+
+Ad account users
+
+People of a business portfolio assigned to a Meta ad account, with their tasks. Ids are business-scoped user ids (see `GET /v1/ads/businesses/users`).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+business_id = 'business_id_example' # String | Business portfolio whose people to list.
+
+begin
+  # Ad account users
+  result = api_instance.list_ad_account_users(account_id, ad_account_id, business_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_ad_account_users: #{e}"
+end
+```
+
+#### Using the list_ad_account_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdAccountUsers200Response>, Integer, Hash)> list_ad_account_users_with_http_info(account_id, ad_account_id, business_id)
+
+```ruby
+begin
+  # Ad account users
+  data, status_code, headers = api_instance.list_ad_account_users_with_http_info(account_id, ad_account_id, business_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdAccountUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_ad_account_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **business_id** | **String** | Business portfolio whose people to list. |  |
+
+### Return type
+
+[**ListAdAccountUsers200Response**](ListAdAccountUsers200Response.md)
 
 ### Authorization
 
@@ -2851,6 +3069,77 @@ end
 - **Accept**: application/json
 
 
+## list_meta_business_users
+
+> <ListMetaBusinessUsers200Response> list_meta_business_users(account_id, business_id)
+
+Business users
+
+People and system users of a Meta business portfolio, with the business-scoped ids that `POST /v1/ads/accounts/users` and `POST /v1/ads/page-users` take. The connected Meta user must be an admin of the portfolio.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+business_id = 'business_id_example' # String | Meta business portfolio id.
+
+begin
+  # Business users
+  result = api_instance.list_meta_business_users(account_id, business_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_meta_business_users: #{e}"
+end
+```
+
+#### Using the list_meta_business_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListMetaBusinessUsers200Response>, Integer, Hash)> list_meta_business_users_with_http_info(account_id, business_id)
+
+```ruby
+begin
+  # Business users
+  data, status_code, headers = api_instance.list_meta_business_users_with_http_info(account_id, business_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListMetaBusinessUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_meta_business_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **business_id** | **String** | Meta business portfolio id. |  |
+
+### Return type
+
+[**ListMetaBusinessUsers200Response**](ListMetaBusinessUsers200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_meta_businesses
 
 > <ListMetaBusinesses200Response> list_meta_businesses(account_id, opts)
@@ -2915,6 +3204,79 @@ end
 ### Return type
 
 [**ListMetaBusinesses200Response**](ListMetaBusinesses200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_page_users
+
+> <ListPageUsers200Response> list_page_users(account_id, page_id, business_id)
+
+Page users of a business
+
+People of a business portfolio assigned to a Facebook Page the portfolio owns or was granted as a partner (`POST /v1/accounts/{accountId}/business-partners` on the owner side).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+page_id = 'page_id_example' # String | Facebook Page id.
+business_id = 'business_id_example' # String | Business portfolio whose people to list.
+
+begin
+  # Page users of a business
+  result = api_instance.list_page_users(account_id, page_id, business_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_page_users: #{e}"
+end
+```
+
+#### Using the list_page_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListPageUsers200Response>, Integer, Hash)> list_page_users_with_http_info(account_id, page_id, business_id)
+
+```ruby
+begin
+  # Page users of a business
+  data, status_code, headers = api_instance.list_page_users_with_http_info(account_id, page_id, business_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListPageUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_page_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **page_id** | **String** | Facebook Page id. |  |
+| **business_id** | **String** | Business portfolio whose people to list. |  |
+
+### Return type
+
+[**ListPageUsers200Response**](ListPageUsers200Response.md)
 
 ### Authorization
 
@@ -3287,6 +3649,77 @@ end
 - **Accept**: application/json
 
 
+## remove_ad_account_user
+
+> <RemoveAdAccountUser200Response> remove_ad_account_user(account_id, ad_account_id, user_id)
+
+Remove a user from an ad account
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+user_id = 'user_id_example' # String | Business-scoped user id.
+
+begin
+  # Remove a user from an ad account
+  result = api_instance.remove_ad_account_user(account_id, ad_account_id, user_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_ad_account_user: #{e}"
+end
+```
+
+#### Using the remove_ad_account_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveAdAccountUser200Response>, Integer, Hash)> remove_ad_account_user_with_http_info(account_id, ad_account_id, user_id)
+
+```ruby
+begin
+  # Remove a user from an ad account
+  data, status_code, headers = api_instance.remove_ad_account_user_with_http_info(account_id, ad_account_id, user_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveAdAccountUser200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_ad_account_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **user_id** | **String** | Business-scoped user id. |  |
+
+### Return type
+
+[**RemoveAdAccountUser200Response**](RemoveAdAccountUser200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## remove_ad_label
 
 > <RemoveAdLabel200Response> remove_ad_label(label_id, account_id, opts)
@@ -3353,6 +3786,77 @@ end
 ### Return type
 
 [**RemoveAdLabel200Response**](RemoveAdLabel200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_page_user
+
+> <RemovePageUser200Response> remove_page_user(account_id, page_id, user_id)
+
+Remove a user from a Page
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id used to resolve the Meta token.
+page_id = 'page_id_example' # String | Facebook Page id.
+user_id = 'user_id_example' # String | Business-scoped user id.
+
+begin
+  # Remove a user from a Page
+  result = api_instance.remove_page_user(account_id, page_id, user_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_page_user: #{e}"
+end
+```
+
+#### Using the remove_page_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemovePageUser200Response>, Integer, Hash)> remove_page_user_with_http_info(account_id, page_id, user_id)
+
+```ruby
+begin
+  # Remove a user from a Page
+  data, status_code, headers = api_instance.remove_page_user_with_http_info(account_id, page_id, user_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemovePageUser200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_page_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id used to resolve the Meta token. |  |
+| **page_id** | **String** | Facebook Page id. |  |
+| **user_id** | **String** | Business-scoped user id. |  |
+
+### Return type
+
+[**RemovePageUser200Response**](RemovePageUser200Response.md)
 
 ### Authorization
 
@@ -3727,7 +4231,7 @@ end
 
 Update ad account settings
 
-Sets the default DSA beneficiary and payor on a Meta ad account (EU DSA, Article 26). Set them once and every EU-targeted call to `/v1/ads/create`, `/v1/ads/boost` and `/v1/ads/ctwa` on that ad account can omit `dsaBeneficiary`/`dsaPayor`: Meta applies the defaults automatically.  The values are written to the ad account on Meta, the same setting Ads Manager edits. Nothing is stored in Zernio, and defaults already set in Ads Manager work identically. Zernio never guesses these values for you. Beneficiary and payor are legal disclosures shown to EU users, so you must provide the entity names explicitly. Use `GET /v1/ads/dsa-recommendations` to offer suggestions in your UI.  If `defaultDsaPayor` is omitted, the beneficiary is also set as the payor, which covers the common case where the same entity benefits from and pays for the ads. Read the current values back with `GET /v1/ads/dsa-defaults`.  Currently supported for Meta accounts only; other platforms return 400. 
+Updates a Meta ad account in place: its name, its account-level spend cap, and its default DSA beneficiary and payor. Pass any combination of fields.  **Spend cap.** `spendCap` is the total the account may spend before Meta pauses every campaign in it, in whole units of the account currency. `spendCap: null` removes the cap and `resetAmountSpent: true` restarts the amount counted against it from zero. When `name`, `spendCap` or `resetAmountSpent` is passed, the response carries `settings`, the account's finances re-read after the write (same shape as `GET /v1/ads/accounts/finance`), so the effective cap can be confirmed in one call.  **DSA defaults.** Sets the default DSA beneficiary and payor on the ad account (EU DSA, Article 26). Set them once and every EU-targeted call to `/v1/ads/create`, `/v1/ads/boost` and `/v1/ads/ctwa` on that ad account can omit `dsaBeneficiary`/`dsaPayor`: Meta applies the defaults automatically.  The values are written to the ad account on Meta, the same setting Ads Manager edits. Nothing is stored in Zernio, and defaults already set in Ads Manager work identically. Zernio never guesses these values for you. Beneficiary and payor are legal disclosures shown to EU users, so you must provide the entity names explicitly. Use `GET /v1/ads/dsa-recommendations` to offer suggestions in your UI.  If `defaultDsaPayor` is omitted, the beneficiary is also set as the payor, which covers the common case where the same entity benefits from and pays for the ads. Read the current values back with `GET /v1/ads/dsa-defaults`.  Currently supported for Meta accounts only; other platforms return 400. 
 
 ### Examples
 
@@ -3741,7 +4245,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAccountsApi.new
-update_ad_account_request = Zernio::UpdateAdAccountRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', default_dsa_beneficiary: 'default_dsa_beneficiary_example'}) # UpdateAdAccountRequest | 
+update_ad_account_request = Zernio::UpdateAdAccountRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example'}) # UpdateAdAccountRequest | 
 
 begin
   # Update ad account settings
