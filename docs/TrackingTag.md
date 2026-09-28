@@ -16,6 +16,7 @@
 | **is_unavailable** | **Boolean** | Whether the tag is in a broken/unavailable state (Meta &#x60;is_unavailable&#x60;). | [optional] |
 | **installed** | **Boolean** | Convenience flag derived from &#x60;lastFiredTime&#x60;: has the tag ever fired. | [optional] |
 | **creation_time** | **Integer** | Unix seconds the tag was created. | [optional] |
+| **automatic_matching_fields** | **Array&lt;String&gt;** | Customer data the tag matches automatically, where the platform reports it (Pinterest automatic enhanced match). | [optional] |
 | **owner_business_id** | **String** | Business Manager id that owns the tag, or &#x60;null&#x60; when the tag lives on a personal (non-BM) ad account. Such tags can&#39;t be shared with other ad accounts.  | [optional] |
 | **owner_ad_account_id** | **String** | Ad account id (&#x60;act_...&#x60;) that owns the tag, when reported. | [optional] |
 | **auto_tagging** | **Boolean** | Google Ads: whether gclid auto-tagging is on for the ad account (needed to attribute conversions to clicks). | [optional] |
@@ -38,6 +39,7 @@ instance = Zernio::TrackingTag.new(
   is_unavailable: null,
   installed: null,
   creation_time: null,
+  automatic_matching_fields: null,
   owner_business_id: null,
   owner_ad_account_id: null,
   auto_tagging: null
