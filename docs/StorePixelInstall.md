@@ -5,10 +5,13 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **store_account_id** | **String** |  | [optional] |
-| **platform** | **String** |  | [optional] |
-| **installed** | **Boolean** | Shopify: this tag is the pixel the store fires. WordPress: the Zernio widget for this tag is in an active widget area with its script intact. | [optional] |
+| **platform** | **String** | The store platform. | [optional] |
+| **tag_platform** | **String** | Platform of the tag this install is about (e.g. &#x60;metaads&#x60;). | [optional] |
+| **site_tag_id** | **String** | The id the tag carries on the site (see &#x60;TrackingTag.siteTagId&#x60;). | [optional] |
+| **installed** | **Boolean** | Shopify: this tag is the one the store fires for its platform. WordPress: the Zernio widget for this tag is in an active widget area with its script intact. | [optional] |
 | **shop_domain** | **String** | Shopify only. | [optional] |
-| **installed_tag_id** | **String** | Shopify only: the Meta pixel the store fires now (may be a different tag), or null. | [optional] |
+| **installed_tag_id** | **String** | Shopify only: the tag of the same platform the store fires now (may be a different tag), or null. | [optional] |
+| **tags** | [**Array&lt;StorePixelInstallTagsInner&gt;**](StorePixelInstallTagsInner.md) | GET only on WordPress, always on Shopify: every Zernio tag on the store, all platforms. | [optional] |
 | **web_pixel_id** | **String** | Shopify only: web pixel id, or null when nothing is installed. | [optional] |
 | **site_url** | **String** | WordPress only. | [optional] |
 | **method** | **String** | WordPress only. | [optional] |
@@ -23,9 +26,12 @@ require 'zernio-sdk'
 instance = Zernio::StorePixelInstall.new(
   store_account_id: null,
   platform: null,
+  tag_platform: null,
+  site_tag_id: null,
   installed: null,
   shop_domain: acme.myshopify.com,
   installed_tag_id: null,
+  tags: null,
   web_pixel_id: null,
   site_url: null,
   method: null,
