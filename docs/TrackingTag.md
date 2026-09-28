@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Platform-native tag id, the &#x60;{tagId}&#x60; of the per-tag routes. Meta: numeric pixel id, as a string. OpenAI: the pixel resource id. |  |
 | **site_tag_id** | **String** | The id the on-site code carries. Equals &#x60;id&#x60; on Meta; differs on platforms with separate API and site ids (OpenAI &#x60;pixel_id&#x60;). | [optional] |
-| **events** | [**Array&lt;TrackingTagEventsInner&gt;**](TrackingTagEventsInner.md) | Platforms where each conversion is its own object: the tag&#39;s conversion events, with the id a site sends for each. | [optional] |
+| **events** | [**Array&lt;TrackingTagEvent&gt;**](TrackingTagEvent.md) | Platforms where each conversion is its own object: the tag&#39;s conversion events, with the id a site sends for each. | [optional] |
 | **name** | **String** |  |  |
 | **platform** | **String** |  |  |
 | **kind** | **String** | Platform-native flavor of the tag (Meta: &#x60;pixel&#x60;). |  |

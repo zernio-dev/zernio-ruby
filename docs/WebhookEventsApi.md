@@ -43,6 +43,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_post_recycled**](WebhookEventsApi.md#on_post_recycled) | **POST** /post.recycled | Post recycled event |
 | [**on_post_scheduled**](WebhookEventsApi.md#on_post_scheduled) | **POST** /post.scheduled | Post scheduled event |
 | [**on_post_tik_tok_url_resolved**](WebhookEventsApi.md#on_post_tik_tok_url_resolved) | **POST** /post.tiktok.url_resolved | TikTok post URL resolved event |
+| [**on_rcs_agent_status_updated**](WebhookEventsApi.md#on_rcs_agent_status_updated) | **POST** /rcs.agent.status_updated | RCS agent status updated event |
 | [**on_reaction_received**](WebhookEventsApi.md#on_reaction_received) | **POST** /reaction.received | Reaction received event |
 | [**on_referral_received**](WebhookEventsApi.md#on_referral_received) | **POST** /referral.received | Referral received event |
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
@@ -1568,7 +1569,7 @@ nil (empty response body)
 
 Message read event
 
-Fired when an outgoing message is read by the recipient. Supported on WhatsApp, Facebook Messenger, and Instagram. 
+Fired when an outgoing message is read by the recipient. Supported on WhatsApp, Facebook Messenger, Instagram, and RCS. 
 
 ### Examples
 
@@ -2703,6 +2704,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_post_platform** | [**WebhookPayloadPostPlatform**](WebhookPayloadPostPlatform.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_rcs_agent_status_updated
+
+> on_rcs_agent_status_updated(on_rcs_agent_status_updated_request)
+
+RCS agent status updated event
+
+Fired on every customer-visible status change of an RCS agent: `changes_requested` (we need changes before filing, `reason` is our note), `brand_vetting`, `agent_review`, `testing` (add test phones, then send the launch filing; with a `reason` the launch filing bounced), `launch_review`, `launching`, `live` (the agent can message any RCS-capable phone), `rejected` (`reason` says why) and `deactivated`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_rcs_agent_status_updated_request =  # OnRcsAgentStatusUpdatedRequest | 
+
+begin
+  # RCS agent status updated event
+  api_instance.on_rcs_agent_status_updated(on_rcs_agent_status_updated_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_rcs_agent_status_updated: #{e}"
+end
+```
+
+#### Using the on_rcs_agent_status_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_rcs_agent_status_updated_with_http_info(on_rcs_agent_status_updated_request)
+
+```ruby
+begin
+  # RCS agent status updated event
+  data, status_code, headers = api_instance.on_rcs_agent_status_updated_with_http_info(on_rcs_agent_status_updated_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_rcs_agent_status_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_rcs_agent_status_updated_request** | [**OnRcsAgentStatusUpdatedRequest**](OnRcsAgentStatusUpdatedRequest.md) |  |  |
 
 ### Return type
 

@@ -6,17 +6,21 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**add_tracking_tag_shared_account**](TrackingTagsApi.md#add_tracking_tag_shared_account) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Share with an ad account |
 | [**create_tracking_tag**](TrackingTagsApi.md#create_tracking_tag) | **POST** /v1/accounts/{accountId}/tracking-tags | Create a tracking tag |
+| [**create_tracking_tag_event**](TrackingTagsApi.md#create_tracking_tag_event) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/events | Create a conversion event |
+| [**delete_tracking_tag_event**](TrackingTagsApi.md#delete_tracking_tag_event) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/events/{eventId} | Delete a conversion event |
 | [**get_ad_tracking_tags**](TrackingTagsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags |
 | [**get_tracking_tag**](TrackingTagsApi.md#get_tracking_tag) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId} | Get a tracking tag |
 | [**get_tracking_tag_stats**](TrackingTagsApi.md#get_tracking_tag_stats) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/stats | Get aggregated event stats |
 | [**get_tracking_tag_store_install**](TrackingTagsApi.md#get_tracking_tag_store_install) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Get store install status |
 | [**install_tracking_tag_on_store**](TrackingTagsApi.md#install_tracking_tag_on_store) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Install on a Shopify store or WordPress site |
+| [**list_tracking_tag_events**](TrackingTagsApi.md#list_tracking_tag_events) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/events | List conversion events |
 | [**list_tracking_tag_shared_accounts**](TrackingTagsApi.md#list_tracking_tag_shared_accounts) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | List accounts it is shared with |
 | [**list_tracking_tags**](TrackingTagsApi.md#list_tracking_tags) | **GET** /v1/accounts/{accountId}/tracking-tags | List tracking tags |
 | [**remove_tracking_tag_from_store**](TrackingTagsApi.md#remove_tracking_tag_from_store) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Remove from a Shopify store or WordPress site |
 | [**remove_tracking_tag_shared_account**](TrackingTagsApi.md#remove_tracking_tag_shared_account) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Stop sharing with an account |
 | [**update_ad_tracking_tags**](TrackingTagsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags |
 | [**update_tracking_tag**](TrackingTagsApi.md#update_tracking_tag) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId} | Update a tracking tag |
+| [**update_tracking_tag_event**](TrackingTagsApi.md#update_tracking_tag_event) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId}/events/{eventId} | Update a conversion event |
 
 
 ## add_tracking_tag_shared_account
@@ -160,6 +164,156 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_tracking_tag_event
+
+> <CreateTrackingTagEvent201Response> create_tracking_tag_event(account_id, tag_id, create_tracking_tag_event_request)
+
+Create a conversion event
+
+Creates a conversion event tied to the tag. Pass the platform's own event type in `type` (e.g. Google `PURCHASE`, LinkedIn `ADD_TO_CART`, X `CHECKOUT_INITIATED`) or a neutral `siteEvent` the platform maps to its closest type. Each platform stores a subset of the optional fields; sending one it does not store answers 400 naming the supported fields. NOT idempotent unless noted per platform: do not retry blindly. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Tag id (`TrackingTag.id`).
+create_tracking_tag_event_request = Zernio::CreateTrackingTagEventRequest.new({name: 'name_example'}) # CreateTrackingTagEventRequest | 
+
+begin
+  # Create a conversion event
+  result = api_instance.create_tracking_tag_event(account_id, tag_id, create_tracking_tag_event_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->create_tracking_tag_event: #{e}"
+end
+```
+
+#### Using the create_tracking_tag_event_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateTrackingTagEvent201Response>, Integer, Hash)> create_tracking_tag_event_with_http_info(account_id, tag_id, create_tracking_tag_event_request)
+
+```ruby
+begin
+  # Create a conversion event
+  data, status_code, headers = api_instance.create_tracking_tag_event_with_http_info(account_id, tag_id, create_tracking_tag_event_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateTrackingTagEvent201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->create_tracking_tag_event_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Tag id (&#x60;TrackingTag.id&#x60;). |  |
+| **create_tracking_tag_event_request** | [**CreateTrackingTagEventRequest**](CreateTrackingTagEventRequest.md) |  |  |
+
+### Return type
+
+[**CreateTrackingTagEvent201Response**](CreateTrackingTagEvent201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## delete_tracking_tag_event
+
+> <DeleteTrackingTagEvent200Response> delete_tracking_tag_event(account_id, tag_id, event_id, opts)
+
+Delete a conversion event
+
+Removes the conversion event. Platforms without a hard delete archive or disable it instead; `state` in the response says which (`deleted`, `archived`, `disabled`). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | 
+event_id = 'event_id_example' # String | Event id (`TrackingTagEvent.id`).
+opts = {
+  ad_account_id: 'ad_account_id_example' # String | Scopes the lookup on platforms whose tag ids live inside an ad account.
+}
+
+begin
+  # Delete a conversion event
+  result = api_instance.delete_tracking_tag_event(account_id, tag_id, event_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->delete_tracking_tag_event: #{e}"
+end
+```
+
+#### Using the delete_tracking_tag_event_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteTrackingTagEvent200Response>, Integer, Hash)> delete_tracking_tag_event_with_http_info(account_id, tag_id, event_id, opts)
+
+```ruby
+begin
+  # Delete a conversion event
+  data, status_code, headers = api_instance.delete_tracking_tag_event_with_http_info(account_id, tag_id, event_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteTrackingTagEvent200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->delete_tracking_tag_event_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** |  |  |
+| **event_id** | **String** | Event id (&#x60;TrackingTagEvent.id&#x60;). |  |
+| **ad_account_id** | **String** | Scopes the lookup on platforms whose tag ids live inside an ad account. | [optional] |
+
+### Return type
+
+[**DeleteTrackingTagEvent200Response**](DeleteTrackingTagEvent200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -535,6 +689,81 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## list_tracking_tag_events
+
+> <ListTrackingTagEvents200Response> list_tracking_tag_events(account_id, tag_id, opts)
+
+List conversion events
+
+The tag's conversion events, on platforms where each conversion is its own object: Google conversion actions, LinkedIn conversion rules, X web event tags, OpenAI event settings, TikTok pixel events, Meta custom conversions. Platforms where events are just names the site sends (Pinterest) answer 501. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Tag id (`TrackingTag.id`).
+opts = {
+  ad_account_id: 'ad_account_id_example' # String | Scopes the lookup on platforms whose tag ids live inside an ad account.
+}
+
+begin
+  # List conversion events
+  result = api_instance.list_tracking_tag_events(account_id, tag_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tag_events: #{e}"
+end
+```
+
+#### Using the list_tracking_tag_events_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListTrackingTagEvents200Response>, Integer, Hash)> list_tracking_tag_events_with_http_info(account_id, tag_id, opts)
+
+```ruby
+begin
+  # List conversion events
+  data, status_code, headers = api_instance.list_tracking_tag_events_with_http_info(account_id, tag_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListTrackingTagEvents200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tag_events_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Tag id (&#x60;TrackingTag.id&#x60;). |  |
+| **ad_account_id** | **String** | Scopes the lookup on platforms whose tag ids live inside an ad account. | [optional] |
+
+### Return type
+
+[**ListTrackingTagEvents200Response**](ListTrackingTagEvents200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -966,6 +1195,81 @@ end
 ### Return type
 
 [**GetTrackingTag200Response**](GetTrackingTag200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_tracking_tag_event
+
+> <CreateTrackingTagEvent201Response> update_tracking_tag_event(account_id, tag_id, event_id, tracking_tag_event_input)
+
+Update a conversion event
+
+Partial update; at least one field. A field the platform does not store answers 400.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | 
+event_id = 'event_id_example' # String | Event id (`TrackingTagEvent.id`).
+tracking_tag_event_input = Zernio::TrackingTagEventInput.new # TrackingTagEventInput | 
+
+begin
+  # Update a conversion event
+  result = api_instance.update_tracking_tag_event(account_id, tag_id, event_id, tracking_tag_event_input)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->update_tracking_tag_event: #{e}"
+end
+```
+
+#### Using the update_tracking_tag_event_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateTrackingTagEvent201Response>, Integer, Hash)> update_tracking_tag_event_with_http_info(account_id, tag_id, event_id, tracking_tag_event_input)
+
+```ruby
+begin
+  # Update a conversion event
+  data, status_code, headers = api_instance.update_tracking_tag_event_with_http_info(account_id, tag_id, event_id, tracking_tag_event_input)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateTrackingTagEvent201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->update_tracking_tag_event_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** |  |  |
+| **event_id** | **String** | Event id (&#x60;TrackingTagEvent.id&#x60;). |  |
+| **tracking_tag_event_input** | [**TrackingTagEventInput**](TrackingTagEventInput.md) |  |  |
+
+### Return type
+
+[**CreateTrackingTagEvent201Response**](CreateTrackingTagEvent201Response.md)
 
 ### Authorization
 
