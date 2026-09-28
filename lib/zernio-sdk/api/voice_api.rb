@@ -621,7 +621,7 @@ module Zernio
     end
 
     # Hang up a live call
-    # Hangs up a live call on demand, including an outbound call that is still ringing and has not been answered yet (the callee stops ringing immediately). Idempotent: ending a call that already ended (or never connected) returns success with the call's current status. Final duration/cost are written asynchronously when the hangup event lands, so the call doc may briefly still show its prior status. 
+    # Hangs up a live call on demand, including an outbound call that is still ringing and has not been answered yet (the callee stops ringing immediately). Works for PSTN calls and for WhatsApp calls (the `callId` returned by `POST /v1/whatsapp/calls`, or an inbound WhatsApp call id). A WhatsApp call forwarded to a `wss://` destination also ends automatically when that WebSocket closes. Idempotent: ending a call that already ended (or never connected) returns success with the call's current status. Final duration/cost are written asynchronously when the hangup event lands, so the call doc may briefly still show its prior status. 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @return [EndVoiceCall200Response]
@@ -631,7 +631,7 @@ module Zernio
     end
 
     # Hang up a live call
-    # Hangs up a live call on demand, including an outbound call that is still ringing and has not been answered yet (the callee stops ringing immediately). Idempotent: ending a call that already ended (or never connected) returns success with the call&#39;s current status. Final duration/cost are written asynchronously when the hangup event lands, so the call doc may briefly still show its prior status. 
+    # Hangs up a live call on demand, including an outbound call that is still ringing and has not been answered yet (the callee stops ringing immediately). Works for PSTN calls and for WhatsApp calls (the &#x60;callId&#x60; returned by &#x60;POST /v1/whatsapp/calls&#x60;, or an inbound WhatsApp call id). A WhatsApp call forwarded to a &#x60;wss://&#x60; destination also ends automatically when that WebSocket closes. Idempotent: ending a call that already ended (or never connected) returns success with the call&#39;s current status. Final duration/cost are written asynchronously when the hangup event lands, so the call doc may briefly still show its prior status. 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(EndVoiceCall200Response, Integer, Hash)>] EndVoiceCall200Response data, response status code and response headers
