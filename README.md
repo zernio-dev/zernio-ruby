@@ -756,6 +756,7 @@ Class | Method | HTTP request | Description
 *Zernio::SlackApi* | [**list_slack_members**](docs/SlackApi.md#list_slack_members) | **GET** /v1/accounts/{accountId}/slack-members | List Slack workspace members
 *Zernio::ToolsApi* | [**download_tik_tok_video**](docs/ToolsApi.md#download_tik_tok_video) | **GET** /v1/tools/tiktok/download | Download a TikTok video
 *Zernio::TrackingTagsApi* | [**add_tracking_tag_shared_account**](docs/TrackingTagsApi.md#add_tracking_tag_shared_account) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Share with an ad account
+*Zernio::TrackingTagsApi* | [**assign_tracking_tag_user**](docs/TrackingTagsApi.md#assign_tracking_tag_user) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/users | Assign a user to a tag
 *Zernio::TrackingTagsApi* | [**create_tracking_tag**](docs/TrackingTagsApi.md#create_tracking_tag) | **POST** /v1/accounts/{accountId}/tracking-tags | Create a tracking tag
 *Zernio::TrackingTagsApi* | [**create_tracking_tag_event**](docs/TrackingTagsApi.md#create_tracking_tag_event) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/events | Create a conversion event
 *Zernio::TrackingTagsApi* | [**delete_tracking_tag_event**](docs/TrackingTagsApi.md#delete_tracking_tag_event) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/events/{eventId} | Delete a conversion event
@@ -766,10 +767,13 @@ Class | Method | HTTP request | Description
 *Zernio::TrackingTagsApi* | [**get_tracking_tag_store_install**](docs/TrackingTagsApi.md#get_tracking_tag_store_install) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Get store install status
 *Zernio::TrackingTagsApi* | [**install_tracking_tag_on_store**](docs/TrackingTagsApi.md#install_tracking_tag_on_store) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Install on a Shopify store or WordPress site
 *Zernio::TrackingTagsApi* | [**list_tracking_tag_events**](docs/TrackingTagsApi.md#list_tracking_tag_events) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/events | List conversion events
+*Zernio::TrackingTagsApi* | [**list_tracking_tag_partners**](docs/TrackingTagsApi.md#list_tracking_tag_partners) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/partners | List partner businesses of a tag
 *Zernio::TrackingTagsApi* | [**list_tracking_tag_shared_accounts**](docs/TrackingTagsApi.md#list_tracking_tag_shared_accounts) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | List accounts it is shared with
+*Zernio::TrackingTagsApi* | [**list_tracking_tag_users**](docs/TrackingTagsApi.md#list_tracking_tag_users) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/users | List tag users
 *Zernio::TrackingTagsApi* | [**list_tracking_tags**](docs/TrackingTagsApi.md#list_tracking_tags) | **GET** /v1/accounts/{accountId}/tracking-tags | List tracking tags
 *Zernio::TrackingTagsApi* | [**remove_tracking_tag_from_store**](docs/TrackingTagsApi.md#remove_tracking_tag_from_store) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Remove from a Shopify store or WordPress site
 *Zernio::TrackingTagsApi* | [**remove_tracking_tag_shared_account**](docs/TrackingTagsApi.md#remove_tracking_tag_shared_account) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Stop sharing with an account
+*Zernio::TrackingTagsApi* | [**remove_tracking_tag_user**](docs/TrackingTagsApi.md#remove_tracking_tag_user) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/users/{userId} | Remove a user from a tag
 *Zernio::TrackingTagsApi* | [**update_ad_tracking_tags**](docs/TrackingTagsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags
 *Zernio::TrackingTagsApi* | [**update_tracking_tag**](docs/TrackingTagsApi.md#update_tracking_tag) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId} | Update a tracking tag
 *Zernio::TrackingTagsApi* | [**update_tracking_tag_event**](docs/TrackingTagsApi.md#update_tracking_tag_event) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId}/events/{eventId} | Update a conversion event
@@ -1043,6 +1047,8 @@ Class | Method | HTTP request | Description
  - [Zernio::AssignPageUser201Response](docs/AssignPageUser201Response.md)
  - [Zernio::AssignPageUser201ResponseUser](docs/AssignPageUser201ResponseUser.md)
  - [Zernio::AssignPageUserRequest](docs/AssignPageUserRequest.md)
+ - [Zernio::AssignTrackingTagUser200Response](docs/AssignTrackingTagUser200Response.md)
+ - [Zernio::AssignTrackingTagUserRequest](docs/AssignTrackingTagUserRequest.md)
  - [Zernio::AttachAdGroupAssets201Response](docs/AttachAdGroupAssets201Response.md)
  - [Zernio::AttachAdLabel200Response](docs/AttachAdLabel200Response.md)
  - [Zernio::AttachBrandedCallingNumbersRequest](docs/AttachBrandedCallingNumbersRequest.md)
@@ -2359,7 +2365,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ListTikTokCommercialMusic200ResponseTracksInner](docs/ListTikTokCommercialMusic200ResponseTracksInner.md)
  - [Zernio::ListTikTokCommercialMusic200ResponseTracksInnerClip](docs/ListTikTokCommercialMusic200ResponseTracksInnerClip.md)
  - [Zernio::ListTrackingTagEvents200Response](docs/ListTrackingTagEvents200Response.md)
+ - [Zernio::ListTrackingTagPartners200Response](docs/ListTrackingTagPartners200Response.md)
  - [Zernio::ListTrackingTagSharedAccounts200Response](docs/ListTrackingTagSharedAccounts200Response.md)
+ - [Zernio::ListTrackingTagUsers200Response](docs/ListTrackingTagUsers200Response.md)
  - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
  - [Zernio::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
@@ -2608,6 +2616,7 @@ Class | Method | HTTP request | Description
  - [Zernio::RemovePageUser200Response](docs/RemovePageUser200Response.md)
  - [Zernio::RemoveTrackingTagFromStore200Response](docs/RemoveTrackingTagFromStore200Response.md)
  - [Zernio::RemoveTrackingTagFromStore200ResponseInstall](docs/RemoveTrackingTagFromStore200ResponseInstall.md)
+ - [Zernio::RemoveTrackingTagUser200Response](docs/RemoveTrackingTagUser200Response.md)
  - [Zernio::RemoveWhatsAppGroupParticipantsRequest](docs/RemoveWhatsAppGroupParticipantsRequest.md)
  - [Zernio::ReplaceAdAudienceCompanies200Response](docs/ReplaceAdAudienceCompanies200Response.md)
  - [Zernio::ReplaceAdAudienceCompaniesRequest](docs/ReplaceAdAudienceCompaniesRequest.md)
@@ -2886,6 +2895,8 @@ Class | Method | HTTP request | Description
  - [Zernio::TrackingTagEvent](docs/TrackingTagEvent.md)
  - [Zernio::TrackingTagEventInput](docs/TrackingTagEventInput.md)
  - [Zernio::TrackingTagInstallBlockedReason](docs/TrackingTagInstallBlockedReason.md)
+ - [Zernio::TrackingTagPartner](docs/TrackingTagPartner.md)
+ - [Zernio::TrackingTagUser](docs/TrackingTagUser.md)
  - [Zernio::TransferVoiceCall200Response](docs/TransferVoiceCall200Response.md)
  - [Zernio::TransferVoiceCallRequest](docs/TransferVoiceCallRequest.md)
  - [Zernio::TriggerWorkflow200Response](docs/TriggerWorkflow200Response.md)

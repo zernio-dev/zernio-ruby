@@ -125,6 +125,8 @@ docs/AssignGoogleBusinessLocationRequest.md
 docs/AssignPageUser201Response.md
 docs/AssignPageUser201ResponseUser.md
 docs/AssignPageUserRequest.md
+docs/AssignTrackingTagUser200Response.md
+docs/AssignTrackingTagUserRequest.md
 docs/AttachAdGroupAssets201Response.md
 docs/AttachAdLabel200Response.md
 docs/AttachBrandedCallingNumbersRequest.md
@@ -1469,7 +1471,9 @@ docs/ListTikTokCommercialMusic200Response.md
 docs/ListTikTokCommercialMusic200ResponseTracksInner.md
 docs/ListTikTokCommercialMusic200ResponseTracksInnerClip.md
 docs/ListTrackingTagEvents200Response.md
+docs/ListTrackingTagPartners200Response.md
 docs/ListTrackingTagSharedAccounts200Response.md
+docs/ListTrackingTagUsers200Response.md
 docs/ListTrackingTags200Response.md
 docs/ListUsers200Response.md
 docs/ListUsers200ResponseUsersInner.md
@@ -1732,6 +1736,7 @@ docs/RemoveMessageReaction200Response.md
 docs/RemovePageUser200Response.md
 docs/RemoveTrackingTagFromStore200Response.md
 docs/RemoveTrackingTagFromStore200ResponseInstall.md
+docs/RemoveTrackingTagUser200Response.md
 docs/RemoveWhatsAppGroupParticipantsRequest.md
 docs/ReplaceAdAudienceCompanies200Response.md
 docs/ReplaceAdAudienceCompaniesRequest.md
@@ -2015,6 +2020,8 @@ docs/TrackingTagDiagnostic.md
 docs/TrackingTagEvent.md
 docs/TrackingTagEventInput.md
 docs/TrackingTagInstallBlockedReason.md
+docs/TrackingTagPartner.md
+docs/TrackingTagUser.md
 docs/TrackingTagsApi.md
 docs/TransferVoiceCall200Response.md
 docs/TransferVoiceCallRequest.md
@@ -2700,6 +2707,8 @@ lib/zernio-sdk/models/assign_google_business_location_request.rb
 lib/zernio-sdk/models/assign_page_user201_response.rb
 lib/zernio-sdk/models/assign_page_user201_response_user.rb
 lib/zernio-sdk/models/assign_page_user_request.rb
+lib/zernio-sdk/models/assign_tracking_tag_user200_response.rb
+lib/zernio-sdk/models/assign_tracking_tag_user_request.rb
 lib/zernio-sdk/models/attach_ad_group_assets201_response.rb
 lib/zernio-sdk/models/attach_ad_label200_response.rb
 lib/zernio-sdk/models/attach_branded_calling_numbers_request.rb
@@ -4016,7 +4025,9 @@ lib/zernio-sdk/models/list_tik_tok_commercial_music200_response.rb
 lib/zernio-sdk/models/list_tik_tok_commercial_music200_response_tracks_inner.rb
 lib/zernio-sdk/models/list_tik_tok_commercial_music200_response_tracks_inner_clip.rb
 lib/zernio-sdk/models/list_tracking_tag_events200_response.rb
+lib/zernio-sdk/models/list_tracking_tag_partners200_response.rb
 lib/zernio-sdk/models/list_tracking_tag_shared_accounts200_response.rb
+lib/zernio-sdk/models/list_tracking_tag_users200_response.rb
 lib/zernio-sdk/models/list_tracking_tags200_response.rb
 lib/zernio-sdk/models/list_users200_response.rb
 lib/zernio-sdk/models/list_users200_response_users_inner.rb
@@ -4265,6 +4276,7 @@ lib/zernio-sdk/models/remove_message_reaction200_response.rb
 lib/zernio-sdk/models/remove_page_user200_response.rb
 lib/zernio-sdk/models/remove_tracking_tag_from_store200_response.rb
 lib/zernio-sdk/models/remove_tracking_tag_from_store200_response_install.rb
+lib/zernio-sdk/models/remove_tracking_tag_user200_response.rb
 lib/zernio-sdk/models/remove_whats_app_group_participants_request.rb
 lib/zernio-sdk/models/replace_ad_audience_companies200_response.rb
 lib/zernio-sdk/models/replace_ad_audience_companies_request.rb
@@ -4543,6 +4555,8 @@ lib/zernio-sdk/models/tracking_tag_diagnostic.rb
 lib/zernio-sdk/models/tracking_tag_event.rb
 lib/zernio-sdk/models/tracking_tag_event_input.rb
 lib/zernio-sdk/models/tracking_tag_install_blocked_reason.rb
+lib/zernio-sdk/models/tracking_tag_partner.rb
+lib/zernio-sdk/models/tracking_tag_user.rb
 lib/zernio-sdk/models/transfer_voice_call200_response.rb
 lib/zernio-sdk/models/transfer_voice_call_request.rb
 lib/zernio-sdk/models/trigger_workflow200_response.rb
@@ -5206,6 +5220,8 @@ spec/models/assign_google_business_location_request_spec.rb
 spec/models/assign_page_user201_response_spec.rb
 spec/models/assign_page_user201_response_user_spec.rb
 spec/models/assign_page_user_request_spec.rb
+spec/models/assign_tracking_tag_user200_response_spec.rb
+spec/models/assign_tracking_tag_user_request_spec.rb
 spec/models/attach_ad_group_assets201_response_spec.rb
 spec/models/attach_ad_label200_response_spec.rb
 spec/models/attach_branded_calling_numbers_request_signature_spec.rb
@@ -6522,7 +6538,9 @@ spec/models/list_tik_tok_commercial_music200_response_spec.rb
 spec/models/list_tik_tok_commercial_music200_response_tracks_inner_clip_spec.rb
 spec/models/list_tik_tok_commercial_music200_response_tracks_inner_spec.rb
 spec/models/list_tracking_tag_events200_response_spec.rb
+spec/models/list_tracking_tag_partners200_response_spec.rb
 spec/models/list_tracking_tag_shared_accounts200_response_spec.rb
+spec/models/list_tracking_tag_users200_response_spec.rb
 spec/models/list_tracking_tags200_response_spec.rb
 spec/models/list_users200_response_spec.rb
 spec/models/list_users200_response_users_inner_spec.rb
@@ -6771,6 +6789,7 @@ spec/models/remove_message_reaction200_response_spec.rb
 spec/models/remove_page_user200_response_spec.rb
 spec/models/remove_tracking_tag_from_store200_response_install_spec.rb
 spec/models/remove_tracking_tag_from_store200_response_spec.rb
+spec/models/remove_tracking_tag_user200_response_spec.rb
 spec/models/remove_whats_app_group_participants_request_spec.rb
 spec/models/replace_ad_audience_companies200_response_spec.rb
 spec/models/replace_ad_audience_companies_request_companies_inner_spec.rb
@@ -7048,7 +7067,9 @@ spec/models/tracking_tag_diagnostic_spec.rb
 spec/models/tracking_tag_event_input_spec.rb
 spec/models/tracking_tag_event_spec.rb
 spec/models/tracking_tag_install_blocked_reason_spec.rb
+spec/models/tracking_tag_partner_spec.rb
 spec/models/tracking_tag_spec.rb
+spec/models/tracking_tag_user_spec.rb
 spec/models/transfer_voice_call200_response_spec.rb
 spec/models/transfer_voice_call_request_spec.rb
 spec/models/trigger_workflow200_response_execution_spec.rb

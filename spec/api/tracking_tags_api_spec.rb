@@ -46,6 +46,20 @@ describe 'TrackingTagsApi' do
     end
   end
 
+  # unit tests for assign_tracking_tag_user
+  # Assign a user to a tag
+  # Gives a user of the owning business access to the tag. Assigning an already assigned user replaces their task set.  Meta: &#x60;tasks&#x60; are &#x60;AA_ANALYZE&#x60;, &#x60;ADVERTISE&#x60;, &#x60;ANALYZE&#x60;, &#x60;EDIT&#x60;, &#x60;UPLOAD&#x60;; &#x60;userId&#x60; is the business-scoped id from &#x60;GET /v1/ads/businesses/users&#x60;. A pixel on a personal ad account answers 400. Needs &#x60;business_management&#x60; like the list. 
+  # @param account_id 
+  # @param tag_id Tag id (&#x60;TrackingTag.id&#x60;).
+  # @param assign_tracking_tag_user_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AssignTrackingTagUser200Response]
+  describe 'assign_tracking_tag_user test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_tracking_tag
   # Create a tracking tag
   # Meta: creates a Meta Pixel on the given ad account (&#x60;POST /act_{id}/adspixels&#x60;, where &#x60;name&#x60; is the only input). Returns the created tag including its install &#x60;code&#x60;. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with &#x60;ownerBusinessId: null&#x60; and can&#39;t be shared with other ad accounts.  Creating a Meta pixel does NOT install it. Install the returned &#x60;code&#x60; snippet on the site, or send events server-side via &#x60;POST /v1/ads/conversions&#x60;. The check &#x60;installed&#x60; is derived from &#x60;lastFiredTime&#x60;.  OpenAI Ads: creates an OpenAI pixel AND provisions a Conversions API key for it in the same call (&#x60;adAccountId&#x60; is required by this endpoint but ignored: one API key maps to exactly one ad account, so there&#39;s nothing to select). Returns 422 (&#x60;FEATURE_NOT_AVAILABLE&#x60;) if the ad account isn&#39;t enabled for pixel management; contact your OpenAI partner representative to enable it. There is no delete API for OpenAI pixels. If the pixel is created but the Conversions API key provisioning then fails, the pixel is left live on OpenAI (it cannot be cleaned up) and the error message names the surviving pixel id and warns against retrying, since a retry would create a second, orphaned pixel.  NOT idempotent on either platform: each call creates a new pixel (and, for OpenAI, a new Conversions API key plus, with &#x60;defaultEventType&#x60;, a new conversion event setting). Do not retry blindly on timeout. Meta (platform &#x60;metaads&#x60;) and OpenAI Ads (platform &#x60;openaiads&#x60;); other platforms return 501.  LinkedIn (&#x60;linkedinads&#x60;): creates the ad account&#39;s Insight Tag (&#x60;POST /rest/insightTags&#x60;). Idempotent: an ad account holds at most one Insight Tag, so when it already has one that tag is returned and nothing is created. &#x60;name&#x60; is ignored (LinkedIn tags have no name) and there is no API to delete an Insight Tag.  Pinterest (platform &#x60;pinterestads&#x60;): creates a Pinterest tag on the numeric ad account &#x60;adAccountId&#x60; (&#x60;POST /v5/ad_accounts/{id}/conversion_tags&#x60;). Returns the tag with Pinterest&#39;s &#x60;code&#x60; snippet. NOT idempotent and Pinterest has no dry-run and no delete for tags, so never retry blindly: list first.  Google Ads (&#x60;googleads&#x60;): every Google Ads account has exactly one Google tag (&#x60;AW-...&#x60;), so this is idempotent. &#x60;adAccountId&#x60; is the 10-digit customer id. When the account already tracks conversions the existing tag is returned (201) and nothing is created. Otherwise a first WEBPAGE conversion action named &#x60;name&#x60; (category DEFAULT) is created, which is what switches Google&#39;s conversion tracking on, and the tag is returned with it as its first event. 
@@ -187,6 +201,19 @@ describe 'TrackingTagsApi' do
     end
   end
 
+  # unit tests for list_tracking_tag_partners
+  # List partner businesses of a tag
+  # Other businesses the tag is shared with. Read-only. Platforms without partner sharing answer 501.  Meta: the pixel&#39;s shared agencies. Sharing a pixel with a new partner is not available: &#x60;/{pixel}/agencies&#x60; answers \&quot;(#3) Application does not have the capability to make this API call\&quot; for our app. 
+  # @param account_id 
+  # @param tag_id Tag id (&#x60;TrackingTag.id&#x60;).
+  # @param [Hash] opts the optional parameters
+  # @return [ListTrackingTagPartners200Response]
+  describe 'list_tracking_tag_partners test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_tracking_tag_shared_accounts
   # List accounts it is shared with
   # Meta (&#x60;metaads&#x60;) and LinkedIn (&#x60;linkedinads&#x60;); other platforms return 501.  LinkedIn (&#x60;linkedinads&#x60;): the ad accounts this connection can see that hold access to the Insight Tag; the role (&#x60;FULL&#x60; or &#x60;USE_ONLY&#x60;) is appended to &#x60;name&#x60;. LinkedIn exposes permissions per ad account only, so accounts the connection cannot see are not listed. 
@@ -195,6 +222,19 @@ describe 'TrackingTagsApi' do
   # @param [Hash] opts the optional parameters
   # @return [ListTrackingTagSharedAccounts200Response]
   describe 'list_tracking_tag_shared_accounts test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_tracking_tag_users
+  # List tag users
+  # People and system users of the owning business with access to the tag. Platforms without tag user assignment answer 501.  Meta: the pixel&#39;s assigned users in its owning Business Manager. A pixel on a personal ad account has no business and returns an empty list. Needs the &#x60;business_management&#x60; permission on the connecting Meta user (an admin of the owning business); without it the call answers 403 asking to reconnect. 
+  # @param account_id 
+  # @param tag_id Tag id (&#x60;TrackingTag.id&#x60;).
+  # @param [Hash] opts the optional parameters
+  # @return [ListTrackingTagUsers200Response]
+  describe 'list_tracking_tag_users test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -237,6 +277,20 @@ describe 'TrackingTagsApi' do
   # @option opts [String] :ad_account_id Ad account to unshare, e.g. &#x60;act_123456789&#x60;. May also be sent in the JSON body.
   # @return [nil]
   describe 'remove_tracking_tag_shared_account test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for remove_tracking_tag_user
+  # Remove a user from a tag
+  # Removes a user&#39;s access to the tag, on platforms whose API allows it.  Meta answers 501: the Business SDK has no delete on the pixel&#39;s assigned users, &#x60;DELETE /{pixel}/assigned_users&#x60; answers \&quot;Unsupported delete request\&quot; (code 100, subcode 33) and re-assigning with no tasks is refused. Remove the user in Business Settings. 
+  # @param account_id 
+  # @param tag_id 
+  # @param user_id User id (&#x60;TrackingTagUser.id&#x60;).
+  # @param [Hash] opts the optional parameters
+  # @return [RemoveTrackingTagUser200Response]
+  describe 'remove_tracking_tag_user test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

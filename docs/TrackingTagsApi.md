@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**add_tracking_tag_shared_account**](TrackingTagsApi.md#add_tracking_tag_shared_account) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Share with an ad account |
+| [**assign_tracking_tag_user**](TrackingTagsApi.md#assign_tracking_tag_user) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/users | Assign a user to a tag |
 | [**create_tracking_tag**](TrackingTagsApi.md#create_tracking_tag) | **POST** /v1/accounts/{accountId}/tracking-tags | Create a tracking tag |
 | [**create_tracking_tag_event**](TrackingTagsApi.md#create_tracking_tag_event) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/events | Create a conversion event |
 | [**delete_tracking_tag_event**](TrackingTagsApi.md#delete_tracking_tag_event) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/events/{eventId} | Delete a conversion event |
@@ -15,10 +16,13 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_tracking_tag_store_install**](TrackingTagsApi.md#get_tracking_tag_store_install) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Get store install status |
 | [**install_tracking_tag_on_store**](TrackingTagsApi.md#install_tracking_tag_on_store) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Install on a Shopify store or WordPress site |
 | [**list_tracking_tag_events**](TrackingTagsApi.md#list_tracking_tag_events) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/events | List conversion events |
+| [**list_tracking_tag_partners**](TrackingTagsApi.md#list_tracking_tag_partners) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/partners | List partner businesses of a tag |
 | [**list_tracking_tag_shared_accounts**](TrackingTagsApi.md#list_tracking_tag_shared_accounts) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | List accounts it is shared with |
+| [**list_tracking_tag_users**](TrackingTagsApi.md#list_tracking_tag_users) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/users | List tag users |
 | [**list_tracking_tags**](TrackingTagsApi.md#list_tracking_tags) | **GET** /v1/accounts/{accountId}/tracking-tags | List tracking tags |
 | [**remove_tracking_tag_from_store**](TrackingTagsApi.md#remove_tracking_tag_from_store) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/install | Remove from a Shopify store or WordPress site |
 | [**remove_tracking_tag_shared_account**](TrackingTagsApi.md#remove_tracking_tag_shared_account) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Stop sharing with an account |
+| [**remove_tracking_tag_user**](TrackingTagsApi.md#remove_tracking_tag_user) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/users/{userId} | Remove a user from a tag |
 | [**update_ad_tracking_tags**](TrackingTagsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags |
 | [**update_tracking_tag**](TrackingTagsApi.md#update_tracking_tag) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId} | Update a tracking tag |
 | [**update_tracking_tag_event**](TrackingTagsApi.md#update_tracking_tag_event) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId}/events/{eventId} | Update a conversion event |
@@ -86,6 +90,79 @@ end
 ### Return type
 
 [**AddTrackingTagSharedAccount201Response**](AddTrackingTagSharedAccount201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## assign_tracking_tag_user
+
+> <AssignTrackingTagUser200Response> assign_tracking_tag_user(account_id, tag_id, assign_tracking_tag_user_request)
+
+Assign a user to a tag
+
+Gives a user of the owning business access to the tag. Assigning an already assigned user replaces their task set.  Meta: `tasks` are `AA_ANALYZE`, `ADVERTISE`, `ANALYZE`, `EDIT`, `UPLOAD`; `userId` is the business-scoped id from `GET /v1/ads/businesses/users`. A pixel on a personal ad account answers 400. Needs `business_management` like the list. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Tag id (`TrackingTag.id`).
+assign_tracking_tag_user_request = Zernio::AssignTrackingTagUserRequest.new({user_id: 'user_id_example', tasks: ['tasks_example']}) # AssignTrackingTagUserRequest | 
+
+begin
+  # Assign a user to a tag
+  result = api_instance.assign_tracking_tag_user(account_id, tag_id, assign_tracking_tag_user_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->assign_tracking_tag_user: #{e}"
+end
+```
+
+#### Using the assign_tracking_tag_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AssignTrackingTagUser200Response>, Integer, Hash)> assign_tracking_tag_user_with_http_info(account_id, tag_id, assign_tracking_tag_user_request)
+
+```ruby
+begin
+  # Assign a user to a tag
+  data, status_code, headers = api_instance.assign_tracking_tag_user_with_http_info(account_id, tag_id, assign_tracking_tag_user_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AssignTrackingTagUser200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->assign_tracking_tag_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Tag id (&#x60;TrackingTag.id&#x60;). |  |
+| **assign_tracking_tag_user_request** | [**AssignTrackingTagUserRequest**](AssignTrackingTagUserRequest.md) |  |  |
+
+### Return type
+
+[**AssignTrackingTagUser200Response**](AssignTrackingTagUser200Response.md)
 
 ### Authorization
 
@@ -839,6 +916,77 @@ end
 - **Accept**: application/json
 
 
+## list_tracking_tag_partners
+
+> <ListTrackingTagPartners200Response> list_tracking_tag_partners(account_id, tag_id)
+
+List partner businesses of a tag
+
+Other businesses the tag is shared with. Read-only. Platforms without partner sharing answer 501.  Meta: the pixel's shared agencies. Sharing a pixel with a new partner is not available: `/{pixel}/agencies` answers \"(#3) Application does not have the capability to make this API call\" for our app. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Tag id (`TrackingTag.id`).
+
+begin
+  # List partner businesses of a tag
+  result = api_instance.list_tracking_tag_partners(account_id, tag_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tag_partners: #{e}"
+end
+```
+
+#### Using the list_tracking_tag_partners_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListTrackingTagPartners200Response>, Integer, Hash)> list_tracking_tag_partners_with_http_info(account_id, tag_id)
+
+```ruby
+begin
+  # List partner businesses of a tag
+  data, status_code, headers = api_instance.list_tracking_tag_partners_with_http_info(account_id, tag_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListTrackingTagPartners200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tag_partners_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Tag id (&#x60;TrackingTag.id&#x60;). |  |
+
+### Return type
+
+[**ListTrackingTagPartners200Response**](ListTrackingTagPartners200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_tracking_tag_shared_accounts
 
 > <ListTrackingTagSharedAccounts200Response> list_tracking_tag_shared_accounts(account_id, tag_id)
@@ -899,6 +1047,77 @@ end
 ### Return type
 
 [**ListTrackingTagSharedAccounts200Response**](ListTrackingTagSharedAccounts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_tracking_tag_users
+
+> <ListTrackingTagUsers200Response> list_tracking_tag_users(account_id, tag_id)
+
+List tag users
+
+People and system users of the owning business with access to the tag. Platforms without tag user assignment answer 501.  Meta: the pixel's assigned users in its owning Business Manager. A pixel on a personal ad account has no business and returns an empty list. Needs the `business_management` permission on the connecting Meta user (an admin of the owning business); without it the call answers 403 asking to reconnect. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Tag id (`TrackingTag.id`).
+
+begin
+  # List tag users
+  result = api_instance.list_tracking_tag_users(account_id, tag_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tag_users: #{e}"
+end
+```
+
+#### Using the list_tracking_tag_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListTrackingTagUsers200Response>, Integer, Hash)> list_tracking_tag_users_with_http_info(account_id, tag_id)
+
+```ruby
+begin
+  # List tag users
+  data, status_code, headers = api_instance.list_tracking_tag_users_with_http_info(account_id, tag_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListTrackingTagUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tag_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Tag id (&#x60;TrackingTag.id&#x60;). |  |
+
+### Return type
+
+[**ListTrackingTagUsers200Response**](ListTrackingTagUsers200Response.md)
 
 ### Authorization
 
@@ -1123,6 +1342,79 @@ end
 ### Return type
 
 nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_tracking_tag_user
+
+> <RemoveTrackingTagUser200Response> remove_tracking_tag_user(account_id, tag_id, user_id)
+
+Remove a user from a tag
+
+Removes a user's access to the tag, on platforms whose API allows it.  Meta answers 501: the Business SDK has no delete on the pixel's assigned users, `DELETE /{pixel}/assigned_users` answers \"Unsupported delete request\" (code 100, subcode 33) and re-assigning with no tasks is refused. Remove the user in Business Settings. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | 
+user_id = 'user_id_example' # String | User id (`TrackingTagUser.id`).
+
+begin
+  # Remove a user from a tag
+  result = api_instance.remove_tracking_tag_user(account_id, tag_id, user_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->remove_tracking_tag_user: #{e}"
+end
+```
+
+#### Using the remove_tracking_tag_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveTrackingTagUser200Response>, Integer, Hash)> remove_tracking_tag_user_with_http_info(account_id, tag_id, user_id)
+
+```ruby
+begin
+  # Remove a user from a tag
+  data, status_code, headers = api_instance.remove_tracking_tag_user_with_http_info(account_id, tag_id, user_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveTrackingTagUser200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->remove_tracking_tag_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** |  |  |
+| **user_id** | **String** | User id (&#x60;TrackingTagUser.id&#x60;). |  |
+
+### Return type
+
+[**RemoveTrackingTagUser200Response**](RemoveTrackingTagUser200Response.md)
 
 ### Authorization
 

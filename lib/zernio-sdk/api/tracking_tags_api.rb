@@ -99,6 +99,86 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Assign a user to a tag
+    # Gives a user of the owning business access to the tag. Assigning an already assigned user replaces their task set.  Meta: `tasks` are `AA_ANALYZE`, `ADVERTISE`, `ANALYZE`, `EDIT`, `UPLOAD`; `userId` is the business-scoped id from `GET /v1/ads/businesses/users`. A pixel on a personal ad account answers 400. Needs `business_management` like the list. 
+    # @param account_id [String] 
+    # @param tag_id [String] Tag id (&#x60;TrackingTag.id&#x60;).
+    # @param assign_tracking_tag_user_request [AssignTrackingTagUserRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AssignTrackingTagUser200Response]
+    def assign_tracking_tag_user(account_id, tag_id, assign_tracking_tag_user_request, opts = {})
+      data, _status_code, _headers = assign_tracking_tag_user_with_http_info(account_id, tag_id, assign_tracking_tag_user_request, opts)
+      data
+    end
+
+    # Assign a user to a tag
+    # Gives a user of the owning business access to the tag. Assigning an already assigned user replaces their task set.  Meta: &#x60;tasks&#x60; are &#x60;AA_ANALYZE&#x60;, &#x60;ADVERTISE&#x60;, &#x60;ANALYZE&#x60;, &#x60;EDIT&#x60;, &#x60;UPLOAD&#x60;; &#x60;userId&#x60; is the business-scoped id from &#x60;GET /v1/ads/businesses/users&#x60;. A pixel on a personal ad account answers 400. Needs &#x60;business_management&#x60; like the list. 
+    # @param account_id [String] 
+    # @param tag_id [String] Tag id (&#x60;TrackingTag.id&#x60;).
+    # @param assign_tracking_tag_user_request [AssignTrackingTagUserRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AssignTrackingTagUser200Response, Integer, Hash)>] AssignTrackingTagUser200Response data, response status code and response headers
+    def assign_tracking_tag_user_with_http_info(account_id, tag_id, assign_tracking_tag_user_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TrackingTagsApi.assign_tracking_tag_user ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TrackingTagsApi.assign_tracking_tag_user"
+      end
+      # verify the required parameter 'tag_id' is set
+      if @api_client.config.client_side_validation && tag_id.nil?
+        fail ArgumentError, "Missing the required parameter 'tag_id' when calling TrackingTagsApi.assign_tracking_tag_user"
+      end
+      # verify the required parameter 'assign_tracking_tag_user_request' is set
+      if @api_client.config.client_side_validation && assign_tracking_tag_user_request.nil?
+        fail ArgumentError, "Missing the required parameter 'assign_tracking_tag_user_request' when calling TrackingTagsApi.assign_tracking_tag_user"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/tracking-tags/{tagId}/users'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'tagId' + '}', CGI.escape(tag_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(assign_tracking_tag_user_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AssignTrackingTagUser200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"TrackingTagsApi.assign_tracking_tag_user",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TrackingTagsApi#assign_tracking_tag_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create a tracking tag
     # Meta: creates a Meta Pixel on the given ad account (`POST /act_{id}/adspixels`, where `name` is the only input). Returns the created tag including its install `code`. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with `ownerBusinessId: null` and can't be shared with other ad accounts.  Creating a Meta pixel does NOT install it. Install the returned `code` snippet on the site, or send events server-side via `POST /v1/ads/conversions`. The check `installed` is derived from `lastFiredTime`.  OpenAI Ads: creates an OpenAI pixel AND provisions a Conversions API key for it in the same call (`adAccountId` is required by this endpoint but ignored: one API key maps to exactly one ad account, so there's nothing to select). Returns 422 (`FEATURE_NOT_AVAILABLE`) if the ad account isn't enabled for pixel management; contact your OpenAI partner representative to enable it. There is no delete API for OpenAI pixels. If the pixel is created but the Conversions API key provisioning then fails, the pixel is left live on OpenAI (it cannot be cleaned up) and the error message names the surviving pixel id and warns against retrying, since a retry would create a second, orphaned pixel.  NOT idempotent on either platform: each call creates a new pixel (and, for OpenAI, a new Conversions API key plus, with `defaultEventType`, a new conversion event setting). Do not retry blindly on timeout. Meta (platform `metaads`) and OpenAI Ads (platform `openaiads`); other platforms return 501.  LinkedIn (`linkedinads`): creates the ad account's Insight Tag (`POST /rest/insightTags`). Idempotent: an ad account holds at most one Insight Tag, so when it already has one that tag is returned and nothing is created. `name` is ignored (LinkedIn tags have no name) and there is no API to delete an Insight Tag.  Pinterest (platform `pinterestads`): creates a Pinterest tag on the numeric ad account `adAccountId` (`POST /v5/ad_accounts/{id}/conversion_tags`). Returns the tag with Pinterest's `code` snippet. NOT idempotent and Pinterest has no dry-run and no delete for tags, so never retry blindly: list first.  Google Ads (`googleads`): every Google Ads account has exactly one Google tag (`AW-...`), so this is idempotent. `adAccountId` is the 10-digit customer id. When the account already tracks conversions the existing tag is returned (201) and nothing is created. Otherwise a first WEBPAGE conversion action named `name` (category DEFAULT) is created, which is what switches Google's conversion tracking on, and the tag is returned with it as its first event. 
     # @param account_id [String] Ads SocialAccount id (platform &#x60;metaads&#x60; or &#x60;openaiads&#x60;).
@@ -851,6 +931,75 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List partner businesses of a tag
+    # Other businesses the tag is shared with. Read-only. Platforms without partner sharing answer 501.  Meta: the pixel's shared agencies. Sharing a pixel with a new partner is not available: `/{pixel}/agencies` answers \"(#3) Application does not have the capability to make this API call\" for our app. 
+    # @param account_id [String] 
+    # @param tag_id [String] Tag id (&#x60;TrackingTag.id&#x60;).
+    # @param [Hash] opts the optional parameters
+    # @return [ListTrackingTagPartners200Response]
+    def list_tracking_tag_partners(account_id, tag_id, opts = {})
+      data, _status_code, _headers = list_tracking_tag_partners_with_http_info(account_id, tag_id, opts)
+      data
+    end
+
+    # List partner businesses of a tag
+    # Other businesses the tag is shared with. Read-only. Platforms without partner sharing answer 501.  Meta: the pixel&#39;s shared agencies. Sharing a pixel with a new partner is not available: &#x60;/{pixel}/agencies&#x60; answers \&quot;(#3) Application does not have the capability to make this API call\&quot; for our app. 
+    # @param account_id [String] 
+    # @param tag_id [String] Tag id (&#x60;TrackingTag.id&#x60;).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListTrackingTagPartners200Response, Integer, Hash)>] ListTrackingTagPartners200Response data, response status code and response headers
+    def list_tracking_tag_partners_with_http_info(account_id, tag_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TrackingTagsApi.list_tracking_tag_partners ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TrackingTagsApi.list_tracking_tag_partners"
+      end
+      # verify the required parameter 'tag_id' is set
+      if @api_client.config.client_side_validation && tag_id.nil?
+        fail ArgumentError, "Missing the required parameter 'tag_id' when calling TrackingTagsApi.list_tracking_tag_partners"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/tracking-tags/{tagId}/partners'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'tagId' + '}', CGI.escape(tag_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListTrackingTagPartners200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"TrackingTagsApi.list_tracking_tag_partners",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TrackingTagsApi#list_tracking_tag_partners\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List accounts it is shared with
     # Meta (`metaads`) and LinkedIn (`linkedinads`); other platforms return 501.  LinkedIn (`linkedinads`): the ad accounts this connection can see that hold access to the Insight Tag; the role (`FULL` or `USE_ONLY`) is appended to `name`. LinkedIn exposes permissions per ad account only, so accounts the connection cannot see are not listed. 
     # @param account_id [String] 
@@ -916,6 +1065,75 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TrackingTagsApi#list_tracking_tag_shared_accounts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List tag users
+    # People and system users of the owning business with access to the tag. Platforms without tag user assignment answer 501.  Meta: the pixel's assigned users in its owning Business Manager. A pixel on a personal ad account has no business and returns an empty list. Needs the `business_management` permission on the connecting Meta user (an admin of the owning business); without it the call answers 403 asking to reconnect. 
+    # @param account_id [String] 
+    # @param tag_id [String] Tag id (&#x60;TrackingTag.id&#x60;).
+    # @param [Hash] opts the optional parameters
+    # @return [ListTrackingTagUsers200Response]
+    def list_tracking_tag_users(account_id, tag_id, opts = {})
+      data, _status_code, _headers = list_tracking_tag_users_with_http_info(account_id, tag_id, opts)
+      data
+    end
+
+    # List tag users
+    # People and system users of the owning business with access to the tag. Platforms without tag user assignment answer 501.  Meta: the pixel&#39;s assigned users in its owning Business Manager. A pixel on a personal ad account has no business and returns an empty list. Needs the &#x60;business_management&#x60; permission on the connecting Meta user (an admin of the owning business); without it the call answers 403 asking to reconnect. 
+    # @param account_id [String] 
+    # @param tag_id [String] Tag id (&#x60;TrackingTag.id&#x60;).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListTrackingTagUsers200Response, Integer, Hash)>] ListTrackingTagUsers200Response data, response status code and response headers
+    def list_tracking_tag_users_with_http_info(account_id, tag_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TrackingTagsApi.list_tracking_tag_users ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TrackingTagsApi.list_tracking_tag_users"
+      end
+      # verify the required parameter 'tag_id' is set
+      if @api_client.config.client_side_validation && tag_id.nil?
+        fail ArgumentError, "Missing the required parameter 'tag_id' when calling TrackingTagsApi.list_tracking_tag_users"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/tracking-tags/{tagId}/users'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'tagId' + '}', CGI.escape(tag_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListTrackingTagUsers200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"TrackingTagsApi.list_tracking_tag_users",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TrackingTagsApi#list_tracking_tag_users\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1133,6 +1351,81 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TrackingTagsApi#remove_tracking_tag_shared_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Remove a user from a tag
+    # Removes a user's access to the tag, on platforms whose API allows it.  Meta answers 501: the Business SDK has no delete on the pixel's assigned users, `DELETE /{pixel}/assigned_users` answers \"Unsupported delete request\" (code 100, subcode 33) and re-assigning with no tasks is refused. Remove the user in Business Settings. 
+    # @param account_id [String] 
+    # @param tag_id [String] 
+    # @param user_id [String] User id (&#x60;TrackingTagUser.id&#x60;).
+    # @param [Hash] opts the optional parameters
+    # @return [RemoveTrackingTagUser200Response]
+    def remove_tracking_tag_user(account_id, tag_id, user_id, opts = {})
+      data, _status_code, _headers = remove_tracking_tag_user_with_http_info(account_id, tag_id, user_id, opts)
+      data
+    end
+
+    # Remove a user from a tag
+    # Removes a user&#39;s access to the tag, on platforms whose API allows it.  Meta answers 501: the Business SDK has no delete on the pixel&#39;s assigned users, &#x60;DELETE /{pixel}/assigned_users&#x60; answers \&quot;Unsupported delete request\&quot; (code 100, subcode 33) and re-assigning with no tasks is refused. Remove the user in Business Settings. 
+    # @param account_id [String] 
+    # @param tag_id [String] 
+    # @param user_id [String] User id (&#x60;TrackingTagUser.id&#x60;).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RemoveTrackingTagUser200Response, Integer, Hash)>] RemoveTrackingTagUser200Response data, response status code and response headers
+    def remove_tracking_tag_user_with_http_info(account_id, tag_id, user_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TrackingTagsApi.remove_tracking_tag_user ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TrackingTagsApi.remove_tracking_tag_user"
+      end
+      # verify the required parameter 'tag_id' is set
+      if @api_client.config.client_side_validation && tag_id.nil?
+        fail ArgumentError, "Missing the required parameter 'tag_id' when calling TrackingTagsApi.remove_tracking_tag_user"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TrackingTagsApi.remove_tracking_tag_user"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/tracking-tags/{tagId}/users/{userId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'tagId' + '}', CGI.escape(tag_id.to_s)).sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveTrackingTagUser200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"TrackingTagsApi.remove_tracking_tag_user",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TrackingTagsApi#remove_tracking_tag_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
