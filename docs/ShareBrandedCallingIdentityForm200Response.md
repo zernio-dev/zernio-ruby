@@ -1,4 +1,4 @@
-# Zernio::ShareSmsRegistration200Response
+# Zernio::ShareBrandedCallingIdentityForm200Response
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ShareSmsRegistration200Response.new(
+instance = Zernio::ShareBrandedCallingIdentityForm200Response.new(
   url: null,
   expires_at: null
 )

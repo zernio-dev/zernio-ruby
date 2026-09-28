@@ -1210,7 +1210,7 @@ end
 
 ## share_sms_registration
 
-> <ShareSmsRegistration200Response> share_sms_registration(share_sms_registration_request)
+> <ShareBrandedCallingIdentityForm200Response> share_sms_registration(share_sms_registration_request)
 
 Create a registration share link
 
@@ -1243,7 +1243,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ShareSmsRegistration200Response>, Integer, Hash)> share_sms_registration_with_http_info(share_sms_registration_request)
+> <Array(<ShareBrandedCallingIdentityForm200Response>, Integer, Hash)> share_sms_registration_with_http_info(share_sms_registration_request)
 
 ```ruby
 begin
@@ -1251,7 +1251,7 @@ begin
   data, status_code, headers = api_instance.share_sms_registration_with_http_info(share_sms_registration_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ShareSmsRegistration200Response>
+  p data # => <ShareBrandedCallingIdentityForm200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling SMSApi->share_sms_registration_with_http_info: #{e}"
 end
@@ -1265,7 +1265,7 @@ end
 
 ### Return type
 
-[**ShareSmsRegistration200Response**](ShareSmsRegistration200Response.md)
+[**ShareBrandedCallingIdentityForm200Response**](ShareBrandedCallingIdentityForm200Response.md)
 
 ### Authorization
 

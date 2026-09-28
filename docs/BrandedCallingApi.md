@@ -19,6 +19,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_branded_calling_identity_numbers**](BrandedCallingApi.md#list_branded_calling_identity_numbers) | **GET** /v1/branded-calling/identities/{id}/numbers | List the numbers on a caller identity |
 | [**preflight_branded_calling_identity**](BrandedCallingApi.md#preflight_branded_calling_identity) | **POST** /v1/branded-calling/identities/preflight | Dry-run a caller identity before creating it |
 | [**resend_branded_calling_authorizer_code**](BrandedCallingApi.md#resend_branded_calling_authorizer_code) | **POST** /v1/branded-calling/identities/{id}/verify-email | Resend the authorizer&#39;s code |
+| [**share_branded_calling_identity_form**](BrandedCallingApi.md#share_branded_calling_identity_form) | **POST** /v1/branded-calling/share | Create a caller identity share link |
 | [**update_branded_calling_identity**](BrandedCallingApi.md#update_branded_calling_identity) | **PATCH** /v1/branded-calling/identities/{id} | Edit or resubmit a caller identity |
 
 
@@ -1051,6 +1052,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## share_branded_calling_identity_form
+
+> <ShareBrandedCallingIdentityForm200Response> share_branded_calling_identity_form(opts)
+
+Create a caller identity share link
+
+Creates a single-use link (valid 7 days) where the end business fills in the caller identity itself, with no Zernio login: display name, logo, call reasons, the authorizer and the three references. What it submits lands under your team as `requested`, the same review as an API submission, and `branded_calling.identity.status_updated` fires. Scope the link with `identityId` (complete an identity that is `requested` or `changes_requested`), with `enterpriseId` (a new identity for a registered business), or with neither (the business registers itself and its first identity). The person opening the link can forward a fresh one to someone else, which retires theirs. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::BrandedCallingApi.new
+opts = {
+  share_branded_calling_identity_form_request: Zernio::ShareBrandedCallingIdentityFormRequest.new # ShareBrandedCallingIdentityFormRequest | 
+}
+
+begin
+  # Create a caller identity share link
+  result = api_instance.share_branded_calling_identity_form(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling BrandedCallingApi->share_branded_calling_identity_form: #{e}"
+end
+```
+
+#### Using the share_branded_calling_identity_form_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ShareBrandedCallingIdentityForm200Response>, Integer, Hash)> share_branded_calling_identity_form_with_http_info(opts)
+
+```ruby
+begin
+  # Create a caller identity share link
+  data, status_code, headers = api_instance.share_branded_calling_identity_form_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ShareBrandedCallingIdentityForm200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling BrandedCallingApi->share_branded_calling_identity_form_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **share_branded_calling_identity_form_request** | [**ShareBrandedCallingIdentityFormRequest**](ShareBrandedCallingIdentityFormRequest.md) |  | [optional] |
+
+### Return type
+
+[**ShareBrandedCallingIdentityForm200Response**](ShareBrandedCallingIdentityForm200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
