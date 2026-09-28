@@ -120,6 +120,8 @@ docs/AssignGoogleBusinessLocation200ResponseAccount.md
 docs/AssignGoogleBusinessLocationRequest.md
 docs/AttachAdGroupAssets201Response.md
 docs/AttachAdLabel200Response.md
+docs/AttachBrandedCallingNumbersRequest.md
+docs/AttachBrandedCallingNumbersRequestSignature.md
 docs/AttachCampaignAssets201Response.md
 docs/AttachCampaignAssetsRequest.md
 docs/AttachNumberToSipTrunk200Response.md
@@ -164,6 +166,19 @@ docs/BoostPostRequestTargetingCitiesInner.md
 docs/BoostPostRequestTargetingCustomLocationsInner.md
 docs/BoostPostRequestTracking.md
 docs/BoostPostRequestTrackingUrlTagsInner.md
+docs/BrandedCallingAddress.md
+docs/BrandedCallingApi.md
+docs/BrandedCallingContact.md
+docs/BrandedCallingEnterprise.md
+docs/BrandedCallingIdentity.md
+docs/BrandedCallingIdentityAuthorizer.md
+docs/BrandedCallingIdentityNumber.md
+docs/BrandedCallingIdentityNumberRejectionReason.md
+docs/BrandedCallingIdentityRejectionReasonsInner.md
+docs/BrandedCallingIdentityReviewRequest.md
+docs/BrandedCallingIdentityReviewRequestPointsInner.md
+docs/BrandedCallingReference.md
+docs/BrandedCallingReferences.md
 docs/BroadcastsApi.md
 docs/BulkCreateContacts200Response.md
 docs/BulkCreateContactsRequest.md
@@ -251,6 +266,7 @@ docs/CompleteWhatsAppPhoneSelection200ResponseAccount.md
 docs/CompleteWhatsAppPhoneSelectionRequest.md
 docs/ConfigureTikTokAdsBrandIdentity200Response.md
 docs/ConfigureTikTokAdsBrandIdentityRequest.md
+docs/ConfirmBrandedCallingAuthorizerEmailRequest.md
 docs/ConnectAds200Response.md
 docs/ConnectAds200ResponseOneOf.md
 docs/ConnectAds200ResponseOneOf1.md
@@ -332,6 +348,9 @@ docs/CreateBlogArticleRequest.md
 docs/CreateBlogArticleRequestImage.md
 docs/CreateBlogArticleRequestSeo.md
 docs/CreateBlogRequest.md
+docs/CreateBrandedCallingEnterpriseRequest.md
+docs/CreateBrandedCallingIdentityRequest.md
+docs/CreateBrandedCallingIdentityRequestAuthorizer.md
 docs/CreateBroadcast200Response.md
 docs/CreateBroadcast200ResponseBroadcast.md
 docs/CreateBroadcastRequest.md
@@ -539,6 +558,7 @@ docs/DeleteAdCreative200Response.md
 docs/DeleteAdNegativeKeywordList200Response.md
 docs/DeleteAdSet200Response.md
 docs/DeleteAdVideo200Response.md
+docs/DeleteBrandedCallingEnterprise200Response.md
 docs/DeleteDiscordScheduledEvent200Response.md
 docs/DeleteGoogleBusinessMedia200Response.md
 docs/DeleteGoogleBusinessPlaceAction200Response.md
@@ -553,6 +573,8 @@ docs/DeleteWhatsAppTemplate200Response.md
 docs/DeleteWhatsAppTemplateById200Response.md
 docs/DeleteWhatsappBusinessUsernameRequest.md
 docs/DetachAdLabel200Response.md
+docs/DetachBrandedCallingNumbers200Response.md
+docs/DetachBrandedCallingNumbersRequest.md
 docs/DetachNumberFromSipTrunk200Response.md
 docs/DialVoiceWebCall200Response.md
 docs/DialVoiceWebCallRequest.md
@@ -1247,6 +1269,10 @@ docs/ListApiKeys200Response.md
 docs/ListBidStrategies200Response.md
 docs/ListBlogArticles200Response.md
 docs/ListBlogs200Response.md
+docs/ListBrandedCallingCallReasons200Response.md
+docs/ListBrandedCallingEnterprises200Response.md
+docs/ListBrandedCallingIdentities200Response.md
+docs/ListBrandedCallingIdentityNumbers200Response.md
 docs/ListBroadcastRecipients200Response.md
 docs/ListBroadcastRecipients200ResponseRecipientsInner.md
 docs/ListBroadcastRecipients200ResponseSummary.md
@@ -1642,6 +1668,7 @@ docs/RequestSmsSenderIdLimitIncrease200Response.md
 docs/RequestSmsSenderIdLimitIncreaseRequest.md
 docs/RequestWhatsAppVerificationCode200Response.md
 docs/RequestWhatsAppVerificationCodeRequest.md
+docs/ResendBrandedCallingAuthorizerCode200Response.md
 docs/ResendSmsRegistrationOtp200Response.md
 docs/ReserveImessageAvailableNumber200Response.md
 docs/ReserveRfPrediction201Response.md
@@ -1974,6 +2001,8 @@ docs/UpdateBlogArticleRequest.md
 docs/UpdateBlogArticleRequestImage.md
 docs/UpdateBlogRequest.md
 docs/UpdateBlueskySettingsRequest.md
+docs/UpdateBrandedCallingIdentityRequest.md
+docs/UpdateBrandedCallingIdentityRequestReviewAnswersValue.md
 docs/UpdateBroadcast200Response.md
 docs/UpdateBroadcast200ResponseBroadcast.md
 docs/UpdateBroadcastRequest.md
@@ -2392,6 +2421,7 @@ lib/zernio-sdk/api/ad_targeting_api.rb
 lib/zernio-sdk/api/analytics_api.rb
 lib/zernio-sdk/api/api_keys_api.rb
 lib/zernio-sdk/api/blogs_api.rb
+lib/zernio-sdk/api/branded_calling_api.rb
 lib/zernio-sdk/api/broadcasts_api.rb
 lib/zernio-sdk/api/business_agent_api.rb
 lib/zernio-sdk/api/calls_api.rb
@@ -2558,6 +2588,8 @@ lib/zernio-sdk/models/assign_google_business_location200_response_account.rb
 lib/zernio-sdk/models/assign_google_business_location_request.rb
 lib/zernio-sdk/models/attach_ad_group_assets201_response.rb
 lib/zernio-sdk/models/attach_ad_label200_response.rb
+lib/zernio-sdk/models/attach_branded_calling_numbers_request.rb
+lib/zernio-sdk/models/attach_branded_calling_numbers_request_signature.rb
 lib/zernio-sdk/models/attach_campaign_assets201_response.rb
 lib/zernio-sdk/models/attach_campaign_assets_request.rb
 lib/zernio-sdk/models/attach_number_to_sip_trunk200_response.rb
@@ -2601,6 +2633,18 @@ lib/zernio-sdk/models/boost_post_request_targeting_cities_inner.rb
 lib/zernio-sdk/models/boost_post_request_targeting_custom_locations_inner.rb
 lib/zernio-sdk/models/boost_post_request_tracking.rb
 lib/zernio-sdk/models/boost_post_request_tracking_url_tags_inner.rb
+lib/zernio-sdk/models/branded_calling_address.rb
+lib/zernio-sdk/models/branded_calling_contact.rb
+lib/zernio-sdk/models/branded_calling_enterprise.rb
+lib/zernio-sdk/models/branded_calling_identity.rb
+lib/zernio-sdk/models/branded_calling_identity_authorizer.rb
+lib/zernio-sdk/models/branded_calling_identity_number.rb
+lib/zernio-sdk/models/branded_calling_identity_number_rejection_reason.rb
+lib/zernio-sdk/models/branded_calling_identity_rejection_reasons_inner.rb
+lib/zernio-sdk/models/branded_calling_identity_review_request.rb
+lib/zernio-sdk/models/branded_calling_identity_review_request_points_inner.rb
+lib/zernio-sdk/models/branded_calling_reference.rb
+lib/zernio-sdk/models/branded_calling_references.rb
 lib/zernio-sdk/models/bulk_create_contacts200_response.rb
 lib/zernio-sdk/models/bulk_create_contacts_request.rb
 lib/zernio-sdk/models/bulk_create_contacts_request_contacts_inner.rb
@@ -2683,6 +2727,7 @@ lib/zernio-sdk/models/complete_whats_app_phone_selection200_response_account.rb
 lib/zernio-sdk/models/complete_whats_app_phone_selection_request.rb
 lib/zernio-sdk/models/configure_tik_tok_ads_brand_identity200_response.rb
 lib/zernio-sdk/models/configure_tik_tok_ads_brand_identity_request.rb
+lib/zernio-sdk/models/confirm_branded_calling_authorizer_email_request.rb
 lib/zernio-sdk/models/connect_ads200_response.rb
 lib/zernio-sdk/models/connect_ads200_response_one_of.rb
 lib/zernio-sdk/models/connect_ads200_response_one_of1.rb
@@ -2760,6 +2805,9 @@ lib/zernio-sdk/models/create_blog_article_request.rb
 lib/zernio-sdk/models/create_blog_article_request_image.rb
 lib/zernio-sdk/models/create_blog_article_request_seo.rb
 lib/zernio-sdk/models/create_blog_request.rb
+lib/zernio-sdk/models/create_branded_calling_enterprise_request.rb
+lib/zernio-sdk/models/create_branded_calling_identity_request.rb
+lib/zernio-sdk/models/create_branded_calling_identity_request_authorizer.rb
 lib/zernio-sdk/models/create_broadcast200_response.rb
 lib/zernio-sdk/models/create_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/create_broadcast_request.rb
@@ -2966,6 +3014,7 @@ lib/zernio-sdk/models/delete_ad_creative200_response.rb
 lib/zernio-sdk/models/delete_ad_negative_keyword_list200_response.rb
 lib/zernio-sdk/models/delete_ad_set200_response.rb
 lib/zernio-sdk/models/delete_ad_video200_response.rb
+lib/zernio-sdk/models/delete_branded_calling_enterprise200_response.rb
 lib/zernio-sdk/models/delete_discord_scheduled_event200_response.rb
 lib/zernio-sdk/models/delete_google_business_media200_response.rb
 lib/zernio-sdk/models/delete_google_business_place_action200_response.rb
@@ -2980,6 +3029,8 @@ lib/zernio-sdk/models/delete_whats_app_template200_response.rb
 lib/zernio-sdk/models/delete_whats_app_template_by_id200_response.rb
 lib/zernio-sdk/models/delete_whatsapp_business_username_request.rb
 lib/zernio-sdk/models/detach_ad_label200_response.rb
+lib/zernio-sdk/models/detach_branded_calling_numbers200_response.rb
+lib/zernio-sdk/models/detach_branded_calling_numbers_request.rb
 lib/zernio-sdk/models/detach_number_from_sip_trunk200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call_request.rb
@@ -3658,6 +3709,10 @@ lib/zernio-sdk/models/list_api_keys200_response.rb
 lib/zernio-sdk/models/list_bid_strategies200_response.rb
 lib/zernio-sdk/models/list_blog_articles200_response.rb
 lib/zernio-sdk/models/list_blogs200_response.rb
+lib/zernio-sdk/models/list_branded_calling_call_reasons200_response.rb
+lib/zernio-sdk/models/list_branded_calling_enterprises200_response.rb
+lib/zernio-sdk/models/list_branded_calling_identities200_response.rb
+lib/zernio-sdk/models/list_branded_calling_identity_numbers200_response.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response_recipients_inner.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response_summary.rb
@@ -4040,6 +4095,7 @@ lib/zernio-sdk/models/request_sms_sender_id_limit_increase200_response.rb
 lib/zernio-sdk/models/request_sms_sender_id_limit_increase_request.rb
 lib/zernio-sdk/models/request_whats_app_verification_code200_response.rb
 lib/zernio-sdk/models/request_whats_app_verification_code_request.rb
+lib/zernio-sdk/models/resend_branded_calling_authorizer_code200_response.rb
 lib/zernio-sdk/models/resend_sms_registration_otp200_response.rb
 lib/zernio-sdk/models/reserve_imessage_available_number200_response.rb
 lib/zernio-sdk/models/reserve_rf_prediction201_response.rb
@@ -4365,6 +4421,8 @@ lib/zernio-sdk/models/update_blog_article_request.rb
 lib/zernio-sdk/models/update_blog_article_request_image.rb
 lib/zernio-sdk/models/update_blog_request.rb
 lib/zernio-sdk/models/update_bluesky_settings_request.rb
+lib/zernio-sdk/models/update_branded_calling_identity_request.rb
+lib/zernio-sdk/models/update_branded_calling_identity_request_review_answers_value.rb
 lib/zernio-sdk/models/update_broadcast200_response.rb
 lib/zernio-sdk/models/update_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/update_broadcast_request.rb
@@ -4768,6 +4826,7 @@ spec/api/ad_targeting_api_spec.rb
 spec/api/analytics_api_spec.rb
 spec/api/api_keys_api_spec.rb
 spec/api/blogs_api_spec.rb
+spec/api/branded_calling_api_spec.rb
 spec/api/broadcasts_api_spec.rb
 spec/api/business_agent_api_spec.rb
 spec/api/calls_api_spec.rb
@@ -4929,6 +4988,8 @@ spec/models/assign_google_business_location200_response_spec.rb
 spec/models/assign_google_business_location_request_spec.rb
 spec/models/attach_ad_group_assets201_response_spec.rb
 spec/models/attach_ad_label200_response_spec.rb
+spec/models/attach_branded_calling_numbers_request_signature_spec.rb
+spec/models/attach_branded_calling_numbers_request_spec.rb
 spec/models/attach_campaign_assets201_response_spec.rb
 spec/models/attach_campaign_assets_request_spec.rb
 spec/models/attach_number_to_sip_trunk200_response_spec.rb
@@ -4972,6 +5033,18 @@ spec/models/boost_post_request_targeting_custom_locations_inner_spec.rb
 spec/models/boost_post_request_targeting_spec.rb
 spec/models/boost_post_request_tracking_spec.rb
 spec/models/boost_post_request_tracking_url_tags_inner_spec.rb
+spec/models/branded_calling_address_spec.rb
+spec/models/branded_calling_contact_spec.rb
+spec/models/branded_calling_enterprise_spec.rb
+spec/models/branded_calling_identity_authorizer_spec.rb
+spec/models/branded_calling_identity_number_rejection_reason_spec.rb
+spec/models/branded_calling_identity_number_spec.rb
+spec/models/branded_calling_identity_rejection_reasons_inner_spec.rb
+spec/models/branded_calling_identity_review_request_points_inner_spec.rb
+spec/models/branded_calling_identity_review_request_spec.rb
+spec/models/branded_calling_identity_spec.rb
+spec/models/branded_calling_reference_spec.rb
+spec/models/branded_calling_references_spec.rb
 spec/models/bulk_create_contacts200_response_spec.rb
 spec/models/bulk_create_contacts_request_contacts_inner_spec.rb
 spec/models/bulk_create_contacts_request_spec.rb
@@ -5054,6 +5127,7 @@ spec/models/complete_whats_app_phone_selection200_response_spec.rb
 spec/models/complete_whats_app_phone_selection_request_spec.rb
 spec/models/configure_tik_tok_ads_brand_identity200_response_spec.rb
 spec/models/configure_tik_tok_ads_brand_identity_request_spec.rb
+spec/models/confirm_branded_calling_authorizer_email_request_spec.rb
 spec/models/connect_ads200_response_one_of1_spec.rb
 spec/models/connect_ads200_response_one_of_spec.rb
 spec/models/connect_ads200_response_spec.rb
@@ -5131,6 +5205,9 @@ spec/models/create_blog_article_request_image_spec.rb
 spec/models/create_blog_article_request_seo_spec.rb
 spec/models/create_blog_article_request_spec.rb
 spec/models/create_blog_request_spec.rb
+spec/models/create_branded_calling_enterprise_request_spec.rb
+spec/models/create_branded_calling_identity_request_authorizer_spec.rb
+spec/models/create_branded_calling_identity_request_spec.rb
 spec/models/create_broadcast200_response_broadcast_spec.rb
 spec/models/create_broadcast200_response_spec.rb
 spec/models/create_broadcast_request_message_attachments_inner_spec.rb
@@ -5337,6 +5414,7 @@ spec/models/delete_ad_creative200_response_spec.rb
 spec/models/delete_ad_negative_keyword_list200_response_spec.rb
 spec/models/delete_ad_set200_response_spec.rb
 spec/models/delete_ad_video200_response_spec.rb
+spec/models/delete_branded_calling_enterprise200_response_spec.rb
 spec/models/delete_discord_scheduled_event200_response_spec.rb
 spec/models/delete_google_business_media200_response_spec.rb
 spec/models/delete_google_business_place_action200_response_spec.rb
@@ -5351,6 +5429,8 @@ spec/models/delete_whats_app_template200_response_spec.rb
 spec/models/delete_whats_app_template_by_id200_response_spec.rb
 spec/models/delete_whatsapp_business_username_request_spec.rb
 spec/models/detach_ad_label200_response_spec.rb
+spec/models/detach_branded_calling_numbers200_response_spec.rb
+spec/models/detach_branded_calling_numbers_request_spec.rb
 spec/models/detach_number_from_sip_trunk200_response_spec.rb
 spec/models/dial_voice_web_call200_response_spec.rb
 spec/models/dial_voice_web_call_request_spec.rb
@@ -6029,6 +6109,10 @@ spec/models/list_api_keys200_response_spec.rb
 spec/models/list_bid_strategies200_response_spec.rb
 spec/models/list_blog_articles200_response_spec.rb
 spec/models/list_blogs200_response_spec.rb
+spec/models/list_branded_calling_call_reasons200_response_spec.rb
+spec/models/list_branded_calling_enterprises200_response_spec.rb
+spec/models/list_branded_calling_identities200_response_spec.rb
+spec/models/list_branded_calling_identity_numbers200_response_spec.rb
 spec/models/list_broadcast_recipients200_response_recipients_inner_spec.rb
 spec/models/list_broadcast_recipients200_response_spec.rb
 spec/models/list_broadcast_recipients200_response_summary_spec.rb
@@ -6411,6 +6495,7 @@ spec/models/request_sms_sender_id_limit_increase200_response_spec.rb
 spec/models/request_sms_sender_id_limit_increase_request_spec.rb
 spec/models/request_whats_app_verification_code200_response_spec.rb
 spec/models/request_whats_app_verification_code_request_spec.rb
+spec/models/resend_branded_calling_authorizer_code200_response_spec.rb
 spec/models/resend_sms_registration_otp200_response_spec.rb
 spec/models/reserve_imessage_available_number200_response_spec.rb
 spec/models/reserve_rf_prediction201_response_spec.rb
@@ -6736,6 +6821,8 @@ spec/models/update_blog_article_request_image_spec.rb
 spec/models/update_blog_article_request_spec.rb
 spec/models/update_blog_request_spec.rb
 spec/models/update_bluesky_settings_request_spec.rb
+spec/models/update_branded_calling_identity_request_review_answers_value_spec.rb
+spec/models/update_branded_calling_identity_request_spec.rb
 spec/models/update_broadcast200_response_broadcast_spec.rb
 spec/models/update_broadcast200_response_spec.rb
 spec/models/update_broadcast_request_message_spec.rb
