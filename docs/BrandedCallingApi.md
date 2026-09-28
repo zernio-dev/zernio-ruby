@@ -17,6 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_branded_calling_enterprises**](BrandedCallingApi.md#list_branded_calling_enterprises) | **GET** /v1/branded-calling/enterprises | List registered businesses |
 | [**list_branded_calling_identities**](BrandedCallingApi.md#list_branded_calling_identities) | **GET** /v1/branded-calling/identities | List caller identities |
 | [**list_branded_calling_identity_numbers**](BrandedCallingApi.md#list_branded_calling_identity_numbers) | **GET** /v1/branded-calling/identities/{id}/numbers | List the numbers on a caller identity |
+| [**preflight_branded_calling_identity**](BrandedCallingApi.md#preflight_branded_calling_identity) | **POST** /v1/branded-calling/identities/preflight | Dry-run a caller identity before creating it |
 | [**resend_branded_calling_authorizer_code**](BrandedCallingApi.md#resend_branded_calling_authorizer_code) | **POST** /v1/branded-calling/identities/{id}/verify-email | Resend the authorizer&#39;s code |
 | [**update_branded_calling_identity**](BrandedCallingApi.md#update_branded_calling_identity) | **PATCH** /v1/branded-calling/identities/{id} | Edit or resubmit a caller identity |
 
@@ -165,11 +166,11 @@ end
 
 ## create_branded_calling_enterprise
 
-> <BrandedCallingEnterprise> create_branded_calling_enterprise(create_branded_calling_enterprise_request)
+> <BrandedCallingEnterprise> create_branded_calling_enterprise(create_branded_calling_enterprise_request, opts)
 
 Register a business for Branded Calling
 
-Stores the legal entity behind your caller identities. Nothing is filed with the carrier until the business's first identity passes review. Only businesses registered in the US or Canada qualify (a FEIN or Canadian equivalent is required); any other country returns `422`. 
+Stores the legal entity behind your caller identities. Nothing is filed with the carrier until the business's first identity passes review. Only businesses registered in the US or Canada qualify (a FEIN or Canadian equivalent is required); any other country returns `422`. Send an `Idempotency-Key` so a retry replays the original response instead of registering the business twice. 
 
 ### Examples
 
@@ -184,10 +185,13 @@ end
 
 api_instance = Zernio::BrandedCallingApi.new
 create_branded_calling_enterprise_request = Zernio::CreateBrandedCallingEnterpriseRequest.new({legal_name: 'legal_name_example', doing_business_as: 'doing_business_as_example', organization_type: 'commercial', organization_legal_type: 'corporation', country_code: 'country_code_example', jurisdiction_of_incorporation: 'jurisdiction_of_incorporation_example', website: 'website_example', fein: 'fein_example', industry: 'industry_example', number_of_employees: '1-10', organization_contact: Zernio::BrandedCallingContact.new({first_name: 'first_name_example', last_name: 'last_name_example', email: 'email_example', phone_number: 'phone_number_example'}), billing_contact: Zernio::BrandedCallingContact.new({first_name: 'first_name_example', last_name: 'last_name_example', email: 'email_example', phone_number: 'phone_number_example'}), physical_address: Zernio::BrandedCallingAddress.new({street_address: 'street_address_example', city: 'city_example', administrative_area: 'administrative_area_example', postal_code: 'postal_code_example', country: 'country_example'}), billing_address: Zernio::BrandedCallingAddress.new({street_address: 'street_address_example', city: 'city_example', administrative_area: 'administrative_area_example', postal_code: 'postal_code_example', country: 'country_example'})}) # CreateBrandedCallingEnterpriseRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+}
 
 begin
   # Register a business for Branded Calling
-  result = api_instance.create_branded_calling_enterprise(create_branded_calling_enterprise_request)
+  result = api_instance.create_branded_calling_enterprise(create_branded_calling_enterprise_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling BrandedCallingApi->create_branded_calling_enterprise: #{e}"
@@ -198,12 +202,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BrandedCallingEnterprise>, Integer, Hash)> create_branded_calling_enterprise_with_http_info(create_branded_calling_enterprise_request)
+> <Array(<BrandedCallingEnterprise>, Integer, Hash)> create_branded_calling_enterprise_with_http_info(create_branded_calling_enterprise_request, opts)
 
 ```ruby
 begin
   # Register a business for Branded Calling
-  data, status_code, headers = api_instance.create_branded_calling_enterprise_with_http_info(create_branded_calling_enterprise_request)
+  data, status_code, headers = api_instance.create_branded_calling_enterprise_with_http_info(create_branded_calling_enterprise_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BrandedCallingEnterprise>
@@ -217,6 +221,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_branded_calling_enterprise_request** | [**CreateBrandedCallingEnterpriseRequest**](CreateBrandedCallingEnterpriseRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 
@@ -234,11 +239,11 @@ end
 
 ## create_branded_calling_identity
 
-> <BrandedCallingIdentity> create_branded_calling_identity(create_branded_calling_identity_request)
+> <BrandedCallingIdentity> create_branded_calling_identity(create_branded_calling_identity_request, opts)
 
 Create a caller identity
 
-A caller identity is what the callee sees: display name, logo and call reasons, backed by a registered business and three references the carrier vetting team phones. It starts in Zernio review (`requested`). Once approved, the carrier emails the authorizer a 6-digit code; confirm it with the verify-email endpoint and the identity goes into carrier vetting on its own. Track it with `GET` or the `branded_calling.identity.status_updated` webhook.  Billing: $100 per identity per month, the first month charged when the identity is filed with the carrier and not refunded if the carrier rejects it, then monthly while the identity exists. Branded calls add $0.10 each, counted on every outbound call from a verified branded number to a US destination (whether or not the callee's carrier displayed the branding); the surcharge shows as `brandedCallUSD` on the call's billing and in `GET /v1/voice/calls/estimate` when you pass `from`. 
+A caller identity is what the callee sees: display name, logo and call reasons, backed by a registered business and three references the carrier vetting team phones. It starts in Zernio review (`requested`). Once approved, the carrier emails the authorizer a 6-digit code; confirm it with the verify-email endpoint and the identity goes into carrier vetting on its own. Track it with `GET` or the `branded_calling.identity.status_updated` webhook.  Billing: $100 per identity per month, the first month charged when the identity is filed with the carrier and not refunded if the carrier rejects it, then monthly while the identity exists. Branded calls add $0.10 each, counted on every outbound call from a verified branded number to a US destination (whether or not the callee's carrier displayed the branding); the surcharge shows as `brandedCallUSD` on the call's billing and in `GET /v1/voice/calls/estimate` when you pass `from`.  Run `POST /v1/branded-calling/identities/preflight` with the same body first to catch what the review would bounce. Send an `Idempotency-Key` so a retry replays the original response instead of creating a second identity. 
 
 ### Examples
 
@@ -253,10 +258,13 @@ end
 
 api_instance = Zernio::BrandedCallingApi.new
 create_branded_calling_identity_request = Zernio::CreateBrandedCallingIdentityRequest.new({enterprise_id: 'enterprise_id_example', display_name: 'display_name_example', call_reasons: ['call_reasons_example'], authorizer: Zernio::CreateBrandedCallingIdentityRequestAuthorizer.new({name: 'name_example', email: 'email_example'}), references: Zernio::BrandedCallingReferences.new({business: [Zernio::BrandedCallingReference.new({full_name: 'full_name_example', phone_number: 'phone_number_example', email: 'email_example', timezone: 'timezone_example'})], financial: Zernio::BrandedCallingReference.new({full_name: 'full_name_example', phone_number: 'phone_number_example', email: 'email_example', timezone: 'timezone_example'})})}) # CreateBrandedCallingIdentityRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+}
 
 begin
   # Create a caller identity
-  result = api_instance.create_branded_calling_identity(create_branded_calling_identity_request)
+  result = api_instance.create_branded_calling_identity(create_branded_calling_identity_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling BrandedCallingApi->create_branded_calling_identity: #{e}"
@@ -267,12 +275,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BrandedCallingIdentity>, Integer, Hash)> create_branded_calling_identity_with_http_info(create_branded_calling_identity_request)
+> <Array(<BrandedCallingIdentity>, Integer, Hash)> create_branded_calling_identity_with_http_info(create_branded_calling_identity_request, opts)
 
 ```ruby
 begin
   # Create a caller identity
-  data, status_code, headers = api_instance.create_branded_calling_identity_with_http_info(create_branded_calling_identity_request)
+  data, status_code, headers = api_instance.create_branded_calling_identity_with_http_info(create_branded_calling_identity_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BrandedCallingIdentity>
@@ -286,6 +294,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_branded_calling_identity_request** | [**CreateBrandedCallingIdentityRequest**](CreateBrandedCallingIdentityRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 
@@ -904,6 +913,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## preflight_branded_calling_identity
+
+> <PreflightBrandedCallingIdentity200Response> preflight_branded_calling_identity(preflight_branded_calling_identity_request)
+
+Dry-run a caller identity before creating it
+
+Validates the exact body `POST /v1/branded-calling/identities` takes and runs the same deterministic lints the review runs on it without creating anything, with the same codes and fields the queued identity's findings carry. A `block` finding is what the review would bounce (two references sharing a phone, a reference inside the business, an invalid timezone); a `warn` finding slows vetting (a display name that does not read as the business, a call reason outside the carrier catalogue, a public-mailbox authorizer, a logo that does not answer). `ok` is true when there is no `block`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::BrandedCallingApi.new
+preflight_branded_calling_identity_request = Zernio::PreflightBrandedCallingIdentityRequest.new({enterprise_id: 'enterprise_id_example', display_name: 'display_name_example', call_reasons: ['call_reasons_example'], authorizer: Zernio::PreflightBrandedCallingIdentityRequestAuthorizer.new({name: 'name_example', email: 'email_example'}), references: Zernio::BrandedCallingReferences.new({business: [Zernio::BrandedCallingReference.new({full_name: 'full_name_example', phone_number: 'phone_number_example', email: 'email_example', timezone: 'timezone_example'})], financial: Zernio::BrandedCallingReference.new({full_name: 'full_name_example', phone_number: 'phone_number_example', email: 'email_example', timezone: 'timezone_example'})})}) # PreflightBrandedCallingIdentityRequest | 
+
+begin
+  # Dry-run a caller identity before creating it
+  result = api_instance.preflight_branded_calling_identity(preflight_branded_calling_identity_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling BrandedCallingApi->preflight_branded_calling_identity: #{e}"
+end
+```
+
+#### Using the preflight_branded_calling_identity_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PreflightBrandedCallingIdentity200Response>, Integer, Hash)> preflight_branded_calling_identity_with_http_info(preflight_branded_calling_identity_request)
+
+```ruby
+begin
+  # Dry-run a caller identity before creating it
+  data, status_code, headers = api_instance.preflight_branded_calling_identity_with_http_info(preflight_branded_calling_identity_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PreflightBrandedCallingIdentity200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling BrandedCallingApi->preflight_branded_calling_identity_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **preflight_branded_calling_identity_request** | [**PreflightBrandedCallingIdentityRequest**](PreflightBrandedCallingIdentityRequest.md) |  |  |
+
+### Return type
+
+[**PreflightBrandedCallingIdentity200Response**](PreflightBrandedCallingIdentity200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

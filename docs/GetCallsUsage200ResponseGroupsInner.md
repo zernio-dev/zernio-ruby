@@ -10,6 +10,8 @@
 | **minutes** | **Float** |  | [optional] |
 | **billable_usd** | **Float** |  | [optional] |
 | **meta_usd** | **Float** |  | [optional] |
+| **branded_calls** | **Integer** |  | [optional] |
+| **branded_call_usd** | **Float** |  | [optional] |
 
 ## Example
 
@@ -22,7 +24,9 @@ instance = Zernio::GetCallsUsage200ResponseGroupsInner.new(
   answered: null,
   minutes: null,
   billable_usd: null,
-  meta_usd: null
+  meta_usd: null,
+  branded_calls: null,
+  branded_call_usd: null
 )
 ```
 
