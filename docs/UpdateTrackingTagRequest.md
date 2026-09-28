@@ -10,6 +10,7 @@
 | **automatic_matching_fields** | **Array&lt;String&gt;** | Which user fields Advanced Matching may collect. Meta&#39;s terse codes: em&#x3D;email, ph&#x3D;phone, fn&#x3D;first name, ln&#x3D;last name, ge&#x3D;gender, db&#x3D;date of birth, ct&#x3D;city, st&#x3D;state, zp&#x3D;zip.  | [optional] |
 | **first_party_cookie_status** | **String** |  | [optional] |
 | **data_use_setting** | **String** |  | [optional] |
+| **enable_first_party_cookies** | **Boolean** | First-party cookie on or off (TikTok, LinkedIn). Platform-neutral alternative to &#x60;firstPartyCookieStatus&#x60;. | [optional] |
 | **auto_tagging** | **Boolean** | Google Ads: turn gclid auto-tagging on or off for the ad account. | [optional] |
 
 ## Example
@@ -24,6 +25,7 @@ instance = Zernio::UpdateTrackingTagRequest.new(
   automatic_matching_fields: null,
   first_party_cookie_status: null,
   data_use_setting: null,
+  enable_first_party_cookies: null,
   auto_tagging: null
 )
 ```
