@@ -1002,6 +1002,7 @@ docs/GetTikTokSmartPlusMaterialReport200Response.md
 docs/GetTikTokSmartPlusMaterialReport200ResponseRowsInner.md
 docs/GetTikTokSmartPlusMaterialReport200ResponseRowsInnerMetrics.md
 docs/GetTrackingTag200Response.md
+docs/GetTrackingTagDiagnostics200Response.md
 docs/GetTrackingTagStats200Response.md
 docs/GetTrackingTagStats200ResponseStats.md
 docs/GetTrackingTagStoreInstall200Response.md
@@ -2010,6 +2011,7 @@ docs/TikTokPlatformData.md
 docs/TikTokPlatformDataMusicSoundInfo.md
 docs/ToolsApi.md
 docs/TrackingTag.md
+docs/TrackingTagDiagnostic.md
 docs/TrackingTagEvent.md
 docs/TrackingTagEventInput.md
 docs/TrackingTagInstallBlockedReason.md
@@ -3553,6 +3555,7 @@ lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response.rb
 lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response_rows_inner.rb
 lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_metrics.rb
 lib/zernio-sdk/models/get_tracking_tag200_response.rb
+lib/zernio-sdk/models/get_tracking_tag_diagnostics200_response.rb
 lib/zernio-sdk/models/get_tracking_tag_stats200_response.rb
 lib/zernio-sdk/models/get_tracking_tag_stats200_response_stats.rb
 lib/zernio-sdk/models/get_tracking_tag_store_install200_response.rb
@@ -4536,6 +4539,7 @@ lib/zernio-sdk/models/tik_tok_dry_run_verdict_tiktok_inner.rb
 lib/zernio-sdk/models/tik_tok_platform_data.rb
 lib/zernio-sdk/models/tik_tok_platform_data_music_sound_info.rb
 lib/zernio-sdk/models/tracking_tag.rb
+lib/zernio-sdk/models/tracking_tag_diagnostic.rb
 lib/zernio-sdk/models/tracking_tag_event.rb
 lib/zernio-sdk/models/tracking_tag_event_input.rb
 lib/zernio-sdk/models/tracking_tag_install_blocked_reason.rb
@@ -6057,6 +6061,7 @@ spec/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_metric
 spec/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_spec.rb
 spec/models/get_tik_tok_smart_plus_material_report200_response_spec.rb
 spec/models/get_tracking_tag200_response_spec.rb
+spec/models/get_tracking_tag_diagnostics200_response_spec.rb
 spec/models/get_tracking_tag_stats200_response_spec.rb
 spec/models/get_tracking_tag_stats200_response_stats_spec.rb
 spec/models/get_tracking_tag_store_install200_response_install_all_of_preflight_spec.rb
@@ -7039,6 +7044,7 @@ spec/models/tik_tok_dry_run_verdict_spec.rb
 spec/models/tik_tok_dry_run_verdict_tiktok_inner_spec.rb
 spec/models/tik_tok_platform_data_music_sound_info_spec.rb
 spec/models/tik_tok_platform_data_spec.rb
+spec/models/tracking_tag_diagnostic_spec.rb
 spec/models/tracking_tag_event_input_spec.rb
 spec/models/tracking_tag_event_spec.rb
 spec/models/tracking_tag_install_blocked_reason_spec.rb

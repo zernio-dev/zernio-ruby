@@ -10,6 +10,7 @@
 | **custom_event_type** | **String** |  | [optional] |
 | **pixel_id** | **String** | Meta&#39;s event_source_id, the pixel the rule reads from. | [optional] |
 | **is_archived** | **Boolean** |  | [optional] |
+| **default_conversion_value** | **Float** | Value Meta assigns a conversion that carries none, in the ad account&#39;s currency. | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::CustomConversion.new(
   rule: null,
   custom_event_type: null,
   pixel_id: null,
-  is_archived: null
+  is_archived: null,
+  default_conversion_value: null
 )
 ```
 

@@ -13,6 +13,7 @@
 | **currency** | **String** | ISO 4217 code. | [optional] |
 | **click_window_days** | **Integer** |  | [optional] |
 | **view_window_days** | **Integer** |  | [optional] |
+| **url_contains** | **String** | Fire only on pages whose URL contains this text (case-insensitive). | [optional] |
 
 ## Example
 
@@ -28,7 +29,8 @@ instance = Zernio::TrackingTagEventInput.new(
   default_value: null,
   currency: null,
   click_window_days: null,
-  view_window_days: null
+  view_window_days: null,
+  url_contains: null
 )
 ```
 
