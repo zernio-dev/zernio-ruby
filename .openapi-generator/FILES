@@ -625,6 +625,8 @@ docs/FacebookPostEarningsResponseMetricsValue.md
 docs/FacebookPostEarningsResponseUnavailableMetricsInner.md
 docs/FacebookSettings.md
 docs/FacebookSettingsCarouselCardsInner.md
+docs/FeedbackApi.md
+docs/FeedbackReceipt.md
 docs/FetchGoogleBusinessVerificationOptions200Response.md
 docs/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.md
 docs/FetchGoogleBusinessVerificationOptionsRequest.md
@@ -1842,6 +1844,8 @@ docs/StartSmsRegistrationRequestCampaign.md
 docs/StartSmsRegistrationRequestTollFree.md
 docs/StartWhatsAppCallerIdVerification200Response.md
 docs/StartWhatsAppCallerIdVerificationRequest.md
+docs/SubmitFeedbackRequest.md
+docs/SubmitFeedbackRequestAgent.md
 docs/SubmitPhoneNumberKyc200Response.md
 docs/SubmitPhoneNumberKyc200ResponseNumbersInner.md
 docs/SubmitPhoneNumberKyc200ResponsePhoneNumber.md
@@ -2384,6 +2388,7 @@ lib/zernio-sdk/api/contacts_api.rb
 lib/zernio-sdk/api/conversions_api.rb
 lib/zernio-sdk/api/custom_fields_api.rb
 lib/zernio-sdk/api/discord_api.rb
+lib/zernio-sdk/api/feedback_api.rb
 lib/zernio-sdk/api/gmb_attributes_api.rb
 lib/zernio-sdk/api/gmb_food_menus_api.rb
 lib/zernio-sdk/api/gmb_location_details_api.rb
@@ -3031,6 +3036,7 @@ lib/zernio-sdk/models/facebook_post_earnings_response_metrics_value.rb
 lib/zernio-sdk/models/facebook_post_earnings_response_unavailable_metrics_inner.rb
 lib/zernio-sdk/models/facebook_settings.rb
 lib/zernio-sdk/models/facebook_settings_carousel_cards_inner.rb
+lib/zernio-sdk/models/feedback_receipt.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options200_response.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options200_response_options_inner.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options_request.rb
@@ -4217,6 +4223,8 @@ lib/zernio-sdk/models/start_sms_registration_request_campaign.rb
 lib/zernio-sdk/models/start_sms_registration_request_toll_free.rb
 lib/zernio-sdk/models/start_whats_app_caller_id_verification200_response.rb
 lib/zernio-sdk/models/start_whats_app_caller_id_verification_request.rb
+lib/zernio-sdk/models/submit_feedback_request.rb
+lib/zernio-sdk/models/submit_feedback_request_agent.rb
 lib/zernio-sdk/models/submit_phone_number_kyc200_response.rb
 lib/zernio-sdk/models/submit_phone_number_kyc200_response_numbers_inner.rb
 lib/zernio-sdk/models/submit_phone_number_kyc200_response_phone_number.rb
@@ -4741,6 +4749,7 @@ spec/api/contacts_api_spec.rb
 spec/api/conversions_api_spec.rb
 spec/api/custom_fields_api_spec.rb
 spec/api/discord_api_spec.rb
+spec/api/feedback_api_spec.rb
 spec/api/gmb_attributes_api_spec.rb
 spec/api/gmb_food_menus_api_spec.rb
 spec/api/gmb_location_details_api_spec.rb
@@ -5383,6 +5392,7 @@ spec/models/facebook_post_earnings_response_spec.rb
 spec/models/facebook_post_earnings_response_unavailable_metrics_inner_spec.rb
 spec/models/facebook_settings_carousel_cards_inner_spec.rb
 spec/models/facebook_settings_spec.rb
+spec/models/feedback_receipt_spec.rb
 spec/models/fetch_google_business_verification_options200_response_options_inner_spec.rb
 spec/models/fetch_google_business_verification_options200_response_spec.rb
 spec/models/fetch_google_business_verification_options_request_spec.rb
@@ -6569,6 +6579,8 @@ spec/models/start_sms_registration_request_spec.rb
 spec/models/start_sms_registration_request_toll_free_spec.rb
 spec/models/start_whats_app_caller_id_verification200_response_spec.rb
 spec/models/start_whats_app_caller_id_verification_request_spec.rb
+spec/models/submit_feedback_request_agent_spec.rb
+spec/models/submit_feedback_request_spec.rb
 spec/models/submit_phone_number_kyc200_response_numbers_inner_spec.rb
 spec/models/submit_phone_number_kyc200_response_phone_number_spec.rb
 spec/models/submit_phone_number_kyc200_response_spec.rb
