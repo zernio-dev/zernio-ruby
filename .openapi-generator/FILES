@@ -1134,6 +1134,8 @@ docs/GoogleRsaDescription.md
 docs/GoogleRsaHeadline.md
 docs/GoogleSitelink.md
 docs/GoogleStructuredSnippet.md
+docs/GrantBusinessPartner200Response.md
+docs/GrantBusinessPartner200ResponsePartner.md
 docs/GrantBusinessPartner201Response.md
 docs/GrantBusinessPartner201ResponsePartner.md
 docs/GrantBusinessPartnerRequest.md
@@ -3631,6 +3633,8 @@ lib/zernio-sdk/models/google_rsa_description.rb
 lib/zernio-sdk/models/google_rsa_headline.rb
 lib/zernio-sdk/models/google_sitelink.rb
 lib/zernio-sdk/models/google_structured_snippet.rb
+lib/zernio-sdk/models/grant_business_partner200_response.rb
+lib/zernio-sdk/models/grant_business_partner200_response_partner.rb
 lib/zernio-sdk/models/grant_business_partner201_response.rb
 lib/zernio-sdk/models/grant_business_partner201_response_partner.rb
 lib/zernio-sdk/models/grant_business_partner_request.rb
@@ -6082,6 +6086,8 @@ spec/models/google_rsa_description_spec.rb
 spec/models/google_rsa_headline_spec.rb
 spec/models/google_sitelink_spec.rb
 spec/models/google_structured_snippet_spec.rb
+spec/models/grant_business_partner200_response_partner_spec.rb
+spec/models/grant_business_partner200_response_spec.rb
 spec/models/grant_business_partner201_response_partner_spec.rb
 spec/models/grant_business_partner201_response_spec.rb
 spec/models/grant_business_partner_request_spec.rb

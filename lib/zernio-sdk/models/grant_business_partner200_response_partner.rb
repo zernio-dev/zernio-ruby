@@ -14,19 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  class MetaPagePartner < ApiModelBase
+  class GrantBusinessPartner200ResponsePartner < ApiModelBase
     attr_accessor :business_id
 
-    attr_accessor :name
-
-    # Tasks the partner holds, in the bare spelling the grant takes (ADVERTISE, ANALYZE, MANAGE, ...). Meta reads them back with a PROFILE_PLUS_ prefix, which is stripped here; partners granted in Business Settings may hold tasks beyond the six the grant accepts, such as MANAGE_LEADS or REVENUE.
+    # Tasks the partner currently holds.
     attr_accessor :permitted_tasks
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'business_id' => :'businessId',
-        :'name' => :'name',
         :'permitted_tasks' => :'permittedTasks'
       }
     end
@@ -45,7 +42,6 @@ module Zernio
     def self.openapi_types
       {
         :'business_id' => :'String',
-        :'name' => :'String',
         :'permitted_tasks' => :'Array<String>'
       }
     end
@@ -60,24 +56,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::MetaPagePartner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GrantBusinessPartner200ResponsePartner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::MetaPagePartner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GrantBusinessPartner200ResponsePartner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'business_id')
         self.business_id = attributes[:'business_id']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
       end
 
       if attributes.key?(:'permitted_tasks')
@@ -108,7 +100,6 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           business_id == o.business_id &&
-          name == o.name &&
           permitted_tasks == o.permitted_tasks
     end
 
@@ -121,7 +112,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [business_id, name, permitted_tasks].hash
+      [business_id, permitted_tasks].hash
     end
 
     # Builds the object from hash

@@ -2012,6 +2012,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GoogleRsaHeadline](docs/GoogleRsaHeadline.md)
  - [Zernio::GoogleSitelink](docs/GoogleSitelink.md)
  - [Zernio::GoogleStructuredSnippet](docs/GoogleStructuredSnippet.md)
+ - [Zernio::GrantBusinessPartner200Response](docs/GrantBusinessPartner200Response.md)
+ - [Zernio::GrantBusinessPartner200ResponsePartner](docs/GrantBusinessPartner200ResponsePartner.md)
  - [Zernio::GrantBusinessPartner201Response](docs/GrantBusinessPartner201Response.md)
  - [Zernio::GrantBusinessPartner201ResponsePartner](docs/GrantBusinessPartner201ResponsePartner.md)
  - [Zernio::GrantBusinessPartnerRequest](docs/GrantBusinessPartnerRequest.md)

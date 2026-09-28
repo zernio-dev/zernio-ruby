@@ -14,20 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  class MetaPagePartner < ApiModelBase
-    attr_accessor :business_id
+  class GrantBusinessPartner200Response < ApiModelBase
+    attr_accessor :page
 
-    attr_accessor :name
+    attr_accessor :partner
 
-    # Tasks the partner holds, in the bare spelling the grant takes (ADVERTISE, ANALYZE, MANAGE, ...). Meta reads them back with a PROFILE_PLUS_ prefix, which is stripped here; partners granted in Business Settings may hold tasks beyond the six the grant accepts, such as MANAGE_LEADS or REVENUE.
-    attr_accessor :permitted_tasks
+    # Always true on this response.
+    attr_accessor :already_shared
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'business_id' => :'businessId',
-        :'name' => :'name',
-        :'permitted_tasks' => :'permittedTasks'
+        :'page' => :'page',
+        :'partner' => :'partner',
+        :'already_shared' => :'alreadyShared'
       }
     end
 
@@ -44,9 +44,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'business_id' => :'String',
-        :'name' => :'String',
-        :'permitted_tasks' => :'Array<String>'
+        :'page' => :'MetaPageOwnership',
+        :'partner' => :'GrantBusinessPartner200ResponsePartner',
+        :'already_shared' => :'Boolean'
       }
     end
 
@@ -60,30 +60,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::MetaPagePartner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GrantBusinessPartner200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::MetaPagePartner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GrantBusinessPartner200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'business_id')
-        self.business_id = attributes[:'business_id']
+      if attributes.key?(:'page')
+        self.page = attributes[:'page']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'partner')
+        self.partner = attributes[:'partner']
       end
 
-      if attributes.key?(:'permitted_tasks')
-        if (value = attributes[:'permitted_tasks']).is_a?(Array)
-          self.permitted_tasks = value
-        end
+      if attributes.key?(:'already_shared')
+        self.already_shared = attributes[:'already_shared']
       end
     end
 
@@ -107,9 +105,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          business_id == o.business_id &&
-          name == o.name &&
-          permitted_tasks == o.permitted_tasks
+          page == o.page &&
+          partner == o.partner &&
+          already_shared == o.already_shared
     end
 
     # @see the `==` method
@@ -121,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [business_id, name, permitted_tasks].hash
+      [page, partner, already_shared].hash
     end
 
     # Builds the object from hash
