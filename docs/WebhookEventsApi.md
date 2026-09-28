@@ -5,6 +5,8 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**on_account_ads_initial_sync_completed**](WebhookEventsApi.md#on_account_ads_initial_sync_completed) | **POST** /account.ads.initial_sync_completed | Ads initial sync completed event |
+| [**on_account_ads_sync_failed**](WebhookEventsApi.md#on_account_ads_sync_failed) | **POST** /account.ads.sync_failed | Ads sync failed event |
+| [**on_account_ads_sync_recovered**](WebhookEventsApi.md#on_account_ads_sync_recovered) | **POST** /account.ads.sync_recovered | Ads sync recovered event |
 | [**on_account_connected**](WebhookEventsApi.md#on_account_connected) | **POST** /account.connected | Account connected event |
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
 | [**on_ad_status_changed**](WebhookEventsApi.md#on_ad_status_changed) | **POST** /ad.status_changed | Ad status changed event |
@@ -114,6 +116,142 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_account_ads_initial_sync_completed** | [**WebhookPayloadAccountAdsInitialSyncCompleted**](WebhookPayloadAccountAdsInitialSyncCompleted.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_account_ads_sync_failed
+
+> on_account_ads_sync_failed(webhook_payload_account_ads_sync_failed)
+
+Ads sync failed event
+
+Fired once per ad account when its ads stop syncing (no successful sync for 24 hours, or every live ad at the retry cap). Checked hourly. Metrics for the ad account are stale until `account.ads.sync_recovered` fires for it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_account_ads_sync_failed =  # WebhookPayloadAccountAdsSyncFailed | 
+
+begin
+  # Ads sync failed event
+  api_instance.on_account_ads_sync_failed(webhook_payload_account_ads_sync_failed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_ads_sync_failed: #{e}"
+end
+```
+
+#### Using the on_account_ads_sync_failed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_account_ads_sync_failed_with_http_info(webhook_payload_account_ads_sync_failed)
+
+```ruby
+begin
+  # Ads sync failed event
+  data, status_code, headers = api_instance.on_account_ads_sync_failed_with_http_info(webhook_payload_account_ads_sync_failed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_ads_sync_failed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_account_ads_sync_failed** | [**WebhookPayloadAccountAdsSyncFailed**](WebhookPayloadAccountAdsSyncFailed.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_account_ads_sync_recovered
+
+> on_account_ads_sync_recovered(webhook_payload_account_ads_sync_recovered)
+
+Ads sync recovered event
+
+Fired once when an ad account previously reported by `account.ads.sync_failed` syncs successfully again. Checked hourly. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_account_ads_sync_recovered =  # WebhookPayloadAccountAdsSyncRecovered | 
+
+begin
+  # Ads sync recovered event
+  api_instance.on_account_ads_sync_recovered(webhook_payload_account_ads_sync_recovered)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_ads_sync_recovered: #{e}"
+end
+```
+
+#### Using the on_account_ads_sync_recovered_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_account_ads_sync_recovered_with_http_info(webhook_payload_account_ads_sync_recovered)
+
+```ruby
+begin
+  # Ads sync recovered event
+  data, status_code, headers = api_instance.on_account_ads_sync_recovered_with_http_info(webhook_payload_account_ads_sync_recovered)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_ads_sync_recovered_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_account_ads_sync_recovered** | [**WebhookPayloadAccountAdsSyncRecovered**](WebhookPayloadAccountAdsSyncRecovered.md) |  |  |
 
 ### Return type
 
