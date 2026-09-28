@@ -990,6 +990,8 @@ docs/GetTrackingTag200Response.md
 docs/GetTrackingTagStats200Response.md
 docs/GetTrackingTagStats200ResponseStats.md
 docs/GetTrackingTagStoreInstall200Response.md
+docs/GetTrackingTagStoreInstall200ResponseInstall.md
+docs/GetTrackingTagStoreInstall200ResponseInstallAllOfPreflight.md
 docs/GetTweet200Response.md
 docs/GetTweet200ResponseTweet.md
 docs/GetUsage200Response.md
@@ -1172,6 +1174,8 @@ docs/InstagramPlatformDataTrialParams.md
 docs/InstagramPlatformDataUserTagsInner.md
 docs/InstallTrackingTagOnStore200Response.md
 docs/InstallTrackingTagOnStore200ResponseInstall.md
+docs/InstallTrackingTagOnStore422Response.md
+docs/InstallTrackingTagOnStore422ResponseDetails.md
 docs/InstallTrackingTagOnStoreRequest.md
 docs/InviteAdAccountToManagerRequest.md
 docs/InvitesApi.md
@@ -1656,6 +1660,8 @@ docs/RemoveCustomConversionGoal200Response.md
 docs/RemoveDiscordMemberRole200Response.md
 docs/RemoveGoogleAssetGroup200Response.md
 docs/RemoveMessageReaction200Response.md
+docs/RemoveTrackingTagFromStore200Response.md
+docs/RemoveTrackingTagFromStore200ResponseInstall.md
 docs/RemoveWhatsAppGroupParticipantsRequest.md
 docs/ReplaceAdAudienceCompanies200Response.md
 docs/ReplaceAdAudienceCompaniesRequest.md
@@ -1931,6 +1937,7 @@ docs/TikTokPlatformData.md
 docs/TikTokPlatformDataMusicSoundInfo.md
 docs/ToolsApi.md
 docs/TrackingTag.md
+docs/TrackingTagInstallBlockedReason.md
 docs/TrackingTagsApi.md
 docs/TransferVoiceCall200Response.md
 docs/TransferVoiceCallRequest.md
@@ -3455,6 +3462,8 @@ lib/zernio-sdk/models/get_tracking_tag200_response.rb
 lib/zernio-sdk/models/get_tracking_tag_stats200_response.rb
 lib/zernio-sdk/models/get_tracking_tag_stats200_response_stats.rb
 lib/zernio-sdk/models/get_tracking_tag_store_install200_response.rb
+lib/zernio-sdk/models/get_tracking_tag_store_install200_response_install.rb
+lib/zernio-sdk/models/get_tracking_tag_store_install200_response_install_all_of_preflight.rb
 lib/zernio-sdk/models/get_tweet200_response.rb
 lib/zernio-sdk/models/get_tweet200_response_tweet.rb
 lib/zernio-sdk/models/get_usage200_response.rb
@@ -3634,6 +3643,8 @@ lib/zernio-sdk/models/instagram_platform_data_trial_params.rb
 lib/zernio-sdk/models/instagram_platform_data_user_tags_inner.rb
 lib/zernio-sdk/models/install_tracking_tag_on_store200_response.rb
 lib/zernio-sdk/models/install_tracking_tag_on_store200_response_install.rb
+lib/zernio-sdk/models/install_tracking_tag_on_store422_response.rb
+lib/zernio-sdk/models/install_tracking_tag_on_store422_response_details.rb
 lib/zernio-sdk/models/install_tracking_tag_on_store_request.rb
 lib/zernio-sdk/models/invite_ad_account_to_manager_request.rb
 lib/zernio-sdk/models/keyword_entry.rb
@@ -4102,6 +4113,8 @@ lib/zernio-sdk/models/remove_custom_conversion_goal200_response.rb
 lib/zernio-sdk/models/remove_discord_member_role200_response.rb
 lib/zernio-sdk/models/remove_google_asset_group200_response.rb
 lib/zernio-sdk/models/remove_message_reaction200_response.rb
+lib/zernio-sdk/models/remove_tracking_tag_from_store200_response.rb
+lib/zernio-sdk/models/remove_tracking_tag_from_store200_response_install.rb
 lib/zernio-sdk/models/remove_whats_app_group_participants_request.rb
 lib/zernio-sdk/models/replace_ad_audience_companies200_response.rb
 lib/zernio-sdk/models/replace_ad_audience_companies_request.rb
@@ -4372,6 +4385,7 @@ lib/zernio-sdk/models/tik_tok_dry_run_verdict_tiktok_inner.rb
 lib/zernio-sdk/models/tik_tok_platform_data.rb
 lib/zernio-sdk/models/tik_tok_platform_data_music_sound_info.rb
 lib/zernio-sdk/models/tracking_tag.rb
+lib/zernio-sdk/models/tracking_tag_install_blocked_reason.rb
 lib/zernio-sdk/models/transfer_voice_call200_response.rb
 lib/zernio-sdk/models/transfer_voice_call_request.rb
 lib/zernio-sdk/models/trigger_workflow200_response.rb
@@ -5873,6 +5887,8 @@ spec/models/get_tik_tok_smart_plus_material_report200_response_spec.rb
 spec/models/get_tracking_tag200_response_spec.rb
 spec/models/get_tracking_tag_stats200_response_spec.rb
 spec/models/get_tracking_tag_stats200_response_stats_spec.rb
+spec/models/get_tracking_tag_store_install200_response_install_all_of_preflight_spec.rb
+spec/models/get_tracking_tag_store_install200_response_install_spec.rb
 spec/models/get_tracking_tag_store_install200_response_spec.rb
 spec/models/get_tweet200_response_spec.rb
 spec/models/get_tweet200_response_tweet_spec.rb
@@ -6053,6 +6069,8 @@ spec/models/instagram_platform_data_trial_params_spec.rb
 spec/models/instagram_platform_data_user_tags_inner_spec.rb
 spec/models/install_tracking_tag_on_store200_response_install_spec.rb
 spec/models/install_tracking_tag_on_store200_response_spec.rb
+spec/models/install_tracking_tag_on_store422_response_details_spec.rb
+spec/models/install_tracking_tag_on_store422_response_spec.rb
 spec/models/install_tracking_tag_on_store_request_spec.rb
 spec/models/invite_ad_account_to_manager_request_spec.rb
 spec/models/keyword_entry_spec.rb
@@ -6521,6 +6539,8 @@ spec/models/remove_custom_conversion_goal200_response_spec.rb
 spec/models/remove_discord_member_role200_response_spec.rb
 spec/models/remove_google_asset_group200_response_spec.rb
 spec/models/remove_message_reaction200_response_spec.rb
+spec/models/remove_tracking_tag_from_store200_response_install_spec.rb
+spec/models/remove_tracking_tag_from_store200_response_spec.rb
 spec/models/remove_whats_app_group_participants_request_spec.rb
 spec/models/replace_ad_audience_companies200_response_spec.rb
 spec/models/replace_ad_audience_companies_request_companies_inner_spec.rb
@@ -6790,6 +6810,7 @@ spec/models/tik_tok_dry_run_verdict_spec.rb
 spec/models/tik_tok_dry_run_verdict_tiktok_inner_spec.rb
 spec/models/tik_tok_platform_data_music_sound_info_spec.rb
 spec/models/tik_tok_platform_data_spec.rb
+spec/models/tracking_tag_install_blocked_reason_spec.rb
 spec/models/tracking_tag_spec.rb
 spec/models/transfer_voice_call200_response_spec.rb
 spec/models/transfer_voice_call_request_spec.rb

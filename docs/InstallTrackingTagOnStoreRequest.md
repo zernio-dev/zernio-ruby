@@ -4,7 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **store_account_id** | **String** | The connected Shopify account id (platform &#x60;shopify&#x60;). |  |
+| **store_account_id** | **String** | The connected Shopify (&#x60;shopify&#x60;) or WordPress (&#x60;wordpress&#x60;) account id. |  |
+| **sidebar_id** | **String** | WordPress only: widget area to use (see &#x60;install.preflight.sidebars&#x60; from GET). Defaults to a footer area. | [optional] |
+| **verify_homepage** | **Boolean** | WordPress only: fetch the homepage afterwards and report &#x60;homepageCheck&#x60;. | [optional][default to true] |
 
 ## Example
 
@@ -12,7 +14,9 @@
 require 'zernio-sdk'
 
 instance = Zernio::InstallTrackingTagOnStoreRequest.new(
-  store_account_id: null
+  store_account_id: null,
+  sidebar_id: null,
+  verify_homepage: null
 )
 ```
 

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** |  | [optional] |
-| **install** | [**StorePixelInstall**](StorePixelInstall.md) |  | [optional] |
+| **install** | [**GetTrackingTagStoreInstall200ResponseInstall**](GetTrackingTagStoreInstall200ResponseInstall.md) |  | [optional] |
 
 ## Example
 
