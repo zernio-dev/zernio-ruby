@@ -879,6 +879,7 @@ end
 api_instance = Zernio::VoiceApi.new
 to = 'to_example' # String | Destination number, E.164 (leading + optional).
 opts = {
+  from: 'from_example', # String | The number the call would dial from, E.164. When it is verified on a Branded Calling identity and `to` is a US number, the estimate includes the per-call Branded Calling surcharge.
   minutes: 56, # Integer | 
   recording: true, # Boolean | 
   transcription: true # Boolean | 
@@ -916,6 +917,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **to** | **String** | Destination number, E.164 (leading + optional). |  |
+| **from** | **String** | The number the call would dial from, E.164. When it is verified on a Branded Calling identity and &#x60;to&#x60; is a US number, the estimate includes the per-call Branded Calling surcharge. | [optional] |
 | **minutes** | **Integer** |  | [optional][default to 1] |
 | **recording** | **Boolean** |  | [optional] |
 | **transcription** | **Boolean** |  | [optional] |

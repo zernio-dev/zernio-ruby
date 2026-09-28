@@ -7,6 +7,7 @@
 | **telnyx_cost_usd** | **Float** |  | [optional] |
 | **recording_cost_usd** | **Float** |  | [optional] |
 | **transcription_cost_usd** | **Float** |  | [optional] |
+| **branded_call_usd** | **Float** | Branded Calling surcharge, 0 unless &#x60;from&#x60; is a verified branded number calling a US destination. | [optional] |
 | **billable_cost_usd** | **Float** | What Zernio bills for the call. | [optional] |
 | **total_cost_usd** | **Float** | Equals billableCostUSD (no separate Meta bill on PSTN); kept for shape parity with the WhatsApp estimate. | [optional] |
 
@@ -19,6 +20,7 @@ instance = Zernio::GetVoiceCallEstimate200ResponseBreakdown.new(
   telnyx_cost_usd: null,
   recording_cost_usd: null,
   transcription_cost_usd: null,
+  branded_call_usd: null,
   billable_cost_usd: null,
   total_cost_usd: null
 )
