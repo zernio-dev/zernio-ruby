@@ -1,4 +1,4 @@
-# Zernio::ListProductMetafields200Response
+# Zernio::ListCommerceProductMetafields200Response
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ListProductMetafields200Response.new(
+instance = Zernio::ListCommerceProductMetafields200Response.new(
   metafields: null
 )
 ```

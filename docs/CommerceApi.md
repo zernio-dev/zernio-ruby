@@ -7,12 +7,12 @@ All URIs are relative to *https://zernio.com/api*
 | [**add_commerce_discount_codes**](CommerceApi.md#add_commerce_discount_codes) | **POST** /v1/commerce/discounts/{discountId}/codes | Add codes to a discount |
 | [**add_commerce_marketing_engagement**](CommerceApi.md#add_commerce_marketing_engagement) | **POST** /v1/commerce/marketing-activities/{remoteId}/engagements | Report daily engagement |
 | [**add_commerce_product_images**](CommerceApi.md#add_commerce_product_images) | **POST** /v1/commerce/products/{productId}/images | Add images |
-| [**change_collection_channels**](CommerceApi.md#change_collection_channels) | **POST** /v1/commerce/collections/{collectionId}/channels | Publish or unpublish a collection |
+| [**change_commerce_collection_channels**](CommerceApi.md#change_commerce_collection_channels) | **POST** /v1/commerce/collections/{collectionId}/channels | Publish or unpublish a collection |
 | [**change_commerce_collection_products**](CommerceApi.md#change_commerce_collection_products) | **POST** /v1/commerce/collections/{collectionId}/products | Add or remove products in a collection |
 | [**change_commerce_inventory**](CommerceApi.md#change_commerce_inventory) | **POST** /v1/commerce/products/{productId}/inventory | Set or adjust stock |
+| [**change_commerce_product_channels**](CommerceApi.md#change_commerce_product_channels) | **POST** /v1/commerce/products/{productId}/channels | Publish or unpublish a product |
 | [**change_commerce_product_state**](CommerceApi.md#change_commerce_product_state) | **POST** /v1/commerce/products/state | Activate, deactivate, archive or delete products |
 | [**change_commerce_product_tags**](CommerceApi.md#change_commerce_product_tags) | **POST** /v1/commerce/products/tags | Add or remove tags in bulk |
-| [**change_product_channels**](CommerceApi.md#change_product_channels) | **POST** /v1/commerce/products/{productId}/channels | Publish or unpublish a product |
 | [**create_commerce_catalog_sync**](CommerceApi.md#create_commerce_catalog_sync) | **POST** /v1/commerce/catalog-syncs | Sync a store into a Meta catalog |
 | [**create_commerce_collection**](CommerceApi.md#create_commerce_collection) | **POST** /v1/commerce/collections | Create a collection |
 | [**create_commerce_discount**](CommerceApi.md#create_commerce_discount) | **POST** /v1/commerce/discounts | Create a discount |
@@ -23,19 +23,19 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_commerce_product_options**](CommerceApi.md#create_commerce_product_options) | **POST** /v1/commerce/products/{productId}/options | Add options |
 | [**create_commerce_product_variants**](CommerceApi.md#create_commerce_product_variants) | **POST** /v1/commerce/products/{productId}/variants | Add variants |
 | [**create_commerce_redirect**](CommerceApi.md#create_commerce_redirect) | **POST** /v1/commerce/redirects | Create a URL redirect |
-| [**delete_collection_metafields**](CommerceApi.md#delete_collection_metafields) | **DELETE** /v1/commerce/collections/{collectionId}/metafields | Delete collection metafields |
 | [**delete_commerce_catalog_sync**](CommerceApi.md#delete_commerce_catalog_sync) | **DELETE** /v1/commerce/catalog-syncs/{syncId} | Stop a catalog sync |
 | [**delete_commerce_collection**](CommerceApi.md#delete_commerce_collection) | **DELETE** /v1/commerce/collections/{collectionId} | Delete a collection |
+| [**delete_commerce_collection_metafields**](CommerceApi.md#delete_commerce_collection_metafields) | **DELETE** /v1/commerce/collections/{collectionId}/metafields | Delete collection metafields |
 | [**delete_commerce_discount**](CommerceApi.md#delete_commerce_discount) | **DELETE** /v1/commerce/discounts/{discountId} | Delete a discount |
 | [**delete_commerce_marketing_activity**](CommerceApi.md#delete_commerce_marketing_activity) | **DELETE** /v1/commerce/marketing-activities/{remoteId} | Delete a marketing activity |
 | [**delete_commerce_menu**](CommerceApi.md#delete_commerce_menu) | **DELETE** /v1/commerce/menus/{menuId} | Delete a navigation menu |
 | [**delete_commerce_metaobject**](CommerceApi.md#delete_commerce_metaobject) | **DELETE** /v1/commerce/metaobjects/{metaobjectId} | Delete a metaobject |
 | [**delete_commerce_page**](CommerceApi.md#delete_commerce_page) | **DELETE** /v1/commerce/pages/{pageId} | Delete a page |
 | [**delete_commerce_price_list_prices**](CommerceApi.md#delete_commerce_price_list_prices) | **DELETE** /v1/commerce/price-lists/{priceListId}/prices | Remove fixed prices |
+| [**delete_commerce_product_metafields**](CommerceApi.md#delete_commerce_product_metafields) | **DELETE** /v1/commerce/products/{productId}/metafields | Delete product metafields |
 | [**delete_commerce_product_options**](CommerceApi.md#delete_commerce_product_options) | **DELETE** /v1/commerce/products/{productId}/options | Delete options |
 | [**delete_commerce_product_variants**](CommerceApi.md#delete_commerce_product_variants) | **DELETE** /v1/commerce/products/{productId}/variants | Delete variants |
 | [**delete_commerce_redirect**](CommerceApi.md#delete_commerce_redirect) | **DELETE** /v1/commerce/redirects/{redirectId} | Delete a URL redirect |
-| [**delete_product_metafields**](CommerceApi.md#delete_product_metafields) | **DELETE** /v1/commerce/products/{productId}/metafields | Delete product metafields |
 | [**duplicate_commerce_product**](CommerceApi.md#duplicate_commerce_product) | **POST** /v1/commerce/products/{productId}/duplicate | Duplicate a product |
 | [**get_commerce_catalog_sync**](CommerceApi.md#get_commerce_catalog_sync) | **GET** /v1/commerce/catalog-syncs/{syncId} | Get a catalog sync |
 | [**get_commerce_collection**](CommerceApi.md#get_commerce_collection) | **GET** /v1/commerce/collections/{collectionId} | Get a collection |
@@ -45,9 +45,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_commerce_page**](CommerceApi.md#get_commerce_page) | **GET** /v1/commerce/pages/{pageId} | Get a page |
 | [**get_commerce_product**](CommerceApi.md#get_commerce_product) | **GET** /v1/commerce/products/{productId} | Get a product |
 | [**get_commerce_store**](CommerceApi.md#get_commerce_store) | **GET** /v1/commerce/store | Get a store |
-| [**list_collection_metafields**](CommerceApi.md#list_collection_metafields) | **GET** /v1/commerce/collections/{collectionId}/metafields | List collection metafields |
 | [**list_commerce_catalog_syncs**](CommerceApi.md#list_commerce_catalog_syncs) | **GET** /v1/commerce/catalog-syncs | List catalog syncs |
 | [**list_commerce_channels**](CommerceApi.md#list_commerce_channels) | **GET** /v1/commerce/channels | List sales channels |
+| [**list_commerce_collection_metafields**](CommerceApi.md#list_commerce_collection_metafields) | **GET** /v1/commerce/collections/{collectionId}/metafields | List collection metafields |
 | [**list_commerce_collections**](CommerceApi.md#list_commerce_collections) | **GET** /v1/commerce/collections | List collections |
 | [**list_commerce_discounts**](CommerceApi.md#list_commerce_discounts) | **GET** /v1/commerce/discounts | List discounts |
 | [**list_commerce_inventory**](CommerceApi.md#list_commerce_inventory) | **GET** /v1/commerce/inventory | Get a product&#39;s stock |
@@ -58,17 +58,17 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_commerce_metaobjects**](CommerceApi.md#list_commerce_metaobjects) | **GET** /v1/commerce/metaobjects | List metaobjects of a type |
 | [**list_commerce_pages**](CommerceApi.md#list_commerce_pages) | **GET** /v1/commerce/pages | List pages |
 | [**list_commerce_price_lists**](CommerceApi.md#list_commerce_price_lists) | **GET** /v1/commerce/price-lists | List price lists |
+| [**list_commerce_product_metafields**](CommerceApi.md#list_commerce_product_metafields) | **GET** /v1/commerce/products/{productId}/metafields | List product metafields |
 | [**list_commerce_products**](CommerceApi.md#list_commerce_products) | **GET** /v1/commerce/products | List products |
 | [**list_commerce_redirects**](CommerceApi.md#list_commerce_redirects) | **GET** /v1/commerce/redirects | List URL redirects |
-| [**list_product_metafields**](CommerceApi.md#list_product_metafields) | **GET** /v1/commerce/products/{productId}/metafields | List product metafields |
 | [**remove_commerce_product_images**](CommerceApi.md#remove_commerce_product_images) | **DELETE** /v1/commerce/products/{productId}/images | Remove images |
 | [**reorder_commerce_collection_products**](CommerceApi.md#reorder_commerce_collection_products) | **POST** /v1/commerce/collections/{collectionId}/reorder | Reorder products in a collection |
 | [**reorder_commerce_product_images**](CommerceApi.md#reorder_commerce_product_images) | **POST** /v1/commerce/products/{productId}/images/reorder | Reorder images |
 | [**run_commerce_catalog_sync**](CommerceApi.md#run_commerce_catalog_sync) | **POST** /v1/commerce/catalog-syncs/{syncId}/run | Run a catalog sync now |
-| [**set_collection_metafields**](CommerceApi.md#set_collection_metafields) | **PUT** /v1/commerce/collections/{collectionId}/metafields | Set collection metafields |
+| [**set_commerce_collection_metafields**](CommerceApi.md#set_commerce_collection_metafields) | **PUT** /v1/commerce/collections/{collectionId}/metafields | Set collection metafields |
 | [**set_commerce_discount_active**](CommerceApi.md#set_commerce_discount_active) | **POST** /v1/commerce/discounts/{discountId}/state | Activate or deactivate a discount |
 | [**set_commerce_price_list_prices**](CommerceApi.md#set_commerce_price_list_prices) | **PUT** /v1/commerce/price-lists/{priceListId}/prices | Set fixed prices |
-| [**set_product_metafields**](CommerceApi.md#set_product_metafields) | **PUT** /v1/commerce/products/{productId}/metafields | Set product metafields |
+| [**set_commerce_product_metafields**](CommerceApi.md#set_commerce_product_metafields) | **PUT** /v1/commerce/products/{productId}/metafields | Set product metafields |
 | [**update_commerce_collection**](CommerceApi.md#update_commerce_collection) | **PATCH** /v1/commerce/collections/{collectionId} | Update a collection |
 | [**update_commerce_discount**](CommerceApi.md#update_commerce_discount) | **PATCH** /v1/commerce/discounts/{discountId} | Update a discount |
 | [**update_commerce_menu**](CommerceApi.md#update_commerce_menu) | **PUT** /v1/commerce/menus/{menuId} | Replace a navigation menu |
@@ -86,7 +86,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Add codes to a discount
 
-Adds up to 250 more codes to a code discount, for example one per influencer. The platform adds them in the background. 
+Adds up to 250 more codes to a code discount, for example one per influencer. The platform adds them in the background. Needs discounts.codes, which WooCommerce stores do not have. 
 
 ### Examples
 
@@ -293,9 +293,9 @@ end
 - **Accept**: application/json
 
 
-## change_collection_channels
+## change_commerce_collection_channels
 
-> <ChangeCollectionChannels200Response> change_collection_channels(collection_id, change_product_channels_request)
+> <ChangeCommerceCollectionChannels200Response> change_commerce_collection_channels(collection_id, change_commerce_product_channels_request)
 
 Publish or unpublish a collection
 
@@ -314,32 +314,32 @@ end
 
 api_instance = Zernio::CommerceApi.new
 collection_id = 'collection_id_example' # String | Platform-native id.
-change_product_channels_request = Zernio::ChangeProductChannelsRequest.new({account_id: 'account_id_example'}) # ChangeProductChannelsRequest | 
+change_commerce_product_channels_request = Zernio::ChangeCommerceProductChannelsRequest.new({account_id: 'account_id_example'}) # ChangeCommerceProductChannelsRequest | 
 
 begin
   # Publish or unpublish a collection
-  result = api_instance.change_collection_channels(collection_id, change_product_channels_request)
+  result = api_instance.change_commerce_collection_channels(collection_id, change_commerce_product_channels_request)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->change_collection_channels: #{e}"
+  puts "Error when calling CommerceApi->change_commerce_collection_channels: #{e}"
 end
 ```
 
-#### Using the change_collection_channels_with_http_info variant
+#### Using the change_commerce_collection_channels_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChangeCollectionChannels200Response>, Integer, Hash)> change_collection_channels_with_http_info(collection_id, change_product_channels_request)
+> <Array(<ChangeCommerceCollectionChannels200Response>, Integer, Hash)> change_commerce_collection_channels_with_http_info(collection_id, change_commerce_product_channels_request)
 
 ```ruby
 begin
   # Publish or unpublish a collection
-  data, status_code, headers = api_instance.change_collection_channels_with_http_info(collection_id, change_product_channels_request)
+  data, status_code, headers = api_instance.change_commerce_collection_channels_with_http_info(collection_id, change_commerce_product_channels_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ChangeCollectionChannels200Response>
+  p data # => <ChangeCommerceCollectionChannels200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->change_collection_channels_with_http_info: #{e}"
+  puts "Error when calling CommerceApi->change_commerce_collection_channels_with_http_info: #{e}"
 end
 ```
 
@@ -348,11 +348,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **collection_id** | **String** | Platform-native id. |  |
-| **change_product_channels_request** | [**ChangeProductChannelsRequest**](ChangeProductChannelsRequest.md) |  |  |
+| **change_commerce_product_channels_request** | [**ChangeCommerceProductChannelsRequest**](ChangeCommerceProductChannelsRequest.md) |  |  |
 
 ### Return type
 
-[**ChangeCollectionChannels200Response**](ChangeCollectionChannels200Response.md)
+[**ChangeCommerceCollectionChannels200Response**](ChangeCommerceCollectionChannels200Response.md)
 
 ### Authorization
 
@@ -506,6 +506,77 @@ end
 - **Accept**: application/json
 
 
+## change_commerce_product_channels
+
+> <ChangeCommerceProductChannels200Response> change_commerce_product_channels(product_id, change_commerce_product_channels_request)
+
+Publish or unpublish a product
+
+Publishes to and/or unpublishes from sales channels (the online store, Shop, POS and others). List channels with GET /v1/commerce/channels. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+product_id = 'product_id_example' # String | Platform-native id.
+change_commerce_product_channels_request = Zernio::ChangeCommerceProductChannelsRequest.new({account_id: 'account_id_example'}) # ChangeCommerceProductChannelsRequest | 
+
+begin
+  # Publish or unpublish a product
+  result = api_instance.change_commerce_product_channels(product_id, change_commerce_product_channels_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->change_commerce_product_channels: #{e}"
+end
+```
+
+#### Using the change_commerce_product_channels_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ChangeCommerceProductChannels200Response>, Integer, Hash)> change_commerce_product_channels_with_http_info(product_id, change_commerce_product_channels_request)
+
+```ruby
+begin
+  # Publish or unpublish a product
+  data, status_code, headers = api_instance.change_commerce_product_channels_with_http_info(product_id, change_commerce_product_channels_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ChangeCommerceProductChannels200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->change_commerce_product_channels_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **product_id** | **String** | Platform-native id. |  |
+| **change_commerce_product_channels_request** | [**ChangeCommerceProductChannelsRequest**](ChangeCommerceProductChannelsRequest.md) |  |  |
+
+### Return type
+
+[**ChangeCommerceProductChannels200Response**](ChangeCommerceProductChannels200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## change_commerce_product_state
 
 > <ChangeCommerceProductState200Response> change_commerce_product_state(change_commerce_product_state_request)
@@ -633,77 +704,6 @@ end
 ### Return type
 
 [**ChangeCommerceProductTags200Response**](ChangeCommerceProductTags200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## change_product_channels
-
-> <ChangeProductChannels200Response> change_product_channels(product_id, change_product_channels_request)
-
-Publish or unpublish a product
-
-Publishes to and/or unpublishes from sales channels (the online store, Shop, POS and others). List channels with GET /v1/commerce/channels. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::CommerceApi.new
-product_id = 'product_id_example' # String | Platform-native id.
-change_product_channels_request = Zernio::ChangeProductChannelsRequest.new({account_id: 'account_id_example'}) # ChangeProductChannelsRequest | 
-
-begin
-  # Publish or unpublish a product
-  result = api_instance.change_product_channels(product_id, change_product_channels_request)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->change_product_channels: #{e}"
-end
-```
-
-#### Using the change_product_channels_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ChangeProductChannels200Response>, Integer, Hash)> change_product_channels_with_http_info(product_id, change_product_channels_request)
-
-```ruby
-begin
-  # Publish or unpublish a product
-  data, status_code, headers = api_instance.change_product_channels_with_http_info(product_id, change_product_channels_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ChangeProductChannels200Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->change_product_channels_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **product_id** | **String** | Platform-native id. |  |
-| **change_product_channels_request** | [**ChangeProductChannelsRequest**](ChangeProductChannelsRequest.md) |  |  |
-
-### Return type
-
-[**ChangeProductChannels200Response**](ChangeProductChannels200Response.md)
 
 ### Authorization
 
@@ -928,6 +928,8 @@ end
 
 Create a navigation menu
 
+Creates a navigation menu from `title`, `handle` and up to 100 `items`, and returns it with status 201. Shopify only. Needs navigation.write.
+
 ### Examples
 
 ```ruby
@@ -995,6 +997,8 @@ end
 
 Create a metaobject
 
+Creates a metaobject of `type` with its `fields` (key and string value, up to 100) and an optional `handle`, and returns it with status 201. Shopify only. Needs metaobjects.write.
+
 ### Examples
 
 ```ruby
@@ -1061,6 +1065,8 @@ end
 > <CreateCommercePage201Response> create_commerce_page(create_commerce_page_request)
 
 Create a page
+
+Creates a content page from `title`, optional `handle`, `bodyHtml` and `isPublished`, and returns it with status 201. Needs pages.write.
 
 ### Examples
 
@@ -1340,6 +1346,8 @@ end
 
 Create a URL redirect
 
+Creates a redirect from `path` (starting with `/`) to `target` (a path or a full URL) and returns it with status 201. Shopify only. Needs navigation.write.
+
 ### Examples
 
 ```ruby
@@ -1398,77 +1406,6 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## delete_collection_metafields
-
-> <DeleteProductMetafields200Response> delete_collection_metafields(collection_id, account_id, keys)
-
-Delete collection metafields
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::CommerceApi.new
-collection_id = 'collection_id_example' # String | Platform-native id.
-account_id = 'account_id_example' # String | Connected store SocialAccount id.
-keys = 'keys_example' # String | Comma-separated namespace.key pairs.
-
-begin
-  # Delete collection metafields
-  result = api_instance.delete_collection_metafields(collection_id, account_id, keys)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->delete_collection_metafields: #{e}"
-end
-```
-
-#### Using the delete_collection_metafields_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<DeleteProductMetafields200Response>, Integer, Hash)> delete_collection_metafields_with_http_info(collection_id, account_id, keys)
-
-```ruby
-begin
-  # Delete collection metafields
-  data, status_code, headers = api_instance.delete_collection_metafields_with_http_info(collection_id, account_id, keys)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <DeleteProductMetafields200Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->delete_collection_metafields_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **collection_id** | **String** | Platform-native id. |  |
-| **account_id** | **String** | Connected store SocialAccount id. |  |
-| **keys** | **String** | Comma-separated namespace.key pairs. |  |
-
-### Return type
-
-[**DeleteProductMetafields200Response**](DeleteProductMetafields200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -1612,11 +1549,86 @@ end
 - **Accept**: application/json
 
 
+## delete_commerce_collection_metafields
+
+> <DeleteCommerceProductMetafields200Response> delete_commerce_collection_metafields(collection_id, account_id, keys)
+
+Delete collection metafields
+
+Deletes the collection metafields named in `keys` (comma-separated `namespace.key`, up to 25). Needs collections.metafields: WooCommerce answers 400 platform_not_supported.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+collection_id = 'collection_id_example' # String | Platform-native id.
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+keys = 'keys_example' # String | Comma-separated namespace.key pairs.
+
+begin
+  # Delete collection metafields
+  result = api_instance.delete_commerce_collection_metafields(collection_id, account_id, keys)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->delete_commerce_collection_metafields: #{e}"
+end
+```
+
+#### Using the delete_commerce_collection_metafields_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteCommerceProductMetafields200Response>, Integer, Hash)> delete_commerce_collection_metafields_with_http_info(collection_id, account_id, keys)
+
+```ruby
+begin
+  # Delete collection metafields
+  data, status_code, headers = api_instance.delete_commerce_collection_metafields_with_http_info(collection_id, account_id, keys)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteCommerceProductMetafields200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->delete_commerce_collection_metafields_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **collection_id** | **String** | Platform-native id. |  |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+| **keys** | **String** | Comma-separated namespace.key pairs. |  |
+
+### Return type
+
+[**DeleteCommerceProductMetafields200Response**](DeleteCommerceProductMetafields200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## delete_commerce_discount
 
 > <DeleteCommerceDiscount200Response> delete_commerce_discount(discount_id, account_id)
 
 Delete a discount
+
+Deletes the discount; its codes stop working at checkout. This cannot be undone. Needs discounts.write.
 
 ### Examples
 
@@ -1687,6 +1699,8 @@ end
 
 Delete a marketing activity
 
+Deletes the marketing activity you created with PUT /v1/commerce/marketing-activities, identified by the `remoteId` you gave it. Shopify only. Needs marketing.write.
+
 ### Examples
 
 ```ruby
@@ -1755,6 +1769,8 @@ end
 > <DeleteCommerceMenu200Response> delete_commerce_menu(menu_id, account_id)
 
 Delete a navigation menu
+
+Deletes the navigation menu. Shopify only. Needs navigation.write.
 
 ### Examples
 
@@ -1825,6 +1841,8 @@ end
 
 Delete a metaobject
 
+Deletes the metaobject. References to it from metafields stop resolving. Shopify only. Needs metaobjects.write.
+
 ### Examples
 
 ```ruby
@@ -1893,6 +1911,8 @@ end
 > <DeleteCommercePage200Response> delete_commerce_page(page_id, account_id)
 
 Delete a page
+
+Deletes the page from the store. This cannot be undone. Needs pages.write.
 
 ### Examples
 
@@ -2030,6 +2050,79 @@ end
 - **Accept**: application/json
 
 
+## delete_commerce_product_metafields
+
+> <DeleteCommerceProductMetafields200Response> delete_commerce_product_metafields(product_id, account_id, keys)
+
+Delete product metafields
+
+Deletes the product custom fields named in `keys` (comma-separated `namespace.key`, up to 25) and returns how many were deleted. Needs metafields.write.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+product_id = 'product_id_example' # String | Platform-native id.
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+keys = 'keys_example' # String | Comma-separated namespace.key pairs.
+
+begin
+  # Delete product metafields
+  result = api_instance.delete_commerce_product_metafields(product_id, account_id, keys)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->delete_commerce_product_metafields: #{e}"
+end
+```
+
+#### Using the delete_commerce_product_metafields_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteCommerceProductMetafields200Response>, Integer, Hash)> delete_commerce_product_metafields_with_http_info(product_id, account_id, keys)
+
+```ruby
+begin
+  # Delete product metafields
+  data, status_code, headers = api_instance.delete_commerce_product_metafields_with_http_info(product_id, account_id, keys)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteCommerceProductMetafields200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->delete_commerce_product_metafields_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **product_id** | **String** | Platform-native id. |  |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+| **keys** | **String** | Comma-separated namespace.key pairs. |  |
+
+### Return type
+
+[**DeleteCommerceProductMetafields200Response**](DeleteCommerceProductMetafields200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## delete_commerce_product_options
 
 > <CreateCommerceProduct201Response> delete_commerce_product_options(product_id, account_id, names)
@@ -2109,6 +2202,8 @@ end
 
 Delete variants
 
+Deletes the variants in `variantIds` (comma-separated, up to 100) and returns the updated product. A product keeps at least one variant, so deleting every variant is refused by the platform. Needs products.variants.
+
 ### Examples
 
 ```ruby
@@ -2180,6 +2275,8 @@ end
 
 Delete a URL redirect
 
+Deletes the redirect; the old path answers 404 again. Shopify only. Needs navigation.write.
+
 ### Examples
 
 ```ruby
@@ -2232,77 +2329,6 @@ end
 ### Return type
 
 [**DeleteCommerceRedirect200Response**](DeleteCommerceRedirect200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## delete_product_metafields
-
-> <DeleteProductMetafields200Response> delete_product_metafields(product_id, account_id, keys)
-
-Delete product metafields
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::CommerceApi.new
-product_id = 'product_id_example' # String | Platform-native id.
-account_id = 'account_id_example' # String | Connected store SocialAccount id.
-keys = 'keys_example' # String | Comma-separated namespace.key pairs.
-
-begin
-  # Delete product metafields
-  result = api_instance.delete_product_metafields(product_id, account_id, keys)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->delete_product_metafields: #{e}"
-end
-```
-
-#### Using the delete_product_metafields_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<DeleteProductMetafields200Response>, Integer, Hash)> delete_product_metafields_with_http_info(product_id, account_id, keys)
-
-```ruby
-begin
-  # Delete product metafields
-  data, status_code, headers = api_instance.delete_product_metafields_with_http_info(product_id, account_id, keys)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <DeleteProductMetafields200Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->delete_product_metafields_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **product_id** | **String** | Platform-native id. |  |
-| **account_id** | **String** | Connected store SocialAccount id. |  |
-| **keys** | **String** | Comma-separated namespace.key pairs. |  |
-
-### Return type
-
-[**DeleteProductMetafields200Response**](DeleteProductMetafields200Response.md)
 
 ### Authorization
 
@@ -2391,6 +2417,8 @@ end
 
 Get a catalog sync
 
+One catalog sync with the status and counts of its last run (`itemsSent`, `itemsSkipped`, `itemsDeleted`, `lastError`). Poll it after POST /v1/commerce/catalog-syncs/{syncId}/run to follow a run.
+
 ### Examples
 
 ```ruby
@@ -2457,6 +2485,8 @@ end
 > <CreateCommerceCollection201Response> get_commerce_collection(collection_id, account_id)
 
 Get a collection
+
+One collection (a category on WooCommerce) with its image, sort order and product count. List its products with GET /v1/commerce/products?collectionId=. Needs collections.read.
 
 ### Examples
 
@@ -2527,6 +2557,8 @@ end
 
 Get a discount
 
+One discount with its value, targets, minimum, usage and schedule. Needs discounts.read.
+
 ### Examples
 
 ```ruby
@@ -2595,6 +2627,8 @@ end
 > <CreateCommerceMenu201Response> get_commerce_menu(menu_id, account_id)
 
 Get a navigation menu
+
+One navigation menu with its nested items. Shopify only. Needs navigation.read.
 
 ### Examples
 
@@ -2665,6 +2699,8 @@ end
 
 Get a metaobject
 
+One metaobject with its fields. Shopify only. Needs metaobjects.read.
+
 ### Examples
 
 ```ruby
@@ -2734,6 +2770,8 @@ end
 
 Get a page
 
+One content page with its body. Needs pages.read.
+
 ### Examples
 
 ```ruby
@@ -2802,6 +2840,8 @@ end
 > <CreateCommerceProduct201Response> get_commerce_product(product_id, account_id)
 
 Get a product
+
+One product with all its variants, options and images. Needs products.read. 404 product_not_found when the id does not exist in the store.
 
 ### Examples
 
@@ -2924,75 +2964,6 @@ end
 ### Return type
 
 [**GetCommerceStore200Response**](GetCommerceStore200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## list_collection_metafields
-
-> <ListProductMetafields200Response> list_collection_metafields(collection_id, account_id)
-
-List collection metafields
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::CommerceApi.new
-collection_id = 'collection_id_example' # String | Platform-native id.
-account_id = 'account_id_example' # String | Connected store SocialAccount id.
-
-begin
-  # List collection metafields
-  result = api_instance.list_collection_metafields(collection_id, account_id)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->list_collection_metafields: #{e}"
-end
-```
-
-#### Using the list_collection_metafields_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ListProductMetafields200Response>, Integer, Hash)> list_collection_metafields_with_http_info(collection_id, account_id)
-
-```ruby
-begin
-  # List collection metafields
-  data, status_code, headers = api_instance.list_collection_metafields_with_http_info(collection_id, account_id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ListProductMetafields200Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->list_collection_metafields_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **collection_id** | **String** | Platform-native id. |  |
-| **account_id** | **String** | Connected store SocialAccount id. |  |
-
-### Return type
-
-[**ListProductMetafields200Response**](ListProductMetafields200Response.md)
 
 ### Authorization
 
@@ -3142,6 +3113,77 @@ end
 - **Accept**: application/json
 
 
+## list_commerce_collection_metafields
+
+> <ListCommerceProductMetafields200Response> list_commerce_collection_metafields(collection_id, account_id)
+
+List collection metafields
+
+The collection's metafields as namespace, key, type and value. Needs collections.metafields: WooCommerce keeps custom fields on products only and answers 400 platform_not_supported.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+collection_id = 'collection_id_example' # String | Platform-native id.
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+
+begin
+  # List collection metafields
+  result = api_instance.list_commerce_collection_metafields(collection_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->list_commerce_collection_metafields: #{e}"
+end
+```
+
+#### Using the list_commerce_collection_metafields_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCommerceProductMetafields200Response>, Integer, Hash)> list_commerce_collection_metafields_with_http_info(collection_id, account_id)
+
+```ruby
+begin
+  # List collection metafields
+  data, status_code, headers = api_instance.list_commerce_collection_metafields_with_http_info(collection_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCommerceProductMetafields200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->list_commerce_collection_metafields_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **collection_id** | **String** | Platform-native id. |  |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+
+### Return type
+
+[**ListCommerceProductMetafields200Response**](ListCommerceProductMetafields200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_commerce_collections
 
 > <ListCommerceCollections200Response> list_commerce_collections(account_id, opts)
@@ -3224,6 +3266,8 @@ end
 > <ListCommerceDiscounts200Response> list_commerce_discounts(account_id, opts)
 
 List discounts
+
+The store's discounts (Shopify code and automatic discounts, WooCommerce coupons), cursor-paginated with `limit`, `cursor` and an optional `query`. Each discount lists its first 10 codes; `codeCount` has the total. Needs discounts.read.
 
 ### Examples
 
@@ -3509,6 +3553,8 @@ end
 
 List navigation menus
 
+The store's navigation menus with their items. Shopify only. Needs navigation.read.
+
 ### Examples
 
 ```ruby
@@ -3645,6 +3691,8 @@ end
 
 List metaobjects of a type
 
+The metaobjects of one `type` (a definition handle from GET /v1/commerce/metaobject-definitions), cursor-paginated with `limit` and `cursor`. Shopify only. Needs metaobjects.read.
+
 ### Examples
 
 ```ruby
@@ -3719,6 +3767,8 @@ end
 > <ListCommercePages200Response> list_commerce_pages(account_id, opts)
 
 List pages
+
+The store's content pages (Shopify online store pages, WordPress pages), cursor-paginated with `limit`, `cursor` and an optional `query`. Needs pages.read.
 
 ### Examples
 
@@ -3858,6 +3908,77 @@ end
 - **Accept**: application/json
 
 
+## list_commerce_product_metafields
+
+> <ListCommerceProductMetafields200Response> list_commerce_product_metafields(product_id, account_id)
+
+List product metafields
+
+The product's custom fields (metafields on Shopify, public meta on WooCommerce) as namespace, key, type and value. Needs metafields.read.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+product_id = 'product_id_example' # String | Platform-native id.
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+
+begin
+  # List product metafields
+  result = api_instance.list_commerce_product_metafields(product_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->list_commerce_product_metafields: #{e}"
+end
+```
+
+#### Using the list_commerce_product_metafields_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCommerceProductMetafields200Response>, Integer, Hash)> list_commerce_product_metafields_with_http_info(product_id, account_id)
+
+```ruby
+begin
+  # List product metafields
+  data, status_code, headers = api_instance.list_commerce_product_metafields_with_http_info(product_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCommerceProductMetafields200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->list_commerce_product_metafields_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **product_id** | **String** | Platform-native id. |  |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+
+### Return type
+
+[**ListCommerceProductMetafields200Response**](ListCommerceProductMetafields200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_commerce_products
 
 > <ListCommerceProducts200Response> list_commerce_products(account_id, opts)
@@ -3945,6 +4066,8 @@ end
 
 List URL redirects
 
+The store's URL redirects (old path to new target), cursor-paginated with `limit`, `cursor` and an optional `query` on the path. Shopify only. Needs navigation.read.
+
 ### Examples
 
 ```ruby
@@ -4003,75 +4126,6 @@ end
 ### Return type
 
 [**ListCommerceRedirects200Response**](ListCommerceRedirects200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## list_product_metafields
-
-> <ListProductMetafields200Response> list_product_metafields(product_id, account_id)
-
-List product metafields
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::CommerceApi.new
-product_id = 'product_id_example' # String | Platform-native id.
-account_id = 'account_id_example' # String | Connected store SocialAccount id.
-
-begin
-  # List product metafields
-  result = api_instance.list_product_metafields(product_id, account_id)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->list_product_metafields: #{e}"
-end
-```
-
-#### Using the list_product_metafields_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ListProductMetafields200Response>, Integer, Hash)> list_product_metafields_with_http_info(product_id, account_id)
-
-```ruby
-begin
-  # List product metafields
-  data, status_code, headers = api_instance.list_product_metafields_with_http_info(product_id, account_id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ListProductMetafields200Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->list_product_metafields_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **product_id** | **String** | Platform-native id. |  |
-| **account_id** | **String** | Connected store SocialAccount id. |  |
-
-### Return type
-
-[**ListProductMetafields200Response**](ListProductMetafields200Response.md)
 
 ### Authorization
 
@@ -4367,13 +4421,13 @@ end
 - **Accept**: application/json
 
 
-## set_collection_metafields
+## set_commerce_collection_metafields
 
-> <ListProductMetafields200Response> set_collection_metafields(collection_id, set_product_metafields_request)
+> <ListCommerceProductMetafields200Response> set_commerce_collection_metafields(collection_id, set_commerce_product_metafields_request)
 
 Set collection metafields
 
-Creates or updates custom fields by namespace and key. 
+Creates or updates custom fields by namespace and key. Needs collections.metafields: WooCommerce keeps custom fields on products only and answers 400 platform_not_supported. 
 
 ### Examples
 
@@ -4388,32 +4442,32 @@ end
 
 api_instance = Zernio::CommerceApi.new
 collection_id = 'collection_id_example' # String | Platform-native id.
-set_product_metafields_request = Zernio::SetProductMetafieldsRequest.new({account_id: 'account_id_example', metafields: [Zernio::CommerceMetafield.new({namespace: 'namespace_example', key: 'key_example', type: 'type_example', value: 'value_example'})]}) # SetProductMetafieldsRequest | 
+set_commerce_product_metafields_request = Zernio::SetCommerceProductMetafieldsRequest.new({account_id: 'account_id_example', metafields: [Zernio::CommerceMetafield.new({namespace: 'namespace_example', key: 'key_example', type: 'type_example', value: 'value_example'})]}) # SetCommerceProductMetafieldsRequest | 
 
 begin
   # Set collection metafields
-  result = api_instance.set_collection_metafields(collection_id, set_product_metafields_request)
+  result = api_instance.set_commerce_collection_metafields(collection_id, set_commerce_product_metafields_request)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->set_collection_metafields: #{e}"
+  puts "Error when calling CommerceApi->set_commerce_collection_metafields: #{e}"
 end
 ```
 
-#### Using the set_collection_metafields_with_http_info variant
+#### Using the set_commerce_collection_metafields_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListProductMetafields200Response>, Integer, Hash)> set_collection_metafields_with_http_info(collection_id, set_product_metafields_request)
+> <Array(<ListCommerceProductMetafields200Response>, Integer, Hash)> set_commerce_collection_metafields_with_http_info(collection_id, set_commerce_product_metafields_request)
 
 ```ruby
 begin
   # Set collection metafields
-  data, status_code, headers = api_instance.set_collection_metafields_with_http_info(collection_id, set_product_metafields_request)
+  data, status_code, headers = api_instance.set_commerce_collection_metafields_with_http_info(collection_id, set_commerce_product_metafields_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ListProductMetafields200Response>
+  p data # => <ListCommerceProductMetafields200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->set_collection_metafields_with_http_info: #{e}"
+  puts "Error when calling CommerceApi->set_commerce_collection_metafields_with_http_info: #{e}"
 end
 ```
 
@@ -4422,11 +4476,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **collection_id** | **String** | Platform-native id. |  |
-| **set_product_metafields_request** | [**SetProductMetafieldsRequest**](SetProductMetafieldsRequest.md) |  |  |
+| **set_commerce_product_metafields_request** | [**SetCommerceProductMetafieldsRequest**](SetCommerceProductMetafieldsRequest.md) |  |  |
 
 ### Return type
 
-[**ListProductMetafields200Response**](ListProductMetafields200Response.md)
+[**ListCommerceProductMetafields200Response**](ListCommerceProductMetafields200Response.md)
 
 ### Authorization
 
@@ -4580,9 +4634,9 @@ end
 - **Accept**: application/json
 
 
-## set_product_metafields
+## set_commerce_product_metafields
 
-> <ListProductMetafields200Response> set_product_metafields(product_id, set_product_metafields_request)
+> <ListCommerceProductMetafields200Response> set_commerce_product_metafields(product_id, set_commerce_product_metafields_request)
 
 Set product metafields
 
@@ -4601,32 +4655,32 @@ end
 
 api_instance = Zernio::CommerceApi.new
 product_id = 'product_id_example' # String | Platform-native id.
-set_product_metafields_request = Zernio::SetProductMetafieldsRequest.new({account_id: 'account_id_example', metafields: [Zernio::CommerceMetafield.new({namespace: 'namespace_example', key: 'key_example', type: 'type_example', value: 'value_example'})]}) # SetProductMetafieldsRequest | 
+set_commerce_product_metafields_request = Zernio::SetCommerceProductMetafieldsRequest.new({account_id: 'account_id_example', metafields: [Zernio::CommerceMetafield.new({namespace: 'namespace_example', key: 'key_example', type: 'type_example', value: 'value_example'})]}) # SetCommerceProductMetafieldsRequest | 
 
 begin
   # Set product metafields
-  result = api_instance.set_product_metafields(product_id, set_product_metafields_request)
+  result = api_instance.set_commerce_product_metafields(product_id, set_commerce_product_metafields_request)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->set_product_metafields: #{e}"
+  puts "Error when calling CommerceApi->set_commerce_product_metafields: #{e}"
 end
 ```
 
-#### Using the set_product_metafields_with_http_info variant
+#### Using the set_commerce_product_metafields_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListProductMetafields200Response>, Integer, Hash)> set_product_metafields_with_http_info(product_id, set_product_metafields_request)
+> <Array(<ListCommerceProductMetafields200Response>, Integer, Hash)> set_commerce_product_metafields_with_http_info(product_id, set_commerce_product_metafields_request)
 
 ```ruby
 begin
   # Set product metafields
-  data, status_code, headers = api_instance.set_product_metafields_with_http_info(product_id, set_product_metafields_request)
+  data, status_code, headers = api_instance.set_commerce_product_metafields_with_http_info(product_id, set_commerce_product_metafields_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ListProductMetafields200Response>
+  p data # => <ListCommerceProductMetafields200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CommerceApi->set_product_metafields_with_http_info: #{e}"
+  puts "Error when calling CommerceApi->set_commerce_product_metafields_with_http_info: #{e}"
 end
 ```
 
@@ -4635,11 +4689,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **product_id** | **String** | Platform-native id. |  |
-| **set_product_metafields_request** | [**SetProductMetafieldsRequest**](SetProductMetafieldsRequest.md) |  |  |
+| **set_commerce_product_metafields_request** | [**SetCommerceProductMetafieldsRequest**](SetCommerceProductMetafieldsRequest.md) |  |  |
 
 ### Return type
 
-[**ListProductMetafields200Response**](ListProductMetafields200Response.md)
+[**ListCommerceProductMetafields200Response**](ListCommerceProductMetafields200Response.md)
 
 ### Authorization
 
@@ -4941,6 +4995,8 @@ end
 
 Update a page
 
+Updates the fields you pass (`title`, `handle`, `bodyHtml`, `isPublished`) and returns the page. Needs pages.write.
+
 ### Examples
 
 ```ruby
@@ -5151,6 +5207,8 @@ end
 > <CreateCommerceRedirect201Response> update_commerce_redirect(redirect_id, update_commerce_redirect_request)
 
 Update a URL redirect
+
+Changes the redirect's `path` and/or `target`. Shopify only. Needs navigation.write.
 
 ### Examples
 

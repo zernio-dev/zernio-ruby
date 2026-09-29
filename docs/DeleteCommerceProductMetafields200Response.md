@@ -1,4 +1,4 @@
-# Zernio::DeleteProductMetafields200Response
+# Zernio::DeleteCommerceProductMetafields200Response
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::DeleteProductMetafields200Response.new(
+instance = Zernio::DeleteCommerceProductMetafields200Response.new(
   deleted: null
 )
 ```

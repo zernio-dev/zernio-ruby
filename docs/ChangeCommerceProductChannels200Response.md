@@ -1,4 +1,4 @@
-# Zernio::ChangeProductChannels200Response
+# Zernio::ChangeCommerceProductChannels200Response
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ChangeProductChannels200Response.new(
+instance = Zernio::ChangeCommerceProductChannels200Response.new(
   product_id: null,
   published: null,
   unpublished: null

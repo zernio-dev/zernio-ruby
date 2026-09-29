@@ -1,4 +1,4 @@
-# Zernio::SetProductMetafieldsRequest
+# Zernio::SetCommerceProductMetafieldsRequest
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SetProductMetafieldsRequest.new(
+instance = Zernio::SetCommerceProductMetafieldsRequest.new(
   account_id: null,
   metafields: null
 )

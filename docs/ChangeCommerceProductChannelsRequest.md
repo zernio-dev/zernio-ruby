@@ -1,4 +1,4 @@
-# Zernio::ChangeProductChannelsRequest
+# Zernio::ChangeCommerceProductChannelsRequest
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ChangeProductChannelsRequest.new(
+instance = Zernio::ChangeCommerceProductChannelsRequest.new(
   account_id: null,
   publish: null,
   unpublish: null

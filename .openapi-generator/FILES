@@ -256,19 +256,19 @@ docs/CampaignBiddingBidSpec.md
 docs/CampaignBiddingPortfolio.md
 docs/CancelBroadcast200Response.md
 docs/CancelPhoneNumberPortIn200Response.md
-docs/ChangeCollectionChannels200Response.md
+docs/ChangeCommerceCollectionChannels200Response.md
 docs/ChangeCommerceCollectionProducts200Response.md
 docs/ChangeCommerceCollectionProductsRequest.md
 docs/ChangeCommerceInventoryRequest.md
 docs/ChangeCommerceInventoryRequestChangesInner.md
+docs/ChangeCommerceProductChannels200Response.md
+docs/ChangeCommerceProductChannelsRequest.md
 docs/ChangeCommerceProductState200Response.md
 docs/ChangeCommerceProductState200ResponseFailedInner.md
 docs/ChangeCommerceProductStateRequest.md
 docs/ChangeCommerceProductTags200Response.md
 docs/ChangeCommerceProductTags200ResponseFailedInner.md
 docs/ChangeCommerceProductTagsRequest.md
-docs/ChangeProductChannels200Response.md
-docs/ChangeProductChannelsRequest.md
 docs/ChannelPicker.md
 docs/ChannelPickerChannelsInner.md
 docs/ChannelPickerTeam.md
@@ -658,6 +658,7 @@ docs/DeleteCommerceMenu200Response.md
 docs/DeleteCommerceMetaobject200Response.md
 docs/DeleteCommercePage200Response.md
 docs/DeleteCommercePriceListPrices200Response.md
+docs/DeleteCommerceProductMetafields200Response.md
 docs/DeleteCommerceRedirect200Response.md
 docs/DeleteDiscordScheduledEvent200Response.md
 docs/DeleteGoogleBusinessMedia200Response.md
@@ -666,7 +667,6 @@ docs/DeleteGoogleBusinessReviewReply200Response.md
 docs/DeleteInboxComment200Response.md
 docs/DeleteInboxReviewReply200Response.md
 docs/DeleteInboxReviewReplyRequest.md
-docs/DeleteProductMetafields200Response.md
 docs/DeleteSmsSenderId200Response.md
 docs/DeleteTestLead200Response.md
 docs/DeleteTrackingTagEvent200Response.md
@@ -1439,6 +1439,7 @@ docs/ListCommerceMetaobjectDefinitions200Response.md
 docs/ListCommerceMetaobjects200Response.md
 docs/ListCommercePages200Response.md
 docs/ListCommercePriceLists200Response.md
+docs/ListCommerceProductMetafields200Response.md
 docs/ListCommerceProducts200Response.md
 docs/ListCommerceRedirects200Response.md
 docs/ListConnectedApps200Response.md
@@ -1547,7 +1548,6 @@ docs/ListPhoneNumbers200ResponseSandbox.md
 docs/ListPhoneNumbers200ResponseSandboxTemplate.md
 docs/ListPinterestBoardsForSelection200Response.md
 docs/ListPinterestBoardsForSelection200ResponseBoardsInner.md
-docs/ListProductMetafields200Response.md
 docs/ListProducts200Response.md
 docs/ListQueueSlots200Response.md
 docs/ListQueueSlots200ResponseOneOf.md
@@ -2059,6 +2059,7 @@ docs/SetCommerceDiscountActiveRequest.md
 docs/SetCommercePriceListPrices200Response.md
 docs/SetCommercePriceListPricesRequest.md
 docs/SetCommercePriceListPricesRequestPricesInner.md
+docs/SetCommerceProductMetafieldsRequest.md
 docs/SetContactFieldValueRequest.md
 docs/SetConversationThreadControl200Response.md
 docs/SetConversationThreadControl200ResponseControl.md
@@ -2071,7 +2072,6 @@ docs/SetMessengerGetStartedRequest.md
 docs/SetMessengerMenuRequest.md
 docs/SetPartnershipAdPermission200Response.md
 docs/SetPartnershipAdPermissionRequest.md
-docs/SetProductMetafieldsRequest.md
 docs/SetRedditPostFlairRequest.md
 docs/SetTelegramCommandsRequest.md
 docs/SetTelegramCommandsRequestCommandsInner.md
@@ -2972,19 +2972,19 @@ lib/zernio-sdk/models/campaign_bidding_bid_spec.rb
 lib/zernio-sdk/models/campaign_bidding_portfolio.rb
 lib/zernio-sdk/models/cancel_broadcast200_response.rb
 lib/zernio-sdk/models/cancel_phone_number_port_in200_response.rb
-lib/zernio-sdk/models/change_collection_channels200_response.rb
+lib/zernio-sdk/models/change_commerce_collection_channels200_response.rb
 lib/zernio-sdk/models/change_commerce_collection_products200_response.rb
 lib/zernio-sdk/models/change_commerce_collection_products_request.rb
 lib/zernio-sdk/models/change_commerce_inventory_request.rb
 lib/zernio-sdk/models/change_commerce_inventory_request_changes_inner.rb
+lib/zernio-sdk/models/change_commerce_product_channels200_response.rb
+lib/zernio-sdk/models/change_commerce_product_channels_request.rb
 lib/zernio-sdk/models/change_commerce_product_state200_response.rb
 lib/zernio-sdk/models/change_commerce_product_state200_response_failed_inner.rb
 lib/zernio-sdk/models/change_commerce_product_state_request.rb
 lib/zernio-sdk/models/change_commerce_product_tags200_response.rb
 lib/zernio-sdk/models/change_commerce_product_tags200_response_failed_inner.rb
 lib/zernio-sdk/models/change_commerce_product_tags_request.rb
-lib/zernio-sdk/models/change_product_channels200_response.rb
-lib/zernio-sdk/models/change_product_channels_request.rb
 lib/zernio-sdk/models/channel_picker.rb
 lib/zernio-sdk/models/channel_picker_channels_inner.rb
 lib/zernio-sdk/models/channel_picker_team.rb
@@ -3366,6 +3366,7 @@ lib/zernio-sdk/models/delete_commerce_menu200_response.rb
 lib/zernio-sdk/models/delete_commerce_metaobject200_response.rb
 lib/zernio-sdk/models/delete_commerce_page200_response.rb
 lib/zernio-sdk/models/delete_commerce_price_list_prices200_response.rb
+lib/zernio-sdk/models/delete_commerce_product_metafields200_response.rb
 lib/zernio-sdk/models/delete_commerce_redirect200_response.rb
 lib/zernio-sdk/models/delete_discord_scheduled_event200_response.rb
 lib/zernio-sdk/models/delete_google_business_media200_response.rb
@@ -3374,7 +3375,6 @@ lib/zernio-sdk/models/delete_google_business_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_comment200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
-lib/zernio-sdk/models/delete_product_metafields200_response.rb
 lib/zernio-sdk/models/delete_sms_sender_id200_response.rb
 lib/zernio-sdk/models/delete_test_lead200_response.rb
 lib/zernio-sdk/models/delete_tracking_tag_event200_response.rb
@@ -4131,6 +4131,7 @@ lib/zernio-sdk/models/list_commerce_metaobject_definitions200_response.rb
 lib/zernio-sdk/models/list_commerce_metaobjects200_response.rb
 lib/zernio-sdk/models/list_commerce_pages200_response.rb
 lib/zernio-sdk/models/list_commerce_price_lists200_response.rb
+lib/zernio-sdk/models/list_commerce_product_metafields200_response.rb
 lib/zernio-sdk/models/list_commerce_products200_response.rb
 lib/zernio-sdk/models/list_commerce_redirects200_response.rb
 lib/zernio-sdk/models/list_connected_apps200_response.rb
@@ -4239,7 +4240,6 @@ lib/zernio-sdk/models/list_phone_numbers200_response_sandbox.rb
 lib/zernio-sdk/models/list_phone_numbers200_response_sandbox_template.rb
 lib/zernio-sdk/models/list_pinterest_boards_for_selection200_response.rb
 lib/zernio-sdk/models/list_pinterest_boards_for_selection200_response_boards_inner.rb
-lib/zernio-sdk/models/list_product_metafields200_response.rb
 lib/zernio-sdk/models/list_products200_response.rb
 lib/zernio-sdk/models/list_queue_slots200_response.rb
 lib/zernio-sdk/models/list_queue_slots200_response_one_of.rb
@@ -4734,6 +4734,7 @@ lib/zernio-sdk/models/set_commerce_discount_active_request.rb
 lib/zernio-sdk/models/set_commerce_price_list_prices200_response.rb
 lib/zernio-sdk/models/set_commerce_price_list_prices_request.rb
 lib/zernio-sdk/models/set_commerce_price_list_prices_request_prices_inner.rb
+lib/zernio-sdk/models/set_commerce_product_metafields_request.rb
 lib/zernio-sdk/models/set_contact_field_value_request.rb
 lib/zernio-sdk/models/set_conversation_thread_control200_response.rb
 lib/zernio-sdk/models/set_conversation_thread_control200_response_control.rb
@@ -4746,7 +4747,6 @@ lib/zernio-sdk/models/set_messenger_get_started_request.rb
 lib/zernio-sdk/models/set_messenger_menu_request.rb
 lib/zernio-sdk/models/set_partnership_ad_permission200_response.rb
 lib/zernio-sdk/models/set_partnership_ad_permission_request.rb
-lib/zernio-sdk/models/set_product_metafields_request.rb
 lib/zernio-sdk/models/set_reddit_post_flair_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request_commands_inner.rb
@@ -5623,19 +5623,19 @@ spec/models/campaign_bidding_portfolio_spec.rb
 spec/models/campaign_bidding_spec.rb
 spec/models/cancel_broadcast200_response_spec.rb
 spec/models/cancel_phone_number_port_in200_response_spec.rb
-spec/models/change_collection_channels200_response_spec.rb
+spec/models/change_commerce_collection_channels200_response_spec.rb
 spec/models/change_commerce_collection_products200_response_spec.rb
 spec/models/change_commerce_collection_products_request_spec.rb
 spec/models/change_commerce_inventory_request_changes_inner_spec.rb
 spec/models/change_commerce_inventory_request_spec.rb
+spec/models/change_commerce_product_channels200_response_spec.rb
+spec/models/change_commerce_product_channels_request_spec.rb
 spec/models/change_commerce_product_state200_response_failed_inner_spec.rb
 spec/models/change_commerce_product_state200_response_spec.rb
 spec/models/change_commerce_product_state_request_spec.rb
 spec/models/change_commerce_product_tags200_response_failed_inner_spec.rb
 spec/models/change_commerce_product_tags200_response_spec.rb
 spec/models/change_commerce_product_tags_request_spec.rb
-spec/models/change_product_channels200_response_spec.rb
-spec/models/change_product_channels_request_spec.rb
 spec/models/channel_picker_channels_inner_spec.rb
 spec/models/channel_picker_spec.rb
 spec/models/channel_picker_team_spec.rb
@@ -6017,6 +6017,7 @@ spec/models/delete_commerce_menu200_response_spec.rb
 spec/models/delete_commerce_metaobject200_response_spec.rb
 spec/models/delete_commerce_page200_response_spec.rb
 spec/models/delete_commerce_price_list_prices200_response_spec.rb
+spec/models/delete_commerce_product_metafields200_response_spec.rb
 spec/models/delete_commerce_redirect200_response_spec.rb
 spec/models/delete_discord_scheduled_event200_response_spec.rb
 spec/models/delete_google_business_media200_response_spec.rb
@@ -6025,7 +6026,6 @@ spec/models/delete_google_business_review_reply200_response_spec.rb
 spec/models/delete_inbox_comment200_response_spec.rb
 spec/models/delete_inbox_review_reply200_response_spec.rb
 spec/models/delete_inbox_review_reply_request_spec.rb
-spec/models/delete_product_metafields200_response_spec.rb
 spec/models/delete_sms_sender_id200_response_spec.rb
 spec/models/delete_test_lead200_response_spec.rb
 spec/models/delete_tracking_tag_event200_response_spec.rb
@@ -6782,6 +6782,7 @@ spec/models/list_commerce_metaobject_definitions200_response_spec.rb
 spec/models/list_commerce_metaobjects200_response_spec.rb
 spec/models/list_commerce_pages200_response_spec.rb
 spec/models/list_commerce_price_lists200_response_spec.rb
+spec/models/list_commerce_product_metafields200_response_spec.rb
 spec/models/list_commerce_products200_response_spec.rb
 spec/models/list_commerce_redirects200_response_spec.rb
 spec/models/list_connected_apps200_response_spec.rb
@@ -6890,7 +6891,6 @@ spec/models/list_phone_numbers200_response_sandbox_template_spec.rb
 spec/models/list_phone_numbers200_response_spec.rb
 spec/models/list_pinterest_boards_for_selection200_response_boards_inner_spec.rb
 spec/models/list_pinterest_boards_for_selection200_response_spec.rb
-spec/models/list_product_metafields200_response_spec.rb
 spec/models/list_products200_response_spec.rb
 spec/models/list_queue_slots200_response_one_of_spec.rb
 spec/models/list_queue_slots200_response_spec.rb
@@ -7385,6 +7385,7 @@ spec/models/set_commerce_discount_active_request_spec.rb
 spec/models/set_commerce_price_list_prices200_response_spec.rb
 spec/models/set_commerce_price_list_prices_request_prices_inner_spec.rb
 spec/models/set_commerce_price_list_prices_request_spec.rb
+spec/models/set_commerce_product_metafields_request_spec.rb
 spec/models/set_contact_field_value_request_spec.rb
 spec/models/set_conversation_thread_control200_response_control_spec.rb
 spec/models/set_conversation_thread_control200_response_spec.rb
@@ -7397,7 +7398,6 @@ spec/models/set_messenger_get_started_request_spec.rb
 spec/models/set_messenger_menu_request_spec.rb
 spec/models/set_partnership_ad_permission200_response_spec.rb
 spec/models/set_partnership_ad_permission_request_spec.rb
-spec/models/set_product_metafields_request_spec.rb
 spec/models/set_reddit_post_flair_request_spec.rb
 spec/models/set_telegram_commands_request_commands_inner_spec.rb
 spec/models/set_telegram_commands_request_spec.rb

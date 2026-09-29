@@ -1,4 +1,4 @@
-# Zernio::ChangeCollectionChannels200Response
+# Zernio::ChangeCommerceCollectionChannels200Response
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ChangeCollectionChannels200Response.new(
+instance = Zernio::ChangeCommerceCollectionChannels200Response.new(
   collection_id: null,
   published: null,
   unpublished: null
