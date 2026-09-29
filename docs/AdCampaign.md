@@ -10,6 +10,7 @@
 | **status** | [**AdStatus**](AdStatus.md) | Delivery status derived from child ad statuses. Distinct from &#x60;reviewStatus&#x60;. | [optional] |
 | **review_status** | [**AdReviewStatus**](AdReviewStatus.md) |  | [optional] |
 | **platform_campaign_status** | **String** | Raw platform-level campaign status (Meta &#x60;effective_status&#x60;; ChatGPT (OpenAI): the campaign&#39;s own switch, active / paused / archived; TikTok: the campaign&#39;s own switch &#x60;operation_status&#x60;, ENABLE / DISABLE). | [optional] |
+| **status_read_at** | **Time** | Only on GET /v1/ads/campaigns with &#x60;live&#x3D;true&#x60;. When &#x60;platformCampaignStatus&#x60; was read from the platform; null when this campaign could not be read live. | [optional] |
 | **campaign_issues_info** | **Array&lt;Object&gt;** | Platform-reported campaign issues (Meta &#x60;issues_info[]&#x60;). | [optional] |
 | **ad_count** | **Integer** |  | [optional] |
 | **budget** | [**AdCampaignBudget**](AdCampaignBudget.md) |  | [optional] |
@@ -44,6 +45,7 @@ instance = Zernio::AdCampaign.new(
   status: null,
   review_status: null,
   platform_campaign_status: null,
+  status_read_at: null,
   campaign_issues_info: null,
   ad_count: null,
   budget: null,

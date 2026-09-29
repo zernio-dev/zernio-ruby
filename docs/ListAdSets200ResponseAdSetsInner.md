@@ -19,6 +19,7 @@
 | **targeting** | [**ListAdSets200ResponseAdSetsInnerTargeting**](ListAdSets200ResponseAdSetsInnerTargeting.md) |  | [optional] |
 | **is_external** | **Boolean** |  | [optional] |
 | **platform_created_at** | **Time** |  | [optional] |
+| **status_read_at** | **Time** | Only with &#x60;live&#x3D;true&#x60;. When &#x60;platformAdSetStatus&#x60; was read from the platform; null when this row was not read live. | [optional] |
 
 ## Example
 
@@ -40,7 +41,8 @@ instance = Zernio::ListAdSets200ResponseAdSetsInner.new(
   schedule: null,
   targeting: null,
   is_external: null,
-  platform_created_at: null
+  platform_created_at: null,
+  status_read_at: null
 )
 ```
 
