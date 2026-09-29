@@ -63,7 +63,7 @@ module Zernio
     # Interest entities from /v1/ads/targeting/search?dimension=interest. Each carries the platform's opaque id.
     attr_accessor :interests
 
-    # Behaviour entities from /v1/ads/targeting/search?dimension=behavior. Supported on Meta and TikTok.
+    # Behaviour entities from /v1/ads/targeting/search?dimension=behavior. Supported on Meta only (TikTok behaviours are rejected with a 400).
     attr_accessor :behaviors
 
     # Meta only. Job title entities from /v1/ads/targeting/search?dimension=workPosition. Not interchangeable with the LinkedIn `jobTitles` URN fragments.

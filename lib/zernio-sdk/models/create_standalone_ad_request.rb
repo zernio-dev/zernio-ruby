@@ -169,7 +169,7 @@ module Zernio
     # Point-radius (lat/lng) geo targeting. Meta only (custom_locations). Rejected on platforms without radius support.
     attr_accessor :custom_locations
 
-    # Behaviour entities from /v1/ads/targeting/search?dimension=behavior. Supported on Meta and TikTok. Each must include id.
+    # Behaviour entities from /v1/ads/targeting/search?dimension=behavior. Supported on Meta only (TikTok behaviours are rejected with a 400). Each must include id.
     attr_accessor :behaviors
 
     # Meta only. Job title entities from /v1/ads/targeting/search?dimension=workPosition. Each must include id. Rejected on other platforms (use LinkedIn's `jobTitles` there).
