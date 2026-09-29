@@ -305,7 +305,7 @@ end
 
 Update profile
 
-Updates a profile's name, description, color, or default status.
+Updates a profile's name, description, color, default timezone, or default status.
 
 ### Examples
 
