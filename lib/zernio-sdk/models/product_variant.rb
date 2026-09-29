@@ -75,7 +75,7 @@ module Zernio
         :'compare_at_price' => :'String',
         :'inventory_quantity' => :'Integer',
         :'available_for_sale' => :'Boolean',
-        :'selected_options' => :'Array<ProductVariantSelectedOptionsInner>'
+        :'selected_options' => :'Array<CreateCommerceProductVariantsRequestVariantsInnerOptionsInner>'
       }
     end
 

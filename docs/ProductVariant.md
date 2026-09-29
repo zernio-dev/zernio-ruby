@@ -12,7 +12,7 @@
 | **compare_at_price** | **String** | Strike-through price; null when the variant is not on sale. | [optional] |
 | **inventory_quantity** | **Integer** | Units on hand across locations; null when inventory is not tracked. | [optional] |
 | **available_for_sale** | **Boolean** |  | [optional] |
-| **selected_options** | [**Array&lt;ProductVariantSelectedOptionsInner&gt;**](ProductVariantSelectedOptionsInner.md) |  | [optional] |
+| **selected_options** | [**Array&lt;CreateCommerceProductVariantsRequestVariantsInnerOptionsInner&gt;**](CreateCommerceProductVariantsRequestVariantsInnerOptionsInner.md) |  | [optional] |
 
 ## Example
 

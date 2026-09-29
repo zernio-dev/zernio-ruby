@@ -424,6 +424,80 @@ Class | Method | HTTP request | Description
 *Zernio::CommentsApi* | [**unlike_inbox_comment**](docs/CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
 *Zernio::CommentsApi* | [**unlike_post**](docs/CommentsApi.md#unlike_post) | **DELETE** /v1/inbox/posts/{postId}/like | Unlike post
 *Zernio::CommentsApi* | [**unpin_inbox_comment**](docs/CommentsApi.md#unpin_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/pin | Unpin comment
+*Zernio::CommerceApi* | [**add_commerce_discount_codes**](docs/CommerceApi.md#add_commerce_discount_codes) | **POST** /v1/commerce/discounts/{discountId}/codes | Add codes to a discount
+*Zernio::CommerceApi* | [**add_commerce_marketing_engagement**](docs/CommerceApi.md#add_commerce_marketing_engagement) | **POST** /v1/commerce/marketing-activities/{remoteId}/engagements | Report daily engagement
+*Zernio::CommerceApi* | [**add_commerce_product_images**](docs/CommerceApi.md#add_commerce_product_images) | **POST** /v1/commerce/products/{productId}/images | Add images
+*Zernio::CommerceApi* | [**change_collection_channels**](docs/CommerceApi.md#change_collection_channels) | **POST** /v1/commerce/collections/{collectionId}/channels | Publish or unpublish a collection
+*Zernio::CommerceApi* | [**change_commerce_collection_products**](docs/CommerceApi.md#change_commerce_collection_products) | **POST** /v1/commerce/collections/{collectionId}/products | Add or remove products in a collection
+*Zernio::CommerceApi* | [**change_commerce_inventory**](docs/CommerceApi.md#change_commerce_inventory) | **POST** /v1/commerce/products/{productId}/inventory | Set or adjust stock
+*Zernio::CommerceApi* | [**change_commerce_product_state**](docs/CommerceApi.md#change_commerce_product_state) | **POST** /v1/commerce/products/state | Activate, deactivate, archive or delete products
+*Zernio::CommerceApi* | [**change_commerce_product_tags**](docs/CommerceApi.md#change_commerce_product_tags) | **POST** /v1/commerce/products/tags | Add or remove tags in bulk
+*Zernio::CommerceApi* | [**change_product_channels**](docs/CommerceApi.md#change_product_channels) | **POST** /v1/commerce/products/{productId}/channels | Publish or unpublish a product
+*Zernio::CommerceApi* | [**create_commerce_catalog_sync**](docs/CommerceApi.md#create_commerce_catalog_sync) | **POST** /v1/commerce/catalog-syncs | Sync a store into a Meta catalog
+*Zernio::CommerceApi* | [**create_commerce_collection**](docs/CommerceApi.md#create_commerce_collection) | **POST** /v1/commerce/collections | Create a collection
+*Zernio::CommerceApi* | [**create_commerce_discount**](docs/CommerceApi.md#create_commerce_discount) | **POST** /v1/commerce/discounts | Create a discount
+*Zernio::CommerceApi* | [**create_commerce_menu**](docs/CommerceApi.md#create_commerce_menu) | **POST** /v1/commerce/menus | Create a navigation menu
+*Zernio::CommerceApi* | [**create_commerce_metaobject**](docs/CommerceApi.md#create_commerce_metaobject) | **POST** /v1/commerce/metaobjects | Create a metaobject
+*Zernio::CommerceApi* | [**create_commerce_page**](docs/CommerceApi.md#create_commerce_page) | **POST** /v1/commerce/pages | Create a page
+*Zernio::CommerceApi* | [**create_commerce_product**](docs/CommerceApi.md#create_commerce_product) | **POST** /v1/commerce/products | Create a product
+*Zernio::CommerceApi* | [**create_commerce_product_options**](docs/CommerceApi.md#create_commerce_product_options) | **POST** /v1/commerce/products/{productId}/options | Add options
+*Zernio::CommerceApi* | [**create_commerce_product_variants**](docs/CommerceApi.md#create_commerce_product_variants) | **POST** /v1/commerce/products/{productId}/variants | Add variants
+*Zernio::CommerceApi* | [**create_commerce_redirect**](docs/CommerceApi.md#create_commerce_redirect) | **POST** /v1/commerce/redirects | Create a URL redirect
+*Zernio::CommerceApi* | [**delete_collection_metafields**](docs/CommerceApi.md#delete_collection_metafields) | **DELETE** /v1/commerce/collections/{collectionId}/metafields | Delete collection metafields
+*Zernio::CommerceApi* | [**delete_commerce_catalog_sync**](docs/CommerceApi.md#delete_commerce_catalog_sync) | **DELETE** /v1/commerce/catalog-syncs/{syncId} | Stop a catalog sync
+*Zernio::CommerceApi* | [**delete_commerce_collection**](docs/CommerceApi.md#delete_commerce_collection) | **DELETE** /v1/commerce/collections/{collectionId} | Delete a collection
+*Zernio::CommerceApi* | [**delete_commerce_discount**](docs/CommerceApi.md#delete_commerce_discount) | **DELETE** /v1/commerce/discounts/{discountId} | Delete a discount
+*Zernio::CommerceApi* | [**delete_commerce_marketing_activity**](docs/CommerceApi.md#delete_commerce_marketing_activity) | **DELETE** /v1/commerce/marketing-activities/{remoteId} | Delete a marketing activity
+*Zernio::CommerceApi* | [**delete_commerce_menu**](docs/CommerceApi.md#delete_commerce_menu) | **DELETE** /v1/commerce/menus/{menuId} | Delete a navigation menu
+*Zernio::CommerceApi* | [**delete_commerce_metaobject**](docs/CommerceApi.md#delete_commerce_metaobject) | **DELETE** /v1/commerce/metaobjects/{metaobjectId} | Delete a metaobject
+*Zernio::CommerceApi* | [**delete_commerce_page**](docs/CommerceApi.md#delete_commerce_page) | **DELETE** /v1/commerce/pages/{pageId} | Delete a page
+*Zernio::CommerceApi* | [**delete_commerce_price_list_prices**](docs/CommerceApi.md#delete_commerce_price_list_prices) | **DELETE** /v1/commerce/price-lists/{priceListId}/prices | Remove fixed prices
+*Zernio::CommerceApi* | [**delete_commerce_product_options**](docs/CommerceApi.md#delete_commerce_product_options) | **DELETE** /v1/commerce/products/{productId}/options | Delete options
+*Zernio::CommerceApi* | [**delete_commerce_product_variants**](docs/CommerceApi.md#delete_commerce_product_variants) | **DELETE** /v1/commerce/products/{productId}/variants | Delete variants
+*Zernio::CommerceApi* | [**delete_commerce_redirect**](docs/CommerceApi.md#delete_commerce_redirect) | **DELETE** /v1/commerce/redirects/{redirectId} | Delete a URL redirect
+*Zernio::CommerceApi* | [**delete_product_metafields**](docs/CommerceApi.md#delete_product_metafields) | **DELETE** /v1/commerce/products/{productId}/metafields | Delete product metafields
+*Zernio::CommerceApi* | [**duplicate_commerce_product**](docs/CommerceApi.md#duplicate_commerce_product) | **POST** /v1/commerce/products/{productId}/duplicate | Duplicate a product
+*Zernio::CommerceApi* | [**get_commerce_catalog_sync**](docs/CommerceApi.md#get_commerce_catalog_sync) | **GET** /v1/commerce/catalog-syncs/{syncId} | Get a catalog sync
+*Zernio::CommerceApi* | [**get_commerce_collection**](docs/CommerceApi.md#get_commerce_collection) | **GET** /v1/commerce/collections/{collectionId} | Get a collection
+*Zernio::CommerceApi* | [**get_commerce_discount**](docs/CommerceApi.md#get_commerce_discount) | **GET** /v1/commerce/discounts/{discountId} | Get a discount
+*Zernio::CommerceApi* | [**get_commerce_menu**](docs/CommerceApi.md#get_commerce_menu) | **GET** /v1/commerce/menus/{menuId} | Get a navigation menu
+*Zernio::CommerceApi* | [**get_commerce_metaobject**](docs/CommerceApi.md#get_commerce_metaobject) | **GET** /v1/commerce/metaobjects/{metaobjectId} | Get a metaobject
+*Zernio::CommerceApi* | [**get_commerce_page**](docs/CommerceApi.md#get_commerce_page) | **GET** /v1/commerce/pages/{pageId} | Get a page
+*Zernio::CommerceApi* | [**get_commerce_product**](docs/CommerceApi.md#get_commerce_product) | **GET** /v1/commerce/products/{productId} | Get a product
+*Zernio::CommerceApi* | [**get_commerce_store**](docs/CommerceApi.md#get_commerce_store) | **GET** /v1/commerce/store | Get a store
+*Zernio::CommerceApi* | [**list_collection_metafields**](docs/CommerceApi.md#list_collection_metafields) | **GET** /v1/commerce/collections/{collectionId}/metafields | List collection metafields
+*Zernio::CommerceApi* | [**list_commerce_catalog_syncs**](docs/CommerceApi.md#list_commerce_catalog_syncs) | **GET** /v1/commerce/catalog-syncs | List catalog syncs
+*Zernio::CommerceApi* | [**list_commerce_channels**](docs/CommerceApi.md#list_commerce_channels) | **GET** /v1/commerce/channels | List sales channels
+*Zernio::CommerceApi* | [**list_commerce_collections**](docs/CommerceApi.md#list_commerce_collections) | **GET** /v1/commerce/collections | List collections
+*Zernio::CommerceApi* | [**list_commerce_discounts**](docs/CommerceApi.md#list_commerce_discounts) | **GET** /v1/commerce/discounts | List discounts
+*Zernio::CommerceApi* | [**list_commerce_inventory**](docs/CommerceApi.md#list_commerce_inventory) | **GET** /v1/commerce/inventory | Get a product's stock
+*Zernio::CommerceApi* | [**list_commerce_locations**](docs/CommerceApi.md#list_commerce_locations) | **GET** /v1/commerce/locations | List locations
+*Zernio::CommerceApi* | [**list_commerce_markets**](docs/CommerceApi.md#list_commerce_markets) | **GET** /v1/commerce/markets | List markets
+*Zernio::CommerceApi* | [**list_commerce_menus**](docs/CommerceApi.md#list_commerce_menus) | **GET** /v1/commerce/menus | List navigation menus
+*Zernio::CommerceApi* | [**list_commerce_metaobject_definitions**](docs/CommerceApi.md#list_commerce_metaobject_definitions) | **GET** /v1/commerce/metaobject-definitions | List metaobject definitions
+*Zernio::CommerceApi* | [**list_commerce_metaobjects**](docs/CommerceApi.md#list_commerce_metaobjects) | **GET** /v1/commerce/metaobjects | List metaobjects of a type
+*Zernio::CommerceApi* | [**list_commerce_pages**](docs/CommerceApi.md#list_commerce_pages) | **GET** /v1/commerce/pages | List pages
+*Zernio::CommerceApi* | [**list_commerce_price_lists**](docs/CommerceApi.md#list_commerce_price_lists) | **GET** /v1/commerce/price-lists | List price lists
+*Zernio::CommerceApi* | [**list_commerce_products**](docs/CommerceApi.md#list_commerce_products) | **GET** /v1/commerce/products | List products
+*Zernio::CommerceApi* | [**list_commerce_redirects**](docs/CommerceApi.md#list_commerce_redirects) | **GET** /v1/commerce/redirects | List URL redirects
+*Zernio::CommerceApi* | [**list_product_metafields**](docs/CommerceApi.md#list_product_metafields) | **GET** /v1/commerce/products/{productId}/metafields | List product metafields
+*Zernio::CommerceApi* | [**remove_commerce_product_images**](docs/CommerceApi.md#remove_commerce_product_images) | **DELETE** /v1/commerce/products/{productId}/images | Remove images
+*Zernio::CommerceApi* | [**reorder_commerce_collection_products**](docs/CommerceApi.md#reorder_commerce_collection_products) | **POST** /v1/commerce/collections/{collectionId}/reorder | Reorder products in a collection
+*Zernio::CommerceApi* | [**reorder_commerce_product_images**](docs/CommerceApi.md#reorder_commerce_product_images) | **POST** /v1/commerce/products/{productId}/images/reorder | Reorder images
+*Zernio::CommerceApi* | [**run_commerce_catalog_sync**](docs/CommerceApi.md#run_commerce_catalog_sync) | **POST** /v1/commerce/catalog-syncs/{syncId}/run | Run a catalog sync now
+*Zernio::CommerceApi* | [**set_collection_metafields**](docs/CommerceApi.md#set_collection_metafields) | **PUT** /v1/commerce/collections/{collectionId}/metafields | Set collection metafields
+*Zernio::CommerceApi* | [**set_commerce_discount_active**](docs/CommerceApi.md#set_commerce_discount_active) | **POST** /v1/commerce/discounts/{discountId}/state | Activate or deactivate a discount
+*Zernio::CommerceApi* | [**set_commerce_price_list_prices**](docs/CommerceApi.md#set_commerce_price_list_prices) | **PUT** /v1/commerce/price-lists/{priceListId}/prices | Set fixed prices
+*Zernio::CommerceApi* | [**set_product_metafields**](docs/CommerceApi.md#set_product_metafields) | **PUT** /v1/commerce/products/{productId}/metafields | Set product metafields
+*Zernio::CommerceApi* | [**update_commerce_collection**](docs/CommerceApi.md#update_commerce_collection) | **PATCH** /v1/commerce/collections/{collectionId} | Update a collection
+*Zernio::CommerceApi* | [**update_commerce_discount**](docs/CommerceApi.md#update_commerce_discount) | **PATCH** /v1/commerce/discounts/{discountId} | Update a discount
+*Zernio::CommerceApi* | [**update_commerce_menu**](docs/CommerceApi.md#update_commerce_menu) | **PUT** /v1/commerce/menus/{menuId} | Replace a navigation menu
+*Zernio::CommerceApi* | [**update_commerce_metaobject**](docs/CommerceApi.md#update_commerce_metaobject) | **PATCH** /v1/commerce/metaobjects/{metaobjectId} | Update a metaobject
+*Zernio::CommerceApi* | [**update_commerce_page**](docs/CommerceApi.md#update_commerce_page) | **PATCH** /v1/commerce/pages/{pageId} | Update a page
+*Zernio::CommerceApi* | [**update_commerce_product**](docs/CommerceApi.md#update_commerce_product) | **PATCH** /v1/commerce/products/{productId} | Update a product
+*Zernio::CommerceApi* | [**update_commerce_product_prices**](docs/CommerceApi.md#update_commerce_product_prices) | **POST** /v1/commerce/products/{productId}/price | Update variant prices
+*Zernio::CommerceApi* | [**update_commerce_redirect**](docs/CommerceApi.md#update_commerce_redirect) | **PATCH** /v1/commerce/redirects/{redirectId} | Update a URL redirect
+*Zernio::CommerceApi* | [**upsert_commerce_marketing_activity**](docs/CommerceApi.md#upsert_commerce_marketing_activity) | **PUT** /v1/commerce/marketing-activities | Record a marketing activity
 *Zernio::ConnectApi* | [**assign_google_business_location**](docs/ConnectApi.md#assign_google_business_location) | **POST** /v1/accounts/{accountId}/gmb-locations/assign | Assign Google Business Profile location to another profile
 *Zernio::ConnectApi* | [**complete_meta_ads_business_login**](docs/ConnectApi.md#complete_meta_ads_business_login) | **GET** /v1/connect/meta-ads/callback | Complete Meta business login
 *Zernio::ConnectApi* | [**complete_telegram_connect**](docs/ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status
@@ -998,6 +1072,10 @@ Class | Method | HTTP request | Description
  - [Zernio::AddBroadcastRecipients200Response](docs/AddBroadcastRecipients200Response.md)
  - [Zernio::AddBroadcastRecipientsRequest](docs/AddBroadcastRecipientsRequest.md)
  - [Zernio::AddBusinessAgentAllowlistEntryRequest](docs/AddBusinessAgentAllowlistEntryRequest.md)
+ - [Zernio::AddCommerceDiscountCodesRequest](docs/AddCommerceDiscountCodesRequest.md)
+ - [Zernio::AddCommerceMarketingEngagement201Response](docs/AddCommerceMarketingEngagement201Response.md)
+ - [Zernio::AddCommerceMarketingEngagementRequest](docs/AddCommerceMarketingEngagementRequest.md)
+ - [Zernio::AddCommerceProductImagesRequest](docs/AddCommerceProductImagesRequest.md)
  - [Zernio::AddConversionAssociations200Response](docs/AddConversionAssociations200Response.md)
  - [Zernio::AddConversionAssociations200ResponseFailedInner](docs/AddConversionAssociations200ResponseFailedInner.md)
  - [Zernio::AddConversionAssociationsRequest](docs/AddConversionAssociationsRequest.md)
@@ -1170,6 +1248,19 @@ Class | Method | HTTP request | Description
  - [Zernio::CampaignBiddingPortfolio](docs/CampaignBiddingPortfolio.md)
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
  - [Zernio::CancelPhoneNumberPortIn200Response](docs/CancelPhoneNumberPortIn200Response.md)
+ - [Zernio::ChangeCollectionChannels200Response](docs/ChangeCollectionChannels200Response.md)
+ - [Zernio::ChangeCommerceCollectionProducts200Response](docs/ChangeCommerceCollectionProducts200Response.md)
+ - [Zernio::ChangeCommerceCollectionProductsRequest](docs/ChangeCommerceCollectionProductsRequest.md)
+ - [Zernio::ChangeCommerceInventoryRequest](docs/ChangeCommerceInventoryRequest.md)
+ - [Zernio::ChangeCommerceInventoryRequestChangesInner](docs/ChangeCommerceInventoryRequestChangesInner.md)
+ - [Zernio::ChangeCommerceProductState200Response](docs/ChangeCommerceProductState200Response.md)
+ - [Zernio::ChangeCommerceProductState200ResponseFailedInner](docs/ChangeCommerceProductState200ResponseFailedInner.md)
+ - [Zernio::ChangeCommerceProductStateRequest](docs/ChangeCommerceProductStateRequest.md)
+ - [Zernio::ChangeCommerceProductTags200Response](docs/ChangeCommerceProductTags200Response.md)
+ - [Zernio::ChangeCommerceProductTags200ResponseFailedInner](docs/ChangeCommerceProductTags200ResponseFailedInner.md)
+ - [Zernio::ChangeCommerceProductTagsRequest](docs/ChangeCommerceProductTagsRequest.md)
+ - [Zernio::ChangeProductChannels200Response](docs/ChangeProductChannels200Response.md)
+ - [Zernio::ChangeProductChannelsRequest](docs/ChangeProductChannelsRequest.md)
  - [Zernio::ChannelPicker](docs/ChannelPicker.md)
  - [Zernio::ChannelPickerChannelsInner](docs/ChannelPickerChannelsInner.md)
  - [Zernio::ChannelPickerTeam](docs/ChannelPickerTeam.md)
@@ -1186,6 +1277,38 @@ Class | Method | HTTP request | Description
  - [Zernio::CommentAutomationTemplate](docs/CommentAutomationTemplate.md)
  - [Zernio::CommentAutomationTemplateElement](docs/CommentAutomationTemplateElement.md)
  - [Zernio::CommentAutomationTemplateElementButtonsInner](docs/CommentAutomationTemplateElementButtonsInner.md)
+ - [Zernio::CommerceCapability](docs/CommerceCapability.md)
+ - [Zernio::CommerceCatalogSync](docs/CommerceCatalogSync.md)
+ - [Zernio::CommerceChannel](docs/CommerceChannel.md)
+ - [Zernio::CommerceCollection](docs/CommerceCollection.md)
+ - [Zernio::CommerceDiscount](docs/CommerceDiscount.md)
+ - [Zernio::CommerceDiscountAppliesTo](docs/CommerceDiscountAppliesTo.md)
+ - [Zernio::CommerceDiscountMinimum](docs/CommerceDiscountMinimum.md)
+ - [Zernio::CommerceDiscountValue](docs/CommerceDiscountValue.md)
+ - [Zernio::CommerceDiscountValueOneOf](docs/CommerceDiscountValueOneOf.md)
+ - [Zernio::CommerceDiscountValueOneOf1](docs/CommerceDiscountValueOneOf1.md)
+ - [Zernio::CommerceImage](docs/CommerceImage.md)
+ - [Zernio::CommerceInventoryItem](docs/CommerceInventoryItem.md)
+ - [Zernio::CommerceInventoryItemLevelsInner](docs/CommerceInventoryItemLevelsInner.md)
+ - [Zernio::CommerceLocation](docs/CommerceLocation.md)
+ - [Zernio::CommerceLocationAddress](docs/CommerceLocationAddress.md)
+ - [Zernio::CommerceMarket](docs/CommerceMarket.md)
+ - [Zernio::CommerceMenu](docs/CommerceMenu.md)
+ - [Zernio::CommerceMenuItem](docs/CommerceMenuItem.md)
+ - [Zernio::CommerceMenuItemInput](docs/CommerceMenuItemInput.md)
+ - [Zernio::CommerceMetafield](docs/CommerceMetafield.md)
+ - [Zernio::CommerceMetaobject](docs/CommerceMetaobject.md)
+ - [Zernio::CommerceMetaobjectDefinition](docs/CommerceMetaobjectDefinition.md)
+ - [Zernio::CommerceMetaobjectDefinitionFieldsInner](docs/CommerceMetaobjectDefinitionFieldsInner.md)
+ - [Zernio::CommerceMetaobjectFieldsInner](docs/CommerceMetaobjectFieldsInner.md)
+ - [Zernio::CommerceMoney](docs/CommerceMoney.md)
+ - [Zernio::CommercePage](docs/CommercePage.md)
+ - [Zernio::CommercePriceList](docs/CommercePriceList.md)
+ - [Zernio::CommerceProduct](docs/CommerceProduct.md)
+ - [Zernio::CommerceProductStatus](docs/CommerceProductStatus.md)
+ - [Zernio::CommerceRedirect](docs/CommerceRedirect.md)
+ - [Zernio::CommerceStore](docs/CommerceStore.md)
+ - [Zernio::CommerceVariant](docs/CommerceVariant.md)
  - [Zernio::CompleteGoogleBusinessVerificationRequest](docs/CompleteGoogleBusinessVerificationRequest.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
  - [Zernio::CompleteWhatsAppPhoneSelection200Response](docs/CompleteWhatsAppPhoneSelection200Response.md)
@@ -1287,6 +1410,33 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateCommentAutomation200ResponseAutomation](docs/CreateCommentAutomation200ResponseAutomation.md)
  - [Zernio::CreateCommentAutomation200ResponseAutomationStats](docs/CreateCommentAutomation200ResponseAutomationStats.md)
  - [Zernio::CreateCommentAutomationRequest](docs/CreateCommentAutomationRequest.md)
+ - [Zernio::CreateCommerceCatalogSync202Response](docs/CreateCommerceCatalogSync202Response.md)
+ - [Zernio::CreateCommerceCatalogSyncRequest](docs/CreateCommerceCatalogSyncRequest.md)
+ - [Zernio::CreateCommerceCollection201Response](docs/CreateCommerceCollection201Response.md)
+ - [Zernio::CreateCommerceCollectionRequest](docs/CreateCommerceCollectionRequest.md)
+ - [Zernio::CreateCommerceDiscount201Response](docs/CreateCommerceDiscount201Response.md)
+ - [Zernio::CreateCommerceDiscountRequest](docs/CreateCommerceDiscountRequest.md)
+ - [Zernio::CreateCommerceMenu201Response](docs/CreateCommerceMenu201Response.md)
+ - [Zernio::CreateCommerceMenuRequest](docs/CreateCommerceMenuRequest.md)
+ - [Zernio::CreateCommerceMetaobject201Response](docs/CreateCommerceMetaobject201Response.md)
+ - [Zernio::CreateCommerceMetaobjectRequest](docs/CreateCommerceMetaobjectRequest.md)
+ - [Zernio::CreateCommercePage201Response](docs/CreateCommercePage201Response.md)
+ - [Zernio::CreateCommercePageRequest](docs/CreateCommercePageRequest.md)
+ - [Zernio::CreateCommerceProduct201Response](docs/CreateCommerceProduct201Response.md)
+ - [Zernio::CreateCommerceProductOptionsRequest](docs/CreateCommerceProductOptionsRequest.md)
+ - [Zernio::CreateCommerceProductRequest](docs/CreateCommerceProductRequest.md)
+ - [Zernio::CreateCommerceProductRequestImagesInner](docs/CreateCommerceProductRequestImagesInner.md)
+ - [Zernio::CreateCommerceProductRequestOptionsInner](docs/CreateCommerceProductRequestOptionsInner.md)
+ - [Zernio::CreateCommerceProductRequestSeo](docs/CreateCommerceProductRequestSeo.md)
+ - [Zernio::CreateCommerceProductRequestVariantsInner](docs/CreateCommerceProductRequestVariantsInner.md)
+ - [Zernio::CreateCommerceProductRequestVariantsInnerCompareAtPrice](docs/CreateCommerceProductRequestVariantsInnerCompareAtPrice.md)
+ - [Zernio::CreateCommerceProductRequestVariantsInnerOptionsInner](docs/CreateCommerceProductRequestVariantsInnerOptionsInner.md)
+ - [Zernio::CreateCommerceProductRequestVariantsInnerPrice](docs/CreateCommerceProductRequestVariantsInnerPrice.md)
+ - [Zernio::CreateCommerceProductVariantsRequest](docs/CreateCommerceProductVariantsRequest.md)
+ - [Zernio::CreateCommerceProductVariantsRequestVariantsInner](docs/CreateCommerceProductVariantsRequestVariantsInner.md)
+ - [Zernio::CreateCommerceProductVariantsRequestVariantsInnerOptionsInner](docs/CreateCommerceProductVariantsRequestVariantsInnerOptionsInner.md)
+ - [Zernio::CreateCommerceRedirect201Response](docs/CreateCommerceRedirect201Response.md)
+ - [Zernio::CreateCommerceRedirectRequest](docs/CreateCommerceRedirectRequest.md)
  - [Zernio::CreateContact200Response](docs/CreateContact200Response.md)
  - [Zernio::CreateContact200ResponseChannel](docs/CreateContact200ResponseChannel.md)
  - [Zernio::CreateContact200ResponseContact](docs/CreateContact200ResponseContact.md)
@@ -1484,6 +1634,15 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteAdSet200Response](docs/DeleteAdSet200Response.md)
  - [Zernio::DeleteAdVideo200Response](docs/DeleteAdVideo200Response.md)
  - [Zernio::DeleteBrandedCallingEnterprise200Response](docs/DeleteBrandedCallingEnterprise200Response.md)
+ - [Zernio::DeleteCommerceCatalogSync200Response](docs/DeleteCommerceCatalogSync200Response.md)
+ - [Zernio::DeleteCommerceCollection200Response](docs/DeleteCommerceCollection200Response.md)
+ - [Zernio::DeleteCommerceDiscount200Response](docs/DeleteCommerceDiscount200Response.md)
+ - [Zernio::DeleteCommerceMarketingActivity200Response](docs/DeleteCommerceMarketingActivity200Response.md)
+ - [Zernio::DeleteCommerceMenu200Response](docs/DeleteCommerceMenu200Response.md)
+ - [Zernio::DeleteCommerceMetaobject200Response](docs/DeleteCommerceMetaobject200Response.md)
+ - [Zernio::DeleteCommercePage200Response](docs/DeleteCommercePage200Response.md)
+ - [Zernio::DeleteCommercePriceListPrices200Response](docs/DeleteCommercePriceListPrices200Response.md)
+ - [Zernio::DeleteCommerceRedirect200Response](docs/DeleteCommerceRedirect200Response.md)
  - [Zernio::DeleteDiscordScheduledEvent200Response](docs/DeleteDiscordScheduledEvent200Response.md)
  - [Zernio::DeleteGoogleBusinessMedia200Response](docs/DeleteGoogleBusinessMedia200Response.md)
  - [Zernio::DeleteGoogleBusinessPlaceAction200Response](docs/DeleteGoogleBusinessPlaceAction200Response.md)
@@ -1491,6 +1650,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxComment200Response](docs/DeleteInboxComment200Response.md)
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
+ - [Zernio::DeleteProductMetafields200Response](docs/DeleteProductMetafields200Response.md)
  - [Zernio::DeleteSmsSenderId200Response](docs/DeleteSmsSenderId200Response.md)
  - [Zernio::DeleteTestLead200Response](docs/DeleteTestLead200Response.md)
  - [Zernio::DeleteTrackingTagEvent200Response](docs/DeleteTrackingTagEvent200Response.md)
@@ -1531,6 +1691,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DuplicateAdRequest](docs/DuplicateAdRequest.md)
  - [Zernio::DuplicateAdSet200Response](docs/DuplicateAdSet200Response.md)
  - [Zernio::DuplicateAdSetRequest](docs/DuplicateAdSetRequest.md)
+ - [Zernio::DuplicateCommerceProductRequest](docs/DuplicateCommerceProductRequest.md)
  - [Zernio::DuplicateWorkflow201Response](docs/DuplicateWorkflow201Response.md)
  - [Zernio::DuplicateWorkflow201ResponseWorkflow](docs/DuplicateWorkflow201ResponseWorkflow.md)
  - [Zernio::EditDiscordGuildRoleRequest](docs/EditDiscordGuildRoleRequest.md)
@@ -1684,6 +1845,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetCommentAutomation200ResponseAutomation](docs/GetCommentAutomation200ResponseAutomation.md)
  - [Zernio::GetCommentAutomation200ResponseLogsInner](docs/GetCommentAutomation200ResponseLogsInner.md)
  - [Zernio::GetCommentAutomation200ResponseLogsInnerPlatformError](docs/GetCommentAutomation200ResponseLogsInnerPlatformError.md)
+ - [Zernio::GetCommerceStore200Response](docs/GetCommerceStore200Response.md)
  - [Zernio::GetConnectUrl200Response](docs/GetConnectUrl200Response.md)
  - [Zernio::GetContact200Response](docs/GetContact200Response.md)
  - [Zernio::GetContact200ResponseChannelsInner](docs/GetContact200ResponseChannelsInner.md)
@@ -2232,6 +2394,20 @@ Class | Method | HTTP request | Description
  - [Zernio::ListCommentAutomations200Response](docs/ListCommentAutomations200Response.md)
  - [Zernio::ListCommentAutomations200ResponseAutomationsInner](docs/ListCommentAutomations200ResponseAutomationsInner.md)
  - [Zernio::ListCommentAutomations200ResponseAutomationsInnerStats](docs/ListCommentAutomations200ResponseAutomationsInnerStats.md)
+ - [Zernio::ListCommerceCatalogSyncs200Response](docs/ListCommerceCatalogSyncs200Response.md)
+ - [Zernio::ListCommerceChannels200Response](docs/ListCommerceChannels200Response.md)
+ - [Zernio::ListCommerceCollections200Response](docs/ListCommerceCollections200Response.md)
+ - [Zernio::ListCommerceDiscounts200Response](docs/ListCommerceDiscounts200Response.md)
+ - [Zernio::ListCommerceInventory200Response](docs/ListCommerceInventory200Response.md)
+ - [Zernio::ListCommerceLocations200Response](docs/ListCommerceLocations200Response.md)
+ - [Zernio::ListCommerceMarkets200Response](docs/ListCommerceMarkets200Response.md)
+ - [Zernio::ListCommerceMenus200Response](docs/ListCommerceMenus200Response.md)
+ - [Zernio::ListCommerceMetaobjectDefinitions200Response](docs/ListCommerceMetaobjectDefinitions200Response.md)
+ - [Zernio::ListCommerceMetaobjects200Response](docs/ListCommerceMetaobjects200Response.md)
+ - [Zernio::ListCommercePages200Response](docs/ListCommercePages200Response.md)
+ - [Zernio::ListCommercePriceLists200Response](docs/ListCommercePriceLists200Response.md)
+ - [Zernio::ListCommerceProducts200Response](docs/ListCommerceProducts200Response.md)
+ - [Zernio::ListCommerceRedirects200Response](docs/ListCommerceRedirects200Response.md)
  - [Zernio::ListConnectedApps200Response](docs/ListConnectedApps200Response.md)
  - [Zernio::ListContacts200Response](docs/ListContacts200Response.md)
  - [Zernio::ListContacts200ResponseContactsInner](docs/ListContacts200ResponseContactsInner.md)
@@ -2336,6 +2512,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListPhoneNumbers200ResponseSandboxTemplate](docs/ListPhoneNumbers200ResponseSandboxTemplate.md)
  - [Zernio::ListPinterestBoardsForSelection200Response](docs/ListPinterestBoardsForSelection200Response.md)
  - [Zernio::ListPinterestBoardsForSelection200ResponseBoardsInner](docs/ListPinterestBoardsForSelection200ResponseBoardsInner.md)
+ - [Zernio::ListProductMetafields200Response](docs/ListProductMetafields200Response.md)
  - [Zernio::ListProducts200Response](docs/ListProducts200Response.md)
  - [Zernio::ListQueueSlots200Response](docs/ListQueueSlots200Response.md)
  - [Zernio::ListQueueSlots200ResponseOneOf](docs/ListQueueSlots200ResponseOneOf.md)
@@ -2525,7 +2702,6 @@ Class | Method | HTTP request | Description
  - [Zernio::ProductOptionsInner](docs/ProductOptionsInner.md)
  - [Zernio::ProductSeo](docs/ProductSeo.md)
  - [Zernio::ProductVariant](docs/ProductVariant.md)
- - [Zernio::ProductVariantSelectedOptionsInner](docs/ProductVariantSelectedOptionsInner.md)
  - [Zernio::Profile](docs/Profile.md)
  - [Zernio::ProfileCreateResponse](docs/ProfileCreateResponse.md)
  - [Zernio::ProfileDeleteResponse](docs/ProfileDeleteResponse.md)
@@ -2623,6 +2799,10 @@ Class | Method | HTTP request | Description
  - [Zernio::RemoveTrackingTagFromStore200ResponseInstall](docs/RemoveTrackingTagFromStore200ResponseInstall.md)
  - [Zernio::RemoveTrackingTagUser200Response](docs/RemoveTrackingTagUser200Response.md)
  - [Zernio::RemoveWhatsAppGroupParticipantsRequest](docs/RemoveWhatsAppGroupParticipantsRequest.md)
+ - [Zernio::ReorderCommerceCollectionProductsRequest](docs/ReorderCommerceCollectionProductsRequest.md)
+ - [Zernio::ReorderCommerceCollectionProductsRequestMovesInner](docs/ReorderCommerceCollectionProductsRequestMovesInner.md)
+ - [Zernio::ReorderCommerceProductImages200Response](docs/ReorderCommerceProductImages200Response.md)
+ - [Zernio::ReorderCommerceProductImagesRequest](docs/ReorderCommerceProductImagesRequest.md)
  - [Zernio::ReplaceAdAudienceCompanies200Response](docs/ReplaceAdAudienceCompanies200Response.md)
  - [Zernio::ReplaceAdAudienceCompaniesRequest](docs/ReplaceAdAudienceCompaniesRequest.md)
  - [Zernio::ReplaceAdAudienceCompaniesRequestCompaniesInner](docs/ReplaceAdAudienceCompaniesRequestCompaniesInner.md)
@@ -2823,6 +3003,10 @@ Class | Method | HTTP request | Description
  - [Zernio::SetBusinessAgentConnectorCredentialsRequestOneOf1](docs/SetBusinessAgentConnectorCredentialsRequestOneOf1.md)
  - [Zernio::SetBusinessAgentConnectorCredentialsRequestOneOf2](docs/SetBusinessAgentConnectorCredentialsRequestOneOf2.md)
  - [Zernio::SetCommentModerationRequest](docs/SetCommentModerationRequest.md)
+ - [Zernio::SetCommerceDiscountActiveRequest](docs/SetCommerceDiscountActiveRequest.md)
+ - [Zernio::SetCommercePriceListPrices200Response](docs/SetCommercePriceListPrices200Response.md)
+ - [Zernio::SetCommercePriceListPricesRequest](docs/SetCommercePriceListPricesRequest.md)
+ - [Zernio::SetCommercePriceListPricesRequestPricesInner](docs/SetCommercePriceListPricesRequestPricesInner.md)
  - [Zernio::SetContactFieldValueRequest](docs/SetContactFieldValueRequest.md)
  - [Zernio::SetConversationThreadControl200Response](docs/SetConversationThreadControl200Response.md)
  - [Zernio::SetConversationThreadControl200ResponseControl](docs/SetConversationThreadControl200ResponseControl.md)
@@ -2835,6 +3019,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SetMessengerMenuRequest](docs/SetMessengerMenuRequest.md)
  - [Zernio::SetPartnershipAdPermission200Response](docs/SetPartnershipAdPermission200Response.md)
  - [Zernio::SetPartnershipAdPermissionRequest](docs/SetPartnershipAdPermissionRequest.md)
+ - [Zernio::SetProductMetafieldsRequest](docs/SetProductMetafieldsRequest.md)
  - [Zernio::SetRedditPostFlairRequest](docs/SetRedditPostFlairRequest.md)
  - [Zernio::SetTelegramCommandsRequest](docs/SetTelegramCommandsRequest.md)
  - [Zernio::SetTelegramCommandsRequestCommandsInner](docs/SetTelegramCommandsRequestCommandsInner.md)
@@ -3026,6 +3211,16 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateCommentAutomation200Response](docs/UpdateCommentAutomation200Response.md)
  - [Zernio::UpdateCommentAutomation200ResponseAutomation](docs/UpdateCommentAutomation200ResponseAutomation.md)
  - [Zernio::UpdateCommentAutomationRequest](docs/UpdateCommentAutomationRequest.md)
+ - [Zernio::UpdateCommerceCollectionRequest](docs/UpdateCommerceCollectionRequest.md)
+ - [Zernio::UpdateCommerceDiscountRequest](docs/UpdateCommerceDiscountRequest.md)
+ - [Zernio::UpdateCommerceMenuRequest](docs/UpdateCommerceMenuRequest.md)
+ - [Zernio::UpdateCommerceMetaobjectRequest](docs/UpdateCommerceMetaobjectRequest.md)
+ - [Zernio::UpdateCommercePageRequest](docs/UpdateCommercePageRequest.md)
+ - [Zernio::UpdateCommerceProductPricesRequest](docs/UpdateCommerceProductPricesRequest.md)
+ - [Zernio::UpdateCommerceProductPricesRequestVariantsInner](docs/UpdateCommerceProductPricesRequestVariantsInner.md)
+ - [Zernio::UpdateCommerceProductPricesRequestVariantsInnerPrice](docs/UpdateCommerceProductPricesRequestVariantsInnerPrice.md)
+ - [Zernio::UpdateCommerceProductRequest](docs/UpdateCommerceProductRequest.md)
+ - [Zernio::UpdateCommerceRedirectRequest](docs/UpdateCommerceRedirectRequest.md)
  - [Zernio::UpdateContact200Response](docs/UpdateContact200Response.md)
  - [Zernio::UpdateContact200ResponseContact](docs/UpdateContact200ResponseContact.md)
  - [Zernio::UpdateContactRequest](docs/UpdateContactRequest.md)
@@ -3160,6 +3355,11 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadedOrDerivedAudience](docs/UploadedOrDerivedAudience.md)
  - [Zernio::UploadedOrDerivedAudienceCompaniesInner](docs/UploadedOrDerivedAudienceCompaniesInner.md)
  - [Zernio::UploadedOrDerivedAudienceMatchRulesInner](docs/UploadedOrDerivedAudienceMatchRulesInner.md)
+ - [Zernio::UpsertCommerceMarketingActivity200Response](docs/UpsertCommerceMarketingActivity200Response.md)
+ - [Zernio::UpsertCommerceMarketingActivity200ResponseMarketingActivity](docs/UpsertCommerceMarketingActivity200ResponseMarketingActivity.md)
+ - [Zernio::UpsertCommerceMarketingActivityRequest](docs/UpsertCommerceMarketingActivityRequest.md)
+ - [Zernio::UpsertCommerceMarketingActivityRequestBudget](docs/UpsertCommerceMarketingActivityRequestBudget.md)
+ - [Zernio::UpsertCommerceMarketingActivityRequestUtm](docs/UpsertCommerceMarketingActivityRequestUtm.md)
  - [Zernio::UsageAttributionGroup](docs/UsageAttributionGroup.md)
  - [Zernio::UsageAttributionSlice](docs/UsageAttributionSlice.md)
  - [Zernio::UsageAttributionSliceByProduct](docs/UsageAttributionSliceByProduct.md)
@@ -3256,6 +3456,9 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadCommentCommentAuthor](docs/WebhookPayloadCommentCommentAuthor.md)
  - [Zernio::WebhookPayloadCommentCommentAuthorInstagramProfile](docs/WebhookPayloadCommentCommentAuthorInstagramProfile.md)
  - [Zernio::WebhookPayloadCommentPost](docs/WebhookPayloadCommentPost.md)
+ - [Zernio::WebhookPayloadCommerceProduct](docs/WebhookPayloadCommerceProduct.md)
+ - [Zernio::WebhookPayloadCommerceProductResource](docs/WebhookPayloadCommerceProductResource.md)
+ - [Zernio::WebhookPayloadCommerceProductStore](docs/WebhookPayloadCommerceProductStore.md)
  - [Zernio::WebhookPayloadConversationControlChanged](docs/WebhookPayloadConversationControlChanged.md)
  - [Zernio::WebhookPayloadConversationControlChangedControl](docs/WebhookPayloadConversationControlChangedControl.md)
  - [Zernio::WebhookPayloadConversationStarted](docs/WebhookPayloadConversationStarted.md)

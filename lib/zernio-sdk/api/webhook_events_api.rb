@@ -1009,6 +1009,204 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Commerce product created event
+    # Fired when a product is created on a connected store. The payload carries identifiers only; read the product with `GET /v1/commerce/products/{productId}?accountId=...`. Fired once per Zernio account connected to the store. 
+    # @param webhook_payload_commerce_product [WebhookPayloadCommerceProduct] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_commerce_product_created(webhook_payload_commerce_product, opts = {})
+      on_commerce_product_created_with_http_info(webhook_payload_commerce_product, opts)
+      nil
+    end
+
+    # Commerce product created event
+    # Fired when a product is created on a connected store. The payload carries identifiers only; read the product with &#x60;GET /v1/commerce/products/{productId}?accountId&#x3D;...&#x60;. Fired once per Zernio account connected to the store. 
+    # @param webhook_payload_commerce_product [WebhookPayloadCommerceProduct] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_commerce_product_created_with_http_info(webhook_payload_commerce_product, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_commerce_product_created ...'
+      end
+      # verify the required parameter 'webhook_payload_commerce_product' is set
+      if @api_client.config.client_side_validation && webhook_payload_commerce_product.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_commerce_product' when calling WebhookEventsApi.on_commerce_product_created"
+      end
+      # resource path
+      local_var_path = '/commerce.product.created'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_commerce_product)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_commerce_product_created",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_commerce_product_created\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Commerce product deleted event
+    # Fired when a product is deleted from a connected store. `status` and `platformStatus` are null. The payload carries identifiers only; read the product with `GET /v1/commerce/products/{productId}?accountId=...`. Fired once per Zernio account connected to the store. 
+    # @param webhook_payload_commerce_product [WebhookPayloadCommerceProduct] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_commerce_product_deleted(webhook_payload_commerce_product, opts = {})
+      on_commerce_product_deleted_with_http_info(webhook_payload_commerce_product, opts)
+      nil
+    end
+
+    # Commerce product deleted event
+    # Fired when a product is deleted from a connected store. &#x60;status&#x60; and &#x60;platformStatus&#x60; are null. The payload carries identifiers only; read the product with &#x60;GET /v1/commerce/products/{productId}?accountId&#x3D;...&#x60;. Fired once per Zernio account connected to the store. 
+    # @param webhook_payload_commerce_product [WebhookPayloadCommerceProduct] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_commerce_product_deleted_with_http_info(webhook_payload_commerce_product, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_commerce_product_deleted ...'
+      end
+      # verify the required parameter 'webhook_payload_commerce_product' is set
+      if @api_client.config.client_side_validation && webhook_payload_commerce_product.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_commerce_product' when calling WebhookEventsApi.on_commerce_product_deleted"
+      end
+      # resource path
+      local_var_path = '/commerce.product.deleted'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_commerce_product)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_commerce_product_deleted",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_commerce_product_deleted\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Commerce product updated event
+    # Fired when a product on a connected store changes: its fields, status, variants or prices. The payload carries identifiers only; read the product with `GET /v1/commerce/products/{productId}?accountId=...`. Fired once per Zernio account connected to the store. 
+    # @param webhook_payload_commerce_product [WebhookPayloadCommerceProduct] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_commerce_product_updated(webhook_payload_commerce_product, opts = {})
+      on_commerce_product_updated_with_http_info(webhook_payload_commerce_product, opts)
+      nil
+    end
+
+    # Commerce product updated event
+    # Fired when a product on a connected store changes: its fields, status, variants or prices. The payload carries identifiers only; read the product with &#x60;GET /v1/commerce/products/{productId}?accountId&#x3D;...&#x60;. Fired once per Zernio account connected to the store. 
+    # @param webhook_payload_commerce_product [WebhookPayloadCommerceProduct] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_commerce_product_updated_with_http_info(webhook_payload_commerce_product, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_commerce_product_updated ...'
+      end
+      # verify the required parameter 'webhook_payload_commerce_product' is set
+      if @api_client.config.client_side_validation && webhook_payload_commerce_product.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_commerce_product' when calling WebhookEventsApi.on_commerce_product_updated"
+      end
+      # resource path
+      local_var_path = '/commerce.product.updated'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_commerce_product)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_commerce_product_updated",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_commerce_product_updated\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Conversation control changed event
     # WhatsApp only. Fired when control of a conversation moves between Meta Business Agent and your app (Meta's `messaging_handovers`), or when the agent is first seen answering a thread. While `control.owner` is `ai_agent`, inbound messages arrive on `message.received` with `metadata.standby: true` and the agent's replies on `message.sent` with `source: meta_business_agent`. Sending any message takes control back; release it with `POST /v1/inbox/conversations/{conversationId}/thread-control`. 
     # @param webhook_payload_conversation_control_changed [WebhookPayloadConversationControlChanged] 
