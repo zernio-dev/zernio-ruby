@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**add_imessage_group_participant**](IMessageApi.md#add_imessage_group_participant) | **POST** /v1/imessage/groups/{conversationId}/participants | Add a participant to an iMessage group |
+| [**add_imessage_sandbox_contact**](IMessageApi.md#add_imessage_sandbox_contact) | **POST** /v1/imessage/sandbox/contacts | Add an iMessage sandbox contact |
 | [**cancel_imessage_sender**](IMessageApi.md#cancel_imessage_sender) | **DELETE** /v1/imessage/senders/{senderId} | Cancel an iMessage sender |
 | [**create_imessage_group**](IMessageApi.md#create_imessage_group) | **POST** /v1/imessage/groups | Start an iMessage group chat |
 | [**create_imessage_opt_in_link**](IMessageApi.md#create_imessage_opt_in_link) | **POST** /v1/imessage/senders/{senderId}/opt-in-links | Create a tracked iMessage opt-in link |
@@ -12,11 +13,13 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_imessage_sender**](IMessageApi.md#get_imessage_sender) | **GET** /v1/imessage/senders/{senderId} | Get iMessage sender status |
 | [**list_imessage_audience**](IMessageApi.md#list_imessage_audience) | **GET** /v1/imessage/audience | List iMessage audience |
 | [**list_imessage_available_numbers**](IMessageApi.md#list_imessage_available_numbers) | **GET** /v1/imessage/senders/available-numbers | List instantly available iMessage numbers |
+| [**list_imessage_sandbox_contacts**](IMessageApi.md#list_imessage_sandbox_contacts) | **GET** /v1/imessage/sandbox/contacts | List iMessage sandbox contacts |
 | [**list_imessage_sender_orders**](IMessageApi.md#list_imessage_sender_orders) | **GET** /v1/imessage/senders/order | List iMessage sender orders |
 | [**list_imessage_senders**](IMessageApi.md#list_imessage_senders) | **GET** /v1/imessage/senders | List iMessage senders |
 | [**order_imessage_sender**](IMessageApi.md#order_imessage_sender) | **POST** /v1/imessage/senders/order | Order a new iMessage sender |
 | [**register_imessage_sender**](IMessageApi.md#register_imessage_sender) | **POST** /v1/imessage/senders | Register an iMessage sender |
 | [**remove_imessage_group_participant**](IMessageApi.md#remove_imessage_group_participant) | **DELETE** /v1/imessage/groups/{conversationId}/participants | Remove a participant from an iMessage group |
+| [**remove_imessage_sandbox_contact**](IMessageApi.md#remove_imessage_sandbox_contact) | **DELETE** /v1/imessage/sandbox/contacts/{contactId} | Remove an iMessage sandbox contact |
 | [**reserve_imessage_available_number**](IMessageApi.md#reserve_imessage_available_number) | **POST** /v1/imessage/senders/available-numbers/{numberId}/reserve | Reserve an available iMessage number |
 | [**set_imessage_subscription**](IMessageApi.md#set_imessage_subscription) | **POST** /v1/imessage/audience/subscription | Subscribe or opt out an iMessage contact |
 | [**update_imessage_group**](IMessageApi.md#update_imessage_group) | **PATCH** /v1/imessage/groups/{conversationId} | Rename an iMessage group or change its photo |
@@ -83,6 +86,75 @@ end
 ### Return type
 
 [**AddImessageGroupParticipant200Response**](AddImessageGroupParticipant200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## add_imessage_sandbox_contact
+
+> <AddImessageSandboxContact201Response> add_imessage_sandbox_contact(add_imessage_sandbox_contact_request)
+
+Add an iMessage sandbox contact
+
+Adds your own phone (E.164) or Apple ID email. The contact starts as pending; it becomes active when its joinText arrives at the sandbox line from that handle (joinLink opens Messages with it prefilled). Adding a handle that is already on your list returns it unchanged.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::IMessageApi.new
+add_imessage_sandbox_contact_request = Zernio::AddImessageSandboxContactRequest.new({handle: 'handle_example'}) # AddImessageSandboxContactRequest | 
+
+begin
+  # Add an iMessage sandbox contact
+  result = api_instance.add_imessage_sandbox_contact(add_imessage_sandbox_contact_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling IMessageApi->add_imessage_sandbox_contact: #{e}"
+end
+```
+
+#### Using the add_imessage_sandbox_contact_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AddImessageSandboxContact201Response>, Integer, Hash)> add_imessage_sandbox_contact_with_http_info(add_imessage_sandbox_contact_request)
+
+```ruby
+begin
+  # Add an iMessage sandbox contact
+  data, status_code, headers = api_instance.add_imessage_sandbox_contact_with_http_info(add_imessage_sandbox_contact_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AddImessageSandboxContact201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling IMessageApi->add_imessage_sandbox_contact_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **add_imessage_sandbox_contact_request** | [**AddImessageSandboxContactRequest**](AddImessageSandboxContactRequest.md) |  |  |
+
+### Return type
+
+[**AddImessageSandboxContact201Response**](AddImessageSandboxContact201Response.md)
 
 ### Authorization
 
@@ -593,6 +665,72 @@ end
 - **Accept**: application/json
 
 
+## list_imessage_sandbox_contacts
+
+> <ListImessageSandboxContacts200Response> list_imessage_sandbox_contacts
+
+List iMessage sandbox contacts
+
+The shared sandbox line and your sandbox contacts. The sandbox lets you test iMessage without ordering a sender: add your own phone or Apple ID email, send its join code to the sandbox line from that phone, and your messages reach your inbox and webhooks. Replies are allowed for 24 hours after each message from the contact. Group chats and starting conversations are not supported.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::IMessageApi.new
+
+begin
+  # List iMessage sandbox contacts
+  result = api_instance.list_imessage_sandbox_contacts
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling IMessageApi->list_imessage_sandbox_contacts: #{e}"
+end
+```
+
+#### Using the list_imessage_sandbox_contacts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListImessageSandboxContacts200Response>, Integer, Hash)> list_imessage_sandbox_contacts_with_http_info
+
+```ruby
+begin
+  # List iMessage sandbox contacts
+  data, status_code, headers = api_instance.list_imessage_sandbox_contacts_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListImessageSandboxContacts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling IMessageApi->list_imessage_sandbox_contacts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListImessageSandboxContacts200Response**](ListImessageSandboxContacts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_imessage_sender_orders
 
 > <ListImessageSenderOrders200Response> list_imessage_sender_orders(opts)
@@ -930,6 +1068,75 @@ end
 ### Return type
 
 [**AddImessageGroupParticipant200Response**](AddImessageGroupParticipant200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_imessage_sandbox_contact
+
+> <UpdateYoutubeDefaultPlaylist200Response> remove_imessage_sandbox_contact(contact_id)
+
+Remove an iMessage sandbox contact
+
+Removes the contact and its sandbox conversation. Messages from that handle to the sandbox line are no longer delivered to you.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::IMessageApi.new
+contact_id = 'contact_id_example' # String | 
+
+begin
+  # Remove an iMessage sandbox contact
+  result = api_instance.remove_imessage_sandbox_contact(contact_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling IMessageApi->remove_imessage_sandbox_contact: #{e}"
+end
+```
+
+#### Using the remove_imessage_sandbox_contact_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> remove_imessage_sandbox_contact_with_http_info(contact_id)
+
+```ruby
+begin
+  # Remove an iMessage sandbox contact
+  data, status_code, headers = api_instance.remove_imessage_sandbox_contact_with_http_info(contact_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling IMessageApi->remove_imessage_sandbox_contact_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **contact_id** | **String** |  |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 
