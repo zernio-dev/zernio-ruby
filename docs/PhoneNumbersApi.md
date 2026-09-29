@@ -1724,7 +1724,7 @@ opts = {
   area_code: 'area_code_example', # String | Area code or national dialing code the number must start with, e.g. 415 or 91
   type: 'type_example', # String | Alias of numberType, kept for existing callers
   prefix: 'prefix_example', # String | Alias of areaCode, kept for existing callers
-  locality: 'locality_example', # String | City
+  locality: 'locality_example', # String | A city name, matched against the numbering plan (accents and common aliases allowed) and searched by that city's area codes; a name no city of the plan matches returns no numbers. `areaCode` takes a city name too.
   contains: 'contains_example', # String | Pattern to match within the number
   sms: true, # Boolean | true narrows the pool to SMS-capable numbers. Each result still carries its full `features` list for per-number capability badging.
   limit: 56, # Integer | 
@@ -1767,7 +1767,7 @@ end
 | **area_code** | **String** | Area code or national dialing code the number must start with, e.g. 415 or 91 | [optional] |
 | **type** | **String** | Alias of numberType, kept for existing callers | [optional] |
 | **prefix** | **String** | Alias of areaCode, kept for existing callers | [optional] |
-| **locality** | **String** | City | [optional] |
+| **locality** | **String** | A city name, matched against the numbering plan (accents and common aliases allowed) and searched by that city&#39;s area codes; a name no city of the plan matches returns no numbers. &#x60;areaCode&#x60; takes a city name too. | [optional] |
 | **contains** | **String** | Pattern to match within the number | [optional] |
 | **sms** | **Boolean** | true narrows the pool to SMS-capable numbers. Each result still carries its full &#x60;features&#x60; list for per-number capability badging. | [optional] |
 | **limit** | **Integer** |  | [optional][default to 20] |
