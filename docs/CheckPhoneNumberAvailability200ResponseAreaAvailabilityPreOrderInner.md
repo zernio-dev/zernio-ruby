@@ -6,6 +6,8 @@
 | ---- | ---- | ----------- | ----- |
 | **ndc** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
+| **ndcs** | **Array&lt;String&gt;** | Every area code of the city, deepest first (Madrid: 915, 911, 910, ...). &#x60;ndc&#x60; is the one an order is placed against. | [optional] |
+| **aliases** | **Array&lt;String&gt;** | Other names the area answers to, present only when it has some (Milano for Milan, Sevilla for Seville). | [optional] |
 
 ## Example
 
@@ -14,7 +16,9 @@ require 'zernio-sdk'
 
 instance = Zernio::CheckPhoneNumberAvailability200ResponseAreaAvailabilityPreOrderInner.new(
   ndc: null,
-  name: null
+  name: null,
+  ndcs: null,
+  aliases: null
 )
 ```
 
