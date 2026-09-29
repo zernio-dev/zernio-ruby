@@ -8,6 +8,7 @@
 | **platform** | **String** |  | [optional] |
 | **updated** | **Integer** |  | [optional] |
 | **skipped** | **Integer** |  | [optional] |
+| **platform_campaign_status** | **String** | The campaign&#39;s own switch read back from the platform; null when it could not be read. | [optional] |
 | **error** | **String** |  | [optional] |
 
 ## Example
@@ -20,6 +21,7 @@ instance = Zernio::BulkUpdateAdCampaignStatus200ResponseResultsInner.new(
   platform: null,
   updated: null,
   skipped: null,
+  platform_campaign_status: null,
   error: null
 )
 ```
