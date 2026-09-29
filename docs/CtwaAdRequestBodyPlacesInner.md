@@ -1,4 +1,4 @@
-# Zernio::TargetingSpecExcludedLocationsPlacesInner
+# Zernio::CtwaAdRequestBodyPlacesInner
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::TargetingSpecExcludedLocationsPlacesInner.new(
+instance = Zernio::CtwaAdRequestBodyPlacesInner.new(
   key: null
 )
 ```
