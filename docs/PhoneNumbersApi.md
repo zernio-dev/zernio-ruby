@@ -389,7 +389,7 @@ end
 
 ## create_phone_number_stock_watch
 
-> <PhoneNumberStockWatch> create_phone_number_stock_watch(create_phone_number_stock_watch_request)
+> <CreatePhoneNumberStockWatch200Response> create_phone_number_stock_watch(create_phone_number_stock_watch_request)
 
 Watch an out-of-stock country
 
@@ -422,7 +422,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PhoneNumberStockWatch>, Integer, Hash)> create_phone_number_stock_watch_with_http_info(create_phone_number_stock_watch_request)
+> <Array(<CreatePhoneNumberStockWatch200Response>, Integer, Hash)> create_phone_number_stock_watch_with_http_info(create_phone_number_stock_watch_request)
 
 ```ruby
 begin
@@ -430,7 +430,7 @@ begin
   data, status_code, headers = api_instance.create_phone_number_stock_watch_with_http_info(create_phone_number_stock_watch_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PhoneNumberStockWatch>
+  p data # => <CreatePhoneNumberStockWatch200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling PhoneNumbersApi->create_phone_number_stock_watch_with_http_info: #{e}"
 end
@@ -444,7 +444,7 @@ end
 
 ### Return type
 
-[**PhoneNumberStockWatch**](PhoneNumberStockWatch.md)
+[**CreatePhoneNumberStockWatch200Response**](CreatePhoneNumberStockWatch200Response.md)
 
 ### Authorization
 

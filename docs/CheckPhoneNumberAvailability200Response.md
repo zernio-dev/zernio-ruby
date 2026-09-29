@@ -10,8 +10,9 @@
 | **pre_orderable** | **Boolean** | Nothing deliverable now, but this pair can be pre-ordered: submit KYC as usual and we buy regular stock the moment it returns, otherwise the carrier sources the number (usually 2 to 4 weeks, never guaranteed). Only document tiers (3/4) qualify. | [optional] |
 | **address_constraint** | **String** |  | [optional] |
 | **areas** | **Array&lt;String&gt;** | For &#x60;geo&#x60; only: the area(s) the registered address must be in. | [optional] |
-| **area_options** | [**Array&lt;CheckPhoneNumberAvailability200ResponseAreaOptionsInner&gt;**](CheckPhoneNumberAvailability200ResponseAreaOptionsInner.md) | Live inventory grouped by area code. For US and CA this is the full country inventory (every area code with stock, recognizable metros listed first, then alphabetical); other countries are ordered largest stock first; they list the areas in the latest inventory page (up to 500 numbers, which for most countries is the entire pool). Empty when out of stock (or the area lookup failed). Pass a chosen &#x60;ndc&#x60; as &#x60;areaCode&#x60; on POST /v1/phone-numbers/purchase (or on the KYC submit for regulated countries) to require that area.  | [optional] |
-| **sold_out_areas** | [**Array&lt;CheckPhoneNumberAvailability200ResponseSoldOutAreasInner&gt;**](CheckPhoneNumberAvailability200ResponseSoldOutAreasInner.md) | Areas that had stock in the last 90 days and have none now. Pass one as &#x60;areaCode&#x60; with &#x60;preOrder: true&#x60; on the KYC submit when &#x60;preOrderable&#x60; is true, or watch it with POST /v1/phone-numbers/stock-watches.  | [optional] |
+| **area_options** | [**Array&lt;CheckPhoneNumberAvailability200ResponseAreaOptionsInner&gt;**](CheckPhoneNumberAvailability200ResponseAreaOptionsInner.md) | Live inventory grouped by area code. For US and CA this is the full country inventory (every area code with stock, recognizable metros listed first, then alphabetical); other countries are ordered largest stock first; they list the areas in the latest inventory page (up to 500 numbers, which for most countries is the entire pool). Empty when out of stock (or the area lookup failed). Pass a chosen &#x60;ndc&#x60; as &#x60;areaCode&#x60; on POST /v1/phone-numbers/purchase (or on the KYC submit for regulated countries) to require that area. Equal to &#x60;areaAvailability.inStock&#x60;.  | [optional] |
+| **sold_out_areas** | [**Array&lt;CheckPhoneNumberAvailability200ResponseSoldOutAreasInner&gt;**](CheckPhoneNumberAvailability200ResponseSoldOutAreasInner.md) | Every area of the country&#39;s numbering plan with nothing deliverable now: &#x60;areaAvailability.preOrder&#x60; plus &#x60;areaAvailability.outOfStock&#x60;, kept for older clients. Pass one as &#x60;areaCode&#x60; with &#x60;preOrder: true&#x60; on the KYC submit when &#x60;preOrderable&#x60; is true, or watch it with POST /v1/phone-numbers/stock-watches.  | [optional] |
+| **area_availability** | [**CheckPhoneNumberAvailability200ResponseAreaAvailability**](CheckPhoneNumberAvailability200ResponseAreaAvailability.md) |  | [optional] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = Zernio::CheckPhoneNumberAvailability200Response.new(
   address_constraint: null,
   areas: null,
   area_options: null,
-  sold_out_areas: null
+  sold_out_areas: null,
+  area_availability: null
 )
 ```
 
