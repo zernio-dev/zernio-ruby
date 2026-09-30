@@ -1,4 +1,4 @@
-# Zernio::WebhookPayloadWhatsAppContactIdentityChangedAccount
+# Zernio::WebhookPayloadWhatsAppAccountQualityUpdatedAccount
 
 ## Properties
 
@@ -15,7 +15,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::WebhookPayloadWhatsAppContactIdentityChangedAccount.new(
+instance = Zernio::WebhookPayloadWhatsAppAccountQualityUpdatedAccount.new(
   account_id: null,
   profile_id: null,
   platform: null,

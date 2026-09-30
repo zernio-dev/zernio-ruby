@@ -56,7 +56,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_verification_approved**](WebhookEventsApi.md#on_verification_approved) | **POST** /verification.approved | Verification approved event |
 | [**on_verification_failed**](WebhookEventsApi.md#on_verification_failed) | **POST** /verification.failed | Verification failed event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
+| [**on_whats_app_account_alert_received**](WebhookEventsApi.md#on_whats_app_account_alert_received) | **POST** /whatsapp.account.alert_received | WhatsApp account alert received |
 | [**on_whats_app_account_name_status_updated**](WebhookEventsApi.md#on_whats_app_account_name_status_updated) | **POST** /whatsapp.account.name_status_updated | WhatsApp display-name review outcome event |
+| [**on_whats_app_account_quality_updated**](WebhookEventsApi.md#on_whats_app_account_quality_updated) | **POST** /whatsapp.account.quality_updated | WhatsApp quality rating or messaging limit changed |
+| [**on_whats_app_account_status_updated**](WebhookEventsApi.md#on_whats_app_account_status_updated) | **POST** /whatsapp.account.status_updated | WhatsApp Business Account restricted or reinstated |
 | [**on_whats_app_automatic_event**](WebhookEventsApi.md#on_whats_app_automatic_event) | **POST** /whatsapp.automatic_event | WhatsApp automatic event detected |
 | [**on_whats_app_contact_identity_changed**](WebhookEventsApi.md#on_whats_app_contact_identity_changed) | **POST** /whatsapp.contact.identity_changed | WhatsApp contact identity changed event |
 | [**on_whats_app_number_action_required**](WebhookEventsApi.md#on_whats_app_number_action_required) | **POST** /whatsapp.number.action_required | WhatsApp number action required event |
@@ -3607,6 +3610,74 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_whats_app_account_alert_received
+
+> on_whats_app_account_alert_received(webhook_payload_whats_app_account_alert_received)
+
+WhatsApp account alert received
+
+Fired for each Meta `account_alerts` notification on a connected WhatsApp Business Account. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_whats_app_account_alert_received =  # WebhookPayloadWhatsAppAccountAlertReceived | 
+
+begin
+  # WhatsApp account alert received
+  api_instance.on_whats_app_account_alert_received(webhook_payload_whats_app_account_alert_received)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_account_alert_received: #{e}"
+end
+```
+
+#### Using the on_whats_app_account_alert_received_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_account_alert_received_with_http_info(webhook_payload_whats_app_account_alert_received)
+
+```ruby
+begin
+  # WhatsApp account alert received
+  data, status_code, headers = api_instance.on_whats_app_account_alert_received_with_http_info(webhook_payload_whats_app_account_alert_received)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_account_alert_received_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_whats_app_account_alert_received** | [**WebhookPayloadWhatsAppAccountAlertReceived**](WebhookPayloadWhatsAppAccountAlertReceived.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_whats_app_account_name_status_updated
 
 > on_whats_app_account_name_status_updated(webhook_payload_whats_app_account_name_status_updated)
@@ -3660,6 +3731,142 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_whats_app_account_name_status_updated** | [**WebhookPayloadWhatsAppAccountNameStatusUpdated**](WebhookPayloadWhatsAppAccountNameStatusUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_whats_app_account_quality_updated
+
+> on_whats_app_account_quality_updated(webhook_payload_whats_app_account_quality_updated)
+
+WhatsApp quality rating or messaging limit changed
+
+Fired when a connected WhatsApp number's quality rating or messaging limit tier changes. Delivery is at-least-once; dedupe on the event `id`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_whats_app_account_quality_updated =  # WebhookPayloadWhatsAppAccountQualityUpdated | 
+
+begin
+  # WhatsApp quality rating or messaging limit changed
+  api_instance.on_whats_app_account_quality_updated(webhook_payload_whats_app_account_quality_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_account_quality_updated: #{e}"
+end
+```
+
+#### Using the on_whats_app_account_quality_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_account_quality_updated_with_http_info(webhook_payload_whats_app_account_quality_updated)
+
+```ruby
+begin
+  # WhatsApp quality rating or messaging limit changed
+  data, status_code, headers = api_instance.on_whats_app_account_quality_updated_with_http_info(webhook_payload_whats_app_account_quality_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_account_quality_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_whats_app_account_quality_updated** | [**WebhookPayloadWhatsAppAccountQualityUpdated**](WebhookPayloadWhatsAppAccountQualityUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_whats_app_account_status_updated
+
+> on_whats_app_account_status_updated(webhook_payload_whats_app_account_status_updated)
+
+WhatsApp Business Account restricted or reinstated
+
+Fired when Meta restricts, disables, deletes or reinstates the WhatsApp Business Account, once per connected number on it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_whats_app_account_status_updated =  # WebhookPayloadWhatsAppAccountStatusUpdated | 
+
+begin
+  # WhatsApp Business Account restricted or reinstated
+  api_instance.on_whats_app_account_status_updated(webhook_payload_whats_app_account_status_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_account_status_updated: #{e}"
+end
+```
+
+#### Using the on_whats_app_account_status_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_account_status_updated_with_http_info(webhook_payload_whats_app_account_status_updated)
+
+```ruby
+begin
+  # WhatsApp Business Account restricted or reinstated
+  data, status_code, headers = api_instance.on_whats_app_account_status_updated_with_http_info(webhook_payload_whats_app_account_status_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_account_status_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_whats_app_account_status_updated** | [**WebhookPayloadWhatsAppAccountStatusUpdated**](WebhookPayloadWhatsAppAccountStatusUpdated.md) |  |  |
 
 ### Return type
 
