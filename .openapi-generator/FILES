@@ -2584,6 +2584,8 @@ docs/WebhookPayloadReviewUpdated.md
 docs/WebhookPayloadTest.md
 docs/WebhookPayloadWhatsAppAccountNameStatusUpdated.md
 docs/WebhookPayloadWhatsAppAccountNameStatusUpdatedName.md
+docs/WebhookPayloadWhatsAppContactIdentityChanged.md
+docs/WebhookPayloadWhatsAppContactIdentityChangedAccount.md
 docs/WebhookPayloadWhatsAppTemplateCategoryUpdated.md
 docs/WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplate.md
 docs/WebhookPayloadWhatsAppTemplateStatusUpdated.md
@@ -2600,6 +2602,7 @@ docs/WhatsAppCarouselCardComponent.md
 docs/WhatsAppCarouselComponent.md
 docs/WhatsAppCarouselComponentCardsInner.md
 docs/WhatsAppCommerceSettings.md
+docs/WhatsAppContactIdentity.md
 docs/WhatsAppFlowsApi.md
 docs/WhatsAppFooterComponent.md
 docs/WhatsAppHeaderComponent.md
@@ -5258,6 +5261,8 @@ lib/zernio-sdk/models/webhook_payload_review_updated.rb
 lib/zernio-sdk/models/webhook_payload_test.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_account_name_status_updated.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_account_name_status_updated_name.rb
+lib/zernio-sdk/models/webhook_payload_whats_app_contact_identity_changed.rb
+lib/zernio-sdk/models/webhook_payload_whats_app_contact_identity_changed_account.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_template_category_updated.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_template_category_updated_template.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated.rb
@@ -5271,6 +5276,7 @@ lib/zernio-sdk/models/whats_app_carousel_card_component.rb
 lib/zernio-sdk/models/whats_app_carousel_component.rb
 lib/zernio-sdk/models/whats_app_carousel_component_cards_inner.rb
 lib/zernio-sdk/models/whats_app_commerce_settings.rb
+lib/zernio-sdk/models/whats_app_contact_identity.rb
 lib/zernio-sdk/models/whats_app_footer_component.rb
 lib/zernio-sdk/models/whats_app_header_component.rb
 lib/zernio-sdk/models/whats_app_header_component_example.rb
@@ -7917,6 +7923,8 @@ spec/models/webhook_payload_review_updated_spec.rb
 spec/models/webhook_payload_test_spec.rb
 spec/models/webhook_payload_whats_app_account_name_status_updated_name_spec.rb
 spec/models/webhook_payload_whats_app_account_name_status_updated_spec.rb
+spec/models/webhook_payload_whats_app_contact_identity_changed_account_spec.rb
+spec/models/webhook_payload_whats_app_contact_identity_changed_spec.rb
 spec/models/webhook_payload_whats_app_template_category_updated_spec.rb
 spec/models/webhook_payload_whats_app_template_category_updated_template_spec.rb
 spec/models/webhook_payload_whats_app_template_status_updated_account_spec.rb
@@ -7931,6 +7939,7 @@ spec/models/whats_app_carousel_card_component_spec.rb
 spec/models/whats_app_carousel_component_cards_inner_spec.rb
 spec/models/whats_app_carousel_component_spec.rb
 spec/models/whats_app_commerce_settings_spec.rb
+spec/models/whats_app_contact_identity_spec.rb
 spec/models/whats_app_footer_component_spec.rb
 spec/models/whats_app_header_component_example_spec.rb
 spec/models/whats_app_header_component_spec.rb
