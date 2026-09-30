@@ -1647,6 +1647,7 @@ docs/MetaAssignedUser.md
 docs/MetaBusinessUser.md
 docs/MetaCatalogProduct.md
 docs/MetaCatalogProductInput.md
+docs/MetaCustomerLifecycle.md
 docs/MetaFeedUpload.md
 docs/MetaInstagramIdentityRef.md
 docs/MetaLeadForm.md
@@ -4340,6 +4341,7 @@ lib/zernio-sdk/models/meta_assigned_user.rb
 lib/zernio-sdk/models/meta_business_user.rb
 lib/zernio-sdk/models/meta_catalog_product.rb
 lib/zernio-sdk/models/meta_catalog_product_input.rb
+lib/zernio-sdk/models/meta_customer_lifecycle.rb
 lib/zernio-sdk/models/meta_feed_upload.rb
 lib/zernio-sdk/models/meta_instagram_identity_ref.rb
 lib/zernio-sdk/models/meta_lead_form.rb
@@ -6997,6 +6999,7 @@ spec/models/meta_assigned_user_spec.rb
 spec/models/meta_business_user_spec.rb
 spec/models/meta_catalog_product_input_spec.rb
 spec/models/meta_catalog_product_spec.rb
+spec/models/meta_customer_lifecycle_spec.rb
 spec/models/meta_feed_upload_spec.rb
 spec/models/meta_instagram_identity_ref_spec.rb
 spec/models/meta_lead_form_context_card_spec.rb
