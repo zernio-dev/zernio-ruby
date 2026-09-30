@@ -29,6 +29,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_message_delivered**](WebhookEventsApi.md#on_message_delivered) | **POST** /message.delivered | Message delivered event |
 | [**on_message_edited**](WebhookEventsApi.md#on_message_edited) | **POST** /message.edited | Message edited event |
 | [**on_message_failed**](WebhookEventsApi.md#on_message_failed) | **POST** /message.failed | Message delivery failed event |
+| [**on_message_played**](WebhookEventsApi.md#on_message_played) | **POST** /message.played | Message played event |
 | [**on_message_read**](WebhookEventsApi.md#on_message_read) | **POST** /message.read | Message read event |
 | [**on_message_received**](WebhookEventsApi.md#on_message_received) | **POST** /message.received | Message received event |
 | [**on_message_sent**](WebhookEventsApi.md#on_message_sent) | **POST** /message.sent | Message sent event |
@@ -1751,6 +1752,74 @@ begin
   p data # => nil
 rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_failed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_message_delivery_status** | [**WebhookPayloadMessageDeliveryStatus**](WebhookPayloadMessageDeliveryStatus.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_message_played
+
+> on_message_played(webhook_payload_message_delivery_status)
+
+Message played event
+
+Fires the first time the recipient plays a voice message you sent on WhatsApp.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_message_delivery_status =  # WebhookPayloadMessageDeliveryStatus | 
+
+begin
+  # Message played event
+  api_instance.on_message_played(webhook_payload_message_delivery_status)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_message_played: #{e}"
+end
+```
+
+#### Using the on_message_played_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_message_played_with_http_info(webhook_payload_message_delivery_status)
+
+```ruby
+begin
+  # Message played event
+  data, status_code, headers = api_instance.on_message_played_with_http_info(webhook_payload_message_delivery_status)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_message_played_with_http_info: #{e}"
 end
 ```
 
