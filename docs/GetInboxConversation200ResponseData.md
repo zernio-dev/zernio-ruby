@@ -12,6 +12,8 @@
 | **participant_name** | **String** |  | [optional] |
 | **participant_id** | **String** |  | [optional] |
 | **participant_verified_type** | **String** | X verified badge type. Only present for X conversations. | [optional] |
+| **business_scoped_user_id** | **String** | WhatsApp only. Meta business-scoped user ID (BSUID), the stable identity anchor; present when Meta has sent it for this participant. | [optional] |
+| **whatsapp_username** | **String** | WhatsApp only. The participant&#39;s WhatsApp username (e.g. &#x60;jane.shop&#x60;, no leading @). Not a stable identifier, because users can change it: useful for display, not recommended as an identity anchor. Captured from inbound messages, so older threads fill in on their next inbound. | [optional] |
 | **last_message** | **String** |  | [optional] |
 | **last_message_at** | **Time** |  | [optional] |
 | **updated_time** | **Time** |  | [optional] |
@@ -33,6 +35,8 @@ instance = Zernio::GetInboxConversation200ResponseData.new(
   participant_name: null,
   participant_id: null,
   participant_verified_type: null,
+  business_scoped_user_id: null,
+  whatsapp_username: null,
   last_message: null,
   last_message_at: null,
   updated_time: null,
