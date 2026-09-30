@@ -9,6 +9,7 @@
 | **message** | **String** |  | [optional] |
 | **first_seen_at** | **Time** |  | [optional] |
 | **last_seen_at** | **Time** |  | [optional] |
+| **paused_until** | **Time** | When held automation DMs are next retried. Null when nothing is held. | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Zernio::GetAllAccountsHealth200ResponseAccountsInnerMessagingRestrict
   subcode: null,
   message: null,
   first_seen_at: null,
-  last_seen_at: null
+  last_seen_at: null,
+  paused_until: null
 )
 ```
 
