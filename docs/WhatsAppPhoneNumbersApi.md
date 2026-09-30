@@ -11,6 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_number_remediation**](WhatsAppPhoneNumbersApi.md#get_whats_app_number_remediation) | **GET** /v1/whatsapp/phone-numbers/{id}/remediate | Get declined requirements |
 | [**get_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#get_whats_app_phone_number) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number |
 | [**get_whats_app_phone_numbers**](WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers |
+| [**get_whats_app_pricing_analytics**](WhatsAppPhoneNumbersApi.md#get_whats_app_pricing_analytics) | **GET** /v1/whatsapp/pricing-analytics | Get pricing analytics |
 | [**list_whats_app_number_countries**](WhatsAppPhoneNumbersApi.md#list_whats_app_number_countries) | **GET** /v1/whatsapp/phone-numbers/countries | List offerable number countries |
 | [**move_whats_app_number_to_profile**](WhatsAppPhoneNumbersApi.md#move_whats_app_number_to_profile) | **PATCH** /v1/whatsapp/phone-numbers/{id}/profile | Move a number to another profile |
 | [**purchase_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number |
@@ -506,6 +507,93 @@ end
 ### Return type
 
 [**ListPhoneNumbers200Response**](ListPhoneNumbers200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_whats_app_pricing_analytics
+
+> <GetWhatsAppPricingAnalytics200Response> get_whats_app_pricing_analytics(account_id, start, _end, granularity, opts)
+
+Get pricing analytics
+
+Message volume and approximate cost for one connected WhatsApp number, read live from Meta's `pricing_analytics` on the WhatsApp Business Account and scoped to that account's phone number. Meta's figures are approximate and can lag; Meta bills from its own invoice. Meta limits how far back and how fine the data goes (for example HALF_HOUR only over short ranges) and answers out-of-range requests with an error. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+account_id = 'account_id_example' # String | WhatsApp account ID
+start = Time.parse('2013-10-20T19:20:30+01:00') # Time | Range start, ISO 8601 date or date-time.
+_end = Time.parse('2013-10-20T19:20:30+01:00') # Time | Range end, ISO 8601 date or date-time. Must be after start.
+granularity = 'HALF_HOUR' # String | 
+opts = {
+  dimensions: 'PRICING_CATEGORY,COUNTRY', # String | Comma-separated breakdowns: COUNTRY, PHONE, PRICING_CATEGORY, PRICING_TYPE, TIER. Without it each data point is a total for the interval.
+  metric_types: 'COST,VOLUME', # String | Comma-separated: COST, VOLUME. Defaults to both.
+  pricing_types: 'REGULAR', # String | Comma-separated filter: REGULAR, FREE_CUSTOMER_SERVICE, FREE_ENTRY_POINT.
+  pricing_categories: 'MARKETING,UTILITY', # String | Comma-separated filter of Meta pricing categories, for example MARKETING, MARKETING_LITE, UTILITY, AUTHENTICATION, AUTHENTICATION_INTERNATIONAL, SERVICE, REFERRAL_CONVERSION.
+  country_codes: 'ES,MX' # String | Comma-separated ISO 3166-1 alpha-2 country codes to filter on.
+}
+
+begin
+  # Get pricing analytics
+  result = api_instance.get_whats_app_pricing_analytics(account_id, start, _end, granularity, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_pricing_analytics: #{e}"
+end
+```
+
+#### Using the get_whats_app_pricing_analytics_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppPricingAnalytics200Response>, Integer, Hash)> get_whats_app_pricing_analytics_with_http_info(account_id, start, _end, granularity, opts)
+
+```ruby
+begin
+  # Get pricing analytics
+  data, status_code, headers = api_instance.get_whats_app_pricing_analytics_with_http_info(account_id, start, _end, granularity, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppPricingAnalytics200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_pricing_analytics_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp account ID |  |
+| **start** | **Time** | Range start, ISO 8601 date or date-time. |  |
+| **_end** | **Time** | Range end, ISO 8601 date or date-time. Must be after start. |  |
+| **granularity** | **String** |  |  |
+| **dimensions** | **String** | Comma-separated breakdowns: COUNTRY, PHONE, PRICING_CATEGORY, PRICING_TYPE, TIER. Without it each data point is a total for the interval. | [optional] |
+| **metric_types** | **String** | Comma-separated: COST, VOLUME. Defaults to both. | [optional] |
+| **pricing_types** | **String** | Comma-separated filter: REGULAR, FREE_CUSTOMER_SERVICE, FREE_ENTRY_POINT. | [optional] |
+| **pricing_categories** | **String** | Comma-separated filter of Meta pricing categories, for example MARKETING, MARKETING_LITE, UTILITY, AUTHENTICATION, AUTHENTICATION_INTERNATIONAL, SERVICE, REFERRAL_CONVERSION. | [optional] |
+| **country_codes** | **String** | Comma-separated ISO 3166-1 alpha-2 country codes to filter on. | [optional] |
+
+### Return type
+
+[**GetWhatsAppPricingAnalytics200Response**](GetWhatsAppPricingAnalytics200Response.md)
 
 ### Authorization
 
