@@ -27,6 +27,7 @@
 | **meta_verification_status** | **String** |  | [optional] |
 | **meta_verified_at** | **Time** |  | [optional] |
 | **meta_verification_expires_at** | **Time** |  | [optional] |
+| **meta_pool_add_rejected_at** | **Time** | Set when WhatsApp reported the number as registered to another WhatsApp account while connecting it. The number keeps working for Calls and SMS; remove it from the other account and connect again, or replace it with POST /v1/whatsapp/phone-numbers/{id}/replace. Absent once WhatsApp accepts the number. | [optional] |
 | **social_account_id** | **String** | The WhatsApp account the number is linked to; null when WhatsApp is not connected. | [optional] |
 | **owner_account_id** | **String** | The telephony account that owns Calls and SMS on the number. | [optional] |
 | **sip_trunk_id** | **String** | SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409. | [optional] |
@@ -100,6 +101,7 @@ instance = Zernio::OwnedPhoneNumber.new(
   meta_verification_status: null,
   meta_verified_at: null,
   meta_verification_expires_at: null,
+  meta_pool_add_rejected_at: null,
   social_account_id: null,
   owner_account_id: null,
   sip_trunk_id: null,
