@@ -14,6 +14,7 @@
 | **image_url** | **String** |  | [optional] |
 | **video_url** | **String** |  | [optional] |
 | **thumbnail_url** | **String** |  | [optional] |
+| **welcome_message** | [**WebhookPayloadMessageMetadataReferralWelcomeMessage**](WebhookPayloadMessageMetadataReferralWelcomeMessage.md) |  | [optional] |
 | **ad_id** | **String** | Facebook Messenger CTM / Instagram CTD only. The Meta ad ID the user clicked to start the conversation.  | [optional] |
 | **ref** | **String** | The &#x60;ref&#x60; parameter passed through from the Meta ad creative or from an ig.me / m.me link. Instagram / Facebook Messenger only.  | [optional] |
 | **source** | **String** | Meta-supplied source identifier (&#x60;ADS&#x60; for ad clicks; &#x60;SHORTLINK&#x60;, &#x60;SHORTLINKS&#x60; or &#x60;IGME-SOURCE-LINK&#x60; for ref links). Instagram / Facebook Messenger only.  | [optional] |
@@ -37,6 +38,7 @@ instance = Zernio::WebhookPayloadMessageMetadataReferral.new(
   image_url: null,
   video_url: null,
   thumbnail_url: null,
+  welcome_message: null,
   ad_id: null,
   ref: null,
   source: null,

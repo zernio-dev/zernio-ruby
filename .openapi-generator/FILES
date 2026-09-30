@@ -1271,6 +1271,7 @@ docs/InboxWebhookConversation.md
 docs/InboxWebhookConversationDetail.md
 docs/InboxWebhookMessage.md
 docs/InboxWebhookMessageAttachmentsInner.md
+docs/InboxWebhookMessageAttachmentsInnerPayload.md
 docs/InboxWebhookMessageSender.md
 docs/InboxWebhookMessageSenderInstagramProfile.md
 docs/InitiateTelegramConnect200Response.md
@@ -2553,6 +2554,7 @@ docs/WebhookPayloadMessageMetadataOrderProductItemsInner.md
 docs/WebhookPayloadMessageMetadataQuotedMessage.md
 docs/WebhookPayloadMessageMetadataReferral.md
 docs/WebhookPayloadMessageMetadataReferralAdsContextData.md
+docs/WebhookPayloadMessageMetadataReferralWelcomeMessage.md
 docs/WebhookPayloadMessageMetadataReferredProduct.md
 docs/WebhookPayloadMessageMetadataStoryReply.md
 docs/WebhookPayloadMessageMetadataUnsupported.md
@@ -3988,6 +3990,7 @@ lib/zernio-sdk/models/inbox_webhook_conversation.rb
 lib/zernio-sdk/models/inbox_webhook_conversation_detail.rb
 lib/zernio-sdk/models/inbox_webhook_message.rb
 lib/zernio-sdk/models/inbox_webhook_message_attachments_inner.rb
+lib/zernio-sdk/models/inbox_webhook_message_attachments_inner_payload.rb
 lib/zernio-sdk/models/inbox_webhook_message_sender.rb
 lib/zernio-sdk/models/inbox_webhook_message_sender_instagram_profile.rb
 lib/zernio-sdk/models/initiate_telegram_connect200_response.rb
@@ -5239,6 +5242,7 @@ lib/zernio-sdk/models/webhook_payload_message_metadata_order_product_items_inner
 lib/zernio-sdk/models/webhook_payload_message_metadata_quoted_message.rb
 lib/zernio-sdk/models/webhook_payload_message_metadata_referral.rb
 lib/zernio-sdk/models/webhook_payload_message_metadata_referral_ads_context_data.rb
+lib/zernio-sdk/models/webhook_payload_message_metadata_referral_welcome_message.rb
 lib/zernio-sdk/models/webhook_payload_message_metadata_referred_product.rb
 lib/zernio-sdk/models/webhook_payload_message_metadata_story_reply.rb
 lib/zernio-sdk/models/webhook_payload_message_metadata_unsupported.rb
@@ -6658,6 +6662,7 @@ spec/models/inbox_message_edit_history_entry_spec.rb
 spec/models/inbox_webhook_account_spec.rb
 spec/models/inbox_webhook_conversation_detail_spec.rb
 spec/models/inbox_webhook_conversation_spec.rb
+spec/models/inbox_webhook_message_attachments_inner_payload_spec.rb
 spec/models/inbox_webhook_message_attachments_inner_spec.rb
 spec/models/inbox_webhook_message_sender_instagram_profile_spec.rb
 spec/models/inbox_webhook_message_sender_spec.rb
@@ -7908,6 +7913,7 @@ spec/models/webhook_payload_message_metadata_order_spec.rb
 spec/models/webhook_payload_message_metadata_quoted_message_spec.rb
 spec/models/webhook_payload_message_metadata_referral_ads_context_data_spec.rb
 spec/models/webhook_payload_message_metadata_referral_spec.rb
+spec/models/webhook_payload_message_metadata_referral_welcome_message_spec.rb
 spec/models/webhook_payload_message_metadata_referred_product_spec.rb
 spec/models/webhook_payload_message_metadata_spec.rb
 spec/models/webhook_payload_message_metadata_story_reply_spec.rb
