@@ -10,7 +10,7 @@
 | **unconfirmed_write** | [**ErrorResponseDetailsUnconfirmedWrite**](ErrorResponseDetailsUnconfirmedWrite.md) |  | [optional] |
 | **quota_exhausted** | **Boolean** | Google Ads 429 only. True when the upstream Google Ads quota is spent rather than a Zernio limit. | [optional] |
 | **quota_scope** | **String** | Google Ads 429 only, when Google names the scope. DEVELOPER is the shared developer-token budget; ACCOUNT is your ad account. | [optional] |
-| **budget_scope** | **String** | Zernio Google Ads operations-budget 429 only (never set alongside &#x60;quotaExhausted&#x60;). &#x60;user&#x60; is your own burst/daily allowance; &#x60;platform&#x60; is the fleet-wide daily budget shared across customers. | [optional] |
+| **budget_scope** | **String** | Zernio Google Ads burst-limit 429 only (never set alongside &#x60;quotaExhausted&#x60;). &#x60;user&#x60; is your own per-minute allowance on user-driven Google Ads calls; it clears within a minute. | [optional] |
 
 ## Example
 
