@@ -2591,6 +2591,7 @@ docs/WebhookPayloadWhatsAppTemplateStatusUpdatedAccount.md
 docs/WebhookPayloadWhatsAppTemplateStatusUpdatedTemplate.md
 docs/WebhooksApi.md
 docs/WhatsAppApi.md
+docs/WhatsAppBillingConversation.md
 docs/WhatsAppBodyComponent.md
 docs/WhatsAppBodyComponentExample.md
 docs/WhatsAppButtonsComponent.md
@@ -2605,6 +2606,7 @@ docs/WhatsAppHeaderComponent.md
 docs/WhatsAppHeaderComponentExample.md
 docs/WhatsAppLimitedTimeOfferComponent.md
 docs/WhatsAppLimitedTimeOfferComponentLimitedTimeOffer.md
+docs/WhatsAppMessagePricing.md
 docs/WhatsAppNamedParamExample.md
 docs/WhatsAppPhoneNumbersApi.md
 docs/WhatsAppSandboxApi.md
@@ -5261,6 +5263,7 @@ lib/zernio-sdk/models/webhook_payload_whats_app_template_category_updated_templa
 lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated_account.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated_template.rb
+lib/zernio-sdk/models/whats_app_billing_conversation.rb
 lib/zernio-sdk/models/whats_app_body_component.rb
 lib/zernio-sdk/models/whats_app_body_component_example.rb
 lib/zernio-sdk/models/whats_app_buttons_component.rb
@@ -5273,6 +5276,7 @@ lib/zernio-sdk/models/whats_app_header_component.rb
 lib/zernio-sdk/models/whats_app_header_component_example.rb
 lib/zernio-sdk/models/whats_app_limited_time_offer_component.rb
 lib/zernio-sdk/models/whats_app_limited_time_offer_component_limited_time_offer.rb
+lib/zernio-sdk/models/whats_app_message_pricing.rb
 lib/zernio-sdk/models/whats_app_named_param_example.rb
 lib/zernio-sdk/models/whats_app_sandbox_session.rb
 lib/zernio-sdk/models/whats_app_template_button.rb
@@ -7919,6 +7923,7 @@ spec/models/webhook_payload_whats_app_template_status_updated_account_spec.rb
 spec/models/webhook_payload_whats_app_template_status_updated_spec.rb
 spec/models/webhook_payload_whats_app_template_status_updated_template_spec.rb
 spec/models/webhook_spec.rb
+spec/models/whats_app_billing_conversation_spec.rb
 spec/models/whats_app_body_component_example_spec.rb
 spec/models/whats_app_body_component_spec.rb
 spec/models/whats_app_buttons_component_spec.rb
@@ -7931,6 +7936,7 @@ spec/models/whats_app_header_component_example_spec.rb
 spec/models/whats_app_header_component_spec.rb
 spec/models/whats_app_limited_time_offer_component_limited_time_offer_spec.rb
 spec/models/whats_app_limited_time_offer_component_spec.rb
+spec/models/whats_app_message_pricing_spec.rb
 spec/models/whats_app_named_param_example_spec.rb
 spec/models/whats_app_sandbox_session_spec.rb
 spec/models/whats_app_template_button_spec.rb
