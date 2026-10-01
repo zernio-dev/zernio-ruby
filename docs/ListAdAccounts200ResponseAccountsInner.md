@@ -13,6 +13,9 @@
 | **account_status** | **Object** |  | [optional] |
 | **approval_status** | **String** | X only. X&#39;s own ad account approval status. Observed values are &#x60;ACCEPTED&#x60;, &#x60;PENDING&#x60; and &#x60;REJECTED&#x60;, but X does not publish the full vocabulary, so treat an unrecognised value as not usable. Other platforms report &#x60;accountStatus&#x60; or &#x60;status&#x60; instead. | [optional] |
 | **disable_reason** | **Integer** | Meta only. Meta&#39;s &#x60;disable_reason&#x60; code, forwarded unchanged. Present when &#x60;accountStatus&#x60; is &#x60;2&#x60; (DISABLED) and Meta gives a reason, which is what separates a policy action from a payment problem. Meta does not publish a stable list of values for this field, so none are enumerated here: resolve the code against Meta&#39;s own ad account reference. Absent when Meta reports no reason, or when the connected token cannot read the field. | [optional] |
+| **balance** | **Float** | TikTok only. Total balance the advertiser can spend (cash plus grant), in whole units of &#x60;currency&#x60;. Read from the Business Center balance when the connection has a finance role there, which is the only TikTok source that counts cash held in a shared payment portfolio; otherwise TikTok&#39;s advertiser-level balance, which can read 0 for a cash-funded advertiser. | [optional] |
+| **cash_balance** | **Float** | TikTok only. Cash part of &#x60;balance&#x60;, in whole units of &#x60;currency&#x60;. Absent when the connection has no finance role in the advertiser&#39;s Business Center. | [optional] |
+| **grant_balance** | **Float** | TikTok only. Grant (ad credit) part of &#x60;balance&#x60;, in whole units of &#x60;currency&#x60;. Absent when the connection has no finance role in the advertiser&#39;s Business Center. | [optional] |
 | **timezone_name** | **String** | IANA timezone of the ad account (Meta only). Drives daily-budget reset and Insights day boundaries. | [optional] |
 | **timezone_offset_hours_utc** | **Float** | Signed UTC offset in hours, reflecting current DST (Meta only). | [optional] |
 | **minimum_daily_budget** | **Float** | Meta only. Minimum daily budget for the account, in the account currency&#39;s major units. This is the impressions-billed minimum; other billing events have higher minimums. Absent when the connected token cannot read it. | [optional] |
@@ -37,6 +40,9 @@ instance = Zernio::ListAdAccounts200ResponseAccountsInner.new(
   account_status: null,
   approval_status: null,
   disable_reason: null,
+  balance: null,
+  cash_balance: null,
+  grant_balance: null,
   timezone_name: null,
   timezone_offset_hours_utc: null,
   minimum_daily_budget: null,
