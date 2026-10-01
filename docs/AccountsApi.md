@@ -769,7 +769,9 @@ opts = {
   status: 'connected', # String | Filter accounts by connection status. `connected` returns healthy accounts; `disconnected` returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. 
   include_over_limit: true, # Boolean | When true, includes accounts from over-limit profiles.
   page: 56, # Integer | Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. 
-  limit: 56 # Integer | Page size. Must be provided together with page; sending only one of the two returns 400. 
+  limit: 56, # Integer | Page size. Must be provided together with page; sending only one of the two returns 400. 
+  profile_ids: 'profile_ids_example', # String | Comma-separated profile IDs (up to 50) to preview, together with perProfile. The response then also carries `profileTotals`.
+  per_profile: 56 # Integer | Return a preview of each profile in profileIds: the newest account of every platform it has, topped up to at least N. Requires profileIds; cannot be combined with page and limit.
 }
 
 begin
@@ -809,6 +811,8 @@ end
 | **include_over_limit** | **Boolean** | When true, includes accounts from over-limit profiles. | [optional][default to false] |
 | **page** | **Integer** | Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts.  | [optional] |
 | **limit** | **Integer** | Page size. Must be provided together with page; sending only one of the two returns 400.  | [optional] |
+| **profile_ids** | **String** | Comma-separated profile IDs (up to 50) to preview, together with perProfile. The response then also carries &#x60;profileTotals&#x60;. | [optional] |
+| **per_profile** | **Integer** | Return a preview of each profile in profileIds: the newest account of every platform it has, topped up to at least N. Requires profileIds; cannot be combined with page and limit. | [optional] |
 
 ### Return type
 
