@@ -3221,7 +3221,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-select_facebook_page_request = Zernio::SelectFacebookPageRequestOneOf.new({profile_id: 'profile_id_example', page_id: 'page_id_example', temp_token: 'temp_token_example', user_profile: Zernio::SelectFacebookPageRequestOneOfUserProfile.new}) # SelectFacebookPageRequest | 
+select_facebook_page_request = Zernio::SelectFacebookPageRequestOneOf.new({profile_id: 'profile_id_example', temp_token: 'temp_token_example', user_profile: Zernio::SelectFacebookPageRequestOneOfUserProfile.new}) # SelectFacebookPageRequest | 
 
 begin
   # Select Facebook page
@@ -3369,7 +3369,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-select_instagram_account_request = Zernio::SelectInstagramAccountRequest.new({profile_id: 'profile_id_example', page_id: 'page_id_example', temp_token: 'temp_token_example'}) # SelectInstagramAccountRequest | 
+select_instagram_account_request = Zernio::SelectInstagramAccountRequest.new({profile_id: 'profile_id_example', temp_token: 'temp_token_example'}) # SelectInstagramAccountRequest | 
 
 begin
   # Select the Page whose Instagram account to connect

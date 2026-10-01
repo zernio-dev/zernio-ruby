@@ -1963,6 +1963,7 @@ docs/SearchTweets200ResponseTweetsInner.md
 docs/SearchTweets200ResponseTweetsInnerAuthor.md
 docs/SelectFacebookPage200Response.md
 docs/SelectFacebookPage200ResponseAccount.md
+docs/SelectFacebookPage200ResponseFailedInner.md
 docs/SelectFacebookPageRequest.md
 docs/SelectFacebookPageRequestOneOf.md
 docs/SelectFacebookPageRequestOneOf1.md
@@ -4670,6 +4671,7 @@ lib/zernio-sdk/models/search_tweets200_response_tweets_inner.rb
 lib/zernio-sdk/models/search_tweets200_response_tweets_inner_author.rb
 lib/zernio-sdk/models/select_facebook_page200_response.rb
 lib/zernio-sdk/models/select_facebook_page200_response_account.rb
+lib/zernio-sdk/models/select_facebook_page200_response_failed_inner.rb
 lib/zernio-sdk/models/select_facebook_page_request.rb
 lib/zernio-sdk/models/select_facebook_page_request_one_of.rb
 lib/zernio-sdk/models/select_facebook_page_request_one_of1.rb
@@ -7351,6 +7353,7 @@ spec/models/search_tweets200_response_spec.rb
 spec/models/search_tweets200_response_tweets_inner_author_spec.rb
 spec/models/search_tweets200_response_tweets_inner_spec.rb
 spec/models/select_facebook_page200_response_account_spec.rb
+spec/models/select_facebook_page200_response_failed_inner_spec.rb
 spec/models/select_facebook_page200_response_spec.rb
 spec/models/select_facebook_page_request_one_of1_spec.rb
 spec/models/select_facebook_page_request_one_of_not_spec.rb
