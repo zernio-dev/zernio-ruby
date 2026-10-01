@@ -3438,7 +3438,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-select_linked_in_organization_request = Zernio::SelectLinkedInOrganizationRequest.new({profile_id: 'profile_id_example', temp_token: 'temp_token_example', user_profile: 3.56, account_type: 'personal'}) # SelectLinkedInOrganizationRequest | 
+select_linked_in_organization_request = Zernio::SelectLinkedInOrganizationRequest.new({profile_id: 'profile_id_example', temp_token: 'temp_token_example', user_profile: 3.56}) # SelectLinkedInOrganizationRequest | 
 
 begin
   # Select LinkedIn org
