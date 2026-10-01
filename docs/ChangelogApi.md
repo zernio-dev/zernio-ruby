@@ -13,18 +13,13 @@ All URIs are relative to *https://zernio.com/api*
 
 List API changelog entries
 
-The API changelog, newest first. Each entry is what the `api.changelog.published` webhook delivered: the announcement in `message`, and in `changes` the deterministic diff of the OpenAPI spec (operations and schemas added, removed and modified) for automation to act on. Page with `before` set to the previous page's `nextCursor`. 
+The API changelog, newest first. No API key needed; one address may make 120 requests a minute. Each entry is what the `api.changelog.published` webhook delivered: the announcement in `message`, and in `changes` the deterministic diff of the OpenAPI spec (operations and schemas added, removed and modified) for automation to act on. Page with `before` set to the previous page's `nextCursor`. 
 
 ### Examples
 
 ```ruby
 require 'time'
 require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
 
 api_instance = Zernio::ChangelogApi.new
 opts = {
@@ -76,7 +71,7 @@ end
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+No authorization required
 
 ### HTTP request headers
 
