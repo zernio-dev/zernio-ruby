@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**get_analytics**](AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics |
+| [**get_analytics_dashboard**](AnalyticsApi.md#get_analytics_dashboard) | **GET** /v1/analytics/dashboard | Get an analytics dashboard |
 | [**get_analytics_delta**](AnalyticsApi.md#get_analytics_delta) | **GET** /v1/analytics/delta | Analytics changed since a cursor |
 | [**get_best_time_to_post**](AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post |
 | [**get_content_decay**](AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay |
@@ -112,6 +113,89 @@ end
 ### Return type
 
 [**GetAnalytics200Response**](GetAnalytics200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_analytics_dashboard
+
+> <GetAnalyticsDashboard200Response> get_analytics_dashboard(from_date, to_date, opts)
+
+Get an analytics dashboard
+
+Everything an analytics dashboard needs in one call: window totals, follower growth, a per-day series, top posts, recent posts and, optionally, the same figures for the previous period. Daily and total metrics use received attribution: each day holds the engagement that arrived that day, on any post, so `totals` is always the sum of `daily`. `topPosts` and `recentPosts` list posts published in the window with their lifetime metrics. A post cross-posted to several platforms appears once per platform. All dates are UTC days. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+from_date = Date.parse('2026-09-01') # Date | First day of the window (YYYY-MM-DD, inclusive).
+to_date = Date.parse('2026-09-30') # Date | Last day of the window (YYYY-MM-DD, inclusive). May equal fromDate. The window covers at most 366 days.
+opts = {
+  profile_id: 'profile_id_example', # String | Profile ID, or \"all\" for every profile you can access.
+  platform: 'platform_example', # String | Platform to cover (e.g. \"instagram\"), or \"all\".
+  compare: 'previous_period', # String | Set to \"previous_period\" to also return previousTotals and previousFollowers for the window of the same length that ends the day before fromDate.
+  top_posts: 56, # Integer | How many top posts to return, ranked by engagement (likes, comments, shares and saves, the same sum as daily engagement).
+  recent_posts: 56 # Integer | How many of the most recently published posts to return.
+}
+
+begin
+  # Get an analytics dashboard
+  result = api_instance.get_analytics_dashboard(from_date, to_date, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_analytics_dashboard: #{e}"
+end
+```
+
+#### Using the get_analytics_dashboard_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAnalyticsDashboard200Response>, Integer, Hash)> get_analytics_dashboard_with_http_info(from_date, to_date, opts)
+
+```ruby
+begin
+  # Get an analytics dashboard
+  data, status_code, headers = api_instance.get_analytics_dashboard_with_http_info(from_date, to_date, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAnalyticsDashboard200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_analytics_dashboard_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **from_date** | **Date** | First day of the window (YYYY-MM-DD, inclusive). |  |
+| **to_date** | **Date** | Last day of the window (YYYY-MM-DD, inclusive). May equal fromDate. The window covers at most 366 days. |  |
+| **profile_id** | **String** | Profile ID, or \&quot;all\&quot; for every profile you can access. | [optional][default to &#39;all&#39;] |
+| **platform** | **String** | Platform to cover (e.g. \&quot;instagram\&quot;), or \&quot;all\&quot;. | [optional][default to &#39;all&#39;] |
+| **compare** | **String** | Set to \&quot;previous_period\&quot; to also return previousTotals and previousFollowers for the window of the same length that ends the day before fromDate. | [optional] |
+| **top_posts** | **Integer** | How many top posts to return, ranked by engagement (likes, comments, shares and saves, the same sum as daily engagement). | [optional][default to 5] |
+| **recent_posts** | **Integer** | How many of the most recently published posts to return. | [optional][default to 10] |
+
+### Return type
+
+[**GetAnalyticsDashboard200Response**](GetAnalyticsDashboard200Response.md)
 
 ### Authorization
 
