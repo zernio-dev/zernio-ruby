@@ -11,6 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
 | [**on_ad_status_changed**](WebhookEventsApi.md#on_ad_status_changed) | **POST** /ad.status_changed | Ad status changed event |
 | [**on_analytics_synced**](WebhookEventsApi.md#on_analytics_synced) | **POST** /analytics.synced | Analytics synced event |
+| [**on_api_changelog_published**](WebhookEventsApi.md#on_api_changelog_published) | **POST** /api.changelog.published | API changelog entry published event |
 | [**on_branded_calling_identity_action_required**](WebhookEventsApi.md#on_branded_calling_identity_action_required) | **POST** /branded_calling.identity.action_required | Caller identity action required event |
 | [**on_branded_calling_identity_status_updated**](WebhookEventsApi.md#on_branded_calling_identity_status_updated) | **POST** /branded_calling.identity.status_updated | Caller identity status updated event |
 | [**on_branded_calling_number_status_updated**](WebhookEventsApi.md#on_branded_calling_number_status_updated) | **POST** /branded_calling.number.status_updated | Branded number status updated event |
@@ -536,6 +537,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_analytics_synced** | [**WebhookPayloadAnalyticsSynced**](WebhookPayloadAnalyticsSynced.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_api_changelog_published
+
+> on_api_changelog_published(webhook_payload_api_changelog_published)
+
+API changelog entry published event
+
+Fired when an entry is published to the API changelog (https://docs.zernio.com/changelog), which happens when a change to this OpenAPI spec goes live. The event belongs to no profile or account: every active subscription that opted in receives it, scoped subscriptions (`profileIds` / `accountIds`) do not. `entry.changes` is the deterministic diff of the spec (operations and schemas added, removed and modified); `entry.message` is the written announcement. Act on `changes` and `type`, read `message` for the why. Entries are listed by `GET /v1/changelog`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_api_changelog_published =  # WebhookPayloadApiChangelogPublished | 
+
+begin
+  # API changelog entry published event
+  api_instance.on_api_changelog_published(webhook_payload_api_changelog_published)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_api_changelog_published: #{e}"
+end
+```
+
+#### Using the on_api_changelog_published_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_api_changelog_published_with_http_info(webhook_payload_api_changelog_published)
+
+```ruby
+begin
+  # API changelog entry published event
+  data, status_code, headers = api_instance.on_api_changelog_published_with_http_info(webhook_payload_api_changelog_published)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_api_changelog_published_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_api_changelog_published** | [**WebhookPayloadApiChangelogPublished**](WebhookPayloadApiChangelogPublished.md) |  |  |
 
 ### Return type
 

@@ -118,6 +118,11 @@ docs/AnalyticsOverview.md
 docs/AnalyticsOverviewDataStaleness.md
 docs/AnalyticsSinglePostResponse.md
 docs/AnalyticsSinglePostResponseMediaItemsInner.md
+docs/ApiChangelogEntry.md
+docs/ApiChangelogEntryChanges.md
+docs/ApiChangelogEntryChangesEndpoints.md
+docs/ApiChangelogEntryChangesSchemas.md
+docs/ApiChangelogOperationRef.md
 docs/ApiKey.md
 docs/ApiKeyCreatedBy.md
 docs/ApiKeyProfileIdsInner.md
@@ -274,6 +279,7 @@ docs/ChangeCommerceProductStateRequest.md
 docs/ChangeCommerceProductTags200Response.md
 docs/ChangeCommerceProductTags200ResponseFailedInner.md
 docs/ChangeCommerceProductTagsRequest.md
+docs/ChangelogApi.md
 docs/ChannelPicker.md
 docs/ChannelPickerChannelsInner.md
 docs/ChannelPickerTeam.md
@@ -1439,6 +1445,7 @@ docs/ListCampaignAssets200ResponseSitelinksInner.md
 docs/ListCampaignAssets200ResponseStructuredSnippetsInner.md
 docs/ListCampaignNegativeKeywords200Response.md
 docs/ListCampaignNegativeKeywords200ResponseKeywordsInner.md
+docs/ListChangelog200Response.md
 docs/ListCommentAutomationLogs200Response.md
 docs/ListCommentAutomationLogs200ResponseMisses.md
 docs/ListCommentAutomationLogs200ResponseMissesSamplesInner.md
@@ -2522,6 +2529,7 @@ docs/WebhookPayloadAdStatusChangedStatus.md
 docs/WebhookPayloadAnalyticsSynced.md
 docs/WebhookPayloadAnalyticsSyncedAccount.md
 docs/WebhookPayloadAnalyticsSyncedSync.md
+docs/WebhookPayloadApiChangelogPublished.md
 docs/WebhookPayloadCallEnded.md
 docs/WebhookPayloadCallEndedCall.md
 docs/WebhookPayloadCallEndedCallBilling.md
@@ -2710,6 +2718,7 @@ lib/zernio-sdk/api/branded_calling_api.rb
 lib/zernio-sdk/api/broadcasts_api.rb
 lib/zernio-sdk/api/business_agent_api.rb
 lib/zernio-sdk/api/calls_api.rb
+lib/zernio-sdk/api/changelog_api.rb
 lib/zernio-sdk/api/comment_automations_api.rb
 lib/zernio-sdk/api/comments_api.rb
 lib/zernio-sdk/api/commerce_api.rb
@@ -2873,6 +2882,11 @@ lib/zernio-sdk/models/analytics_overview.rb
 lib/zernio-sdk/models/analytics_overview_data_staleness.rb
 lib/zernio-sdk/models/analytics_single_post_response.rb
 lib/zernio-sdk/models/analytics_single_post_response_media_items_inner.rb
+lib/zernio-sdk/models/api_changelog_entry.rb
+lib/zernio-sdk/models/api_changelog_entry_changes.rb
+lib/zernio-sdk/models/api_changelog_entry_changes_endpoints.rb
+lib/zernio-sdk/models/api_changelog_entry_changes_schemas.rb
+lib/zernio-sdk/models/api_changelog_operation_ref.rb
 lib/zernio-sdk/models/api_key.rb
 lib/zernio-sdk/models/api_key_created_by.rb
 lib/zernio-sdk/models/api_key_profile_ids_inner.rb
@@ -4165,6 +4179,7 @@ lib/zernio-sdk/models/list_campaign_assets200_response_sitelinks_inner.rb
 lib/zernio-sdk/models/list_campaign_assets200_response_structured_snippets_inner.rb
 lib/zernio-sdk/models/list_campaign_negative_keywords200_response.rb
 lib/zernio-sdk/models/list_campaign_negative_keywords200_response_keywords_inner.rb
+lib/zernio-sdk/models/list_changelog200_response.rb
 lib/zernio-sdk/models/list_comment_automation_logs200_response.rb
 lib/zernio-sdk/models/list_comment_automation_logs200_response_misses.rb
 lib/zernio-sdk/models/list_comment_automation_logs200_response_misses_samples_inner.rb
@@ -5221,6 +5236,7 @@ lib/zernio-sdk/models/webhook_payload_ad_status_changed_status.rb
 lib/zernio-sdk/models/webhook_payload_analytics_synced.rb
 lib/zernio-sdk/models/webhook_payload_analytics_synced_account.rb
 lib/zernio-sdk/models/webhook_payload_analytics_synced_sync.rb
+lib/zernio-sdk/models/webhook_payload_api_changelog_published.rb
 lib/zernio-sdk/models/webhook_payload_call_ended.rb
 lib/zernio-sdk/models/webhook_payload_call_ended_call.rb
 lib/zernio-sdk/models/webhook_payload_call_ended_call_billing.rb
@@ -5400,6 +5416,7 @@ spec/api/branded_calling_api_spec.rb
 spec/api/broadcasts_api_spec.rb
 spec/api/business_agent_api_spec.rb
 spec/api/calls_api_spec.rb
+spec/api/changelog_api_spec.rb
 spec/api/comment_automations_api_spec.rb
 spec/api/comments_api_spec.rb
 spec/api/commerce_api_spec.rb
@@ -5558,6 +5575,11 @@ spec/models/analytics_overview_data_staleness_spec.rb
 spec/models/analytics_overview_spec.rb
 spec/models/analytics_single_post_response_media_items_inner_spec.rb
 spec/models/analytics_single_post_response_spec.rb
+spec/models/api_changelog_entry_changes_endpoints_spec.rb
+spec/models/api_changelog_entry_changes_schemas_spec.rb
+spec/models/api_changelog_entry_changes_spec.rb
+spec/models/api_changelog_entry_spec.rb
+spec/models/api_changelog_operation_ref_spec.rb
 spec/models/api_key_created_by_spec.rb
 spec/models/api_key_profile_ids_inner_spec.rb
 spec/models/api_key_spec.rb
@@ -6850,6 +6872,7 @@ spec/models/list_campaign_assets200_response_spec.rb
 spec/models/list_campaign_assets200_response_structured_snippets_inner_spec.rb
 spec/models/list_campaign_negative_keywords200_response_keywords_inner_spec.rb
 spec/models/list_campaign_negative_keywords200_response_spec.rb
+spec/models/list_changelog200_response_spec.rb
 spec/models/list_comment_automation_logs200_response_misses_samples_inner_spec.rb
 spec/models/list_comment_automation_logs200_response_misses_spec.rb
 spec/models/list_comment_automation_logs200_response_spec.rb
@@ -7905,6 +7928,7 @@ spec/models/webhook_payload_ad_status_changed_status_spec.rb
 spec/models/webhook_payload_analytics_synced_account_spec.rb
 spec/models/webhook_payload_analytics_synced_spec.rb
 spec/models/webhook_payload_analytics_synced_sync_spec.rb
+spec/models/webhook_payload_api_changelog_published_spec.rb
 spec/models/webhook_payload_call_ended_call_billing_spec.rb
 spec/models/webhook_payload_call_ended_call_spec.rb
 spec/models/webhook_payload_call_ended_spec.rb
