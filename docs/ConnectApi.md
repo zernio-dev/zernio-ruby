@@ -580,7 +580,7 @@ end
 
 Connect a Discord channel
 
-Finalize a Discord connect by binding one channel to a profile. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. One connected account per channel: repeat the call with a different channelId to add another.
+Finalize a Discord connect by binding channels to a profile. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. One connected account per channel: send channelIds to connect several channels of the server at once, or repeat the call with a different channelId.
 
 ### Examples
 
@@ -594,7 +594,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-connect_discord_channel_request = Zernio::ConnectDiscordChannelRequest.new({guild_id: 'guild_id_example', channel_id: 'channel_id_example', profile_id: 'profile_id_example'}) # ConnectDiscordChannelRequest | 
+connect_discord_channel_request = Zernio::ConnectDiscordChannelRequest.new({guild_id: 'guild_id_example', profile_id: 'profile_id_example'}) # ConnectDiscordChannelRequest | 
 
 begin
   # Connect a Discord channel
@@ -800,7 +800,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-connect_slack_channel_request = Zernio::ConnectSlackChannelRequest.new({profile_id: 'profile_id_example', channel_id: 'channel_id_example'}) # ConnectSlackChannelRequest | 
+connect_slack_channel_request = Zernio::ConnectSlackChannelRequest.new({profile_id: 'profile_id_example'}) # ConnectSlackChannelRequest | 
 
 begin
   # Connect a Slack channel
@@ -3295,7 +3295,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-select_google_business_location_request = Zernio::SelectGoogleBusinessLocationRequest.new({profile_id: 'profile_id_example', location_id: 'location_id_example', pending_data_token: 'pending_data_token_example'}) # SelectGoogleBusinessLocationRequest | 
+select_google_business_location_request = Zernio::SelectGoogleBusinessLocationRequest.new({profile_id: 'profile_id_example', pending_data_token: 'pending_data_token_example'}) # SelectGoogleBusinessLocationRequest | 
 
 begin
   # Select Google Business Profile location
