@@ -767,6 +767,10 @@ opts = {
   profile_id: 'profile_id_example', # String | Filter accounts by profile ID. Must be a valid ObjectId.
   platform: 'platform_example', # String | Filter accounts by platform (e.g. \"instagram\", \"twitter\").
   status: 'connected', # String | Filter accounts by connection status. `connected` returns healthy accounts; `disconnected` returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. 
+  search: 'search_example', # String | Case-insensitive match on the account username, display name or platform user id, or an exact account id. Combine with page/limit to paginate the matches.
+  category: 'social', # String | Only accounts of this kind. ads = ad accounts (Meta, Google, LinkedIn, Pinterest, TikTok, X, OpenAI), communication = WhatsApp, Telegram, Discord, Slack and iMessage, blogs = Shopify and WordPress, social = every other platform.
+  sort: 'account', # String | Sort a paginated listing (page/limit) by account name, platform, profile name, status (accounts needing a reconnect first when ascending) or connection date. Ties keep the default order: platform, then newest first.
+  order: 'asc', # String | Direction for `sort`.
   include_over_limit: true, # Boolean | When true, includes accounts from over-limit profiles.
   page: 56, # Integer | Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. 
   limit: 56, # Integer | Page size. Must be provided together with page; sending only one of the two returns 400. 
@@ -808,6 +812,10 @@ end
 | **profile_id** | **String** | Filter accounts by profile ID. Must be a valid ObjectId. | [optional] |
 | **platform** | **String** | Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). | [optional] |
 | **status** | **String** | Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set.  | [optional] |
+| **search** | **String** | Case-insensitive match on the account username, display name or platform user id, or an exact account id. Combine with page/limit to paginate the matches. | [optional] |
+| **category** | **String** | Only accounts of this kind. ads &#x3D; ad accounts (Meta, Google, LinkedIn, Pinterest, TikTok, X, OpenAI), communication &#x3D; WhatsApp, Telegram, Discord, Slack and iMessage, blogs &#x3D; Shopify and WordPress, social &#x3D; every other platform. | [optional] |
+| **sort** | **String** | Sort a paginated listing (page/limit) by account name, platform, profile name, status (accounts needing a reconnect first when ascending) or connection date. Ties keep the default order: platform, then newest first. | [optional] |
+| **order** | **String** | Direction for &#x60;sort&#x60;. | [optional][default to &#39;asc&#39;] |
 | **include_over_limit** | **Boolean** | When true, includes accounts from over-limit profiles. | [optional][default to false] |
 | **page** | **Integer** | Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts.  | [optional] |
 | **limit** | **Integer** | Page size. Must be provided together with page; sending only one of the two returns 400.  | [optional] |
