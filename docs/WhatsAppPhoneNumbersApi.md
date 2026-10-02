@@ -541,7 +541,7 @@ api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 account_id = 'account_id_example' # String | WhatsApp account ID
 start = Time.parse('2013-10-20T19:20:30+01:00') # Time | Range start, ISO 8601 date or date-time.
 _end = Time.parse('2013-10-20T19:20:30+01:00') # Time | Range end, ISO 8601 date or date-time. Must be after start.
-granularity = 'HALF_HOUR' # String | 
+granularity = 'HALF_HOUR' # String | Size of each data point. Meta refuses MONTHLY when the range is too short for a monthly bucket (for example a range that starts at the beginning of the current month and ends today); that is a 400 with `param: granularity` and Meta's reason in `error`. Use DAILY for short or month-to-date ranges. 
 opts = {
   dimensions: 'PRICING_CATEGORY,COUNTRY', # String | Comma-separated breakdowns: COUNTRY, PHONE, PRICING_CATEGORY, PRICING_TYPE, TIER. Without it each data point is a total for the interval.
   metric_types: 'COST,VOLUME', # String | Comma-separated: COST, VOLUME. Defaults to both.
@@ -584,7 +584,7 @@ end
 | **account_id** | **String** | WhatsApp account ID |  |
 | **start** | **Time** | Range start, ISO 8601 date or date-time. |  |
 | **_end** | **Time** | Range end, ISO 8601 date or date-time. Must be after start. |  |
-| **granularity** | **String** |  |  |
+| **granularity** | **String** | Size of each data point. Meta refuses MONTHLY when the range is too short for a monthly bucket (for example a range that starts at the beginning of the current month and ends today); that is a 400 with &#x60;param: granularity&#x60; and Meta&#39;s reason in &#x60;error&#x60;. Use DAILY for short or month-to-date ranges.  |  |
 | **dimensions** | **String** | Comma-separated breakdowns: COUNTRY, PHONE, PRICING_CATEGORY, PRICING_TYPE, TIER. Without it each data point is a total for the interval. | [optional] |
 | **metric_types** | **String** | Comma-separated: COST, VOLUME. Defaults to both. | [optional] |
 | **pricing_types** | **String** | Comma-separated filter: REGULAR, FREE_CUSTOMER_SERVICE, FREE_ENTRY_POINT. | [optional] |
