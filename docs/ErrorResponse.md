@@ -8,6 +8,7 @@
 | **type** | **String** | Error class for programmatic handling. | [optional] |
 | **code** | **String** | Stable machine-readable error code. | [optional] |
 | **param** | **String** | The request field that caused the error, when applicable. | [optional] |
+| **doc_url** | **String** | Documentation page for resolving the error, when one applies. | [optional] |
 | **platform** | **String** | Upstream platform (e.g. meta, google, tiktok), present when type is platform_error. | [optional] |
 | **platform_error** | **Hash&lt;String, Object&gt;** | Raw error payload from the upstream platform, passed through verbatim so integrators can read provider-specific codes. For Meta this includes error_subcode, error_user_title, and error_user_msg.  | [optional] |
 | **details** | [**ErrorResponseDetails**](ErrorResponseDetails.md) |  | [optional] |
@@ -22,6 +23,7 @@ instance = Zernio::ErrorResponse.new(
   type: null,
   code: null,
   param: null,
+  doc_url: null,
   platform: null,
   platform_error: null,
   details: null

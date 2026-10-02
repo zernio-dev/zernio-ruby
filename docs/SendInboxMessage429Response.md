@@ -8,6 +8,7 @@
 | **type** | **String** | Error class for programmatic handling. |  |
 | **code** | **String** |  |  |
 | **param** | **String** | The request field that caused the error, when applicable. | [optional] |
+| **doc_url** | **String** | Documentation page for resolving the error, when one applies. | [optional] |
 | **platform** | **String** |  |  |
 | **platform_error** | [**WhatsAppTemplateLookupErrorPlatformError**](WhatsAppTemplateLookupErrorPlatformError.md) |  | [optional] |
 | **details** | [**WhatsAppTemplateLookupErrorDetails**](WhatsAppTemplateLookupErrorDetails.md) |  |  |
@@ -22,6 +23,7 @@ instance = Zernio::SendInboxMessage429Response.new(
   type: null,
   code: null,
   param: null,
+  doc_url: null,
   platform: null,
   platform_error: null,
   details: null

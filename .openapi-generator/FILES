@@ -1297,8 +1297,7 @@ docs/InlineObject.md
 docs/InlineObject1.md
 docs/InlineObject2.md
 docs/InlineObject3.md
-docs/InlineObject4.md
-docs/InlineObject4Details.md
+docs/InlineObject3Details.md
 docs/InstagramAccountInsightsResponse.md
 docs/InstagramAccountInsightsResponseDateRange.md
 docs/InstagramAccountInsightsResponseMetricsValue.md
@@ -4037,8 +4036,7 @@ lib/zernio-sdk/models/inline_object.rb
 lib/zernio-sdk/models/inline_object1.rb
 lib/zernio-sdk/models/inline_object2.rb
 lib/zernio-sdk/models/inline_object3.rb
-lib/zernio-sdk/models/inline_object4.rb
-lib/zernio-sdk/models/inline_object4_details.rb
+lib/zernio-sdk/models/inline_object3_details.rb
 lib/zernio-sdk/models/instagram_account_insights_response.rb
 lib/zernio-sdk/models/instagram_account_insights_response_date_range.rb
 lib/zernio-sdk/models/instagram_account_insights_response_metrics_value.rb
@@ -6730,9 +6728,8 @@ spec/models/initiate_whats_app_call200_response_spec.rb
 spec/models/initiate_whats_app_call_request_spec.rb
 spec/models/inline_object1_spec.rb
 spec/models/inline_object2_spec.rb
+spec/models/inline_object3_details_spec.rb
 spec/models/inline_object3_spec.rb
-spec/models/inline_object4_details_spec.rb
-spec/models/inline_object4_spec.rb
 spec/models/inline_object_spec.rb
 spec/models/instagram_account_insights_response_date_range_spec.rb
 spec/models/instagram_account_insights_response_metrics_value_breakdowns_inner_spec.rb

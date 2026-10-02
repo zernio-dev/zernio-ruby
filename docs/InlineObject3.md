@@ -4,9 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **error** | **String** |  | [optional] |
-| **code** | **String** |  | [optional] |
-| **required_group** | **String** | The resource group the key needs for this operation. Absent on admin-plane and unclassified-path denials. | [optional] |
+| **error** | **String** | Human-readable error message suitable for end-user display. |  |
+| **code** | **String** | Machine-readable error code. Stable across versions. |  |
+| **reason** | **String** | Discriminator for which gate fired. |  |
+| **documentation_url** | **String** | Link to the relevant documentation page. | [optional] |
+| **dashboard_url** | **String** | Deep-link to send the end-user to. For &#x60;free_tier_exceeded&#x60; and &#x60;twitter_passthrough&#x60; this opens the add-payment-method drawer on the Zernio billing page. For &#x60;enterprise_required&#x60; this is the Zernio enterprise contact page.  | [optional] |
+| **details** | [**InlineObject3Details**](InlineObject3Details.md) |  | [optional] |
 
 ## Example
 
@@ -14,9 +17,12 @@
 require 'zernio-sdk'
 
 instance = Zernio::InlineObject3.new(
-  error: This API key has the &#39;messages&#39; resource group disabled. GET /api/v1/inbox/conversations requires it. Create a key with &#39;messages&#39; enabled in the dashboard API keys tab.,
+  error: X (Twitter) requires a payment method due to API pass-through costs. Add a payment method to connect an X account.,
   code: null,
-  required_group: null
+  reason: null,
+  documentation_url: https://docs.zernio.com/billing/payment-method-required,
+  dashboard_url: https://zernio.com/dashboard/billing?add_payment_method&#x3D;1,
+  details: null
 )
 ```
 
