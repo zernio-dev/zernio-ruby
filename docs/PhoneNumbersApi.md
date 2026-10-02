@@ -26,6 +26,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**release_phone_number**](PhoneNumbersApi.md#release_phone_number) | **DELETE** /v1/phone-numbers/{id} | Release phone number |
 | [**remediate_phone_number**](PhoneNumbersApi.md#remediate_phone_number) | **POST** /v1/phone-numbers/{id}/remediate | Resubmit a declined number |
 | [**reply_to_phone_number_reviewer**](PhoneNumbersApi.md#reply_to_phone_number_reviewer) | **POST** /v1/phone-numbers/{id}/remediate/reply | Reply to the regulatory reviewer |
+| [**request_phone_number_whats_app_code**](PhoneNumbersApi.md#request_phone_number_whats_app_code) | **POST** /v1/phone-numbers/{id}/whatsapp/request-code | Request the WhatsApp verification code for a number |
 | [**respond_to_phone_number_reviewer**](PhoneNumbersApi.md#respond_to_phone_number_reviewer) | **POST** /v1/phone-numbers/{id}/remediate/respond | Respond to the regulatory reviewer (message + corrections) |
 | [**review_phone_number_kyc_packet**](PhoneNumbersApi.md#review_phone_number_kyc_packet) | **POST** /v1/phone-numbers/kyc/review-packet | Pre-review a KYC packet |
 | [**search_available_phone_numbers**](PhoneNumbersApi.md#search_available_phone_numbers) | **GET** /v1/phone-numbers/available | Search available numbers |
@@ -1547,6 +1548,79 @@ end
 ### Return type
 
 [**ReplyToPhoneNumberReviewer200Response**](ReplyToPhoneNumberReviewer200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## request_phone_number_whats_app_code
+
+> <RequestPhoneNumberWhatsAppCode200Response> request_phone_number_whats_app_code(id, opts)
+
+Request the WhatsApp verification code for a number
+
+Starts (or restarts) WhatsApp verification of a Zernio-hosted number: adds it to Meta's pre-verified pool when needed and asks Meta to send the verification code, which Zernio captures on the number itself. Used to connect WhatsApp on a number bought for calls or SMS. `/v1/whatsapp/phone-numbers/{id}/request-code` is a deprecated alias with the same contract.  When Meta refuses the number for WhatsApp (Meta error 136021): a number that is already live (`active` or `suspended`) is left untouched and keeps working for calls and SMS, and the call answers 409 `number_not_whatsapp_eligible`; buy a new number with WhatsApp enabled instead. A number that was never live (still verifying) is replaced at no extra cost with a WhatsApp-eligible number on the same record, answered as 200 with `replaced: true`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+id = 'id_example' # String | Phone number record ID (from GET /v1/phone-numbers).
+opts = {
+  request_phone_number_whats_app_code_request: Zernio::RequestPhoneNumberWhatsAppCodeRequest.new # RequestPhoneNumberWhatsAppCodeRequest | 
+}
+
+begin
+  # Request the WhatsApp verification code for a number
+  result = api_instance.request_phone_number_whats_app_code(id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->request_phone_number_whats_app_code: #{e}"
+end
+```
+
+#### Using the request_phone_number_whats_app_code_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RequestPhoneNumberWhatsAppCode200Response>, Integer, Hash)> request_phone_number_whats_app_code_with_http_info(id, opts)
+
+```ruby
+begin
+  # Request the WhatsApp verification code for a number
+  data, status_code, headers = api_instance.request_phone_number_whats_app_code_with_http_info(id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RequestPhoneNumberWhatsAppCode200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->request_phone_number_whats_app_code_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Phone number record ID (from GET /v1/phone-numbers). |  |
+| **request_phone_number_whats_app_code_request** | [**RequestPhoneNumberWhatsAppCodeRequest**](RequestPhoneNumberWhatsAppCodeRequest.md) |  | [optional] |
+
+### Return type
+
+[**RequestPhoneNumberWhatsAppCode200Response**](RequestPhoneNumberWhatsAppCode200Response.md)
 
 ### Authorization
 

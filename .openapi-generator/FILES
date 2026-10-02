@@ -1902,6 +1902,8 @@ docs/ReplyToMentionRequest.md
 docs/ReplyToPhoneNumberReviewer200Response.md
 docs/ReplyToPhoneNumberReviewerRequest.md
 docs/ReplyToPhoneNumberReviewerRequestAttachmentsInner.md
+docs/RequestPhoneNumberWhatsAppCode200Response.md
+docs/RequestPhoneNumberWhatsAppCodeRequest.md
 docs/RequestSmsSenderIdLimitIncrease200Response.md
 docs/RequestSmsSenderIdLimitIncreaseRequest.md
 docs/RequestWhatsAppVerificationCode200Response.md
@@ -4622,6 +4624,8 @@ lib/zernio-sdk/models/reply_to_mention_request.rb
 lib/zernio-sdk/models/reply_to_phone_number_reviewer200_response.rb
 lib/zernio-sdk/models/reply_to_phone_number_reviewer_request.rb
 lib/zernio-sdk/models/reply_to_phone_number_reviewer_request_attachments_inner.rb
+lib/zernio-sdk/models/request_phone_number_whats_app_code200_response.rb
+lib/zernio-sdk/models/request_phone_number_whats_app_code_request.rb
 lib/zernio-sdk/models/request_sms_sender_id_limit_increase200_response.rb
 lib/zernio-sdk/models/request_sms_sender_id_limit_increase_request.rb
 lib/zernio-sdk/models/request_whats_app_verification_code200_response.rb
@@ -7315,6 +7319,8 @@ spec/models/reply_to_mention_request_spec.rb
 spec/models/reply_to_phone_number_reviewer200_response_spec.rb
 spec/models/reply_to_phone_number_reviewer_request_attachments_inner_spec.rb
 spec/models/reply_to_phone_number_reviewer_request_spec.rb
+spec/models/request_phone_number_whats_app_code200_response_spec.rb
+spec/models/request_phone_number_whats_app_code_request_spec.rb
 spec/models/request_sms_sender_id_limit_increase200_response_spec.rb
 spec/models/request_sms_sender_id_limit_increase_request_spec.rb
 spec/models/request_whats_app_verification_code200_response_spec.rb
