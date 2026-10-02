@@ -20,6 +20,8 @@
 | **is_external** | **Boolean** |  | [optional] |
 | **platform_created_at** | **Time** |  | [optional] |
 | **status_read_at** | **Time** | Only with &#x60;live&#x3D;true&#x60;. When &#x60;platformAdSetStatus&#x60; was read from the platform; null when this row was not read live. | [optional] |
+| **optimization_goal** | **String** | TikTok only, only with &#x60;live&#x3D;true&#x60; and only on rows read live. The ad group&#39;s &#x60;optimization_goal&#x60; exactly as TikTok&#39;s adgroup/get returns it now (for example ENGAGED_VIEW, ENGAGED_VIEW_FIFTEEN, CLICK, CONVERT). Absent on rows not read live and on other platforms. | [optional] |
+| **billing_event** | **String** | TikTok only, only with &#x60;live&#x3D;true&#x60; and only on rows read live. The ad group&#39;s &#x60;billing_event&#x60; exactly as TikTok&#39;s adgroup/get returns it now (for example CPV, CPC, OCPM). | [optional] |
 
 ## Example
 
@@ -42,7 +44,9 @@ instance = Zernio::ListAdSets200ResponseAdSetsInner.new(
   targeting: null,
   is_external: null,
   platform_created_at: null,
-  status_read_at: null
+  status_read_at: null,
+  optimization_goal: null,
+  billing_event: null
 )
 ```
 
