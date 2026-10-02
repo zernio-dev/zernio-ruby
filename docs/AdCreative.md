@@ -28,6 +28,7 @@
 | **body** | **String** | Ad copy/text | [optional] |
 | **google_headline** | **String** | Google Ads headline | [optional] |
 | **google_description** | **String** | Google Ads description | [optional] |
+| **youtube_video_ids** | **Array&lt;String&gt;** | Google only. YouTube video ids behind a Video campaign ad (video and responsive video ads) or a Demand Gen video ad, same id as &#x60;youtubeVideoId&#x60; on Performance Max asset groups. When the ad has no image, &#x60;thumbnailUrl&#x60; is the first video&#39;s YouTube thumbnail. Absent on ads without a video. | [optional] |
 | **link_url** | **String** | Destination URL | [optional] |
 | **whatsapp_phone_number** | **String** | Explicit E.164 WhatsApp number supplied when creating a Meta boost or messaging ad. Absent when omitted by the caller or on older records. | [optional] |
 | **pinterest_image_url** | **String** |  | [optional] |
@@ -64,6 +65,7 @@ instance = Zernio::AdCreative.new(
   body: null,
   google_headline: null,
   google_description: null,
+  youtube_video_ids: null,
   link_url: null,
   whatsapp_phone_number: +12025550123,
   pinterest_image_url: null,
