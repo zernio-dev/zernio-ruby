@@ -25,6 +25,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**edit_google_asset_group_assets**](AdCampaignsApi.md#edit_google_asset_group_assets) | **POST** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId}/assets | Link or unlink asset group assets |
 | [**get_ad**](AdCampaignsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
 | [**get_ad_campaign_details**](AdCampaignsApi.md#get_ad_campaign_details) | **GET** /v1/ads/campaigns/{campaignId} | Get live campaign details |
+| [**get_ad_review**](AdCampaignsApi.md#get_ad_review) | **GET** /v1/ads/{adId}/review | Read the platform&#39;s review verdict for an ad |
 | [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Get live ad-set details |
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
@@ -1561,6 +1562,75 @@ end
 ### Return type
 
 [**GetAdCampaignDetails200Response**](GetAdCampaignDetails200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_review
+
+> <GetAdReview200Response> get_ad_review(ad_id)
+
+Read the platform's review verdict for an ad
+
+Reads the ad's review verdict from the platform now: whether it was approved, where it may not deliver, and every rejection reason with TikTok's suggestion and the piece of content it refers to. Read-only, so it works on a paused ad without re-enabling it.  TikTok only (`/ad/review_info/`); every other platform returns 501. Use it alongside the ad's `platformStatus`: TikTok reports `AD_STATUS_AUDIT` while the ad is in review and `AD_STATUS_AD_PRE_ONLINE` once it passed and is about to deliver (both map to `status: pending_review`); `AD_STATUS_AUDIT_DENY` maps to `rejected`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_id = 'ad_id_example' # String | Zernio ad id (24-char hex) or the platform ad id.
+
+begin
+  # Read the platform's review verdict for an ad
+  result = api_instance.get_ad_review(ad_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_ad_review: #{e}"
+end
+```
+
+#### Using the get_ad_review_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdReview200Response>, Integer, Hash)> get_ad_review_with_http_info(ad_id)
+
+```ruby
+begin
+  # Read the platform's review verdict for an ad
+  data, status_code, headers = api_instance.get_ad_review_with_http_info(ad_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdReview200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_ad_review_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Zernio ad id (24-char hex) or the platform ad id. |  |
+
+### Return type
+
+[**GetAdReview200Response**](GetAdReview200Response.md)
 
 ### Authorization
 
