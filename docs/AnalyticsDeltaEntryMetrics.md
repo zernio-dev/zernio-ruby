@@ -24,6 +24,8 @@
 | **impression_sources** | **Hash&lt;String, Float&gt;** | TikTok business lane: share of views by surface (forYou, follow, search, personalProfile, sound, directMessage, other), fractions 0 to 1. Empty object elsewhere. |  |
 | **audience_types** | **Hash&lt;String, Float&gt;** | TikTok business lane: follower / nonFollower and newViewer / returnViewer shares, fractions 0 to 1. Empty object elsewhere. |  |
 | **audience_countries** | **Hash&lt;String, Float&gt;** | TikTok business lane: viewer-country shares keyed by ISO-3166 alpha-2, fractions 0 to 1, top 20 with the tail in &#x60;other&#x60;. Empty object elsewhere. |  |
+| **replays** | **Integer** | Facebook Reels only: plays that were replays. 0 elsewhere. | [optional] |
+| **retention_curve** | **Hash&lt;String, Float&gt;** | Facebook Reels only: share of plays still watching at each second, keyed by the second, fractions 0 to 1. Empty object elsewhere. | [optional] |
 
 ## Example
 
@@ -50,7 +52,9 @@ instance = Zernio::AnalyticsDeltaEntryMetrics.new(
   website_clicks: null,
   impression_sources: null,
   audience_types: null,
-  audience_countries: null
+  audience_countries: null,
+  replays: null,
+  retention_curve: null
 )
 ```
 

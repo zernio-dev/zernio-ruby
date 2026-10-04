@@ -22,6 +22,8 @@
 | **impression_sources** | **Hash&lt;String, Float&gt;** | TikTok business lane: share of views by surface on this date (forYou, follow, search, personalProfile, sound, directMessage, other), fractions 0 to 1; empty object elsewhere | [optional] |
 | **audience_types** | **Hash&lt;String, Float&gt;** | TikTok business lane: follower / nonFollower and newViewer / returnViewer shares on this date, fractions 0 to 1; empty object elsewhere | [optional] |
 | **audience_countries** | **Hash&lt;String, Float&gt;** | TikTok business lane: viewer-country shares on this date keyed by ISO-3166 alpha-2, fractions 0 to 1, top 20 with the tail in &#x60;other&#x60;; empty object elsewhere | [optional] |
+| **replays** | **Integer** | Facebook Reels only: plays that were replays, as of this date; 0 elsewhere | [optional] |
+| **retention_curve** | **Hash&lt;String, Float&gt;** | Facebook Reels only: share of plays still watching at each second as of this date, keyed by the second, fractions 0 to 1; empty object elsewhere | [optional] |
 
 ## Example
 
@@ -46,7 +48,9 @@ instance = Zernio::GetPostTimeline200ResponseTimelineInner.new(
   website_clicks: null,
   impression_sources: null,
   audience_types: null,
-  audience_countries: null
+  audience_countries: null,
+  replays: null,
+  retention_curve: null
 )
 ```
 
