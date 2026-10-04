@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # customer_list, website, or lookalike audience (uploaded or derived from a source).
+  # customer_list, website, lookalike or engagement audience (uploaded or derived from a source).
   class UploadedOrDerivedAudience < ApiModelBase
     attr_accessor :account_id
 
@@ -45,10 +45,10 @@ module Zernio
     # Required for company_list audiences (LinkedIn only): plain-text company rows for account targeting. Each row needs at least one identifier. Not hashed, LinkedIn matches these against its own company graph. LinkedIn recommends 1,000+ companies for a usable match rate and takes up to 48h to process the list. Replace the list later with POST /v1/ads/audiences/{audienceId}/companies. 
     attr_accessor :companies
 
-    # Required for website audiences
+    # website: the Meta pixel, TikTok pixel or Pinterest tag id. Required on those three, rejected on Google.
     attr_accessor :pixel_id
 
-    # Required for website (max 180) and meta_engagement (max 365) audiences.
+    # Required for website (Meta max 180, TikTok 7/14/30/60/90/180, Pinterest and Google max 540), meta_engagement (max 365) and tiktok_engagement (7/14/30/60/90/180; organic and live video and most business-account events only 7/14/30).
     attr_accessor :retention_days
 
     # Required for meta_engagement audiences (Meta only): what people engaged with. `page` = a Facebook Page, `instagram` = an IG professional account, `video` = a video. 
@@ -57,7 +57,7 @@ module Zernio
     # Required for meta_engagement: the Page / IG account / video id.
     attr_accessor :source_id
 
-    # meta_engagement only. The engagement event; defaults per source (page → page_engaged, instagram → ig_business_profile_all, video → video_watched). Ignored when `rule` is provided. 
+    # meta_engagement: the engagement event; defaults per source (page → page_engaged, instagram → ig_business_profile_all, video → video_watched). Ignored when `rule` is provided.  website on TikTok: the pixel event (default `PAGE BROWSE`). website on Pinterest: the tag event (`pagevisit`, `signup`, `checkout`, `viewcategory`, `search`, `addtocart`, `watchvideo`, `lead`, `custom` or a partner-defined event).  tiktok_engagement (required): the TikTok engagement event, validated per `source` (TikTok's filter values, spaces included): - ads: `CLICK`, `IMPRESSION`, `PLAY 2S`, `PLAY 6S`, `PLAY 25`, `PLAY 50`, `PLAY 75`,   `PLAY OVER`, and the `ENGAGEMENT APP PROFILE` / `ENGAGEMENT TIKTOK INSTANT` /   `ENGAGEMENT COLLECTION ADS` `CLICK` and `IMPRESSION` events. - organic_video: `ORGANIC VIDEO PLAY 2S`, `ORGANIC VIDEO PLAY 6S`,   `ORGANIC VIDEO PLAY OVER`, `ORGANIC VIDEO ENGAGEMENT`. - live_video: `LIVE VIDEO VIEW`, `LIVE VIDEO ENGAGEMENT`. - business_account: `BUSINESS ACCOUNT PROFILE FOLLOW`, `BUSINESS ACCOUNT PROFILE VISIT`,   `BUSINESS ACCOUNT ENGAGEMENT`, `BUSINESS ACCOUNT PLAY 2S`, `BUSINESS ACCOUNT PLAY 6S`,   `BUSINESS ACCOUNT PLAY OVER` and the rest of TikTok's business-account events. An unknown value is a 400 that lists the valid ones. 
     attr_accessor :event
 
     # Required for lookalike audiences
@@ -66,13 +66,49 @@ module Zernio
     # 2-letter code, required for lookalike audiences
     attr_accessor :country
 
-    # Required for lookalike audiences
+    # lookalike on Meta (0.01-0.20) and Pinterest (0.01-0.10, whole percents). Rejected on TikTok and Google.
     attr_accessor :ratio
 
-    # website only. Narrows the audience from all visitors to visitors of URLs containing this substring. Ignored when `rule` is supplied. 
+    # lookalike on TikTok and Google: audience breadth. Rejected on Meta and Pinterest.
+    attr_accessor :size
+
+    # Required for tiktok_engagement: what people engaged with.
+    attr_accessor :source
+
+    # tiktok_engagement: ad group / campaign ids for `ads`, video ids for `organic_video` and `live_video` (max 10). Required except for `business_account`.
+    attr_accessor :source_ids
+
+    # tiktok_engagement: the TikTok identity that owns the videos or business account. Required for organic_video, live_video and business_account.
+    attr_accessor :identity_id
+
+    # tiktok_engagement: type of `identityId`.
+    attr_accessor :identity_type
+
+    # tiktok_engagement: required when identityType is BC_AUTH_TT.
+    attr_accessor :identity_authorized_bc_id
+
+    # pinterest_engagement: Pinterest's `engager_type`, passed through when set.
+    attr_accessor :engager_type
+
+    # pinterest_engagement: limit to one engagement action.
+    attr_accessor :engagement_type
+
+    # pinterest_engagement: people who engaged with Pins from these domains. The domain must be claimed on the Pinterest account or Pinterest rejects it.
+    attr_accessor :engagement_domains
+
+    # pinterest_engagement: people who engaged with these campaigns' ads.
+    attr_accessor :campaign_ids
+
+    # pinterest_engagement: people who engaged with these ads.
+    attr_accessor :ad_ids
+
+    # pinterest_engagement: people who engaged with these Pins. At least one of engagementDomains, campaignIds, adIds or pinIds is required.
+    attr_accessor :pin_ids
+
+    # website on Meta, TikTok and Google. Narrows the audience from all visitors to visitors of URLs containing this substring. Ignored when `rule` is supplied. A 400 on Pinterest, which only matches exact URLs. 
     attr_accessor :url_contains
 
-    # Optional raw Meta rule, replacing the one we build. Omit it for all visitors of `pixelId`, or use `urlContains` for the common page-match case.  For `website` this is Meta's Flexible Audience Rule and is VALIDATED before we call Meta: every entry in `inclusions.rules` (and `exclusions.rules`) must carry `event_sources`, `retention_seconds` AND `filter`. Meta rejects a rule missing any of the three with code 100 / subcode 1713098 (\"Invalid rule JSON format\"), so a bad shape is a 400 here instead. The pre-2018 flat shapes (`{url: ...}`, `{event: ...}`) are not accepted by Meta at all (subcode 1870029).  Example, visitors of /checkout in the last 30 days: `{\"inclusions\":{\"operator\":\"or\",\"rules\":[{\"event_sources\":[{\"id\":\"<pixelId>\",\"type\":\"pixel\"}],\"retention_seconds\":2592000,\"filter\":{\"operator\":\"and\",\"filters\":[{\"field\":\"url\",\"operator\":\"i_contains\",\"value\":\"/checkout\"}]}}]}}`  Note Meta DERIVES `retention_days` from `retention_seconds` and stores `event_sources[].id` as a number, so a rule read back will not be byte-identical to the one you sent.  For `meta_engagement` the rule is forwarded verbatim and NOT validated: that type has two dialects (the `video` source uses a legacy flat array), so no single schema covers both. 
+    # Meta only (a 400 elsewhere). Optional raw Meta rule, replacing the one we build. Omit it for all visitors of `pixelId`, or use `urlContains` for the common page-match case.  For `website` this is Meta's Flexible Audience Rule and is VALIDATED before we call Meta: every entry in `inclusions.rules` (and `exclusions.rules`) must carry `event_sources`, `retention_seconds` AND `filter`. Meta rejects a rule missing any of the three with code 100 / subcode 1713098 (\"Invalid rule JSON format\"), so a bad shape is a 400 here instead. The pre-2018 flat shapes (`{url: ...}`, `{event: ...}`) are not accepted by Meta at all (subcode 1870029).  Example, visitors of /checkout in the last 30 days: `{\"inclusions\":{\"operator\":\"or\",\"rules\":[{\"event_sources\":[{\"id\":\"<pixelId>\",\"type\":\"pixel\"}],\"retention_seconds\":2592000,\"filter\":{\"operator\":\"and\",\"filters\":[{\"field\":\"url\",\"operator\":\"i_contains\",\"value\":\"/checkout\"}]}}]}}`  Note Meta DERIVES `retention_days` from `retention_seconds` and stores `event_sources[].id` as a number, so a rule read back will not be byte-identical to the one you sent.  For `meta_engagement` the rule is forwarded verbatim and NOT validated: that type has two dialects (the `video` source uses a legacy flat array), so no single schema covers both. 
     attr_accessor :rule
 
     # Data source declaration for GDPR compliance (customer_list only)
@@ -122,6 +158,18 @@ module Zernio
         :'source_audience_id' => :'sourceAudienceId',
         :'country' => :'country',
         :'ratio' => :'ratio',
+        :'size' => :'size',
+        :'source' => :'source',
+        :'source_ids' => :'sourceIds',
+        :'identity_id' => :'identityId',
+        :'identity_type' => :'identityType',
+        :'identity_authorized_bc_id' => :'identityAuthorizedBcId',
+        :'engager_type' => :'engagerType',
+        :'engagement_type' => :'engagementType',
+        :'engagement_domains' => :'engagementDomains',
+        :'campaign_ids' => :'campaignIds',
+        :'ad_ids' => :'adIds',
+        :'pin_ids' => :'pinIds',
         :'url_contains' => :'urlContains',
         :'rule' => :'rule',
         :'customer_file_source' => :'customerFileSource'
@@ -160,6 +208,18 @@ module Zernio
         :'source_audience_id' => :'String',
         :'country' => :'String',
         :'ratio' => :'Float',
+        :'size' => :'String',
+        :'source' => :'String',
+        :'source_ids' => :'Array<String>',
+        :'identity_id' => :'String',
+        :'identity_type' => :'String',
+        :'identity_authorized_bc_id' => :'String',
+        :'engager_type' => :'Integer',
+        :'engagement_type' => :'String',
+        :'engagement_domains' => :'Array<String>',
+        :'campaign_ids' => :'Array<String>',
+        :'ad_ids' => :'Array<String>',
+        :'pin_ids' => :'Array<String>',
         :'url_contains' => :'String',
         :'rule' => :'Object',
         :'customer_file_source' => :'String'
@@ -278,6 +338,64 @@ module Zernio
         self.ratio = attributes[:'ratio']
       end
 
+      if attributes.key?(:'size')
+        self.size = attributes[:'size']
+      end
+
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
+      end
+
+      if attributes.key?(:'source_ids')
+        if (value = attributes[:'source_ids']).is_a?(Array)
+          self.source_ids = value
+        end
+      end
+
+      if attributes.key?(:'identity_id')
+        self.identity_id = attributes[:'identity_id']
+      end
+
+      if attributes.key?(:'identity_type')
+        self.identity_type = attributes[:'identity_type']
+      end
+
+      if attributes.key?(:'identity_authorized_bc_id')
+        self.identity_authorized_bc_id = attributes[:'identity_authorized_bc_id']
+      end
+
+      if attributes.key?(:'engager_type')
+        self.engager_type = attributes[:'engager_type']
+      end
+
+      if attributes.key?(:'engagement_type')
+        self.engagement_type = attributes[:'engagement_type']
+      end
+
+      if attributes.key?(:'engagement_domains')
+        if (value = attributes[:'engagement_domains']).is_a?(Array)
+          self.engagement_domains = value
+        end
+      end
+
+      if attributes.key?(:'campaign_ids')
+        if (value = attributes[:'campaign_ids']).is_a?(Array)
+          self.campaign_ids = value
+        end
+      end
+
+      if attributes.key?(:'ad_ids')
+        if (value = attributes[:'ad_ids']).is_a?(Array)
+          self.ad_ids = value
+        end
+      end
+
+      if attributes.key?(:'pin_ids')
+        if (value = attributes[:'pin_ids']).is_a?(Array)
+          self.pin_ids = value
+        end
+      end
+
       if attributes.key?(:'url_contains')
         self.url_contains = attributes[:'url_contains']
       end
@@ -340,12 +458,16 @@ module Zernio
         invalid_properties.push('invalid value for "companies", number of items must be greater than or equal to 1.')
       end
 
-      if !@retention_days.nil? && @retention_days > 365
-        invalid_properties.push('invalid value for "retention_days", must be smaller than or equal to 365.')
+      if !@retention_days.nil? && @retention_days > 540
+        invalid_properties.push('invalid value for "retention_days", must be smaller than or equal to 540.')
       end
 
       if !@retention_days.nil? && @retention_days < 1
         invalid_properties.push('invalid value for "retention_days", must be greater than or equal to 1.')
+      end
+
+      if !@event.nil? && @event.to_s.length > 100
+        invalid_properties.push('invalid value for "event", the character length must be smaller than or equal to 100.')
       end
 
       if !@ratio.nil? && @ratio > 0.2
@@ -354,6 +476,14 @@ module Zernio
 
       if !@ratio.nil? && @ratio < 0.01
         invalid_properties.push('invalid value for "ratio", must be greater than or equal to 0.01.')
+      end
+
+      if !@source_ids.nil? && @source_ids.length > 50
+        invalid_properties.push('invalid value for "source_ids", number of items must be less than or equal to 50.')
+      end
+
+      if !@source_ids.nil? && @source_ids.length < 1
+        invalid_properties.push('invalid value for "source_ids", number of items must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -368,7 +498,7 @@ module Zernio
       return false if @name.nil?
       return false if @name.to_s.length > 255
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "website", "website_retargeting", "lookalike"])
+      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "tiktok_engagement", "pinterest_engagement", "website", "website_retargeting", "lookalike"])
       return false unless type_validator.valid?(@type)
       return false if !@match_rules.nil? && @match_rules.length > 50
       return false if !@match_rules.nil? && @match_rules.length < 1
@@ -380,12 +510,25 @@ module Zernio
       return false if !@engagement_sources.nil? && @engagement_sources.length < 1
       return false if !@companies.nil? && @companies.length > 300000
       return false if !@companies.nil? && @companies.length < 1
-      return false if !@retention_days.nil? && @retention_days > 365
+      return false if !@retention_days.nil? && @retention_days > 540
       return false if !@retention_days.nil? && @retention_days < 1
       engagement_source_validator = EnumAttributeValidator.new('String', ["page", "instagram", "video"])
       return false unless engagement_source_validator.valid?(@engagement_source)
+      return false if !@event.nil? && @event.to_s.length > 100
       return false if !@ratio.nil? && @ratio > 0.2
       return false if !@ratio.nil? && @ratio < 0.01
+      size_validator = EnumAttributeValidator.new('String', ["narrow", "balanced", "broad"])
+      return false unless size_validator.valid?(@size)
+      source_validator = EnumAttributeValidator.new('String', ["ads", "organic_video", "live_video", "business_account"])
+      return false unless source_validator.valid?(@source)
+      return false if !@source_ids.nil? && @source_ids.length > 50
+      return false if !@source_ids.nil? && @source_ids.length < 1
+      identity_type_validator = EnumAttributeValidator.new('String', ["TT_USER", "BC_AUTH_TT"])
+      return false unless identity_type_validator.valid?(@identity_type)
+      engager_type_validator = EnumAttributeValidator.new('Integer', [1, 2])
+      return false unless engager_type_validator.valid?(@engager_type)
+      engagement_type_validator = EnumAttributeValidator.new('String', ["click", "save", "closeup", "comment", "like"])
+      return false unless engagement_type_validator.valid?(@engagement_type)
       true
     end
 
@@ -426,7 +569,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "website", "website_retargeting", "lookalike"])
+      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "tiktok_engagement", "pinterest_engagement", "website", "website_retargeting", "lookalike"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -514,8 +657,8 @@ module Zernio
         fail ArgumentError, 'retention_days cannot be nil'
       end
 
-      if retention_days > 365
-        fail ArgumentError, 'invalid value for "retention_days", must be smaller than or equal to 365.'
+      if retention_days > 540
+        fail ArgumentError, 'invalid value for "retention_days", must be smaller than or equal to 540.'
       end
 
       if retention_days < 1
@@ -536,6 +679,20 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] event Value to be assigned
+    def event=(event)
+      if event.nil?
+        fail ArgumentError, 'event cannot be nil'
+      end
+
+      if event.to_s.length > 100
+        fail ArgumentError, 'invalid value for "event", the character length must be smaller than or equal to 100.'
+      end
+
+      @event = event
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] ratio Value to be assigned
     def ratio=(ratio)
       if ratio.nil?
@@ -551,6 +708,74 @@ module Zernio
       end
 
       @ratio = ratio
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] size Object to be assigned
+    def size=(size)
+      validator = EnumAttributeValidator.new('String', ["narrow", "balanced", "broad"])
+      unless validator.valid?(size)
+        fail ArgumentError, "invalid value for \"size\", must be one of #{validator.allowable_values}."
+      end
+      @size = size
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source Object to be assigned
+    def source=(source)
+      validator = EnumAttributeValidator.new('String', ["ads", "organic_video", "live_video", "business_account"])
+      unless validator.valid?(source)
+        fail ArgumentError, "invalid value for \"source\", must be one of #{validator.allowable_values}."
+      end
+      @source = source
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] source_ids Value to be assigned
+    def source_ids=(source_ids)
+      if source_ids.nil?
+        fail ArgumentError, 'source_ids cannot be nil'
+      end
+
+      if source_ids.length > 50
+        fail ArgumentError, 'invalid value for "source_ids", number of items must be less than or equal to 50.'
+      end
+
+      if source_ids.length < 1
+        fail ArgumentError, 'invalid value for "source_ids", number of items must be greater than or equal to 1.'
+      end
+
+      @source_ids = source_ids
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] identity_type Object to be assigned
+    def identity_type=(identity_type)
+      validator = EnumAttributeValidator.new('String', ["TT_USER", "BC_AUTH_TT"])
+      unless validator.valid?(identity_type)
+        fail ArgumentError, "invalid value for \"identity_type\", must be one of #{validator.allowable_values}."
+      end
+      @identity_type = identity_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] engager_type Object to be assigned
+    def engager_type=(engager_type)
+      validator = EnumAttributeValidator.new('Integer', [1, 2])
+      unless validator.valid?(engager_type)
+        fail ArgumentError, "invalid value for \"engager_type\", must be one of #{validator.allowable_values}."
+      end
+      @engager_type = engager_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] engagement_type Object to be assigned
+    def engagement_type=(engagement_type)
+      validator = EnumAttributeValidator.new('String', ["click", "save", "closeup", "comment", "like"])
+      unless validator.valid?(engagement_type)
+        fail ArgumentError, "invalid value for \"engagement_type\", must be one of #{validator.allowable_values}."
+      end
+      @engagement_type = engagement_type
     end
 
     # Checks equality by comparing each attribute.
@@ -577,6 +802,18 @@ module Zernio
           source_audience_id == o.source_audience_id &&
           country == o.country &&
           ratio == o.ratio &&
+          size == o.size &&
+          source == o.source &&
+          source_ids == o.source_ids &&
+          identity_id == o.identity_id &&
+          identity_type == o.identity_type &&
+          identity_authorized_bc_id == o.identity_authorized_bc_id &&
+          engager_type == o.engager_type &&
+          engagement_type == o.engagement_type &&
+          engagement_domains == o.engagement_domains &&
+          campaign_ids == o.campaign_ids &&
+          ad_ids == o.ad_ids &&
+          pin_ids == o.pin_ids &&
           url_contains == o.url_contains &&
           rule == o.rule &&
           customer_file_source == o.customer_file_source
@@ -591,7 +828,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, description, type, match_rules, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, engagement_source, source_id, event, source_audience_id, country, ratio, url_contains, rule, customer_file_source].hash
+      [account_id, ad_account_id, name, description, type, match_rules, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, engagement_source, source_id, event, source_audience_id, country, ratio, size, source, source_ids, identity_id, identity_type, identity_authorized_bc_id, engager_type, engagement_type, engagement_domains, campaign_ids, ad_ids, pin_ids, url_contains, rule, customer_file_source].hash
     end
 
     # Builds the object from hash

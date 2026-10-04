@@ -54,7 +54,7 @@ describe Zernio::UploadedOrDerivedAudience do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "website", "website_retargeting", "lookalike"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "tiktok_engagement", "pinterest_engagement", "website", "website_retargeting", "lookalike"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end
@@ -152,6 +152,98 @@ describe Zernio::UploadedOrDerivedAudience do
   end
 
   describe 'test attribute "ratio"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "size"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["narrow", "balanced", "broad"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.size = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "source"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ads", "organic_video", "live_video", "business_account"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.source = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "source_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "identity_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "identity_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["TT_USER", "BC_AUTH_TT"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.identity_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "identity_authorized_bc_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "engager_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Integer', [1, 2])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.engager_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "engagement_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["click", "save", "closeup", "comment", "like"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.engagement_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "engagement_domains"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "campaign_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "ad_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "pin_ids"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
