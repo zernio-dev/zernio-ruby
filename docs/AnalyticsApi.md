@@ -10,6 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_best_time_to_post**](AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post |
 | [**get_content_decay**](AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay |
 | [**get_daily_metrics**](AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics |
+| [**get_facebook_demographics**](AnalyticsApi.md#get_facebook_demographics) | **GET** /v1/analytics/facebook/demographics | Get Facebook Page demographics |
 | [**get_facebook_page_insights**](AnalyticsApi.md#get_facebook_page_insights) | **GET** /v1/analytics/facebook/page-insights | Get Facebook Page insights |
 | [**get_facebook_post_earnings**](AnalyticsApi.md#get_facebook_post_earnings) | **GET** /v1/analytics/facebook/post-earnings | Get Facebook post monetization earnings |
 | [**get_facebook_post_reactions**](AnalyticsApi.md#get_facebook_post_reactions) | **GET** /v1/accounts/{accountId}/facebook-post-reactions | Get Facebook post reactions |
@@ -510,6 +511,79 @@ end
 ### Return type
 
 [**GetDailyMetrics200Response**](GetDailyMetrics200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_facebook_demographics
+
+> <GetFacebookDemographics200Response> get_facebook_demographics(account_id, opts)
+
+Get Facebook Page demographics
+
+Returns the follower breakdown of a connected Facebook Page by country and/or city, from Meta's latest daily snapshot. Country keys are ISO 3166-1 alpha-2 codes; city keys are \"City, Region, Country\" strings as Meta returns them. Meta removed age and gender demographics for Pages (page_fans_gender_age) on November 15 2025 with no replacement, so only country and city are available. Meta reports small counts at a privacy floor, so the long tail can show identical low values. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Facebook account
+opts = {
+  breakdown: 'breakdown_example' # String | Comma-separated list of demographic dimensions: country, city. Defaults to both if omitted. 
+}
+
+begin
+  # Get Facebook Page demographics
+  result = api_instance.get_facebook_demographics(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_facebook_demographics: #{e}"
+end
+```
+
+#### Using the get_facebook_demographics_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetFacebookDemographics200Response>, Integer, Hash)> get_facebook_demographics_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get Facebook Page demographics
+  data, status_code, headers = api_instance.get_facebook_demographics_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetFacebookDemographics200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_facebook_demographics_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio SocialAccount ID for the Facebook account |  |
+| **breakdown** | **String** | Comma-separated list of demographic dimensions: country, city. Defaults to both if omitted.  | [optional] |
+
+### Return type
+
+[**GetFacebookDemographics200Response**](GetFacebookDemographics200Response.md)
 
 ### Authorization
 

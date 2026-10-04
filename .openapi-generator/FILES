@@ -925,6 +925,9 @@ docs/GetDiscordSettings200ResponseAccount.md
 docs/GetDsaDefaults200Response.md
 docs/GetDsaDefaults200ResponseDsaDefaults.md
 docs/GetDsaRecommendations200Response.md
+docs/GetFacebookDemographics200Response.md
+docs/GetFacebookDemographics200ResponseDemographics.md
+docs/GetFacebookDemographics200ResponseDemographicsCountryInner.md
 docs/GetFacebookPages200Response.md
 docs/GetFacebookPages200ResponsePagesInner.md
 docs/GetFacebookPostReactions200Response.md
@@ -3674,6 +3677,9 @@ lib/zernio-sdk/models/get_discord_settings200_response_account.rb
 lib/zernio-sdk/models/get_dsa_defaults200_response.rb
 lib/zernio-sdk/models/get_dsa_defaults200_response_dsa_defaults.rb
 lib/zernio-sdk/models/get_dsa_recommendations200_response.rb
+lib/zernio-sdk/models/get_facebook_demographics200_response.rb
+lib/zernio-sdk/models/get_facebook_demographics200_response_demographics.rb
+lib/zernio-sdk/models/get_facebook_demographics200_response_demographics_country_inner.rb
 lib/zernio-sdk/models/get_facebook_pages200_response.rb
 lib/zernio-sdk/models/get_facebook_pages200_response_pages_inner.rb
 lib/zernio-sdk/models/get_facebook_post_reactions200_response.rb
@@ -6376,6 +6382,9 @@ spec/models/get_discord_settings200_response_spec.rb
 spec/models/get_dsa_defaults200_response_dsa_defaults_spec.rb
 spec/models/get_dsa_defaults200_response_spec.rb
 spec/models/get_dsa_recommendations200_response_spec.rb
+spec/models/get_facebook_demographics200_response_demographics_country_inner_spec.rb
+spec/models/get_facebook_demographics200_response_demographics_spec.rb
+spec/models/get_facebook_demographics200_response_spec.rb
 spec/models/get_facebook_pages200_response_pages_inner_spec.rb
 spec/models/get_facebook_pages200_response_spec.rb
 spec/models/get_facebook_post_reactions200_response_breakdown_spec.rb
