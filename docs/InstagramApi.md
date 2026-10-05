@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**get_instagram_audio**](InstagramApi.md#get_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio/{audioId} | Get Instagram audio metadata |
+| [**get_instagram_business_discovery**](InstagramApi.md#get_instagram_business_discovery) | **GET** /v1/accounts/{accountId}/instagram/business-discovery | Look up a public Instagram Business account |
 | [**get_instagram_publishing_limit**](InstagramApi.md#get_instagram_publishing_limit) | **GET** /v1/accounts/{accountId}/instagram/publishing-limit | Get Instagram publishing limit |
 | [**get_instagram_story_insights**](InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights |
 | [**list_instagram_stories**](InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories |
@@ -71,6 +72,81 @@ end
 ### Return type
 
 [**GetInstagramAudio200Response**](GetInstagramAudio200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_instagram_business_discovery
+
+> <InstagramBusinessDiscovery> get_instagram_business_discovery(account_id, username, opts)
+
+Look up a public Instagram Business account
+
+Returns the public profile and most recent media of any Instagram Business or Creator account, looked up by username through one of your connected Instagram accounts. Useful for competitor and market research. Personal accounts and private accounts cannot be looked up.  Requires an Instagram account connected via **Facebook Login**. Meta serves business discovery on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (`instagram_business_discovery_requires_facebook_login`) and must be reconnected choosing the Facebook option. Any one such account can look up any public Business or Creator handle.  `likeCount` is null when the owner hides like counts. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of a connected Instagram account (Facebook Login).
+username = 'nike' # String | Instagram handle to look up, with or without the leading @. Case-insensitive.
+opts = {
+  limit: 56 # Integer | How many of the most recent media to return.
+}
+
+begin
+  # Look up a public Instagram Business account
+  result = api_instance.get_instagram_business_discovery(account_id, username, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_business_discovery: #{e}"
+end
+```
+
+#### Using the get_instagram_business_discovery_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<InstagramBusinessDiscovery>, Integer, Hash)> get_instagram_business_discovery_with_http_info(account_id, username, opts)
+
+```ruby
+begin
+  # Look up a public Instagram Business account
+  data, status_code, headers = api_instance.get_instagram_business_discovery_with_http_info(account_id, username, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <InstagramBusinessDiscovery>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_business_discovery_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Instagram account (Facebook Login). |  |
+| **username** | **String** | Instagram handle to look up, with or without the leading @. Case-insensitive. |  |
+| **limit** | **Integer** | How many of the most recent media to return. | [optional][default to 12] |
+
+### Return type
+
+[**InstagramBusinessDiscovery**](InstagramBusinessDiscovery.md)
 
 ### Authorization
 
