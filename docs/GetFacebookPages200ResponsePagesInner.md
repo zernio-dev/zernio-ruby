@@ -9,6 +9,7 @@
 | **username** | **String** |  | [optional] |
 | **category** | **String** |  | [optional] |
 | **fan_count** | **Integer** |  | [optional] |
+| **instagram_account** | [**GetFacebookPages200ResponsePagesInnerInstagramAccount**](GetFacebookPages200ResponsePagesInnerInstagramAccount.md) |  | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Zernio::GetFacebookPages200ResponsePagesInner.new(
   name: null,
   username: null,
   category: null,
-  fan_count: null
+  fan_count: null,
+  instagram_account: null
 )
 ```
 

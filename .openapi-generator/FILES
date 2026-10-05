@@ -930,6 +930,7 @@ docs/GetFacebookDemographics200ResponseDemographics.md
 docs/GetFacebookDemographics200ResponseDemographicsCountryInner.md
 docs/GetFacebookPages200Response.md
 docs/GetFacebookPages200ResponsePagesInner.md
+docs/GetFacebookPages200ResponsePagesInnerInstagramAccount.md
 docs/GetFacebookPostReactions200Response.md
 docs/GetFacebookPostReactions200ResponseBreakdown.md
 docs/GetFollowerStats403Response.md
@@ -3685,6 +3686,7 @@ lib/zernio-sdk/models/get_facebook_demographics200_response_demographics.rb
 lib/zernio-sdk/models/get_facebook_demographics200_response_demographics_country_inner.rb
 lib/zernio-sdk/models/get_facebook_pages200_response.rb
 lib/zernio-sdk/models/get_facebook_pages200_response_pages_inner.rb
+lib/zernio-sdk/models/get_facebook_pages200_response_pages_inner_instagram_account.rb
 lib/zernio-sdk/models/get_facebook_post_reactions200_response.rb
 lib/zernio-sdk/models/get_facebook_post_reactions200_response_breakdown.rb
 lib/zernio-sdk/models/get_follower_stats403_response.rb
@@ -6391,6 +6393,7 @@ spec/models/get_dsa_recommendations200_response_spec.rb
 spec/models/get_facebook_demographics200_response_demographics_country_inner_spec.rb
 spec/models/get_facebook_demographics200_response_demographics_spec.rb
 spec/models/get_facebook_demographics200_response_spec.rb
+spec/models/get_facebook_pages200_response_pages_inner_instagram_account_spec.rb
 spec/models/get_facebook_pages200_response_pages_inner_spec.rb
 spec/models/get_facebook_pages200_response_spec.rb
 spec/models/get_facebook_post_reactions200_response_breakdown_spec.rb
