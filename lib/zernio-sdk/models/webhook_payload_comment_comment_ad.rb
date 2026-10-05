@@ -14,13 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Ad context. Present only when the comment was made on paid content. Instagram: populated from the webhook payload's value.media.ad_id and value.media.ad_title. Facebook: populated via a Graph API lookup of the parent post's promotion_status. Absent for comments on organic posts that are not currently promoted. 
+  # Ad context. Present only when the comment was made on paid content. Instagram: populated from the webhook payload's value.media.ad_id, value.media.ad_title and value.media.original_media_id, each only when Meta includes it. Facebook: populated via a Graph API lookup of the parent post's promotion_status. Absent for comments on organic posts that are not currently promoted. 
   class WebhookPayloadCommentCommentAd < ApiModelBase
     # Meta ad ID (Instagram only).
     attr_accessor :id
 
     # Ad creative title (Instagram only).
     attr_accessor :title
+
+    # Original media ID that Meta reports for the ad (Instagram only).
+    attr_accessor :original_media_id
 
     # Facebook promotion status returned by Graph API. Common values: \"active\" (organic post currently boosted), \"ineligible\" (dark post or ad creative, not promotable because it already is an ad). 
     attr_accessor :promotion_status
@@ -30,6 +33,7 @@ module Zernio
       {
         :'id' => :'id',
         :'title' => :'title',
+        :'original_media_id' => :'originalMediaId',
         :'promotion_status' => :'promotionStatus'
       }
     end
@@ -49,6 +53,7 @@ module Zernio
       {
         :'id' => :'String',
         :'title' => :'String',
+        :'original_media_id' => :'String',
         :'promotion_status' => :'String'
       }
     end
@@ -83,6 +88,10 @@ module Zernio
         self.title = attributes[:'title']
       end
 
+      if attributes.key?(:'original_media_id')
+        self.original_media_id = attributes[:'original_media_id']
+      end
+
       if attributes.key?(:'promotion_status')
         self.promotion_status = attributes[:'promotion_status']
       end
@@ -110,6 +119,7 @@ module Zernio
       self.class == o.class &&
           id == o.id &&
           title == o.title &&
+          original_media_id == o.original_media_id &&
           promotion_status == o.promotion_status
     end
 
@@ -122,7 +132,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, title, promotion_status].hash
+      [id, title, original_media_id, promotion_status].hash
     end
 
     # Builds the object from hash
