@@ -34,7 +34,7 @@ module Zernio
 
     attr_accessor :views
 
-    # Follows attributed to this post (Instagram)
+    # Follows attributed to this post (Instagram feed and stories, Facebook Reels, TikTok business lane)
     attr_accessor :follows
 
     # Average watch time per play, in milliseconds (Instagram Reels, Facebook Reels, TikTok business videos)

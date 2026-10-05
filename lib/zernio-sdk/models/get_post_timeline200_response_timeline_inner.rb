@@ -48,7 +48,7 @@ module Zernio
     # Total views on this date
     attr_accessor :views
 
-    # Follows attributed to the post on this date (Instagram feed and stories, TikTok business lane); 0 elsewhere
+    # Follows attributed to the post on this date (Instagram feed and stories, Facebook Reels, TikTok business lane). Null on Instagram Reels and video and on Facebook posts that are not Reels, where Meta has no follows metric; 0 on other platforms.
     attr_accessor :follows
 
     # TikTok business lane: share of viewers who watched to the end on this date, 0 to 1; 0 elsewhere
@@ -140,6 +140,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'follows',
       ])
     end
 
