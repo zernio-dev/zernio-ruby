@@ -18,7 +18,7 @@ module Zernio
     # The platformConversationId (the same identity used by metadata.conversationId)
     attr_accessor :conversation_id
 
-    # The Conversation document _id, when a matching doc exists
+    # The Zernio conversation id, when a matching conversation exists
     attr_accessor :mongo_id
 
     attr_accessor :account_id

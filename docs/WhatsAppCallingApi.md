@@ -253,7 +253,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppCallingApi.new
-id = 'id_example' # String | WhatsAppPhoneNumber Mongo ID
+id = 'id_example' # String | WhatsApp phone number id
 enable_whats_app_calling_legacy_request = Zernio::EnableWhatsAppCallingLegacyRequest.new({account_id: 'account_id_example', forward_to: 'forward_to_example'}) # EnableWhatsAppCallingLegacyRequest | 
 
 begin
@@ -287,7 +287,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | WhatsAppPhoneNumber Mongo ID |  |
+| **id** | **String** | WhatsApp phone number id |  |
 | **enable_whats_app_calling_legacy_request** | [**EnableWhatsAppCallingLegacyRequest**](EnableWhatsAppCallingLegacyRequest.md) |  |  |
 
 ### Return type

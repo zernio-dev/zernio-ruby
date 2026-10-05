@@ -235,7 +235,7 @@ module Zernio
 
     # Enable calling on a number
     # Deprecated alias of `/v1/phone-numbers/{id}/whatsapp/calling`; same contract. New integrations should use that path.  Enable WhatsApp Business Calling on a connected number. Configures Meta calling.status=ENABLED with our Telnyx SIP endpoint, fetches and stores the Meta-issued SIP password (encrypted), and snapshots the customer's forward-to destination. 
-    # @param id [String] WhatsAppPhoneNumber Mongo ID
+    # @param id [String] WhatsApp phone number id
     # @param enable_whats_app_calling_legacy_request [EnableWhatsAppCallingLegacyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [EnableWhatsAppCallingLegacy200Response]
@@ -246,7 +246,7 @@ module Zernio
 
     # Enable calling on a number
     # Deprecated alias of &#x60;/v1/phone-numbers/{id}/whatsapp/calling&#x60;; same contract. New integrations should use that path.  Enable WhatsApp Business Calling on a connected number. Configures Meta calling.status&#x3D;ENABLED with our Telnyx SIP endpoint, fetches and stores the Meta-issued SIP password (encrypted), and snapshots the customer&#39;s forward-to destination. 
-    # @param id [String] WhatsAppPhoneNumber Mongo ID
+    # @param id [String] WhatsApp phone number id
     # @param enable_whats_app_calling_legacy_request [EnableWhatsAppCallingLegacyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(EnableWhatsAppCallingLegacy200Response, Integer, Hash)>] EnableWhatsAppCallingLegacy200Response data, response status code and response headers

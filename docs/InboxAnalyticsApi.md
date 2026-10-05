@@ -19,7 +19,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Get conversation analytics
 
-Per-conversation inbox analytics. The inbox analog of /v1/analytics/post-timeline: one conversation, daily totals, source mix.  The {conversationId} path param accepts EITHER the Mongo `_id` of the Conversation document OR its `platformConversationId` (the same identity used by metadata.conversationId at ingest time). Ownership is verified in MongoDB against the caller's team before the Tinybird query fires.  Max date range is 365 days. 
+Per-conversation inbox analytics. The inbox analog of /v1/analytics/post-timeline: one conversation, daily totals, source mix.  The {conversationId} path param accepts EITHER the Zernio conversation id OR its `platformConversationId` (the same identity used by metadata.conversationId at ingest time). Ownership is verified against the caller's team before the Tinybird query fires.  Max date range is 365 days. 
 
 ### Examples
 
@@ -33,7 +33,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::InboxAnalyticsApi.new
-conversation_id = 'conversation_id_example' # String | Mongo _id or platformConversationId.
+conversation_id = 'conversation_id_example' # String | Zernio conversation id or platformConversationId.
 from_date = Date.parse('2013-10-20') # Date | 
 opts = {
   to_date: Date.parse('2013-10-20') # Date | 
@@ -70,7 +70,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **conversation_id** | **String** | Mongo _id or platformConversationId. |  |
+| **conversation_id** | **String** | Zernio conversation id or platformConversationId. |  |
 | **from_date** | **Date** |  |  |
 | **to_date** | **Date** |  | [optional] |
 
@@ -355,7 +355,7 @@ opts = {
   profile_id: 'profile_id_example', # String | 
   platform: 'platform_example', # String | 
   source: 'source_example', # String | 
-  limit: 56 # Integer | Cap on returned rows. Lower than the posting listing's 100 because each row triggers a SocialAccount Mongo lookup.
+  limit: 56 # Integer | Cap on returned rows. Lower than the posting listing's 100 because each row triggers a social account lookup.
 }
 
 begin
@@ -394,7 +394,7 @@ end
 | **profile_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **source** | **String** |  | [optional] |
-| **limit** | **Integer** | Cap on returned rows. Lower than the posting listing&#39;s 100 because each row triggers a SocialAccount Mongo lookup. | [optional][default to 10] |
+| **limit** | **Integer** | Cap on returned rows. Lower than the posting listing&#39;s 100 because each row triggers a social account lookup. | [optional][default to 10] |
 
 ### Return type
 

@@ -20,8 +20,8 @@ module Zernio
       @api_client = api_client
     end
     # Get conversation analytics
-    # Per-conversation inbox analytics. The inbox analog of /v1/analytics/post-timeline: one conversation, daily totals, source mix.  The {conversationId} path param accepts EITHER the Mongo `_id` of the Conversation document OR its `platformConversationId` (the same identity used by metadata.conversationId at ingest time). Ownership is verified in MongoDB against the caller's team before the Tinybird query fires.  Max date range is 365 days. 
-    # @param conversation_id [String] Mongo _id or platformConversationId.
+    # Per-conversation inbox analytics. The inbox analog of /v1/analytics/post-timeline: one conversation, daily totals, source mix.  The {conversationId} path param accepts EITHER the Zernio conversation id OR its `platformConversationId` (the same identity used by metadata.conversationId at ingest time). Ownership is verified against the caller's team before the Tinybird query fires.  Max date range is 365 days. 
+    # @param conversation_id [String] Zernio conversation id or platformConversationId.
     # @param from_date [Date] 
     # @param [Hash] opts the optional parameters
     # @option opts [Date] :to_date 
@@ -32,8 +32,8 @@ module Zernio
     end
 
     # Get conversation analytics
-    # Per-conversation inbox analytics. The inbox analog of /v1/analytics/post-timeline: one conversation, daily totals, source mix.  The {conversationId} path param accepts EITHER the Mongo &#x60;_id&#x60; of the Conversation document OR its &#x60;platformConversationId&#x60; (the same identity used by metadata.conversationId at ingest time). Ownership is verified in MongoDB against the caller&#39;s team before the Tinybird query fires.  Max date range is 365 days. 
-    # @param conversation_id [String] Mongo _id or platformConversationId.
+    # Per-conversation inbox analytics. The inbox analog of /v1/analytics/post-timeline: one conversation, daily totals, source mix.  The {conversationId} path param accepts EITHER the Zernio conversation id OR its &#x60;platformConversationId&#x60; (the same identity used by metadata.conversationId at ingest time). Ownership is verified against the caller&#39;s team before the Tinybird query fires.  Max date range is 365 days. 
+    # @param conversation_id [String] Zernio conversation id or platformConversationId.
     # @param from_date [Date] 
     # @param [Hash] opts the optional parameters
     # @option opts [Date] :to_date 
@@ -338,7 +338,7 @@ module Zernio
     # @option opts [String] :profile_id 
     # @option opts [String] :platform 
     # @option opts [String] :source 
-    # @option opts [Integer] :limit Cap on returned rows. Lower than the posting listing&#39;s 100 because each row triggers a SocialAccount Mongo lookup. (default to 10)
+    # @option opts [Integer] :limit Cap on returned rows. Lower than the posting listing&#39;s 100 because each row triggers a social account lookup. (default to 10)
     # @return [GetInboxTopAccounts200Response]
     def get_inbox_top_accounts(from_date, opts = {})
       data, _status_code, _headers = get_inbox_top_accounts_with_http_info(from_date, opts)
@@ -353,7 +353,7 @@ module Zernio
     # @option opts [String] :profile_id 
     # @option opts [String] :platform 
     # @option opts [String] :source 
-    # @option opts [Integer] :limit Cap on returned rows. Lower than the posting listing&#39;s 100 because each row triggers a SocialAccount Mongo lookup. (default to 10)
+    # @option opts [Integer] :limit Cap on returned rows. Lower than the posting listing&#39;s 100 because each row triggers a social account lookup. (default to 10)
     # @return [Array<(GetInboxTopAccounts200Response, Integer, Hash)>] GetInboxTopAccounts200Response data, response status code and response headers
     def get_inbox_top_accounts_with_http_info(from_date, opts = {})
       if @api_client.config.debugging

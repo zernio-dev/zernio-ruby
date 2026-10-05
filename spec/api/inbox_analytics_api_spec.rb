@@ -34,8 +34,8 @@ describe 'InboxAnalyticsApi' do
 
   # unit tests for get_inbox_conversation_analytics
   # Get conversation analytics
-  # Per-conversation inbox analytics. The inbox analog of /v1/analytics/post-timeline: one conversation, daily totals, source mix.  The {conversationId} path param accepts EITHER the Mongo &#x60;_id&#x60; of the Conversation document OR its &#x60;platformConversationId&#x60; (the same identity used by metadata.conversationId at ingest time). Ownership is verified in MongoDB against the caller&#39;s team before the Tinybird query fires.  Max date range is 365 days. 
-  # @param conversation_id Mongo _id or platformConversationId.
+  # Per-conversation inbox analytics. The inbox analog of /v1/analytics/post-timeline: one conversation, daily totals, source mix.  The {conversationId} path param accepts EITHER the Zernio conversation id OR its &#x60;platformConversationId&#x60; (the same identity used by metadata.conversationId at ingest time). Ownership is verified against the caller&#39;s team before the Tinybird query fires.  Max date range is 365 days. 
+  # @param conversation_id Zernio conversation id or platformConversationId.
   # @param from_date 
   # @param [Hash] opts the optional parameters
   # @option opts [Date] :to_date 
@@ -105,7 +105,7 @@ describe 'InboxAnalyticsApi' do
   # @option opts [String] :profile_id 
   # @option opts [String] :platform 
   # @option opts [String] :source 
-  # @option opts [Integer] :limit Cap on returned rows. Lower than the posting listing&#39;s 100 because each row triggers a SocialAccount Mongo lookup.
+  # @option opts [Integer] :limit Cap on returned rows. Lower than the posting listing&#39;s 100 because each row triggers a social account lookup.
   # @return [GetInboxTopAccounts200Response]
   describe 'get_inbox_top_accounts test' do
     it 'should work' do
