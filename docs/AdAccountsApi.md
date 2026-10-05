@@ -22,6 +22,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**detach_ad_label**](AdAccountsApi.md#detach_ad_label) | **DELETE** /v1/ads/labels/{labelId}/assignments | Detach a Google Ads label |
 | [**get_ad_account_finance**](AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances |
 | [**get_ad_account_hierarchy**](AdAccountsApi.md#get_ad_account_hierarchy) | **GET** /v1/ads/accounts/hierarchy | Get manager account hierarchy |
+| [**get_ad_account_live_entities**](AdAccountsApi.md#get_ad_account_live_entities) | **GET** /v1/ads/accounts/live | Read an ad account&#39;s campaigns and ad sets live |
 | [**get_ad_comments**](AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
 | [**get_ad_negative_keyword_list**](AdAccountsApi.md#get_ad_negative_keyword_list) | **GET** /v1/ads/accounts/negative-keyword-lists/{listId} | Get a negative keyword list |
 | [**get_ads_activity_log**](AdAccountsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log |
@@ -1333,6 +1334,87 @@ end
 ### Return type
 
 [**GetAdAccountHierarchy200Response**](GetAdAccountHierarchy200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_account_live_entities
+
+> <GetAdAccountLiveEntities200Response> get_ad_account_live_entities(account_id, ad_account_id, opts)
+
+Read an ad account's campaigns and ad sets live
+
+Reads the campaigns and ad sets of one Meta ad account **live from Meta**, in a single Graph call per request (the account's `/campaigns` and `/adsets` edges, filtered by `effective_status`), so it is cheap enough to run before every write: for example a per-ad-account spend ceiling that must see the current `daily_budget` / `lifetime_budget` rather than the synced copy.  **Live vs synced.** GET /v1/ads/campaigns and GET /v1/ads/ad-sets serve Zernio's synced store, refreshed by background sync (typically 15 to 60 minutes behind Meta), and their `live=true` re-reads only the on/off switches of at most 20 objects. This endpoint returns what Meta reports at `readAt`, for every matching campaign and ad set, and stores nothing.  Budgets and bid amounts are converted from Meta's minor units to whole units of `currency`, the same units as the synced rows. A campaign with a campaign budget (Advantage+ campaign budget) carries `budget` and its ad sets have `budget: null`; otherwise each ad set carries its own.  Each level returns at most `limit` rows. When more match, `paging.<level>.after` is a cursor: pass it back as `after` together with `level` to read the next page of that level only. Other platforms answer 501 rather than serving synced data.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  status: 'ACTIVE', # String | Comma-separated Meta `effective_status` values to keep: ACTIVE, PAUSED, IN_PROCESS, WITH_ISSUES, DELETED, ARCHIVED, and CAMPAIGN_PAUSED (ad sets only; the campaigns level ignores it). Defaults to every status except DELETED and ARCHIVED. An unknown value is a 400.
+  level: 'campaign', # String | Read only one level. Required with `after`. Both levels are read when omitted.
+  limit: 56, # Integer | Maximum rows per level in this response.
+  after: 'after_example' # String | Cursor from `paging.campaigns.after` or `paging.adSets.after` of a previous response. Requires `level`.
+}
+
+begin
+  # Read an ad account's campaigns and ad sets live
+  result = api_instance.get_ad_account_live_entities(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_ad_account_live_entities: #{e}"
+end
+```
+
+#### Using the get_ad_account_live_entities_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdAccountLiveEntities200Response>, Integer, Hash)> get_ad_account_live_entities_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # Read an ad account's campaigns and ad sets live
+  data, status_code, headers = api_instance.get_ad_account_live_entities_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdAccountLiveEntities200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_ad_account_live_entities_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **status** | **String** | Comma-separated Meta &#x60;effective_status&#x60; values to keep: ACTIVE, PAUSED, IN_PROCESS, WITH_ISSUES, DELETED, ARCHIVED, and CAMPAIGN_PAUSED (ad sets only; the campaigns level ignores it). Defaults to every status except DELETED and ARCHIVED. An unknown value is a 400. | [optional] |
+| **level** | **String** | Read only one level. Required with &#x60;after&#x60;. Both levels are read when omitted. | [optional] |
+| **limit** | **Integer** | Maximum rows per level in this response. | [optional][default to 200] |
+| **after** | **String** | Cursor from &#x60;paging.campaigns.after&#x60; or &#x60;paging.adSets.after&#x60; of a previous response. Requires &#x60;level&#x60;. | [optional] |
+
+### Return type
+
+[**GetAdAccountLiveEntities200Response**](GetAdAccountLiveEntities200Response.md)
 
 ### Authorization
 
