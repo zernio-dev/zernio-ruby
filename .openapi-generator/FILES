@@ -852,6 +852,8 @@ docs/GetAdReview200ResponseReviewRejectionsInnerContent.md
 docs/GetAdSetDetails200Response.md
 docs/GetAdTrackingTags200Response.md
 docs/GetAdTree202Response.md
+docs/GetAdVideoStatus200Response.md
+docs/GetAdVideoStatus200ResponseVideo.md
 docs/GetAdsActivityLog200Response.md
 docs/GetAdsActivityLog200ResponsePaging.md
 docs/GetAdsSearchTerms200Response.md
@@ -2439,6 +2441,8 @@ docs/UploadAdImage201ResponseImage.md
 docs/UploadAdImageRequest.md
 docs/UploadAdVideo201Response.md
 docs/UploadAdVideo201ResponseVideo.md
+docs/UploadAdVideo202Response.md
+docs/UploadAdVideo202ResponseVideo.md
 docs/UploadAdVideoRequest.md
 docs/UploadBusinessAgentFileRequest.md
 docs/UploadMediaDirect200Response.md
@@ -2543,6 +2547,9 @@ docs/WebhookPayloadAdStatusChangedAccount.md
 docs/WebhookPayloadAdStatusChangedAdObject.md
 docs/WebhookPayloadAdStatusChangedError.md
 docs/WebhookPayloadAdStatusChangedStatus.md
+docs/WebhookPayloadAdVideoProcessed.md
+docs/WebhookPayloadAdVideoProcessedAccount.md
+docs/WebhookPayloadAdVideoProcessedVideo.md
 docs/WebhookPayloadAnalyticsSynced.md
 docs/WebhookPayloadAnalyticsSyncedAccount.md
 docs/WebhookPayloadAnalyticsSyncedSync.md
@@ -3609,6 +3616,8 @@ lib/zernio-sdk/models/get_ad_review200_response_review_rejections_inner_content.
 lib/zernio-sdk/models/get_ad_set_details200_response.rb
 lib/zernio-sdk/models/get_ad_tracking_tags200_response.rb
 lib/zernio-sdk/models/get_ad_tree202_response.rb
+lib/zernio-sdk/models/get_ad_video_status200_response.rb
+lib/zernio-sdk/models/get_ad_video_status200_response_video.rb
 lib/zernio-sdk/models/get_ads_activity_log200_response.rb
 lib/zernio-sdk/models/get_ads_activity_log200_response_paging.rb
 lib/zernio-sdk/models/get_ads_search_terms200_response.rb
@@ -5169,6 +5178,8 @@ lib/zernio-sdk/models/upload_ad_image201_response_image.rb
 lib/zernio-sdk/models/upload_ad_image_request.rb
 lib/zernio-sdk/models/upload_ad_video201_response.rb
 lib/zernio-sdk/models/upload_ad_video201_response_video.rb
+lib/zernio-sdk/models/upload_ad_video202_response.rb
+lib/zernio-sdk/models/upload_ad_video202_response_video.rb
 lib/zernio-sdk/models/upload_ad_video_request.rb
 lib/zernio-sdk/models/upload_business_agent_file_request.rb
 lib/zernio-sdk/models/upload_media_direct200_response.rb
@@ -5267,6 +5278,9 @@ lib/zernio-sdk/models/webhook_payload_ad_status_changed_account.rb
 lib/zernio-sdk/models/webhook_payload_ad_status_changed_ad_object.rb
 lib/zernio-sdk/models/webhook_payload_ad_status_changed_error.rb
 lib/zernio-sdk/models/webhook_payload_ad_status_changed_status.rb
+lib/zernio-sdk/models/webhook_payload_ad_video_processed.rb
+lib/zernio-sdk/models/webhook_payload_ad_video_processed_account.rb
+lib/zernio-sdk/models/webhook_payload_ad_video_processed_video.rb
 lib/zernio-sdk/models/webhook_payload_analytics_synced.rb
 lib/zernio-sdk/models/webhook_payload_analytics_synced_account.rb
 lib/zernio-sdk/models/webhook_payload_analytics_synced_sync.rb
@@ -6319,6 +6333,8 @@ spec/models/get_ad_review200_response_spec.rb
 spec/models/get_ad_set_details200_response_spec.rb
 spec/models/get_ad_tracking_tags200_response_spec.rb
 spec/models/get_ad_tree202_response_spec.rb
+spec/models/get_ad_video_status200_response_spec.rb
+spec/models/get_ad_video_status200_response_video_spec.rb
 spec/models/get_ads_activity_log200_response_paging_spec.rb
 spec/models/get_ads_activity_log200_response_spec.rb
 spec/models/get_ads_search_terms200_response_data_inner_spec.rb
@@ -7879,6 +7895,8 @@ spec/models/upload_ad_image201_response_spec.rb
 spec/models/upload_ad_image_request_spec.rb
 spec/models/upload_ad_video201_response_spec.rb
 spec/models/upload_ad_video201_response_video_spec.rb
+spec/models/upload_ad_video202_response_spec.rb
+spec/models/upload_ad_video202_response_video_spec.rb
 spec/models/upload_ad_video_request_spec.rb
 spec/models/upload_business_agent_file_request_spec.rb
 spec/models/upload_media_direct200_response_spec.rb
@@ -7976,6 +7994,9 @@ spec/models/webhook_payload_ad_status_changed_ad_object_spec.rb
 spec/models/webhook_payload_ad_status_changed_error_spec.rb
 spec/models/webhook_payload_ad_status_changed_spec.rb
 spec/models/webhook_payload_ad_status_changed_status_spec.rb
+spec/models/webhook_payload_ad_video_processed_account_spec.rb
+spec/models/webhook_payload_ad_video_processed_spec.rb
+spec/models/webhook_payload_ad_video_processed_video_spec.rb
 spec/models/webhook_payload_analytics_synced_account_spec.rb
 spec/models/webhook_payload_analytics_synced_spec.rb
 spec/models/webhook_payload_analytics_synced_sync_spec.rb
