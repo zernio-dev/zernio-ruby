@@ -25,6 +25,12 @@ module Zernio
 
     attr_accessor :display_name
 
+    # The account's id on its platform as the platform reports it to Zernio; stable across reconnects, so it is the key to match an account against your own records. Instagram: the app-scoped user id on Instagram Login accounts (the professional account id is in `metadata.instagramScopedId`), the professional account id (`17841...`) on Facebook Login accounts. TikTok: the open_id of Zernio's TikTok app, which differs from the open_id any other app sees for the same user. Either value can be passed back as `expectedPlatformUserId` on GET /v1/connect/{platform}.
+    attr_accessor :platform_user_id
+
+    # TikTok accounts only. The account type TikTok reported when the account was connected. `personal` accounts cannot use TikTok direct messages through the API (TikTok limits Business Messaging to Business Accounts): skip the inbox for them and tell the user to switch to a Business Account in the TikTok app, then reconnect. `business` is the prerequisite, not a guarantee; messaging also needs the messaging scopes granted and TikTok's regional availability. `unknown` on accounts connected before this was captured or whose grant left out the account-type scope.
+    attr_accessor :tiktok_account_type
+
     # URL to the account's profile picture on the platform. May be null if the platform does not provide one.
     attr_accessor :profile_picture
 
@@ -48,7 +54,7 @@ module Zernio
     # Whether the user explicitly activated this account. false means the account was created as a side effect (e.g., posting account auto-created when user connected ads first). Such accounts are hidden from this list, cannot be posted to (`ACCOUNT_NOT_ENABLED_FOR_POSTING`), and are not billed as connected accounts. 
     attr_accessor :enabled
 
-    # Platform-specific metadata. Fields vary by platform. For WhatsApp accounts, includes: - qualityRating: Phone number quality rating from Meta (GREEN, YELLOW, RED, or UNKNOWN) - nameStatus: Display name review status (APPROVED, PENDING_REVIEW, DECLINED, or NONE). A declined or pending display name does not by itself block sending; sendability is reported separately via health_status (can_send_message). - messagingLimitTier: Maximum unique business-initiated conversations per 24h rolling window (TIER_250, TIER_1K, TIER_10K, TIER_100K, or TIER_UNLIMITED). Scales automatically as quality rating improves. - verifiedName: Meta-verified business display name - displayPhoneNumber: Formatted phone number (e.g., \"+1 555-123-4567\") - wabaId: WhatsApp Business Account ID - phoneNumberId: Meta phone number ID  For Meta ads business-login accounts: - tokenType: system-user - businessId: The owning Business Manager ID when there is one owner; null for multiple owners. - businessIds: Owning Business Manager IDs discovered from granted ad accounts. - grantedAdAccountIds: Ad-account IDs granted to the token. - adAccountBusinesses: Map from ad-account ID to its owning business ID or null. - availablePages: Granted Page IDs and names. No Page tokens are exposed. - selectedPageId: The Page selected for creatives and lead forms, or null. - scopedAdAccountIds: Existing sync scope preserved on reconnect. Non-expiring tokens have no tokenExpiresAt field. Parent posting reconnects do not replace this token.  For LinkedIn accounts, profileData carries the profile details refreshed on each daily snapshot: - profileData.bio: The member's headline for personal accounts, or the organization description for organization accounts. null when the member has not set one. - profileData.extraData.vanityName: The member's profile slug, i.e. the /in/{vanityName} segment of profileUrl. Personal accounts only; an organization's own slug is in metadata.organizationInfo.vanityName.  For Instagram accounts: - loginMethod: \"facebook_login\" when the account was connected through Facebook Login. Absent on accounts connected with Instagram Login. On facebook_login accounts, comment reads leave hidden comments out entirely instead of returning them with isHidden true.  For X (Twitter) accounts: - profileData.extraData.isPremium: Whether X reports a paid subscription (Basic, Premium, Premium+, or a blue verified badge), which raises the post length limit from 280 to 25,000 characters. Read live at connect and reconnect and refreshed by the daily follower snapshot; because X intermittently reports no subscription for subscribed accounts, a cancellation is stored on the fourth consecutive daily snapshot that reports it (about four days). Accounts connected before the extraData layout carry the same flag at profileData.isPremium. 
+    # Platform-specific metadata. Fields vary by platform. For WhatsApp accounts, includes: - qualityRating: Phone number quality rating from Meta (GREEN, YELLOW, RED, or UNKNOWN) - nameStatus: Display name review status (APPROVED, PENDING_REVIEW, DECLINED, or NONE). A declined or pending display name does not by itself block sending; sendability is reported separately via health_status (can_send_message). - messagingLimitTier: Maximum unique business-initiated conversations per 24h rolling window (TIER_250, TIER_1K, TIER_10K, TIER_100K, or TIER_UNLIMITED). Scales automatically as quality rating improves. - verifiedName: Meta-verified business display name - displayPhoneNumber: Formatted phone number (e.g., \"+1 555-123-4567\") - wabaId: WhatsApp Business Account ID - phoneNumberId: Meta phone number ID  For Meta ads business-login accounts: - tokenType: system-user - businessId: The owning Business Manager ID when there is one owner; null for multiple owners. - businessIds: Owning Business Manager IDs discovered from granted ad accounts. - grantedAdAccountIds: Ad-account IDs granted to the token. - adAccountBusinesses: Map from ad-account ID to its owning business ID or null. - availablePages: Granted Page IDs and names. No Page tokens are exposed. - selectedPageId: The Page selected for creatives and lead forms, or null. - scopedAdAccountIds: Existing sync scope preserved on reconnect. Non-expiring tokens have no tokenExpiresAt field. Parent posting reconnects do not replace this token.  For LinkedIn accounts, profileData carries the profile details refreshed on each daily snapshot: - profileData.bio: The member's headline for personal accounts, or the organization description for organization accounts. null when the member has not set one. - profileData.extraData.vanityName: The member's profile slug, i.e. the /in/{vanityName} segment of profileUrl. Personal accounts only; an organization's own slug is in metadata.organizationInfo.vanityName.  For Instagram accounts: - loginMethod: \"facebook_login\" when the account was connected through Facebook Login. Absent on accounts connected with Instagram Login. On facebook_login accounts, comment reads leave hidden comments out entirely instead of returning them with isHidden true. - instagramScopedId: the Instagram professional account id (`17841...`). On Instagram Login accounts this is the id that is the same whichever app connected the account, while platformUserId is app-scoped; Facebook Login accounts hold this id as platformUserId.  For X (Twitter) accounts: - profileData.extraData.isPremium: Whether X reports a paid subscription (Basic, Premium, Premium+, or a blue verified badge), which raises the post length limit from 280 to 25,000 characters. Read live at connect and reconnect and refreshed by the daily follower snapshot; because X intermittently reports no subscription for subscribed accounts, a cancellation is stored on the fourth consecutive daily snapshot that reports it (about four days). Accounts connected before the extraData layout carry the same flag at profileData.isPremium. 
     attr_accessor :metadata
 
     class EnumAttributeValidator
@@ -81,6 +87,8 @@ module Zernio
         :'profile_id' => :'profileId',
         :'username' => :'username',
         :'display_name' => :'displayName',
+        :'platform_user_id' => :'platformUserId',
+        :'tiktok_account_type' => :'tiktokAccountType',
         :'profile_picture' => :'profilePicture',
         :'profile_url' => :'profileUrl',
         :'is_active' => :'isActive',
@@ -111,6 +119,8 @@ module Zernio
         :'profile_id' => :'SocialAccountProfileId',
         :'username' => :'String',
         :'display_name' => :'String',
+        :'platform_user_id' => :'String',
+        :'tiktok_account_type' => :'String',
         :'profile_picture' => :'String',
         :'profile_url' => :'String',
         :'is_active' => :'Boolean',
@@ -171,6 +181,14 @@ module Zernio
 
       if attributes.key?(:'display_name')
         self.display_name = attributes[:'display_name']
+      end
+
+      if attributes.key?(:'platform_user_id')
+        self.platform_user_id = attributes[:'platform_user_id']
+      end
+
+      if attributes.key?(:'tiktok_account_type')
+        self.tiktok_account_type = attributes[:'tiktok_account_type']
       end
 
       if attributes.key?(:'profile_picture')
@@ -245,6 +263,8 @@ module Zernio
       platform_validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "slack", "whatsapp", "shopify", "wordpress", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads", "openaiads", "sms", "phone", "rcs", "whopads"])
       return false unless platform_validator.valid?(@platform)
       return false if @profile_id.nil?
+      tiktok_account_type_validator = EnumAttributeValidator.new('String', ["business", "personal", "unknown"])
+      return false unless tiktok_account_type_validator.valid?(@tiktok_account_type)
       return false if @is_active.nil?
       true
     end
@@ -279,6 +299,16 @@ module Zernio
       @profile_id = profile_id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tiktok_account_type Object to be assigned
+    def tiktok_account_type=(tiktok_account_type)
+      validator = EnumAttributeValidator.new('String', ["business", "personal", "unknown"])
+      unless validator.valid?(tiktok_account_type)
+        fail ArgumentError, "invalid value for \"tiktok_account_type\", must be one of #{validator.allowable_values}."
+      end
+      @tiktok_account_type = tiktok_account_type
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] is_active Value to be assigned
     def is_active=(is_active)
@@ -299,6 +329,8 @@ module Zernio
           profile_id == o.profile_id &&
           username == o.username &&
           display_name == o.display_name &&
+          platform_user_id == o.platform_user_id &&
+          tiktok_account_type == o.tiktok_account_type &&
           profile_picture == o.profile_picture &&
           profile_url == o.profile_url &&
           is_active == o.is_active &&
@@ -319,7 +351,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_picture, profile_url, is_active, needs_reconnection, followers_count, followers_last_updated, parent_account_id, enabled, metadata].hash
+      [_id, platform, profile_id, username, display_name, platform_user_id, tiktok_account_type, profile_picture, profile_url, is_active, needs_reconnection, followers_count, followers_last_updated, parent_account_id, enabled, metadata].hash
     end
 
     # Builds the object from hash

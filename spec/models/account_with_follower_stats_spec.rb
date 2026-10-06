@@ -61,6 +61,22 @@ describe Zernio::AccountWithFollowerStats do
     end
   end
 
+  describe 'test attribute "platform_user_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "tiktok_account_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["business", "personal", "unknown"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.tiktok_account_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "profile_picture"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
