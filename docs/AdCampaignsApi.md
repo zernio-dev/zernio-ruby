@@ -2483,7 +2483,7 @@ opts = {
   campaign_id: 'campaign_id_example', # String | Platform campaign ID
   ad_set_id: 'ad_set_id_example', # String | Platform ad group ID (Google ad group)
   status: 'active', # String | Keyword criterion status
-  match_type: 'exact', # String | 
+  match_type: 'exact', # String | Accepted in any case.
   negative: true, # Boolean | true = negative keywords only, false = positive only. Omit for both.
   search: 'search_example' # String | Case-insensitive substring match on the keyword text
 }
@@ -2527,7 +2527,7 @@ end
 | **campaign_id** | **String** | Platform campaign ID | [optional] |
 | **ad_set_id** | **String** | Platform ad group ID (Google ad group) | [optional] |
 | **status** | **String** | Keyword criterion status | [optional] |
-| **match_type** | **String** |  | [optional] |
+| **match_type** | **String** | Accepted in any case. | [optional] |
 | **negative** | **Boolean** | true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both. | [optional] |
 | **search** | **String** | Case-insensitive substring match on the keyword text | [optional] |
 
@@ -3179,11 +3179,11 @@ end
 
 ## remove_ad_group_assets
 
-> <RemoveCampaignAssets200Response> remove_ad_group_assets(ad_set_id, remove_ad_group_assets_request)
+> <RemoveCampaignAssets200Response> remove_ad_group_assets(ad_set_id, account_id, asset_resource_names, ad_group_asset_resource_names, opts)
 
 Remove ad-group assets
 
-Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility. Fields go in the query string. A JSON body with the same fields is also accepted and, when sent, the query string is ignored.
 
 ### Examples
 
@@ -3198,11 +3198,17 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Numeric Google platform id.
-remove_ad_group_assets_request = Zernio::RemoveAdGroupAssetsRequest.new({account_id: 'account_id_example', asset_resource_names: ['asset_resource_names_example'], ad_group_asset_resource_names: ['ad_group_asset_resource_names_example']}) # RemoveAdGroupAssetsRequest | 
+account_id = 'account_id_example' # String | Zernio Google Ads connection id.
+asset_resource_names = ['inner_example'] # Array<String> | Asset resource names, retained for compatibility. Repeat the parameter or pass a comma-separated list.
+ad_group_asset_resource_names = ['inner_example'] # Array<String> | ad_group_asset resource names to remove, e.g. customers/1234567890/adGroupAssets/456~123~CALLOUT. Repeat the parameter or pass a comma-separated list.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
+}
 
 begin
   # Remove ad-group assets
-  result = api_instance.remove_ad_group_assets(ad_set_id, remove_ad_group_assets_request)
+  result = api_instance.remove_ad_group_assets(ad_set_id, account_id, asset_resource_names, ad_group_asset_resource_names, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->remove_ad_group_assets: #{e}"
@@ -3213,12 +3219,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RemoveCampaignAssets200Response>, Integer, Hash)> remove_ad_group_assets_with_http_info(ad_set_id, remove_ad_group_assets_request)
+> <Array(<RemoveCampaignAssets200Response>, Integer, Hash)> remove_ad_group_assets_with_http_info(ad_set_id, account_id, asset_resource_names, ad_group_asset_resource_names, opts)
 
 ```ruby
 begin
   # Remove ad-group assets
-  data, status_code, headers = api_instance.remove_ad_group_assets_with_http_info(ad_set_id, remove_ad_group_assets_request)
+  data, status_code, headers = api_instance.remove_ad_group_assets_with_http_info(ad_set_id, account_id, asset_resource_names, ad_group_asset_resource_names, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveCampaignAssets200Response>
@@ -3232,7 +3238,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_set_id** | **String** | Numeric Google platform id. |  |
-| **remove_ad_group_assets_request** | [**RemoveAdGroupAssetsRequest**](RemoveAdGroupAssetsRequest.md) |  |  |
+| **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **asset_resource_names** | [**Array&lt;String&gt;**](String.md) | Asset resource names, retained for compatibility. Repeat the parameter or pass a comma-separated list. |  |
+| **ad_group_asset_resource_names** | [**Array&lt;String&gt;**](String.md) | ad_group_asset resource names to remove, e.g. customers/1234567890/adGroupAssets/456~123~CALLOUT. Repeat the parameter or pass a comma-separated list. |  |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -3244,7 +3254,7 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -3319,11 +3329,11 @@ end
 
 ## remove_campaign_assets
 
-> <RemoveCampaignAssets200Response> remove_campaign_assets(campaign_id, remove_campaign_assets_request)
+> <RemoveCampaignAssets200Response> remove_campaign_assets(campaign_id, account_id, asset_resource_names, campaign_asset_resource_names, opts)
 
 Remove campaign assets
 
-Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility. Fields go in the query string. A JSON body with the same fields is also accepted and, when sent, the query string is ignored.
 
 ### Examples
 
@@ -3338,11 +3348,17 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Numeric Google platform id.
-remove_campaign_assets_request = Zernio::RemoveCampaignAssetsRequest.new({account_id: 'account_id_example', asset_resource_names: ['asset_resource_names_example'], campaign_asset_resource_names: ['campaign_asset_resource_names_example']}) # RemoveCampaignAssetsRequest | 
+account_id = 'account_id_example' # String | Zernio Google Ads connection id.
+asset_resource_names = ['inner_example'] # Array<String> | Asset resource names, retained for compatibility. Repeat the parameter or pass a comma-separated list.
+campaign_asset_resource_names = ['inner_example'] # Array<String> | campaign_asset resource names to remove, e.g. customers/1234567890/campaignAssets/456~123~CALLOUT. Repeat the parameter or pass a comma-separated list.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
+}
 
 begin
   # Remove campaign assets
-  result = api_instance.remove_campaign_assets(campaign_id, remove_campaign_assets_request)
+  result = api_instance.remove_campaign_assets(campaign_id, account_id, asset_resource_names, campaign_asset_resource_names, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->remove_campaign_assets: #{e}"
@@ -3353,12 +3369,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RemoveCampaignAssets200Response>, Integer, Hash)> remove_campaign_assets_with_http_info(campaign_id, remove_campaign_assets_request)
+> <Array(<RemoveCampaignAssets200Response>, Integer, Hash)> remove_campaign_assets_with_http_info(campaign_id, account_id, asset_resource_names, campaign_asset_resource_names, opts)
 
 ```ruby
 begin
   # Remove campaign assets
-  data, status_code, headers = api_instance.remove_campaign_assets_with_http_info(campaign_id, remove_campaign_assets_request)
+  data, status_code, headers = api_instance.remove_campaign_assets_with_http_info(campaign_id, account_id, asset_resource_names, campaign_asset_resource_names, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveCampaignAssets200Response>
@@ -3372,7 +3388,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Numeric Google platform id. |  |
-| **remove_campaign_assets_request** | [**RemoveCampaignAssetsRequest**](RemoveCampaignAssetsRequest.md) |  |  |
+| **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **asset_resource_names** | [**Array&lt;String&gt;**](String.md) | Asset resource names, retained for compatibility. Repeat the parameter or pass a comma-separated list. |  |
+| **campaign_asset_resource_names** | [**Array&lt;String&gt;**](String.md) | campaign_asset resource names to remove, e.g. customers/1234567890/campaignAssets/456~123~CALLOUT. Repeat the parameter or pass a comma-separated list. |  |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -3384,7 +3404,7 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -3555,7 +3575,7 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Platform campaign ID
-replace_campaign_negative_keywords_request = Zernio::ReplaceCampaignNegativeKeywordsRequest.new({keywords: [Zernio::AddAdKeywordsRequestKeywordsInnerAnyOf.new({text: 'text_example'})]}) # ReplaceCampaignNegativeKeywordsRequest | 
+replace_campaign_negative_keywords_request = Zernio::ReplaceCampaignNegativeKeywordsRequest.new({keywords: [Zernio::KeywordEntryOneOf.new({text: 'text_example'})]}) # ReplaceCampaignNegativeKeywordsRequest | 
 
 begin
   # Replace campaign-level negative keywords

@@ -14,7 +14,7 @@ require 'zernio-sdk'
 Zernio::KeywordEntry.openapi_one_of
 # =>
 # [
-#   :'AddAdKeywordsRequestKeywordsInnerAnyOf',
+#   :'KeywordEntryOneOf',
 #   :'String'
 # ]
 ```
@@ -29,7 +29,7 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 require 'zernio-sdk'
 
 Zernio::KeywordEntry.build(data)
-# => #<AddAdKeywordsRequestKeywordsInnerAnyOf:0x00007fdd4aab02a0>
+# => #<KeywordEntryOneOf:0x00007fdd4aab02a0>
 
 Zernio::KeywordEntry.build(data_that_doesnt_match)
 # => nil
@@ -43,7 +43,7 @@ Zernio::KeywordEntry.build(data_that_doesnt_match)
 
 #### Return type
 
-- `AddAdKeywordsRequestKeywordsInnerAnyOf`
+- `KeywordEntryOneOf`
 - `String`
 - `nil` (if no type matches)
 

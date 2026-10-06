@@ -1130,11 +1130,11 @@ end
 
 ## detach_ad_label
 
-> <DetachAdLabel200Response> detach_ad_label(label_id, google_ad_label_assignments)
+> <DetachAdLabel200Response> detach_ad_label(label_id, account_id, opts)
 
 Detach a Google Ads label
 
-Removes the label from the given targets. Idempotent; a target without the label is counted in `unchanged`.
+Removes the label from the given targets. Idempotent; a target without the label is counted in `unchanged`. Fields go in the query string. A JSON body with the same fields is also accepted and, when sent, the query string is ignored.
 
 ### Examples
 
@@ -1149,11 +1149,19 @@ end
 
 api_instance = Zernio::AdAccountsApi.new
 label_id = 'label_id_example' # String | Google label id
-google_ad_label_assignments = Zernio::GoogleAdLabelAssignments.new({account_id: 'account_id_example'}) # GoogleAdLabelAssignments | 
+account_id = 'account_id_example' # String | Zernio Google Ads connection id.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
+  customer_id: 'customer_id_example', # String | Alias of adAccountId, kept for existing callers
+  campaign_ids: ['inner_example'], # Array<String> | Google campaign ids. Repeat the parameter or pass a comma-separated list.
+  ad_set_ids: ['inner_example'], # Array<String> | Google ad group ids. Repeat the parameter or pass a comma-separated list.
+  ad_ids: ['inner_example'], # Array<String> | Google ad group ad ids, {adGroupId}~{adId}. Repeat the parameter or pass a comma-separated list.
+  keyword_ids: ['inner_example'] # Array<String> | Google keyword criterion ids, {adGroupId}~{criterionId}. Repeat the parameter or pass a comma-separated list.
+}
 
 begin
   # Detach a Google Ads label
-  result = api_instance.detach_ad_label(label_id, google_ad_label_assignments)
+  result = api_instance.detach_ad_label(label_id, account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->detach_ad_label: #{e}"
@@ -1164,12 +1172,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DetachAdLabel200Response>, Integer, Hash)> detach_ad_label_with_http_info(label_id, google_ad_label_assignments)
+> <Array(<DetachAdLabel200Response>, Integer, Hash)> detach_ad_label_with_http_info(label_id, account_id, opts)
 
 ```ruby
 begin
   # Detach a Google Ads label
-  data, status_code, headers = api_instance.detach_ad_label_with_http_info(label_id, google_ad_label_assignments)
+  data, status_code, headers = api_instance.detach_ad_label_with_http_info(label_id, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DetachAdLabel200Response>
@@ -1183,7 +1191,13 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **label_id** | **String** | Google label id |  |
-| **google_ad_label_assignments** | [**GoogleAdLabelAssignments**](GoogleAdLabelAssignments.md) |  |  |
+| **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
+| **campaign_ids** | [**Array&lt;String&gt;**](String.md) | Google campaign ids. Repeat the parameter or pass a comma-separated list. | [optional] |
+| **ad_set_ids** | [**Array&lt;String&gt;**](String.md) | Google ad group ids. Repeat the parameter or pass a comma-separated list. | [optional] |
+| **ad_ids** | [**Array&lt;String&gt;**](String.md) | Google ad group ad ids, {adGroupId}~{adId}. Repeat the parameter or pass a comma-separated list. | [optional] |
+| **keyword_ids** | [**Array&lt;String&gt;**](String.md) | Google keyword criterion ids, {adGroupId}~{criterionId}. Repeat the parameter or pass a comma-separated list. | [optional] |
 
 ### Return type
 
@@ -1195,7 +1209,7 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -3526,11 +3540,11 @@ end
 
 ## remove_account_callout
 
-> <RemoveAccountCallout200Response> remove_account_callout(remove_account_callout_request)
+> <RemoveAccountCallout200Response> remove_account_callout(account_id, asset_id, opts)
 
 Remove account callout
 
-Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain. Fields go in the query string. A JSON body with the same fields is also accepted and, when sent, the query string is ignored.
 
 ### Examples
 
@@ -3544,11 +3558,16 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAccountsApi.new
-remove_account_callout_request = Zernio::RemoveAccountCalloutRequest.new({account_id: 'account_id_example', asset_id: 'asset_id_example'}) # RemoveAccountCalloutRequest | 
+account_id = 'account_id_example' # String | Zernio Google Ads connection id.
+asset_id = 'asset_id_example' # String | Numeric Google Ads asset id.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
+}
 
 begin
   # Remove account callout
-  result = api_instance.remove_account_callout(remove_account_callout_request)
+  result = api_instance.remove_account_callout(account_id, asset_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->remove_account_callout: #{e}"
@@ -3559,12 +3578,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_callout_with_http_info(remove_account_callout_request)
+> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_callout_with_http_info(account_id, asset_id, opts)
 
 ```ruby
 begin
   # Remove account callout
-  data, status_code, headers = api_instance.remove_account_callout_with_http_info(remove_account_callout_request)
+  data, status_code, headers = api_instance.remove_account_callout_with_http_info(account_id, asset_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveAccountCallout200Response>
@@ -3577,7 +3596,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **remove_account_callout_request** | [**RemoveAccountCalloutRequest**](RemoveAccountCalloutRequest.md) |  |  |
+| **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **asset_id** | **String** | Numeric Google Ads asset id. |  |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -3589,17 +3611,17 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
 ## remove_account_sitelink
 
-> <RemoveAccountCallout200Response> remove_account_sitelink(remove_account_callout_request)
+> <RemoveAccountCallout200Response> remove_account_sitelink(account_id, asset_id, opts)
 
 Remove account sitelink
 
-Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain. Fields go in the query string. A JSON body with the same fields is also accepted and, when sent, the query string is ignored.
 
 ### Examples
 
@@ -3613,11 +3635,16 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAccountsApi.new
-remove_account_callout_request = Zernio::RemoveAccountCalloutRequest.new({account_id: 'account_id_example', asset_id: 'asset_id_example'}) # RemoveAccountCalloutRequest | 
+account_id = 'account_id_example' # String | Zernio Google Ads connection id.
+asset_id = 'asset_id_example' # String | Numeric Google Ads asset id.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
+}
 
 begin
   # Remove account sitelink
-  result = api_instance.remove_account_sitelink(remove_account_callout_request)
+  result = api_instance.remove_account_sitelink(account_id, asset_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->remove_account_sitelink: #{e}"
@@ -3628,12 +3655,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_sitelink_with_http_info(remove_account_callout_request)
+> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_sitelink_with_http_info(account_id, asset_id, opts)
 
 ```ruby
 begin
   # Remove account sitelink
-  data, status_code, headers = api_instance.remove_account_sitelink_with_http_info(remove_account_callout_request)
+  data, status_code, headers = api_instance.remove_account_sitelink_with_http_info(account_id, asset_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveAccountCallout200Response>
@@ -3646,7 +3673,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **remove_account_callout_request** | [**RemoveAccountCalloutRequest**](RemoveAccountCalloutRequest.md) |  |  |
+| **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **asset_id** | **String** | Numeric Google Ads asset id. |  |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -3658,17 +3688,17 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
 ## remove_account_structured_snippet
 
-> <RemoveAccountCallout200Response> remove_account_structured_snippet(remove_account_callout_request)
+> <RemoveAccountCallout200Response> remove_account_structured_snippet(account_id, asset_id, opts)
 
 Remove account snippet
 
-Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain. Fields go in the query string. A JSON body with the same fields is also accepted and, when sent, the query string is ignored.
 
 ### Examples
 
@@ -3682,11 +3712,16 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAccountsApi.new
-remove_account_callout_request = Zernio::RemoveAccountCalloutRequest.new({account_id: 'account_id_example', asset_id: 'asset_id_example'}) # RemoveAccountCalloutRequest | 
+account_id = 'account_id_example' # String | Zernio Google Ads connection id.
+asset_id = 'asset_id_example' # String | Numeric Google Ads asset id.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
+  customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
+}
 
 begin
   # Remove account snippet
-  result = api_instance.remove_account_structured_snippet(remove_account_callout_request)
+  result = api_instance.remove_account_structured_snippet(account_id, asset_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->remove_account_structured_snippet: #{e}"
@@ -3697,12 +3732,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_structured_snippet_with_http_info(remove_account_callout_request)
+> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_structured_snippet_with_http_info(account_id, asset_id, opts)
 
 ```ruby
 begin
   # Remove account snippet
-  data, status_code, headers = api_instance.remove_account_structured_snippet_with_http_info(remove_account_callout_request)
+  data, status_code, headers = api_instance.remove_account_structured_snippet_with_http_info(account_id, asset_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveAccountCallout200Response>
@@ -3715,7 +3750,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **remove_account_callout_request** | [**RemoveAccountCalloutRequest**](RemoveAccountCalloutRequest.md) |  |  |
+| **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **asset_id** | **String** | Numeric Google Ads asset id. |  |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
+| **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
 ### Return type
 
@@ -3727,7 +3765,7 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -3971,7 +4009,7 @@ end
 
 api_instance = Zernio::AdAccountsApi.new
 list_id = 'list_id_example' # String | 
-replace_ad_negative_keyword_list_keywords_request = Zernio::ReplaceAdNegativeKeywordListKeywordsRequest.new({account_id: 'account_id_example', keywords: [Zernio::AddAdKeywordsRequestKeywordsInnerAnyOf.new({text: 'text_example'})]}) # ReplaceAdNegativeKeywordListKeywordsRequest | 
+replace_ad_negative_keyword_list_keywords_request = Zernio::ReplaceAdNegativeKeywordListKeywordsRequest.new({account_id: 'account_id_example', keywords: [Zernio::KeywordEntryOneOf.new({text: 'text_example'})]}) # ReplaceAdNegativeKeywordListKeywordsRequest | 
 
 begin
   # Replace negative list keywords
