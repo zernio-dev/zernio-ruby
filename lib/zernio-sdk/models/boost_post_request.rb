@@ -143,8 +143,17 @@ module Zernio
     # Lead Gen form ID to attach to the boosted ad's creative. REQUIRED when `goal` is `lead_generation`. On Meta this is the leadgen_forms ID (create one via POST /v1/ads/lead-forms). On LinkedIn this is the adForm ID (create one via POST /v1/ads/lead-forms with a LinkedIn account); the creative's `leadgenCallToAction.destination` is set to `urn:li:adForm:{id}`. Ignored for other goals.
     attr_accessor :lead_gen_form_id
 
-    # Publish state of the created entities, on every platform. Omitted or ACTIVE publishes live (default); PAUSED pauses only the top-most object this boost creates and switches everything below it on: a new campaign is held paused with its ad set and ad on (one PUT /v1/ads/campaigns/{campaignId}/status with `active` brings it live); into an existing campaign (TikTok `existingCampaignId`) the new ad set is held paused; attached to an existing ad set (`adSetId`) the new ad itself is paused. On LinkedIn the held campaign group is PAUSED, its campaign and creative ACTIVE. X has no per-ad switch, so its lowest level is the line item.
+    # Publish state of the created entities, on every platform. Omitted or ACTIVE publishes live (default); PAUSED pauses only the top-most object this boost creates and switches everything below it on: a new campaign is held paused with its ad set and ad on (one PUT /v1/ads/campaigns/{campaignId}/status with `active` brings it live); into an existing campaign (TikTok `existingCampaignId`) the new ad set is held paused; attached to an existing ad set (`adSetId`) the new ad itself is paused. On LinkedIn the held campaign group is PAUSED, its campaign and creative ACTIVE. X has no per-ad switch, so its lowest level is the line item. `campaignStatus`, `adSetStatus` and `adStatus` set one level each and always win for that level; `status: PAUSED` adds a hold of its own only when none of them is PAUSED. To create every object paused, send all three as PAUSED.
     attr_accessor :status
+
+    # Every platform, same semantics as POST /v1/ads/create. Sets the switch of the new campaign alone (LinkedIn: the campaign group) and overrides `status` for it. `ACTIVE` with `status: PAUSED` switches the campaign on and holds the new ad set paused (its ad on). Omitted, it follows `status`. Rejected with a 400 alongside `adSetId` or `existingCampaignId`, where no campaign is created (change an existing one with PUT /v1/ads/campaigns/{campaignId}/status).
+    attr_accessor :campaign_status
+
+    # Every platform, same semantics as POST /v1/ads/create. Sets the switch of the new ad set alone (Google, TikTok and Pinterest: the ad group; LinkedIn: the campaign, which stays DRAFT when held; X: the line item) and overrides `status` for it. Omitted, it follows `status`.  Precedence: a level status (`campaignStatus`, `adSetStatus`, `adStatus`) always wins for its level. `status: PAUSED` then holds the top-most new object that has no level status, and only when no level status is PAUSED; every other new object is switched on. So `campaignStatus: ACTIVE` + `adSetStatus: PAUSED` + `adStatus: PAUSED` keeps the campaign on with the new ad set and ad off, and all three PAUSED create the whole tree paused.  Rejected with a 400 alongside `adSetId` (that ad set already exists; change it with PUT /v1/ads/ad-sets/{adSetId}/status). 
+    attr_accessor :ad_set_status
+
+    # Sets the switch of the new ad alone, also when attaching to an existing ad set with `adSetId` (Meta, TikTok Smart+), and overrides `status` for it. Same precedence as `adSetStatus`. Omitted, it follows `status`.  X returns a 400: a promoted post has no switch of its own, so hold the line item with `adSetStatus`. 
+    attr_accessor :ad_status
 
     # Meta only, same semantics as POST /v1/ads/create: campaign = Advantage campaign budget (CBO), the budget and bid strategy sit on the campaign and the ad set inherits them. Default adset. Not allowed with adSetId.
     attr_accessor :budget_level
@@ -231,6 +240,9 @@ module Zernio
         :'dsa_payor' => :'dsaPayor',
         :'lead_gen_form_id' => :'leadGenFormId',
         :'status' => :'status',
+        :'campaign_status' => :'campaignStatus',
+        :'ad_set_status' => :'adSetStatus',
+        :'ad_status' => :'adStatus',
         :'budget_level' => :'budgetLevel',
         :'attribution_spec' => :'attributionSpec',
         :'bodies' => :'bodies',
@@ -298,6 +310,9 @@ module Zernio
         :'dsa_payor' => :'String',
         :'lead_gen_form_id' => :'String',
         :'status' => :'String',
+        :'campaign_status' => :'String',
+        :'ad_set_status' => :'String',
+        :'ad_status' => :'AdActivationStatus',
         :'budget_level' => :'String',
         :'attribution_spec' => :'Array<BoostPostRequestAttributionSpecInner>',
         :'bodies' => :'Array<String>',
@@ -536,6 +551,18 @@ module Zernio
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'campaign_status')
+        self.campaign_status = attributes[:'campaign_status']
+      end
+
+      if attributes.key?(:'ad_set_status')
+        self.ad_set_status = attributes[:'ad_set_status']
+      end
+
+      if attributes.key?(:'ad_status')
+        self.ad_status = attributes[:'ad_status']
+      end
+
       if attributes.key?(:'budget_level')
         self.budget_level = attributes[:'budget_level']
       end
@@ -680,6 +707,10 @@ module Zernio
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
       return false unless status_validator.valid?(@status)
+      campaign_status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      return false unless campaign_status_validator.valid?(@campaign_status)
+      ad_set_status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      return false unless ad_set_status_validator.valid?(@ad_set_status)
       budget_level_validator = EnumAttributeValidator.new('String', ["adset", "campaign"])
       return false unless budget_level_validator.valid?(@budget_level)
       return false if !@attribution_spec.nil? && @attribution_spec.length > 3
@@ -899,6 +930,26 @@ module Zernio
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] campaign_status Object to be assigned
+    def campaign_status=(campaign_status)
+      validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      unless validator.valid?(campaign_status)
+        fail ArgumentError, "invalid value for \"campaign_status\", must be one of #{validator.allowable_values}."
+      end
+      @campaign_status = campaign_status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] ad_set_status Object to be assigned
+    def ad_set_status=(ad_set_status)
+      validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      unless validator.valid?(ad_set_status)
+        fail ArgumentError, "invalid value for \"ad_set_status\", must be one of #{validator.allowable_values}."
+      end
+      @ad_set_status = ad_set_status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] budget_level Object to be assigned
     def budget_level=(budget_level)
       validator = EnumAttributeValidator.new('String', ["adset", "campaign"])
@@ -995,6 +1046,9 @@ module Zernio
           dsa_payor == o.dsa_payor &&
           lead_gen_form_id == o.lead_gen_form_id &&
           status == o.status &&
+          campaign_status == o.campaign_status &&
+          ad_set_status == o.ad_set_status &&
+          ad_status == o.ad_status &&
           budget_level == o.budget_level &&
           attribution_spec == o.attribution_spec &&
           bodies == o.bodies &&
@@ -1011,7 +1065,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [creative_features, post_id, platform_post_id, account_id, ad_account_id, name, campaign_name, ad_set_name, goal, ad_set_id, existing_campaign_id, identity_id, identity_type, budget_amount, budget_type, budget, instagram_account_id, destination_type, whatsapp_phone_number, currency, start_date, end_date, schedule, targeting, location_targeting_type, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, smart_plus, spark_posts, promo_codes, promoted_object, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, budget_level, attribution_spec, bodies, smart_targeting, optimization_goal].hash
+      [creative_features, post_id, platform_post_id, account_id, ad_account_id, name, campaign_name, ad_set_name, goal, ad_set_id, existing_campaign_id, identity_id, identity_type, budget_amount, budget_type, budget, instagram_account_id, destination_type, whatsapp_phone_number, currency, start_date, end_date, schedule, targeting, location_targeting_type, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, smart_plus, spark_posts, promo_codes, promoted_object, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, campaign_status, ad_set_status, ad_status, budget_level, attribution_spec, bodies, smart_targeting, optimization_goal].hash
     end
 
     # Builds the object from hash
