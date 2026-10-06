@@ -13,6 +13,7 @@
 | **image_url** | **String** | Image asset. Mutually exclusive with this entry&#39;s &#x60;video&#x60;. Required if neither &#x60;video&#x60; nor an existing post reference is supplied.  | [optional] |
 | **video** | [**CtwaAdRequestBodyCreativesInnerVideo**](CtwaAdRequestBodyCreativesInnerVideo.md) |  | [optional] |
 | **welcome_message** | [**CtwaAdRequestBodyCreativesInnerWelcomeMessage**](CtwaAdRequestBodyCreativesInnerWelcomeMessage.md) |  | [optional] |
+| **carousel_cards** | [**Array&lt;MessagingCarouselCard&gt;**](MessagingCarouselCard.md) | A 2-10 card carousel for this entry instead of &#x60;imageUrl&#x60; / &#x60;video&#x60;; &#x60;body&#x60; is required. Same rules as the top-level &#x60;carouselCards&#x60;. Carousel and single-media entries can be mixed on one ad set. | [optional] |
 
 ## Example
 
@@ -28,7 +29,8 @@ instance = Zernio::CtwaAdRequestBodyCreativesInner.new(
   body: null,
   image_url: null,
   video: null,
-  welcome_message: null
+  welcome_message: null,
+  carousel_cards: null
 )
 ```
 
