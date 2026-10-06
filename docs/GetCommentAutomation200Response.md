@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
 | **automation** | [**GetCommentAutomation200ResponseAutomation**](GetCommentAutomation200ResponseAutomation.md) |  | [optional] |
-| **logs** | [**Array&lt;GetCommentAutomation200ResponseLogsInner&gt;**](GetCommentAutomation200ResponseLogsInner.md) |  | [optional] |
+| **logs** | [**Array&lt;CommentAutomationLog&gt;**](CommentAutomationLog.md) | The 20 most recent trigger logs. | [optional] |
 
 ## Example
 

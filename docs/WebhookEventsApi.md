@@ -24,6 +24,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_commerce_product_created**](WebhookEventsApi.md#on_commerce_product_created) | **POST** /commerce.product.created | Commerce product created event |
 | [**on_commerce_product_deleted**](WebhookEventsApi.md#on_commerce_product_deleted) | **POST** /commerce.product.deleted | Commerce product deleted event |
 | [**on_commerce_product_updated**](WebhookEventsApi.md#on_commerce_product_updated) | **POST** /commerce.product.updated | Commerce product updated event |
+| [**on_contact_field_changed**](WebhookEventsApi.md#on_contact_field_changed) | **POST** /contact.field_changed | Contact field changed event |
+| [**on_contact_tag_added**](WebhookEventsApi.md#on_contact_tag_added) | **POST** /contact.tag_added | Contact tag added event |
+| [**on_contact_tag_removed**](WebhookEventsApi.md#on_contact_tag_removed) | **POST** /contact.tag_removed | Contact tag removed event |
 | [**on_conversation_control_changed**](WebhookEventsApi.md#on_conversation_control_changed) | **POST** /conversation.control_changed | Conversation control changed event |
 | [**on_conversation_started**](WebhookEventsApi.md#on_conversation_started) | **POST** /conversation.started | Conversation started event |
 | [**on_lead_received**](WebhookEventsApi.md#on_lead_received) | **POST** /lead.received | Lead received event |
@@ -54,6 +57,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_referral_received**](WebhookEventsApi.md#on_referral_received) | **POST** /referral.received | Referral received event |
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
+| [**on_sequence_enrolled**](WebhookEventsApi.md#on_sequence_enrolled) | **POST** /sequence.enrolled | Sequence enrolled event |
+| [**on_sequence_exited**](WebhookEventsApi.md#on_sequence_exited) | **POST** /sequence.exited | Sequence exited event |
 | [**on_sms_registration_action_required**](WebhookEventsApi.md#on_sms_registration_action_required) | **POST** /sms.registration.action_required | SMS registration action required event |
 | [**on_sms_registration_status_updated**](WebhookEventsApi.md#on_sms_registration_status_updated) | **POST** /sms.registration.status_updated | SMS registration status updated event |
 | [**on_verification_approved**](WebhookEventsApi.md#on_verification_approved) | **POST** /verification.approved | Verification approved event |
@@ -75,6 +80,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_whats_app_number_verification_required**](WebhookEventsApi.md#on_whats_app_number_verification_required) | **POST** /whatsapp.number.verification_required | WhatsApp number verification-required event |
 | [**on_whats_app_template_category_updated**](WebhookEventsApi.md#on_whats_app_template_category_updated) | **POST** /whatsapp.template.category_updated | WhatsApp template category updated event |
 | [**on_whats_app_template_status_updated**](WebhookEventsApi.md#on_whats_app_template_status_updated) | **POST** /whatsapp.template.status_updated | WhatsApp template status updated event |
+| [**on_workflow_run_completed**](WebhookEventsApi.md#on_workflow_run_completed) | **POST** /workflow.run.completed | Workflow run completed event |
+| [**on_workflow_run_failed**](WebhookEventsApi.md#on_workflow_run_failed) | **POST** /workflow.run.failed | Workflow run failed event |
+| [**on_workflow_run_started**](WebhookEventsApi.md#on_workflow_run_started) | **POST** /workflow.run.started | Workflow run started event |
 
 
 ## on_account_ads_initial_sync_completed
@@ -1437,13 +1445,217 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_contact_field_changed
+
+> on_contact_field_changed(webhook_payload_contact_field_changed)
+
+Contact field changed event
+
+Fired once per custom field whose value a write changed, with the previous and new value.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_contact_field_changed =  # WebhookPayloadContactFieldChanged | 
+
+begin
+  # Contact field changed event
+  api_instance.on_contact_field_changed(webhook_payload_contact_field_changed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_field_changed: #{e}"
+end
+```
+
+#### Using the on_contact_field_changed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_contact_field_changed_with_http_info(webhook_payload_contact_field_changed)
+
+```ruby
+begin
+  # Contact field changed event
+  data, status_code, headers = api_instance.on_contact_field_changed_with_http_info(webhook_payload_contact_field_changed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_field_changed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_contact_field_changed** | [**WebhookPayloadContactFieldChanged**](WebhookPayloadContactFieldChanged.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_contact_tag_added
+
+> on_contact_tag_added(webhook_payload_contact_tag)
+
+Contact tag added event
+
+Fired once per tag a write actually added to a contact, whether the API, a workflow add_tag node or a comment-automation click made it.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_contact_tag =  # WebhookPayloadContactTag | 
+
+begin
+  # Contact tag added event
+  api_instance.on_contact_tag_added(webhook_payload_contact_tag)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_tag_added: #{e}"
+end
+```
+
+#### Using the on_contact_tag_added_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_contact_tag_added_with_http_info(webhook_payload_contact_tag)
+
+```ruby
+begin
+  # Contact tag added event
+  data, status_code, headers = api_instance.on_contact_tag_added_with_http_info(webhook_payload_contact_tag)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_tag_added_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_contact_tag** | [**WebhookPayloadContactTag**](WebhookPayloadContactTag.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_contact_tag_removed
+
+> on_contact_tag_removed(webhook_payload_contact_tag)
+
+Contact tag removed event
+
+Fired once per tag a write actually removed from a contact.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_contact_tag =  # WebhookPayloadContactTag | 
+
+begin
+  # Contact tag removed event
+  api_instance.on_contact_tag_removed(webhook_payload_contact_tag)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_tag_removed: #{e}"
+end
+```
+
+#### Using the on_contact_tag_removed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_contact_tag_removed_with_http_info(webhook_payload_contact_tag)
+
+```ruby
+begin
+  # Contact tag removed event
+  data, status_code, headers = api_instance.on_contact_tag_removed_with_http_info(webhook_payload_contact_tag)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_tag_removed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_contact_tag** | [**WebhookPayloadContactTag**](WebhookPayloadContactTag.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_conversation_control_changed
 
 > on_conversation_control_changed(webhook_payload_conversation_control_changed)
 
 Conversation control changed event
 
-WhatsApp only. Fired when control of a conversation moves between Meta Business Agent and your app (Meta's `messaging_handovers`), or when the agent is first seen answering a thread. While `control.owner` is `ai_agent`, inbound messages arrive on `message.received` with `metadata.standby: true` and the agent's replies on `message.sent` with `source: meta_business_agent`. Sending any message takes control back; release it with `POST /v1/inbox/conversations/{conversationId}/thread-control`. 
+Fired on Meta's handover protocol (`messaging_handovers`). WhatsApp: control moves between Meta Business Agent and your app, or the agent is first seen answering a thread; while `control.owner` is `ai_agent`, inbound messages arrive on `message.received` with `metadata.standby: true` and the agent's replies on `message.sent` with `source: meta_business_agent`, and sending any message takes control back. Facebook and Instagram: another app passed you the thread (`owner: app`) or took or received it (`owner: other`, with `ownerAppId`); while you are not the owner, inbound arrive with `metadata.standby: true`, no automation runs, and sends fail with `not_thread_owner`. Change control with `POST /v1/inbox/conversations/{conversationId}/thread-control`. 
 
 ### Examples
 
@@ -3477,6 +3689,142 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_sequence_enrolled
+
+> on_sequence_enrolled(webhook_payload_sequence_enrollment)
+
+Sequence enrolled event
+
+Fired when a contact is enrolled in a sequence.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_sequence_enrollment =  # WebhookPayloadSequenceEnrollment | 
+
+begin
+  # Sequence enrolled event
+  api_instance.on_sequence_enrolled(webhook_payload_sequence_enrollment)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_sequence_enrolled: #{e}"
+end
+```
+
+#### Using the on_sequence_enrolled_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_sequence_enrolled_with_http_info(webhook_payload_sequence_enrollment)
+
+```ruby
+begin
+  # Sequence enrolled event
+  data, status_code, headers = api_instance.on_sequence_enrolled_with_http_info(webhook_payload_sequence_enrollment)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_sequence_enrolled_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_sequence_enrollment** | [**WebhookPayloadSequenceEnrollment**](WebhookPayloadSequenceEnrollment.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_sequence_exited
+
+> on_sequence_exited(webhook_payload_sequence_enrollment)
+
+Sequence exited event
+
+Fired when a contact leaves a sequence, finished or not; exitReason says why.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_sequence_enrollment =  # WebhookPayloadSequenceEnrollment | 
+
+begin
+  # Sequence exited event
+  api_instance.on_sequence_exited(webhook_payload_sequence_enrollment)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_sequence_exited: #{e}"
+end
+```
+
+#### Using the on_sequence_exited_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_sequence_exited_with_http_info(webhook_payload_sequence_enrollment)
+
+```ruby
+begin
+  # Sequence exited event
+  data, status_code, headers = api_instance.on_sequence_exited_with_http_info(webhook_payload_sequence_enrollment)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_sequence_exited_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_sequence_enrollment** | [**WebhookPayloadSequenceEnrollment**](WebhookPayloadSequenceEnrollment.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_sms_registration_action_required
 
 > on_sms_registration_action_required(on_sms_registration_action_required_request)
@@ -4890,6 +5238,210 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_whats_app_template_status_updated** | [**WebhookPayloadWhatsAppTemplateStatusUpdated**](WebhookPayloadWhatsAppTemplateStatusUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_workflow_run_completed
+
+> on_workflow_run_completed(webhook_payload_workflow_run)
+
+Workflow run completed event
+
+Fired when a workflow run ends; execution.status is completed, or exited for a run ended on purpose before its last node.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_workflow_run =  # WebhookPayloadWorkflowRun | 
+
+begin
+  # Workflow run completed event
+  api_instance.on_workflow_run_completed(webhook_payload_workflow_run)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_workflow_run_completed: #{e}"
+end
+```
+
+#### Using the on_workflow_run_completed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_workflow_run_completed_with_http_info(webhook_payload_workflow_run)
+
+```ruby
+begin
+  # Workflow run completed event
+  data, status_code, headers = api_instance.on_workflow_run_completed_with_http_info(webhook_payload_workflow_run)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_workflow_run_completed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_workflow_run** | [**WebhookPayloadWorkflowRun**](WebhookPayloadWorkflowRun.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_workflow_run_failed
+
+> on_workflow_run_failed(webhook_payload_workflow_run)
+
+Workflow run failed event
+
+Fired when a workflow run fails; error says which node failed and why.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_workflow_run =  # WebhookPayloadWorkflowRun | 
+
+begin
+  # Workflow run failed event
+  api_instance.on_workflow_run_failed(webhook_payload_workflow_run)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_workflow_run_failed: #{e}"
+end
+```
+
+#### Using the on_workflow_run_failed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_workflow_run_failed_with_http_info(webhook_payload_workflow_run)
+
+```ruby
+begin
+  # Workflow run failed event
+  data, status_code, headers = api_instance.on_workflow_run_failed_with_http_info(webhook_payload_workflow_run)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_workflow_run_failed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_workflow_run** | [**WebhookPayloadWorkflowRun**](WebhookPayloadWorkflowRun.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_workflow_run_started
+
+> on_workflow_run_started(webhook_payload_workflow_run)
+
+Workflow run started event
+
+Fired when a workflow run starts for a conversation.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_workflow_run =  # WebhookPayloadWorkflowRun | 
+
+begin
+  # Workflow run started event
+  api_instance.on_workflow_run_started(webhook_payload_workflow_run)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_workflow_run_started: #{e}"
+end
+```
+
+#### Using the on_workflow_run_started_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_workflow_run_started_with_http_info(webhook_payload_workflow_run)
+
+```ruby
+begin
+  # Workflow run started event
+  data, status_code, headers = api_instance.on_workflow_run_started_with_http_info(webhook_payload_workflow_run)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_workflow_run_started_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_workflow_run** | [**WebhookPayloadWorkflowRun**](WebhookPayloadWorkflowRun.md) |  |  |
 
 ### Return type
 

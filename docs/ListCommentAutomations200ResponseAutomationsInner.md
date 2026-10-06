@@ -11,6 +11,7 @@
 | **account_id** | **String** |  | [optional] |
 | **platform_post_id** | **String** |  | [optional] |
 | **post_title** | **String** |  | [optional] |
+| **post_id** | **String** |  | [optional] |
 | **keywords** | **Array&lt;String&gt;** |  | [optional] |
 | **match_mode** | **String** | How a keyword is compared with the comment. &#39;contains&#39; (default) matches anywhere, even inside another word (keyword &#39;app&#39; fires on &#39;happy&#39;). &#39;word&#39; matches the keyword only as a standalone word. &#39;exact&#39; requires the whole comment to be exactly the keyword. | [optional] |
 | **exclude_keywords** | **Array&lt;String&gt;** | Comments containing one of these never trigger the automation, even when a trigger keyword also matches. Compared using the same matchMode. | [optional] |
@@ -26,8 +27,16 @@
 | **dm_delay_seconds** | **Integer** | Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately. | [optional] |
 | **comment_reply_delay_seconds** | **Integer** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional] |
 | **also_match_in_dms** | **Boolean** | Whether these keywords also fire on a plain inbound DM. | [optional] |
+| **repeat_policy** | [**CommentAutomationRepeatPolicy**](CommentAutomationRepeatPolicy.md) |  | [optional] |
+| **dedupe_same_text_hours** | **Integer** | Same-text dedupe window in hours. Omitted when off. | [optional] |
+| **public_reply_policy** | **String** |  | [optional] |
+| **actions** | [**CommentAutomationActions**](CommentAutomationActions.md) |  | [optional] |
+| **quick_replies** | [**Array&lt;CommentAutomationQuickReply&gt;**](CommentAutomationQuickReply.md) |  | [optional] |
+| **dm_media** | [**CommentAutomationDmMedia**](CommentAutomationDmMedia.md) |  | [optional] |
+| **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
+| **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
-| **stats** | [**ListCommentAutomations200ResponseAutomationsInnerStats**](ListCommentAutomations200ResponseAutomationsInnerStats.md) |  | [optional] |
+| **stats** | [**CommentAutomationStats**](CommentAutomationStats.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
 
 ## Example
@@ -43,6 +52,7 @@ instance = Zernio::ListCommentAutomations200ResponseAutomationsInner.new(
   account_id: null,
   platform_post_id: null,
   post_title: null,
+  post_id: null,
   keywords: null,
   match_mode: null,
   exclude_keywords: null,
@@ -58,6 +68,14 @@ instance = Zernio::ListCommentAutomations200ResponseAutomationsInner.new(
   dm_delay_seconds: null,
   comment_reply_delay_seconds: null,
   also_match_in_dms: null,
+  repeat_policy: null,
+  dedupe_same_text_hours: null,
+  public_reply_policy: null,
+  actions: null,
+  quick_replies: null,
+  dm_media: null,
+  audience: null,
+  follow_gate: null,
   is_active: null,
   stats: null,
   created_at: null

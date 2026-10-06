@@ -7,6 +7,9 @@ Gemfile
 README.md
 Rakefile
 docs/APIKeysApi.md
+docs/AcceptConversationRequest200Response.md
+docs/AcceptConversationRequest200ResponseData.md
+docs/AcceptConversationRequestRequest.md
 docs/AccountGroupsApi.md
 docs/AccountSettingsApi.md
 docs/AccountWithFollowerStats.md
@@ -297,8 +300,15 @@ docs/CheckPhoneNumberPortability200ResponseResultsInner.md
 docs/CheckPhoneNumberPortabilityRequest.md
 docs/CheckVerification200Response.md
 docs/CheckVerificationRequest.md
+docs/CommentAutomationActions.md
 docs/CommentAutomationAudience.md
+docs/CommentAutomationDmMedia.md
 docs/CommentAutomationFollowGate.md
+docs/CommentAutomationLog.md
+docs/CommentAutomationLogPlatformError.md
+docs/CommentAutomationQuickReply.md
+docs/CommentAutomationRepeatPolicy.md
+docs/CommentAutomationStats.md
 docs/CommentAutomationTemplate.md
 docs/CommentAutomationTemplateElement.md
 docs/CommentAutomationTemplateElementButtonsInner.md
@@ -440,7 +450,6 @@ docs/CreateBroadcastRequestTemplateVariableMappingValue.md
 docs/CreateCallAdRequest.md
 docs/CreateCommentAutomation200Response.md
 docs/CreateCommentAutomation200ResponseAutomation.md
-docs/CreateCommentAutomation200ResponseAutomationStats.md
 docs/CreateCommentAutomationRequest.md
 docs/CreateCommerceCatalogSync202Response.md
 docs/CreateCommerceCatalogSyncRequest.md
@@ -885,6 +894,7 @@ docs/GetBlueskySettings200Response.md
 docs/GetBroadcast200Response.md
 docs/GetBroadcast200ResponseBroadcast.md
 docs/GetBroadcast200ResponseBroadcastMessage.md
+docs/GetBroadcast200ResponseBroadcastSegmentFilters.md
 docs/GetBroadcast200ResponseBroadcastTemplate.md
 docs/GetBusinessAgentBudget200Response.md
 docs/GetBusinessAgentConnectorLogs200Response.md
@@ -905,8 +915,6 @@ docs/GetCampaignTargeting200ResponseLanguagesInner.md
 docs/GetCampaignTargeting200ResponseLocationsInner.md
 docs/GetCommentAutomation200Response.md
 docs/GetCommentAutomation200ResponseAutomation.md
-docs/GetCommentAutomation200ResponseLogsInner.md
-docs/GetCommentAutomation200ResponseLogsInnerPlatformError.md
 docs/GetCommerceStore200Response.md
 docs/GetConnectUrl200Response.md
 docs/GetContact200Response.md
@@ -1072,6 +1080,8 @@ docs/GetMediaPresignedUrlRequest.md
 docs/GetMessageAttachment200Response.md
 docs/GetMessengerGetStarted200Response.md
 docs/GetMessengerGetStarted200ResponseData.md
+docs/GetMessengerGreeting200Response.md
+docs/GetMessengerIceBreakers200Response.md
 docs/GetMessengerMenu200Response.md
 docs/GetPageWebhookSubscription200Response.md
 docs/GetPendingOAuthData200Response.md
@@ -1172,6 +1182,7 @@ docs/GetWhatsAppCallRecording200Response.md
 docs/GetWhatsAppCalling200Response.md
 docs/GetWhatsAppCallingConfig200Response.md
 docs/GetWhatsAppCommerceSettings200Response.md
+docs/GetWhatsAppConversationalAutomation200Response.md
 docs/GetWhatsAppDataset200Response.md
 docs/GetWhatsAppDisplayName200Response.md
 docs/GetWhatsAppDisplayName200ResponseDisplayName.md
@@ -1474,7 +1485,6 @@ docs/ListCommentAutomationLogs200ResponseMisses.md
 docs/ListCommentAutomationLogs200ResponseMissesSamplesInner.md
 docs/ListCommentAutomations200Response.md
 docs/ListCommentAutomations200ResponseAutomationsInner.md
-docs/ListCommentAutomations200ResponseAutomationsInnerStats.md
 docs/ListCommerceCatalogSyncs200Response.md
 docs/ListCommerceChannels200Response.md
 docs/ListCommerceCollections200Response.md
@@ -1685,6 +1695,9 @@ docs/MentionsApi.md
 docs/MessagesApi.md
 docs/MessagingAdsApi.md
 docs/MessagingCarouselCard.md
+docs/MessengerGreeting.md
+docs/MessengerIceBreakerLocale.md
+docs/MessengerIceBreakerLocaleCallToActionsInner.md
 docs/MetaAdsPlatformData.md
 docs/MetaAssignedUser.md
 docs/MetaBusinessUser.md
@@ -2127,12 +2140,15 @@ docs/SetImessageSubscriptionRequest.md
 docs/SetInstagramIceBreakersRequest.md
 docs/SetInstagramIceBreakersRequestIceBreakersInner.md
 docs/SetMessengerGetStartedRequest.md
+docs/SetMessengerGreetingRequest.md
+docs/SetMessengerIceBreakersRequest.md
 docs/SetMessengerMenuRequest.md
 docs/SetPartnershipAdPermission200Response.md
 docs/SetPartnershipAdPermissionRequest.md
 docs/SetRedditPostFlairRequest.md
 docs/SetTelegramCommandsRequest.md
 docs/SetTelegramCommandsRequestCommandsInner.md
+docs/SetWhatsAppConversationalAutomationRequest.md
 docs/SetWhatsAppFlowsEncryptionKeyRequest.md
 docs/SetWhatsappBusinessUsername200Response.md
 docs/SetWhatsappBusinessUsernameRequest.md
@@ -2202,6 +2218,8 @@ docs/TrackingTagUser.md
 docs/TrackingTagsApi.md
 docs/TransferVoiceCall200Response.md
 docs/TransferVoiceCallRequest.md
+docs/TriggerApiCallWorkflow201Response.md
+docs/TriggerApiCallWorkflowRequest.md
 docs/TriggerWorkflow200Response.md
 docs/TriggerWorkflow200ResponseExecution.md
 docs/TriggerWorkflowRequest.md
@@ -2585,6 +2603,9 @@ docs/WebhookPayloadCommentPost.md
 docs/WebhookPayloadCommerceProduct.md
 docs/WebhookPayloadCommerceProductResource.md
 docs/WebhookPayloadCommerceProductStore.md
+docs/WebhookPayloadContactFieldChanged.md
+docs/WebhookPayloadContactTag.md
+docs/WebhookPayloadContactTagContact.md
 docs/WebhookPayloadConversationControlChanged.md
 docs/WebhookPayloadConversationControlChangedControl.md
 docs/WebhookPayloadConversationStarted.md
@@ -2639,6 +2660,7 @@ docs/WebhookPayloadReferralSender.md
 docs/WebhookPayloadReviewNew.md
 docs/WebhookPayloadReviewNewAccount.md
 docs/WebhookPayloadReviewUpdated.md
+docs/WebhookPayloadSequenceEnrollment.md
 docs/WebhookPayloadTest.md
 docs/WebhookPayloadWhatsAppAccountAlertReceived.md
 docs/WebhookPayloadWhatsAppAccountAlertReceivedAlert.md
@@ -2656,6 +2678,11 @@ docs/WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplate.md
 docs/WebhookPayloadWhatsAppTemplateStatusUpdated.md
 docs/WebhookPayloadWhatsAppTemplateStatusUpdatedAccount.md
 docs/WebhookPayloadWhatsAppTemplateStatusUpdatedTemplate.md
+docs/WebhookPayloadWorkflowRun.md
+docs/WebhookPayloadWorkflowRunConversation.md
+docs/WebhookPayloadWorkflowRunExecution.md
+docs/WebhookPayloadWorkflowRunTrigger.md
+docs/WebhookPayloadWorkflowRunWorkflow.md
 docs/WebhooksApi.md
 docs/WhatsAppApi.md
 docs/WhatsAppBillingConversation.md
@@ -2668,6 +2695,8 @@ docs/WhatsAppCarouselComponent.md
 docs/WhatsAppCarouselComponentCardsInner.md
 docs/WhatsAppCommerceSettings.md
 docs/WhatsAppContactIdentity.md
+docs/WhatsAppConversationalAutomation.md
+docs/WhatsAppConversationalAutomationCommandsInner.md
 docs/WhatsAppFlowsApi.md
 docs/WhatsAppFooterComponent.md
 docs/WhatsAppHeaderComponent.md
@@ -2817,6 +2846,9 @@ lib/zernio-sdk/api_client.rb
 lib/zernio-sdk/api_error.rb
 lib/zernio-sdk/api_model_base.rb
 lib/zernio-sdk/configuration.rb
+lib/zernio-sdk/models/accept_conversation_request200_response.rb
+lib/zernio-sdk/models/accept_conversation_request200_response_data.rb
+lib/zernio-sdk/models/accept_conversation_request_request.rb
 lib/zernio-sdk/models/account_with_follower_stats.rb
 lib/zernio-sdk/models/account_with_follower_stats_all_of_account_stats.rb
 lib/zernio-sdk/models/accounts_list_response.rb
@@ -3090,8 +3122,15 @@ lib/zernio-sdk/models/check_phone_number_portability200_response_results_inner.r
 lib/zernio-sdk/models/check_phone_number_portability_request.rb
 lib/zernio-sdk/models/check_verification200_response.rb
 lib/zernio-sdk/models/check_verification_request.rb
+lib/zernio-sdk/models/comment_automation_actions.rb
 lib/zernio-sdk/models/comment_automation_audience.rb
+lib/zernio-sdk/models/comment_automation_dm_media.rb
 lib/zernio-sdk/models/comment_automation_follow_gate.rb
+lib/zernio-sdk/models/comment_automation_log.rb
+lib/zernio-sdk/models/comment_automation_log_platform_error.rb
+lib/zernio-sdk/models/comment_automation_quick_reply.rb
+lib/zernio-sdk/models/comment_automation_repeat_policy.rb
+lib/zernio-sdk/models/comment_automation_stats.rb
 lib/zernio-sdk/models/comment_automation_template.rb
 lib/zernio-sdk/models/comment_automation_template_element.rb
 lib/zernio-sdk/models/comment_automation_template_element_buttons_inner.rb
@@ -3226,7 +3265,6 @@ lib/zernio-sdk/models/create_broadcast_request_template_variable_mapping_value.r
 lib/zernio-sdk/models/create_call_ad_request.rb
 lib/zernio-sdk/models/create_comment_automation200_response.rb
 lib/zernio-sdk/models/create_comment_automation200_response_automation.rb
-lib/zernio-sdk/models/create_comment_automation200_response_automation_stats.rb
 lib/zernio-sdk/models/create_comment_automation_request.rb
 lib/zernio-sdk/models/create_commerce_catalog_sync202_response.rb
 lib/zernio-sdk/models/create_commerce_catalog_sync_request.rb
@@ -3660,6 +3698,7 @@ lib/zernio-sdk/models/get_bluesky_settings200_response.rb
 lib/zernio-sdk/models/get_broadcast200_response.rb
 lib/zernio-sdk/models/get_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/get_broadcast200_response_broadcast_message.rb
+lib/zernio-sdk/models/get_broadcast200_response_broadcast_segment_filters.rb
 lib/zernio-sdk/models/get_broadcast200_response_broadcast_template.rb
 lib/zernio-sdk/models/get_business_agent_budget200_response.rb
 lib/zernio-sdk/models/get_business_agent_connector_logs200_response.rb
@@ -3680,8 +3719,6 @@ lib/zernio-sdk/models/get_campaign_targeting200_response_languages_inner.rb
 lib/zernio-sdk/models/get_campaign_targeting200_response_locations_inner.rb
 lib/zernio-sdk/models/get_comment_automation200_response.rb
 lib/zernio-sdk/models/get_comment_automation200_response_automation.rb
-lib/zernio-sdk/models/get_comment_automation200_response_logs_inner.rb
-lib/zernio-sdk/models/get_comment_automation200_response_logs_inner_platform_error.rb
 lib/zernio-sdk/models/get_commerce_store200_response.rb
 lib/zernio-sdk/models/get_connect_url200_response.rb
 lib/zernio-sdk/models/get_contact200_response.rb
@@ -3847,6 +3884,8 @@ lib/zernio-sdk/models/get_media_presigned_url_request.rb
 lib/zernio-sdk/models/get_message_attachment200_response.rb
 lib/zernio-sdk/models/get_messenger_get_started200_response.rb
 lib/zernio-sdk/models/get_messenger_get_started200_response_data.rb
+lib/zernio-sdk/models/get_messenger_greeting200_response.rb
+lib/zernio-sdk/models/get_messenger_ice_breakers200_response.rb
 lib/zernio-sdk/models/get_messenger_menu200_response.rb
 lib/zernio-sdk/models/get_page_webhook_subscription200_response.rb
 lib/zernio-sdk/models/get_pending_o_auth_data200_response.rb
@@ -3947,6 +3986,7 @@ lib/zernio-sdk/models/get_whats_app_call_recording200_response.rb
 lib/zernio-sdk/models/get_whats_app_calling200_response.rb
 lib/zernio-sdk/models/get_whats_app_calling_config200_response.rb
 lib/zernio-sdk/models/get_whats_app_commerce_settings200_response.rb
+lib/zernio-sdk/models/get_whats_app_conversational_automation200_response.rb
 lib/zernio-sdk/models/get_whats_app_dataset200_response.rb
 lib/zernio-sdk/models/get_whats_app_display_name200_response.rb
 lib/zernio-sdk/models/get_whats_app_display_name200_response_display_name.rb
@@ -4243,7 +4283,6 @@ lib/zernio-sdk/models/list_comment_automation_logs200_response_misses.rb
 lib/zernio-sdk/models/list_comment_automation_logs200_response_misses_samples_inner.rb
 lib/zernio-sdk/models/list_comment_automations200_response.rb
 lib/zernio-sdk/models/list_comment_automations200_response_automations_inner.rb
-lib/zernio-sdk/models/list_comment_automations200_response_automations_inner_stats.rb
 lib/zernio-sdk/models/list_commerce_catalog_syncs200_response.rb
 lib/zernio-sdk/models/list_commerce_channels200_response.rb
 lib/zernio-sdk/models/list_commerce_collections200_response.rb
@@ -4449,6 +4488,9 @@ lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_subtitle.rb
 lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/messaging_carousel_card.rb
+lib/zernio-sdk/models/messenger_greeting.rb
+lib/zernio-sdk/models/messenger_ice_breaker_locale.rb
+lib/zernio-sdk/models/messenger_ice_breaker_locale_call_to_actions_inner.rb
 lib/zernio-sdk/models/meta_ads_platform_data.rb
 lib/zernio-sdk/models/meta_assigned_user.rb
 lib/zernio-sdk/models/meta_business_user.rb
@@ -4879,12 +4921,15 @@ lib/zernio-sdk/models/set_imessage_subscription_request.rb
 lib/zernio-sdk/models/set_instagram_ice_breakers_request.rb
 lib/zernio-sdk/models/set_instagram_ice_breakers_request_ice_breakers_inner.rb
 lib/zernio-sdk/models/set_messenger_get_started_request.rb
+lib/zernio-sdk/models/set_messenger_greeting_request.rb
+lib/zernio-sdk/models/set_messenger_ice_breakers_request.rb
 lib/zernio-sdk/models/set_messenger_menu_request.rb
 lib/zernio-sdk/models/set_partnership_ad_permission200_response.rb
 lib/zernio-sdk/models/set_partnership_ad_permission_request.rb
 lib/zernio-sdk/models/set_reddit_post_flair_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request_commands_inner.rb
+lib/zernio-sdk/models/set_whats_app_conversational_automation_request.rb
 lib/zernio-sdk/models/set_whats_app_flows_encryption_key_request.rb
 lib/zernio-sdk/models/set_whatsapp_business_username200_response.rb
 lib/zernio-sdk/models/set_whatsapp_business_username_request.rb
@@ -4951,6 +4996,8 @@ lib/zernio-sdk/models/tracking_tag_partner.rb
 lib/zernio-sdk/models/tracking_tag_user.rb
 lib/zernio-sdk/models/transfer_voice_call200_response.rb
 lib/zernio-sdk/models/transfer_voice_call_request.rb
+lib/zernio-sdk/models/trigger_api_call_workflow201_response.rb
+lib/zernio-sdk/models/trigger_api_call_workflow_request.rb
 lib/zernio-sdk/models/trigger_workflow200_response.rb
 lib/zernio-sdk/models/trigger_workflow200_response_execution.rb
 lib/zernio-sdk/models/trigger_workflow_request.rb
@@ -5327,6 +5374,9 @@ lib/zernio-sdk/models/webhook_payload_comment_post.rb
 lib/zernio-sdk/models/webhook_payload_commerce_product.rb
 lib/zernio-sdk/models/webhook_payload_commerce_product_resource.rb
 lib/zernio-sdk/models/webhook_payload_commerce_product_store.rb
+lib/zernio-sdk/models/webhook_payload_contact_field_changed.rb
+lib/zernio-sdk/models/webhook_payload_contact_tag.rb
+lib/zernio-sdk/models/webhook_payload_contact_tag_contact.rb
 lib/zernio-sdk/models/webhook_payload_conversation_control_changed.rb
 lib/zernio-sdk/models/webhook_payload_conversation_control_changed_control.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started.rb
@@ -5381,6 +5431,7 @@ lib/zernio-sdk/models/webhook_payload_referral_sender.rb
 lib/zernio-sdk/models/webhook_payload_review_new.rb
 lib/zernio-sdk/models/webhook_payload_review_new_account.rb
 lib/zernio-sdk/models/webhook_payload_review_updated.rb
+lib/zernio-sdk/models/webhook_payload_sequence_enrollment.rb
 lib/zernio-sdk/models/webhook_payload_test.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_account_alert_received.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_account_alert_received_alert.rb
@@ -5398,6 +5449,11 @@ lib/zernio-sdk/models/webhook_payload_whats_app_template_category_updated_templa
 lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated_account.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated_template.rb
+lib/zernio-sdk/models/webhook_payload_workflow_run.rb
+lib/zernio-sdk/models/webhook_payload_workflow_run_conversation.rb
+lib/zernio-sdk/models/webhook_payload_workflow_run_execution.rb
+lib/zernio-sdk/models/webhook_payload_workflow_run_trigger.rb
+lib/zernio-sdk/models/webhook_payload_workflow_run_workflow.rb
 lib/zernio-sdk/models/whats_app_billing_conversation.rb
 lib/zernio-sdk/models/whats_app_body_component.rb
 lib/zernio-sdk/models/whats_app_body_component_example.rb
@@ -5407,6 +5463,8 @@ lib/zernio-sdk/models/whats_app_carousel_component.rb
 lib/zernio-sdk/models/whats_app_carousel_component_cards_inner.rb
 lib/zernio-sdk/models/whats_app_commerce_settings.rb
 lib/zernio-sdk/models/whats_app_contact_identity.rb
+lib/zernio-sdk/models/whats_app_conversational_automation.rb
+lib/zernio-sdk/models/whats_app_conversational_automation_commands_inner.rb
 lib/zernio-sdk/models/whats_app_footer_component.rb
 lib/zernio-sdk/models/whats_app_header_component.rb
 lib/zernio-sdk/models/whats_app_header_component_example.rb
@@ -5545,6 +5603,9 @@ spec/api/whats_app_phone_numbers_api_spec.rb
 spec/api/whats_app_sandbox_api_spec.rb
 spec/api/whats_app_templates_api_spec.rb
 spec/api/workflows_api_spec.rb
+spec/models/accept_conversation_request200_response_data_spec.rb
+spec/models/accept_conversation_request200_response_spec.rb
+spec/models/accept_conversation_request_request_spec.rb
 spec/models/account_with_follower_stats_all_of_account_stats_spec.rb
 spec/models/account_with_follower_stats_spec.rb
 spec/models/accounts_list_response_spec.rb
@@ -5818,8 +5879,15 @@ spec/models/check_phone_number_portability200_response_spec.rb
 spec/models/check_phone_number_portability_request_spec.rb
 spec/models/check_verification200_response_spec.rb
 spec/models/check_verification_request_spec.rb
+spec/models/comment_automation_actions_spec.rb
 spec/models/comment_automation_audience_spec.rb
+spec/models/comment_automation_dm_media_spec.rb
 spec/models/comment_automation_follow_gate_spec.rb
+spec/models/comment_automation_log_platform_error_spec.rb
+spec/models/comment_automation_log_spec.rb
+spec/models/comment_automation_quick_reply_spec.rb
+spec/models/comment_automation_repeat_policy_spec.rb
+spec/models/comment_automation_stats_spec.rb
 spec/models/comment_automation_template_element_buttons_inner_spec.rb
 spec/models/comment_automation_template_element_spec.rb
 spec/models/comment_automation_template_spec.rb
@@ -5953,7 +6021,6 @@ spec/models/create_broadcast_request_template_spec.rb
 spec/models/create_broadcast_request_template_variable_mapping_value_spec.rb
 spec/models/create_call_ad_request_spec.rb
 spec/models/create_comment_automation200_response_automation_spec.rb
-spec/models/create_comment_automation200_response_automation_stats_spec.rb
 spec/models/create_comment_automation200_response_spec.rb
 spec/models/create_comment_automation_request_spec.rb
 spec/models/create_commerce_catalog_sync202_response_spec.rb
@@ -6386,6 +6453,7 @@ spec/models/get_best_time_to_post403_response_spec.rb
 spec/models/get_blog200_response_spec.rb
 spec/models/get_bluesky_settings200_response_spec.rb
 spec/models/get_broadcast200_response_broadcast_message_spec.rb
+spec/models/get_broadcast200_response_broadcast_segment_filters_spec.rb
 spec/models/get_broadcast200_response_broadcast_spec.rb
 spec/models/get_broadcast200_response_broadcast_template_spec.rb
 spec/models/get_broadcast200_response_spec.rb
@@ -6407,8 +6475,6 @@ spec/models/get_campaign_targeting200_response_languages_inner_spec.rb
 spec/models/get_campaign_targeting200_response_locations_inner_spec.rb
 spec/models/get_campaign_targeting200_response_spec.rb
 spec/models/get_comment_automation200_response_automation_spec.rb
-spec/models/get_comment_automation200_response_logs_inner_platform_error_spec.rb
-spec/models/get_comment_automation200_response_logs_inner_spec.rb
 spec/models/get_comment_automation200_response_spec.rb
 spec/models/get_commerce_store200_response_spec.rb
 spec/models/get_connect_url200_response_spec.rb
@@ -6575,6 +6641,8 @@ spec/models/get_media_presigned_url_request_spec.rb
 spec/models/get_message_attachment200_response_spec.rb
 spec/models/get_messenger_get_started200_response_data_spec.rb
 spec/models/get_messenger_get_started200_response_spec.rb
+spec/models/get_messenger_greeting200_response_spec.rb
+spec/models/get_messenger_ice_breakers200_response_spec.rb
 spec/models/get_messenger_menu200_response_spec.rb
 spec/models/get_page_webhook_subscription200_response_spec.rb
 spec/models/get_pending_o_auth_data200_response_organizations_inner_spec.rb
@@ -6675,6 +6743,7 @@ spec/models/get_whats_app_call_recording200_response_spec.rb
 spec/models/get_whats_app_calling200_response_spec.rb
 spec/models/get_whats_app_calling_config200_response_spec.rb
 spec/models/get_whats_app_commerce_settings200_response_spec.rb
+spec/models/get_whats_app_conversational_automation200_response_spec.rb
 spec/models/get_whats_app_dataset200_response_spec.rb
 spec/models/get_whats_app_display_name200_response_display_name_spec.rb
 spec/models/get_whats_app_display_name200_response_spec.rb
@@ -6970,7 +7039,6 @@ spec/models/list_comment_automation_logs200_response_misses_samples_inner_spec.r
 spec/models/list_comment_automation_logs200_response_misses_spec.rb
 spec/models/list_comment_automation_logs200_response_spec.rb
 spec/models/list_comment_automations200_response_automations_inner_spec.rb
-spec/models/list_comment_automations200_response_automations_inner_stats_spec.rb
 spec/models/list_comment_automations200_response_spec.rb
 spec/models/list_commerce_catalog_syncs200_response_spec.rb
 spec/models/list_commerce_channels200_response_spec.rb
@@ -7177,6 +7245,9 @@ spec/models/media_item_spec.rb
 spec/models/media_subtitle_spec.rb
 spec/models/media_upload_response_spec.rb
 spec/models/messaging_carousel_card_spec.rb
+spec/models/messenger_greeting_spec.rb
+spec/models/messenger_ice_breaker_locale_call_to_actions_inner_spec.rb
+spec/models/messenger_ice_breaker_locale_spec.rb
 spec/models/meta_ads_platform_data_spec.rb
 spec/models/meta_assigned_user_spec.rb
 spec/models/meta_business_user_spec.rb
@@ -7607,12 +7678,15 @@ spec/models/set_imessage_subscription_request_spec.rb
 spec/models/set_instagram_ice_breakers_request_ice_breakers_inner_spec.rb
 spec/models/set_instagram_ice_breakers_request_spec.rb
 spec/models/set_messenger_get_started_request_spec.rb
+spec/models/set_messenger_greeting_request_spec.rb
+spec/models/set_messenger_ice_breakers_request_spec.rb
 spec/models/set_messenger_menu_request_spec.rb
 spec/models/set_partnership_ad_permission200_response_spec.rb
 spec/models/set_partnership_ad_permission_request_spec.rb
 spec/models/set_reddit_post_flair_request_spec.rb
 spec/models/set_telegram_commands_request_commands_inner_spec.rb
 spec/models/set_telegram_commands_request_spec.rb
+spec/models/set_whats_app_conversational_automation_request_spec.rb
 spec/models/set_whats_app_flows_encryption_key_request_spec.rb
 spec/models/set_whatsapp_business_username200_response_spec.rb
 spec/models/set_whatsapp_business_username_request_spec.rb
@@ -7679,6 +7753,8 @@ spec/models/tracking_tag_spec.rb
 spec/models/tracking_tag_user_spec.rb
 spec/models/transfer_voice_call200_response_spec.rb
 spec/models/transfer_voice_call_request_spec.rb
+spec/models/trigger_api_call_workflow201_response_spec.rb
+spec/models/trigger_api_call_workflow_request_spec.rb
 spec/models/trigger_workflow200_response_execution_spec.rb
 spec/models/trigger_workflow200_response_spec.rb
 spec/models/trigger_workflow_request_spec.rb
@@ -8054,6 +8130,9 @@ spec/models/webhook_payload_comment_spec.rb
 spec/models/webhook_payload_commerce_product_resource_spec.rb
 spec/models/webhook_payload_commerce_product_spec.rb
 spec/models/webhook_payload_commerce_product_store_spec.rb
+spec/models/webhook_payload_contact_field_changed_spec.rb
+spec/models/webhook_payload_contact_tag_contact_spec.rb
+spec/models/webhook_payload_contact_tag_spec.rb
 spec/models/webhook_payload_conversation_control_changed_control_spec.rb
 spec/models/webhook_payload_conversation_control_changed_spec.rb
 spec/models/webhook_payload_conversation_started_spec.rb
@@ -8108,6 +8187,7 @@ spec/models/webhook_payload_referral_spec.rb
 spec/models/webhook_payload_review_new_account_spec.rb
 spec/models/webhook_payload_review_new_spec.rb
 spec/models/webhook_payload_review_updated_spec.rb
+spec/models/webhook_payload_sequence_enrollment_spec.rb
 spec/models/webhook_payload_test_spec.rb
 spec/models/webhook_payload_whats_app_account_alert_received_alert_spec.rb
 spec/models/webhook_payload_whats_app_account_alert_received_spec.rb
@@ -8125,6 +8205,11 @@ spec/models/webhook_payload_whats_app_template_category_updated_template_spec.rb
 spec/models/webhook_payload_whats_app_template_status_updated_account_spec.rb
 spec/models/webhook_payload_whats_app_template_status_updated_spec.rb
 spec/models/webhook_payload_whats_app_template_status_updated_template_spec.rb
+spec/models/webhook_payload_workflow_run_conversation_spec.rb
+spec/models/webhook_payload_workflow_run_execution_spec.rb
+spec/models/webhook_payload_workflow_run_spec.rb
+spec/models/webhook_payload_workflow_run_trigger_spec.rb
+spec/models/webhook_payload_workflow_run_workflow_spec.rb
 spec/models/webhook_spec.rb
 spec/models/whats_app_billing_conversation_spec.rb
 spec/models/whats_app_body_component_example_spec.rb
@@ -8135,6 +8220,8 @@ spec/models/whats_app_carousel_component_cards_inner_spec.rb
 spec/models/whats_app_carousel_component_spec.rb
 spec/models/whats_app_commerce_settings_spec.rb
 spec/models/whats_app_contact_identity_spec.rb
+spec/models/whats_app_conversational_automation_commands_inner_spec.rb
+spec/models/whats_app_conversational_automation_spec.rb
 spec/models/whats_app_footer_component_spec.rb
 spec/models/whats_app_header_component_example_spec.rb
 spec/models/whats_app_header_component_spec.rb

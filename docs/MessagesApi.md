@@ -4,6 +4,7 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**accept_conversation_request**](MessagesApi.md#accept_conversation_request) | **POST** /v1/inbox/conversations/{conversationId}/accept | Accept a message request |
 | [**add_message_reaction**](MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction |
 | [**create_inbox_conversation**](MessagesApi.md#create_inbox_conversation) | **POST** /v1/inbox/conversations | Create conversation |
 | [**delete_inbox_message**](MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message |
@@ -17,9 +18,80 @@ All URIs are relative to *https://zernio.com/api*
 | [**search_inbox_conversations**](MessagesApi.md#search_inbox_conversations) | **GET** /v1/inbox/conversations/search | Search conversations |
 | [**send_inbox_message**](MessagesApi.md#send_inbox_message) | **POST** /v1/inbox/conversations/{conversationId}/messages | Send message |
 | [**send_typing_indicator**](MessagesApi.md#send_typing_indicator) | **POST** /v1/inbox/conversations/{conversationId}/typing | Send typing indicator |
-| [**set_conversation_thread_control**](MessagesApi.md#set_conversation_thread_control) | **POST** /v1/inbox/conversations/{conversationId}/thread-control | Hand a conversation to or from Meta Business Agent |
+| [**set_conversation_thread_control**](MessagesApi.md#set_conversation_thread_control) | **POST** /v1/inbox/conversations/{conversationId}/thread-control | Change who answers a conversation (handover) |
 | [**update_inbox_conversation**](MessagesApi.md#update_inbox_conversation) | **PUT** /v1/inbox/conversations/{conversationId} | Update conversation status |
 | [**upload_media_direct**](MessagesApi.md#upload_media_direct) | **POST** /v1/media/upload-direct | Upload media file |
+
+
+## accept_conversation_request
+
+> <AcceptConversationRequest200Response> accept_conversation_request(conversation_id, accept_conversation_request_request)
+
+Accept a message request
+
+Accept a Facebook or Instagram Message Request (listed with `GET /v1/inbox/conversations?folder=requests`) by replying to it. Meta has no separate accept call: the first reply is what moves the thread into the inbox, so this sends `message` through the same path, checks and webhooks as `POST /v1/inbox/conversations/{conversationId}/messages`, and answers the same way. Supports the `Idempotency-Key` header. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | The `id` of the request item from the requests folder.
+accept_conversation_request_request = Zernio::AcceptConversationRequestRequest.new({account_id: 'account_id_example', message: 'message_example'}) # AcceptConversationRequestRequest | 
+
+begin
+  # Accept a message request
+  result = api_instance.accept_conversation_request(conversation_id, accept_conversation_request_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->accept_conversation_request: #{e}"
+end
+```
+
+#### Using the accept_conversation_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AcceptConversationRequest200Response>, Integer, Hash)> accept_conversation_request_with_http_info(conversation_id, accept_conversation_request_request)
+
+```ruby
+begin
+  # Accept a message request
+  data, status_code, headers = api_instance.accept_conversation_request_with_http_info(conversation_id, accept_conversation_request_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AcceptConversationRequest200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->accept_conversation_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | The &#x60;id&#x60; of the request item from the requests folder. |  |
+| **accept_conversation_request_request** | [**AcceptConversationRequestRequest**](AcceptConversationRequestRequest.md) |  |  |
+
+### Return type
+
+[**AcceptConversationRequest200Response**](AcceptConversationRequest200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## add_message_reaction
@@ -563,6 +635,7 @@ opts = {
   profile_id: 'profile_id_example', # String | Filter by profile ID
   platform: 'facebook', # String | Filter by platform
   status: 'active', # String | Filter by conversation status
+  folder: 'inbox', # String | requests lists Facebook and Instagram Message Requests (threads from people the account has not accepted) live from Meta, first page only, each item with `folder: requests`. Meta has no accept call: replying moves a thread to the inbox, which is what POST /v1/inbox/conversations/{conversationId}/accept does. When Meta will not list the folder for the one account asked (`accountId`), the call answers 400 PLATFORM_LIMITATION; across several accounts the refusal is reported per account in meta.failedAccounts.
   sort_order: 'asc', # String | Sort order by updated time
   limit: 56, # Integer | Maximum number of conversations to return
   cursor: 'cursor_example', # String | Pagination cursor for next page
@@ -603,6 +676,7 @@ end
 | **profile_id** | **String** | Filter by profile ID | [optional] |
 | **platform** | **String** | Filter by platform | [optional] |
 | **status** | **String** | Filter by conversation status | [optional] |
+| **folder** | **String** | requests lists Facebook and Instagram Message Requests (threads from people the account has not accepted) live from Meta, first page only, each item with &#x60;folder: requests&#x60;. Meta has no accept call: replying moves a thread to the inbox, which is what POST /v1/inbox/conversations/{conversationId}/accept does. When Meta will not list the folder for the one account asked (&#x60;accountId&#x60;), the call answers 400 PLATFORM_LIMITATION; across several accounts the refusal is reported per account in meta.failedAccounts. | [optional][default to &#39;inbox&#39;] |
 | **sort_order** | **String** | Sort order by updated time | [optional][default to &#39;desc&#39;] |
 | **limit** | **Integer** | Maximum number of conversations to return | [optional][default to 50] |
 | **cursor** | **String** | Pagination cursor for next page | [optional] |
@@ -999,9 +1073,9 @@ end
 
 > <SetConversationThreadControl200Response> set_conversation_thread_control(conversation_id, set_conversation_thread_control_request)
 
-Hand a conversation to or from Meta Business Agent
+Change who answers a conversation (handover)
 
-WhatsApp only, on numbers with Meta Business Agent enabled. Wraps Meta's thread control: - `release`: hand the conversation back to the agent so it resumes answering. You must currently hold control (sending any message takes it implicitly). - `take`: take control before sending anything, so the agent stops replying while an operator reads the thread. Meta accepts this only from the business configured as the number's escalation partner; other apps take control by sending a message. - `pass`: transfer control to the number's configured escalation partner, or to the agent with `target: ai_agent`. Meta's Cloud API currently rejects it (\"Pass action is not supported\", verified 2026-09-08); use `release` to hand a thread back to the agent.  The conversation's `threadControl` follows the result; a `conversation.control_changed` webhook fires when Meta later reports the change. 
+Meta's handover protocol on WhatsApp, Facebook and Instagram.  **WhatsApp**, on numbers with Meta Business Agent enabled: - `release`: hand the conversation back to the agent so it resumes answering. You must currently hold control (sending any message takes it implicitly). - `take`: take control before sending anything, so the agent stops replying while an operator reads the thread. Meta accepts this only from the business configured as the number's escalation partner; other apps take control by sending a message. - `pass`: transfer control to the number's configured escalation partner, or to the agent with `target: ai_agent`. Meta's Cloud API currently rejects it (\"Pass action is not supported\", verified 2026-09-08); use `release` to hand a thread back to the agent.  **Facebook and Instagram** (Messenger Platform handover between the apps on the Page, such as Page Inbox): - `pass` with `targetAppId`: give the thread to another app (`pass_thread_control`). Page Inbox is 263902037430900. - `take`: take the thread back (`take_thread_control`); Meta allows it only to the Page's primary receiver. - `request`: ask the current owner to pass the thread (`request_thread_control`); nothing changes until it does. - `release`: give the thread back to the primary receiver (`release_thread_control`).  While another app owns a Facebook or Instagram thread, inbound arrive with `metadata.standby: true` and a send answers 409 `not_thread_owner`. The conversation's `threadControl` follows the result; a `conversation.control_changed` webhook fires when Meta later reports the change. 
 
 ### Examples
 
@@ -1019,7 +1093,7 @@ conversation_id = 'conversation_id_example' # String | The conversation ID
 set_conversation_thread_control_request = Zernio::SetConversationThreadControlRequest.new({account_id: 'account_id_example', action: 'release'}) # SetConversationThreadControlRequest | 
 
 begin
-  # Hand a conversation to or from Meta Business Agent
+  # Change who answers a conversation (handover)
   result = api_instance.set_conversation_thread_control(conversation_id, set_conversation_thread_control_request)
   p result
 rescue Zernio::ApiError => e
@@ -1035,7 +1109,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Hand a conversation to or from Meta Business Agent
+  # Change who answers a conversation (handover)
   data, status_code, headers = api_instance.set_conversation_thread_control_with_http_info(conversation_id, set_conversation_thread_control_request)
   p status_code # => 2xx
   p headers # => { ... }

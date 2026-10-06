@@ -29,8 +29,14 @@
 | **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
 | **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
 | **also_match_in_dms** | **Boolean** | Whether these keywords also fire on a plain inbound DM. | [optional] |
+| **repeat_policy** | [**CommentAutomationRepeatPolicy**](CommentAutomationRepeatPolicy.md) |  | [optional] |
+| **dedupe_same_text_hours** | **Integer** | Same-text dedupe window in hours. Omitted when off. | [optional] |
+| **public_reply_policy** | **String** |  | [optional] |
+| **actions** | [**CommentAutomationActions**](CommentAutomationActions.md) |  | [optional] |
+| **quick_replies** | [**Array&lt;CommentAutomationQuickReply&gt;**](CommentAutomationQuickReply.md) |  | [optional] |
+| **dm_media** | [**CommentAutomationDmMedia**](CommentAutomationDmMedia.md) |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
-| **stats** | [**CreateCommentAutomation200ResponseAutomationStats**](CreateCommentAutomation200ResponseAutomationStats.md) |  | [optional] |
+| **stats** | [**CommentAutomationStats**](CommentAutomationStats.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
 | **updated_at** | **Time** |  | [optional] |
 
@@ -65,6 +71,12 @@ instance = Zernio::GetCommentAutomation200ResponseAutomation.new(
   audience: null,
   follow_gate: null,
   also_match_in_dms: null,
+  repeat_policy: null,
+  dedupe_same_text_hours: null,
+  public_reply_policy: null,
+  actions: null,
+  quick_replies: null,
+  dm_media: null,
   is_active: null,
   stats: null,
   created_at: null,

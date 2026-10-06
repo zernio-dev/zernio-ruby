@@ -16,6 +16,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_workflows**](WorkflowsApi.md#list_workflows) | **GET** /v1/workflows | List workflows |
 | [**pause_workflow**](WorkflowsApi.md#pause_workflow) | **POST** /v1/workflows/{workflowId}/pause | Pause workflow |
 | [**restore_workflow_version**](WorkflowsApi.md#restore_workflow_version) | **POST** /v1/workflows/{workflowId}/versions/{version}/restore | Restore a workflow version |
+| [**trigger_api_call_workflow**](WorkflowsApi.md#trigger_api_call_workflow) | **POST** /v1/workflows/{workflowId}/trigger | Start an API-triggered workflow |
 | [**trigger_workflow**](WorkflowsApi.md#trigger_workflow) | **POST** /v1/workflows/{workflowId}/executions | Manually start a workflow run |
 | [**update_workflow**](WorkflowsApi.md#update_workflow) | **PATCH** /v1/workflows/{workflowId} | Update workflow |
 
@@ -866,6 +867,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## trigger_api_call_workflow
+
+> <TriggerApiCallWorkflow201Response> trigger_api_call_workflow(workflow_id, trigger_api_call_workflow_request)
+
+Start an API-triggered workflow
+
+Starts a run of an active workflow whose trigger type is `api_call`. Pass exactly one target: `conversationId` (a conversation on the workflow's account), `contactId` (resolved to that contact's conversation on the workflow's account), or `to` (WhatsApp workflows only: a phone number, whose conversation is found or created). `variables` are merged over the standard run variables, so each key is available as `{{key}}`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WorkflowsApi.new
+workflow_id = 'workflow_id_example' # String | 
+trigger_api_call_workflow_request = Zernio::TriggerApiCallWorkflowRequest.new # TriggerApiCallWorkflowRequest | 
+
+begin
+  # Start an API-triggered workflow
+  result = api_instance.trigger_api_call_workflow(workflow_id, trigger_api_call_workflow_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->trigger_api_call_workflow: #{e}"
+end
+```
+
+#### Using the trigger_api_call_workflow_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<TriggerApiCallWorkflow201Response>, Integer, Hash)> trigger_api_call_workflow_with_http_info(workflow_id, trigger_api_call_workflow_request)
+
+```ruby
+begin
+  # Start an API-triggered workflow
+  data, status_code, headers = api_instance.trigger_api_call_workflow_with_http_info(workflow_id, trigger_api_call_workflow_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <TriggerApiCallWorkflow201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->trigger_api_call_workflow_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **workflow_id** | **String** |  |  |
+| **trigger_api_call_workflow_request** | [**TriggerApiCallWorkflowRequest**](TriggerApiCallWorkflowRequest.md) |  |  |
+
+### Return type
+
+[**TriggerApiCallWorkflow201Response**](TriggerApiCallWorkflow201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

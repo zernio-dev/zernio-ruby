@@ -13,6 +13,7 @@
 | **created_at** | **Time** |  |  |
 | **is_reply** | **Boolean** | Whether this is a reply to another comment |  |
 | **parent_comment_id** | **String** | Parent comment ID if this is a reply |  |
+| **is_live** | **Boolean** | Instagram only: true when the comment was made on a live broadcast (the live_comments webhook field). Absent on every other comment. | [optional] |
 | **ad** | [**WebhookPayloadCommentCommentAd**](WebhookPayloadCommentCommentAd.md) |  | [optional] |
 | **attachment** | [**WebhookPayloadCommentCommentAttachment**](WebhookPayloadCommentCommentAttachment.md) |  | [optional] |
 
@@ -31,6 +32,7 @@ instance = Zernio::WebhookPayloadCommentComment.new(
   created_at: null,
   is_reply: null,
   parent_comment_id: null,
+  is_live: null,
   ad: null,
   attachment: null
 )
