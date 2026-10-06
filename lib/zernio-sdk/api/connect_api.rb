@@ -960,6 +960,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Connect a Whop account
+    # Connect a Whop account with an Account API key from the Whop dashboard (Developer > API keys). The key only has to be able to read its own account: Zernio calls `GET /accounts/me` once to learn the account id (`biz_...`) and name, then stores the key.  What the connection unlocks today is the Whop Pixel through the tracking-tags API: the account id is the pixel, so `GET /v1/accounts/{accountId}/tracking-tags` lists it and `POST .../tracking-tags/{biz_...}/install` puts it on a Shopify store or WordPress site. Whop campaigns are not managed through Zernio. One Whop account per profile. 
+    # @param connect_whop_ads_credentials_request [ConnectWhopAdsCredentialsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ConnectWhopAdsCredentials200Response]
+    def connect_whop_ads_credentials(connect_whop_ads_credentials_request, opts = {})
+      data, _status_code, _headers = connect_whop_ads_credentials_with_http_info(connect_whop_ads_credentials_request, opts)
+      data
+    end
+
+    # Connect a Whop account
+    # Connect a Whop account with an Account API key from the Whop dashboard (Developer &gt; API keys). The key only has to be able to read its own account: Zernio calls &#x60;GET /accounts/me&#x60; once to learn the account id (&#x60;biz_...&#x60;) and name, then stores the key.  What the connection unlocks today is the Whop Pixel through the tracking-tags API: the account id is the pixel, so &#x60;GET /v1/accounts/{accountId}/tracking-tags&#x60; lists it and &#x60;POST .../tracking-tags/{biz_...}/install&#x60; puts it on a Shopify store or WordPress site. Whop campaigns are not managed through Zernio. One Whop account per profile. 
+    # @param connect_whop_ads_credentials_request [ConnectWhopAdsCredentialsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ConnectWhopAdsCredentials200Response, Integer, Hash)>] ConnectWhopAdsCredentials200Response data, response status code and response headers
+    def connect_whop_ads_credentials_with_http_info(connect_whop_ads_credentials_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.connect_whop_ads_credentials ...'
+      end
+      # verify the required parameter 'connect_whop_ads_credentials_request' is set
+      if @api_client.config.client_side_validation && connect_whop_ads_credentials_request.nil?
+        fail ArgumentError, "Missing the required parameter 'connect_whop_ads_credentials_request' when calling ConnectApi.connect_whop_ads_credentials"
+      end
+      # resource path
+      local_var_path = '/v1/connect/whop-ads/credentials'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(connect_whop_ads_credentials_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ConnectWhopAdsCredentials200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.connect_whop_ads_credentials",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#connect_whop_ads_credentials\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Connect self-hosted WordPress with an application password
     # Connects one self-hosted WordPress site using a WordPress username and application password. `siteUrl` must use HTTPS and may include the path where WordPress is installed. Zernio discovers the REST API, verifies the credentials and required post/media/taxonomy capabilities, then stores the password encrypted. Create an application password in the WordPress user's profile; do not send the user's login password. Reconnecting the same site and profile updates the connection in place. 
     # @param connect_word_press_with_application_password_request [ConnectWordPressWithApplicationPasswordRequest] 

@@ -14,38 +14,24 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateTrackingTag201Response < ApiModelBase
-    attr_accessor :platform
+  class ConnectWhopAdsCredentials200Response < ApiModelBase
+    # The Zernio account id (platform `whopads`) to use as `{accountId}` on the tracking-tags routes.
+    attr_accessor :account_id
 
-    attr_accessor :tag
+    # The Whop account id (`biz_...`), which is also the tracking tag id.
+    attr_accessor :whop_account_id
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :account_name
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :redirect_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'platform' => :'platform',
-        :'tag' => :'tag'
+        :'account_id' => :'accountId',
+        :'whop_account_id' => :'whopAccountId',
+        :'account_name' => :'accountName',
+        :'redirect_url' => :'redirectUrl'
       }
     end
 
@@ -62,8 +48,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'platform' => :'String',
-        :'tag' => :'TrackingTag'
+        :'account_id' => :'String',
+        :'whop_account_id' => :'String',
+        :'account_name' => :'String',
+        :'redirect_url' => :'String'
       }
     end
 
@@ -77,24 +65,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateTrackingTag201Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ConnectWhopAdsCredentials200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateTrackingTag201Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ConnectWhopAdsCredentials200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'platform')
-        self.platform = attributes[:'platform']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'tag')
-        self.tag = attributes[:'tag']
+      if attributes.key?(:'whop_account_id')
+        self.whop_account_id = attributes[:'whop_account_id']
+      end
+
+      if attributes.key?(:'account_name')
+        self.account_name = attributes[:'account_name']
+      end
+
+      if attributes.key?(:'redirect_url')
+        self.redirect_url = attributes[:'redirect_url']
       end
     end
 
@@ -110,19 +106,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      platform_validator = EnumAttributeValidator.new('String', ["metaads", "openaiads", "tiktokads", "googleads", "xads", "linkedinads", "pinterestads", "whopads"])
-      return false unless platform_validator.valid?(@platform)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] platform Object to be assigned
-    def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["metaads", "openaiads", "tiktokads", "googleads", "xads", "linkedinads", "pinterestads", "whopads"])
-      unless validator.valid?(platform)
-        fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
-      end
-      @platform = platform
     end
 
     # Checks equality by comparing each attribute.
@@ -130,8 +114,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          platform == o.platform &&
-          tag == o.tag
+          account_id == o.account_id &&
+          whop_account_id == o.whop_account_id &&
+          account_name == o.account_name &&
+          redirect_url == o.redirect_url
     end
 
     # @see the `==` method
@@ -143,7 +129,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, tag].hash
+      [account_id, whop_account_id, account_name, redirect_url].hash
     end
 
     # Builds the object from hash

@@ -30,7 +30,7 @@ describe Zernio::CreateTrackingTag201Response do
   describe 'test attribute "platform"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["metaads", "openaiads", "tiktokads", "googleads", "xads", "linkedinads", "pinterestads"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["metaads", "openaiads", "tiktokads", "googleads", "xads", "linkedinads", "pinterestads", "whopads"])
       # validator.allowable_values.each do |value|
       #   expect { instance.platform = value }.not_to raise_error
       # end

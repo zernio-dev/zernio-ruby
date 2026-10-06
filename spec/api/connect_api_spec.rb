@@ -203,6 +203,18 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for connect_whop_ads_credentials
+  # Connect a Whop account
+  # Connect a Whop account with an Account API key from the Whop dashboard (Developer &gt; API keys). The key only has to be able to read its own account: Zernio calls &#x60;GET /accounts/me&#x60; once to learn the account id (&#x60;biz_...&#x60;) and name, then stores the key.  What the connection unlocks today is the Whop Pixel through the tracking-tags API: the account id is the pixel, so &#x60;GET /v1/accounts/{accountId}/tracking-tags&#x60; lists it and &#x60;POST .../tracking-tags/{biz_...}/install&#x60; puts it on a Shopify store or WordPress site. Whop campaigns are not managed through Zernio. One Whop account per profile. 
+  # @param connect_whop_ads_credentials_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ConnectWhopAdsCredentials200Response]
+  describe 'connect_whop_ads_credentials test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for connect_word_press_with_application_password
   # Connect self-hosted WordPress with an application password
   # Connects one self-hosted WordPress site using a WordPress username and application password. &#x60;siteUrl&#x60; must use HTTPS and may include the path where WordPress is installed. Zernio discovers the REST API, verifies the credentials and required post/media/taxonomy capabilities, then stores the password encrypted. Create an application password in the WordPress user&#39;s profile; do not send the user&#39;s login password. Reconnecting the same site and profile updates the connection in place. 

@@ -524,6 +524,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**connect_slack_channel**](docs/ConnectApi.md#connect_slack_channel) | **POST** /v1/connect/slack | Connect a Slack channel
 *Zernio::ConnectApi* | [**connect_whats_app_credentials**](docs/ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials
 *Zernio::ConnectApi* | [**connect_whats_app_embedded_signup**](docs/ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup
+*Zernio::ConnectApi* | [**connect_whop_ads_credentials**](docs/ConnectApi.md#connect_whop_ads_credentials) | **POST** /v1/connect/whop-ads/credentials | Connect a Whop account
 *Zernio::ConnectApi* | [**connect_word_press_with_application_password**](docs/ConnectApi.md#connect_word_press_with_application_password) | **POST** /v1/connect/wordpress/token | Connect self-hosted WordPress with an application password
 *Zernio::ConnectApi* | [**create_pinterest_board**](docs/ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board
 *Zernio::ConnectApi* | [**create_youtube_playlist**](docs/ConnectApi.md#create_youtube_playlist) | **POST** /v1/accounts/{accountId}/youtube-playlists | Create YouTube playlist
@@ -1387,6 +1388,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ConnectWhatsAppEmbeddedSignup200Response](docs/ConnectWhatsAppEmbeddedSignup200Response.md)
  - [Zernio::ConnectWhatsAppEmbeddedSignup200ResponseAccount](docs/ConnectWhatsAppEmbeddedSignup200ResponseAccount.md)
  - [Zernio::ConnectWhatsAppEmbeddedSignupRequest](docs/ConnectWhatsAppEmbeddedSignupRequest.md)
+ - [Zernio::ConnectWhopAdsCredentials200Response](docs/ConnectWhopAdsCredentials200Response.md)
+ - [Zernio::ConnectWhopAdsCredentialsRequest](docs/ConnectWhopAdsCredentialsRequest.md)
  - [Zernio::ConnectWordPressWithApplicationPassword200Response](docs/ConnectWordPressWithApplicationPassword200Response.md)
  - [Zernio::ConnectWordPressWithApplicationPassword200ResponseAccount](docs/ConnectWordPressWithApplicationPassword200ResponseAccount.md)
  - [Zernio::ConnectWordPressWithApplicationPasswordRequest](docs/ConnectWordPressWithApplicationPasswordRequest.md)
