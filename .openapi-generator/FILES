@@ -868,6 +868,7 @@ docs/GetAdNegativeKeywordList200ResponseList.md
 docs/GetAdPreviews200Response.md
 docs/GetAdReview200Response.md
 docs/GetAdReview200ResponseReview.md
+docs/GetAdReview200ResponseReviewPolicyTopicsInner.md
 docs/GetAdReview200ResponseReviewRejectionsInner.md
 docs/GetAdReview200ResponseReviewRejectionsInnerContent.md
 docs/GetAdSetDetails200Response.md
@@ -3687,6 +3688,7 @@ lib/zernio-sdk/models/get_ad_negative_keyword_list200_response_list.rb
 lib/zernio-sdk/models/get_ad_previews200_response.rb
 lib/zernio-sdk/models/get_ad_review200_response.rb
 lib/zernio-sdk/models/get_ad_review200_response_review.rb
+lib/zernio-sdk/models/get_ad_review200_response_review_policy_topics_inner.rb
 lib/zernio-sdk/models/get_ad_review200_response_review_rejections_inner.rb
 lib/zernio-sdk/models/get_ad_review200_response_review_rejections_inner_content.rb
 lib/zernio-sdk/models/get_ad_set_details200_response.rb
@@ -6457,6 +6459,7 @@ spec/models/get_ad_media200_response_spec.rb
 spec/models/get_ad_negative_keyword_list200_response_list_spec.rb
 spec/models/get_ad_negative_keyword_list200_response_spec.rb
 spec/models/get_ad_previews200_response_spec.rb
+spec/models/get_ad_review200_response_review_policy_topics_inner_spec.rb
 spec/models/get_ad_review200_response_review_rejections_inner_content_spec.rb
 spec/models/get_ad_review200_response_review_rejections_inner_spec.rb
 spec/models/get_ad_review200_response_review_spec.rb

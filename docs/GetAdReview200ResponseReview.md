@@ -11,7 +11,9 @@
 | **forbidden_locations** | **Array&lt;String&gt;** |  | [optional] |
 | **forbidden_operating_systems** | **Array&lt;String&gt;** |  | [optional] |
 | **rejections** | [**Array&lt;GetAdReview200ResponseReviewRejectionsInner&gt;**](GetAdReview200ResponseReviewRejectionsInner.md) | One entry per rejected piece of content (TikTok &#x60;reject_info&#x60;). Empty when the ad was approved. | [optional] |
-| **read_at** | **Time** | When the verdict was read from TikTok. | [optional] |
+| **approval_status** | **String** | Google only. ad_group_ad.policy_summary.approval_status, verbatim. | [optional] |
+| **policy_topics** | [**Array&lt;GetAdReview200ResponseReviewPolicyTopicsInner&gt;**](GetAdReview200ResponseReviewPolicyTopicsInner.md) | Google only. ad_group_ad.policy_summary.policy_topic_entries. | [optional] |
+| **read_at** | **Time** | When the verdict was read from the platform. | [optional] |
 
 ## Example
 
@@ -26,6 +28,8 @@ instance = Zernio::GetAdReview200ResponseReview.new(
   forbidden_locations: null,
   forbidden_operating_systems: null,
   rejections: null,
+  approval_status: null,
+  policy_topics: null,
   read_at: null
 )
 ```

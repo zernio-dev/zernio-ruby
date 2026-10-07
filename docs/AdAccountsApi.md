@@ -1606,7 +1606,7 @@ end
 
 Ad account change / audit log
 
-Account-level audit log from Meta's `/act_X/activities`: who changed what and when (creates, edits, status flips, budget changes...) with Meta's translated event names and the structured before/after in `extra_data`. Rows are returned verbatim. Meta has no server-side per-object filter on this edge, so `objectId` filters the returned page client-side (combine with paging to walk history for one campaign/ad set/ad).
+**Google**: reads the customer's `change_event` history, newest first. Google keeps 30 days of it, so `since` defaults to 29 days ago and an older `since` returns 400; `until` defaults to today. Each change is mapped onto the Meta row shape: `event_type` = resource_change_operation (CREATE, UPDATE, REMOVE), `event_time` = change_date_time, `actor_name` = user_email, `object_type` = change_resource_type, `object_id` = the last numeric id of `object_resource_name`, `application_name` = client_type, `changed_fields` (array), and `extra_data` = a JSON string `{ old, new }` with Google's old and new resource. Pass `paging.after` back as `after` for the next page; it is null when nothing older is left. A page never splits a change batch (the changes of one request share an `event_time`), so a page can hold fewer rows than `limit` while more follow, or more when one batch is larger than `limit`. `adAccountId` is the numeric customer id.  **Meta**: Account-level audit log from Meta's `/act_X/activities`: who changed what and when (creates, edits, status flips, budget changes...) with Meta's translated event names and the structured before/after in `extra_data`. Rows are returned verbatim. Meta has no server-side per-object filter on this edge, so `objectId` filters the returned page client-side (combine with paging to walk history for one campaign/ad set/ad).
 
 ### Examples
 
@@ -1621,11 +1621,11 @@ end
 
 api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>), or the Google customer id (digits only).
 opts = {
-  since: Date.parse('2013-10-20'), # Date | Start of range (YYYY-MM-DD).
+  since: Date.parse('2013-10-20'), # Date | Start of range (YYYY-MM-DD). Google: at most 29 days ago, the default.
   _until: Date.parse('2013-10-20'), # Date | End of range (YYYY-MM-DD).
-  object_id: 'object_id_example', # String | Client-side filter to one Meta object id (campaign, ad set or ad).
+  object_id: 'object_id_example', # String | Client-side filter to one object id (campaign, ad set / ad group or ad).
   limit: 56, # Integer | Rows per page
   after: 'after_example' # String | Cursor from paging.after of the previous page.
 }
@@ -1662,10 +1662,10 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
-| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
-| **since** | **Date** | Start of range (YYYY-MM-DD). | [optional] |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;), or the Google customer id (digits only). |  |
+| **since** | **Date** | Start of range (YYYY-MM-DD). Google: at most 29 days ago, the default. | [optional] |
 | **_until** | **Date** | End of range (YYYY-MM-DD). | [optional] |
-| **object_id** | **String** | Client-side filter to one Meta object id (campaign, ad set or ad). | [optional] |
+| **object_id** | **String** | Client-side filter to one object id (campaign, ad set / ad group or ad). | [optional] |
 | **limit** | **Integer** | Rows per page | [optional][default to 50] |
 | **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
 
