@@ -14,49 +14,25 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateCampaignTargetingRequestTargeting < ApiModelBase
-    # Devices to include. Devices not listed become excluded (negative) criteria, same contract as the existing devices-only edit.
-    attr_accessor :devices
+  class UpdateCampaignTargetingRequestTargetingExcludedLocationsOneOf < ApiModelBase
+    attr_accessor :countries
 
-    attr_accessor :locations
+    attr_accessor :regions
 
-    # Google's language codes (ISO 639-1, plus variants such as `zh_CN`), e.g. [\"en\", \"de\"].
-    attr_accessor :languages
+    attr_accessor :cities
 
-    attr_accessor :excluded_locations
+    attr_accessor :zips
 
-    attr_accessor :location_targeting_type
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :metros
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'devices' => :'devices',
-        :'locations' => :'locations',
-        :'languages' => :'languages',
-        :'excluded_locations' => :'excludedLocations',
-        :'location_targeting_type' => :'locationTargetingType'
+        :'countries' => :'countries',
+        :'regions' => :'regions',
+        :'cities' => :'cities',
+        :'zips' => :'zips',
+        :'metros' => :'metros'
       }
     end
 
@@ -73,11 +49,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'devices' => :'Array<UpdateCampaignTargetingRequestTargetingDevicesInner>',
-        :'locations' => :'UpdateCampaignTargetingRequestTargetingLocations',
-        :'languages' => :'Array<String>',
-        :'excluded_locations' => :'UpdateCampaignTargetingRequestTargetingExcludedLocations',
-        :'location_targeting_type' => :'GoogleLocationTargetingType'
+        :'countries' => :'Array<String>',
+        :'regions' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
+        :'cities' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
+        :'zips' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
+        :'metros' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>'
       }
     end
 
@@ -91,40 +67,46 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateCampaignTargetingRequestTargeting` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateCampaignTargetingRequestTargetingExcludedLocationsOneOf` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateCampaignTargetingRequestTargeting`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateCampaignTargetingRequestTargetingExcludedLocationsOneOf`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'devices')
-        if (value = attributes[:'devices']).is_a?(Array)
-          self.devices = value
+      if attributes.key?(:'countries')
+        if (value = attributes[:'countries']).is_a?(Array)
+          self.countries = value
         end
       end
 
-      if attributes.key?(:'locations')
-        self.locations = attributes[:'locations']
-      end
-
-      if attributes.key?(:'languages')
-        if (value = attributes[:'languages']).is_a?(Array)
-          self.languages = value
+      if attributes.key?(:'regions')
+        if (value = attributes[:'regions']).is_a?(Array)
+          self.regions = value
         end
       end
 
-      if attributes.key?(:'excluded_locations')
-        self.excluded_locations = attributes[:'excluded_locations']
+      if attributes.key?(:'cities')
+        if (value = attributes[:'cities']).is_a?(Array)
+          self.cities = value
+        end
       end
 
-      if attributes.key?(:'location_targeting_type')
-        self.location_targeting_type = attributes[:'location_targeting_type']
+      if attributes.key?(:'zips')
+        if (value = attributes[:'zips']).is_a?(Array)
+          self.zips = value
+        end
+      end
+
+      if attributes.key?(:'metros')
+        if (value = attributes[:'metros']).is_a?(Array)
+          self.metros = value
+        end
       end
     end
 
@@ -148,11 +130,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          devices == o.devices &&
-          locations == o.locations &&
-          languages == o.languages &&
-          excluded_locations == o.excluded_locations &&
-          location_targeting_type == o.location_targeting_type
+          countries == o.countries &&
+          regions == o.regions &&
+          cities == o.cities &&
+          zips == o.zips &&
+          metros == o.metros
     end
 
     # @see the `==` method
@@ -164,7 +146,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [devices, locations, languages, excluded_locations, location_targeting_type].hash
+      [countries, regions, cities, zips, metros].hash
     end
 
     # Builds the object from hash

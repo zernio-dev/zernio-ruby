@@ -19,6 +19,12 @@ module Zernio
 
     attr_accessor :locations
 
+    # The negative (excluded) location criteria, same item shape as `locations` with `negative: true`.
+    attr_accessor :excluded_locations
+
+    # Whether PUT accepts `excludedLocations` for this campaign. False on Demand Gen, which returns 400 for any exclusion.
+    attr_accessor :excluded_locations_editable
+
     attr_accessor :languages
 
     # Who the location targeting reaches, see GoogleLocationTargetingType. Null when Google reports a legacy value (SEARCH_INTEREST) this API does not set.
@@ -57,6 +63,8 @@ module Zernio
       {
         :'devices' => :'devices',
         :'locations' => :'locations',
+        :'excluded_locations' => :'excludedLocations',
+        :'excluded_locations_editable' => :'excludedLocationsEditable',
         :'languages' => :'languages',
         :'location_targeting_type' => :'locationTargetingType',
         :'cached_at' => :'cachedAt',
@@ -79,6 +87,8 @@ module Zernio
       {
         :'devices' => :'Array<GetCampaignTargeting200ResponseDevicesInner>',
         :'locations' => :'Array<GetCampaignTargeting200ResponseLocationsInner>',
+        :'excluded_locations' => :'Array<GetCampaignTargeting200ResponseExcludedLocationsInner>',
+        :'excluded_locations_editable' => :'Boolean',
         :'languages' => :'Array<GetCampaignTargeting200ResponseLanguagesInner>',
         :'location_targeting_type' => :'String',
         :'cached_at' => :'Time',
@@ -120,6 +130,16 @@ module Zernio
         if (value = attributes[:'locations']).is_a?(Array)
           self.locations = value
         end
+      end
+
+      if attributes.key?(:'excluded_locations')
+        if (value = attributes[:'excluded_locations']).is_a?(Array)
+          self.excluded_locations = value
+        end
+      end
+
+      if attributes.key?(:'excluded_locations_editable')
+        self.excluded_locations_editable = attributes[:'excluded_locations_editable']
       end
 
       if attributes.key?(:'languages')
@@ -175,6 +195,8 @@ module Zernio
       self.class == o.class &&
           devices == o.devices &&
           locations == o.locations &&
+          excluded_locations == o.excluded_locations &&
+          excluded_locations_editable == o.excluded_locations_editable &&
           languages == o.languages &&
           location_targeting_type == o.location_targeting_type &&
           cached_at == o.cached_at &&
@@ -190,7 +212,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [devices, locations, languages, location_targeting_type, cached_at, stale].hash
+      [devices, locations, excluded_locations, excluded_locations_editable, languages, location_targeting_type, cached_at, stale].hash
     end
 
     # Builds the object from hash

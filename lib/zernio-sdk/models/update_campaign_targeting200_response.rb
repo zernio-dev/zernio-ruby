@@ -30,6 +30,9 @@ module Zernio
 
     attr_accessor :locations
 
+    # The negative (excluded) location criteria read back after the edit, same item shape as `locations`.
+    attr_accessor :excluded_locations
+
     attr_accessor :languages
 
     class EnumAttributeValidator
@@ -63,6 +66,7 @@ module Zernio
         :'location_targeting_type' => :'locationTargetingType',
         :'devices' => :'devices',
         :'locations' => :'locations',
+        :'excluded_locations' => :'excludedLocations',
         :'languages' => :'languages'
       }
     end
@@ -86,6 +90,7 @@ module Zernio
         :'location_targeting_type' => :'String',
         :'devices' => :'Array<UpdateCampaignTargeting200ResponseDevicesInner>',
         :'locations' => :'Array<UpdateCampaignTargeting200ResponseLocationsInner>',
+        :'excluded_locations' => :'Array<UpdateCampaignTargeting200ResponseExcludedLocationsInner>',
         :'languages' => :'Array<UpdateCampaignTargeting200ResponseLanguagesInner>'
       }
     end
@@ -143,6 +148,12 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'excluded_locations')
+        if (value = attributes[:'excluded_locations']).is_a?(Array)
+          self.excluded_locations = value
+        end
+      end
+
       if attributes.key?(:'languages')
         if (value = attributes[:'languages']).is_a?(Array)
           self.languages = value
@@ -188,6 +199,7 @@ module Zernio
           location_targeting_type == o.location_targeting_type &&
           devices == o.devices &&
           locations == o.locations &&
+          excluded_locations == o.excluded_locations &&
           languages == o.languages
     end
 
@@ -200,7 +212,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, ad_group_id, updated, location_targeting_type, devices, locations, languages].hash
+      [campaign_id, ad_group_id, updated, location_targeting_type, devices, locations, excluded_locations, languages].hash
     end
 
     # Builds the object from hash

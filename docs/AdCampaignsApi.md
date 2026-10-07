@@ -32,7 +32,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_campaign_ad_schedule**](AdCampaignsApi.md#get_campaign_ad_schedule) | **GET** /v1/ads/campaigns/{campaignId}/ad-schedule | Read a campaign&#39;s ad schedule (dayparting) |
 | [**get_campaign_bidding**](AdCampaignsApi.md#get_campaign_bidding) | **GET** /v1/ads/campaigns/{campaignId}/bidding | Read a campaign&#39;s current bidding |
 | [**get_campaign_conversion_goals**](AdCampaignsApi.md#get_campaign_conversion_goals) | **GET** /v1/ads/campaigns/{campaignId}/conversion-goals | Get campaign conversion goals |
-| [**get_campaign_targeting**](AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign&#39;s device, location, and language targeting |
+| [**get_campaign_targeting**](AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign&#39;s device, location, excluded location, and language targeting |
 | [**get_google_asset_group**](AdCampaignsApi.md#get_google_asset_group) | **GET** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId} | Get a Performance Max asset group |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
 | [**list_ad_group_assets**](AdCampaignsApi.md#list_ad_group_assets) | **GET** /v1/ads/ad-sets/{adSetId}/assets | List ad-group assets |
@@ -64,7 +64,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_campaign_ad_schedule**](AdCampaignsApi.md#update_campaign_ad_schedule) | **PUT** /v1/ads/campaigns/{campaignId}/ad-schedule | Replace a campaign&#39;s ad schedule (dayparting) |
 | [**update_campaign_assets**](AdCampaignsApi.md#update_campaign_assets) | **PUT** /v1/ads/campaigns/{campaignId}/assets | Update campaign assets |
 | [**update_campaign_conversion_goals**](AdCampaignsApi.md#update_campaign_conversion_goals) | **PATCH** /v1/ads/campaigns/{campaignId}/conversion-goals | Update campaign conversion goals |
-| [**update_campaign_targeting**](AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign&#39;s device, location, or language targeting |
+| [**update_campaign_targeting**](AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign&#39;s device, location, excluded location, or language targeting |
 | [**update_google_asset_group**](AdCampaignsApi.md#update_google_asset_group) | **PATCH** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId} | Update a Performance Max asset group |
 
 
@@ -2136,9 +2136,9 @@ end
 
 > <GetCampaignTargeting200Response> get_campaign_targeting(campaign_id, opts)
 
-Read a Google campaign's device, location, and language targeting
+Read a Google campaign's device, location, excluded location, and language targeting
 
-Google Ads compliance requires geo, language, budget, and bidding targeting set at creation to stay editable afterwards; this reads the campaign state so an integrator can build an editor around it. Cached for the quota window (10 minutes fresh, up to 7 days last-good), not always a live read. Google only; every other platform returns 501.  `devices` lists the device criteria the campaign carries, which depends on its channel: Search campaigns have MOBILE, DESKTOP and TABLET, Display campaigns also have CONNECTED_TV. `bidModifier` is Google's bid adjustment for that device, `null` when it has none, and `0` when the device is switched off; `included` is false for exactly that case. 
+Google Ads compliance requires geo, language, budget, and bidding targeting set at creation to stay editable afterwards; this reads the campaign state so an integrator can build an editor around it. Cached for the quota window (10 minutes fresh, up to 7 days last-good), not always a live read. Google only; every other platform returns 501.  `devices` lists the device criteria the campaign carries, which depends on its channel: Search campaigns have MOBILE, DESKTOP and TABLET, Display campaigns also have CONNECTED_TV. `bidModifier` is Google's bid adjustment for that device, `null` when it has none, and `0` when the device is switched off; `included` is false for exactly that case.  `excludedLocations` lists the campaign's negative location criteria (the places it never serves in). `locations` still lists every location criterion, each flagged with `negative`, so a client reading the targeted set filters `negative: false`. 
 
 ### Examples
 
@@ -2158,7 +2158,7 @@ opts = {
 }
 
 begin
-  # Read a Google campaign's device, location, and language targeting
+  # Read a Google campaign's device, location, excluded location, and language targeting
   result = api_instance.get_campaign_targeting(campaign_id, opts)
   p result
 rescue Zernio::ApiError => e
@@ -2174,7 +2174,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Read a Google campaign's device, location, and language targeting
+  # Read a Google campaign's device, location, excluded location, and language targeting
   data, status_code, headers = api_instance.get_campaign_targeting_with_http_info(campaign_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -4554,9 +4554,9 @@ end
 
 > <UpdateCampaignTargeting200Response> update_campaign_targeting(campaign_id, update_campaign_targeting_request)
 
-Edit a Google campaign's device, location, or language targeting
+Edit a Google campaign's device, location, excluded location, or language targeting
 
-Google Ads compliance row M.10: geo and language targeting set at creation must stay editable afterwards. Send at least one of `devices`, `locations`, `languages`, `locationTargetingType`; each provided field REPLACES that field's existing criteria on the campaign (a full set, not a delta). Fields left out of the body are untouched. Google only; every other platform returns 501.  `devices` is the full set of device bid modifiers: a supported device you leave out is switched off with a bid modifier of 0, since Google cannot remove a device criterion. A device the campaign's channel does not carry, and a set that switches every device off, both return 422.  `locations` accepts the same shapes as campaign creation: a bare array of ISO country codes, or an object with `countries`/`regions`/`cities`/`zips`/`metros` key lists (`key` from GET /v1/ads/targeting/search?dimension=geo). Negative (excluded) locations are left untouched by this endpoint. An empty location list returns 400 instead of removing every criterion: a Google campaign with no location criteria targets every country, so omit `locations` to leave targeting alone.  The removes and the creates go out in ONE Google `googleAds:mutate`, so a failed edit leaves the campaign's previous set intact rather than a half-applied one.  `languages` is an array of Google's language codes (ISO 639-1, plus variants such as `zh_CN`); an unknown code returns 400.  `locationTargetingType` switches who the location targeting reaches: `presence` (people in or regularly in the locations) or `presence_or_interest` (also people searching for or interested in them). Example: `{ \"platform\": \"google\", \"targeting\": { \"locationTargetingType\": \"presence\" } }`.  The response includes the refreshed `devices`/`locations`/`languages` state read back from Google after the edit, and invalidates the cached copy `GET` on this campaign would otherwise keep serving.  **Demand Gen:** Google keeps a Demand Gen campaign's locations and languages on its ad groups and refuses them on the campaign. When the campaign has one ad group they are written there and the response carries its `adGroupId` (the campaign-level `locations`/`languages` read back then stay empty). With several ad groups the call returns 400 naming them: edit each one with PUT /v1/ads/{adId} `targeting` on an ad of that ad group. Campaigns migrated from Discovery that still target on the campaign keep being written there. `devices` and `locationTargetingType` stay campaign-level. 
+Google Ads compliance row M.10: geo and language targeting set at creation must stay editable afterwards. Send at least one of `devices`, `locations`, `excludedLocations`, `languages`, `locationTargetingType`; each provided field REPLACES that field's existing criteria on the campaign (a full set, not a delta). Fields left out of the body are untouched. Google only; every other platform returns 501.  `devices` is the full set of device bid modifiers: a supported device you leave out is switched off with a bid modifier of 0, since Google cannot remove a device criterion. A device the campaign's channel does not carry, and a set that switches every device off, both return 422.  `locations` accepts the same shapes as campaign creation: a bare array of ISO country codes, or an object with `countries`/`regions`/`cities`/`zips`/`metros` key lists (`key` from GET /v1/ads/targeting/search?dimension=geo). Excluded locations are left untouched by `locations`. An empty location list returns 400 instead of removing every criterion: a Google campaign with no location criteria targets every country, so omit `locations` to leave targeting alone.  `excludedLocations` takes the same two shapes and replaces the campaign's negative location criteria (the places it never serves in), leaving the targeted `locations` untouched. An empty list (or `{}`) removes every exclusion. Radius exclusions are not supported. A place cannot be both targeted and excluded: a request whose result would leave one on both sides returns 400 before anything is written, and moving a place from one side to the other in the same request is applied atomically. Example: `{ \"platform\": \"google\", \"targeting\": { \"excludedLocations\": { \"countries\": [\"CA\"], \"regions\": [\"21137\"] } } }`.  The removes and the creates go out in ONE Google `googleAds:mutate`, so a failed edit leaves the campaign's previous set intact rather than a half-applied one.  `languages` is an array of Google's language codes (ISO 639-1, plus variants such as `zh_CN`); an unknown code returns 400.  `locationTargetingType` switches who the location targeting reaches: `presence` (people in or regularly in the locations) or `presence_or_interest` (also people searching for or interested in them). Example: `{ \"platform\": \"google\", \"targeting\": { \"locationTargetingType\": \"presence\" } }`.  The response includes the refreshed `devices`/`locations`/`excludedLocations`/`languages` state read back from Google after the edit, and invalidates the cached copy `GET` on this campaign would otherwise keep serving.  **Demand Gen:** Google keeps a Demand Gen campaign's locations and languages on its ad groups and refuses them on the campaign. When the campaign has one ad group they are written there and the response carries its `adGroupId` (the campaign-level `locations`/`languages` read back then stay empty). With several ad groups the call returns 400 naming them: edit each one with PUT /v1/ads/{adId} `targeting` on an ad of that ad group. Campaigns migrated from Discovery that still target on the campaign keep being written there. `devices` and `locationTargetingType` stay campaign-level. `excludedLocations` is not available on Demand Gen yet and returns 400. 
 
 ### Examples
 
@@ -4574,7 +4574,7 @@ campaign_id = 'campaign_id_example' # String | Google platform campaign ID
 update_campaign_targeting_request = Zernio::UpdateCampaignTargetingRequest.new({platform: 'google', targeting: Zernio::UpdateCampaignTargetingRequestTargeting.new}) # UpdateCampaignTargetingRequest | 
 
 begin
-  # Edit a Google campaign's device, location, or language targeting
+  # Edit a Google campaign's device, location, excluded location, or language targeting
   result = api_instance.update_campaign_targeting(campaign_id, update_campaign_targeting_request)
   p result
 rescue Zernio::ApiError => e
@@ -4590,7 +4590,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Edit a Google campaign's device, location, or language targeting
+  # Edit a Google campaign's device, location, excluded location, or language targeting
   data, status_code, headers = api_instance.update_campaign_targeting_with_http_info(campaign_id, update_campaign_targeting_request)
   p status_code # => 2xx
   p headers # => { ... }

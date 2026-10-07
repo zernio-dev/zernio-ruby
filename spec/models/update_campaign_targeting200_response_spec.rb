@@ -42,7 +42,7 @@ describe Zernio::UpdateCampaignTargeting200Response do
   describe 'test attribute "updated"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["devices", "locations", "languages", "locationTargetingType"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["devices", "locations", "excludedLocations", "languages", "locationTargetingType"])
       # validator.allowable_values.each do |value|
       #   expect { instance.updated = value }.not_to raise_error
       # end
@@ -66,6 +66,12 @@ describe Zernio::UpdateCampaignTargeting200Response do
   end
 
   describe 'test attribute "locations"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "excluded_locations"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

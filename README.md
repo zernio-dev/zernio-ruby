@@ -222,7 +222,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**get_campaign_ad_schedule**](docs/AdCampaignsApi.md#get_campaign_ad_schedule) | **GET** /v1/ads/campaigns/{campaignId}/ad-schedule | Read a campaign's ad schedule (dayparting)
 *Zernio::AdCampaignsApi* | [**get_campaign_bidding**](docs/AdCampaignsApi.md#get_campaign_bidding) | **GET** /v1/ads/campaigns/{campaignId}/bidding | Read a campaign's current bidding
 *Zernio::AdCampaignsApi* | [**get_campaign_conversion_goals**](docs/AdCampaignsApi.md#get_campaign_conversion_goals) | **GET** /v1/ads/campaigns/{campaignId}/conversion-goals | Get campaign conversion goals
-*Zernio::AdCampaignsApi* | [**get_campaign_targeting**](docs/AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign's device, location, and language targeting
+*Zernio::AdCampaignsApi* | [**get_campaign_targeting**](docs/AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign's device, location, excluded location, and language targeting
 *Zernio::AdCampaignsApi* | [**get_google_asset_group**](docs/AdCampaignsApi.md#get_google_asset_group) | **GET** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId} | Get a Performance Max asset group
 *Zernio::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
 *Zernio::AdCampaignsApi* | [**list_ad_group_assets**](docs/AdCampaignsApi.md#list_ad_group_assets) | **GET** /v1/ads/ad-sets/{adSetId}/assets | List ad-group assets
@@ -254,7 +254,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_campaign_ad_schedule**](docs/AdCampaignsApi.md#update_campaign_ad_schedule) | **PUT** /v1/ads/campaigns/{campaignId}/ad-schedule | Replace a campaign's ad schedule (dayparting)
 *Zernio::AdCampaignsApi* | [**update_campaign_assets**](docs/AdCampaignsApi.md#update_campaign_assets) | **PUT** /v1/ads/campaigns/{campaignId}/assets | Update campaign assets
 *Zernio::AdCampaignsApi* | [**update_campaign_conversion_goals**](docs/AdCampaignsApi.md#update_campaign_conversion_goals) | **PATCH** /v1/ads/campaigns/{campaignId}/conversion-goals | Update campaign conversion goals
-*Zernio::AdCampaignsApi* | [**update_campaign_targeting**](docs/AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign's device, location, or language targeting
+*Zernio::AdCampaignsApi* | [**update_campaign_targeting**](docs/AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign's device, location, excluded location, or language targeting
 *Zernio::AdCampaignsApi* | [**update_google_asset_group**](docs/AdCampaignsApi.md#update_google_asset_group) | **PATCH** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId} | Update a Performance Max asset group
 *Zernio::AdCreativesApi* | [**create_ad_creative**](docs/AdCreativesApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative
 *Zernio::AdCreativesApi* | [**delete_ad_creative**](docs/AdCreativesApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative
@@ -1914,6 +1914,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetCampaignConversionGoals200Response](docs/GetCampaignConversionGoals200Response.md)
  - [Zernio::GetCampaignTargeting200Response](docs/GetCampaignTargeting200Response.md)
  - [Zernio::GetCampaignTargeting200ResponseDevicesInner](docs/GetCampaignTargeting200ResponseDevicesInner.md)
+ - [Zernio::GetCampaignTargeting200ResponseExcludedLocationsInner](docs/GetCampaignTargeting200ResponseExcludedLocationsInner.md)
  - [Zernio::GetCampaignTargeting200ResponseLanguagesInner](docs/GetCampaignTargeting200ResponseLanguagesInner.md)
  - [Zernio::GetCampaignTargeting200ResponseLocationsInner](docs/GetCampaignTargeting200ResponseLocationsInner.md)
  - [Zernio::GetCommentAutomation200Response](docs/GetCommentAutomation200Response.md)
@@ -3306,12 +3307,15 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateCampaignConversionGoalsRequest](docs/UpdateCampaignConversionGoalsRequest.md)
  - [Zernio::UpdateCampaignTargeting200Response](docs/UpdateCampaignTargeting200Response.md)
  - [Zernio::UpdateCampaignTargeting200ResponseDevicesInner](docs/UpdateCampaignTargeting200ResponseDevicesInner.md)
+ - [Zernio::UpdateCampaignTargeting200ResponseExcludedLocationsInner](docs/UpdateCampaignTargeting200ResponseExcludedLocationsInner.md)
  - [Zernio::UpdateCampaignTargeting200ResponseLanguagesInner](docs/UpdateCampaignTargeting200ResponseLanguagesInner.md)
  - [Zernio::UpdateCampaignTargeting200ResponseLocationsInner](docs/UpdateCampaignTargeting200ResponseLocationsInner.md)
  - [Zernio::UpdateCampaignTargetingRequest](docs/UpdateCampaignTargetingRequest.md)
  - [Zernio::UpdateCampaignTargetingRequestTargeting](docs/UpdateCampaignTargetingRequestTargeting.md)
  - [Zernio::UpdateCampaignTargetingRequestTargetingDevicesInner](docs/UpdateCampaignTargetingRequestTargetingDevicesInner.md)
  - [Zernio::UpdateCampaignTargetingRequestTargetingDevicesInnerOneOf](docs/UpdateCampaignTargetingRequestTargetingDevicesInnerOneOf.md)
+ - [Zernio::UpdateCampaignTargetingRequestTargetingExcludedLocations](docs/UpdateCampaignTargetingRequestTargetingExcludedLocations.md)
+ - [Zernio::UpdateCampaignTargetingRequestTargetingExcludedLocationsOneOf](docs/UpdateCampaignTargetingRequestTargetingExcludedLocationsOneOf.md)
  - [Zernio::UpdateCampaignTargetingRequestTargetingLocations](docs/UpdateCampaignTargetingRequestTargetingLocations.md)
  - [Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOf](docs/UpdateCampaignTargetingRequestTargetingLocationsOneOf.md)
  - [Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner](docs/UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.md)
