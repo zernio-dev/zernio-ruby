@@ -329,7 +329,9 @@ api_instance = Zernio::AdCreativesApi.new
 creative_id = 'creative_id_example' # String | Platform creative id
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
 opts = {
-  fields: 'id,name,status,object_story_spec{page_id,link_data{link,message}}' # String | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
+  fields: 'id,name,status,object_story_spec{page_id,link_data{link,message}}', # String | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently.
+  thumbnail_width: 600, # Integer | Width in pixels of the `thumbnail_url` rendering, forwarded to Meta as `thumbnail_width`. Without it Meta returns a 64x64 thumbnail.
+  thumbnail_height: 600 # Integer | Height in pixels of the `thumbnail_url` rendering, forwarded to Meta as `thumbnail_height`. Without it Meta returns a 64x64 thumbnail.
 }
 
 begin
@@ -366,6 +368,8 @@ end
 | **creative_id** | **String** | Platform creative id |  |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
 | **fields** | **String** | Comma-separated Graph field override. Supports nested {} projections and Graph field modifiers, so a nested edge can be paged explicitly: without a .limit() modifier the expansion runs at the Meta default page size and the tail is dropped silently. | [optional] |
+| **thumbnail_width** | **Integer** | Width in pixels of the &#x60;thumbnail_url&#x60; rendering, forwarded to Meta as &#x60;thumbnail_width&#x60;. Without it Meta returns a 64x64 thumbnail. | [optional] |
+| **thumbnail_height** | **Integer** | Height in pixels of the &#x60;thumbnail_url&#x60; rendering, forwarded to Meta as &#x60;thumbnail_height&#x60;. Without it Meta returns a 64x64 thumbnail. | [optional] |
 
 ### Return type
 
