@@ -68,7 +68,7 @@ describe Zernio::ImessageSenderLifecycle do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ordering", "activating", "active", "suspended", "canceled", "failed"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ordering", "awaiting_payment", "activating", "active", "suspended", "canceled", "failed"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

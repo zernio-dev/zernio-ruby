@@ -28,6 +28,7 @@ module Zernio
     # imessage:// deep link that opens Messages on this sender with a prefilled text. Share it so contacts message you first (Apple only lets a sender reach contacts who wrote to it first); null until the handle is assigned.
     attr_accessor :opt_in_link
 
+    # `awaiting_payment`: the first-month charge is still being confirmed by the card; the number is ordered automatically once it is paid (usually under 5 minutes), or the order fails with `failureReason` when the card declines or nothing confirms within 30 minutes.
     attr_accessor :status
 
     # Monthly price billed while the sender is active
@@ -213,7 +214,7 @@ module Zernio
       return false unless kind_validator.valid?(@kind)
       region_validator = EnumAttributeValidator.new('String', ["US", "GB"])
       return false unless region_validator.valid?(@region)
-      status_validator = EnumAttributeValidator.new('String', ["ordering", "activating", "active", "suspended", "canceled", "failed"])
+      status_validator = EnumAttributeValidator.new('String', ["ordering", "awaiting_payment", "activating", "active", "suspended", "canceled", "failed"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -241,7 +242,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["ordering", "activating", "active", "suspended", "canceled", "failed"])
+      validator = EnumAttributeValidator.new('String', ["ordering", "awaiting_payment", "activating", "active", "suspended", "canceled", "failed"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
