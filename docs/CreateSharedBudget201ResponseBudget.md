@@ -1,4 +1,4 @@
-# Zernio::CreateCustomConversionGoal201Response
+# Zernio::CreateSharedBudget201ResponseBudget
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateCustomConversionGoal201Response.new(
+instance = Zernio::CreateSharedBudget201ResponseBudget.new(
   customer_id: null,
   id: null,
   resource_name: null

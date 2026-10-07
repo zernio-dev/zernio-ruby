@@ -311,7 +311,7 @@ end
 
 ## create_custom_conversion_goal
 
-> <CreateCustomConversionGoal201Response> create_custom_conversion_goal(create_custom_conversion_goal_request)
+> <CreateSharedBudget201ResponseBudget> create_custom_conversion_goal(create_custom_conversion_goal_request)
 
 Create a custom conversion goal
 
@@ -344,7 +344,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateCustomConversionGoal201Response>, Integer, Hash)> create_custom_conversion_goal_with_http_info(create_custom_conversion_goal_request)
+> <Array(<CreateSharedBudget201ResponseBudget>, Integer, Hash)> create_custom_conversion_goal_with_http_info(create_custom_conversion_goal_request)
 
 ```ruby
 begin
@@ -352,7 +352,7 @@ begin
   data, status_code, headers = api_instance.create_custom_conversion_goal_with_http_info(create_custom_conversion_goal_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateCustomConversionGoal201Response>
+  p data # => <CreateSharedBudget201ResponseBudget>
 rescue Zernio::ApiError => e
   puts "Error when calling ConversionsApi->create_custom_conversion_goal_with_http_info: #{e}"
 end
@@ -366,7 +366,7 @@ end
 
 ### Return type
 
-[**CreateCustomConversionGoal201Response**](CreateCustomConversionGoal201Response.md)
+[**CreateSharedBudget201ResponseBudget**](CreateSharedBudget201ResponseBudget.md)
 
 ### Authorization
 

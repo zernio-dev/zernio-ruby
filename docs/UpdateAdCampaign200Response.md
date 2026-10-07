@@ -16,6 +16,7 @@
 | **network_settings** | [**GoogleNetworkSettings**](GoogleNetworkSettings.md) |  | [optional] |
 | **tracking_url_template** | **String** |  | [optional] |
 | **final_url_suffix** | **String** |  | [optional] |
+| **shared_budget_id** | **String** | Google only. Echoed back when the campaign moved budgets; &#x60;budget&#x60; is then the budget it now uses. | [optional] |
 | **platform_specific_data** | **Object** |  | [optional] |
 
 ## Example
@@ -36,6 +37,7 @@ instance = Zernio::UpdateAdCampaign200Response.new(
   network_settings: null,
   tracking_url_template: null,
   final_url_suffix: null,
+  shared_budget_id: null,
   platform_specific_data: null
 )
 ```

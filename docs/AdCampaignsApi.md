@@ -14,6 +14,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_ad_set**](AdCampaignsApi.md#create_ad_set) | **POST** /v1/ads/ad-sets | Create a standalone ad group |
 | [**create_bid_strategy**](AdCampaignsApi.md#create_bid_strategy) | **POST** /v1/ads/bid-strategies | Create portfolio bid strategy |
 | [**create_google_asset_group**](AdCampaignsApi.md#create_google_asset_group) | **POST** /v1/ads/campaigns/{campaignId}/asset-groups | Create a Performance Max asset group |
+| [**create_shared_budget**](AdCampaignsApi.md#create_shared_budget) | **POST** /v1/ads/shared-budgets | Create a shared budget |
 | [**create_standalone_ad**](AdCampaignsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad |
 | [**delete_ad**](AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
@@ -45,6 +46,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_campaign_negative_keywords**](AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords |
 | [**list_google_asset_groups**](AdCampaignsApi.md#list_google_asset_groups) | **GET** /v1/ads/campaigns/{campaignId}/asset-groups | List Performance Max asset groups |
 | [**list_google_recommendations**](AdCampaignsApi.md#list_google_recommendations) | **GET** /v1/ads/recommendations | List Google Ads recommendations |
+| [**list_shared_budgets**](AdCampaignsApi.md#list_shared_budgets) | **GET** /v1/ads/shared-budgets | List shared budgets |
 | [**remove_ad_group_assets**](AdCampaignsApi.md#remove_ad_group_assets) | **DELETE** /v1/ads/ad-sets/{adSetId}/assets | Remove ad-group assets |
 | [**remove_ad_keyword**](AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword |
 | [**remove_campaign_assets**](AdCampaignsApi.md#remove_campaign_assets) | **DELETE** /v1/ads/campaigns/{campaignId}/assets | Remove campaign assets |
@@ -765,6 +767,75 @@ end
 ### Return type
 
 [**CreateGoogleAssetGroup200Response**](CreateGoogleAssetGroup200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_shared_budget
+
+> <CreateSharedBudget201Response> create_shared_budget(create_shared_budget_request)
+
+Create a shared budget
+
+Creates a daily shared campaign budget (`explicitly_shared: true`, standard delivery) that several campaigns can draw from. A lifetime budget returns 422, like every Google budget. Google refuses some bidding strategies on a shared budget; that error surfaces when a campaign is moved onto it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+create_shared_budget_request = Zernio::CreateSharedBudgetRequest.new({account_id: 'account_id_example', name: 'name_example', amount: 3.56}) # CreateSharedBudgetRequest | 
+
+begin
+  # Create a shared budget
+  result = api_instance.create_shared_budget(create_shared_budget_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->create_shared_budget: #{e}"
+end
+```
+
+#### Using the create_shared_budget_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateSharedBudget201Response>, Integer, Hash)> create_shared_budget_with_http_info(create_shared_budget_request)
+
+```ruby
+begin
+  # Create a shared budget
+  data, status_code, headers = api_instance.create_shared_budget_with_http_info(create_shared_budget_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateSharedBudget201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->create_shared_budget_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_shared_budget_request** | [**CreateSharedBudgetRequest**](CreateSharedBudgetRequest.md) |  |  |
+
+### Return type
+
+[**CreateSharedBudget201Response**](CreateSharedBudget201Response.md)
 
 ### Authorization
 
@@ -3177,6 +3248,79 @@ end
 - **Accept**: application/json
 
 
+## list_shared_budgets
+
+> <ListSharedBudgets200Response> list_shared_budgets(account_id, opts)
+
+List shared budgets
+
+Lists the Google Ads customer's shared campaign budgets (`campaign_budget.explicitly_shared` = true, not removed), with how many campaigns use each. Move a campaign onto one with `sharedBudgetId` on PUT /v1/ads/campaigns/{campaignId}. Google only; other platforms return 501. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+account_id = 'account_id_example' # String | Google ads SocialAccount id.
+opts = {
+  ad_account_id: 'ad_account_id_example' # String | Platform ad account ID (Google customer ID, digits only). Defaults to the account's connected customer.
+}
+
+begin
+  # List shared budgets
+  result = api_instance.list_shared_budgets(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_shared_budgets: #{e}"
+end
+```
+
+#### Using the list_shared_budgets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListSharedBudgets200Response>, Integer, Hash)> list_shared_budgets_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List shared budgets
+  data, status_code, headers = api_instance.list_shared_budgets_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListSharedBudgets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_shared_budgets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Google ads SocialAccount id. |  |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Defaults to the account&#39;s connected customer. | [optional] |
+
+### Return type
+
+[**ListSharedBudgets200Response**](ListSharedBudgets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## remove_ad_group_assets
 
 > <RemoveCampaignAssets200Response> remove_ad_group_assets(ad_set_id, account_id, asset_resource_names, ad_group_asset_resource_names, opts)
@@ -3775,7 +3919,7 @@ end
 
 Update a campaign
 
-Campaign-level edits. Send at least one of `budget`, `bidStrategy`, `portfolioBidStrategyId`, `targetImpressionShare`, `manualCpc`, `networkSettings`, `trackingUrlTemplate`, `finalUrlSuffix`, `name` or `platformSpecificData`. An unsupported field is always an error, never a silent drop.  | Body field | Meta | Google | Others | |---|---|---|---| | `bidStrategy` | Yes | Yes | 501 | | `bidAmount`, `roasAverageFloor` | 400 (ad-set level) | Yes | 400 | | `portfolioBidStrategyId` | 400 | Yes | 400 | | `targetImpressionShare` | 400 | Search only | 400 | | `manualCpc` | 400 | Search and Display | 400 | | `networkSettings` | 400 | Search only | 400 | | `trackingUrlTemplate`, `finalUrlSuffix` | 400 | Yes | 400 | | `budget` (CBO; ABO returns 409) | Yes | Daily only | OpenAI: daily or lifetime; others 501 | | `name` | Yes | 501 | 501 | | `platformSpecificData.spendCap` | Yes | 400 | 400 | | `accountId` (empty campaigns) | Yes | - | - |  Meta budget edits check the live campaign budget, so an older local ABO stamp cannot block a CBO campaign. A successful edit repairs local ad budget fields. A live ABO campaign still returns 409 with the ad-set budget endpoint.  On Google: `LOWEST_COST_WITHOUT_CAP` = Maximize Conversions, `COST_CAP` + `bidAmount` = Target CPA, `LOWEST_COST_WITH_MIN_ROAS` + `roasAverageFloor` = Target ROAS, `LOWEST_COST_WITH_BID_CAP` + `bidAmount` = Maximize Clicks with a CPC ceiling; `portfolioBidStrategyId` attaches a portfolio strategy instead (exclusive with `bidStrategy`). `targetImpressionShare` switches the campaign to Target impression share and `manualCpc: { maxCpc }` to Manual CPC (every ad group of the campaign gets `maxCpc` as its bid, in the same mutate); each is exclusive with every other strategy field. `networkSettings`, `trackingUrlTemplate` and `finalUrlSuffix` go out in one campaign update, each field sent written on its own leaf, so an omitted one keeps its current value; an empty string clears a URL field. Setting the standard triplet on a campaign that is currently on a PORTFOLIO strategy is rejected: detach it in Google Ads first, since it is shared across campaigns.  Google budget updates read the current budget before mutation. Shared budgets return 409 unless allowSharedBudgetUpdate=true is explicitly supplied, because the change affects every campaign using that budget. Unknown sharing state also returns 409.  OpenAI Ads campaigns carry exactly one spend cap: `budget.type` daily or lifetime replaces whichever cap the campaign had, with a minimum of 1 in the ad account's currency (422 below it). Lifetime can switch to daily, but OpenAI never switches a daily cap back to lifetime (422).  `accountId` forwards the update straight to Meta for a campaign with zero ads, which would otherwise 404; the response then carries `updated: 0`. 
+Campaign-level edits. Send at least one of `budget`, `bidStrategy`, `portfolioBidStrategyId`, `targetImpressionShare`, `manualCpc`, `networkSettings`, `trackingUrlTemplate`, `finalUrlSuffix`, `sharedBudgetId`, `name` or `platformSpecificData`. An unsupported field is always an error, never a silent drop.  | Body field | Meta | Google | Others | |---|---|---|---| | `bidStrategy` | Yes | Yes | 501 | | `bidAmount`, `roasAverageFloor` | 400 (ad-set level) | Yes | 400 | | `portfolioBidStrategyId` | 400 | Yes | 400 | | `targetImpressionShare` | 400 | Search only | 400 | | `manualCpc` | 400 | Search and Display | 400 | | `networkSettings` | 400 | Search only | 400 | | `trackingUrlTemplate`, `finalUrlSuffix` | 400 | Yes | 400 | | `sharedBudgetId` | 400 | Yes | 400 | | `budget` (CBO; ABO returns 409) | Yes | Daily only | OpenAI: daily or lifetime; others 501 | | `name` | Yes | 501 | 501 | | `platformSpecificData.spendCap` | Yes | 400 | 400 | | `accountId` (empty campaigns) | Yes | - | - |  Meta budget edits check the live campaign budget, so an older local ABO stamp cannot block a CBO campaign. A successful edit repairs local ad budget fields. A live ABO campaign still returns 409 with the ad-set budget endpoint.  On Google: `LOWEST_COST_WITHOUT_CAP` = Maximize Conversions, `COST_CAP` + `bidAmount` = Target CPA, `LOWEST_COST_WITH_MIN_ROAS` + `roasAverageFloor` = Target ROAS, `LOWEST_COST_WITH_BID_CAP` + `bidAmount` = Maximize Clicks with a CPC ceiling; `portfolioBidStrategyId` attaches a portfolio strategy instead (exclusive with `bidStrategy`). `targetImpressionShare` switches the campaign to Target impression share and `manualCpc: { maxCpc }` to Manual CPC (every ad group of the campaign gets `maxCpc` as its bid, in the same mutate); each is exclusive with every other strategy field. `networkSettings`, `trackingUrlTemplate` and `finalUrlSuffix` go out in one campaign update, each field sent written on its own leaf, so an omitted one keeps its current value; an empty string clears a URL field. Setting the standard triplet on a campaign that is currently on a PORTFOLIO strategy is rejected: detach it in Google Ads first, since it is shared across campaigns.  Google budget updates read the current budget before mutation. Shared budgets return 409 unless allowSharedBudgetUpdate=true is explicitly supplied, because the change affects every campaign using that budget. Unknown sharing state also returns 409.  `sharedBudgetId` (Google) moves the campaign onto a shared budget from GET /v1/ads/shared-budgets, which also needs `allowSharedBudgetUpdate: true` (409 otherwise) because the campaign then splits that budget with every campaign on it; `budget` cannot ride along. `sharedBudgetId: null` moves it back onto a new budget of its own, sized by `budget` (required, daily); the new budget and the switch go out in one atomic Google mutate. A campaign that already has its own budget returns 409 for null. The budget a campaign leaves is not removed. The response carries the budget the campaign now uses.  OpenAI Ads campaigns carry exactly one spend cap: `budget.type` daily or lifetime replaces whichever cap the campaign had, with a minimum of 1 in the ad account's currency (422 below it). Lifetime can switch to daily, but OpenAI never switches a daily cap back to lifetime (422).  `accountId` forwards the update straight to Meta for a campaign with zero ads, which would otherwise 404; the response then carries `updated: 0`. 
 
 ### Examples
 
