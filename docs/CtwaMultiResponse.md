@@ -9,6 +9,7 @@
 | **platform_campaign_id** | **String** |  |  |
 | **platform_ad_set_id** | **String** |  |  |
 | **message** | **String** |  |  |
+| **warnings** | **Array&lt;String&gt;** | Present when Meta created the ad set differently from the request. Today: Meta kept the ad set without the requested &#x60;whatsappPhoneNumber&#x60; in its promoted_object (the ads still carry it on their WhatsApp button). | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Zernio::CtwaMultiResponse.new(
   ads: null,
   platform_campaign_id: null,
   platform_ad_set_id: null,
-  message: null
+  message: null,
+  warnings: null
 )
 ```
 
