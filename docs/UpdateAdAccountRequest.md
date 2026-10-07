@@ -11,6 +11,8 @@
 | **reset_amount_spent** | **Boolean** | Restart the amount counted against the cap from zero. Cannot be combined with spendCap null. | [optional] |
 | **default_dsa_beneficiary** | **String** | Legal entity benefiting from ads on this ad account | [optional] |
 | **default_dsa_payor** | **String** | Legal entity paying for ads on this ad account. Defaults to defaultDsaBeneficiary when omitted. Requires defaultDsaBeneficiary. | [optional] |
+| **tracking_url_template** | **String** | **Google only.** Account tracking template (customer.tracking_url_template); an empty string clears it. | [optional] |
+| **final_url_suffix** | **String** | **Google only.** Account final URL suffix (customer.final_url_suffix); an empty string clears it. | [optional] |
 
 ## Example
 
@@ -24,7 +26,9 @@ instance = Zernio::UpdateAdAccountRequest.new(
   spend_cap: null,
   reset_amount_spent: null,
   default_dsa_beneficiary: null,
-  default_dsa_payor: null
+  default_dsa_payor: null,
+  tracking_url_template: null,
+  final_url_suffix: null
 )
 ```
 

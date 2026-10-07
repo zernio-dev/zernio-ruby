@@ -11,6 +11,7 @@
 | **type** | **String** |  | [optional] |
 | **target_cpa** | **Float** |  | [optional] |
 | **target_roas** | **Float** |  | [optional] |
+| **target_impression_share** | [**GoogleTargetImpressionShare**](GoogleTargetImpressionShare.md) | Retargets a TARGET_IMPRESSION_SHARE strategy; location, percent and maxCpc are all written. | [optional] |
 
 ## Example
 
@@ -24,7 +25,8 @@ instance = Zernio::UpdateBidStrategyRequest.new(
   name: null,
   type: null,
   target_cpa: null,
-  target_roas: null
+  target_roas: null,
+  target_impression_share: null
 )
 ```
 

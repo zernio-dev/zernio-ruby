@@ -11,6 +11,7 @@
 | **type** | **String** |  |  |
 | **target_cpa** | **Float** | Required when type is TARGET_CPA, in the account&#39;s currency units. | [optional] |
 | **target_roas** | **Float** | Required when type is TARGET_ROAS; a multiplier (2.0 &#x3D; 2.0x). | [optional] |
+| **target_impression_share** | [**GoogleTargetImpressionShare**](GoogleTargetImpressionShare.md) | Required when type is TARGET_IMPRESSION_SHARE, and refused with any other type. | [optional] |
 
 ## Example
 
@@ -24,7 +25,8 @@ instance = Zernio::CreateBidStrategyRequest.new(
   name: null,
   type: null,
   target_cpa: null,
-  target_roas: null
+  target_roas: null,
+  target_impression_share: null
 )
 ```
 

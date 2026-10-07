@@ -17,6 +17,7 @@
 | **conversions** | **Float** |  | [optional] |
 | **target_cpa** | **Float** | Current target, in the account&#39;s currency units. Null for a ROAS-family type (TARGET_ROAS, MAXIMIZE_CONVERSION_VALUE), or a Maximize type with no target set. Pre-fills the edit form&#39;s target field. | [optional] |
 | **target_roas** | **Float** | Current target as a decimal multiplier (2.0 &#x3D; 2.0x). Null for a CPA-family type (TARGET_CPA, MAXIMIZE_CONVERSIONS), or a Maximize type with no target set. | [optional] |
+| **target_impression_share** | [**GoogleTargetImpressionShare**](GoogleTargetImpressionShare.md) |  | [optional] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = Zernio::PortfolioBidStrategy.new(
   average_cpc: null,
   conversions: null,
   target_cpa: null,
-  target_roas: null
+  target_roas: null,
+  target_impression_share: null
 )
 ```
 

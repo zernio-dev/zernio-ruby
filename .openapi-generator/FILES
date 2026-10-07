@@ -1282,6 +1282,8 @@ docs/GoogleListingGroupFilterNode.md
 docs/GoogleListingGroupNode.md
 docs/GoogleListingGroupTree.md
 docs/GoogleLocationTargetingType.md
+docs/GoogleManualCpc.md
+docs/GoogleNetworkSettings.md
 docs/GooglePmaxAssetGroup.md
 docs/GooglePmaxAssetGroupAssetsInner.md
 docs/GooglePmaxAssetGroupDetail.md
@@ -1297,6 +1299,7 @@ docs/GoogleRsaDescription.md
 docs/GoogleRsaHeadline.md
 docs/GoogleSitelink.md
 docs/GoogleStructuredSnippet.md
+docs/GoogleTargetImpressionShare.md
 docs/GrantBusinessPartner200Response.md
 docs/GrantBusinessPartner200ResponsePartner.md
 docs/GrantBusinessPartner201Response.md
@@ -2262,6 +2265,7 @@ docs/UpdateAdAccount200Response.md
 docs/UpdateAdAccount200ResponseDsaDefaults.md
 docs/UpdateAdAccount200ResponseSettings.md
 docs/UpdateAdAccount200ResponseSettingsFundingSource.md
+docs/UpdateAdAccount200ResponseUrlTracking.md
 docs/UpdateAdAccountManagerLinkRequest.md
 docs/UpdateAdAccountRequest.md
 docs/UpdateAdAudienceRequest.md
@@ -4093,6 +4097,8 @@ lib/zernio-sdk/models/google_listing_group_filter_node.rb
 lib/zernio-sdk/models/google_listing_group_node.rb
 lib/zernio-sdk/models/google_listing_group_tree.rb
 lib/zernio-sdk/models/google_location_targeting_type.rb
+lib/zernio-sdk/models/google_manual_cpc.rb
+lib/zernio-sdk/models/google_network_settings.rb
 lib/zernio-sdk/models/google_pmax_asset_group.rb
 lib/zernio-sdk/models/google_pmax_asset_group_assets_inner.rb
 lib/zernio-sdk/models/google_pmax_asset_group_detail.rb
@@ -4108,6 +4114,7 @@ lib/zernio-sdk/models/google_rsa_description.rb
 lib/zernio-sdk/models/google_rsa_headline.rb
 lib/zernio-sdk/models/google_sitelink.rb
 lib/zernio-sdk/models/google_structured_snippet.rb
+lib/zernio-sdk/models/google_target_impression_share.rb
 lib/zernio-sdk/models/grant_business_partner200_response.rb
 lib/zernio-sdk/models/grant_business_partner200_response_partner.rb
 lib/zernio-sdk/models/grant_business_partner201_response.rb
@@ -5046,6 +5053,7 @@ lib/zernio-sdk/models/update_ad_account200_response.rb
 lib/zernio-sdk/models/update_ad_account200_response_dsa_defaults.rb
 lib/zernio-sdk/models/update_ad_account200_response_settings.rb
 lib/zernio-sdk/models/update_ad_account200_response_settings_funding_source.rb
+lib/zernio-sdk/models/update_ad_account200_response_url_tracking.rb
 lib/zernio-sdk/models/update_ad_account_manager_link_request.rb
 lib/zernio-sdk/models/update_ad_account_request.rb
 lib/zernio-sdk/models/update_ad_audience_request.rb
@@ -6857,6 +6865,8 @@ spec/models/google_listing_group_filter_node_spec.rb
 spec/models/google_listing_group_node_spec.rb
 spec/models/google_listing_group_tree_spec.rb
 spec/models/google_location_targeting_type_spec.rb
+spec/models/google_manual_cpc_spec.rb
+spec/models/google_network_settings_spec.rb
 spec/models/google_pmax_asset_group_assets_inner_spec.rb
 spec/models/google_pmax_asset_group_detail_spec.rb
 spec/models/google_pmax_asset_group_input_images_spec.rb
@@ -6872,6 +6882,7 @@ spec/models/google_rsa_description_spec.rb
 spec/models/google_rsa_headline_spec.rb
 spec/models/google_sitelink_spec.rb
 spec/models/google_structured_snippet_spec.rb
+spec/models/google_target_impression_share_spec.rb
 spec/models/grant_business_partner200_response_partner_spec.rb
 spec/models/grant_business_partner200_response_spec.rb
 spec/models/grant_business_partner201_response_partner_spec.rb
@@ -7810,6 +7821,7 @@ spec/models/update_ad_account200_response_dsa_defaults_spec.rb
 spec/models/update_ad_account200_response_settings_funding_source_spec.rb
 spec/models/update_ad_account200_response_settings_spec.rb
 spec/models/update_ad_account200_response_spec.rb
+spec/models/update_ad_account200_response_url_tracking_spec.rb
 spec/models/update_ad_account_manager_link_request_spec.rb
 spec/models/update_ad_account_request_spec.rb
 spec/models/update_ad_audience_request_spec.rb

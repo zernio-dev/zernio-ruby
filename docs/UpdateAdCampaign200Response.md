@@ -11,6 +11,11 @@
 | **bid_amount** | **Float** |  | [optional] |
 | **roas_average_floor** | **Float** |  | [optional] |
 | **portfolio_bid_strategy_id** | **String** | Google only. Echoed back, but NOT mirrored onto local Ad documents (no column for it yet). | [optional] |
+| **target_impression_share** | [**GoogleTargetImpressionShare**](GoogleTargetImpressionShare.md) |  | [optional] |
+| **manual_cpc** | [**GoogleManualCpc**](GoogleManualCpc.md) |  | [optional] |
+| **network_settings** | [**GoogleNetworkSettings**](GoogleNetworkSettings.md) |  | [optional] |
+| **tracking_url_template** | **String** |  | [optional] |
+| **final_url_suffix** | **String** |  | [optional] |
 | **platform_specific_data** | **Object** |  | [optional] |
 
 ## Example
@@ -26,6 +31,11 @@ instance = Zernio::UpdateAdCampaign200Response.new(
   bid_amount: null,
   roas_average_floor: null,
   portfolio_bid_strategy_id: null,
+  target_impression_share: null,
+  manual_cpc: null,
+  network_settings: null,
+  tracking_url_template: null,
+  final_url_suffix: null,
   platform_specific_data: null
 )
 ```
