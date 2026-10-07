@@ -1124,6 +1124,7 @@ docs/GetProduct200Response.md
 docs/GetRcsCapabilities200Response.md
 docs/GetRedditFlairs200Response.md
 docs/GetRedditFlairs200ResponseFlairsInner.md
+docs/GetRedditPostComments200Response.md
 docs/GetRedditSubreddits200Response.md
 docs/GetRedditSubreddits200ResponseSubredditsInner.md
 docs/GetSequence200Response.md
@@ -1893,6 +1894,7 @@ docs/RcsTestDevice.md
 docs/ReachAndFrequencyApi.md
 docs/RecyclingConfig.md
 docs/RecyclingState.md
+docs/RedditComment.md
 docs/RedditPlatformData.md
 docs/RedditPost.md
 docs/RedditSearchApi.md
@@ -3945,6 +3947,7 @@ lib/zernio-sdk/models/get_product200_response.rb
 lib/zernio-sdk/models/get_rcs_capabilities200_response.rb
 lib/zernio-sdk/models/get_reddit_flairs200_response.rb
 lib/zernio-sdk/models/get_reddit_flairs200_response_flairs_inner.rb
+lib/zernio-sdk/models/get_reddit_post_comments200_response.rb
 lib/zernio-sdk/models/get_reddit_subreddits200_response.rb
 lib/zernio-sdk/models/get_reddit_subreddits200_response_subreddits_inner.rb
 lib/zernio-sdk/models/get_sequence200_response.rb
@@ -4695,6 +4698,7 @@ lib/zernio-sdk/models/rcs_suggestion_one_of5.rb
 lib/zernio-sdk/models/rcs_test_device.rb
 lib/zernio-sdk/models/recycling_config.rb
 lib/zernio-sdk/models/recycling_state.rb
+lib/zernio-sdk/models/reddit_comment.rb
 lib/zernio-sdk/models/reddit_platform_data.rb
 lib/zernio-sdk/models/reddit_post.rb
 lib/zernio-sdk/models/redeliver_webhook_event_request.rb
@@ -6719,6 +6723,7 @@ spec/models/get_product200_response_spec.rb
 spec/models/get_rcs_capabilities200_response_spec.rb
 spec/models/get_reddit_flairs200_response_flairs_inner_spec.rb
 spec/models/get_reddit_flairs200_response_spec.rb
+spec/models/get_reddit_post_comments200_response_spec.rb
 spec/models/get_reddit_subreddits200_response_spec.rb
 spec/models/get_reddit_subreddits200_response_subreddits_inner_spec.rb
 spec/models/get_sequence200_response_sequence_spec.rb
@@ -7469,6 +7474,7 @@ spec/models/rcs_suggestion_spec.rb
 spec/models/rcs_test_device_spec.rb
 spec/models/recycling_config_spec.rb
 spec/models/recycling_state_spec.rb
+spec/models/reddit_comment_spec.rb
 spec/models/reddit_platform_data_spec.rb
 spec/models/reddit_post_spec.rb
 spec/models/redeliver_webhook_event_request_spec.rb
