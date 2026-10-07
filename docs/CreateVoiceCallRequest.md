@@ -13,6 +13,7 @@
 | **transcription_language** | **String** | &#39;auto&#39; derives from the callee&#39;s country; &#39;en&#39;/&#39;es&#39; force it. | [optional] |
 | **amd** | **Boolean** | Answering-machine detection; defers the bridge until human vs machine is known. | [optional] |
 | **voicemail_drop_message** | **String** | Spoken to a detected machine, then hang up (implies &#x60;amd&#x60;). For outbound voicemail drops. | [optional] |
+| **ring_timeout_seconds** | **Integer** | Seconds to let the callee&#39;s phone ring before the call ends as no_answer. The destination carrier can end it sooner. | [optional][default to 30] |
 
 ## Example
 
@@ -28,7 +29,8 @@ instance = Zernio::CreateVoiceCallRequest.new(
   transcribe_override: null,
   transcription_language: null,
   amd: null,
-  voicemail_drop_message: null
+  voicemail_drop_message: null,
+  ring_timeout_seconds: null
 )
 ```
 
