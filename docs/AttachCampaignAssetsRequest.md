@@ -10,6 +10,7 @@
 | **sitelinks** | [**Array&lt;GoogleSitelink&gt;**](GoogleSitelink.md) |  | [optional] |
 | **callouts** | **Array&lt;String&gt;** |  | [optional] |
 | **structured_snippets** | [**Array&lt;GoogleStructuredSnippet&gt;**](GoogleStructuredSnippet.md) |  | [optional] |
+| **images** | **Array&lt;String&gt;** | Public image URLs, uploaded to Google as image assets. Landscape 1.91:1 (min 600x314) or square 1:1 (min 300x300), up to 5 MB each. | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::AttachCampaignAssetsRequest.new(
   customer_id: null,
   sitelinks: null,
   callouts: null,
-  structured_snippets: null
+  structured_snippets: null,
+  images: null
 )
 ```
 

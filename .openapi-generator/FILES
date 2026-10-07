@@ -1424,6 +1424,7 @@ docs/ListAdConversionGoals200Response.md
 docs/ListAdCreatives200Response.md
 docs/ListAdGroupAssets200Response.md
 docs/ListAdGroupAssets200ResponseCalloutsInner.md
+docs/ListAdGroupAssets200ResponseImagesInner.md
 docs/ListAdGroupAssets200ResponseSitelinksInner.md
 docs/ListAdGroupAssets200ResponseStructuredSnippetsInner.md
 docs/ListAdImages200Response.md
@@ -1479,6 +1480,7 @@ docs/ListCalls200Response.md
 docs/ListCalls200ResponseCallsInner.md
 docs/ListCampaignAssets200Response.md
 docs/ListCampaignAssets200ResponseCalloutsInner.md
+docs/ListCampaignAssets200ResponseImagesInner.md
 docs/ListCampaignAssets200ResponseSitelinksInner.md
 docs/ListCampaignAssets200ResponseStructuredSnippetsInner.md
 docs/ListCampaignNegativeKeywords200Response.md
@@ -4223,6 +4225,7 @@ lib/zernio-sdk/models/list_ad_conversion_goals200_response.rb
 lib/zernio-sdk/models/list_ad_creatives200_response.rb
 lib/zernio-sdk/models/list_ad_group_assets200_response.rb
 lib/zernio-sdk/models/list_ad_group_assets200_response_callouts_inner.rb
+lib/zernio-sdk/models/list_ad_group_assets200_response_images_inner.rb
 lib/zernio-sdk/models/list_ad_group_assets200_response_sitelinks_inner.rb
 lib/zernio-sdk/models/list_ad_group_assets200_response_structured_snippets_inner.rb
 lib/zernio-sdk/models/list_ad_images200_response.rb
@@ -4278,6 +4281,7 @@ lib/zernio-sdk/models/list_calls200_response.rb
 lib/zernio-sdk/models/list_calls200_response_calls_inner.rb
 lib/zernio-sdk/models/list_campaign_assets200_response.rb
 lib/zernio-sdk/models/list_campaign_assets200_response_callouts_inner.rb
+lib/zernio-sdk/models/list_campaign_assets200_response_images_inner.rb
 lib/zernio-sdk/models/list_campaign_assets200_response_sitelinks_inner.rb
 lib/zernio-sdk/models/list_campaign_assets200_response_structured_snippets_inner.rb
 lib/zernio-sdk/models/list_campaign_negative_keywords200_response.rb
@@ -6980,6 +6984,7 @@ spec/models/list_ad_catalogs200_response_spec.rb
 spec/models/list_ad_conversion_goals200_response_spec.rb
 spec/models/list_ad_creatives200_response_spec.rb
 spec/models/list_ad_group_assets200_response_callouts_inner_spec.rb
+spec/models/list_ad_group_assets200_response_images_inner_spec.rb
 spec/models/list_ad_group_assets200_response_sitelinks_inner_spec.rb
 spec/models/list_ad_group_assets200_response_spec.rb
 spec/models/list_ad_group_assets200_response_structured_snippets_inner_spec.rb
@@ -7035,6 +7040,7 @@ spec/models/list_business_partners200_response_spec.rb
 spec/models/list_calls200_response_calls_inner_spec.rb
 spec/models/list_calls200_response_spec.rb
 spec/models/list_campaign_assets200_response_callouts_inner_spec.rb
+spec/models/list_campaign_assets200_response_images_inner_spec.rb
 spec/models/list_campaign_assets200_response_sitelinks_inner_spec.rb
 spec/models/list_campaign_assets200_response_spec.rb
 spec/models/list_campaign_assets200_response_structured_snippets_inner_spec.rb

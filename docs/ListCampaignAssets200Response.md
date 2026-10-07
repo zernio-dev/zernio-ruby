@@ -8,6 +8,7 @@
 | **sitelinks** | [**Array&lt;ListCampaignAssets200ResponseSitelinksInner&gt;**](ListCampaignAssets200ResponseSitelinksInner.md) |  | [optional] |
 | **callouts** | [**Array&lt;ListCampaignAssets200ResponseCalloutsInner&gt;**](ListCampaignAssets200ResponseCalloutsInner.md) |  | [optional] |
 | **structured_snippets** | [**Array&lt;ListCampaignAssets200ResponseStructuredSnippetsInner&gt;**](ListCampaignAssets200ResponseStructuredSnippetsInner.md) |  | [optional] |
+| **images** | [**Array&lt;ListCampaignAssets200ResponseImagesInner&gt;**](ListCampaignAssets200ResponseImagesInner.md) |  | [optional] |
 | **cached_at** | **Time** | Time of the cached Google read. Null when no cache was used. | [optional] |
 | **stale** | **Boolean** | True when exhausted quota required returning the last successful read. | [optional] |
 
@@ -21,6 +22,7 @@ instance = Zernio::ListCampaignAssets200Response.new(
   sitelinks: null,
   callouts: null,
   structured_snippets: null,
+  images: null,
   cached_at: null,
   stale: null
 )
