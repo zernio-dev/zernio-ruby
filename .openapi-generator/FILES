@@ -619,6 +619,9 @@ docs/CreateStandaloneAdRequestStructuredSnippetsInner.md
 docs/CreateStandaloneAdRequestTranslationsInner.md
 docs/CreateStandaloneAdRequestVideo.md
 docs/CreateStandaloneAdRequestZipsInner.md
+docs/CreateSupportRun202Response.md
+docs/CreateSupportRunRequest.md
+docs/CreateSupportRunRequestContext.md
 docs/CreateTestLead200Response.md
 docs/CreateTestLead200ResponseTestLead.md
 docs/CreateTestLeadRequest.md
@@ -2206,6 +2209,9 @@ docs/SubmitPhoneNumberKycRequestDocumentsInnerOneOf1.md
 docs/SubmitWhatsAppNumberKycRequest.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md
+docs/SupportRun.md
+docs/SupportRunUsage.md
+docs/SupportRunsApi.md
 docs/SyncExternalPosts200Response.md
 docs/SyncExternalPosts200ResponseSynced.md
 docs/SyncExternalPostsRequest.md
@@ -2680,6 +2686,7 @@ docs/WebhookPayloadReviewNew.md
 docs/WebhookPayloadReviewNewAccount.md
 docs/WebhookPayloadReviewUpdated.md
 docs/WebhookPayloadSequenceEnrollment.md
+docs/WebhookPayloadSupportRun.md
 docs/WebhookPayloadTest.md
 docs/WebhookPayloadWhatsAppAccountAlertReceived.md
 docs/WebhookPayloadWhatsAppAccountAlertReceivedAlert.md
@@ -2844,6 +2851,7 @@ lib/zernio-sdk/api/reviews_api.rb
 lib/zernio-sdk/api/sequences_api.rb
 lib/zernio-sdk/api/slack_api.rb
 lib/zernio-sdk/api/sms_api.rb
+lib/zernio-sdk/api/support_runs_api.rb
 lib/zernio-sdk/api/tools_api.rb
 lib/zernio-sdk/api/tracking_tags_api.rb
 lib/zernio-sdk/api/twitter_engagement_api.rb
@@ -3453,6 +3461,9 @@ lib/zernio-sdk/models/create_standalone_ad_request_structured_snippets_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_translations_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
 lib/zernio-sdk/models/create_standalone_ad_request_zips_inner.rb
+lib/zernio-sdk/models/create_support_run202_response.rb
+lib/zernio-sdk/models/create_support_run_request.rb
+lib/zernio-sdk/models/create_support_run_request_context.rb
 lib/zernio-sdk/models/create_test_lead200_response.rb
 lib/zernio-sdk/models/create_test_lead200_response_test_lead.rb
 lib/zernio-sdk/models/create_test_lead_request.rb
@@ -5005,6 +5016,8 @@ lib/zernio-sdk/models/submit_phone_number_kyc_request_documents_inner_one_of1.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner_one_of.rb
+lib/zernio-sdk/models/support_run.rb
+lib/zernio-sdk/models/support_run_usage.rb
 lib/zernio-sdk/models/sync_external_posts200_response.rb
 lib/zernio-sdk/models/sync_external_posts200_response_synced.rb
 lib/zernio-sdk/models/sync_external_posts_request.rb
@@ -5470,6 +5483,7 @@ lib/zernio-sdk/models/webhook_payload_review_new.rb
 lib/zernio-sdk/models/webhook_payload_review_new_account.rb
 lib/zernio-sdk/models/webhook_payload_review_updated.rb
 lib/zernio-sdk/models/webhook_payload_sequence_enrollment.rb
+lib/zernio-sdk/models/webhook_payload_support_run.rb
 lib/zernio-sdk/models/webhook_payload_test.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_account_alert_received.rb
 lib/zernio-sdk/models/webhook_payload_whats_app_account_alert_received_alert.rb
@@ -5625,6 +5639,7 @@ spec/api/reviews_api_spec.rb
 spec/api/sequences_api_spec.rb
 spec/api/slack_api_spec.rb
 spec/api/sms_api_spec.rb
+spec/api/support_runs_api_spec.rb
 spec/api/tools_api_spec.rb
 spec/api/tracking_tags_api_spec.rb
 spec/api/twitter_engagement_api_spec.rb
@@ -6229,6 +6244,9 @@ spec/models/create_standalone_ad_request_structured_snippets_inner_spec.rb
 spec/models/create_standalone_ad_request_translations_inner_spec.rb
 spec/models/create_standalone_ad_request_video_spec.rb
 spec/models/create_standalone_ad_request_zips_inner_spec.rb
+spec/models/create_support_run202_response_spec.rb
+spec/models/create_support_run_request_context_spec.rb
+spec/models/create_support_run_request_spec.rb
 spec/models/create_test_lead200_response_spec.rb
 spec/models/create_test_lead200_response_test_lead_spec.rb
 spec/models/create_test_lead_request_field_data_inner_spec.rb
@@ -7781,6 +7799,8 @@ spec/models/submit_phone_number_kyc_request_spec.rb
 spec/models/submit_whats_app_number_kyc_request_documents_inner_one_of_spec.rb
 spec/models/submit_whats_app_number_kyc_request_documents_inner_spec.rb
 spec/models/submit_whats_app_number_kyc_request_spec.rb
+spec/models/support_run_spec.rb
+spec/models/support_run_usage_spec.rb
 spec/models/sync_external_posts200_response_spec.rb
 spec/models/sync_external_posts200_response_synced_spec.rb
 spec/models/sync_external_posts_request_spec.rb
@@ -8245,6 +8265,7 @@ spec/models/webhook_payload_review_new_account_spec.rb
 spec/models/webhook_payload_review_new_spec.rb
 spec/models/webhook_payload_review_updated_spec.rb
 spec/models/webhook_payload_sequence_enrollment_spec.rb
+spec/models/webhook_payload_support_run_spec.rb
 spec/models/webhook_payload_test_spec.rb
 spec/models/webhook_payload_whats_app_account_alert_received_alert_spec.rb
 spec/models/webhook_payload_whats_app_account_alert_received_spec.rb
