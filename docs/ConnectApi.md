@@ -2617,7 +2617,9 @@ end
 api_instance = Zernio::ConnectApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Profile ID from your classic connection flow. Required with tempToken.
-  temp_token: 'temp_token_example', # String | Temporary Facebook access token from the classic OAuth callback. Required with profileId.
+  temp_token: 'temp_token_example', # String | Temporary Facebook access token from the classic OAuth callback. Required with profileId unless sent in the X-Temp-Token header.
+  x_temp_token: 'x_temp_token_example', # String | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way.
+  connect_flow: 'connect_flow_example', # String | Set by the Zernio-hosted picker, whose user token stays in an httpOnly cookie. Integrators send tempToken instead.
   selection_token: 'ENCRYPTED_SELECTION_TOKEN' # String | Encrypted dashboard business-login grant. Send alone instead of profileId and tempToken. Expires after ten minutes.
 }
 
@@ -2653,7 +2655,9 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | Profile ID from your classic connection flow. Required with tempToken. | [optional] |
-| **temp_token** | **String** | Temporary Facebook access token from the classic OAuth callback. Required with profileId. | [optional] |
+| **temp_token** | **String** | Temporary Facebook access token from the classic OAuth callback. Required with profileId unless sent in the X-Temp-Token header. | [optional] |
+| **x_temp_token** | **String** | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way. | [optional] |
+| **connect_flow** | **String** | Set by the Zernio-hosted picker, whose user token stays in an httpOnly cookie. Integrators send tempToken instead. | [optional] |
 | **selection_token** | **String** | Encrypted dashboard business-login grant. Send alone instead of profileId and tempToken. Expires after ten minutes. | [optional] |
 
 ### Return type
@@ -2756,7 +2760,7 @@ end
 
 ## list_instagram_pages
 
-> <ListInstagramPages200Response> list_instagram_pages(profile_id, temp_token)
+> <ListInstagramPages200Response> list_instagram_pages(profile_id, opts)
 
 List Pages with a linked Instagram account
 
@@ -2780,11 +2784,15 @@ end
 
 api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Profile ID from your connection flow
-temp_token = 'temp_token_example' # String | Long-lived Facebook user access token from the OAuth callback redirect
+opts = {
+  temp_token: 'temp_token_example', # String | Long-lived Facebook user access token from the OAuth callback redirect. Required unless sent in the X-Temp-Token header.
+  x_temp_token: 'x_temp_token_example', # String | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way.
+  connect_flow: 'connect_flow_example' # String | Set by the Zernio-hosted picker, whose user token stays in an httpOnly cookie. Integrators send tempToken instead.
+}
 
 begin
   # List Pages with a linked Instagram account
-  result = api_instance.list_instagram_pages(profile_id, temp_token)
+  result = api_instance.list_instagram_pages(profile_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_instagram_pages: #{e}"
@@ -2795,12 +2803,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListInstagramPages200Response>, Integer, Hash)> list_instagram_pages_with_http_info(profile_id, temp_token)
+> <Array(<ListInstagramPages200Response>, Integer, Hash)> list_instagram_pages_with_http_info(profile_id, opts)
 
 ```ruby
 begin
   # List Pages with a linked Instagram account
-  data, status_code, headers = api_instance.list_instagram_pages_with_http_info(profile_id, temp_token)
+  data, status_code, headers = api_instance.list_instagram_pages_with_http_info(profile_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListInstagramPages200Response>
@@ -2814,7 +2822,9 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | Profile ID from your connection flow |  |
-| **temp_token** | **String** | Long-lived Facebook user access token from the OAuth callback redirect |  |
+| **temp_token** | **String** | Long-lived Facebook user access token from the OAuth callback redirect. Required unless sent in the X-Temp-Token header. | [optional] |
+| **x_temp_token** | **String** | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way. | [optional] |
+| **connect_flow** | **String** | Set by the Zernio-hosted picker, whose user token stays in an httpOnly cookie. Integrators send tempToken instead. | [optional] |
 
 ### Return type
 
@@ -3295,7 +3305,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-select_facebook_page_request = Zernio::SelectFacebookPageRequestOneOf.new({profile_id: 'profile_id_example', temp_token: 'temp_token_example', user_profile: Zernio::SelectFacebookPageRequestOneOfUserProfile.new}) # SelectFacebookPageRequest | 
+select_facebook_page_request = Zernio::SelectFacebookPageRequestOneOf.new({profile_id: 'profile_id_example', user_profile: Zernio::SelectFacebookPageRequestOneOfUserProfile.new}) # SelectFacebookPageRequest | 
 
 begin
   # Select Facebook page
@@ -3443,7 +3453,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-select_instagram_account_request = Zernio::SelectInstagramAccountRequest.new({profile_id: 'profile_id_example', temp_token: 'temp_token_example'}) # SelectInstagramAccountRequest | 
+select_instagram_account_request = Zernio::SelectInstagramAccountRequest.new({profile_id: 'profile_id_example'}) # SelectInstagramAccountRequest | 
 
 begin
   # Select the Page whose Instagram account to connect
