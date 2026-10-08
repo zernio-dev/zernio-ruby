@@ -34,6 +34,9 @@
 | **video_p75_watched_actions** | **Integer** | Views reaching 75% of the video&#39;s length. Sources: Meta &#x60;video_p75_watched_actions&#x60;, TikTok &#x60;video_views_p75&#x60;. | [optional] |
 | **video_p95_watched_actions** | **Integer** | Views reaching 95% of the video&#39;s length. Sources: Meta &#x60;video_p95_watched_actions&#x60; (Meta only). | [optional] |
 | **video_p100_watched_actions** | **Integer** | Views reaching 100% of the video&#39;s length. Sources: Meta &#x60;video_p100_watched_actions&#x60;, TikTok &#x60;video_views_p100&#x60;. | [optional] |
+| **video2_sec_watched_actions** | **Integer** | Plays of at least 2 seconds, replays excluded. Hook rate &#x3D; video2SecWatchedActions / impressions. Sources: TikTok &#x60;video_watched_2s&#x60; (TikTok only; Meta&#39;s closest field, 2-second continuous plays, is not synced). TikTok history note: added 2026-10, and each sync re-fetches only the last 7 days, so older days read 0. | [optional] |
+| **video6_sec_watched_actions** | **Integer** | Plays of at least 6 seconds, replays excluded. Hold rate &#x3D; video6SecWatchedActions / video2SecWatchedActions. Sources: TikTok &#x60;video_watched_6s&#x60; (TikTok only). Same history note as &#x60;video2SecWatchedActions&#x60;. | [optional] |
+| **video6_sec_focused_views** | **Integer** | TikTok&#39;s 6-second focused views: plays of at least 6 seconds (or to the end, for shorter videos) or with an interaction in the first 6 seconds, so it is at least &#x60;video6SecWatchedActions&#x60;. Sources: TikTok &#x60;engaged_view&#x60; (TikTok only). Same history note as &#x60;video2SecWatchedActions&#x60;. | [optional] |
 | **video_avg_time_watched_actions** | **Float** | Average seconds watched per play. Aggregated over date ranges and across children as a play-weighted average (total watch time / total plays), never a plain average of averages. Sources: Meta &#x60;video_avg_time_watched_actions&#x60;, TikTok &#x60;average_video_play&#x60;. | [optional] |
 | **cost_per_thruplay** | **Float** | Derived &#x60;spend / videoThruplayWatchedActions&#x60;, in ad-account native currency. Rounded to 4 decimals rather than the usual 2 because a ThruPlay routinely costs well under a cent. 0 when the ad has no ThruPlays (ThruPlay is Meta-only). | [optional] |
 | **funnel** | [**AdFunnelCounts**](AdFunnelCounts.md) |  | [optional] |
@@ -77,6 +80,9 @@ instance = Zernio::CampaignAnalyticsResponseAnalyticsDailyInner.new(
   video_p75_watched_actions: null,
   video_p95_watched_actions: null,
   video_p100_watched_actions: null,
+  video2_sec_watched_actions: null,
+  video6_sec_watched_actions: null,
+  video6_sec_focused_views: null,
   video_avg_time_watched_actions: null,
   cost_per_thruplay: null,
   funnel: null,

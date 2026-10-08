@@ -102,6 +102,15 @@ module Zernio
     # Views reaching 100% of the video's length. Sources: Meta `video_p100_watched_actions`, TikTok `video_views_p100`.
     attr_accessor :video_p100_watched_actions
 
+    # Plays of at least 2 seconds, replays excluded. Hook rate = video2SecWatchedActions / impressions. Sources: TikTok `video_watched_2s` (TikTok only; Meta's closest field, 2-second continuous plays, is not synced). TikTok history note: added 2026-10, and each sync re-fetches only the last 7 days, so older days read 0.
+    attr_accessor :video2_sec_watched_actions
+
+    # Plays of at least 6 seconds, replays excluded. Hold rate = video6SecWatchedActions / video2SecWatchedActions. Sources: TikTok `video_watched_6s` (TikTok only). Same history note as `video2SecWatchedActions`.
+    attr_accessor :video6_sec_watched_actions
+
+    # TikTok's 6-second focused views: plays of at least 6 seconds (or to the end, for shorter videos) or with an interaction in the first 6 seconds, so it is at least `video6SecWatchedActions`. Sources: TikTok `engaged_view` (TikTok only). Same history note as `video2SecWatchedActions`.
+    attr_accessor :video6_sec_focused_views
+
     # Average seconds watched per play. Aggregated over date ranges and across children as a play-weighted average (total watch time / total plays), never a plain average of averages. Sources: Meta `video_avg_time_watched_actions`, TikTok `average_video_play`.
     attr_accessor :video_avg_time_watched_actions
 
@@ -151,6 +160,9 @@ module Zernio
         :'video_p75_watched_actions' => :'videoP75WatchedActions',
         :'video_p95_watched_actions' => :'videoP95WatchedActions',
         :'video_p100_watched_actions' => :'videoP100WatchedActions',
+        :'video2_sec_watched_actions' => :'video2SecWatchedActions',
+        :'video6_sec_watched_actions' => :'video6SecWatchedActions',
+        :'video6_sec_focused_views' => :'video6SecFocusedViews',
         :'video_avg_time_watched_actions' => :'videoAvgTimeWatchedActions',
         :'cost_per_thruplay' => :'costPerThruplay',
         :'funnel' => :'funnel',
@@ -203,6 +215,9 @@ module Zernio
         :'video_p75_watched_actions' => :'Integer',
         :'video_p95_watched_actions' => :'Integer',
         :'video_p100_watched_actions' => :'Integer',
+        :'video2_sec_watched_actions' => :'Integer',
+        :'video6_sec_watched_actions' => :'Integer',
+        :'video6_sec_focused_views' => :'Integer',
         :'video_avg_time_watched_actions' => :'Float',
         :'cost_per_thruplay' => :'Float',
         :'funnel' => :'AdFunnelCounts',
@@ -367,6 +382,18 @@ module Zernio
         self.video_p100_watched_actions = attributes[:'video_p100_watched_actions']
       end
 
+      if attributes.key?(:'video2_sec_watched_actions')
+        self.video2_sec_watched_actions = attributes[:'video2_sec_watched_actions']
+      end
+
+      if attributes.key?(:'video6_sec_watched_actions')
+        self.video6_sec_watched_actions = attributes[:'video6_sec_watched_actions']
+      end
+
+      if attributes.key?(:'video6_sec_focused_views')
+        self.video6_sec_focused_views = attributes[:'video6_sec_focused_views']
+      end
+
       if attributes.key?(:'video_avg_time_watched_actions')
         self.video_avg_time_watched_actions = attributes[:'video_avg_time_watched_actions']
       end
@@ -442,6 +469,9 @@ module Zernio
           video_p75_watched_actions == o.video_p75_watched_actions &&
           video_p95_watched_actions == o.video_p95_watched_actions &&
           video_p100_watched_actions == o.video_p100_watched_actions &&
+          video2_sec_watched_actions == o.video2_sec_watched_actions &&
+          video6_sec_watched_actions == o.video6_sec_watched_actions &&
+          video6_sec_focused_views == o.video6_sec_focused_views &&
           video_avg_time_watched_actions == o.video_avg_time_watched_actions &&
           cost_per_thruplay == o.cost_per_thruplay &&
           funnel == o.funnel &&
@@ -459,7 +489,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, all_conversions, cost_per_conversion, actions, action_values, purchase_value, roas, cost_per_action, outbound_clicks, outbound_clicks_ctr, inline_link_clicks, inline_link_click_ctr, unique_clicks, unique_ctr, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video_avg_time_watched_actions, cost_per_thruplay, funnel, engagement_breakdown, last_synced_at, date].hash
+      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, all_conversions, cost_per_conversion, actions, action_values, purchase_value, roas, cost_per_action, outbound_clicks, outbound_clicks_ctr, inline_link_clicks, inline_link_click_ctr, unique_clicks, unique_ctr, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video2_sec_watched_actions, video6_sec_watched_actions, video6_sec_focused_views, video_avg_time_watched_actions, cost_per_thruplay, funnel, engagement_breakdown, last_synced_at, date].hash
     end
 
     # Builds the object from hash
