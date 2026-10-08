@@ -17,6 +17,8 @@
 | **removed_from_platform_at** | **Time** | Set when a post that was successfully published later disappears from the platform (deleted on-platform or taken down by the platform). status stays \&quot;published\&quot; (it reflects the publish outcome); poll this field to detect post-publish removals. Absent while the post is live, and cleared if the post reappears. Detection runs with the analytics sync, so expect up to a few hours of lag. | [optional] |
 | **is_trial_reel** | **Boolean** | Present and true only when this Instagram reel was launched as a Trial through Zernio (created with platformSpecificData.trialParams). Use it to segment trial reels in analytics. Note: Instagram&#39;s Graph API exposes no readable trial field, so this reflects creation-time intent only. It indicates the reel STARTED as a trial, not whether or when it graduated. | [optional] |
 | **trial_graduation_strategy** | **String** | Graduation strategy the trial reel was launched with. Present only when isTrialReel is true. | [optional] |
+| **publish_attempts** | **Integer** | Number of times the publishing pipeline claimed this target to publish it since it was created or last manually retried (a manual retry resets it, except on TikTok). Not the number of retries (see publishRetries). | [optional] |
+| **publish_retries** | **Integer** | Instagram only. Automatic re-sends of media_publish on the same container that Zernio scheduled after Meta answered a transient error (30 min, 2 h and 6 h after each failure, at most 3). While the target is still processing, the latest one may not have been sent yet. Not reset by a manual retry. Independent of publishAttempts, which counts publish-leg claims. Absent when none was scheduled. | [optional] |
 | **error_message** | **String** | Human-readable error message when status is failed. Contains platform-specific error details explaining why the publish failed. | [optional] |
 | **error_category** | **String** | Error category for programmatic handling: auth_expired (token expired/revoked), user_content (wrong format/too long), user_abuse (rate limits/spam), account_issue (config problems), platform_rejected (policy violation), platform_error (5xx/maintenance), platform_rate_limit (platform throttling, retried automatically), quota_exhausted (a shared quota pool the integration draws on is empty, including our own capacity gate in front of one; not caused by your content or account, and safe to retry once the pool frees up), system_error (Zernio infra), unknown | [optional] |
 | **error_source** | **String** | Who caused the error: user (fix content/reconnect), platform (outage/API change), system (Zernio issue, rare) | [optional] |
@@ -41,6 +43,8 @@ instance = Zernio::PlatformTarget.new(
   removed_from_platform_at: null,
   is_trial_reel: null,
   trial_graduation_strategy: null,
+  publish_attempts: null,
+  publish_retries: null,
   error_message: null,
   error_category: null,
   error_source: null,
