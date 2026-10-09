@@ -788,6 +788,7 @@ docs/ExternalPostMediaItem.md
 docs/ExternalPostSummary.md
 docs/ExternalPostSummaryAnalytics.md
 docs/ExternalPostWebhookPost.md
+docs/FacebookOrInstagramPost.md
 docs/FacebookPlatformData.md
 docs/FacebookPostEarningsResponse.md
 docs/FacebookPostEarningsResponseMetricsValue.md
@@ -3630,6 +3631,7 @@ lib/zernio-sdk/models/external_post_media_item.rb
 lib/zernio-sdk/models/external_post_summary.rb
 lib/zernio-sdk/models/external_post_summary_analytics.rb
 lib/zernio-sdk/models/external_post_webhook_post.rb
+lib/zernio-sdk/models/facebook_or_instagram_post.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
 lib/zernio-sdk/models/facebook_post_earnings_response.rb
 lib/zernio-sdk/models/facebook_post_earnings_response_metrics_value.rb
@@ -6415,6 +6417,7 @@ spec/models/external_post_media_item_spec.rb
 spec/models/external_post_summary_analytics_spec.rb
 spec/models/external_post_summary_spec.rb
 spec/models/external_post_webhook_post_spec.rb
+spec/models/facebook_or_instagram_post_spec.rb
 spec/models/facebook_platform_data_spec.rb
 spec/models/facebook_post_earnings_response_metrics_value_spec.rb
 spec/models/facebook_post_earnings_response_spec.rb

@@ -4,22 +4,21 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Reddit post ID (without type prefix) | [optional] |
-| **fullname** | **String** | Reddit fullname (e.g. t3_abc123) | [optional] |
+| **id** | **String** | Reddit post base36 id (e.g. \&quot;1tjtj26\&quot;) | [optional] |
+| **fullname** | **String** | Fullname with type prefix (e.g. \&quot;t3_1tjtj26\&quot;) | [optional] |
 | **title** | **String** |  | [optional] |
-| **author** | **String** |  | [optional] |
-| **subreddit** | **String** |  | [optional] |
-| **url** | **String** | Post URL (may be a gallery URL, external link, or self-post URL) | [optional] |
-| **permalink** | **String** | Full permalink to the Reddit post | [optional] |
-| **selftext** | **String** | Self-post body text (empty string for link posts) | [optional] |
-| **created_utc** | **Float** | Unix timestamp of post creation | [optional] |
-| **score** | **Integer** |  | [optional] |
+| **selftext** | **String** | Body text for self-posts (empty for link posts) | [optional] |
+| **author** | **String** | Reddit username, without the u/ prefix | [optional] |
+| **subreddit** | **String** | Subreddit name, without the r/ prefix | [optional] |
+| **permalink** | **String** | Absolute URL to the post on reddit.com | [optional] |
+| **url** | **String** | For link posts, the external URL; for self-posts, the Reddit permalink | [optional] |
+| **score** | **Integer** | Net upvotes (upvotes minus downvotes) | [optional] |
 | **num_comments** | **Integer** |  | [optional] |
-| **over18** | **Boolean** | Whether the post is marked NSFW | [optional] |
+| **created_utc** | **Integer** | Unix timestamp in seconds | [optional] |
+| **over18** | **Boolean** |  | [optional] |
 | **stickied** | **Boolean** |  | [optional] |
-| **flair_text** | **String** | Link flair text if set | [optional] |
-| **is_gallery** | **Boolean** | Whether the post is a gallery with multiple images | [optional] |
-| **gallery_images** | **Array&lt;String&gt;** | Individual image URLs for gallery posts (only present when isGallery is true) | [optional] |
+| **flair_text** | **String** | Link flair text if any | [optional] |
+| **is_gallery** | **Boolean** | True if the post is a Reddit gallery (multiple images) | [optional] |
 
 ## Example
 
@@ -30,19 +29,18 @@ instance = Zernio::RedditPost.new(
   id: null,
   fullname: null,
   title: null,
+  selftext: null,
   author: null,
   subreddit: null,
-  url: null,
   permalink: null,
-  selftext: null,
-  created_utc: null,
+  url: null,
   score: null,
   num_comments: null,
+  created_utc: null,
   over18: null,
   stickied: null,
   flair_text: null,
-  is_gallery: null,
-  gallery_images: null
+  is_gallery: null
 )
 ```
 
