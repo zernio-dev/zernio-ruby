@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Stable webhook event ID: the dedupe key, also sent as the X-Zernio-Event-Id header and identical on every retry and redelivery. It identifies the event only, never an account or other resource. |  |
+| **test** | **Boolean** | Always true when present: only a sample sent by POST /v1/webhooks/test with an event carries it. Real deliveries never do. | [optional] |
 | **event** | **String** |  |  |
 | **message** | [**WebhookPayloadMessageMessage**](WebhookPayloadMessageMessage.md) |  |  |
 | **conversation** | [**InboxWebhookConversation**](InboxWebhookConversation.md) |  |  |
@@ -19,6 +20,7 @@ require 'zernio-sdk'
 
 instance = Zernio::WebhookPayloadMessage.new(
   id: null,
+  test: null,
   event: null,
   message: null,
   conversation: null,
