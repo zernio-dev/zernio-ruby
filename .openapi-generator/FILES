@@ -891,6 +891,7 @@ docs/GetAdsSearchTerms200ResponsePaging.md
 docs/GetAdsTimeline202Response.md
 docs/GetAllAccountsHealth200Response.md
 docs/GetAllAccountsHealth200ResponseAccountsInner.md
+docs/GetAllAccountsHealth200ResponseAccountsInnerAnalyticsSync.md
 docs/GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction.md
 docs/GetAllAccountsHealth200ResponseSummary.md
 docs/GetAnalytics200Response.md
@@ -3725,6 +3726,7 @@ lib/zernio-sdk/models/get_ads_search_terms200_response_paging.rb
 lib/zernio-sdk/models/get_ads_timeline202_response.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response_accounts_inner.rb
+lib/zernio-sdk/models/get_all_accounts_health200_response_accounts_inner_analytics_sync.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response_accounts_inner_messaging_restriction.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response_summary.rb
 lib/zernio-sdk/models/get_analytics200_response.rb
@@ -6509,6 +6511,7 @@ spec/models/get_ads_search_terms200_response_data_inner_spec.rb
 spec/models/get_ads_search_terms200_response_paging_spec.rb
 spec/models/get_ads_search_terms200_response_spec.rb
 spec/models/get_ads_timeline202_response_spec.rb
+spec/models/get_all_accounts_health200_response_accounts_inner_analytics_sync_spec.rb
 spec/models/get_all_accounts_health200_response_accounts_inner_messaging_restriction_spec.rb
 spec/models/get_all_accounts_health200_response_accounts_inner_spec.rb
 spec/models/get_all_accounts_health200_response_spec.rb

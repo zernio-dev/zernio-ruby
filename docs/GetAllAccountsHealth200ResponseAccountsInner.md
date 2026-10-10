@@ -16,6 +16,7 @@
 | **token_expires_at** | **Time** |  | [optional] |
 | **needs_reconnect** | **Boolean** | True when the token is expired or revoked, permissions are missing, the account is inactive, or the platform rejected its stored credentials (the same flag the account listing reports as needsReconnection). | [optional] |
 | **issues** | **Array&lt;String&gt;** |  | [optional] |
+| **analytics_sync** | [**GetAllAccountsHealth200ResponseAccountsInnerAnalyticsSync**](GetAllAccountsHealth200ResponseAccountsInnerAnalyticsSync.md) |  | [optional] |
 | **messaging_restriction** | [**GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction**](GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction.md) |  | [optional] |
 
 ## Example
@@ -36,6 +37,7 @@ instance = Zernio::GetAllAccountsHealth200ResponseAccountsInner.new(
   token_expires_at: null,
   needs_reconnect: null,
   issues: null,
+  analytics_sync: null,
   messaging_restriction: null
 )
 ```
