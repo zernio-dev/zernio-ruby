@@ -87,7 +87,7 @@ end
 
 Delete automation
 
-Permanently delete an automation and all its trigger logs.
+Delete an automation. Its trigger logs are kept so tracked links already sent in DMs keep redirecting; they are removed with the account.
 
 ### Examples
 
