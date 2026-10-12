@@ -10,7 +10,7 @@
 | **stop_reason** | **String** | Why the run stopped. Null while it is in progress. |  |
 | **answer** | **String** | Ana&#39;s answer. Null while the run is in progress or when it failed. |  |
 | **usage** | [**SupportRunUsage**](SupportRunUsage.md) |  |  |
-| **cost_usd** | **Float** | The amount billed for the run, in USD: the tokens in &#x60;usage&#x60; at the Support Assistant rates (see Ask a support question), never above &#x60;maxCostUsd&#x60;. 0 for a failed run. |  |
+| **cost_usd** | **Float** | The exact amount charged for the question, in USD, never above &#x60;maxCostUsd&#x60;. 0 for a failed run. |  |
 | **max_cost_usd** | **Float** | The cost cap this run was started with, in USD. |  |
 | **created_at** | **Time** |  |  |
 | **started_at** | **Time** |  |  |
