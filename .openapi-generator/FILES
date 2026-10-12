@@ -1658,6 +1658,7 @@ docs/ListSmsSenderIds200ResponseBudgetPendingRequest.md
 docs/ListSmsSenderIds200ResponseSenderIdsInner.md
 docs/ListSnapchatProfiles200Response.md
 docs/ListSnapchatProfiles200ResponsePublicProfilesInner.md
+docs/ListSupportAnswers200Response.md
 docs/ListTikTokAdPixels200Response.md
 docs/ListTikTokAdPixels200ResponsePixelsInner.md
 docs/ListTikTokAdPixels200ResponsePixelsInnerEventDetailsInner.md
@@ -4489,6 +4490,7 @@ lib/zernio-sdk/models/list_sms_sender_ids200_response_budget_pending_request.rb
 lib/zernio-sdk/models/list_sms_sender_ids200_response_sender_ids_inner.rb
 lib/zernio-sdk/models/list_snapchat_profiles200_response.rb
 lib/zernio-sdk/models/list_snapchat_profiles200_response_public_profiles_inner.rb
+lib/zernio-sdk/models/list_support_answers200_response.rb
 lib/zernio-sdk/models/list_tik_tok_ad_pixels200_response.rb
 lib/zernio-sdk/models/list_tik_tok_ad_pixels200_response_pixels_inner.rb
 lib/zernio-sdk/models/list_tik_tok_ad_pixels200_response_pixels_inner_event_details_inner.rb
@@ -7278,6 +7280,7 @@ spec/models/list_sms_sender_ids200_response_sender_ids_inner_spec.rb
 spec/models/list_sms_sender_ids200_response_spec.rb
 spec/models/list_snapchat_profiles200_response_public_profiles_inner_spec.rb
 spec/models/list_snapchat_profiles200_response_spec.rb
+spec/models/list_support_answers200_response_spec.rb
 spec/models/list_tik_tok_ad_pixels200_response_pixels_inner_event_details_inner_spec.rb
 spec/models/list_tik_tok_ad_pixels200_response_pixels_inner_spec.rb
 spec/models/list_tik_tok_ad_pixels200_response_spec.rb

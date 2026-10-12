@@ -6,6 +6,7 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**ask_support_question**](SupportAssistantApi.md#ask_support_question) | **POST** /v1/support/runs | Ask a support question |
 | [**get_support_answer**](SupportAssistantApi.md#get_support_answer) | **GET** /v1/support/runs/{runId} | Get a support answer |
+| [**list_support_answers**](SupportAssistantApi.md#list_support_answers) | **GET** /v1/support/runs | List a thread&#39;s support answers |
 
 
 ## ask_support_question
@@ -139,6 +140,81 @@ end
 ### Return type
 
 [**SupportRun**](SupportRun.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_support_answers
+
+> <ListSupportAnswers200Response> list_support_answers(thread_id, opts)
+
+List a thread's support answers
+
+Lists the runs of one thread that your team started, with Ana's answers, oldest first. Replies from the Zernio team after a support ticket arrive by email and are not included. Runs are kept for 90 days. Page through a long thread with `limit` and `cursor`: pass `nextCursor` as `cursor` until it is null.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SupportAssistantApi.new
+thread_id = 'thread_id_example' # String | The thread to list, as returned by `POST /v1/support/runs`.
+opts = {
+  limit: 56, # Integer | Runs per page.
+  cursor: 'cursor_example' # String | Pass `nextCursor` from the previous page.
+}
+
+begin
+  # List a thread's support answers
+  result = api_instance.list_support_answers(thread_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SupportAssistantApi->list_support_answers: #{e}"
+end
+```
+
+#### Using the list_support_answers_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListSupportAnswers200Response>, Integer, Hash)> list_support_answers_with_http_info(thread_id, opts)
+
+```ruby
+begin
+  # List a thread's support answers
+  data, status_code, headers = api_instance.list_support_answers_with_http_info(thread_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListSupportAnswers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SupportAssistantApi->list_support_answers_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **thread_id** | **String** | The thread to list, as returned by &#x60;POST /v1/support/runs&#x60;. |  |
+| **limit** | **Integer** | Runs per page. | [optional][default to 20] |
+| **cursor** | **String** | Pass &#x60;nextCursor&#x60; from the previous page. | [optional] |
+
+### Return type
+
+[**ListSupportAnswers200Response**](ListSupportAnswers200Response.md)
 
 ### Authorization
 
