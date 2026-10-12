@@ -1,4 +1,4 @@
-# Zernio::CreateSupportRun202Response
+# Zernio::AskSupportQuestion202Response
 
 ## Properties
 
@@ -14,7 +14,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateSupportRun202Response.new(
+instance = Zernio::AskSupportQuestion202Response.new(
   run_id: null,
   thread_id: null,
   status: null,

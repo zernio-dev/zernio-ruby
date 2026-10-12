@@ -139,6 +139,9 @@ docs/ApplyGoogleRecommendationsRequest.md
 docs/ApplyGoogleRecommendationsRequestRecommendationsInner.md
 docs/ApproveWhatsAppGroupJoinRequestsRequest.md
 docs/ArchiveLeadForm200Response.md
+docs/AskSupportQuestion202Response.md
+docs/AskSupportQuestionRequest.md
+docs/AskSupportQuestionRequestContext.md
 docs/AssignAdAccountUser201Response.md
 docs/AssignAdAccountUserRequest.md
 docs/AssignGoogleBusinessLocation200Response.md
@@ -621,9 +624,6 @@ docs/CreateStandaloneAdRequestStructuredSnippetsInner.md
 docs/CreateStandaloneAdRequestTranslationsInner.md
 docs/CreateStandaloneAdRequestVideo.md
 docs/CreateStandaloneAdRequestZipsInner.md
-docs/CreateSupportRun202Response.md
-docs/CreateSupportRunRequest.md
-docs/CreateSupportRunRequestContext.md
 docs/CreateTestLead200Response.md
 docs/CreateTestLead200ResponseTestLead.md
 docs/CreateTestLeadRequest.md
@@ -2214,10 +2214,10 @@ docs/SubmitPhoneNumberKycRequestDocumentsInnerOneOf1.md
 docs/SubmitWhatsAppNumberKycRequest.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md
+docs/SupportAssistantApi.md
 docs/SupportRun.md
 docs/SupportRunSupportTicket.md
 docs/SupportRunUsage.md
-docs/SupportRunsApi.md
 docs/SyncExternalPosts200Response.md
 docs/SyncExternalPosts200ResponseSynced.md
 docs/SyncExternalPostsRequest.md
@@ -2857,7 +2857,7 @@ lib/zernio-sdk/api/reviews_api.rb
 lib/zernio-sdk/api/sequences_api.rb
 lib/zernio-sdk/api/slack_api.rb
 lib/zernio-sdk/api/sms_api.rb
-lib/zernio-sdk/api/support_runs_api.rb
+lib/zernio-sdk/api/support_assistant_api.rb
 lib/zernio-sdk/api/tools_api.rb
 lib/zernio-sdk/api/tracking_tags_api.rb
 lib/zernio-sdk/api/twitter_engagement_api.rb
@@ -3000,6 +3000,9 @@ lib/zernio-sdk/models/apply_google_recommendations_request.rb
 lib/zernio-sdk/models/apply_google_recommendations_request_recommendations_inner.rb
 lib/zernio-sdk/models/approve_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/archive_lead_form200_response.rb
+lib/zernio-sdk/models/ask_support_question202_response.rb
+lib/zernio-sdk/models/ask_support_question_request.rb
+lib/zernio-sdk/models/ask_support_question_request_context.rb
 lib/zernio-sdk/models/assign_ad_account_user201_response.rb
 lib/zernio-sdk/models/assign_ad_account_user_request.rb
 lib/zernio-sdk/models/assign_google_business_location200_response.rb
@@ -3469,9 +3472,6 @@ lib/zernio-sdk/models/create_standalone_ad_request_structured_snippets_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_translations_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
 lib/zernio-sdk/models/create_standalone_ad_request_zips_inner.rb
-lib/zernio-sdk/models/create_support_run202_response.rb
-lib/zernio-sdk/models/create_support_run_request.rb
-lib/zernio-sdk/models/create_support_run_request_context.rb
 lib/zernio-sdk/models/create_test_lead200_response.rb
 lib/zernio-sdk/models/create_test_lead200_response_test_lead.rb
 lib/zernio-sdk/models/create_test_lead_request.rb
@@ -5651,7 +5651,7 @@ spec/api/reviews_api_spec.rb
 spec/api/sequences_api_spec.rb
 spec/api/slack_api_spec.rb
 spec/api/sms_api_spec.rb
-spec/api/support_runs_api_spec.rb
+spec/api/support_assistant_api_spec.rb
 spec/api/tools_api_spec.rb
 spec/api/tracking_tags_api_spec.rb
 spec/api/twitter_engagement_api_spec.rb
@@ -5789,6 +5789,9 @@ spec/models/apply_google_recommendations_request_recommendations_inner_spec.rb
 spec/models/apply_google_recommendations_request_spec.rb
 spec/models/approve_whats_app_group_join_requests_request_spec.rb
 spec/models/archive_lead_form200_response_spec.rb
+spec/models/ask_support_question202_response_spec.rb
+spec/models/ask_support_question_request_context_spec.rb
+spec/models/ask_support_question_request_spec.rb
 spec/models/assign_ad_account_user201_response_spec.rb
 spec/models/assign_ad_account_user_request_spec.rb
 spec/models/assign_google_business_location200_response_account_spec.rb
@@ -6258,9 +6261,6 @@ spec/models/create_standalone_ad_request_structured_snippets_inner_spec.rb
 spec/models/create_standalone_ad_request_translations_inner_spec.rb
 spec/models/create_standalone_ad_request_video_spec.rb
 spec/models/create_standalone_ad_request_zips_inner_spec.rb
-spec/models/create_support_run202_response_spec.rb
-spec/models/create_support_run_request_context_spec.rb
-spec/models/create_support_run_request_spec.rb
 spec/models/create_test_lead200_response_spec.rb
 spec/models/create_test_lead200_response_test_lead_spec.rb
 spec/models/create_test_lead_request_field_data_inner_spec.rb

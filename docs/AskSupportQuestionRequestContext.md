@@ -1,4 +1,4 @@
-# Zernio::CreateSupportRunRequestContext
+# Zernio::AskSupportQuestionRequestContext
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateSupportRunRequestContext.new(
+instance = Zernio::AskSupportQuestionRequestContext.new(
   post_id: null,
   account_id: null,
   profile_id: null
