@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **run_id** | **String** | Run id, a 24-character hex string. |  |
 | **thread_id** | **String** | Conversation thread id. Send it back as &#x60;threadId&#x60; to ask a follow-up in the same thread. |  |
-| **status** | **String** | queued and running are in progress. needs_human means Ana handed the question to a person instead of answering. |  |
+| **status** | **String** | queued and running are in progress. needs_human means Ana handed the question to a person instead of answering; when &#x60;supportTicket&#x60; is set, a Zernio teammate has been notified and will follow up by email. |  |
 | **stop_reason** | **String** | Why the run stopped. Null while it is in progress. |  |
 | **answer** | **String** | Ana&#39;s answer. Null while the run is in progress or when it failed. |  |
 | **usage** | [**SupportRunUsage**](SupportRunUsage.md) |  |  |
@@ -15,6 +15,7 @@
 | **created_at** | **Time** |  |  |
 | **started_at** | **Time** |  |  |
 | **finished_at** | **Time** |  |  |
+| **support_ticket** | [**SupportRunSupportTicket**](SupportRunSupportTicket.md) |  |  |
 | **poll_after_seconds** | **Integer** | Seconds to wait before polling again. Present only while the run is queued or running. | [optional] |
 
 ## Example
@@ -34,6 +35,7 @@ instance = Zernio::SupportRun.new(
   created_at: null,
   started_at: null,
   finished_at: null,
+  support_ticket: null,
   poll_after_seconds: null
 )
 ```

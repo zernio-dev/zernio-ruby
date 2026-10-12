@@ -2214,6 +2214,7 @@ docs/SubmitWhatsAppNumberKycRequest.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md
 docs/SupportRun.md
+docs/SupportRunSupportTicket.md
 docs/SupportRunUsage.md
 docs/SupportRunsApi.md
 docs/SyncExternalPosts200Response.md
@@ -5025,6 +5026,7 @@ lib/zernio-sdk/models/submit_whats_app_number_kyc_request.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner_one_of.rb
 lib/zernio-sdk/models/support_run.rb
+lib/zernio-sdk/models/support_run_support_ticket.rb
 lib/zernio-sdk/models/support_run_usage.rb
 lib/zernio-sdk/models/sync_external_posts200_response.rb
 lib/zernio-sdk/models/sync_external_posts200_response_synced.rb
@@ -7812,6 +7814,7 @@ spec/models/submit_whats_app_number_kyc_request_documents_inner_one_of_spec.rb
 spec/models/submit_whats_app_number_kyc_request_documents_inner_spec.rb
 spec/models/submit_whats_app_number_kyc_request_spec.rb
 spec/models/support_run_spec.rb
+spec/models/support_run_support_ticket_spec.rb
 spec/models/support_run_usage_spec.rb
 spec/models/sync_external_posts200_response_spec.rb
 spec/models/sync_external_posts200_response_synced_spec.rb
