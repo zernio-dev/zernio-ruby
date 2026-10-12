@@ -19,6 +19,9 @@ module Zernio
     # Stable webhook event ID: the dedupe key, also sent as the X-Zernio-Event-Id header and identical on every retry and redelivery.
     attr_accessor :id
 
+    # The profiles this event belongs to, each with the externalId you set on it (null when none is set). Present on every event tied to a profile and absent on events that belong to none. Events spanning several profiles (a post published to accounts of different profiles) list each once. Use it to route the event to your tenant without storing Zernio profile ids.
+    attr_accessor :profiles
+
     # Always true when present: only a sample sent by POST /v1/webhooks/test with an event carries it. Real deliveries never do.
     attr_accessor :test
 
@@ -59,6 +62,7 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
+        :'profiles' => :'profiles',
         :'test' => :'test',
         :'event' => :'event',
         :'account' => :'account',
@@ -82,6 +86,7 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
+        :'profiles' => :'Array<WebhookProfilesInner>',
         :'test' => :'Boolean',
         :'event' => :'String',
         :'account' => :'WebhookAdsSyncAccount',
@@ -117,6 +122,12 @@ module Zernio
         self.id = attributes[:'id']
       else
         self.id = nil
+      end
+
+      if attributes.key?(:'profiles')
+        if (value = attributes[:'profiles']).is_a?(Array)
+          self.profiles = value
+        end
       end
 
       if attributes.key?(:'test')
@@ -267,6 +278,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          profiles == o.profiles &&
           test == o.test &&
           event == o.event &&
           account == o.account &&
@@ -284,7 +296,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, test, event, account, ad_account, sync, timestamp].hash
+      [id, profiles, test, event, account, ad_account, sync, timestamp].hash
     end
 
     # Builds the object from hash

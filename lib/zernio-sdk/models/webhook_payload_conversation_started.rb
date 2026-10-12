@@ -22,6 +22,9 @@ module Zernio
     # Stable webhook event ID: the dedupe key, also sent as the X-Zernio-Event-Id header and identical on every retry and redelivery. It identifies the event only, never an account or other resource.
     attr_accessor :id
 
+    # The profiles this event belongs to, each with the externalId you set on it (null when none is set). Present on every event tied to a profile and absent on events that belong to none. Events spanning several profiles (a post published to accounts of different profiles) list each once. Use it to route the event to your tenant without storing Zernio profile ids.
+    attr_accessor :profiles
+
     attr_accessor :event
 
     attr_accessor :conversation
@@ -61,6 +64,7 @@ module Zernio
       {
         :'test' => :'test',
         :'id' => :'id',
+        :'profiles' => :'profiles',
         :'event' => :'event',
         :'conversation' => :'conversation',
         :'account' => :'account',
@@ -84,6 +88,7 @@ module Zernio
       {
         :'test' => :'Boolean',
         :'id' => :'String',
+        :'profiles' => :'Array<WebhookProfilesInner>',
         :'event' => :'String',
         :'conversation' => :'InboxWebhookConversationDetail',
         :'account' => :'InboxWebhookAccount',
@@ -122,6 +127,12 @@ module Zernio
         self.id = attributes[:'id']
       else
         self.id = nil
+      end
+
+      if attributes.key?(:'profiles')
+        if (value = attributes[:'profiles']).is_a?(Array)
+          self.profiles = value
+        end
       end
 
       if attributes.key?(:'event')
@@ -269,6 +280,7 @@ module Zernio
       self.class == o.class &&
           test == o.test &&
           id == o.id &&
+          profiles == o.profiles &&
           event == o.event &&
           conversation == o.conversation &&
           account == o.account &&
@@ -285,7 +297,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [test, id, event, conversation, account, started_at, timestamp].hash
+      [test, id, profiles, event, conversation, account, started_at, timestamp].hash
     end
 
     # Builds the object from hash

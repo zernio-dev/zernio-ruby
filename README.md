@@ -3689,6 +3689,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadWorkflowRunExecution](docs/WebhookPayloadWorkflowRunExecution.md)
  - [Zernio::WebhookPayloadWorkflowRunTrigger](docs/WebhookPayloadWorkflowRunTrigger.md)
  - [Zernio::WebhookPayloadWorkflowRunWorkflow](docs/WebhookPayloadWorkflowRunWorkflow.md)
+ - [Zernio::WebhookProfilesInner](docs/WebhookProfilesInner.md)
  - [Zernio::WhatsAppBillingConversation](docs/WhatsAppBillingConversation.md)
  - [Zernio::WhatsAppBodyComponent](docs/WhatsAppBodyComponent.md)
  - [Zernio::WhatsAppBodyComponentExample](docs/WhatsAppBodyComponentExample.md)

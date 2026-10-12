@@ -21,6 +21,9 @@ module Zernio
     # Stable webhook event ID: the dedupe key, also sent as the X-Zernio-Event-Id header and identical on every retry and redelivery. It identifies the event only, never an account or other resource.
     attr_accessor :id
 
+    # The profiles this event belongs to, each with the externalId you set on it (null when none is set). Present on every event tied to a profile and absent on events that belong to none. Events spanning several profiles (a post published to accounts of different profiles) list each once. Use it to route the event to your tenant without storing Zernio profile ids.
+    attr_accessor :profiles
+
     attr_accessor :event
 
     # UTC time at which Zernio generated this event (set once when the event payload is built, before delivery is queued). Retries and redeliveries keep the original value, so it reflects the event, not the delivery attempt.
@@ -55,6 +58,7 @@ module Zernio
       {
         :'test' => :'test',
         :'id' => :'id',
+        :'profiles' => :'profiles',
         :'event' => :'event',
         :'timestamp' => :'timestamp',
         :'number' => :'number'
@@ -76,6 +80,7 @@ module Zernio
       {
         :'test' => :'Boolean',
         :'id' => :'String',
+        :'profiles' => :'Array<WebhookProfilesInner>',
         :'event' => :'String',
         :'timestamp' => :'Time',
         :'number' => :'OnWhatsAppNumberActivatedRequestNumber'
@@ -110,6 +115,12 @@ module Zernio
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'profiles')
+        if (value = attributes[:'profiles']).is_a?(Array)
+          self.profiles = value
+        end
       end
 
       if attributes.key?(:'event')
@@ -159,6 +170,7 @@ module Zernio
       self.class == o.class &&
           test == o.test &&
           id == o.id &&
+          profiles == o.profiles &&
           event == o.event &&
           timestamp == o.timestamp &&
           number == o.number
@@ -173,7 +185,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [test, id, event, timestamp, number].hash
+      [test, id, profiles, event, timestamp, number].hash
     end
 
     # Builds the object from hash
