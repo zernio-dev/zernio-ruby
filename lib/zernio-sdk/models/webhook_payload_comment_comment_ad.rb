@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Ad context. Present only when the comment was made on paid content. Instagram: populated from the webhook payload's value.media.ad_id, value.media.ad_title and value.media.original_media_id, each only when Meta includes it. Facebook: populated via a Graph API lookup of the parent post's promotion_status. Absent for comments on organic posts that are not currently promoted. 
+  # Ad context. Present only when the comment was made on paid content. Instagram: populated from the webhook payload's value.media.ad_id, value.media.ad_title and value.media.original_media_id, each only when Meta includes it. Facebook: populated from a Graph API lookup of the parent post. Present when the post is an ad dark post (isDarkPost true, whatever its promotionStatus) or an organic post that is or was boosted (promotionStatus \"active\", \"extendable\" or \"finished\"). Meta does not link a dark post back to its ad, so id and title are never set on Facebook. Absent for comments on organic posts that are not promoted. 
   class WebhookPayloadCommentCommentAd < ApiModelBase
     # Meta ad ID (Instagram only).
     attr_accessor :id
@@ -25,8 +25,11 @@ module Zernio
     # Original media ID that Meta reports for the ad (Instagram only).
     attr_accessor :original_media_id
 
-    # Facebook promotion status returned by Graph API. Common values: \"active\" (organic post currently boosted), \"ineligible\" (dark post or ad creative, not promotable because it already is an ad). 
+    # Facebook only. The parent post's promotion_status as the Graph API returns it, for example \"active\" (organic post currently boosted). Ad dark posts usually report \"inactive\" and sometimes \"ineligible\", so use isDarkPost, not this value, to tell an ad comment apart. 
     attr_accessor :promotion_status
+
+    # Facebook only: true when the post is an unpublished ad creative (dark post), false for a boosted organic post.
+    attr_accessor :is_dark_post
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -34,7 +37,8 @@ module Zernio
         :'id' => :'id',
         :'title' => :'title',
         :'original_media_id' => :'originalMediaId',
-        :'promotion_status' => :'promotionStatus'
+        :'promotion_status' => :'promotionStatus',
+        :'is_dark_post' => :'isDarkPost'
       }
     end
 
@@ -54,7 +58,8 @@ module Zernio
         :'id' => :'String',
         :'title' => :'String',
         :'original_media_id' => :'String',
-        :'promotion_status' => :'String'
+        :'promotion_status' => :'String',
+        :'is_dark_post' => :'Boolean'
       }
     end
 
@@ -95,6 +100,10 @@ module Zernio
       if attributes.key?(:'promotion_status')
         self.promotion_status = attributes[:'promotion_status']
       end
+
+      if attributes.key?(:'is_dark_post')
+        self.is_dark_post = attributes[:'is_dark_post']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -120,7 +129,8 @@ module Zernio
           id == o.id &&
           title == o.title &&
           original_media_id == o.original_media_id &&
-          promotion_status == o.promotion_status
+          promotion_status == o.promotion_status &&
+          is_dark_post == o.is_dark_post
     end
 
     # @see the `==` method
@@ -132,7 +142,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, title, original_media_id, promotion_status].hash
+      [id, title, original_media_id, promotion_status, is_dark_post].hash
     end
 
     # Builds the object from hash
