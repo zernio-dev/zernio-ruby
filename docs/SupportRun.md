@@ -8,6 +8,7 @@
 | **thread_id** | **String** | Conversation thread id. Send it back as &#x60;threadId&#x60; to ask a follow-up in the same thread. |  |
 | **status** | **String** | queued and running are in progress. needs_human means the assistant handed the question to a person instead of answering; when &#x60;supportTicket&#x60; is set, a Zernio teammate has been notified and will follow up by email. |  |
 | **stop_reason** | **String** | Why the run stopped. Null while it is in progress. |  |
+| **question** | **String** | The question as asked, with leading and trailing whitespace trimmed. Null only on runs created before this field was added. |  |
 | **answer** | **String** | The assistant&#39;s answer. Null while the run is in progress or when it failed. |  |
 | **usage** | [**SupportRunUsage**](SupportRunUsage.md) |  |  |
 | **cost_usd** | **Float** | The exact amount charged for the question, in USD, never above &#x60;maxCostUsd&#x60;. 0 for a failed run. |  |
@@ -28,6 +29,7 @@ instance = Zernio::SupportRun.new(
   thread_id: null,
   status: null,
   stop_reason: null,
+  question: null,
   answer: null,
   usage: null,
   cost_usd: null,
