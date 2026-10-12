@@ -17,7 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Create profile
 
-Creates a new profile with a name, optional description, and color. Names are unique per team: a duplicate returns a 409 whose details.existingProfileId carries the id of the existing profile. Send an Idempotency-Key header to make retries safe: a retried create with the same key and body replays the original 201 (same _id) instead of conflicting.
+Creates a new profile with a name, optional description, and color. Names are unique per team: a duplicate returns a 409 whose details.existingProfileId carries the id of the existing profile. Set externalId to your own tenant or client id to find the profile later without storing its Zernio id. A duplicate externalId returns the same kind of 409, with code profile_external_id_conflict. Send an Idempotency-Key header to make retries safe: a retried create with the same key and body replays the original 201 (same _id) instead of conflicting.
 
 ### Examples
 
@@ -228,7 +228,7 @@ end
 
 List profiles
 
-Returns profiles sorted default-first, then by creation date. Filter with name (exact match) and paginate with limit/skip; without those params the full list is returned unchanged. Use includeOverLimit=true to include profiles that exceed the plan limit.
+Returns profiles sorted default-first, then by creation date. Filter with name or externalId (exact match) and paginate with limit/skip; without those params the full list is returned unchanged. Use includeOverLimit=true to include profiles that exceed the plan limit.
 
 ### Examples
 
@@ -245,6 +245,7 @@ api_instance = Zernio::ProfilesApi.new
 opts = {
   include_over_limit: true, # Boolean | When true, includes over-limit profiles (marked with isOverLimit: true).
   name: 'name_example', # String | Exact-match filter on the profile name. Useful to recover a profile id after an ambiguous create (timeout followed by a 409 on retry).
+  external_id: 'external_id_example', # String | Exact-match filter on the externalId you set on the profile, to find the profile of one of your tenants without storing its Zernio id. Team members can each own a profile with the same externalId, so the result is a list.
   limit: 56, # Integer | Page size. When limit or skip is present, the response includes total and skip (and echoes limit).
   skip: 56 # Integer | Number of profiles to skip, applied after sorting and filtering.
 }
@@ -282,6 +283,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **include_over_limit** | **Boolean** | When true, includes over-limit profiles (marked with isOverLimit: true). | [optional][default to false] |
 | **name** | **String** | Exact-match filter on the profile name. Useful to recover a profile id after an ambiguous create (timeout followed by a 409 on retry). | [optional] |
+| **external_id** | **String** | Exact-match filter on the externalId you set on the profile, to find the profile of one of your tenants without storing its Zernio id. Team members can each own a profile with the same externalId, so the result is a list. | [optional] |
 | **limit** | **Integer** | Page size. When limit or skip is present, the response includes total and skip (and echoes limit). | [optional] |
 | **skip** | **Integer** | Number of profiles to skip, applied after sorting and filtering. | [optional] |
 
@@ -305,7 +307,7 @@ end
 
 Update profile
 
-Updates a profile's name, description, color, default timezone, or default status.
+Updates a profile's name, description, color, default timezone, externalId, or default status.
 
 ### Examples
 
