@@ -71,6 +71,12 @@ describe Zernio::SupportRun do
     end
   end
 
+  describe 'test attribute "diagnosis"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "usage"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

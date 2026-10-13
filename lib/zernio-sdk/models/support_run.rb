@@ -33,6 +33,8 @@ module Zernio
     # The assistant's answer. Null while the run is in progress or when it failed.
     attr_accessor :answer
 
+    attr_accessor :diagnosis
+
     attr_accessor :usage
 
     # The exact amount charged for the question, in USD, never above `maxCostUsd`. 0 for a failed run.
@@ -83,6 +85,7 @@ module Zernio
         :'stop_reason' => :'stopReason',
         :'question' => :'question',
         :'answer' => :'answer',
+        :'diagnosis' => :'diagnosis',
         :'usage' => :'usage',
         :'cost_usd' => :'costUsd',
         :'max_cost_usd' => :'maxCostUsd',
@@ -113,6 +116,7 @@ module Zernio
         :'stop_reason' => :'String',
         :'question' => :'String',
         :'answer' => :'String',
+        :'diagnosis' => :'SupportRunDiagnosis',
         :'usage' => :'SupportRunUsage',
         :'cost_usd' => :'Float',
         :'max_cost_usd' => :'Float',
@@ -130,6 +134,7 @@ module Zernio
         :'stop_reason',
         :'question',
         :'answer',
+        :'diagnosis',
         :'started_at',
         :'finished_at',
       ])
@@ -185,6 +190,12 @@ module Zernio
         self.answer = attributes[:'answer']
       else
         self.answer = nil
+      end
+
+      if attributes.key?(:'diagnosis')
+        self.diagnosis = attributes[:'diagnosis']
+      else
+        self.diagnosis = nil
       end
 
       if attributes.key?(:'usage')
@@ -394,6 +405,7 @@ module Zernio
           stop_reason == o.stop_reason &&
           question == o.question &&
           answer == o.answer &&
+          diagnosis == o.diagnosis &&
           usage == o.usage &&
           cost_usd == o.cost_usd &&
           max_cost_usd == o.max_cost_usd &&
@@ -413,7 +425,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [run_id, thread_id, status, stop_reason, question, answer, usage, cost_usd, max_cost_usd, created_at, started_at, finished_at, support_ticket, poll_after_seconds].hash
+      [run_id, thread_id, status, stop_reason, question, answer, diagnosis, usage, cost_usd, max_cost_usd, created_at, started_at, finished_at, support_ticket, poll_after_seconds].hash
     end
 
     # Builds the object from hash

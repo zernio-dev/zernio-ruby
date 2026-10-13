@@ -3199,6 +3199,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInner](docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md)
  - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf](docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md)
  - [Zernio::SupportRun](docs/SupportRun.md)
+ - [Zernio::SupportRunDiagnosis](docs/SupportRunDiagnosis.md)
  - [Zernio::SupportRunSupportTicket](docs/SupportRunSupportTicket.md)
  - [Zernio::SupportRunUsage](docs/SupportRunUsage.md)
  - [Zernio::SyncExternalPosts200Response](docs/SyncExternalPosts200Response.md)
