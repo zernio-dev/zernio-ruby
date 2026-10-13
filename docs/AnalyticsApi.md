@@ -66,7 +66,8 @@ opts = {
   limit: 56, # Integer | Page size (default 50)
   page: 56, # Integer | Page number (default 1)
   sort_by: 'date', # String | Sort by date, engagement, or a specific metric. Platform-specific metrics (follows, reposts, reels_skip_rate, ig_reels_*, completion_rate, profile_views, website_clicks) sort a null value as 0.
-  order: 'asc' # String | Sort order
+  order: 'asc', # String | Sort order
+  tags: 'job' # String | Comma-separated tags (at most 20). Lists only posts created through Zernio that carry every listed tag, matched exactly and case-sensitively. Up to 200 published posts can match within the date range; more returns 400 asking to narrow fromDate and toDate. Ignored when postId is set.
 }
 
 begin
@@ -111,6 +112,7 @@ end
 | **page** | **Integer** | Page number (default 1) | [optional][default to 1] |
 | **sort_by** | **String** | Sort by date, engagement, or a specific metric. Platform-specific metrics (follows, reposts, reels_skip_rate, ig_reels_*, completion_rate, profile_views, website_clicks) sort a null value as 0. | [optional][default to &#39;date&#39;] |
 | **order** | **String** | Sort order | [optional][default to &#39;desc&#39;] |
+| **tags** | **String** | Comma-separated tags (at most 20). Lists only posts created through Zernio that carry every listed tag, matched exactly and case-sensitively. Up to 200 published posts can match within the date range; more returns 400 asking to narrow fromDate and toDate. Ignored when postId is set. | [optional] |
 
 ### Return type
 
