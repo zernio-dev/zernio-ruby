@@ -494,7 +494,7 @@ opts = {
   sort_order: 'asc', # String | Sort order
   limit: 56, # Integer | 
   cursor: 'cursor_example', # String | 
-  account_id: 'account_id_example' # String | Filter by specific account ID
+  account_id: 'account_id_example' # String | Filter by specific account ID. With `platform=metaads` it takes the Meta Ads account ID, or the Facebook or Instagram account ID the Meta Ads connection belongs to, which returns that Meta Ads connection's ad rows. A Facebook or Instagram account with no Meta Ads connection returns no rows; an account on any other platform returns 400.
 }
 
 begin
@@ -536,7 +536,7 @@ end
 | **sort_order** | **String** | Sort order | [optional][default to &#39;desc&#39;] |
 | **limit** | **Integer** |  | [optional][default to 50] |
 | **cursor** | **String** |  | [optional] |
-| **account_id** | **String** | Filter by specific account ID | [optional] |
+| **account_id** | **String** | Filter by specific account ID. With &#x60;platform&#x3D;metaads&#x60; it takes the Meta Ads account ID, or the Facebook or Instagram account ID the Meta Ads connection belongs to, which returns that Meta Ads connection&#39;s ad rows. A Facebook or Instagram account with no Meta Ads connection returns no rows; an account on any other platform returns 400. | [optional] |
 
 ### Return type
 
