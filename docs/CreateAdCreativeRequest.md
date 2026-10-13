@@ -14,6 +14,7 @@
 | **image_url** | **String** | Publicly reachable image; uploaded to the account&#39;s library server-side. | [optional] |
 | **image_hash** | **String** | Existing library image hash (POST /v1/ads/images or GET /v1/ads/images). | [optional] |
 | **carousel_cards** | [**Array&lt;CreateAdCreativeRequestCarouselCardsInner&gt;**](CreateAdCreativeRequestCarouselCardsInner.md) |  | [optional] |
+| **optimize_card_order** | **Boolean** | Only with &#x60;carouselCards&#x60; (a 400 without them). Sets &#x60;link_data.multi_share_optimized&#x60;: &#x60;false&#x60; keeps the cards in the order given, and Meta then takes at most 5 cards, so &#x60;false&#x60; with more than 5 cards is a 400; &#x60;true&#x60; lets Meta reorder them for performance. Omitted, nothing is sent and Meta&#39;s default (&#x60;true&#x60;) applies. | [optional] |
 | **url_tags** | **String** | Appended to every outbound URL (e.g. utm_source&#x3D;fb). | [optional] |
 | **promotion** | **Object** | Not supported. Meta validates creative_sourcing_spec.promotion_metadata_spec on the create call and then discards it, so a Promotion set through the Marketing API never reaches the creative. Any object is rejected with 400 invalid_field_value. Send null or omit the field, and set the Promotion on the ad in Ads Manager. Verified on 2026-09-11 across Graph v19.0 to v25.0 and every write path. | [optional] |
 | **creative_features** | **Hash&lt;String, String&gt;** | Meta only. Applied to each new creative, including standalone and attach shapes. With creatives[], these are defaults; an item replaces the whole feature map, including an empty map. auto_promotion_tag is an Advantage+ enhancement, not the Ads Manager Promotion setting. | [optional] |
@@ -36,6 +37,7 @@ instance = Zernio::CreateAdCreativeRequest.new(
   image_url: null,
   image_hash: null,
   carousel_cards: null,
+  optimize_card_order: null,
   url_tags: null,
   promotion: null,
   creative_features: {auto_promotion_tag&#x3D;OPT_IN},
