@@ -408,6 +408,7 @@ opts = {
   date_to: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   include_hidden: true, # Boolean | 
   search: 'search_example', # String | Search posts by text content.
+  tags: 'job,engineering', # String | Comma-separated tags (at most 20). Returns only posts carrying every listed tag, matched exactly and case-sensitively against the tags set when the post was created. An empty value means no tag filter. `tag` is accepted as an alias.
   sort_by: 'scheduled-desc', # String | Sort order for results.
   account_id: 'account_id_example' # String | Filter posts to those published via a specific account (24-char hex ObjectId).
 }
@@ -457,6 +458,7 @@ end
 | **date_to** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **include_hidden** | **Boolean** |  | [optional][default to false] |
 | **search** | **String** | Search posts by text content. | [optional] |
+| **tags** | **String** | Comma-separated tags (at most 20). Returns only posts carrying every listed tag, matched exactly and case-sensitively against the tags set when the post was created. An empty value means no tag filter. &#x60;tag&#x60; is accepted as an alias. | [optional] |
 | **sort_by** | **String** | Sort order for results. | [optional][default to &#39;scheduled-desc&#39;] |
 | **account_id** | **String** | Filter posts to those published via a specific account (24-char hex ObjectId). | [optional] |
 
