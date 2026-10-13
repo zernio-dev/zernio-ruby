@@ -35,7 +35,7 @@ end
 
 api_instance = Zernio::LeadGenApi.new
 form_id = 'form_id_example' # String | Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
-account_id = 'account_id_example' # String | Connected Meta ads, facebook or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile.
+account_id = 'account_id_example' # String | Connected Meta ads, facebook, instagram or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile; an Instagram account uses the Page its ads run under (its own linked Page, else the Facebook or business-login Meta ads account on the same profile).
 
 begin
   # Archive a lead form
@@ -69,7 +69,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **form_id** | **String** | Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). |  |
-| **account_id** | **String** | Connected Meta ads, facebook or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile. |  |
+| **account_id** | **String** | Connected Meta ads, facebook, instagram or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile; an Instagram account uses the Page its ads run under (its own linked Page, else the Facebook or business-login Meta ads account on the same profile). |  |
 
 ### Return type
 
@@ -91,7 +91,7 @@ end
 
 Create a lead form
 
-Creates a lead form on a Facebook Page or LinkedIn Company Page to collect contact details from ads.  The form content goes inside `platformSpecificData` for both platforms (the shape is selected by the accountId's platform). Meta: created on the connected Facebook Page (POST /{page-id}/leadgen_forms), where `accountId` may be the `metaads` ads connection (its Page comes from the Facebook account linked to the same profile) or the Facebook account itself; the old top-level Meta fields (questions, thankYou*, contextCard, …) are DEPRECATED but still accepted while platformSpecificData is absent; mixing both shapes is a 400. LinkedIn: created on the ad account's Company Page. NOT idempotent: a retry creates a second form. Meta prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. LinkedIn exposes only free-text and multiple-choice questions via API (prefilled-from-profile fields are Campaign Manager UI-only). Requires the Ads add-on. 
+Creates a lead form on a Facebook Page or LinkedIn Company Page to collect contact details from ads.  The form content goes inside `platformSpecificData` for both platforms (the shape is selected by the accountId's platform). Meta: created on the connected Facebook Page (POST /{page-id}/leadgen_forms), where `accountId` may be the `metaads` ads connection (its Page comes from the Facebook account linked to the same profile), an Instagram account (the Page its ads run under: its own linked Page, else the Facebook or business-login Meta ads account on the same profile) or the Facebook account itself; the old top-level Meta fields (questions, thankYou*, contextCard, …) are DEPRECATED but still accepted while platformSpecificData is absent; mixing both shapes is a 400. LinkedIn: created on the ad account's Company Page. NOT idempotent: a retry creates a second form. Meta prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. LinkedIn exposes only free-text and multiple-choice questions via API (prefilled-from-profile fields are Campaign Manager UI-only). Requires the Ads add-on. 
 
 ### Examples
 
@@ -321,7 +321,7 @@ end
 
 api_instance = Zernio::LeadGenApi.new
 form_id = 'form_id_example' # String | Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
-account_id = 'account_id_example' # String | Connected Meta ads, facebook or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile.
+account_id = 'account_id_example' # String | Connected Meta ads, facebook, instagram or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile; an Instagram account uses the Page its ads run under (its own linked Page, else the Facebook or business-login Meta ads account on the same profile).
 opts = {
   fields: 'name,thank_you_page{title,body,button_type,website_url}' # String | Meta only. A Graph field selection passed through verbatim to GET /{form-id}, replacing the default projection, so fields Meta adds later are reachable without an API change. Field names, commas and {} expansion only; anything else (Graph field modifiers such as .limit(), or characters that could open another query parameter) is a 400. Ownership of the form is verified before the selection runs, so this cannot reach any Page but the one accountId manages. Unknown field names are rejected by Meta as a 400. 
 }
@@ -358,7 +358,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **form_id** | **String** | Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). |  |
-| **account_id** | **String** | Connected Meta ads, facebook or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile. |  |
+| **account_id** | **String** | Connected Meta ads, facebook, instagram or linkedin ads account id (selects the platform). A Meta ads connection resolves its Page through the Facebook account linked to the same profile; an Instagram account uses the Page its ads run under (its own linked Page, else the Facebook or business-login Meta ads account on the same profile). |  |
 | **fields** | **String** | Meta only. A Graph field selection passed through verbatim to GET /{form-id}, replacing the default projection, so fields Meta adds later are reachable without an API change. Field names, commas and {} expansion only; anything else (Graph field modifiers such as .limit(), or characters that could open another query parameter) is a 400. Ownership of the form is verified before the selection runs, so this cannot reach any Page but the one accountId manages. Unknown field names are rejected by Meta as a 400.  | [optional] |
 
 ### Return type
@@ -474,7 +474,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::LeadGenApi.new
-account_id = 'account_id_example' # String | Connected Meta ads, Facebook or LinkedIn ads account ID. A Meta ads connection resolves its Page through the Facebook account linked to the same profile.
+account_id = 'account_id_example' # String | Connected Meta ads, Facebook, Instagram or LinkedIn ads account ID. A Meta ads connection resolves its Page through the Facebook account linked to the same profile; an Instagram account uses the Page its ads run under (its own linked Page, else the Facebook or business-login Meta ads account on the same profile).
 opts = {
   ad_account_id: 'ad_account_id_example', # String | LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn.
   limit: 56, # Integer | 
@@ -512,7 +512,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Connected Meta ads, Facebook or LinkedIn ads account ID. A Meta ads connection resolves its Page through the Facebook account linked to the same profile. |  |
+| **account_id** | **String** | Connected Meta ads, Facebook, Instagram or LinkedIn ads account ID. A Meta ads connection resolves its Page through the Facebook account linked to the same profile; an Instagram account uses the Page its ads run under (its own linked Page, else the Facebook or business-login Meta ads account on the same profile). |  |
 | **ad_account_id** | **String** | LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn. | [optional] |
 | **limit** | **Integer** |  | [optional][default to 25] |
 | **cursor** | **String** |  | [optional] |
