@@ -11,7 +11,7 @@
 | **review_status** | [**AdReviewStatus**](AdReviewStatus.md) |  | [optional] |
 | **platform_campaign_status** | **String** | Raw platform-level campaign status (Meta &#x60;effective_status&#x60;; ChatGPT (OpenAI): the campaign&#39;s own switch, active / paused / archived; TikTok: the campaign&#39;s own switch &#x60;operation_status&#x60;, ENABLE / DISABLE; Reddit: the campaign&#39;s &#x60;configured_status&#x60;, ACTIVE / PAUSED / ARCHIVED). | [optional] |
 | **status_read_at** | **Time** | Only on GET /v1/ads/campaigns with &#x60;live&#x3D;true&#x60;. When &#x60;platformCampaignStatus&#x60; was read from the platform; null when this campaign could not be read live. | [optional] |
-| **native_settings** | **Hash&lt;String, Object&gt;** | TikTok only, only on GET /v1/ads/campaigns with &#x60;live&#x3D;true&#x60; and only on campaigns read live. TikTok&#39;s campaign/get record verbatim: operation_status, objective_type, budget_mode (BUDGET_MODE_INFINITE means no campaign budget, so budget lives on the ad groups), budget, and budget_optimize_on when TikTok returns it. Plus advertiser_currency and advertiser_timezone from TikTok&#39;s advertiser/info. | [optional] |
+| **native_settings** | **Hash&lt;String, Object&gt;** | TikTok only, only on GET /v1/ads/campaigns with &#x60;live&#x3D;true&#x60; and only on campaigns read live. A fixed subset of TikTok&#39;s campaign/get record, not the whole record: campaign_id, operation_status, objective_type, budget_mode (BUDGET_MODE_INFINITE means no campaign budget, so budget lives on the ad groups), budget, and budget_optimize_on, each with TikTok&#39;s own value and present only when TikTok returns it. Plus advertiser_currency and advertiser_timezone from TikTok&#39;s advertiser/info. Whether the campaign is Upgraded Smart+ is &#x60;isSmartPlus&#x60;. | [optional] |
 | **config_read_at** | **Time** | Only on GET /v1/ads/campaigns with &#x60;live&#x3D;true&#x60;. When &#x60;nativeSettings&#x60; was read from the platform. Null whenever native settings were not read now. | [optional] |
 | **campaign_issues_info** | **Array&lt;Object&gt;** | Platform-reported campaign issues (Meta &#x60;issues_info[]&#x60;). | [optional] |
 | **ad_count** | **Integer** |  | [optional] |
@@ -25,6 +25,7 @@
 | **platform_ad_account_name** | **String** | Human-readable advertiser/account name from the platform. Refreshed on every sync. | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **profile_id** | **String** |  | [optional] |
+| **is_smart_plus** | **Boolean** | TikTok only. true when the campaign is an Upgraded Smart+ campaign. See AdTreeCampaign.isSmartPlus. | [optional] |
 | **advertising_channel_type** | **String** | Google-only. Raw campaign.advertising_channel_type. See AdTreeCampaign.advertisingChannelType. | [optional] |
 | **platform_objective** | **String** | Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC) | [optional] |
 | **optimization_goal** | [**AdTreeCampaignOptimizationGoal**](AdTreeCampaignOptimizationGoal.md) |  | [optional] |
@@ -62,6 +63,7 @@ instance = Zernio::AdCampaign.new(
   platform_ad_account_name: null,
   account_id: null,
   profile_id: null,
+  is_smart_plus: null,
   advertising_channel_type: null,
   platform_objective: null,
   optimization_goal: null,
