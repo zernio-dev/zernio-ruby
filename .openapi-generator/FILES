@@ -269,6 +269,8 @@ docs/CallRecordTranscriptInner.md
 docs/CallsApi.md
 docs/CampaignAnalyticsResponse.md
 docs/CampaignAnalyticsResponseAnalytics.md
+docs/CampaignAnalyticsResponseAnalyticsBreakdownErrorsInner.md
+docs/CampaignAnalyticsResponseAnalyticsBreakdownsRange.md
 docs/CampaignAnalyticsResponseAnalyticsDailyInner.md
 docs/CampaignAnalyticsResponseAnalyticsImpressionShareCache.md
 docs/CampaignAnalyticsResponseAnalyticsSummary.md
@@ -3128,6 +3130,8 @@ lib/zernio-sdk/models/call_record_call_errors_inner.rb
 lib/zernio-sdk/models/call_record_transcript_inner.rb
 lib/zernio-sdk/models/campaign_analytics_response.rb
 lib/zernio-sdk/models/campaign_analytics_response_analytics.rb
+lib/zernio-sdk/models/campaign_analytics_response_analytics_breakdown_errors_inner.rb
+lib/zernio-sdk/models/campaign_analytics_response_analytics_breakdowns_range.rb
 lib/zernio-sdk/models/campaign_analytics_response_analytics_daily_inner.rb
 lib/zernio-sdk/models/campaign_analytics_response_analytics_impression_share_cache.rb
 lib/zernio-sdk/models/campaign_analytics_response_analytics_summary.rb
@@ -5918,6 +5922,8 @@ spec/models/call_record_billing_spec.rb
 spec/models/call_record_call_errors_inner_spec.rb
 spec/models/call_record_spec.rb
 spec/models/call_record_transcript_inner_spec.rb
+spec/models/campaign_analytics_response_analytics_breakdown_errors_inner_spec.rb
+spec/models/campaign_analytics_response_analytics_breakdowns_range_spec.rb
 spec/models/campaign_analytics_response_analytics_daily_inner_spec.rb
 spec/models/campaign_analytics_response_analytics_impression_share_cache_spec.rb
 spec/models/campaign_analytics_response_analytics_spec.rb

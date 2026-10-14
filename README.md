@@ -1295,6 +1295,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CallRecordTranscriptInner](docs/CallRecordTranscriptInner.md)
  - [Zernio::CampaignAnalyticsResponse](docs/CampaignAnalyticsResponse.md)
  - [Zernio::CampaignAnalyticsResponseAnalytics](docs/CampaignAnalyticsResponseAnalytics.md)
+ - [Zernio::CampaignAnalyticsResponseAnalyticsBreakdownErrorsInner](docs/CampaignAnalyticsResponseAnalyticsBreakdownErrorsInner.md)
+ - [Zernio::CampaignAnalyticsResponseAnalyticsBreakdownsRange](docs/CampaignAnalyticsResponseAnalyticsBreakdownsRange.md)
  - [Zernio::CampaignAnalyticsResponseAnalyticsDailyInner](docs/CampaignAnalyticsResponseAnalyticsDailyInner.md)
  - [Zernio::CampaignAnalyticsResponseAnalyticsImpressionShareCache](docs/CampaignAnalyticsResponseAnalyticsImpressionShareCache.md)
  - [Zernio::CampaignAnalyticsResponseAnalyticsSummary](docs/CampaignAnalyticsResponseAnalyticsSummary.md)

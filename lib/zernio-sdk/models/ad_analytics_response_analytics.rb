@@ -19,15 +19,34 @@ module Zernio
 
     attr_accessor :daily
 
-    # Requested demographic breakdowns, keyed by dimension. Fetched live from the platform per request and never stored, so these rows can carry fields the stored `summary` and `daily` series do not.  LinkedIn rows carry `value` (the pivot URN), `name` (resolved label where LinkedIn provides one), the usual spend/impressions/clicks/ctr/cpc/cpm/engagement figures, plus two reach fields:  - `reach`: the segment's `approximateMemberReach`. - `audiencePenetration`: LinkedIn's own ratio of members reached to the size of   the targeted audience, passed through verbatim.  LinkedIn withholds both below its audience privacy threshold, in which case the keys are ABSENT rather than 0. `audiencePenetration` is available here only: it is not part of the stored metrics series. 
+    # Requested demographic breakdowns, keyed by dimension. Fetched live from the platform per request and never stored, so these rows can carry fields the stored `summary` and `daily` series do not.  LinkedIn rows carry `value` (the pivot URN), `name` (resolved label where LinkedIn provides one), the usual spend/impressions/clicks/ctr/cpc/cpm/engagement figures, plus two reach fields:  - `reach`: the segment's `approximateMemberReach`. - `audiencePenetration`: LinkedIn's own ratio of members reached to the size of   the targeted audience, passed through verbatim.  LinkedIn withholds both below its audience privacy threshold, in which case the keys are ABSENT rather than 0. `audiencePenetration` is available here only: it is not part of the stored metrics series.  TikTok rows are keyed by TikTok's own dimension name (`country_code` for `country`, `platform` for `publisher_platform`). `placement` rows carry the label TikTok Ads Manager shows (`TikTok`, `TikTok Ad Network`, `News Feed App Series`) in `placement` and TikTok's API value (`PLACEMENT_TIKTOK`, `PLACEMENT_PANGLE`, `PLACEMENT_GLOBAL_APP_BUNDLE`) in `placementRaw`; a value without a known label carries the raw value in both.  A requested dimension with no data in the range is an empty array. 
     attr_accessor :breakdowns
+
+    # Requested breakdowns this platform cannot break down by (e.g. region on TikTok, any breakdown on Google). Absent when every requested breakdown is supported.
+    attr_accessor :unsupported_breakdowns
+
+    # Guidance for some names in unsupportedBreakdowns, keyed by that name (e.g. placement on Meta points at publisher_platform and platform_position; platform_position on TikTok points at placement). Absent when no unsupported name has a hint.
+    attr_accessor :breakdown_hints
+
+    # TikTok only: breakdowns the platform failed to return (rate limit, permission, rejected query). Each one is an empty array under breakdowns; summary and daily are unaffected. Absent when every breakdown answered.
+    attr_accessor :breakdown_errors
+
+    # TikTok only: TikTok metric names TikTok refused for a breakdown, keyed by the requested breakdown (e.g. total_purchase and total_purchase_value have no relation to platform, ac or language). Every row value derived from a refused metric is null in that breakdown (purchaseValue and roas, or the matching actions and actionValues entries), never a number computed without it. Absent when no metric was refused.
+    attr_accessor :breakdown_dropped_metrics
+
+    attr_accessor :breakdowns_range
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'summary' => :'summary',
         :'daily' => :'daily',
-        :'breakdowns' => :'breakdowns'
+        :'breakdowns' => :'breakdowns',
+        :'unsupported_breakdowns' => :'unsupportedBreakdowns',
+        :'breakdown_hints' => :'breakdownHints',
+        :'breakdown_errors' => :'breakdownErrors',
+        :'breakdown_dropped_metrics' => :'breakdownDroppedMetrics',
+        :'breakdowns_range' => :'breakdownsRange'
       }
     end
 
@@ -46,7 +65,12 @@ module Zernio
       {
         :'summary' => :'AdMetrics',
         :'daily' => :'Array<CampaignAnalyticsResponseAnalyticsDailyInner>',
-        :'breakdowns' => :'Hash<String, Array<Object>>'
+        :'breakdowns' => :'Hash<String, Array<Object>>',
+        :'unsupported_breakdowns' => :'Array<String>',
+        :'breakdown_hints' => :'Hash<String, String>',
+        :'breakdown_errors' => :'Array<CampaignAnalyticsResponseAnalyticsBreakdownErrorsInner>',
+        :'breakdown_dropped_metrics' => :'Hash<String, Array<String>>',
+        :'breakdowns_range' => :'CampaignAnalyticsResponseAnalyticsBreakdownsRange'
       }
     end
 
@@ -87,6 +111,34 @@ module Zernio
           self.breakdowns = value
         end
       end
+
+      if attributes.key?(:'unsupported_breakdowns')
+        if (value = attributes[:'unsupported_breakdowns']).is_a?(Array)
+          self.unsupported_breakdowns = value
+        end
+      end
+
+      if attributes.key?(:'breakdown_hints')
+        if (value = attributes[:'breakdown_hints']).is_a?(Hash)
+          self.breakdown_hints = value
+        end
+      end
+
+      if attributes.key?(:'breakdown_errors')
+        if (value = attributes[:'breakdown_errors']).is_a?(Array)
+          self.breakdown_errors = value
+        end
+      end
+
+      if attributes.key?(:'breakdown_dropped_metrics')
+        if (value = attributes[:'breakdown_dropped_metrics']).is_a?(Hash)
+          self.breakdown_dropped_metrics = value
+        end
+      end
+
+      if attributes.key?(:'breakdowns_range')
+        self.breakdowns_range = attributes[:'breakdowns_range']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -111,7 +163,12 @@ module Zernio
       self.class == o.class &&
           summary == o.summary &&
           daily == o.daily &&
-          breakdowns == o.breakdowns
+          breakdowns == o.breakdowns &&
+          unsupported_breakdowns == o.unsupported_breakdowns &&
+          breakdown_hints == o.breakdown_hints &&
+          breakdown_errors == o.breakdown_errors &&
+          breakdown_dropped_metrics == o.breakdown_dropped_metrics &&
+          breakdowns_range == o.breakdowns_range
     end
 
     # @see the `==` method
@@ -123,7 +180,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [summary, daily, breakdowns].hash
+      [summary, daily, breakdowns, unsupported_breakdowns, breakdown_hints, breakdown_errors, breakdown_dropped_metrics, breakdowns_range].hash
     end
 
     # Builds the object from hash
