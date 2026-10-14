@@ -23,7 +23,7 @@
 | **platform_ad_account_id** | **String** |  | [optional] |
 | **platform_ad_account_name** | **String** | Human-readable advertiser/account name from the platform. Refreshed on every sync. | [optional] |
 | **account_id** | **String** |  | [optional] |
-| **profile_id** | **String** |  | [optional] |
+| **profile_id** | **String** | Profile the row belongs to: the profile of its owning connection (&#x60;accountId&#x60;); when that connection no longer exists, the requested profile (&#x60;profileId&#x60; filter) that reaches the row ad account, else the profile of the oldest connection of the row owner that reaches it. | [optional] |
 | **is_smart_plus** | **Boolean** | TikTok only. true when the campaign is an Upgraded Smart+ campaign (TikTok lists it on /smart_plus/campaign/get/), false when it is not. Set by ads sync, so the key is absent on other platforms and on TikTok campaigns not synced since this field shipped. On Smart+ objects Zernio can pause, resume, rename, delete and change the budget of the campaign and ad set, and pause or resume an ad; other edits answer 422 and belong in TikTok Ads Manager. | [optional] |
 | **advertising_channel_type** | **String** | Google-only. Raw campaign.advertising_channel_type (SEARCH, PERFORMANCE_MAX, LOCAL_SERVICES, VIDEO, DEMAND_GEN, DISPLAY, SHOPPING, ...). Serving surface, distinct from platformObjective (advertiser intent). Null/absent for non-Google platforms. | [optional] |
 | **platform_objective** | **String** | Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC) | [optional] |
