@@ -23,7 +23,7 @@
 | **queued_from_profile** | **String** | Profile ID if the post was scheduled via the queue | [optional] |
 | **queue_id** | **String** | Queue ID if the post was scheduled via a specific queue | [optional] |
 | **created_at** | **Time** |  | [optional] |
-| **updated_at** | **Time** |  | [optional] |
+| **updated_at** | **Time** | Last change to the post or to any of its platforms (a publish, a failure, a resolved URL). | [optional] |
 
 ## Example
 
