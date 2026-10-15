@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**accept_conversation_request**](MessagesApi.md#accept_conversation_request) | **POST** /v1/inbox/conversations/{conversationId}/accept | Accept a message request |
 | [**add_message_reaction**](MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction |
 | [**create_inbox_conversation**](MessagesApi.md#create_inbox_conversation) | **POST** /v1/inbox/conversations | Create conversation |
+| [**delete_inbox_conversation**](MessagesApi.md#delete_inbox_conversation) | **DELETE** /v1/inbox/conversations/{conversationId} | Delete conversation |
 | [**delete_inbox_message**](MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message |
 | [**edit_inbox_message**](MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message |
 | [**get_inbox_conversation**](MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation |
@@ -233,6 +234,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json, multipart/form-data
+- **Accept**: application/json
+
+
+## delete_inbox_conversation
+
+> <DeleteInboxConversation200Response> delete_inbox_conversation(conversation_id, account_id)
+
+Delete conversation
+
+Permanently deletes Zernio's stored copy of one conversation and every message in it, in one transaction, and unlinks the contact channel that pointed at it. Nothing is deleted on the platform (the thread stays in WhatsApp, Messenger or Instagram), and the contact record is kept: call DELETE /v1/contacts/{contactId} to erase the person's name and number as well. A platform re-sync can import the thread again: WhatsApp coexistence numbers receive their messaging history from Meta repeatedly, and a Facebook or Instagram account whose DM history walk has not finished imports it on that walk. Inbound media copies Zernio stored are removed on a best-effort basis.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed.
+account_id = 'account_id_example' # String | Account ID
+
+begin
+  # Delete conversation
+  result = api_instance.delete_inbox_conversation(conversation_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->delete_inbox_conversation: #{e}"
+end
+```
+
+#### Using the delete_inbox_conversation_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteInboxConversation200Response>, Integer, Hash)> delete_inbox_conversation_with_http_info(conversation_id, account_id)
+
+```ruby
+begin
+  # Delete conversation
+  data, status_code, headers = api_instance.delete_inbox_conversation_with_http_info(conversation_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteInboxConversation200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->delete_inbox_conversation_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. |  |
+| **account_id** | **String** | Account ID |  |
+
+### Return type
+
+[**DeleteInboxConversation200Response**](DeleteInboxConversation200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
