@@ -7,7 +7,7 @@
 | **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
 | **budget_level** | **String** |  | [optional] |
 | **status** | **String** | As in PUT /v1/ads/ad-sets/{adSetId}/status: delivery derived from the switches read back. | [optional] |
-| **platform_ad_set_status** | **String** | The ad set&#39;s own switch read back from the platform; null when it could not be read. | [optional] |
+| **platform_ad_set_status** | **String** | The ad set&#39;s status read back from the platform, as in PUT /v1/ads/ad-sets/{adSetId}/status (Meta and Reddit return the ad set&#39;s effective_status); null when it could not be read. | [optional] |
 | **platform_campaign_status** | **String** |  | [optional] |
 | **status_read_at** | **Time** |  | [optional] |
 | **status_updated** | **Integer** | 1 when the ad set&#39;s switch was written. | [optional] |
