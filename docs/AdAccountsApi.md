@@ -2438,7 +2438,8 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Account ID
 opts = {
   ad_account_id: 'ad_account_id_example', # String | Filter response to a single platform ad account ID (e.g. `act_123` for Meta, advertiser_id for TikTok). Returns at most one item.
-  limit: 56 # Integer | Clamp the returned `accounts[]` length. Useful for typeahead pickers on agency tokens with hundreds of advertisers.
+  limit: 56, # Integer | Clamp the returned `accounts[]` length. Useful for typeahead pickers on agency tokens with hundreds of advertisers.
+  in_scope_only: true # Boolean | Google Ads only. `true` returns only the customers this connection accepts as `adAccountId` (or `customerId`) on the other /v1/ads endpoints, i.e. those inside its ad-account selection. Without it every customer the Google login can reach is listed, including ones selected on another connection of the same login, which those endpoints answer with a 400. Ignored on other platforms.
 }
 
 begin
@@ -2475,6 +2476,7 @@ end
 | **account_id** | **String** | Account ID |  |
 | **ad_account_id** | **String** | Filter response to a single platform ad account ID (e.g. &#x60;act_123&#x60; for Meta, advertiser_id for TikTok). Returns at most one item. | [optional] |
 | **limit** | **Integer** | Clamp the returned &#x60;accounts[]&#x60; length. Useful for typeahead pickers on agency tokens with hundreds of advertisers. | [optional] |
+| **in_scope_only** | **Boolean** | Google Ads only. &#x60;true&#x60; returns only the customers this connection accepts as &#x60;adAccountId&#x60; (or &#x60;customerId&#x60;) on the other /v1/ads endpoints, i.e. those inside its ad-account selection. Without it every customer the Google login can reach is listed, including ones selected on another connection of the same login, which those endpoints answer with a 400. Ignored on other platforms. | [optional][default to false] |
 
 ### Return type
 
