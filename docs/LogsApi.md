@@ -43,6 +43,7 @@ opts = {
   to: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Precise end instant (ISO 8601)
   status_code: 56, # Integer | Filter by exact HTTP status code (api_request logs)
   api_key_id: 'api_key_id_example', # String | Filter by the API key that made the request (api_request logs)
+  profile_id: 'profile_id_example', # String | Filter by profile: every log type carries the profile it belongs to, and an API request log carries the profileId the call named
   include_read_receipts: true # Boolean | Include message.read / message.delivered events (hidden by default for messaging logs)
 }
 
@@ -92,6 +93,7 @@ end
 | **to** | **Time** | Precise end instant (ISO 8601) | [optional] |
 | **status_code** | **Integer** | Filter by exact HTTP status code (api_request logs) | [optional] |
 | **api_key_id** | **String** | Filter by the API key that made the request (api_request logs) | [optional] |
+| **profile_id** | **String** | Filter by profile: every log type carries the profile it belongs to, and an API request log carries the profileId the call named | [optional] |
 | **include_read_receipts** | **Boolean** | Include message.read / message.delivered events (hidden by default for messaging logs) | [optional][default to false] |
 
 ### Return type

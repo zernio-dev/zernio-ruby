@@ -9,6 +9,8 @@
 | **user_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
+| **profile_id** | **String** | The profile the entry belongs to; on API request logs, the profileId the call named in its query or body | [optional] |
+| **operation_id** | **String** | API request logs only: the operationId of the public operation the request hit (e.g. createPost), absent for routes outside this spec | [optional] |
 | **status** | **String** |  | [optional] |
 | **status_code** | **Integer** |  | [optional] |
 | **error_message** | **String** |  | [optional] |
@@ -37,6 +39,8 @@ instance = Zernio::ListLogs200ResponseLogsInner.new(
   user_id: null,
   platform: null,
   account_id: null,
+  profile_id: null,
+  operation_id: null,
   status: null,
   status_code: null,
   error_message: null,
