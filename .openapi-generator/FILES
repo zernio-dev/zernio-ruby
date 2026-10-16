@@ -33,6 +33,8 @@ docs/AdCampaignBudget.md
 docs/AdCampaignsApi.md
 docs/AdCreative.md
 docs/AdCreativeCarouselCardsInner.md
+docs/AdCreativeCatalog.md
+docs/AdCreativeCatalogFormatTransformationSpecInner.md
 docs/AdCreativesApi.md
 docs/AdDailyMetrics.md
 docs/AdEngagementCounts.md
@@ -2908,6 +2910,8 @@ lib/zernio-sdk/models/ad_campaign.rb
 lib/zernio-sdk/models/ad_campaign_budget.rb
 lib/zernio-sdk/models/ad_creative.rb
 lib/zernio-sdk/models/ad_creative_carousel_cards_inner.rb
+lib/zernio-sdk/models/ad_creative_catalog.rb
+lib/zernio-sdk/models/ad_creative_catalog_format_transformation_spec_inner.rb
 lib/zernio-sdk/models/ad_daily_metrics.rb
 lib/zernio-sdk/models/ad_engagement_counts.rb
 lib/zernio-sdk/models/ad_funnel_counts.rb
@@ -5704,6 +5708,8 @@ spec/models/ad_budget_spec.rb
 spec/models/ad_campaign_budget_spec.rb
 spec/models/ad_campaign_spec.rb
 spec/models/ad_creative_carousel_cards_inner_spec.rb
+spec/models/ad_creative_catalog_format_transformation_spec_inner_spec.rb
+spec/models/ad_creative_catalog_spec.rb
 spec/models/ad_creative_spec.rb
 spec/models/ad_daily_metrics_spec.rb
 spec/models/ad_engagement_counts_spec.rb
