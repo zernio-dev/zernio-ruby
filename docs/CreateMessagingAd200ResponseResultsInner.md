@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **node** | **String** |  |  |
 | **status** | **String** |  |  |
-| **reason** | **String** |  | [optional] |
+| **reason** | **String** | On unverified: why Meta could not dry-run this node although the other nodes passed. | [optional] |
 
 ## Example
 
