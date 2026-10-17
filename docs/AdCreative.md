@@ -11,6 +11,7 @@
 | **final_urls** | **Array&lt;String&gt;** | Google RSA only. Replaces final URLs. Omitted lists stay unchanged. | [optional] |
 | **thumbnail_url** | **String** | Primary thumbnail/image URL | [optional] |
 | **image_url** | **String** | Alternative image URL | [optional] |
+| **asset_resource_name** | **String** | Google Display only. Resource name of the landscape marketing image asset (&#x60;creative.imageUrl&#x60;), for example customers/1234567890/assets/123. Set at creation and updated when PUT /v1/ads/{adId} replaces &#x60;creative.imageUrl&#x60;; replacing only &#x60;creative.squareImageUrl&#x60; leaves it unchanged. | [optional] |
 | **video_id** | **String** | Meta video ID for VIDEO-type ads. Null for non-video ads. Callers that need an embeddable MP4 can call GET /{videoId}?fields&#x3D;source with the page access token. | [optional] |
 | **video_url** | **String** | Public Facebook watch URL for VIDEO-type ads (https://www.facebook.com/watch/?v&#x3D;{videoId}). Null for non-video ads. | [optional] |
 | **creative_id** | **String** | Meta ad creative id backing this ad. Reusable via existingCreativeId on POST /v1/ads/create. | [optional] |
@@ -51,6 +52,7 @@ instance = Zernio::AdCreative.new(
   final_urls: null,
   thumbnail_url: null,
   image_url: null,
+  asset_resource_name: null,
   video_id: null,
   video_url: null,
   creative_id: null,
