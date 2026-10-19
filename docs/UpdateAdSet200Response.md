@@ -17,6 +17,7 @@
 | **bid_amount** | **Float** |  | [optional] |
 | **roas_average_floor** | **Float** |  | [optional] |
 | **platform_specific_data** | **Object** |  | [optional] |
+| **targeting** | **Object** | Present when &#x60;placements&#x60; or &#x60;targeting&#x60; was sent. The ad set&#39;s full Meta targeting as written (Meta snake_case). The same snake_case object is stored as the ad set&#39;s and its ads&#39; &#x60;targeting&#x60;. | [optional] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = Zernio::UpdateAdSet200Response.new(
   bid_strategy: null,
   bid_amount: null,
   roas_average_floor: null,
-  platform_specific_data: null
+  platform_specific_data: null,
+  targeting: null
 )
 ```
 
