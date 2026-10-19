@@ -42,6 +42,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_commerce_discount**](CommerceApi.md#get_commerce_discount) | **GET** /v1/commerce/discounts/{discountId} | Get a discount |
 | [**get_commerce_menu**](CommerceApi.md#get_commerce_menu) | **GET** /v1/commerce/menus/{menuId} | Get a navigation menu |
 | [**get_commerce_metaobject**](CommerceApi.md#get_commerce_metaobject) | **GET** /v1/commerce/metaobjects/{metaobjectId} | Get a metaobject |
+| [**get_commerce_order**](CommerceApi.md#get_commerce_order) | **GET** /v1/commerce/orders/{orderId} | Get an order |
 | [**get_commerce_page**](CommerceApi.md#get_commerce_page) | **GET** /v1/commerce/pages/{pageId} | Get a page |
 | [**get_commerce_product**](CommerceApi.md#get_commerce_product) | **GET** /v1/commerce/products/{productId} | Get a product |
 | [**get_commerce_store**](CommerceApi.md#get_commerce_store) | **GET** /v1/commerce/store | Get a store |
@@ -56,6 +57,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_commerce_menus**](CommerceApi.md#list_commerce_menus) | **GET** /v1/commerce/menus | List navigation menus |
 | [**list_commerce_metaobject_definitions**](CommerceApi.md#list_commerce_metaobject_definitions) | **GET** /v1/commerce/metaobject-definitions | List metaobject definitions |
 | [**list_commerce_metaobjects**](CommerceApi.md#list_commerce_metaobjects) | **GET** /v1/commerce/metaobjects | List metaobjects of a type |
+| [**list_commerce_orders**](CommerceApi.md#list_commerce_orders) | **GET** /v1/commerce/orders | List orders |
 | [**list_commerce_pages**](CommerceApi.md#list_commerce_pages) | **GET** /v1/commerce/pages | List pages |
 | [**list_commerce_price_lists**](CommerceApi.md#list_commerce_price_lists) | **GET** /v1/commerce/price-lists | List price lists |
 | [**list_commerce_product_metafields**](CommerceApi.md#list_commerce_product_metafields) | **GET** /v1/commerce/products/{productId}/metafields | List product metafields |
@@ -2764,6 +2766,77 @@ end
 - **Accept**: application/json
 
 
+## get_commerce_order
+
+> <GetCommerceOrder200Response> get_commerce_order(order_id, account_id)
+
+Get an order
+
+One order with every line item, tax line and refund. Needs orders.read.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+order_id = 'order_id_example' # String | Platform-native order id.
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+
+begin
+  # Get an order
+  result = api_instance.get_commerce_order(order_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->get_commerce_order: #{e}"
+end
+```
+
+#### Using the get_commerce_order_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCommerceOrder200Response>, Integer, Hash)> get_commerce_order_with_http_info(order_id, account_id)
+
+```ruby
+begin
+  # Get an order
+  data, status_code, headers = api_instance.get_commerce_order_with_http_info(order_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCommerceOrder200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->get_commerce_order_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **order_id** | **String** | Platform-native order id. |  |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+
+### Return type
+
+[**GetCommerceOrder200Response**](GetCommerceOrder200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_commerce_page
 
 > <CreateCommercePage201Response> get_commerce_page(page_id, account_id)
@@ -3751,6 +3824,87 @@ end
 ### Return type
 
 [**ListCommerceMetaobjects200Response**](ListCommerceMetaobjects200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_commerce_orders
+
+> <ListCommerceOrders200Response> list_commerce_orders(account_id, opts)
+
+List orders
+
+The store's orders in one format for every platform, with what an invoice needs: line items with unit prices, discounts and tax per line, shipping and fee lines, billing details, payment status and refunds. Newest order first; with `updatedAfter`, oldest change first, so a sync can page forward from its last seen `updatedAt`. Start each sync a few minutes before the last `updatedAt` you saw and drop duplicates by `id`, since an order edited while you page can shift the list. Shopify returns at most 25 orders per page and, unless the store was granted access to all orders, only the last 60 days. Buyer fields (`customer` and addresses) are null when the store's approval does not cover buyer data. Needs orders.read.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+opts = {
+  limit: 56, # Integer | 
+  cursor: 'cursor_example', # String | 
+  created_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | 
+  created_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | 
+  updated_after: Time.parse('2013-10-20T19:20:30+01:00') # Time | Only orders changed after this time, oldest change first.
+}
+
+begin
+  # List orders
+  result = api_instance.list_commerce_orders(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->list_commerce_orders: #{e}"
+end
+```
+
+#### Using the list_commerce_orders_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCommerceOrders200Response>, Integer, Hash)> list_commerce_orders_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List orders
+  data, status_code, headers = api_instance.list_commerce_orders_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCommerceOrders200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->list_commerce_orders_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+| **limit** | **Integer** |  | [optional][default to 20] |
+| **cursor** | **String** |  | [optional] |
+| **created_after** | **Time** |  | [optional] |
+| **created_before** | **Time** |  | [optional] |
+| **updated_after** | **Time** | Only orders changed after this time, oldest change first. | [optional] |
+
+### Return type
+
+[**ListCommerceOrders200Response**](ListCommerceOrders200Response.md)
 
 ### Authorization
 

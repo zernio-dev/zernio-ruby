@@ -21,6 +21,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_call_permission_request**](WebhookEventsApi.md#on_call_permission_request) | **POST** /call.permission_request | Call permission request reply event |
 | [**on_call_received**](WebhookEventsApi.md#on_call_received) | **POST** /call.received | Call received event |
 | [**on_comment_received**](WebhookEventsApi.md#on_comment_received) | **POST** /comment.received | Comment received event |
+| [**on_commerce_order_created**](WebhookEventsApi.md#on_commerce_order_created) | **POST** /commerce.order.created | Commerce order created event |
+| [**on_commerce_order_refunded**](WebhookEventsApi.md#on_commerce_order_refunded) | **POST** /commerce.order.refunded | Commerce order refunded event |
+| [**on_commerce_order_updated**](WebhookEventsApi.md#on_commerce_order_updated) | **POST** /commerce.order.updated | Commerce order updated event |
 | [**on_commerce_product_created**](WebhookEventsApi.md#on_commerce_product_created) | **POST** /commerce.product.created | Commerce product created event |
 | [**on_commerce_product_deleted**](WebhookEventsApi.md#on_commerce_product_deleted) | **POST** /commerce.product.deleted | Commerce product deleted event |
 | [**on_commerce_product_updated**](WebhookEventsApi.md#on_commerce_product_updated) | **POST** /commerce.product.updated | Commerce product updated event |
@@ -1228,6 +1231,210 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_comment** | [**WebhookPayloadComment**](WebhookPayloadComment.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_commerce_order_created
+
+> on_commerce_order_created(webhook_payload_commerce_order)
+
+Commerce order created event
+
+Fired when an order is placed on a connected store. The payload carries identifiers only; read the order with `GET /v1/commerce/orders/{orderId}?accountId=...`. Fired once per Zernio account connected to the store. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_commerce_order =  # WebhookPayloadCommerceOrder | 
+
+begin
+  # Commerce order created event
+  api_instance.on_commerce_order_created(webhook_payload_commerce_order)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_commerce_order_created: #{e}"
+end
+```
+
+#### Using the on_commerce_order_created_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_commerce_order_created_with_http_info(webhook_payload_commerce_order)
+
+```ruby
+begin
+  # Commerce order created event
+  data, status_code, headers = api_instance.on_commerce_order_created_with_http_info(webhook_payload_commerce_order)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_commerce_order_created_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_commerce_order** | [**WebhookPayloadCommerceOrder**](WebhookPayloadCommerceOrder.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_commerce_order_refunded
+
+> on_commerce_order_refunded(webhook_payload_commerce_order)
+
+Commerce order refunded event
+
+Fired when a refund is issued on an order of a connected store. A commerce.order.updated usually follows for the same change. The payload carries identifiers only; read the order with `GET /v1/commerce/orders/{orderId}?accountId=...`. Fired once per Zernio account connected to the store. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_commerce_order =  # WebhookPayloadCommerceOrder | 
+
+begin
+  # Commerce order refunded event
+  api_instance.on_commerce_order_refunded(webhook_payload_commerce_order)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_commerce_order_refunded: #{e}"
+end
+```
+
+#### Using the on_commerce_order_refunded_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_commerce_order_refunded_with_http_info(webhook_payload_commerce_order)
+
+```ruby
+begin
+  # Commerce order refunded event
+  data, status_code, headers = api_instance.on_commerce_order_refunded_with_http_info(webhook_payload_commerce_order)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_commerce_order_refunded_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_commerce_order** | [**WebhookPayloadCommerceOrder**](WebhookPayloadCommerceOrder.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_commerce_order_updated
+
+> on_commerce_order_updated(webhook_payload_commerce_order)
+
+Commerce order updated event
+
+Fired when an order on a connected store changes: payment, fulfilment, cancellation, edits, and refunds too. The payload carries identifiers only; read the order with `GET /v1/commerce/orders/{orderId}?accountId=...`. Fired once per Zernio account connected to the store. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_commerce_order =  # WebhookPayloadCommerceOrder | 
+
+begin
+  # Commerce order updated event
+  api_instance.on_commerce_order_updated(webhook_payload_commerce_order)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_commerce_order_updated: #{e}"
+end
+```
+
+#### Using the on_commerce_order_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_commerce_order_updated_with_http_info(webhook_payload_commerce_order)
+
+```ruby
+begin
+  # Commerce order updated event
+  data, status_code, headers = api_instance.on_commerce_order_updated_with_http_info(webhook_payload_commerce_order)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_commerce_order_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_commerce_order** | [**WebhookPayloadCommerceOrder**](WebhookPayloadCommerceOrder.md) |  |  |
 
 ### Return type
 
