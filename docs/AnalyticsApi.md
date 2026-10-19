@@ -22,6 +22,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_instagram_follower_history**](AnalyticsApi.md#get_instagram_follower_history) | **GET** /v1/analytics/instagram/follower-history | Get Instagram follower history |
 | [**get_instagram_online_followers**](AnalyticsApi.md#get_instagram_online_followers) | **GET** /v1/analytics/instagram/online-followers | Get Instagram online followers |
 | [**get_linked_in_aggregate_analytics**](AnalyticsApi.md#get_linked_in_aggregate_analytics) | **GET** /v1/accounts/{accountId}/linkedin-aggregate-analytics | Get LinkedIn aggregate stats |
+| [**get_linked_in_demographics**](AnalyticsApi.md#get_linked_in_demographics) | **GET** /v1/analytics/linkedin/demographics | Get LinkedIn organization follower demographics |
 | [**get_linked_in_org_aggregate_analytics**](AnalyticsApi.md#get_linked_in_org_aggregate_analytics) | **GET** /v1/analytics/linkedin/org-aggregate-analytics | Get LinkedIn org analytics |
 | [**get_linked_in_post_analytics**](AnalyticsApi.md#get_linked_in_post_analytics) | **GET** /v1/accounts/{accountId}/linkedin-post-analytics | Get LinkedIn post stats |
 | [**get_linked_in_post_reactions**](AnalyticsApi.md#get_linked_in_post_reactions) | **GET** /v1/accounts/{accountId}/linkedin-post-reactions | Get LinkedIn post reactions |
@@ -1448,6 +1449,79 @@ end
 ### Return type
 
 [**GetLinkedInAggregateAnalytics200Response**](GetLinkedInAggregateAnalytics200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_linked_in_demographics
+
+> <GetLinkedInDemographics200Response> get_linked_in_demographics(account_id, opts)
+
+Get LinkedIn organization follower demographics
+
+Returns the lifetime follower breakdown of a connected LinkedIn organization page by job function, seniority, industry and company size. Function, seniority and industry are labelled with LinkedIn's standardized names (English) and keep the LinkedIn URN in `id`. Company size is labelled as a range such as `2-10` or `10001+`. LinkedIn returns at most the top 100 values per breakdown and leaves out followers whose profile lacks that field, so a breakdown does not add up to the follower count. Organization accounts only: a personal LinkedIn account answers 400 `personal_account_not_supported`. Requires the r_organization_social, r_organization_followers and r_organization_admin scopes (412 otherwise) and the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | The Zernio SocialAccount ID of the LinkedIn organization account
+opts = {
+  breakdown: 'breakdown_example' # String | Comma-separated list of demographic dimensions: function, seniority, industry, company_size. Defaults to all four if omitted. 
+}
+
+begin
+  # Get LinkedIn organization follower demographics
+  result = api_instance.get_linked_in_demographics(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_linked_in_demographics: #{e}"
+end
+```
+
+#### Using the get_linked_in_demographics_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetLinkedInDemographics200Response>, Integer, Hash)> get_linked_in_demographics_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get LinkedIn organization follower demographics
+  data, status_code, headers = api_instance.get_linked_in_demographics_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetLinkedInDemographics200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_linked_in_demographics_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio SocialAccount ID of the LinkedIn organization account |  |
+| **breakdown** | **String** | Comma-separated list of demographic dimensions: function, seniority, industry, company_size. Defaults to all four if omitted.  | [optional] |
+
+### Return type
+
+[**GetLinkedInDemographics200Response**](GetLinkedInDemographics200Response.md)
 
 ### Authorization
 
