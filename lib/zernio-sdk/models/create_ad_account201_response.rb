@@ -14,327 +14,91 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateAdAccount201Response < ApiModelBase
-    # New Meta ad account ID for subsequent ads calls.
-    attr_accessor :ad_account_id
-
-    # Owning business portfolio ID.
-    attr_accessor :business_id
-
-    # Whether the connection scope and discovery schedule were updated.
-    attr_accessor :connection_updated
-
-    # Always true as a delivery prerequisite. This is not a live funding-source check. Confirm payment or invoicing in Ads Manager.
-    attr_accessor :payment_method_required
-
-    # Open the created account in Ads Manager.
-    attr_accessor :ads_manager_url
-
-    # Payment setup instructions for the user.
-    attr_accessor :next_steps
-
-    # Recovery instructions if the account could not be attached to the connection.
-    attr_accessor :warnings
-
-    # Attribute mapping from ruby-style variable name to JSON key.
-    def self.attribute_map
-      {
-        :'ad_account_id' => :'adAccountId',
-        :'business_id' => :'businessId',
-        :'connection_updated' => :'connectionUpdated',
-        :'payment_method_required' => :'paymentMethodRequired',
-        :'ads_manager_url' => :'adsManagerUrl',
-        :'next_steps' => :'nextSteps',
-        :'warnings' => :'warnings'
-      }
-    end
-
-    # Returns attribute mapping this model knows about
-    def self.acceptable_attribute_map
-      attribute_map
-    end
-
-    # Returns all the JSON keys this model knows about
-    def self.acceptable_attributes
-      acceptable_attribute_map.values
-    end
-
-    # Attribute type mapping.
-    def self.openapi_types
-      {
-        :'ad_account_id' => :'String',
-        :'business_id' => :'String',
-        :'connection_updated' => :'Boolean',
-        :'payment_method_required' => :'Boolean',
-        :'ads_manager_url' => :'String',
-        :'next_steps' => :'String',
-        :'warnings' => :'Array<String>'
-      }
-    end
-
-    # List of attributes with nullable: true
-    def self.openapi_nullable
-      Set.new([
-      ])
-    end
-
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateAdAccount201Response` initialize method"
+  module CreateAdAccount201Response
+    class << self
+      # List of class defined in oneOf (OpenAPI v3)
+      def openapi_one_of
+        [
+          :'CreatedGoogleAdAccount',
+          :'CreatedMetaAdAccount'
+        ]
       end
 
-      # check to see if the attribute exists and convert string to symbol for hash key
-      acceptable_attribute_map = self.class.acceptable_attribute_map
-      attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateAdAccount201Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
-        end
-        h[k.to_sym] = v
-      }
-
-      if attributes.key?(:'ad_account_id')
-        self.ad_account_id = attributes[:'ad_account_id']
-      else
-        self.ad_account_id = nil
-      end
-
-      if attributes.key?(:'business_id')
-        self.business_id = attributes[:'business_id']
-      else
-        self.business_id = nil
-      end
-
-      if attributes.key?(:'connection_updated')
-        self.connection_updated = attributes[:'connection_updated']
-      else
-        self.connection_updated = nil
-      end
-
-      if attributes.key?(:'payment_method_required')
-        self.payment_method_required = attributes[:'payment_method_required']
-      else
-        self.payment_method_required = nil
-      end
-
-      if attributes.key?(:'ads_manager_url')
-        self.ads_manager_url = attributes[:'ads_manager_url']
-      else
-        self.ads_manager_url = nil
-      end
-
-      if attributes.key?(:'next_steps')
-        self.next_steps = attributes[:'next_steps']
-      else
-        self.next_steps = nil
-      end
-
-      if attributes.key?(:'warnings')
-        if (value = attributes[:'warnings']).is_a?(Array)
-          self.warnings = value
-        end
-      else
-        self.warnings = nil
-      end
-    end
-
-    # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properties with the reasons
-    def list_invalid_properties
-      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
-      invalid_properties = Array.new
-      if @ad_account_id.nil?
-        invalid_properties.push('invalid value for "ad_account_id", ad_account_id cannot be nil.')
-      end
-
-      pattern = Regexp.new(/^act_[0-9]+$/)
-      if @ad_account_id !~ pattern
-        invalid_properties.push("invalid value for \"ad_account_id\", must conform to the pattern #{pattern}.")
-      end
-
-      if @business_id.nil?
-        invalid_properties.push('invalid value for "business_id", business_id cannot be nil.')
-      end
-
-      if @connection_updated.nil?
-        invalid_properties.push('invalid value for "connection_updated", connection_updated cannot be nil.')
-      end
-
-      if @payment_method_required.nil?
-        invalid_properties.push('invalid value for "payment_method_required", payment_method_required cannot be nil.')
-      end
-
-      if @ads_manager_url.nil?
-        invalid_properties.push('invalid value for "ads_manager_url", ads_manager_url cannot be nil.')
-      end
-
-      if @next_steps.nil?
-        invalid_properties.push('invalid value for "next_steps", next_steps cannot be nil.')
-      end
-
-      if @warnings.nil?
-        invalid_properties.push('invalid value for "warnings", warnings cannot be nil.')
-      end
-
-      invalid_properties
-    end
-
-    # Check to see if the all the properties in the model are valid
-    # @return true if the model is valid
-    def valid?
-      warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @ad_account_id.nil?
-      return false if @ad_account_id !~ Regexp.new(/^act_[0-9]+$/)
-      return false if @business_id.nil?
-      return false if @connection_updated.nil?
-      return false if @payment_method_required.nil?
-      return false if @ads_manager_url.nil?
-      return false if @next_steps.nil?
-      return false if @warnings.nil?
-      true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ad_account_id Value to be assigned
-    def ad_account_id=(ad_account_id)
-      if ad_account_id.nil?
-        fail ArgumentError, 'ad_account_id cannot be nil'
-      end
-
-      pattern = Regexp.new(/^act_[0-9]+$/)
-      if ad_account_id !~ pattern
-        fail ArgumentError, "invalid value for \"ad_account_id\", must conform to the pattern #{pattern}."
-      end
-
-      @ad_account_id = ad_account_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] business_id Value to be assigned
-    def business_id=(business_id)
-      if business_id.nil?
-        fail ArgumentError, 'business_id cannot be nil'
-      end
-
-      @business_id = business_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] connection_updated Value to be assigned
-    def connection_updated=(connection_updated)
-      if connection_updated.nil?
-        fail ArgumentError, 'connection_updated cannot be nil'
-      end
-
-      @connection_updated = connection_updated
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] payment_method_required Value to be assigned
-    def payment_method_required=(payment_method_required)
-      if payment_method_required.nil?
-        fail ArgumentError, 'payment_method_required cannot be nil'
-      end
-
-      @payment_method_required = payment_method_required
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ads_manager_url Value to be assigned
-    def ads_manager_url=(ads_manager_url)
-      if ads_manager_url.nil?
-        fail ArgumentError, 'ads_manager_url cannot be nil'
-      end
-
-      @ads_manager_url = ads_manager_url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] next_steps Value to be assigned
-    def next_steps=(next_steps)
-      if next_steps.nil?
-        fail ArgumentError, 'next_steps cannot be nil'
-      end
-
-      @next_steps = next_steps
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] warnings Value to be assigned
-    def warnings=(warnings)
-      if warnings.nil?
-        fail ArgumentError, 'warnings cannot be nil'
-      end
-
-      @warnings = warnings
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.equal?(o)
-      self.class == o.class &&
-          ad_account_id == o.ad_account_id &&
-          business_id == o.business_id &&
-          connection_updated == o.connection_updated &&
-          payment_method_required == o.payment_method_required &&
-          ads_manager_url == o.ads_manager_url &&
-          next_steps == o.next_steps &&
-          warnings == o.warnings
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
-    end
-
-    # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    def hash
-      [ad_account_id, business_id, connection_updated, payment_method_required, ads_manager_url, next_steps, warnings].hash
-    end
-
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
-    def self.build_from_hash(attributes)
-      return nil unless attributes.is_a?(Hash)
-      attributes = attributes.transform_keys(&:to_sym)
-      transformed_hash = {}
-      openapi_types.each_pair do |key, type|
-        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
-          transformed_hash["#{key}"] = nil
-        elsif type =~ /\AArray<(.*)>/i
-          # check to ensure the input is an array given that the attribute
-          # is documented as an array but the input is not
-          if attributes[attribute_map[key]].is_a?(Array)
-            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
+      # Builds the object
+      # @param [Mixed] Data to be matched against the list of oneOf items
+      # @return [Object] Returns the model or the data itself
+      def build(data)
+        # Go through the list of oneOf items and attempt to identify the appropriate one.
+        # Note:
+        # - We do not attempt to check whether exactly one item matches.
+        # - No advanced validation of types in some cases (e.g. "x: { type: string }" will happily match { x: 123 })
+        #   due to the way the deserialization is made in the base_object template (it just casts without verifying).
+        # - TODO: scalar values are de facto behaving as if they were nullable.
+        # - TODO: logging when debugging is set.
+        openapi_one_of.each do |klass|
+          begin
+            next if klass == :AnyType # "nullable: true"
+            return find_and_cast_into_type(klass, data)
+          rescue # rescue all errors so we keep iterating even if the current item lookup raises
           end
-        elsif !attributes[attribute_map[key]].nil?
-          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
-        end
-      end
-      new(transformed_hash)
-    end
-
-    # Returns the object in the form of hash
-    # @return [Hash] Returns the object in the form of hash
-    def to_hash
-      hash = {}
-      self.class.attribute_map.each_pair do |attr, param|
-        value = self.send(attr)
-        if value.nil?
-          is_nullable = self.class.openapi_nullable.include?(attr)
-          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
         end
 
-        hash[param] = _to_hash(value)
+        openapi_one_of.include?(:AnyType) ? data : nil
       end
-      hash
-    end
 
+      private
+
+      SchemaMismatchError = Class.new(StandardError)
+
+      # Note: 'File' is missing here because in the regular case we get the data _after_ a call to JSON.parse.
+      def find_and_cast_into_type(klass, data)
+        return if data.nil?
+
+        case klass.to_s
+        when 'Boolean'
+          return data if data.instance_of?(TrueClass) || data.instance_of?(FalseClass)
+        when 'Float'
+          return data if data.instance_of?(Float)
+        when 'Integer'
+          return data if data.instance_of?(Integer)
+        when 'Time'
+          return Time.parse(data)
+        when 'Date'
+          return Date.iso8601(data)
+        when 'String'
+          return data if data.instance_of?(String)
+        when 'Object' # "type: object"
+          return data if data.instance_of?(Hash)
+        when /\AArray<(?<sub_type>.+)>\z/ # "type: array"
+          if data.instance_of?(Array)
+            sub_type = Regexp.last_match[:sub_type]
+            return data.map { |item| find_and_cast_into_type(sub_type, item) }
+          end
+        when /\AHash<String, (?<sub_type>.+)>\z/ # "type: object" with "additionalProperties: { ... }"
+          if data.instance_of?(Hash) && data.keys.all? { |k| k.instance_of?(Symbol) || k.instance_of?(String) }
+            sub_type = Regexp.last_match[:sub_type]
+            return data.each_with_object({}) { |(k, v), hsh| hsh[k] = find_and_cast_into_type(sub_type, v) }
+          end
+        else # model
+          const = Zernio.const_get(klass)
+          if const
+            if const.respond_to?(:openapi_one_of) # nested oneOf model
+              model = const.build(data)
+              return model if model
+            else
+              # raise if data contains keys that are not known to the model
+              raise if const.respond_to?(:acceptable_attributes) && !(data.keys - const.acceptable_attributes).empty?
+              model = const.build_from_hash(data)
+              return model if model
+            end
+          end
+        end
+
+        raise # if no match by now, raise
+      rescue
+        raise SchemaMismatchError, "#{data} doesn't match the #{klass} type"
+      end
+    end
   end
 
 end

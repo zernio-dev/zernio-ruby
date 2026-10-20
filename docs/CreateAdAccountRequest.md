@@ -1,46 +1,49 @@
 # Zernio::CreateAdAccountRequest
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Zernio metaads SocialAccount ID. |  |
-| **business_id** | **String** | Business portfolio that will own the account. |  |
-| **name** | **String** | Ad account name. Whitespace is trimmed. |  |
-| **currency** | **String** | Uppercase ISO 4217 currency supported by Meta. |  |
-| **timezone_id** | **Integer** | Numeric Meta timezone ID from the linked timezone list. For example 1 is America/Los_Angeles. |  |
-| **end_advertiser** | **String** | End advertiser business or page ID. NONE uses the owning business. | [optional][default to &#39;NONE&#39;] |
-| **media_agency** | **String** | Media agency business or page ID. NONE for self-serve customers. | [optional][default to &#39;NONE&#39;] |
-| **partner** | **String** | Partner business or page ID. NONE for self-serve customers. | [optional][default to &#39;NONE&#39;] |
-| **invoice** | **Boolean** | Request Meta invoicing. Eligibility is determined by Meta. | [optional] |
-| **invoice_group_id** | **String** | Existing Meta invoice group ID. | [optional] |
-| **invoicing_emails** | **Array&lt;String&gt;** | Addresses for Meta invoices. | [optional] |
-| **io** | **Boolean** | Meta insertion-order invoicing option. | [optional] |
-| **po_number** | **String** | Purchase order number. | [optional] |
-| **funding_id** | **String** | Existing Meta funding reference. Does not add a payment method. | [optional] |
-| **ad_account_created_from_bm_flag** | **Boolean** | Meta Business Manager creation flag. | [optional] |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateAdAccountRequest.new(
-  account_id: null,
-  business_id: null,
-  name: null,
-  currency: null,
-  timezone_id: null,
-  end_advertiser: null,
-  media_agency: null,
-  partner: null,
-  invoice: null,
-  invoice_group_id: null,
-  invoicing_emails: null,
-  io: null,
-  po_number: null,
-  funding_id: null,
-  ad_account_created_from_bm_flag: null
-)
+Zernio::CreateAdAccountRequest.openapi_one_of
+# =>
+# [
+#   :'CreateGoogleAdAccountRequest',
+#   :'CreateMetaAdAccountRequest'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::CreateAdAccountRequest.build(data)
+# => #<CreateGoogleAdAccountRequest:0x00007fdd4aab02a0>
+
+Zernio::CreateAdAccountRequest.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `CreateGoogleAdAccountRequest`
+- `CreateMetaAdAccountRequest`
+- `nil` (if no type matches)
 

@@ -132,7 +132,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**assign_ad_account_user**](docs/AdAccountsApi.md#assign_ad_account_user) | **POST** /v1/ads/accounts/users | Assign a user to an ad account
 *Zernio::AdAccountsApi* | [**assign_page_user**](docs/AdAccountsApi.md#assign_page_user) | **POST** /v1/ads/page-users | Assign a user to a Page
 *Zernio::AdAccountsApi* | [**attach_ad_label**](docs/AdAccountsApi.md#attach_ad_label) | **POST** /v1/ads/labels/{labelId}/assignments | Attach a Google Ads label
-*Zernio::AdAccountsApi* | [**create_ad_account**](docs/AdAccountsApi.md#create_ad_account) | **POST** /v1/ads/accounts | Create Meta ad account
+*Zernio::AdAccountsApi* | [**create_ad_account**](docs/AdAccountsApi.md#create_ad_account) | **POST** /v1/ads/accounts | Create ad account
 *Zernio::AdAccountsApi* | [**create_ad_label**](docs/AdAccountsApi.md#create_ad_label) | **POST** /v1/ads/labels | Create a Google Ads label
 *Zernio::AdAccountsApi* | [**create_ad_negative_keyword_list**](docs/AdAccountsApi.md#create_ad_negative_keyword_list) | **POST** /v1/ads/accounts/negative-keyword-lists | Create a negative keyword list
 *Zernio::AdAccountsApi* | [**create_custom_conversion**](docs/AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create custom conversion
@@ -1445,6 +1445,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAccountGroup201Response](docs/CreateAccountGroup201Response.md)
  - [Zernio::CreateAccountGroup201ResponseGroup](docs/CreateAccountGroup201ResponseGroup.md)
  - [Zernio::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
+ - [Zernio::CreateAdAccount200Response](docs/CreateAdAccount200Response.md)
  - [Zernio::CreateAdAccount201Response](docs/CreateAdAccount201Response.md)
  - [Zernio::CreateAdAccountRequest](docs/CreateAdAccountRequest.md)
  - [Zernio::CreateAdAudience201Response](docs/CreateAdAudience201Response.md)
@@ -1554,6 +1555,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateDiscordThread200Response](docs/CreateDiscordThread200Response.md)
  - [Zernio::CreateDiscordThread200ResponseData](docs/CreateDiscordThread200ResponseData.md)
  - [Zernio::CreateDiscordThreadRequest](docs/CreateDiscordThreadRequest.md)
+ - [Zernio::CreateGoogleAdAccountRequest](docs/CreateGoogleAdAccountRequest.md)
  - [Zernio::CreateGoogleAssetGroup200Response](docs/CreateGoogleAssetGroup200Response.md)
  - [Zernio::CreateGoogleAssetGroup201Response](docs/CreateGoogleAssetGroup201Response.md)
  - [Zernio::CreateGoogleAssetGroup201ResponseAssetGroup](docs/CreateGoogleAssetGroup201ResponseAssetGroup.md)
@@ -1597,6 +1599,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateMessagingAd200ResponseResultsInner](docs/CreateMessagingAd200ResponseResultsInner.md)
  - [Zernio::CreateMessagingAd201Response](docs/CreateMessagingAd201Response.md)
  - [Zernio::CreateMessagingAdRequest](docs/CreateMessagingAdRequest.md)
+ - [Zernio::CreateMetaAdAccountRequest](docs/CreateMetaAdAccountRequest.md)
  - [Zernio::CreatePhoneNumberKycLink200Response](docs/CreatePhoneNumberKycLink200Response.md)
  - [Zernio::CreatePhoneNumberKycLinkRequest](docs/CreatePhoneNumberKycLinkRequest.md)
  - [Zernio::CreatePhoneNumberKycLinkRequestBranding](docs/CreatePhoneNumberKycLinkRequestBranding.md)
@@ -1703,6 +1706,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateYoutubePlaylist201Response](docs/CreateYoutubePlaylist201Response.md)
  - [Zernio::CreateYoutubePlaylist201ResponsePlaylist](docs/CreateYoutubePlaylist201ResponsePlaylist.md)
  - [Zernio::CreateYoutubePlaylistRequest](docs/CreateYoutubePlaylistRequest.md)
+ - [Zernio::CreatedGoogleAdAccount](docs/CreatedGoogleAdAccount.md)
+ - [Zernio::CreatedMetaAdAccount](docs/CreatedMetaAdAccount.md)
  - [Zernio::CrosspostDiscordMessage200Response](docs/CrosspostDiscordMessage200Response.md)
  - [Zernio::CtwaAdRequestBody](docs/CtwaAdRequestBody.md)
  - [Zernio::CtwaAdRequestBodyCitiesInner](docs/CtwaAdRequestBodyCitiesInner.md)

@@ -10,7 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**assign_ad_account_user**](AdAccountsApi.md#assign_ad_account_user) | **POST** /v1/ads/accounts/users | Assign a user to an ad account |
 | [**assign_page_user**](AdAccountsApi.md#assign_page_user) | **POST** /v1/ads/page-users | Assign a user to a Page |
 | [**attach_ad_label**](AdAccountsApi.md#attach_ad_label) | **POST** /v1/ads/labels/{labelId}/assignments | Attach a Google Ads label |
-| [**create_ad_account**](AdAccountsApi.md#create_ad_account) | **POST** /v1/ads/accounts | Create Meta ad account |
+| [**create_ad_account**](AdAccountsApi.md#create_ad_account) | **POST** /v1/ads/accounts | Create ad account |
 | [**create_ad_label**](AdAccountsApi.md#create_ad_label) | **POST** /v1/ads/labels | Create a Google Ads label |
 | [**create_ad_negative_keyword_list**](AdAccountsApi.md#create_ad_negative_keyword_list) | **POST** /v1/ads/accounts/negative-keyword-lists | Create a negative keyword list |
 | [**create_custom_conversion**](AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create custom conversion |
@@ -487,11 +487,11 @@ end
 
 ## create_ad_account
 
-> <CreateAdAccount201Response> create_ad_account(create_ad_account_request)
+> <CreateAdAccount200Response> create_ad_account(create_ad_account_request)
 
-Create Meta ad account
+Create ad account
 
-Creates a new Meta ad account in the user's own business portfolio (a payment method must then be added in Ads Manager).  Creates a durable Meta ad account in the end user's own business portfolio using their connected Meta Ads token. Requires an active metaads accountId, Ads access, business_management permission and business admin access. Discover portfolios with GET /v1/ads/businesses. System-user tokens may return an empty businesses list; supply the known business ID in that case.  The self-serve account starts without a payment method. The user must add a payment method in Ads Manager before ads can deliver. Zernio cannot add payment methods. Meta may require business verification and limits how many accounts a business can create. Closing an account does not guarantee more capacity. An ad account cannot truly be deleted, even after closing it and removing it from a business.  timezoneId is Meta's numeric ID, not an IANA timezone name. Select it from https://developers.facebook.com/docs/marketing-api/reference/ad-account/timezone-ids/. For example, 1 is America/Los_Angeles. Meta validates supported currencies and IDs. endAdvertiser, mediaAgency and partner default to NONE for the self-serve flow.  The new account is added atomically to an existing scoped ad-account allowlist. Unrestricted connections stay unrestricted. Reconnecting the same Meta identity preserves this scope unless a caller explicitly replaces it. Discovery is nudged immediately. Use the returned adAccountId with the existing ads endpoints.  This operation is not idempotent and Zernio never automatically retries it. Unknown body fields are rejected. No validateOnly or dry-run option is supported. After a timeout or a 502 with details.creationStatus=unknown, check the business in Ads Manager before attempting another creation. A 201 with connectionUpdated=false means the account exists but needs reconnecting with adAccountIds containing the returned ID and the previous scoped IDs via GET /v1/connect/facebook/ads. Do not repeat the create call. 
+Creates a new Meta ad account in the user's own business portfolio, or a Google Ads client account under a manager (MCC) account the connection reaches. Billing must then be set up on the platform.  **Meta** (omit `platform` or send `meta`).  Creates a durable Meta ad account in the end user's own business portfolio using their connected Meta Ads token. Requires an active metaads accountId, Ads access, business_management permission and business admin access. Discover portfolios with GET /v1/ads/businesses. System-user tokens may return an empty businesses list; supply the known business ID in that case.  The self-serve account starts without a payment method. The user must add a payment method in Ads Manager before ads can deliver. Zernio cannot add payment methods. Meta may require business verification and limits how many accounts a business can create. Closing an account does not guarantee more capacity. An ad account cannot truly be deleted, even after closing it and removing it from a business.  timezoneId is Meta's numeric ID, not an IANA timezone name. Select it from https://developers.facebook.com/docs/marketing-api/reference/ad-account/timezone-ids/. For example, 1 is America/Los_Angeles. Meta validates supported currencies and IDs. endAdvertiser, mediaAgency and partner default to NONE for the self-serve flow.  The new account is added atomically to an existing scoped ad-account allowlist. Unrestricted connections stay unrestricted. Reconnecting the same Meta identity preserves this scope unless a caller explicitly replaces it. Discovery is nudged immediately. Use the returned adAccountId with the existing ads endpoints.  This operation is not idempotent and Zernio never automatically retries it. Unknown body fields are rejected. The Meta flow has no validateOnly or dry-run option. After a timeout or a 502 with details.creationStatus=unknown, check the business in Ads Manager before attempting another creation. A 201 with connectionUpdated=false means the account exists but needs reconnecting with adAccountIds containing the returned ID and the previous scoped IDs via GET /v1/connect/facebook/ads. Do not repeat the create call.  **Google** (send `platform: google`).  Google only creates accounts through a manager account, so the new client account is created under `managerCustomerId`, which must be a manager the Google user behind the googleads `accountId` reaches (directly or as a sub-manager). List them with GET /v1/ads/accounts/hierarchy. Whose manager it is (the integrator's or the end user's) is the caller's choice: pass the connection that reaches it.  `currency` (ISO 4217) and `timeZone` (IANA name, for example Europe/Madrid) cannot be changed after creation. The account starts without billing: set it up in Google Ads before ads can serve. Google caps how many accounts a manager can create and how many active client accounts it can hold.  The new customer is added to the connection (and to a scoped connection's allowlist), discovery is nudged immediately, and the returned adAccountId works with every other ads endpoint. `validateOnly: true` asks Google to validate the request without creating anything and returns 200. A real create is not idempotent: after a 502 with details.creationStatus=unknown, check the manager in Google Ads before trying again. 
 
 ### Examples
 
@@ -505,10 +505,10 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAccountsApi.new
-create_ad_account_request = Zernio::CreateAdAccountRequest.new({account_id: 'account_id_example', business_id: 'business_id_example', name: 'name_example', currency: 'currency_example', timezone_id: 37}) # CreateAdAccountRequest | 
+create_ad_account_request = Zernio::CreateGoogleAdAccountRequest.new({platform: 'google', account_id: 'account_id_example', manager_customer_id: 'manager_customer_id_example', name: 'name_example', currency: 'currency_example', time_zone: 'time_zone_example'}) # CreateAdAccountRequest | 
 
 begin
-  # Create Meta ad account
+  # Create ad account
   result = api_instance.create_ad_account(create_ad_account_request)
   p result
 rescue Zernio::ApiError => e
@@ -520,15 +520,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateAdAccount201Response>, Integer, Hash)> create_ad_account_with_http_info(create_ad_account_request)
+> <Array(<CreateAdAccount200Response>, Integer, Hash)> create_ad_account_with_http_info(create_ad_account_request)
 
 ```ruby
 begin
-  # Create Meta ad account
+  # Create ad account
   data, status_code, headers = api_instance.create_ad_account_with_http_info(create_ad_account_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateAdAccount201Response>
+  p data # => <CreateAdAccount200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->create_ad_account_with_http_info: #{e}"
 end
@@ -542,7 +542,7 @@ end
 
 ### Return type
 
-[**CreateAdAccount201Response**](CreateAdAccount201Response.md)
+[**CreateAdAccount200Response**](CreateAdAccount200Response.md)
 
 ### Authorization
 
