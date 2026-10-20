@@ -34,7 +34,7 @@ describe 'RedditSearchApi' do
 
   # unit tests for get_reddit_feed
   # Get subreddit feed
-  # Fetch posts from a subreddit feed. Supports sorting, time filtering, and cursor-based pagination.
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Fetch posts from a subreddit feed. Supports sorting, time filtering, and cursor-based pagination. 
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :subreddit 
@@ -51,7 +51,7 @@ describe 'RedditSearchApi' do
 
   # unit tests for get_reddit_post_comments
   # Get the comments of a Reddit post
-  # Reads the comments of any Reddit post the connected account can see, for example one found through &#x60;/v1/reddit/feed&#x60; or &#x60;/v1/reddit/search&#x60;, straight from Reddit on every call. The tree comes flattened in thread order (a reply follows its parent); rebuild it from &#x60;parentId&#x60;, which is &#x60;t3_…&#x60; for a reply to the post and &#x60;t1_…&#x60; for a reply to a comment. Deleted and removed comments are passed through as Reddit sends them (&#x60;[deleted]&#x60; / &#x60;[removed]&#x60;). Where Reddit truncates a thread, the ids it left out are listed in &#x60;more&#x60;; &#x60;commentId&#x60; fetches one such comment with its replies. A post Reddit no longer serves answers 404 and a private subreddit 403, both with &#x60;platform_api_error&#x60;. For comments on posts published through Zernio, &#x60;/v1/inbox/comments/{postId}&#x60; adds caching, moderation and replies. 
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Reads the comments of any Reddit post the connected account can see, for example one found through &#x60;/v1/reddit/feed&#x60; or &#x60;/v1/reddit/search&#x60;, straight from Reddit on every call. The tree comes flattened in thread order (a reply follows its parent); rebuild it from &#x60;parentId&#x60;, which is &#x60;t3_…&#x60; for a reply to the post and &#x60;t1_…&#x60; for a reply to a comment. Deleted and removed comments are passed through as Reddit sends them (&#x60;[deleted]&#x60; / &#x60;[removed]&#x60;). Where Reddit truncates a thread, the ids it left out are listed in &#x60;more&#x60;; &#x60;commentId&#x60; fetches one such comment with its replies. A post Reddit no longer serves answers 404 and a private subreddit 403, both with &#x60;platform_api_error&#x60;. For comments on posts published through Zernio, &#x60;/v1/inbox/comments/{postId}&#x60; adds caching, moderation and replies. 
   # @param post_id Reddit post id, with or without the &#x60;t3_&#x60; prefix (as &#x60;id&#x60; or &#x60;fullname&#x60; on RedditPost).
   # @param account_id An active Reddit account the request is made as.
   # @param [Hash] opts the optional parameters
@@ -67,7 +67,7 @@ describe 'RedditSearchApi' do
 
   # unit tests for search_reddit
   # Search posts
-  # Search Reddit posts using a connected account. Optionally scope to a specific subreddit.
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Search Reddit posts using a connected account. Optionally scope to a specific subreddit. 
   # @param account_id 
   # @param q 
   # @param [Hash] opts the optional parameters

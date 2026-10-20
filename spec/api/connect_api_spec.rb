@@ -360,7 +360,7 @@ describe 'ConnectApi' do
 
   # unit tests for get_reddit_flairs
   # List subreddit flairs
-  # Returns available post flairs for a subreddit. Some subreddits require a flair when posting.
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Returns available post flairs for a subreddit. Some subreddits require a flair when posting. 
   # @param account_id 
   # @param subreddit Subreddit name (without \&quot;r/\&quot; prefix) to fetch flairs for
   # @param [Hash] opts the optional parameters
@@ -373,7 +373,7 @@ describe 'ConnectApi' do
 
   # unit tests for get_reddit_subreddits
   # List Reddit subreddits
-  # Returns the subreddits the connected Reddit account can post to. Use this to get a subreddit name when creating a Reddit post.
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Returns the subreddits the connected Reddit account can post to. Use this to get a subreddit name when creating a Reddit post. 
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @return [GetRedditSubreddits200Response]
@@ -399,7 +399,7 @@ describe 'ConnectApi' do
 
   # unit tests for get_subreddit_rules
   # Get subreddit rules
-  # Returns a subreddit&#39;s posting rules plus Reddit&#39;s site-wide rules, so you can check them before submitting and avoid a removal.  Use this alongside &#x60;POST /v1/tools/validate/subreddit&#x60;, which only confirms that a subreddit exists and reports its basic posting settings. 
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Returns a subreddit&#39;s posting rules plus Reddit&#39;s site-wide rules, so you can check them before submitting and avoid a removal.  Use this alongside &#x60;POST /v1/tools/validate/subreddit&#x60;, which only confirms that a subreddit exists and reports its basic posting settings. 
   # @param account_id The ID of the Reddit account
   # @param subreddit Subreddit name (without the \&quot;r/\&quot; prefix)
   # @param [Hash] opts the optional parameters
@@ -718,7 +718,7 @@ describe 'ConnectApi' do
 
   # unit tests for set_reddit_post_flair
   # Set Reddit post flair
-  # Applies a flair to a post the connected account already published. Use the GET on this path to list the available &#x60;flairTemplateId&#x60; values for the subreddit.  Flair can also be set at submit time by passing &#x60;flairId&#x60; in &#x60;platformSpecificData&#x60; when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user&#39;s post requires moderator permissions, which Zernio does not request. 
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Applies a flair to a post the connected account already published. Use the GET on this path to list the available &#x60;flairTemplateId&#x60; values for the subreddit.  Flair can also be set at submit time by passing &#x60;flairId&#x60; in &#x60;platformSpecificData&#x60; when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user&#39;s post requires moderator permissions, which Zernio does not request. 
   # @param account_id The ID of the Reddit account that owns the post
   # @param set_reddit_post_flair_request 
   # @param [Hash] opts the optional parameters
@@ -783,7 +783,7 @@ describe 'ConnectApi' do
 
   # unit tests for update_reddit_subreddits
   # Set default subreddit
-  # Sets the default subreddit used when publishing posts for this Reddit account.
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Sets the default subreddit used when publishing posts for this Reddit account. 
   # @param account_id 
   # @param update_reddit_subreddits_request 
   # @param [Hash] opts the optional parameters
@@ -809,7 +809,7 @@ describe 'ConnectApi' do
 
   # unit tests for vote_reddit_thing
   # Vote on a Reddit post or comment
-  # Cast, change, or clear the connected account&#39;s vote on a Reddit post or comment.  **Reddit requires that votes be cast by humans.** Reddit&#39;s API terms permit a client to proxy a human&#39;s action one-for-one, and prohibit a bot from deciding how to vote or from amplifying a human&#39;s vote. Call this endpoint only in direct response to an explicit action by the account owner. Automated or agent-decided voting is vote manipulation and puts API access at risk. 
+  # Temporarily unavailable: Reddit has blocked third-party apps from its API, so this endpoint returns 503 &#x60;PLATFORM_DISABLED&#x60; until Reddit restores access. Reddit Ads is not affected.  Cast, change, or clear the connected account&#39;s vote on a Reddit post or comment.  **Reddit requires that votes be cast by humans.** Reddit&#39;s API terms permit a client to proxy a human&#39;s action one-for-one, and prohibit a bot from deciding how to vote or from amplifying a human&#39;s vote. Call this endpoint only in direct response to an explicit action by the account owner. Automated or agent-decided voting is vote manipulation and puts API access at risk. 
   # @param account_id The ID of the Reddit account casting the vote
   # @param vote_reddit_thing_request 
   # @param [Hash] opts the optional parameters
