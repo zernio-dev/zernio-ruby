@@ -994,7 +994,7 @@ end
 
 Get Google Business Profile search keywords
 
-Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords below a minimum impression threshold set by Google are excluded. Max 18 months of historical data. Requires the Analytics add-on. 
+Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords Google reports only as below a threshold have `impressions` 0 and `impressionsThreshold` set to that threshold. Returns up to 100 keywords per page. When `nextPageToken` is not null, pass it as `pageToken` with the same `startMonth` and `endMonth` to get the next page. Max 18 months of historical data. Requires the Analytics add-on. 
 
 ### Examples
 
@@ -1011,7 +1011,8 @@ api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Google Business Profile account.
 opts = {
   start_month: 'start_month_example', # String | Start month (YYYY-MM). Defaults to 3 months ago.
-  end_month: 'end_month_example' # String | End month (YYYY-MM). Defaults to current month.
+  end_month: 'end_month_example', # String | End month (YYYY-MM). Defaults to current month.
+  page_token: 'page_token_example' # String | The nextPageToken from the previous page. Valid only with the same startMonth and endMonth as the request that returned it.
 }
 
 begin
@@ -1048,6 +1049,7 @@ end
 | **account_id** | **String** | The Zernio SocialAccount ID for the Google Business Profile account. |  |
 | **start_month** | **String** | Start month (YYYY-MM). Defaults to 3 months ago. | [optional] |
 | **end_month** | **String** | End month (YYYY-MM). Defaults to current month. | [optional] |
+| **page_token** | **String** | The nextPageToken from the previous page. Valid only with the same startMonth and endMonth as the request that returned it. | [optional] |
 
 ### Return type
 

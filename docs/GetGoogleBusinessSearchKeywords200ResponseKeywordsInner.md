@@ -5,7 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **keyword** | **String** |  | [optional] |
-| **impressions** | **Integer** |  | [optional] |
+| **impressions** | **Integer** | Impressions for the range. 0 when Google reports only a threshold. | [optional] |
+| **impressions_threshold** | **Integer** | Set when Google reports only that impressions were below this value. null when impressions is exact. | [optional] |
 
 ## Example
 
@@ -14,7 +15,8 @@ require 'zernio-sdk'
 
 instance = Zernio::GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.new(
   keyword: restaurant near me,
-  impressions: 245
+  impressions: 245,
+  impressions_threshold: null
 )
 ```
 

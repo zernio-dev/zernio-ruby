@@ -9,6 +9,7 @@
 | **platform** | **String** |  | [optional] |
 | **month_range** | [**GetGoogleBusinessSearchKeywords200ResponseMonthRange**](GetGoogleBusinessSearchKeywords200ResponseMonthRange.md) |  | [optional] |
 | **keywords** | [**Array&lt;GetGoogleBusinessSearchKeywords200ResponseKeywordsInner&gt;**](GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.md) |  | [optional] |
+| **next_page_token** | **String** | Pass as pageToken to fetch the next page. null on the last page. | [optional] |
 | **note** | **String** |  | [optional] |
 
 ## Example
@@ -22,7 +23,8 @@ instance = Zernio::GetGoogleBusinessSearchKeywords200Response.new(
   platform: googlebusiness,
   month_range: null,
   keywords: null,
-  note: Keywords below a minimum impression threshold are excluded by Google
+  next_page_token: null,
+  note: Keywords Google reports only as below a threshold have impressions 0 and impressionsThreshold set
 )
 ```
 
