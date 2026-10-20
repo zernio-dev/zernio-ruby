@@ -35,7 +35,7 @@ module Zernio
     # Video ads only.
     attr_accessor :youtube_video_ids
 
-    # Replaces the ad group's channel controls; only the listed channels serve.
+    # Replaces the ad group's channel controls. Only the listed channels serve; Google Maps, which this list cannot select, is turned off. Omit to leave the ad group's channel controls unchanged.
     attr_accessor :channels
 
     attr_accessor :audience
