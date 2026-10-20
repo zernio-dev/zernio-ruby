@@ -8,6 +8,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_instagram_business_discovery**](InstagramApi.md#get_instagram_business_discovery) | **GET** /v1/accounts/{accountId}/instagram/business-discovery | Look up a public Instagram Business account |
 | [**get_instagram_publishing_limit**](InstagramApi.md#get_instagram_publishing_limit) | **GET** /v1/accounts/{accountId}/instagram/publishing-limit | Get Instagram publishing limit |
 | [**get_instagram_story_insights**](InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights |
+| [**list_instagram_media_collaborators**](InstagramApi.md#list_instagram_media_collaborators) | **GET** /v1/accounts/{accountId}/instagram/media/{mediaId}/collaborators | List the collaborators of an Instagram post |
 | [**list_instagram_stories**](InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories |
 | [**search_instagram_audio**](InstagramApi.md#search_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio | Search Instagram audio |
 
@@ -287,6 +288,77 @@ end
 ### Return type
 
 [**GetInstagramStoryInsights200Response**](GetInstagramStoryInsights200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_instagram_media_collaborators
+
+> <ListInstagramMediaCollaborators200Response> list_instagram_media_collaborators(account_id, media_id)
+
+List the collaborators of an Instagram post
+
+Returns the accounts invited as collaborators on one of the connected account's own posts (feed image, Reel or carousel), with whether each invitation was accepted or is still pending. Use it to check who accepted a collab post after publishing it.  Requires an Instagram account connected via **Facebook Login**. Meta serves this edge on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (`instagram_collaborators_require_facebook_login`) and must be reconnected choosing the Facebook option.  Meta returns at most 5 collaborators and only those who allow collaborator tagging. A post without collaborators returns an empty list. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of a connected Instagram account (Facebook Login).
+media_id = '18063237463112345' # String | Instagram media ID of a post published by this account (digits only, e.g. the platformPostId of a published post).
+
+begin
+  # List the collaborators of an Instagram post
+  result = api_instance.list_instagram_media_collaborators(account_id, media_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->list_instagram_media_collaborators: #{e}"
+end
+```
+
+#### Using the list_instagram_media_collaborators_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListInstagramMediaCollaborators200Response>, Integer, Hash)> list_instagram_media_collaborators_with_http_info(account_id, media_id)
+
+```ruby
+begin
+  # List the collaborators of an Instagram post
+  data, status_code, headers = api_instance.list_instagram_media_collaborators_with_http_info(account_id, media_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListInstagramMediaCollaborators200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->list_instagram_media_collaborators_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Instagram account (Facebook Login). |  |
+| **media_id** | **String** | Instagram media ID of a post published by this account (digits only, e.g. the platformPostId of a published post). |  |
+
+### Return type
+
+[**ListInstagramMediaCollaborators200Response**](ListInstagramMediaCollaborators200Response.md)
 
 ### Authorization
 
