@@ -7,12 +7,12 @@
 | **title** | **String** |  |  |
 | **body_html** | **String** | Article body as HTML. | [optional] |
 | **handle** | **String** | URL slug. Generated from the title when omitted. | [optional] |
-| **tags** | **Array&lt;String&gt;** | Tag names. WordPress resolves existing names case-insensitively and creates missing tags. | [optional] |
-| **author** | **String** | Shopify author display name, or numeric WordPress user id serialized as a string. Assigning another WordPress user may require elevated capability. | [optional] |
+| **tags** | **Array&lt;String&gt;** | Tag names. WordPress and Wix resolve existing names case-insensitively and create missing tags (Wix allows up to 30). | [optional] |
+| **author** | **String** | Shopify author display name, numeric WordPress user id serialized as a string, or Wix site member id. Assigning another WordPress user may require elevated capability. Wix posts without one go to the site&#39;s default author. | [optional] |
 | **excerpt** | **String** | Short summary shown in blog listings. | [optional] |
 | **image** | [**CreateBlogArticleRequestImage**](CreateBlogArticleRequestImage.md) |  | [optional] |
 | **seo** | [**CreateBlogArticleRequestSeo**](CreateBlogArticleRequestSeo.md) |  | [optional] |
-| **is_published** | **Boolean** | Set false for a draft or true to publish. On WordPress false takes priority over a future publishDate; omission with no date defaults to draft. | [optional] |
+| **is_published** | **Boolean** | Set false for a draft or true to publish. On WordPress and Wix false takes priority over a future publishDate; omission with no date defaults to draft. | [optional] |
 | **publish_date** | **Time** | ISO 8601 datetime with offset (or Z). A future date schedules publication natively on the platform. | [optional] |
 
 ## Example

@@ -34,6 +34,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_subreddit_rules**](ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules |
 | [**get_telegram_connect_status**](ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code |
 | [**get_whats_app_sdk_config**](ConnectApi.md#get_whats_app_sdk_config) | **GET** /v1/connect/whatsapp/sdk-config | Get Embedded Signup SDK config |
+| [**get_wix_connect_url**](ConnectApi.md#get_wix_connect_url) | **GET** /v1/connect/wix | Get Wix site install URL |
 | [**get_word_press_auth_url**](ConnectApi.md#get_word_press_auth_url) | **GET** /v1/connect/wordpress | Get WordPress.com OAuth connect URL |
 | [**get_youtube_captions**](ConnectApi.md#get_youtube_captions) | **GET** /v1/accounts/{accountId}/youtube-captions | Get a YouTube video transcript |
 | [**get_youtube_playlists**](ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists |
@@ -2226,6 +2227,84 @@ end
 ### Authorization
 
 [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_wix_connect_url
+
+> <GetWixConnectUrl200Response> get_wix_connect_url(profile_id, opts)
+
+Get Wix site install URL
+
+Returns the Wix installer link for the Zernio app. The user picks one of their Wix sites there and approves the app; Wix then returns the browser to Zernio's internal callback, which connects that site and redirects to `redirect_url` (or the dashboard when omitted). Wix is a connect-only blog platform: the connected account powers the Blogs API (`/v1/accounts/{accountId}/blogs`) and does not support social posts, inbox, analytics or ads. The site needs the Wix Blog app. Access tokens renew by themselves; removing the Zernio app from the site in Wix disconnects the account. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+}
+
+begin
+  # Get Wix site install URL
+  result = api_instance.get_wix_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_wix_connect_url: #{e}"
+end
+```
+
+#### Using the get_wix_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWixConnectUrl200Response>, Integer, Hash)> get_wix_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get Wix site install URL
+  data, status_code, headers = api_instance.get_wix_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWixConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_wix_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+
+### Return type
+
+[**GetWixConnectUrl200Response**](GetWixConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

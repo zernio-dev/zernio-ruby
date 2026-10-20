@@ -1256,6 +1256,7 @@ docs/GetWhatsAppTemplates200Response.md
 docs/GetWhatsAppTemplates200ResponseTemplatesInner.md
 docs/GetWhatsappBusinessUsername200Response.md
 docs/GetWhatsappBusinessUsernameSuggestions200Response.md
+docs/GetWixConnectUrl200Response.md
 docs/GetWordPressAuthUrl200Response.md
 docs/GetWorkflow200Response.md
 docs/GetWorkflow200ResponseWorkflow.md
@@ -4122,6 +4123,7 @@ lib/zernio-sdk/models/get_whats_app_templates200_response.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response_templates_inner.rb
 lib/zernio-sdk/models/get_whatsapp_business_username200_response.rb
 lib/zernio-sdk/models/get_whatsapp_business_username_suggestions200_response.rb
+lib/zernio-sdk/models/get_wix_connect_url200_response.rb
 lib/zernio-sdk/models/get_word_press_auth_url200_response.rb
 lib/zernio-sdk/models/get_workflow200_response.rb
 lib/zernio-sdk/models/get_workflow200_response_workflow.rb
@@ -6940,6 +6942,7 @@ spec/models/get_whats_app_templates200_response_spec.rb
 spec/models/get_whats_app_templates200_response_templates_inner_spec.rb
 spec/models/get_whatsapp_business_username200_response_spec.rb
 spec/models/get_whatsapp_business_username_suggestions200_response_spec.rb
+spec/models/get_wix_connect_url200_response_spec.rb
 spec/models/get_word_press_auth_url200_response_spec.rb
 spec/models/get_workflow200_response_spec.rb
 spec/models/get_workflow200_response_workflow_spec.rb
