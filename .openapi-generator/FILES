@@ -413,6 +413,7 @@ docs/ConversionActionTagSnippetsInner.md
 docs/ConversionDestination.md
 docs/ConversionEvent.md
 docs/ConversionEventItemsInner.md
+docs/ConversionEventMessaging.md
 docs/ConversionEventUser.md
 docs/ConversionEventUserClickIds.md
 docs/ConversionsApi.md
@@ -3310,6 +3311,7 @@ lib/zernio-sdk/models/conversion_action_tag_snippets_inner.rb
 lib/zernio-sdk/models/conversion_destination.rb
 lib/zernio-sdk/models/conversion_event.rb
 lib/zernio-sdk/models/conversion_event_items_inner.rb
+lib/zernio-sdk/models/conversion_event_messaging.rb
 lib/zernio-sdk/models/conversion_event_user.rb
 lib/zernio-sdk/models/conversion_event_user_click_ids.rb
 lib/zernio-sdk/models/create_account_group201_response.rb
@@ -6146,6 +6148,7 @@ spec/models/conversion_action_spec.rb
 spec/models/conversion_action_tag_snippets_inner_spec.rb
 spec/models/conversion_destination_spec.rb
 spec/models/conversion_event_items_inner_spec.rb
+spec/models/conversion_event_messaging_spec.rb
 spec/models/conversion_event_spec.rb
 spec/models/conversion_event_user_click_ids_spec.rb
 spec/models/conversion_event_user_spec.rb
