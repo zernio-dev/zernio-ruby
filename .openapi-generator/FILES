@@ -32,6 +32,9 @@ docs/AdCampaign.md
 docs/AdCampaignBudget.md
 docs/AdCampaignsApi.md
 docs/AdCreative.md
+docs/AdCreativeAssets.md
+docs/AdCreativeAssetsMarketingImagesInner.md
+docs/AdCreativeAssetsSquareMarketingImagesInner.md
 docs/AdCreativeCarouselCardsInner.md
 docs/AdCreativeCatalog.md
 docs/AdCreativeCatalogFormatTransformationSpecInner.md
@@ -2928,6 +2931,9 @@ lib/zernio-sdk/models/ad_budget.rb
 lib/zernio-sdk/models/ad_campaign.rb
 lib/zernio-sdk/models/ad_campaign_budget.rb
 lib/zernio-sdk/models/ad_creative.rb
+lib/zernio-sdk/models/ad_creative_assets.rb
+lib/zernio-sdk/models/ad_creative_assets_marketing_images_inner.rb
+lib/zernio-sdk/models/ad_creative_assets_square_marketing_images_inner.rb
 lib/zernio-sdk/models/ad_creative_carousel_cards_inner.rb
 lib/zernio-sdk/models/ad_creative_catalog.rb
 lib/zernio-sdk/models/ad_creative_catalog_format_transformation_spec_inner.rb
@@ -5745,6 +5751,9 @@ spec/models/ad_analytics_response_spec.rb
 spec/models/ad_budget_spec.rb
 spec/models/ad_campaign_budget_spec.rb
 spec/models/ad_campaign_spec.rb
+spec/models/ad_creative_assets_marketing_images_inner_spec.rb
+spec/models/ad_creative_assets_spec.rb
+spec/models/ad_creative_assets_square_marketing_images_inner_spec.rb
 spec/models/ad_creative_carousel_cards_inner_spec.rb
 spec/models/ad_creative_catalog_format_transformation_spec_inner_spec.rb
 spec/models/ad_creative_catalog_spec.rb
