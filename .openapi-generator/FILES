@@ -1286,8 +1286,11 @@ docs/GetYoutubePlaylists200Response.md
 docs/GetYoutubePlaylists200ResponsePlaylistsInner.md
 docs/GoogleAdLabel.md
 docs/GoogleAdLabelAssignments.md
+docs/GoogleAdsAccessRole.md
 docs/GoogleAdsHierarchyClient.md
 docs/GoogleAdsManagerLink.md
+docs/GoogleAdsUserAccessInvitation.md
+docs/GoogleAdsUserAccessInvitationResult.md
 docs/GoogleAssetGroupAssetLink.md
 docs/GoogleAssetGroupAssetUnlink.md
 docs/GoogleAssetUpdate.md
@@ -1409,6 +1412,7 @@ docs/InstallTrackingTagOnStore422Response.md
 docs/InstallTrackingTagOnStore422ResponseDetails.md
 docs/InstallTrackingTagOnStoreRequest.md
 docs/InviteAdAccountToManagerRequest.md
+docs/InviteAdAccountUserRequest.md
 docs/InvitesApi.md
 docs/KeywordEntry.md
 docs/KeywordEntryOneOf.md
@@ -1460,6 +1464,7 @@ docs/ListAccountSitelinks200Response.md
 docs/ListAccountSitelinks200ResponseSitelinksInner.md
 docs/ListAccountStructuredSnippets200Response.md
 docs/ListAccountStructuredSnippets200ResponseStructuredSnippetsInner.md
+docs/ListAdAccountUserInvitations200Response.md
 docs/ListAdAccountUsers200Response.md
 docs/ListAdAccounts200Response.md
 docs/ListAdAccounts200ResponseAccountsInner.md
@@ -2036,6 +2041,7 @@ docs/ReviewWebhookReview.md
 docs/ReviewWebhookReviewReply.md
 docs/ReviewWebhookReviewReviewer.md
 docs/ReviewsApi.md
+docs/RevokeAdAccountUserInvitation200Response.md
 docs/RevokeBusinessPartner200Response.md
 docs/RevokeConnectedApp200Response.md
 docs/RfPrediction.md
@@ -4172,8 +4178,11 @@ lib/zernio-sdk/models/get_youtube_playlists200_response.rb
 lib/zernio-sdk/models/get_youtube_playlists200_response_playlists_inner.rb
 lib/zernio-sdk/models/google_ad_label.rb
 lib/zernio-sdk/models/google_ad_label_assignments.rb
+lib/zernio-sdk/models/google_ads_access_role.rb
 lib/zernio-sdk/models/google_ads_hierarchy_client.rb
 lib/zernio-sdk/models/google_ads_manager_link.rb
+lib/zernio-sdk/models/google_ads_user_access_invitation.rb
+lib/zernio-sdk/models/google_ads_user_access_invitation_result.rb
 lib/zernio-sdk/models/google_asset_group_asset_link.rb
 lib/zernio-sdk/models/google_asset_group_asset_unlink.rb
 lib/zernio-sdk/models/google_asset_update.rb
@@ -4292,6 +4301,7 @@ lib/zernio-sdk/models/install_tracking_tag_on_store422_response.rb
 lib/zernio-sdk/models/install_tracking_tag_on_store422_response_details.rb
 lib/zernio-sdk/models/install_tracking_tag_on_store_request.rb
 lib/zernio-sdk/models/invite_ad_account_to_manager_request.rb
+lib/zernio-sdk/models/invite_ad_account_user_request.rb
 lib/zernio-sdk/models/keyword_entry.rb
 lib/zernio-sdk/models/keyword_entry_one_of.rb
 lib/zernio-sdk/models/like_inbox_comment200_response.rb
@@ -4340,6 +4350,7 @@ lib/zernio-sdk/models/list_account_sitelinks200_response.rb
 lib/zernio-sdk/models/list_account_sitelinks200_response_sitelinks_inner.rb
 lib/zernio-sdk/models/list_account_structured_snippets200_response.rb
 lib/zernio-sdk/models/list_account_structured_snippets200_response_structured_snippets_inner.rb
+lib/zernio-sdk/models/list_ad_account_user_invitations200_response.rb
 lib/zernio-sdk/models/list_ad_account_users200_response.rb
 lib/zernio-sdk/models/list_ad_accounts200_response.rb
 lib/zernio-sdk/models/list_ad_accounts200_response_accounts_inner.rb
@@ -4901,6 +4912,7 @@ lib/zernio-sdk/models/review_phone_number_kyc_packet_request.rb
 lib/zernio-sdk/models/review_webhook_review.rb
 lib/zernio-sdk/models/review_webhook_review_reply.rb
 lib/zernio-sdk/models/review_webhook_review_reviewer.rb
+lib/zernio-sdk/models/revoke_ad_account_user_invitation200_response.rb
 lib/zernio-sdk/models/revoke_business_partner200_response.rb
 lib/zernio-sdk/models/revoke_connected_app200_response.rb
 lib/zernio-sdk/models/rf_prediction.rb
@@ -7010,8 +7022,11 @@ spec/models/get_youtube_playlists200_response_playlists_inner_spec.rb
 spec/models/get_youtube_playlists200_response_spec.rb
 spec/models/google_ad_label_assignments_spec.rb
 spec/models/google_ad_label_spec.rb
+spec/models/google_ads_access_role_spec.rb
 spec/models/google_ads_hierarchy_client_spec.rb
 spec/models/google_ads_manager_link_spec.rb
+spec/models/google_ads_user_access_invitation_result_spec.rb
+spec/models/google_ads_user_access_invitation_spec.rb
 spec/models/google_asset_group_asset_link_spec.rb
 spec/models/google_asset_group_asset_unlink_spec.rb
 spec/models/google_asset_update_spec.rb
@@ -7130,6 +7145,7 @@ spec/models/install_tracking_tag_on_store422_response_details_spec.rb
 spec/models/install_tracking_tag_on_store422_response_spec.rb
 spec/models/install_tracking_tag_on_store_request_spec.rb
 spec/models/invite_ad_account_to_manager_request_spec.rb
+spec/models/invite_ad_account_user_request_spec.rb
 spec/models/keyword_entry_one_of_spec.rb
 spec/models/keyword_entry_spec.rb
 spec/models/like_inbox_comment200_response_spec.rb
@@ -7178,6 +7194,7 @@ spec/models/list_account_sitelinks200_response_sitelinks_inner_spec.rb
 spec/models/list_account_sitelinks200_response_spec.rb
 spec/models/list_account_structured_snippets200_response_spec.rb
 spec/models/list_account_structured_snippets200_response_structured_snippets_inner_spec.rb
+spec/models/list_ad_account_user_invitations200_response_spec.rb
 spec/models/list_ad_account_users200_response_spec.rb
 spec/models/list_ad_accounts200_response_accounts_inner_funding_source_details_spec.rb
 spec/models/list_ad_accounts200_response_accounts_inner_spec.rb
@@ -7739,6 +7756,7 @@ spec/models/review_phone_number_kyc_packet_request_spec.rb
 spec/models/review_webhook_review_reply_spec.rb
 spec/models/review_webhook_review_reviewer_spec.rb
 spec/models/review_webhook_review_spec.rb
+spec/models/revoke_ad_account_user_invitation200_response_spec.rb
 spec/models/revoke_business_partner200_response_spec.rb
 spec/models/revoke_connected_app200_response_spec.rb
 spec/models/rf_prediction_spec.rb

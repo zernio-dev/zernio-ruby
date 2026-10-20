@@ -32,9 +32,11 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_value_rule_set**](AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set |
 | [**hide_ad_comment**](AdAccountsApi.md#hide_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/hide | Hide or unhide an ad comment |
 | [**invite_ad_account_to_manager**](AdAccountsApi.md#invite_ad_account_to_manager) | **POST** /v1/ads/accounts/manager-links | Invite a client account to a manager |
+| [**invite_ad_account_user**](AdAccountsApi.md#invite_ad_account_user) | **POST** /v1/ads/accounts/user-invitations | Invite a user to an ad account by email |
 | [**list_account_callouts**](AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account callouts |
 | [**list_account_sitelinks**](AdAccountsApi.md#list_account_sitelinks) | **GET** /v1/ads/accounts/sitelinks | List account sitelinks |
 | [**list_account_structured_snippets**](AdAccountsApi.md#list_account_structured_snippets) | **GET** /v1/ads/accounts/structured-snippets | List account snippets |
+| [**list_ad_account_user_invitations**](AdAccountsApi.md#list_ad_account_user_invitations) | **GET** /v1/ads/accounts/user-invitations | List user access invitations |
 | [**list_ad_account_users**](AdAccountsApi.md#list_ad_account_users) | **GET** /v1/ads/accounts/users | Ad account users |
 | [**list_ad_accounts**](AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_labels**](AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | List ad labels |
@@ -59,6 +61,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**remove_page_user**](AdAccountsApi.md#remove_page_user) | **DELETE** /v1/ads/page-users | Remove a user from a Page |
 | [**replace_ad_negative_keyword_list_keywords**](AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords |
 | [**reply_to_ad_comment**](AdAccountsApi.md#reply_to_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/reply | Reply to an ad comment |
+| [**revoke_ad_account_user_invitation**](AdAccountsApi.md#revoke_ad_account_user_invitation) | **DELETE** /v1/ads/accounts/user-invitations | Revoke a user access invitation |
 | [**update_account_callouts**](AdAccountsApi.md#update_account_callouts) | **PUT** /v1/ads/accounts/callouts | Update account callouts |
 | [**update_account_sitelinks**](AdAccountsApi.md#update_account_sitelinks) | **PUT** /v1/ads/accounts/sitelinks | Update account sitelinks |
 | [**update_account_structured_snippets**](AdAccountsApi.md#update_account_structured_snippets) | **PUT** /v1/ads/accounts/structured-snippets | Update account snippets |
@@ -2117,6 +2120,75 @@ end
 - **Accept**: application/json
 
 
+## invite_ad_account_user
+
+> <GoogleAdsUserAccessInvitationResult> invite_ad_account_user(invite_ad_account_user_request)
+
+Invite a user to an ad account by email
+
+Emails someone an invitation to a Google Ads account with the access role you choose, for example to hand a client account you created under your manager to its owner.  Creates a user access invitation (Google's CustomerUserAccessInvitationService) on `adAccountId`. The connection's Google user needs admin access to that account, directly or through a manager above it, which is the case for an account created with POST /v1/ads/accounts. The recipient accepts from the email, possibly with another Google account. When Google requires multi-party approval, nothing is sent until a second admin of the account approves the request in Google Ads: the response then has `status: PENDING_APPROVAL` and a `multiPartyAuthReviewId` instead of an `invitationId`. Not idempotent: Google refuses a second invitation while the email has one pending or awaiting approval. Google has no server-side check for this call, so `validateOnly: true` reads the account's invitations with the same credentials (proving the account is reachable) and fails if the email already has a pending one, without sending anything.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+invite_ad_account_user_request = Zernio::InviteAdAccountUserRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', email_address: 'email_address_example', access_role: Zernio::GoogleAdsAccessRole::ADMIN}) # InviteAdAccountUserRequest | 
+
+begin
+  # Invite a user to an ad account by email
+  result = api_instance.invite_ad_account_user(invite_ad_account_user_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->invite_ad_account_user: #{e}"
+end
+```
+
+#### Using the invite_ad_account_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GoogleAdsUserAccessInvitationResult>, Integer, Hash)> invite_ad_account_user_with_http_info(invite_ad_account_user_request)
+
+```ruby
+begin
+  # Invite a user to an ad account by email
+  data, status_code, headers = api_instance.invite_ad_account_user_with_http_info(invite_ad_account_user_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GoogleAdsUserAccessInvitationResult>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->invite_ad_account_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **invite_ad_account_user_request** | [**InviteAdAccountUserRequest**](InviteAdAccountUserRequest.md) |  |  |
+
+### Return type
+
+[**GoogleAdsUserAccessInvitationResult**](GoogleAdsUserAccessInvitationResult.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## list_account_callouts
 
 > <ListAccountCallouts200Response> list_account_callouts(account_id, opts)
@@ -2331,6 +2403,79 @@ end
 ### Return type
 
 [**ListAccountStructuredSnippets200Response**](ListAccountStructuredSnippets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_account_user_invitations
+
+> <ListAdAccountUserInvitations200Response> list_ad_account_user_invitations(account_id, opts)
+
+List user access invitations
+
+Lists the email invitations to a Google Ads account, with their role and status.  Reads Google's `customer_user_access_invitation` resource for one customer: invitations that are `PENDING`, `DECLINED` or `EXPIRED` (Google expires them 20 days after sending). An accepted invitation becomes a user of the account and leaves this list, which can take Google up to 24 hours. An invitation still waiting for multi-party approval is not listed until a second admin approves it. Results are cached for 10 minutes and dropped on every invite or revoke through Zernio.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Google ads SocialAccount id.
+opts = {
+  ad_account_id: 'ad_account_id_example' # String | Google Ads customer id, digits only. Defaults to the connection's selected customer.
+}
+
+begin
+  # List user access invitations
+  result = api_instance.list_ad_account_user_invitations(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_ad_account_user_invitations: #{e}"
+end
+```
+
+#### Using the list_ad_account_user_invitations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdAccountUserInvitations200Response>, Integer, Hash)> list_ad_account_user_invitations_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List user access invitations
+  data, status_code, headers = api_instance.list_ad_account_user_invitations_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdAccountUserInvitations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_ad_account_user_invitations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Google ads SocialAccount id. |  |
+| **ad_account_id** | **String** | Google Ads customer id, digits only. Defaults to the connection&#39;s selected customer. | [optional] |
+
+### Return type
+
+[**ListAdAccountUserInvitations200Response**](ListAdAccountUserInvitations200Response.md)
 
 ### Authorization
 
@@ -4141,6 +4286,79 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## revoke_ad_account_user_invitation
+
+> <RevokeAdAccountUserInvitation200Response> revoke_ad_account_user_invitation(account_id, ad_account_id, invitation_id)
+
+Revoke a user access invitation
+
+Withdraws an email invitation to a Google Ads account that has not been accepted yet.  Removes the invitation `invitationId` (from GET on this path) from `adAccountId`. It no longer works from the email, and the address can be invited again.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Google ads SocialAccount id.
+ad_account_id = 'ad_account_id_example' # String | Google Ads customer id, digits only.
+invitation_id = 'invitation_id_example' # String | Numeric invitation id from GET /v1/ads/accounts/user-invitations.
+
+begin
+  # Revoke a user access invitation
+  result = api_instance.revoke_ad_account_user_invitation(account_id, ad_account_id, invitation_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->revoke_ad_account_user_invitation: #{e}"
+end
+```
+
+#### Using the revoke_ad_account_user_invitation_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RevokeAdAccountUserInvitation200Response>, Integer, Hash)> revoke_ad_account_user_invitation_with_http_info(account_id, ad_account_id, invitation_id)
+
+```ruby
+begin
+  # Revoke a user access invitation
+  data, status_code, headers = api_instance.revoke_ad_account_user_invitation_with_http_info(account_id, ad_account_id, invitation_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RevokeAdAccountUserInvitation200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->revoke_ad_account_user_invitation_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Google ads SocialAccount id. |  |
+| **ad_account_id** | **String** | Google Ads customer id, digits only. |  |
+| **invitation_id** | **String** | Numeric invitation id from GET /v1/ads/accounts/user-invitations. |  |
+
+### Return type
+
+[**RevokeAdAccountUserInvitation200Response**](RevokeAdAccountUserInvitation200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
