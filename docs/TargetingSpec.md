@@ -28,6 +28,7 @@
 | **company_sizes** | **Array&lt;String&gt;** | LinkedIn B2B only. Single-letter size codes (A to I), or the full urn:li:staffCountRange:* URN from /v1/ads/targeting/search?dimension&#x3D;companySize. | [optional] |
 | **seniorities** | **Array&lt;String&gt;** | LinkedIn B2B only. Seniority URN id fragments, or the full urn:li:seniority:* URN from /v1/ads/targeting/search?dimension&#x3D;seniority. | [optional] |
 | **job_functions** | **Array&lt;String&gt;** | LinkedIn B2B only. Function URN id fragments, or the full urn:li:function:* URN from /v1/ads/targeting/search?dimension&#x3D;jobFunction. | [optional] |
+| **skills** | **Array&lt;String&gt;** | LinkedIn B2B only. Member skills (e.g. Python, Recruiting): skill URN id fragments, or the full urn:li:skill:* URN from /v1/ads/targeting/search?dimension&#x3D;skill. Values are ORed; the facet is ANDed with the other facets. On an ad set update an empty list removes the skills. | [optional] |
 | **audience_include** | **Array&lt;String&gt;** | Platform audience IDs to include, as returned by GET /v1/ads/audiences (Meta custom audience ids, TikTok audience ids, Pinterest customer list ids, LinkedIn segment ids (the platformAudienceId from GET /v1/ads/audiences; Zernio resolves it to the targetable LinkedIn ad segment, an unknown id returns 400), Google user list ids, X custom audience ids). On Reddit, the ids of custom audiences built in Reddit Ads Manager (GET /v1/ads/audiences does not list Reddit audiences). Not supported on OpenAI (400). | [optional] |
 | **audience_exclude** | **Array&lt;String&gt;** | Platform audience IDs to exclude; same ID formats as audienceInclude. Not supported on OpenAI (400). | [optional] |
 | **communities** | **Array&lt;String&gt;** | Reddit only (400 elsewhere). Subreddits to target, by name, with or without the &#x60;r/&#x60; prefix (e.g. &#x60;[&#39;marketing&#39;, &#39;r/startups&#39;]&#x60;), as returned by /v1/ads/targeting/search?dimension&#x3D;community. | [optional] |
@@ -65,6 +66,7 @@ instance = Zernio::TargetingSpec.new(
   company_sizes: null,
   seniorities: null,
   job_functions: null,
+  skills: null,
   audience_include: null,
   audience_exclude: null,
   communities: null,
