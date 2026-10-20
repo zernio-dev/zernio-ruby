@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **posts** | [**Array&lt;Post&gt;**](Post.md) |  | [optional] |
-| **pagination** | [**Pagination**](Pagination.md) |  | [optional] |
+| **pagination** | [**PostsListResponsePagination**](PostsListResponsePagination.md) |  | [optional] |
 
 ## Example
 

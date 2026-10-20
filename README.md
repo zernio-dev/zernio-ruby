@@ -2847,6 +2847,7 @@ Class | Method | HTTP request | Description
  - [Zernio::PostUpdateResponse](docs/PostUpdateResponse.md)
  - [Zernio::PostUserId](docs/PostUserId.md)
  - [Zernio::PostsListResponse](docs/PostsListResponse.md)
+ - [Zernio::PostsListResponsePagination](docs/PostsListResponsePagination.md)
  - [Zernio::PreflightBrandedCallingIdentity200Response](docs/PreflightBrandedCallingIdentity200Response.md)
  - [Zernio::PreflightBrandedCallingIdentity200ResponseFindingsInner](docs/PreflightBrandedCallingIdentity200ResponseFindingsInner.md)
  - [Zernio::PreflightBrandedCallingIdentityRequest](docs/PreflightBrandedCallingIdentityRequest.md)

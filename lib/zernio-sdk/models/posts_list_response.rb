@@ -41,7 +41,7 @@ module Zernio
     def self.openapi_types
       {
         :'posts' => :'Array<Post>',
-        :'pagination' => :'Pagination'
+        :'pagination' => :'PostsListResponsePagination'
       }
     end
 
