@@ -24,6 +24,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**get_facebook_pages**](ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages |
 | [**get_gmb_locations**](ConnectApi.md#get_gmb_locations) | **GET** /v1/accounts/{accountId}/gmb-locations | List Google Business Profile locations |
+| [**get_hub_spot_connect_url**](ConnectApi.md#get_hub_spot_connect_url) | **GET** /v1/connect/hubspot | Get HubSpot OAuth connect URL |
 | [**get_linked_in_organizations**](ConnectApi.md#get_linked_in_organizations) | **GET** /v1/accounts/{accountId}/linkedin-organizations | List LinkedIn orgs |
 | [**get_page_webhook_subscription**](ConnectApi.md#get_page_webhook_subscription) | **GET** /v1/accounts/{accountId}/webhook-subscription | Read a Facebook Page&#39;s webhook subscription |
 | [**get_pending_o_auth_data**](ConnectApi.md#get_pending_o_auth_data) | **GET** /v1/connect/pending-data | Get pending OAuth data |
@@ -1525,6 +1526,84 @@ end
 ### Authorization
 
 [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_hub_spot_connect_url
+
+> <GetHubSpotConnectUrl200Response> get_hub_spot_connect_url(profile_id, opts)
+
+Get HubSpot OAuth connect URL
+
+Initiates OAuth for a HubSpot portal. HubSpot is a connect-only CRM platform: the connected account does not post, read analytics or run ads. One HubSpot portal can be connected per profile; connecting a different portal to a profile that already has one redirects with `error=hubspot_profile_has_portal`. Redirect the user to `authUrl`; after authorization, HubSpot returns the browser to Zernio's internal callback and Zernio redirects to `redirect_url` (or the dashboard when omitted). On success the redirect carries `connected=hubspot`, `profileId`, `accountId` and `username` (the portal domain); on failure it carries `error`, `platform=hubspot` and `error_message`. Reconnecting the same portal and profile updates the stored connection in place and keeps its settings. Requested scopes: `crm.objects.contacts.read`, `crm.objects.contacts.write`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+}
+
+begin
+  # Get HubSpot OAuth connect URL
+  result = api_instance.get_hub_spot_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_hub_spot_connect_url: #{e}"
+end
+```
+
+#### Using the get_hub_spot_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetHubSpotConnectUrl200Response>, Integer, Hash)> get_hub_spot_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get HubSpot OAuth connect URL
+  data, status_code, headers = api_instance.get_hub_spot_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetHubSpotConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_hub_spot_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+
+### Return type
+
+[**GetHubSpotConnectUrl200Response**](GetHubSpotConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

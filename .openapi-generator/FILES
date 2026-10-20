@@ -1033,6 +1033,8 @@ docs/GetGoogleBusinessVerifications200Response.md
 docs/GetGoogleBusinessVerifications200ResponseVerificationsInner.md
 docs/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantState.md
 docs/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify.md
+docs/GetHubSpotConnectUrl200Response.md
+docs/GetHubSpotSettings200Response.md
 docs/GetImessageGroup200Response.md
 docs/GetImessageGroup200ResponseGroup.md
 docs/GetImessageSender200Response.md
@@ -1348,6 +1350,7 @@ docs/HideAdComment200Response.md
 docs/HideAdCommentRequest.md
 docs/HideInboxComment200Response.md
 docs/HideInboxCommentRequest.md
+docs/HubSpotSettings.md
 docs/IMessageApi.md
 docs/ImessageAudienceContact.md
 docs/ImessageAudienceContactOptIn.md
@@ -2476,6 +2479,8 @@ docs/UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItem.md
 docs/UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItemLabel.md
 docs/UpdateGoogleBusinessServicesRequestServiceItemsInnerPrice.md
 docs/UpdateGoogleBusinessServicesRequestServiceItemsInnerStructuredServiceItem.md
+docs/UpdateHubSpotSettings200Response.md
+docs/UpdateHubSpotSettingsRequest.md
 docs/UpdateImessageGroup200Response.md
 docs/UpdateImessageGroupRequest.md
 docs/UpdateImessageSenderRequest.md
@@ -3906,6 +3911,8 @@ lib/zernio-sdk/models/get_google_business_verifications200_response.rb
 lib/zernio-sdk/models/get_google_business_verifications200_response_verifications_inner.rb
 lib/zernio-sdk/models/get_google_business_verifications200_response_voice_of_merchant_state.rb
 lib/zernio-sdk/models/get_google_business_verifications200_response_voice_of_merchant_state_verify.rb
+lib/zernio-sdk/models/get_hub_spot_connect_url200_response.rb
+lib/zernio-sdk/models/get_hub_spot_settings200_response.rb
 lib/zernio-sdk/models/get_imessage_group200_response.rb
 lib/zernio-sdk/models/get_imessage_group200_response_group.rb
 lib/zernio-sdk/models/get_imessage_sender200_response.rb
@@ -4221,6 +4228,7 @@ lib/zernio-sdk/models/hide_ad_comment200_response.rb
 lib/zernio-sdk/models/hide_ad_comment_request.rb
 lib/zernio-sdk/models/hide_inbox_comment200_response.rb
 lib/zernio-sdk/models/hide_inbox_comment_request.rb
+lib/zernio-sdk/models/hub_spot_settings.rb
 lib/zernio-sdk/models/imessage_audience_contact.rb
 lib/zernio-sdk/models/imessage_audience_contact_opt_in.rb
 lib/zernio-sdk/models/imessage_sandbox_contact.rb
@@ -5321,6 +5329,8 @@ lib/zernio-sdk/models/update_google_business_services_request_service_items_inne
 lib/zernio-sdk/models/update_google_business_services_request_service_items_inner_free_form_service_item_label.rb
 lib/zernio-sdk/models/update_google_business_services_request_service_items_inner_price.rb
 lib/zernio-sdk/models/update_google_business_services_request_service_items_inner_structured_service_item.rb
+lib/zernio-sdk/models/update_hub_spot_settings200_response.rb
+lib/zernio-sdk/models/update_hub_spot_settings_request.rb
 lib/zernio-sdk/models/update_imessage_group200_response.rb
 lib/zernio-sdk/models/update_imessage_group_request.rb
 lib/zernio-sdk/models/update_imessage_sender_request.rb
@@ -6731,6 +6741,8 @@ spec/models/get_google_business_verifications200_response_spec.rb
 spec/models/get_google_business_verifications200_response_verifications_inner_spec.rb
 spec/models/get_google_business_verifications200_response_voice_of_merchant_state_spec.rb
 spec/models/get_google_business_verifications200_response_voice_of_merchant_state_verify_spec.rb
+spec/models/get_hub_spot_connect_url200_response_spec.rb
+spec/models/get_hub_spot_settings200_response_spec.rb
 spec/models/get_imessage_group200_response_group_spec.rb
 spec/models/get_imessage_group200_response_spec.rb
 spec/models/get_imessage_sender200_response_health_spec.rb
@@ -7046,6 +7058,7 @@ spec/models/hide_ad_comment200_response_spec.rb
 spec/models/hide_ad_comment_request_spec.rb
 spec/models/hide_inbox_comment200_response_spec.rb
 spec/models/hide_inbox_comment_request_spec.rb
+spec/models/hub_spot_settings_spec.rb
 spec/models/imessage_audience_contact_opt_in_spec.rb
 spec/models/imessage_audience_contact_spec.rb
 spec/models/imessage_sandbox_contact_spec.rb
@@ -8146,6 +8159,8 @@ spec/models/update_google_business_services_request_service_items_inner_price_sp
 spec/models/update_google_business_services_request_service_items_inner_spec.rb
 spec/models/update_google_business_services_request_service_items_inner_structured_service_item_spec.rb
 spec/models/update_google_business_services_request_spec.rb
+spec/models/update_hub_spot_settings200_response_spec.rb
+spec/models/update_hub_spot_settings_request_spec.rb
 spec/models/update_imessage_group200_response_spec.rb
 spec/models/update_imessage_group_request_spec.rb
 spec/models/update_imessage_sender_request_contact_spec.rb

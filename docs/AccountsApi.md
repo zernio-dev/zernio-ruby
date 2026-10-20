@@ -10,6 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_all_accounts_health**](AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health |
 | [**get_bluesky_settings**](AccountsApi.md#get_bluesky_settings) | **GET** /v1/accounts/{accountId}/bluesky-settings | Get Bluesky account settings |
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
+| [**get_hub_spot_settings**](AccountsApi.md#get_hub_spot_settings) | **GET** /v1/accounts/{accountId}/hubspot-settings | Get HubSpot account settings |
 | [**get_instagram_follow_status**](AccountsApi.md#get_instagram_follow_status) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account |
 | [**get_slack_settings**](AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings |
 | [**get_tik_tok_creator_info**](AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info |
@@ -22,6 +23,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**search_tik_tok_locations**](AccountsApi.md#search_tik_tok_locations) | **GET** /v1/accounts/{accountId}/tiktok/locations | Search TikTok location tags |
 | [**update_account**](AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account |
 | [**update_bluesky_settings**](AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings |
+| [**update_hub_spot_settings**](AccountsApi.md#update_hub_spot_settings) | **PATCH** /v1/accounts/{accountId}/hubspot-settings | Update HubSpot account settings |
 | [**update_slack_settings**](AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings |
 
 
@@ -455,6 +457,75 @@ end
 - **Accept**: application/json
 
 
+## get_hub_spot_settings
+
+> <GetHubSpotSettings200Response> get_hub_spot_settings(account_id)
+
+Get HubSpot account settings
+
+Read a connected HubSpot portal and what Zernio syncs to it.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | 
+
+begin
+  # Get HubSpot account settings
+  result = api_instance.get_hub_spot_settings(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_hub_spot_settings: #{e}"
+end
+```
+
+#### Using the get_hub_spot_settings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetHubSpotSettings200Response>, Integer, Hash)> get_hub_spot_settings_with_http_info(account_id)
+
+```ruby
+begin
+  # Get HubSpot account settings
+  data, status_code, headers = api_instance.get_hub_spot_settings_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetHubSpotSettings200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_hub_spot_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**GetHubSpotSettings200Response**](GetHubSpotSettings200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_instagram_follow_status
 
 > <GetInstagramFollowStatus200Response> get_instagram_follow_status(account_id, user_id, opts)
@@ -768,7 +839,7 @@ opts = {
   platform: 'platform_example', # String | Filter accounts by platform (e.g. \"instagram\", \"twitter\").
   status: 'connected', # String | Filter accounts by connection status. `connected` returns healthy accounts; `disconnected` returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. 
   search: 'search_example', # String | Case-insensitive match on the account username, display name or platform user id, or an exact account id. Combine with page/limit to paginate the matches.
-  category: 'social', # String | Only accounts of this kind. ads = ad accounts (Meta, Google, LinkedIn, Pinterest, TikTok, X, OpenAI, Reddit), communication = WhatsApp, Telegram, Discord, Slack and iMessage, blogs = Shopify and WordPress, social = every other platform.
+  category: 'social', # String | Only accounts of this kind. ads = ad accounts (Meta, Google, LinkedIn, Pinterest, TikTok, X, OpenAI, Reddit), communication = WhatsApp, Telegram, Discord, Slack and iMessage, blogs = Shopify and WordPress, crm = HubSpot, social = every other platform.
   sort: 'account', # String | Sort a paginated listing (page/limit) by account name, platform, profile name, status (accounts needing a reconnect first when ascending) or connection date. Ties keep the default order: platform, then newest first.
   order: 'asc', # String | Direction for `sort`.
   include_over_limit: true, # Boolean | When true, includes accounts from over-limit profiles.
@@ -816,7 +887,7 @@ end
 | **platform** | **String** | Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). | [optional] |
 | **status** | **String** | Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set.  | [optional] |
 | **search** | **String** | Case-insensitive match on the account username, display name or platform user id, or an exact account id. Combine with page/limit to paginate the matches. | [optional] |
-| **category** | **String** | Only accounts of this kind. ads &#x3D; ad accounts (Meta, Google, LinkedIn, Pinterest, TikTok, X, OpenAI, Reddit), communication &#x3D; WhatsApp, Telegram, Discord, Slack and iMessage, blogs &#x3D; Shopify and WordPress, social &#x3D; every other platform. | [optional] |
+| **category** | **String** | Only accounts of this kind. ads &#x3D; ad accounts (Meta, Google, LinkedIn, Pinterest, TikTok, X, OpenAI, Reddit), communication &#x3D; WhatsApp, Telegram, Discord, Slack and iMessage, blogs &#x3D; Shopify and WordPress, crm &#x3D; HubSpot, social &#x3D; every other platform. | [optional] |
 | **sort** | **String** | Sort a paginated listing (page/limit) by account name, platform, profile name, status (accounts needing a reconnect first when ascending) or connection date. Ties keep the default order: platform, then newest first. | [optional] |
 | **order** | **String** | Direction for &#x60;sort&#x60;. | [optional][default to &#39;asc&#39;] |
 | **include_over_limit** | **Boolean** | When true, includes accounts from over-limit profiles. | [optional][default to false] |
@@ -1327,6 +1398,77 @@ end
 ### Return type
 
 nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_hub_spot_settings
+
+> <UpdateHubSpotSettings200Response> update_hub_spot_settings(account_id, update_hub_spot_settings_request)
+
+Update HubSpot account settings
+
+Turn contact sync or message logging on or off for a connected HubSpot portal. Send at least one field; omitted fields keep their value. Settings survive reconnecting the same portal.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | 
+update_hub_spot_settings_request = Zernio::UpdateHubSpotSettingsRequest.new # UpdateHubSpotSettingsRequest | 
+
+begin
+  # Update HubSpot account settings
+  result = api_instance.update_hub_spot_settings(account_id, update_hub_spot_settings_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->update_hub_spot_settings: #{e}"
+end
+```
+
+#### Using the update_hub_spot_settings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateHubSpotSettings200Response>, Integer, Hash)> update_hub_spot_settings_with_http_info(account_id, update_hub_spot_settings_request)
+
+```ruby
+begin
+  # Update HubSpot account settings
+  data, status_code, headers = api_instance.update_hub_spot_settings_with_http_info(account_id, update_hub_spot_settings_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateHubSpotSettings200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->update_hub_spot_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **update_hub_spot_settings_request** | [**UpdateHubSpotSettingsRequest**](UpdateHubSpotSettingsRequest.md) |  |  |
+
+### Return type
+
+[**UpdateHubSpotSettings200Response**](UpdateHubSpotSettings200Response.md)
 
 ### Authorization
 
