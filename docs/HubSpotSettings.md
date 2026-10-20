@@ -9,7 +9,7 @@
 | **hub_id** | **String** | HubSpot portal (hub) ID. |  |
 | **hub_domain** | **String** | HubSpot portal domain, when HubSpot reports one. |  |
 | **scopes** | **Array&lt;String&gt;** | OAuth scopes the portal granted. |  |
-| **sync_contacts** | **Boolean** | Whether Zernio creates or updates HubSpot contacts for inbox contacts. |  |
+| **sync_contacts** | **Boolean** | Whether Zernio creates HubSpot contacts for inbox contacts that match none. |  |
 | **log_messages** | **Boolean** | Whether Zernio logs inbox messages on HubSpot contact timelines. |  |
 
 ## Example

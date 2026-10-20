@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **sync_contacts** | **Boolean** | Create or update a HubSpot contact for each inbox contact. | [optional] |
+| **sync_contacts** | **Boolean** | Create a HubSpot contact for an inbox contact that matches none by email or phone. A match is linked as it is and never updated. | [optional] |
 | **log_messages** | **Boolean** | Log inbound and outbound inbox messages on the contact&#39;s HubSpot timeline. | [optional] |
 
 ## Example
