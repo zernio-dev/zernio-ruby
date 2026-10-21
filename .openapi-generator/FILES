@@ -1195,6 +1195,9 @@ docs/GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowComment
 docs/GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowDuet.md
 docs/GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowStitch.md
 docs/GetTikTokCreatorInfo200ResponsePrivacyLevelsInner.md
+docs/GetTikTokSmartPlusAdReview200Response.md
+docs/GetTikTokSmartPlusAdReview200ResponseMaterialsInner.md
+docs/GetTikTokSmartPlusAdReview200ResponseReview.md
 docs/GetTikTokSmartPlusMaterialReport200Response.md
 docs/GetTikTokSmartPlusMaterialReport200ResponseRowsInner.md
 docs/GetTikTokSmartPlusMaterialReport200ResponseRowsInnerMetrics.md
@@ -2291,6 +2294,9 @@ docs/TikTokDryRunVerdict.md
 docs/TikTokDryRunVerdictTiktokInner.md
 docs/TikTokPlatformData.md
 docs/TikTokPlatformDataMusicSoundInfo.md
+docs/TikTokReviewRejection.md
+docs/TikTokReviewRejectionContent.md
+docs/TikTokSmartPlusReviewStatus.md
 docs/ToolsApi.md
 docs/TrackingTag.md
 docs/TrackingTagDiagnostic.md
@@ -4097,6 +4103,9 @@ lib/zernio-sdk/models/get_tik_tok_creator_info200_response_posting_limits_intera
 lib/zernio-sdk/models/get_tik_tok_creator_info200_response_posting_limits_interaction_settings_allow_duet.rb
 lib/zernio-sdk/models/get_tik_tok_creator_info200_response_posting_limits_interaction_settings_allow_stitch.rb
 lib/zernio-sdk/models/get_tik_tok_creator_info200_response_privacy_levels_inner.rb
+lib/zernio-sdk/models/get_tik_tok_smart_plus_ad_review200_response.rb
+lib/zernio-sdk/models/get_tik_tok_smart_plus_ad_review200_response_materials_inner.rb
+lib/zernio-sdk/models/get_tik_tok_smart_plus_ad_review200_response_review.rb
 lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response.rb
 lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response_rows_inner.rb
 lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_metrics.rb
@@ -5168,6 +5177,9 @@ lib/zernio-sdk/models/tik_tok_dry_run_verdict.rb
 lib/zernio-sdk/models/tik_tok_dry_run_verdict_tiktok_inner.rb
 lib/zernio-sdk/models/tik_tok_platform_data.rb
 lib/zernio-sdk/models/tik_tok_platform_data_music_sound_info.rb
+lib/zernio-sdk/models/tik_tok_review_rejection.rb
+lib/zernio-sdk/models/tik_tok_review_rejection_content.rb
+lib/zernio-sdk/models/tik_tok_smart_plus_review_status.rb
 lib/zernio-sdk/models/tracking_tag.rb
 lib/zernio-sdk/models/tracking_tag_diagnostic.rb
 lib/zernio-sdk/models/tracking_tag_event.rb
@@ -6951,6 +6963,9 @@ spec/models/get_tik_tok_creator_info200_response_posting_limits_interaction_sett
 spec/models/get_tik_tok_creator_info200_response_posting_limits_spec.rb
 spec/models/get_tik_tok_creator_info200_response_privacy_levels_inner_spec.rb
 spec/models/get_tik_tok_creator_info200_response_spec.rb
+spec/models/get_tik_tok_smart_plus_ad_review200_response_materials_inner_spec.rb
+spec/models/get_tik_tok_smart_plus_ad_review200_response_review_spec.rb
+spec/models/get_tik_tok_smart_plus_ad_review200_response_spec.rb
 spec/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_metrics_spec.rb
 spec/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_spec.rb
 spec/models/get_tik_tok_smart_plus_material_report200_response_spec.rb
@@ -8022,6 +8037,9 @@ spec/models/tik_tok_dry_run_verdict_spec.rb
 spec/models/tik_tok_dry_run_verdict_tiktok_inner_spec.rb
 spec/models/tik_tok_platform_data_music_sound_info_spec.rb
 spec/models/tik_tok_platform_data_spec.rb
+spec/models/tik_tok_review_rejection_content_spec.rb
+spec/models/tik_tok_review_rejection_spec.rb
+spec/models/tik_tok_smart_plus_review_status_spec.rb
 spec/models/tracking_tag_diagnostic_spec.rb
 spec/models/tracking_tag_event_input_spec.rb
 spec/models/tracking_tag_event_spec.rb

@@ -35,6 +35,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_campaign_conversion_goals**](AdCampaignsApi.md#get_campaign_conversion_goals) | **GET** /v1/ads/campaigns/{campaignId}/conversion-goals | Get campaign conversion goals |
 | [**get_campaign_targeting**](AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign&#39;s device, location, excluded location, and language targeting |
 | [**get_google_asset_group**](AdCampaignsApi.md#get_google_asset_group) | **GET** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId} | Get a Performance Max asset group |
+| [**get_tik_tok_smart_plus_ad_review**](AdCampaignsApi.md#get_tik_tok_smart_plus_ad_review) | **GET** /v1/ads/{adId}/tiktok-smart-plus-review | Review status of each creative in a TikTok Smart+ ad |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
 | [**list_ad_group_assets**](AdCampaignsApi.md#list_ad_group_assets) | **GET** /v1/ads/ad-sets/{adSetId}/assets | List ad-group assets |
 | [**list_ad_keywords**](AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords |
@@ -2336,6 +2337,75 @@ end
 ### Return type
 
 [**GetGoogleAssetGroup200Response**](GetGoogleAssetGroup200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_tik_tok_smart_plus_ad_review
+
+> <GetTikTokSmartPlusAdReview200Response> get_tik_tok_smart_plus_ad_review(ad_id)
+
+Review status of each creative in a TikTok Smart+ ad
+
+Shows which Spark post, video or carousel of an Upgraded Smart+ ad TikTok approved or rejected, with every rejection reason, keyed by the TikTok post id for a Spark post.  Reads TikTok's `/smart_plus/ad/review_info/` live (read-only, works on a paused ad) for the Smart+ ad that holds `adId`, and returns the ad-level verdict plus one entry per creative. `adId` may be the Smart+ ad itself or any creative of it synced as its own ad: Zernio finds the Smart+ ad in the ad's ad group through `/smart_plus/ad/get/`, and uses the ad group's only Smart+ ad when no creative list names the ad.  `materialType`, `tiktokItemId`, `videoId`, `name` and `operationStatus` come from the Smart+ ad's `creative_list`. TikTok leaves out of that list the creatives it added on its own (creator content, authorized TikTok posts, Creative Library content) and lists each image of a carousel under its own material id, so those entries come back with the review verdict and null descriptive fields. TikTok returns no review timestamp; `readAt` is when Zernio read it.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_id = 'ad_id_example' # String | Zernio ad id (24-char hex) or the TikTok ad id: the Smart+ ad id or the ad id of one of its creatives.
+
+begin
+  # Review status of each creative in a TikTok Smart+ ad
+  result = api_instance.get_tik_tok_smart_plus_ad_review(ad_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_tik_tok_smart_plus_ad_review: #{e}"
+end
+```
+
+#### Using the get_tik_tok_smart_plus_ad_review_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetTikTokSmartPlusAdReview200Response>, Integer, Hash)> get_tik_tok_smart_plus_ad_review_with_http_info(ad_id)
+
+```ruby
+begin
+  # Review status of each creative in a TikTok Smart+ ad
+  data, status_code, headers = api_instance.get_tik_tok_smart_plus_ad_review_with_http_info(ad_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetTikTokSmartPlusAdReview200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_tik_tok_smart_plus_ad_review_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Zernio ad id (24-char hex) or the TikTok ad id: the Smart+ ad id or the ad id of one of its creatives. |  |
+
+### Return type
+
+[**GetTikTokSmartPlusAdReview200Response**](GetTikTokSmartPlusAdReview200Response.md)
 
 ### Authorization
 
