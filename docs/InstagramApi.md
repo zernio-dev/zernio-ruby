@@ -11,6 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_instagram_live_media**](InstagramApi.md#list_instagram_live_media) | **GET** /v1/accounts/{accountId}/instagram/live-media | List the live broadcasts of an Instagram account |
 | [**list_instagram_media_collaborators**](InstagramApi.md#list_instagram_media_collaborators) | **GET** /v1/accounts/{accountId}/instagram/media/{mediaId}/collaborators | List the collaborators of an Instagram post |
 | [**list_instagram_stories**](InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories |
+| [**list_instagram_tagged_media**](InstagramApi.md#list_instagram_tagged_media) | **GET** /v1/accounts/{accountId}/instagram/tags | List the posts an Instagram account is tagged in |
 | [**search_instagram_audio**](InstagramApi.md#search_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio | Search Instagram audio |
 
 
@@ -498,6 +499,81 @@ end
 ### Return type
 
 [**ListInstagramStories200Response**](ListInstagramStories200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_instagram_tagged_media
+
+> <ListInstagramTaggedMedia200Response> list_instagram_tagged_media(account_id, opts)
+
+List the posts an Instagram account is tagged in
+
+Returns the media where other Instagram users photo-tagged the connected account, newest first. Private media is never returned.  Cursor-paginated: pass `nextCursor` from the previous response as `cursor` to read the next page. `nextCursor` is null when there are no more pages. Meta does not say whether a page is the last one, so the final page can come back empty with `nextCursor` null.  Requires an Instagram account connected via **Facebook Login**. Meta does not give Instagram Login access to tagging, so accounts connected with classic Instagram Login receive a 400 (`instagram_tagged_media_requires_facebook_login`) and must be reconnected choosing the Facebook option. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of a connected Instagram account (Facebook Login).
+opts = {
+  limit: 56, # Integer | Page size.
+  cursor: 'cursor_example' # String | The `nextCursor` of the previous page.
+}
+
+begin
+  # List the posts an Instagram account is tagged in
+  result = api_instance.list_instagram_tagged_media(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->list_instagram_tagged_media: #{e}"
+end
+```
+
+#### Using the list_instagram_tagged_media_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListInstagramTaggedMedia200Response>, Integer, Hash)> list_instagram_tagged_media_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List the posts an Instagram account is tagged in
+  data, status_code, headers = api_instance.list_instagram_tagged_media_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListInstagramTaggedMedia200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->list_instagram_tagged_media_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Instagram account (Facebook Login). |  |
+| **limit** | **Integer** | Page size. | [optional][default to 25] |
+| **cursor** | **String** | The &#x60;nextCursor&#x60; of the previous page. | [optional] |
+
+### Return type
+
+[**ListInstagramTaggedMedia200Response**](ListInstagramTaggedMedia200Response.md)
 
 ### Authorization
 

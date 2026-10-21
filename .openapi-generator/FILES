@@ -1409,6 +1409,7 @@ docs/InstagramPlatformData.md
 docs/InstagramPlatformDataAudioConfiguration.md
 docs/InstagramPlatformDataTrialParams.md
 docs/InstagramPlatformDataUserTagsInner.md
+docs/InstagramTaggedMedia.md
 docs/InstallTrackingTagOnStore200Response.md
 docs/InstallTrackingTagOnStore200ResponseInstall.md
 docs/InstallTrackingTagOnStore422Response.md
@@ -1644,6 +1645,7 @@ docs/ListInstagramPages200ResponsePagesInner.md
 docs/ListInstagramPages200ResponsePagesInnerInstagramBusinessAccount.md
 docs/ListInstagramStories200Response.md
 docs/ListInstagramStories200ResponseDataInner.md
+docs/ListInstagramTaggedMedia200Response.md
 docs/ListLeadForms200Response.md
 docs/ListLeads200Response.md
 docs/ListLeads200ResponseLeadsInner.md
@@ -4306,6 +4308,7 @@ lib/zernio-sdk/models/instagram_platform_data.rb
 lib/zernio-sdk/models/instagram_platform_data_audio_configuration.rb
 lib/zernio-sdk/models/instagram_platform_data_trial_params.rb
 lib/zernio-sdk/models/instagram_platform_data_user_tags_inner.rb
+lib/zernio-sdk/models/instagram_tagged_media.rb
 lib/zernio-sdk/models/install_tracking_tag_on_store200_response.rb
 lib/zernio-sdk/models/install_tracking_tag_on_store200_response_install.rb
 lib/zernio-sdk/models/install_tracking_tag_on_store422_response.rb
@@ -4538,6 +4541,7 @@ lib/zernio-sdk/models/list_instagram_pages200_response_pages_inner.rb
 lib/zernio-sdk/models/list_instagram_pages200_response_pages_inner_instagram_business_account.rb
 lib/zernio-sdk/models/list_instagram_stories200_response.rb
 lib/zernio-sdk/models/list_instagram_stories200_response_data_inner.rb
+lib/zernio-sdk/models/list_instagram_tagged_media200_response.rb
 lib/zernio-sdk/models/list_lead_forms200_response.rb
 lib/zernio-sdk/models/list_leads200_response.rb
 lib/zernio-sdk/models/list_leads200_response_leads_inner.rb
@@ -7158,6 +7162,7 @@ spec/models/instagram_platform_data_audio_configuration_spec.rb
 spec/models/instagram_platform_data_spec.rb
 spec/models/instagram_platform_data_trial_params_spec.rb
 spec/models/instagram_platform_data_user_tags_inner_spec.rb
+spec/models/instagram_tagged_media_spec.rb
 spec/models/install_tracking_tag_on_store200_response_install_spec.rb
 spec/models/install_tracking_tag_on_store200_response_spec.rb
 spec/models/install_tracking_tag_on_store422_response_details_spec.rb
@@ -7390,6 +7395,7 @@ spec/models/list_instagram_pages200_response_pages_inner_spec.rb
 spec/models/list_instagram_pages200_response_spec.rb
 spec/models/list_instagram_stories200_response_data_inner_spec.rb
 spec/models/list_instagram_stories200_response_spec.rb
+spec/models/list_instagram_tagged_media200_response_spec.rb
 spec/models/list_lead_forms200_response_spec.rb
 spec/models/list_leads200_response_leads_inner_spec.rb
 spec/models/list_leads200_response_meta_spec.rb
