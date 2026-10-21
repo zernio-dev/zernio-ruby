@@ -392,6 +392,9 @@ docs/ConnectShopifyWithToken200Response.md
 docs/ConnectShopifyWithToken200ResponseAccount.md
 docs/ConnectShopifyWithTokenRequest.md
 docs/ConnectSlackChannelRequest.md
+docs/ConnectWebflowWithSiteToken200Response.md
+docs/ConnectWebflowWithSiteToken200ResponseAccount.md
+docs/ConnectWebflowWithSiteTokenRequest.md
 docs/ConnectWelcomeScreen.md
 docs/ConnectWhatsAppCredentials200Response.md
 docs/ConnectWhatsAppCredentials200ResponseAccount.md
@@ -3314,6 +3317,9 @@ lib/zernio-sdk/models/connect_shopify_with_token200_response.rb
 lib/zernio-sdk/models/connect_shopify_with_token200_response_account.rb
 lib/zernio-sdk/models/connect_shopify_with_token_request.rb
 lib/zernio-sdk/models/connect_slack_channel_request.rb
+lib/zernio-sdk/models/connect_webflow_with_site_token200_response.rb
+lib/zernio-sdk/models/connect_webflow_with_site_token200_response_account.rb
+lib/zernio-sdk/models/connect_webflow_with_site_token_request.rb
 lib/zernio-sdk/models/connect_welcome_screen.rb
 lib/zernio-sdk/models/connect_whats_app_credentials200_response.rb
 lib/zernio-sdk/models/connect_whats_app_credentials200_response_account.rb
@@ -6174,6 +6180,9 @@ spec/models/connect_shopify_with_token200_response_account_spec.rb
 spec/models/connect_shopify_with_token200_response_spec.rb
 spec/models/connect_shopify_with_token_request_spec.rb
 spec/models/connect_slack_channel_request_spec.rb
+spec/models/connect_webflow_with_site_token200_response_account_spec.rb
+spec/models/connect_webflow_with_site_token200_response_spec.rb
+spec/models/connect_webflow_with_site_token_request_spec.rb
 spec/models/connect_welcome_screen_spec.rb
 spec/models/connect_whats_app_credentials200_response_account_spec.rb
 spec/models/connect_whats_app_credentials200_response_spec.rb

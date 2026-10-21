@@ -15,6 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_open_ai_ads_credentials**](ConnectApi.md#connect_open_ai_ads_credentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account |
 | [**connect_shopify_with_token**](ConnectApi.md#connect_shopify_with_token) | **POST** /v1/connect/shopify/token | Connect a Shopify store with a custom-app Admin token |
 | [**connect_slack_channel**](ConnectApi.md#connect_slack_channel) | **POST** /v1/connect/slack | Connect a Slack channel |
+| [**connect_webflow_with_site_token**](ConnectApi.md#connect_webflow_with_site_token) | **POST** /v1/connect/webflow/token | Connect Webflow with a site API token |
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
 | [**connect_whats_app_embedded_signup**](ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup |
 | [**connect_whop_ads_credentials**](ConnectApi.md#connect_whop_ads_credentials) | **POST** /v1/connect/whop-ads/credentials | Connect a Whop account |
@@ -846,6 +847,80 @@ nil (empty response body)
 ### Authorization
 
 [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_webflow_with_site_token
+
+> <ConnectWebflowWithSiteToken200Response> connect_webflow_with_site_token(connect_webflow_with_site_token_request)
+
+Connect Webflow with a site API token
+
+Connects one Webflow site using a site API token, created in the site's Site settings > Apps & integrations > API access with Sites read-only and CMS read and write access. Zernio checks the token's scopes, reads its site, and stores the token encrypted. Webflow is a connect-only blog platform: each CMS collection with a rich text field is a blog in the Blogs API (`/v1/accounts/{accountId}/blogs`); it does not support social posts, inbox, analytics or ads. Publishing an article needs a site that has been published once. Reconnecting the same site and profile updates the connection in place. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_webflow_with_site_token_request = Zernio::ConnectWebflowWithSiteTokenRequest.new({profile_id: 'profile_id_example', site_token: 'site_token_example'}) # ConnectWebflowWithSiteTokenRequest | 
+
+begin
+  # Connect Webflow with a site API token
+  result = api_instance.connect_webflow_with_site_token(connect_webflow_with_site_token_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_webflow_with_site_token: #{e}"
+end
+```
+
+#### Using the connect_webflow_with_site_token_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectWebflowWithSiteToken200Response>, Integer, Hash)> connect_webflow_with_site_token_with_http_info(connect_webflow_with_site_token_request)
+
+```ruby
+begin
+  # Connect Webflow with a site API token
+  data, status_code, headers = api_instance.connect_webflow_with_site_token_with_http_info(connect_webflow_with_site_token_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectWebflowWithSiteToken200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_webflow_with_site_token_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_webflow_with_site_token_request** | [**ConnectWebflowWithSiteTokenRequest**](ConnectWebflowWithSiteTokenRequest.md) |  |  |
+
+### Return type
+
+[**ConnectWebflowWithSiteToken200Response**](ConnectWebflowWithSiteToken200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

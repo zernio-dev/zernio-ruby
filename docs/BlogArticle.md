@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Platform-native article/post id: numeric on Shopify and WordPress, a GUID on Wix. | [optional] |
+| **id** | **String** | Platform-native article/post id: numeric on Shopify and WordPress, a GUID on Wix, a hex item id on Webflow. | [optional] |
 | **blog_id** | **String** | Platform-native id of the blog the article belongs to. | [optional] |
 | **platform** | **String** |  | [optional] |
 | **title** | **String** |  | [optional] |
