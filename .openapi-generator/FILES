@@ -1292,6 +1292,7 @@ docs/GoogleAdsHierarchyClient.md
 docs/GoogleAdsManagerLink.md
 docs/GoogleAdsUserAccessInvitation.md
 docs/GoogleAdsUserAccessInvitationResult.md
+docs/GoogleAdsUserInvitationApproval.md
 docs/GoogleAssetGroupAssetLink.md
 docs/GoogleAssetGroupAssetUnlink.md
 docs/GoogleAssetUpdate.md
@@ -1465,6 +1466,7 @@ docs/ListAccountSitelinks200Response.md
 docs/ListAccountSitelinks200ResponseSitelinksInner.md
 docs/ListAccountStructuredSnippets200Response.md
 docs/ListAccountStructuredSnippets200ResponseStructuredSnippetsInner.md
+docs/ListAdAccountUserInvitationApprovals200Response.md
 docs/ListAdAccountUserInvitations200Response.md
 docs/ListAdAccountUsers200Response.md
 docs/ListAdAccounts200Response.md
@@ -2805,6 +2807,7 @@ docs/WhatsAppTemplateLookupErrorDetailsProviderHeaders.md
 docs/WhatsAppTemplateLookupErrorPlatformError.md
 docs/WhatsAppTemplateLookupErrorPlatformErrorErrorData.md
 docs/WhatsAppTemplatesApi.md
+docs/WithdrawAdAccountUserInvitationApproval200Response.md
 docs/WorkflowEdge.md
 docs/WorkflowExecutionEvent.md
 docs/WorkflowNode.md
@@ -4186,6 +4189,7 @@ lib/zernio-sdk/models/google_ads_hierarchy_client.rb
 lib/zernio-sdk/models/google_ads_manager_link.rb
 lib/zernio-sdk/models/google_ads_user_access_invitation.rb
 lib/zernio-sdk/models/google_ads_user_access_invitation_result.rb
+lib/zernio-sdk/models/google_ads_user_invitation_approval.rb
 lib/zernio-sdk/models/google_asset_group_asset_link.rb
 lib/zernio-sdk/models/google_asset_group_asset_unlink.rb
 lib/zernio-sdk/models/google_asset_update.rb
@@ -4353,6 +4357,7 @@ lib/zernio-sdk/models/list_account_sitelinks200_response.rb
 lib/zernio-sdk/models/list_account_sitelinks200_response_sitelinks_inner.rb
 lib/zernio-sdk/models/list_account_structured_snippets200_response.rb
 lib/zernio-sdk/models/list_account_structured_snippets200_response_structured_snippets_inner.rb
+lib/zernio-sdk/models/list_ad_account_user_invitation_approvals200_response.rb
 lib/zernio-sdk/models/list_ad_account_user_invitations200_response.rb
 lib/zernio-sdk/models/list_ad_account_users200_response.rb
 lib/zernio-sdk/models/list_ad_accounts200_response.rb
@@ -5658,6 +5663,7 @@ lib/zernio-sdk/models/whats_app_template_lookup_error_details.rb
 lib/zernio-sdk/models/whats_app_template_lookup_error_details_provider_headers.rb
 lib/zernio-sdk/models/whats_app_template_lookup_error_platform_error.rb
 lib/zernio-sdk/models/whats_app_template_lookup_error_platform_error_error_data.rb
+lib/zernio-sdk/models/withdraw_ad_account_user_invitation_approval200_response.rb
 lib/zernio-sdk/models/workflow_edge.rb
 lib/zernio-sdk/models/workflow_execution_event.rb
 lib/zernio-sdk/models/workflow_node.rb
@@ -7032,6 +7038,7 @@ spec/models/google_ads_hierarchy_client_spec.rb
 spec/models/google_ads_manager_link_spec.rb
 spec/models/google_ads_user_access_invitation_result_spec.rb
 spec/models/google_ads_user_access_invitation_spec.rb
+spec/models/google_ads_user_invitation_approval_spec.rb
 spec/models/google_asset_group_asset_link_spec.rb
 spec/models/google_asset_group_asset_unlink_spec.rb
 spec/models/google_asset_update_spec.rb
@@ -7199,6 +7206,7 @@ spec/models/list_account_sitelinks200_response_sitelinks_inner_spec.rb
 spec/models/list_account_sitelinks200_response_spec.rb
 spec/models/list_account_structured_snippets200_response_spec.rb
 spec/models/list_account_structured_snippets200_response_structured_snippets_inner_spec.rb
+spec/models/list_ad_account_user_invitation_approvals200_response_spec.rb
 spec/models/list_ad_account_user_invitations200_response_spec.rb
 spec/models/list_ad_account_users200_response_spec.rb
 spec/models/list_ad_accounts200_response_accounts_inner_funding_source_details_spec.rb
@@ -8504,6 +8512,7 @@ spec/models/whats_app_template_lookup_error_details_spec.rb
 spec/models/whats_app_template_lookup_error_platform_error_error_data_spec.rb
 spec/models/whats_app_template_lookup_error_platform_error_spec.rb
 spec/models/whats_app_template_lookup_error_spec.rb
+spec/models/withdraw_ad_account_user_invitation_approval200_response_spec.rb
 spec/models/workflow_edge_spec.rb
 spec/models/workflow_execution_event_spec.rb
 spec/models/workflow_node_position_spec.rb
