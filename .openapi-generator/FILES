@@ -392,6 +392,7 @@ docs/ConnectShopifyWithToken200Response.md
 docs/ConnectShopifyWithToken200ResponseAccount.md
 docs/ConnectShopifyWithTokenRequest.md
 docs/ConnectSlackChannelRequest.md
+docs/ConnectWelcomeScreen.md
 docs/ConnectWhatsAppCredentials200Response.md
 docs/ConnectWhatsAppCredentials200ResponseAccount.md
 docs/ConnectWhatsAppCredentialsRequest.md
@@ -2434,6 +2435,7 @@ docs/UpdateCommerceProductPricesRequestVariantsInner.md
 docs/UpdateCommerceProductPricesRequestVariantsInnerPrice.md
 docs/UpdateCommerceProductRequest.md
 docs/UpdateCommerceRedirectRequest.md
+docs/UpdateConnectWelcomeScreenRequest.md
 docs/UpdateContact200Response.md
 docs/UpdateContact200ResponseContact.md
 docs/UpdateContactRequest.md
@@ -3298,6 +3300,7 @@ lib/zernio-sdk/models/connect_shopify_with_token200_response.rb
 lib/zernio-sdk/models/connect_shopify_with_token200_response_account.rb
 lib/zernio-sdk/models/connect_shopify_with_token_request.rb
 lib/zernio-sdk/models/connect_slack_channel_request.rb
+lib/zernio-sdk/models/connect_welcome_screen.rb
 lib/zernio-sdk/models/connect_whats_app_credentials200_response.rb
 lib/zernio-sdk/models/connect_whats_app_credentials200_response_account.rb
 lib/zernio-sdk/models/connect_whats_app_credentials_request.rb
@@ -5298,6 +5301,7 @@ lib/zernio-sdk/models/update_commerce_product_prices_request_variants_inner.rb
 lib/zernio-sdk/models/update_commerce_product_prices_request_variants_inner_price.rb
 lib/zernio-sdk/models/update_commerce_product_request.rb
 lib/zernio-sdk/models/update_commerce_redirect_request.rb
+lib/zernio-sdk/models/update_connect_welcome_screen_request.rb
 lib/zernio-sdk/models/update_contact200_response.rb
 lib/zernio-sdk/models/update_contact200_response_contact.rb
 lib/zernio-sdk/models/update_contact_request.rb
@@ -6142,6 +6146,7 @@ spec/models/connect_shopify_with_token200_response_account_spec.rb
 spec/models/connect_shopify_with_token200_response_spec.rb
 spec/models/connect_shopify_with_token_request_spec.rb
 spec/models/connect_slack_channel_request_spec.rb
+spec/models/connect_welcome_screen_spec.rb
 spec/models/connect_whats_app_credentials200_response_account_spec.rb
 spec/models/connect_whats_app_credentials200_response_spec.rb
 spec/models/connect_whats_app_credentials_request_spec.rb
@@ -8142,6 +8147,7 @@ spec/models/update_commerce_product_prices_request_variants_inner_price_spec.rb
 spec/models/update_commerce_product_prices_request_variants_inner_spec.rb
 spec/models/update_commerce_product_request_spec.rb
 spec/models/update_commerce_redirect_request_spec.rb
+spec/models/update_connect_welcome_screen_request_spec.rb
 spec/models/update_contact200_response_contact_spec.rb
 spec/models/update_contact200_response_spec.rb
 spec/models/update_contact_request_spec.rb
