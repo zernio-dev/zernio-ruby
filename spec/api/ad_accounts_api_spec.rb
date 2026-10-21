@@ -241,6 +241,19 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for get_ad_account_billing
+  # Get ad account billing
+  # Reads the payments accounts a Google Ads account can be billed to, plus its billing setups and account budgets.  Payments accounts come from Google&#39;s PaymentsAccountService, read as the manager above the customer: they are the monthly invoicing (consolidated billing) accounts of that manager. An empty &#x60;paymentsAccounts&#x60; means the manager has no monthly invoicing, so billing cannot be set up through the API and has to be added in Google Ads. Billing setups and account budgets are read live from Google with their status. Results are cached for 10 minutes and dropped on every setup through Zernio.
+  # @param account_id Google ads SocialAccount id.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id Google Ads customer id, digits only. Defaults to the connection&#39;s selected customer.
+  # @return [GetAdAccountBilling200Response]
+  describe 'get_ad_account_billing test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_ad_account_finance
   # Ad account finances
   # Shows a Meta ad account&#39;s balance, total spend, spend cap and funding source.  Finances of one Meta ad account: prepaid &#x60;balance&#x60;, lifetime &#x60;amountSpent&#x60;, account &#x60;spendCap&#x60; (null &#x3D; no cap) and the &#x60;fundingSource&#x60;. Money values are converted from Meta&#39;s minor units to whole units of &#x60;currency&#x60;.
@@ -853,6 +866,18 @@ describe 'AdAccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [RevokeAdAccountUserInvitation200Response]
   describe 'revoke_ad_account_user_invitation test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for set_up_ad_account_billing
+  # Set up ad account billing (monthly invoicing)
+  # Bills a Google Ads account to a monthly invoicing payments account of a manager above it, and proposes its account budget, so the account can serve without anyone opening Google Ads.  Monthly invoicing only. Google&#39;s API cannot add a card or other payment method, so &#x60;paymentsAccountId&#x60; must be one of the manager&#39;s monthly invoicing (consolidated billing) payments accounts listed by GET /v1/ads/accounts/billing. A manager without monthly invoicing has none, and billing has to be added in Google Ads instead.  Creates a billing setup (Google&#39;s BillingSetupService) that starts now on that payments account, then an account budget proposal that starts now and never ends: unlimited by default, or capped at &#x60;spendingLimit&#x60; in the account currency. Google reviews the budget offline, usually within an hour; until then the setup reads &#x60;APPROVED_HELD&#x60; and ads do not serve. A customer whose current billing setup already has a budget is refused with 409, and so is one billed to another payments account: this call never replaces existing billing. A current setup on the same payments account without a budget (for example after a budget rejection) is reused, so resending the same request finishes it.  Not idempotent and never retried: after a 502 with details.creationStatus&#x3D;unknown, read GET /v1/ads/accounts/billing before retrying. Google has no dry run for billing setups, so &#x60;validateOnly: true&#x60; checks the payments account and the existing billing without creating anything (and asks Google to validate the budget when a setup would be reused).
+  # @param set_up_ad_account_billing_request 
+  # @param [Hash] opts the optional parameters
+  # @return [SetUpAdAccountBilling200Response]
+  describe 'set_up_ad_account_billing test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

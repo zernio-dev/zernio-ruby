@@ -20,6 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad_negative_keyword_list**](AdAccountsApi.md#delete_ad_negative_keyword_list) | **DELETE** /v1/ads/accounts/negative-keyword-lists/{listId} | Delete a negative keyword list |
 | [**delete_value_rule_set**](AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set |
 | [**detach_ad_label**](AdAccountsApi.md#detach_ad_label) | **DELETE** /v1/ads/labels/{labelId}/assignments | Detach a Google Ads label |
+| [**get_ad_account_billing**](AdAccountsApi.md#get_ad_account_billing) | **GET** /v1/ads/accounts/billing | Get ad account billing |
 | [**get_ad_account_finance**](AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances |
 | [**get_ad_account_hierarchy**](AdAccountsApi.md#get_ad_account_hierarchy) | **GET** /v1/ads/accounts/hierarchy | Get manager account hierarchy |
 | [**get_ad_account_live_entities**](AdAccountsApi.md#get_ad_account_live_entities) | **GET** /v1/ads/accounts/live | Read an ad account&#39;s campaigns and ad sets live |
@@ -63,6 +64,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**replace_ad_negative_keyword_list_keywords**](AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords |
 | [**reply_to_ad_comment**](AdAccountsApi.md#reply_to_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/reply | Reply to an ad comment |
 | [**revoke_ad_account_user_invitation**](AdAccountsApi.md#revoke_ad_account_user_invitation) | **DELETE** /v1/ads/accounts/user-invitations | Revoke a user access invitation |
+| [**set_up_ad_account_billing**](AdAccountsApi.md#set_up_ad_account_billing) | **POST** /v1/ads/accounts/billing | Set up ad account billing (monthly invoicing) |
 | [**update_account_callouts**](AdAccountsApi.md#update_account_callouts) | **PUT** /v1/ads/accounts/callouts | Update account callouts |
 | [**update_account_sitelinks**](AdAccountsApi.md#update_account_sitelinks) | **PUT** /v1/ads/accounts/sitelinks | Update account sitelinks |
 | [**update_account_structured_snippets**](AdAccountsApi.md#update_account_structured_snippets) | **PUT** /v1/ads/accounts/structured-snippets | Update account snippets |
@@ -1207,6 +1209,79 @@ end
 ### Return type
 
 [**DetachAdLabel200Response**](DetachAdLabel200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_account_billing
+
+> <GetAdAccountBilling200Response> get_ad_account_billing(account_id, opts)
+
+Get ad account billing
+
+Reads the payments accounts a Google Ads account can be billed to, plus its billing setups and account budgets.  Payments accounts come from Google's PaymentsAccountService, read as the manager above the customer: they are the monthly invoicing (consolidated billing) accounts of that manager. An empty `paymentsAccounts` means the manager has no monthly invoicing, so billing cannot be set up through the API and has to be added in Google Ads. Billing setups and account budgets are read live from Google with their status. Results are cached for 10 minutes and dropped on every setup through Zernio.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Google ads SocialAccount id.
+opts = {
+  ad_account_id: 'ad_account_id_example' # String | Google Ads customer id, digits only. Defaults to the connection's selected customer.
+}
+
+begin
+  # Get ad account billing
+  result = api_instance.get_ad_account_billing(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_ad_account_billing: #{e}"
+end
+```
+
+#### Using the get_ad_account_billing_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdAccountBilling200Response>, Integer, Hash)> get_ad_account_billing_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get ad account billing
+  data, status_code, headers = api_instance.get_ad_account_billing_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdAccountBilling200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_ad_account_billing_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Google ads SocialAccount id. |  |
+| **ad_account_id** | **String** | Google Ads customer id, digits only. Defaults to the connection&#39;s selected customer. | [optional] |
+
+### Return type
+
+[**GetAdAccountBilling200Response**](GetAdAccountBilling200Response.md)
 
 ### Authorization
 
@@ -4434,6 +4509,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## set_up_ad_account_billing
+
+> <SetUpAdAccountBilling200Response> set_up_ad_account_billing(set_up_ad_account_billing_request)
+
+Set up ad account billing (monthly invoicing)
+
+Bills a Google Ads account to a monthly invoicing payments account of a manager above it, and proposes its account budget, so the account can serve without anyone opening Google Ads.  Monthly invoicing only. Google's API cannot add a card or other payment method, so `paymentsAccountId` must be one of the manager's monthly invoicing (consolidated billing) payments accounts listed by GET /v1/ads/accounts/billing. A manager without monthly invoicing has none, and billing has to be added in Google Ads instead.  Creates a billing setup (Google's BillingSetupService) that starts now on that payments account, then an account budget proposal that starts now and never ends: unlimited by default, or capped at `spendingLimit` in the account currency. Google reviews the budget offline, usually within an hour; until then the setup reads `APPROVED_HELD` and ads do not serve. A customer whose current billing setup already has a budget is refused with 409, and so is one billed to another payments account: this call never replaces existing billing. A current setup on the same payments account without a budget (for example after a budget rejection) is reused, so resending the same request finishes it.  Not idempotent and never retried: after a 502 with details.creationStatus=unknown, read GET /v1/ads/accounts/billing before retrying. Google has no dry run for billing setups, so `validateOnly: true` checks the payments account and the existing billing without creating anything (and asks Google to validate the budget when a setup would be reused).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+set_up_ad_account_billing_request = Zernio::SetUpAdAccountBillingRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', payments_account_id: 'payments_account_id_example'}) # SetUpAdAccountBillingRequest | 
+
+begin
+  # Set up ad account billing (monthly invoicing)
+  result = api_instance.set_up_ad_account_billing(set_up_ad_account_billing_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->set_up_ad_account_billing: #{e}"
+end
+```
+
+#### Using the set_up_ad_account_billing_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SetUpAdAccountBilling200Response>, Integer, Hash)> set_up_ad_account_billing_with_http_info(set_up_ad_account_billing_request)
+
+```ruby
+begin
+  # Set up ad account billing (monthly invoicing)
+  data, status_code, headers = api_instance.set_up_ad_account_billing_with_http_info(set_up_ad_account_billing_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SetUpAdAccountBilling200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->set_up_ad_account_billing_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **set_up_ad_account_billing_request** | [**SetUpAdAccountBillingRequest**](SetUpAdAccountBillingRequest.md) |  |  |
+
+### Return type
+
+[**SetUpAdAccountBilling200Response**](SetUpAdAccountBilling200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

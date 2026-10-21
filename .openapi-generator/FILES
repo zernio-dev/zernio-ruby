@@ -871,6 +871,11 @@ docs/GetAccountPosts200Response.md
 docs/GetAccountPosts200ResponsePostsInner.md
 docs/GetAd200Response.md
 docs/GetAd200ResponseDarkPost.md
+docs/GetAdAccountBilling200Response.md
+docs/GetAdAccountBilling200ResponseAccountBudgetsInner.md
+docs/GetAdAccountBilling200ResponseBillingSetupsInner.md
+docs/GetAdAccountBilling200ResponsePaymentsAccountsInner.md
+docs/GetAdAccountBilling200ResponsePendingBudgetProposalsInner.md
 docs/GetAdAccountFinance200Response.md
 docs/GetAdAccountFinance200ResponseFundingSource.md
 docs/GetAdAccountHierarchy200Response.md
@@ -2233,6 +2238,9 @@ docs/SetPartnershipAdPermissionRequest.md
 docs/SetRedditPostFlairRequest.md
 docs/SetTelegramCommandsRequest.md
 docs/SetTelegramCommandsRequestCommandsInner.md
+docs/SetUpAdAccountBilling200Response.md
+docs/SetUpAdAccountBilling201Response.md
+docs/SetUpAdAccountBillingRequest.md
 docs/SetWhatsAppConversationalAutomationRequest.md
 docs/SetWhatsAppFlowsEncryptionKeyRequest.md
 docs/SetWhatsappBusinessUsername200Response.md
@@ -3782,6 +3790,11 @@ lib/zernio-sdk/models/get_account_posts200_response.rb
 lib/zernio-sdk/models/get_account_posts200_response_posts_inner.rb
 lib/zernio-sdk/models/get_ad200_response.rb
 lib/zernio-sdk/models/get_ad200_response_dark_post.rb
+lib/zernio-sdk/models/get_ad_account_billing200_response.rb
+lib/zernio-sdk/models/get_ad_account_billing200_response_account_budgets_inner.rb
+lib/zernio-sdk/models/get_ad_account_billing200_response_billing_setups_inner.rb
+lib/zernio-sdk/models/get_ad_account_billing200_response_payments_accounts_inner.rb
+lib/zernio-sdk/models/get_ad_account_billing200_response_pending_budget_proposals_inner.rb
 lib/zernio-sdk/models/get_ad_account_finance200_response.rb
 lib/zernio-sdk/models/get_ad_account_finance200_response_funding_source.rb
 lib/zernio-sdk/models/get_ad_account_hierarchy200_response.rb
@@ -5121,6 +5134,9 @@ lib/zernio-sdk/models/set_partnership_ad_permission_request.rb
 lib/zernio-sdk/models/set_reddit_post_flair_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request_commands_inner.rb
+lib/zernio-sdk/models/set_up_ad_account_billing200_response.rb
+lib/zernio-sdk/models/set_up_ad_account_billing201_response.rb
+lib/zernio-sdk/models/set_up_ad_account_billing_request.rb
 lib/zernio-sdk/models/set_whats_app_conversational_automation_request.rb
 lib/zernio-sdk/models/set_whats_app_flows_encryption_key_request.rb
 lib/zernio-sdk/models/set_whatsapp_business_username200_response.rb
@@ -6645,6 +6661,11 @@ spec/models/get_account_posts200_response_posts_inner_spec.rb
 spec/models/get_account_posts200_response_spec.rb
 spec/models/get_ad200_response_dark_post_spec.rb
 spec/models/get_ad200_response_spec.rb
+spec/models/get_ad_account_billing200_response_account_budgets_inner_spec.rb
+spec/models/get_ad_account_billing200_response_billing_setups_inner_spec.rb
+spec/models/get_ad_account_billing200_response_payments_accounts_inner_spec.rb
+spec/models/get_ad_account_billing200_response_pending_budget_proposals_inner_spec.rb
+spec/models/get_ad_account_billing200_response_spec.rb
 spec/models/get_ad_account_finance200_response_funding_source_spec.rb
 spec/models/get_ad_account_finance200_response_spec.rb
 spec/models/get_ad_account_hierarchy200_response_direct_customers_inner_pending_invitations_inner_spec.rb
@@ -7984,6 +8005,9 @@ spec/models/set_partnership_ad_permission_request_spec.rb
 spec/models/set_reddit_post_flair_request_spec.rb
 spec/models/set_telegram_commands_request_commands_inner_spec.rb
 spec/models/set_telegram_commands_request_spec.rb
+spec/models/set_up_ad_account_billing200_response_spec.rb
+spec/models/set_up_ad_account_billing201_response_spec.rb
+spec/models/set_up_ad_account_billing_request_spec.rb
 spec/models/set_whats_app_conversational_automation_request_spec.rb
 spec/models/set_whats_app_flows_encryption_key_request_spec.rb
 spec/models/set_whatsapp_business_username200_response_spec.rb

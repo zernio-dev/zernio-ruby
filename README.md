@@ -142,6 +142,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**delete_ad_negative_keyword_list**](docs/AdAccountsApi.md#delete_ad_negative_keyword_list) | **DELETE** /v1/ads/accounts/negative-keyword-lists/{listId} | Delete a negative keyword list
 *Zernio::AdAccountsApi* | [**delete_value_rule_set**](docs/AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set
 *Zernio::AdAccountsApi* | [**detach_ad_label**](docs/AdAccountsApi.md#detach_ad_label) | **DELETE** /v1/ads/labels/{labelId}/assignments | Detach a Google Ads label
+*Zernio::AdAccountsApi* | [**get_ad_account_billing**](docs/AdAccountsApi.md#get_ad_account_billing) | **GET** /v1/ads/accounts/billing | Get ad account billing
 *Zernio::AdAccountsApi* | [**get_ad_account_finance**](docs/AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances
 *Zernio::AdAccountsApi* | [**get_ad_account_hierarchy**](docs/AdAccountsApi.md#get_ad_account_hierarchy) | **GET** /v1/ads/accounts/hierarchy | Get manager account hierarchy
 *Zernio::AdAccountsApi* | [**get_ad_account_live_entities**](docs/AdAccountsApi.md#get_ad_account_live_entities) | **GET** /v1/ads/accounts/live | Read an ad account's campaigns and ad sets live
@@ -185,6 +186,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**replace_ad_negative_keyword_list_keywords**](docs/AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords
 *Zernio::AdAccountsApi* | [**reply_to_ad_comment**](docs/AdAccountsApi.md#reply_to_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/reply | Reply to an ad comment
 *Zernio::AdAccountsApi* | [**revoke_ad_account_user_invitation**](docs/AdAccountsApi.md#revoke_ad_account_user_invitation) | **DELETE** /v1/ads/accounts/user-invitations | Revoke a user access invitation
+*Zernio::AdAccountsApi* | [**set_up_ad_account_billing**](docs/AdAccountsApi.md#set_up_ad_account_billing) | **POST** /v1/ads/accounts/billing | Set up ad account billing (monthly invoicing)
 *Zernio::AdAccountsApi* | [**update_account_callouts**](docs/AdAccountsApi.md#update_account_callouts) | **PUT** /v1/ads/accounts/callouts | Update account callouts
 *Zernio::AdAccountsApi* | [**update_account_sitelinks**](docs/AdAccountsApi.md#update_account_sitelinks) | **PUT** /v1/ads/accounts/sitelinks | Update account sitelinks
 *Zernio::AdAccountsApi* | [**update_account_structured_snippets**](docs/AdAccountsApi.md#update_account_structured_snippets) | **PUT** /v1/ads/accounts/structured-snippets | Update account snippets
@@ -1898,6 +1900,11 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAccountPosts200ResponsePostsInner](docs/GetAccountPosts200ResponsePostsInner.md)
  - [Zernio::GetAd200Response](docs/GetAd200Response.md)
  - [Zernio::GetAd200ResponseDarkPost](docs/GetAd200ResponseDarkPost.md)
+ - [Zernio::GetAdAccountBilling200Response](docs/GetAdAccountBilling200Response.md)
+ - [Zernio::GetAdAccountBilling200ResponseAccountBudgetsInner](docs/GetAdAccountBilling200ResponseAccountBudgetsInner.md)
+ - [Zernio::GetAdAccountBilling200ResponseBillingSetupsInner](docs/GetAdAccountBilling200ResponseBillingSetupsInner.md)
+ - [Zernio::GetAdAccountBilling200ResponsePaymentsAccountsInner](docs/GetAdAccountBilling200ResponsePaymentsAccountsInner.md)
+ - [Zernio::GetAdAccountBilling200ResponsePendingBudgetProposalsInner](docs/GetAdAccountBilling200ResponsePendingBudgetProposalsInner.md)
  - [Zernio::GetAdAccountFinance200Response](docs/GetAdAccountFinance200Response.md)
  - [Zernio::GetAdAccountFinance200ResponseFundingSource](docs/GetAdAccountFinance200ResponseFundingSource.md)
  - [Zernio::GetAdAccountHierarchy200Response](docs/GetAdAccountHierarchy200Response.md)
@@ -3237,6 +3244,9 @@ Class | Method | HTTP request | Description
  - [Zernio::SetRedditPostFlairRequest](docs/SetRedditPostFlairRequest.md)
  - [Zernio::SetTelegramCommandsRequest](docs/SetTelegramCommandsRequest.md)
  - [Zernio::SetTelegramCommandsRequestCommandsInner](docs/SetTelegramCommandsRequestCommandsInner.md)
+ - [Zernio::SetUpAdAccountBilling200Response](docs/SetUpAdAccountBilling200Response.md)
+ - [Zernio::SetUpAdAccountBilling201Response](docs/SetUpAdAccountBilling201Response.md)
+ - [Zernio::SetUpAdAccountBillingRequest](docs/SetUpAdAccountBillingRequest.md)
  - [Zernio::SetWhatsAppConversationalAutomationRequest](docs/SetWhatsAppConversationalAutomationRequest.md)
  - [Zernio::SetWhatsAppFlowsEncryptionKeyRequest](docs/SetWhatsAppFlowsEncryptionKeyRequest.md)
  - [Zernio::SetWhatsappBusinessUsername200Response](docs/SetWhatsappBusinessUsername200Response.md)

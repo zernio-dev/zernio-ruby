@@ -1245,6 +1245,73 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get ad account billing
+    # Reads the payments accounts a Google Ads account can be billed to, plus its billing setups and account budgets.  Payments accounts come from Google's PaymentsAccountService, read as the manager above the customer: they are the monthly invoicing (consolidated billing) accounts of that manager. An empty `paymentsAccounts` means the manager has no monthly invoicing, so billing cannot be set up through the API and has to be added in Google Ads. Billing setups and account budgets are read live from Google with their status. Results are cached for 10 minutes and dropped on every setup through Zernio.
+    # @param account_id [String] Google ads SocialAccount id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id Google Ads customer id, digits only. Defaults to the connection&#39;s selected customer.
+    # @return [GetAdAccountBilling200Response]
+    def get_ad_account_billing(account_id, opts = {})
+      data, _status_code, _headers = get_ad_account_billing_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get ad account billing
+    # Reads the payments accounts a Google Ads account can be billed to, plus its billing setups and account budgets.  Payments accounts come from Google&#39;s PaymentsAccountService, read as the manager above the customer: they are the monthly invoicing (consolidated billing) accounts of that manager. An empty &#x60;paymentsAccounts&#x60; means the manager has no monthly invoicing, so billing cannot be set up through the API and has to be added in Google Ads. Billing setups and account budgets are read live from Google with their status. Results are cached for 10 minutes and dropped on every setup through Zernio.
+    # @param account_id [String] Google ads SocialAccount id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id Google Ads customer id, digits only. Defaults to the connection&#39;s selected customer.
+    # @return [Array<(GetAdAccountBilling200Response, Integer, Hash)>] GetAdAccountBilling200Response data, response status code and response headers
+    def get_ad_account_billing_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.get_ad_account_billing ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.get_ad_account_billing"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/billing'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdAccountBilling200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.get_ad_account_billing",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#get_ad_account_billing\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Ad account finances
     # Shows a Meta ad account's balance, total spend, spend cap and funding source.  Finances of one Meta ad account: prepaid `balance`, lifetime `amountSpent`, account `spendCap` (null = no cap) and the `fundingSource`. Money values are converted from Meta's minor units to whole units of `currency`.
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
@@ -4748,6 +4815,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#revoke_ad_account_user_invitation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Set up ad account billing (monthly invoicing)
+    # Bills a Google Ads account to a monthly invoicing payments account of a manager above it, and proposes its account budget, so the account can serve without anyone opening Google Ads.  Monthly invoicing only. Google's API cannot add a card or other payment method, so `paymentsAccountId` must be one of the manager's monthly invoicing (consolidated billing) payments accounts listed by GET /v1/ads/accounts/billing. A manager without monthly invoicing has none, and billing has to be added in Google Ads instead.  Creates a billing setup (Google's BillingSetupService) that starts now on that payments account, then an account budget proposal that starts now and never ends: unlimited by default, or capped at `spendingLimit` in the account currency. Google reviews the budget offline, usually within an hour; until then the setup reads `APPROVED_HELD` and ads do not serve. A customer whose current billing setup already has a budget is refused with 409, and so is one billed to another payments account: this call never replaces existing billing. A current setup on the same payments account without a budget (for example after a budget rejection) is reused, so resending the same request finishes it.  Not idempotent and never retried: after a 502 with details.creationStatus=unknown, read GET /v1/ads/accounts/billing before retrying. Google has no dry run for billing setups, so `validateOnly: true` checks the payments account and the existing billing without creating anything (and asks Google to validate the budget when a setup would be reused).
+    # @param set_up_ad_account_billing_request [SetUpAdAccountBillingRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [SetUpAdAccountBilling200Response]
+    def set_up_ad_account_billing(set_up_ad_account_billing_request, opts = {})
+      data, _status_code, _headers = set_up_ad_account_billing_with_http_info(set_up_ad_account_billing_request, opts)
+      data
+    end
+
+    # Set up ad account billing (monthly invoicing)
+    # Bills a Google Ads account to a monthly invoicing payments account of a manager above it, and proposes its account budget, so the account can serve without anyone opening Google Ads.  Monthly invoicing only. Google&#39;s API cannot add a card or other payment method, so &#x60;paymentsAccountId&#x60; must be one of the manager&#39;s monthly invoicing (consolidated billing) payments accounts listed by GET /v1/ads/accounts/billing. A manager without monthly invoicing has none, and billing has to be added in Google Ads instead.  Creates a billing setup (Google&#39;s BillingSetupService) that starts now on that payments account, then an account budget proposal that starts now and never ends: unlimited by default, or capped at &#x60;spendingLimit&#x60; in the account currency. Google reviews the budget offline, usually within an hour; until then the setup reads &#x60;APPROVED_HELD&#x60; and ads do not serve. A customer whose current billing setup already has a budget is refused with 409, and so is one billed to another payments account: this call never replaces existing billing. A current setup on the same payments account without a budget (for example after a budget rejection) is reused, so resending the same request finishes it.  Not idempotent and never retried: after a 502 with details.creationStatus&#x3D;unknown, read GET /v1/ads/accounts/billing before retrying. Google has no dry run for billing setups, so &#x60;validateOnly: true&#x60; checks the payments account and the existing billing without creating anything (and asks Google to validate the budget when a setup would be reused).
+    # @param set_up_ad_account_billing_request [SetUpAdAccountBillingRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SetUpAdAccountBilling200Response, Integer, Hash)>] SetUpAdAccountBilling200Response data, response status code and response headers
+    def set_up_ad_account_billing_with_http_info(set_up_ad_account_billing_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.set_up_ad_account_billing ...'
+      end
+      # verify the required parameter 'set_up_ad_account_billing_request' is set
+      if @api_client.config.client_side_validation && set_up_ad_account_billing_request.nil?
+        fail ArgumentError, "Missing the required parameter 'set_up_ad_account_billing_request' when calling AdAccountsApi.set_up_ad_account_billing"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/billing'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_up_ad_account_billing_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SetUpAdAccountBilling200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.set_up_ad_account_billing",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#set_up_ad_account_billing\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
