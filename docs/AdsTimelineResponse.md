@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **backfill_pending** | **Boolean** | Present and true while historical data is being backfilled. | [optional] |
+| **backfill_pending** | **Boolean** | Meta only. Present and true while historical data is being backfilled. | [optional] |
 | **rows** | [**Array&lt;AdsTimelineResponseRowsInner&gt;**](AdsTimelineResponseRowsInner.md) |  | [optional] |
 
 ## Example

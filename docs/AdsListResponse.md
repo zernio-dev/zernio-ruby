@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **ads** | [**Array&lt;Ad&gt;**](Ad.md) |  | [optional] |
 | **pagination** | [**Pagination**](Pagination.md) |  | [optional] |
-| **backfill_pending** | **Boolean** | Present and true while historical data is being backfilled. | [optional] |
+| **backfill_pending** | **Boolean** | Meta only. Present and true while historical data is being backfilled. | [optional] |
 
 ## Example
 
