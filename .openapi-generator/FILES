@@ -2683,6 +2683,7 @@ docs/VerifyWhatsAppNumberRequest.md
 docs/VoiceApi.md
 docs/VoteRedditThingRequest.md
 docs/Webhook.md
+docs/WebhookAdsAccount.md
 docs/WebhookAdsSyncAccount.md
 docs/WebhookAdsSyncAdAccount.md
 docs/WebhookEventsApi.md
@@ -2698,8 +2699,12 @@ docs/WebhookPayloadAccountConnected.md
 docs/WebhookPayloadAccountConnectedAccount.md
 docs/WebhookPayloadAccountDisconnected.md
 docs/WebhookPayloadAccountDisconnectedAccount.md
+docs/WebhookPayloadAdAccountStatusChanged.md
+docs/WebhookPayloadAdAccountStatusChangedAdAccount.md
+docs/WebhookPayloadAdAccountStatusChangedStatus.md
+docs/WebhookPayloadAdDeliveryIssue.md
+docs/WebhookPayloadAdDeliveryIssueIssue.md
 docs/WebhookPayloadAdReview.md
-docs/WebhookPayloadAdReviewAccount.md
 docs/WebhookPayloadAdReviewAdObject.md
 docs/WebhookPayloadAdReviewReview.md
 docs/WebhookPayloadAdReviewReviewReasonsInner.md
@@ -2724,6 +2729,9 @@ docs/WebhookPayloadCallPermissionRequest.md
 docs/WebhookPayloadCallPermissionRequestPermission.md
 docs/WebhookPayloadCallReceived.md
 docs/WebhookPayloadCallReceivedCall.md
+docs/WebhookPayloadCampaignBudgetDepleted.md
+docs/WebhookPayloadCampaignBudgetDepletedAdObject.md
+docs/WebhookPayloadCampaignBudgetDepletedBudget.md
 docs/WebhookPayloadComment.md
 docs/WebhookPayloadCommentAccount.md
 docs/WebhookPayloadCommentComment.md
@@ -5592,6 +5600,7 @@ lib/zernio-sdk/models/verify_whats_app_number200_response.rb
 lib/zernio-sdk/models/verify_whats_app_number_request.rb
 lib/zernio-sdk/models/vote_reddit_thing_request.rb
 lib/zernio-sdk/models/webhook.rb
+lib/zernio-sdk/models/webhook_ads_account.rb
 lib/zernio-sdk/models/webhook_ads_sync_account.rb
 lib/zernio-sdk/models/webhook_ads_sync_ad_account.rb
 lib/zernio-sdk/models/webhook_log.rb
@@ -5606,8 +5615,12 @@ lib/zernio-sdk/models/webhook_payload_account_connected.rb
 lib/zernio-sdk/models/webhook_payload_account_connected_account.rb
 lib/zernio-sdk/models/webhook_payload_account_disconnected.rb
 lib/zernio-sdk/models/webhook_payload_account_disconnected_account.rb
+lib/zernio-sdk/models/webhook_payload_ad_account_status_changed.rb
+lib/zernio-sdk/models/webhook_payload_ad_account_status_changed_ad_account.rb
+lib/zernio-sdk/models/webhook_payload_ad_account_status_changed_status.rb
+lib/zernio-sdk/models/webhook_payload_ad_delivery_issue.rb
+lib/zernio-sdk/models/webhook_payload_ad_delivery_issue_issue.rb
 lib/zernio-sdk/models/webhook_payload_ad_review.rb
-lib/zernio-sdk/models/webhook_payload_ad_review_account.rb
 lib/zernio-sdk/models/webhook_payload_ad_review_ad_object.rb
 lib/zernio-sdk/models/webhook_payload_ad_review_review.rb
 lib/zernio-sdk/models/webhook_payload_ad_review_review_reasons_inner.rb
@@ -5632,6 +5645,9 @@ lib/zernio-sdk/models/webhook_payload_call_permission_request.rb
 lib/zernio-sdk/models/webhook_payload_call_permission_request_permission.rb
 lib/zernio-sdk/models/webhook_payload_call_received.rb
 lib/zernio-sdk/models/webhook_payload_call_received_call.rb
+lib/zernio-sdk/models/webhook_payload_campaign_budget_depleted.rb
+lib/zernio-sdk/models/webhook_payload_campaign_budget_depleted_ad_object.rb
+lib/zernio-sdk/models/webhook_payload_campaign_budget_depleted_budget.rb
 lib/zernio-sdk/models/webhook_payload_comment.rb
 lib/zernio-sdk/models/webhook_payload_comment_account.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment.rb
@@ -8485,6 +8501,7 @@ spec/models/verify_whats_app_caller_id_request_spec.rb
 spec/models/verify_whats_app_number200_response_spec.rb
 spec/models/verify_whats_app_number_request_spec.rb
 spec/models/vote_reddit_thing_request_spec.rb
+spec/models/webhook_ads_account_spec.rb
 spec/models/webhook_ads_sync_account_spec.rb
 spec/models/webhook_ads_sync_ad_account_spec.rb
 spec/models/webhook_log_spec.rb
@@ -8499,7 +8516,11 @@ spec/models/webhook_payload_account_connected_account_spec.rb
 spec/models/webhook_payload_account_connected_spec.rb
 spec/models/webhook_payload_account_disconnected_account_spec.rb
 spec/models/webhook_payload_account_disconnected_spec.rb
-spec/models/webhook_payload_ad_review_account_spec.rb
+spec/models/webhook_payload_ad_account_status_changed_ad_account_spec.rb
+spec/models/webhook_payload_ad_account_status_changed_spec.rb
+spec/models/webhook_payload_ad_account_status_changed_status_spec.rb
+spec/models/webhook_payload_ad_delivery_issue_issue_spec.rb
+spec/models/webhook_payload_ad_delivery_issue_spec.rb
 spec/models/webhook_payload_ad_review_ad_object_spec.rb
 spec/models/webhook_payload_ad_review_review_reasons_inner_spec.rb
 spec/models/webhook_payload_ad_review_review_spec.rb
@@ -8525,6 +8546,9 @@ spec/models/webhook_payload_call_permission_request_permission_spec.rb
 spec/models/webhook_payload_call_permission_request_spec.rb
 spec/models/webhook_payload_call_received_call_spec.rb
 spec/models/webhook_payload_call_received_spec.rb
+spec/models/webhook_payload_campaign_budget_depleted_ad_object_spec.rb
+spec/models/webhook_payload_campaign_budget_depleted_budget_spec.rb
+spec/models/webhook_payload_campaign_budget_depleted_spec.rb
 spec/models/webhook_payload_comment_account_spec.rb
 spec/models/webhook_payload_comment_comment_ad_spec.rb
 spec/models/webhook_payload_comment_comment_attachment_spec.rb

@@ -1,4 +1,4 @@
-# Zernio::WebhookPayloadAdReviewAccount
+# Zernio::WebhookAdsAccount
 
 ## Properties
 
@@ -15,7 +15,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::WebhookPayloadAdReviewAccount.new(
+instance = Zernio::WebhookAdsAccount.new(
   account_id: null,
   profile_id: null,
   platform: tiktokads,

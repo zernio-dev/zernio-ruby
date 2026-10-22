@@ -9,6 +9,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_ads_sync_recovered**](WebhookEventsApi.md#on_account_ads_sync_recovered) | **POST** /account.ads.sync_recovered | Ads sync recovered event |
 | [**on_account_connected**](WebhookEventsApi.md#on_account_connected) | **POST** /account.connected | Account connected event |
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
+| [**on_ad_account_status_changed**](WebhookEventsApi.md#on_ad_account_status_changed) | **POST** /ad_account.status_changed | Ad account status changed event |
+| [**on_ad_delivery_issue**](WebhookEventsApi.md#on_ad_delivery_issue) | **POST** /ad.delivery_issue | Ad delivery issue event |
 | [**on_ad_review_approved**](WebhookEventsApi.md#on_ad_review_approved) | **POST** /ad.review.approved | Ad review approved event |
 | [**on_ad_review_rejected**](WebhookEventsApi.md#on_ad_review_rejected) | **POST** /ad.review.rejected | Ad review rejected event |
 | [**on_ad_status_changed**](WebhookEventsApi.md#on_ad_status_changed) | **POST** /ad.status_changed | Ad status changed event |
@@ -22,6 +24,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_call_failed**](WebhookEventsApi.md#on_call_failed) | **POST** /call.failed | Call failed event |
 | [**on_call_permission_request**](WebhookEventsApi.md#on_call_permission_request) | **POST** /call.permission_request | Call permission request reply event |
 | [**on_call_received**](WebhookEventsApi.md#on_call_received) | **POST** /call.received | Call received event |
+| [**on_campaign_budget_depleted**](WebhookEventsApi.md#on_campaign_budget_depleted) | **POST** /campaign.budget.depleted | Campaign budget depleted event |
 | [**on_comment_received**](WebhookEventsApi.md#on_comment_received) | **POST** /comment.received | Comment received event |
 | [**on_commerce_order_created**](WebhookEventsApi.md#on_commerce_order_created) | **POST** /commerce.order.created | Commerce order created event |
 | [**on_commerce_order_refunded**](WebhookEventsApi.md#on_commerce_order_refunded) | **POST** /commerce.order.refunded | Commerce order refunded event |
@@ -417,6 +420,142 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_account_disconnected** | [**WebhookPayloadAccountDisconnected**](WebhookPayloadAccountDisconnected.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_ad_account_status_changed
+
+> on_ad_account_status_changed(webhook_payload_ad_account_status_changed)
+
+Ad account status changed event
+
+Fired when an ad account Zernio already tracked changes status (Meta, Google, TikTok, X). See `WebhookPayloadAdAccountStatusChanged` for when it fires and when it does not. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_ad_account_status_changed =  # WebhookPayloadAdAccountStatusChanged | 
+
+begin
+  # Ad account status changed event
+  api_instance.on_ad_account_status_changed(webhook_payload_ad_account_status_changed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_account_status_changed: #{e}"
+end
+```
+
+#### Using the on_ad_account_status_changed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_ad_account_status_changed_with_http_info(webhook_payload_ad_account_status_changed)
+
+```ruby
+begin
+  # Ad account status changed event
+  data, status_code, headers = api_instance.on_ad_account_status_changed_with_http_info(webhook_payload_ad_account_status_changed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_account_status_changed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_ad_account_status_changed** | [**WebhookPayloadAdAccountStatusChanged**](WebhookPayloadAdAccountStatusChanged.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_ad_delivery_issue
+
+> on_ad_delivery_issue(webhook_payload_ad_delivery_issue)
+
+Ad delivery issue event
+
+Fired when an ad Zernio already tracked stops delivering for a platform reason (Meta, TikTok, LinkedIn). See `WebhookPayloadAdDeliveryIssue` for when it fires and when it does not. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_ad_delivery_issue =  # WebhookPayloadAdDeliveryIssue | 
+
+begin
+  # Ad delivery issue event
+  api_instance.on_ad_delivery_issue(webhook_payload_ad_delivery_issue)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_delivery_issue: #{e}"
+end
+```
+
+#### Using the on_ad_delivery_issue_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_ad_delivery_issue_with_http_info(webhook_payload_ad_delivery_issue)
+
+```ruby
+begin
+  # Ad delivery issue event
+  data, status_code, headers = api_instance.on_ad_delivery_issue_with_http_info(webhook_payload_ad_delivery_issue)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_delivery_issue_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_ad_delivery_issue** | [**WebhookPayloadAdDeliveryIssue**](WebhookPayloadAdDeliveryIssue.md) |  |  |
 
 ### Return type
 
@@ -1301,6 +1440,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_call_received** | [**WebhookPayloadCallReceived**](WebhookPayloadCallReceived.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_budget_depleted
+
+> on_campaign_budget_depleted(webhook_payload_campaign_budget_depleted)
+
+Campaign budget depleted event
+
+Fired when a campaign Zernio already tracked runs out of budget (TikTok). See `WebhookPayloadCampaignBudgetDepleted` for when it fires and when it does not. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_budget_depleted =  # WebhookPayloadCampaignBudgetDepleted | 
+
+begin
+  # Campaign budget depleted event
+  api_instance.on_campaign_budget_depleted(webhook_payload_campaign_budget_depleted)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_budget_depleted: #{e}"
+end
+```
+
+#### Using the on_campaign_budget_depleted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_budget_depleted_with_http_info(webhook_payload_campaign_budget_depleted)
+
+```ruby
+begin
+  # Campaign budget depleted event
+  data, status_code, headers = api_instance.on_campaign_budget_depleted_with_http_info(webhook_payload_campaign_budget_depleted)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_budget_depleted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_budget_depleted** | [**WebhookPayloadCampaignBudgetDepleted**](WebhookPayloadCampaignBudgetDepleted.md) |  |  |
 
 ### Return type
 
