@@ -31,6 +31,7 @@
 | **billing_address** | [**CommerceAddress**](CommerceAddress.md) |  | [optional] |
 | **shipping_address** | [**CommerceAddress**](CommerceAddress.md) |  | [optional] |
 | **buyer_note** | **String** |  | [optional] |
+| **attribution** | [**CommerceOrderAttribution**](CommerceOrderAttribution.md) |  | [optional] |
 | **line_items** | [**Array&lt;CommerceOrderLineItemsInner&gt;**](CommerceOrderLineItemsInner.md) |  | [optional] |
 | **shipping_lines** | [**Array&lt;CommerceOrderChargeLine&gt;**](CommerceOrderChargeLine.md) |  | [optional] |
 | **fee_lines** | [**Array&lt;CommerceOrderChargeLine&gt;**](CommerceOrderChargeLine.md) | WooCommerce fees. Always empty on Shopify. | [optional] |
@@ -72,6 +73,7 @@ instance = Zernio::CommerceOrder.new(
   billing_address: null,
   shipping_address: null,
   buyer_note: null,
+  attribution: null,
   line_items: null,
   shipping_lines: null,
   fee_lines: null,

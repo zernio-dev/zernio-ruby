@@ -357,6 +357,7 @@ docs/CommerceMetaobjectDefinitionFieldsInner.md
 docs/CommerceMetaobjectFieldsInner.md
 docs/CommerceMoney.md
 docs/CommerceOrder.md
+docs/CommerceOrderAttribution.md
 docs/CommerceOrderChargeLine.md
 docs/CommerceOrderCustomer.md
 docs/CommerceOrderFulfillmentsInner.md
@@ -364,6 +365,8 @@ docs/CommerceOrderLineItemsInner.md
 docs/CommerceOrderRefundsInner.md
 docs/CommerceOrderRefundsInnerLineItemsInner.md
 docs/CommerceOrderStatus.md
+docs/CommerceOrderVisit.md
+docs/CommerceOrderVisitUtm.md
 docs/CommercePage.md
 docs/CommercePriceList.md
 docs/CommerceProduct.md
@@ -3306,6 +3309,7 @@ lib/zernio-sdk/models/commerce_metaobject_definition_fields_inner.rb
 lib/zernio-sdk/models/commerce_metaobject_fields_inner.rb
 lib/zernio-sdk/models/commerce_money.rb
 lib/zernio-sdk/models/commerce_order.rb
+lib/zernio-sdk/models/commerce_order_attribution.rb
 lib/zernio-sdk/models/commerce_order_charge_line.rb
 lib/zernio-sdk/models/commerce_order_customer.rb
 lib/zernio-sdk/models/commerce_order_fulfillments_inner.rb
@@ -3313,6 +3317,8 @@ lib/zernio-sdk/models/commerce_order_line_items_inner.rb
 lib/zernio-sdk/models/commerce_order_refunds_inner.rb
 lib/zernio-sdk/models/commerce_order_refunds_inner_line_items_inner.rb
 lib/zernio-sdk/models/commerce_order_status.rb
+lib/zernio-sdk/models/commerce_order_visit.rb
+lib/zernio-sdk/models/commerce_order_visit_utm.rb
 lib/zernio-sdk/models/commerce_page.rb
 lib/zernio-sdk/models/commerce_price_list.rb
 lib/zernio-sdk/models/commerce_product.rb
@@ -6191,6 +6197,7 @@ spec/models/commerce_metaobject_definition_spec.rb
 spec/models/commerce_metaobject_fields_inner_spec.rb
 spec/models/commerce_metaobject_spec.rb
 spec/models/commerce_money_spec.rb
+spec/models/commerce_order_attribution_spec.rb
 spec/models/commerce_order_charge_line_spec.rb
 spec/models/commerce_order_customer_spec.rb
 spec/models/commerce_order_fulfillments_inner_spec.rb
@@ -6199,6 +6206,8 @@ spec/models/commerce_order_refunds_inner_line_items_inner_spec.rb
 spec/models/commerce_order_refunds_inner_spec.rb
 spec/models/commerce_order_spec.rb
 spec/models/commerce_order_status_spec.rb
+spec/models/commerce_order_visit_spec.rb
+spec/models/commerce_order_visit_utm_spec.rb
 spec/models/commerce_page_spec.rb
 spec/models/commerce_price_list_spec.rb
 spec/models/commerce_product_spec.rb

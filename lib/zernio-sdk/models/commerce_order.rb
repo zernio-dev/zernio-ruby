@@ -77,6 +77,8 @@ module Zernio
 
     attr_accessor :buyer_note
 
+    attr_accessor :attribution
+
     attr_accessor :line_items
 
     attr_accessor :shipping_lines
@@ -146,6 +148,7 @@ module Zernio
         :'billing_address' => :'billingAddress',
         :'shipping_address' => :'shippingAddress',
         :'buyer_note' => :'buyerNote',
+        :'attribution' => :'attribution',
         :'line_items' => :'lineItems',
         :'shipping_lines' => :'shippingLines',
         :'fee_lines' => :'feeLines',
@@ -196,6 +199,7 @@ module Zernio
         :'billing_address' => :'CommerceAddress',
         :'shipping_address' => :'CommerceAddress',
         :'buyer_note' => :'String',
+        :'attribution' => :'CommerceOrderAttribution',
         :'line_items' => :'Array<CommerceOrderLineItemsInner>',
         :'shipping_lines' => :'Array<CommerceOrderChargeLine>',
         :'fee_lines' => :'Array<CommerceOrderChargeLine>',
@@ -349,6 +353,10 @@ module Zernio
         self.buyer_note = attributes[:'buyer_note']
       end
 
+      if attributes.key?(:'attribution')
+        self.attribution = attributes[:'attribution']
+      end
+
       if attributes.key?(:'line_items')
         if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
@@ -463,6 +471,7 @@ module Zernio
           billing_address == o.billing_address &&
           shipping_address == o.shipping_address &&
           buyer_note == o.buyer_note &&
+          attribution == o.attribution &&
           line_items == o.line_items &&
           shipping_lines == o.shipping_lines &&
           fee_lines == o.fee_lines &&
@@ -481,7 +490,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, platform, number, status, platform_status, payment_status, platform_payment_status, currency, taxes_included, created_at, updated_at, paid_at, cancelled_at, cancel_reason, subtotal, discount_total, shipping_total, tax_total, total, refunded_total, discount_codes, payment_methods, customer, billing_address, shipping_address, buyer_note, line_items, shipping_lines, fee_lines, tax_lines, refunds, fulfillments, platform_data].hash
+      [id, account_id, platform, number, status, platform_status, payment_status, platform_payment_status, currency, taxes_included, created_at, updated_at, paid_at, cancelled_at, cancel_reason, subtotal, discount_total, shipping_total, tax_total, total, refunded_total, discount_codes, payment_methods, customer, billing_address, shipping_address, buyer_note, attribution, line_items, shipping_lines, fee_lines, tax_lines, refunds, fulfillments, platform_data].hash
     end
 
     # Builds the object from hash
