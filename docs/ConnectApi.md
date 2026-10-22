@@ -36,6 +36,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_shopify_connect_url**](ConnectApi.md#get_shopify_connect_url) | **GET** /v1/connect/shopify | Get Shopify OAuth connect URL |
 | [**get_subreddit_rules**](ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules |
 | [**get_telegram_connect_status**](ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code |
+| [**get_webflow_connect_url**](ConnectApi.md#get_webflow_connect_url) | **GET** /v1/connect/webflow | Get Webflow OAuth URL |
 | [**get_whats_app_sdk_config**](ConnectApi.md#get_whats_app_sdk_config) | **GET** /v1/connect/whatsapp/sdk-config | Get Embedded Signup SDK config |
 | [**get_wix_connect_url**](ConnectApi.md#get_wix_connect_url) | **GET** /v1/connect/wix | Get Wix site install URL |
 | [**get_word_press_auth_url**](ConnectApi.md#get_word_press_auth_url) | **GET** /v1/connect/wordpress | Get WordPress.com OAuth connect URL |
@@ -2378,6 +2379,84 @@ end
 ### Authorization
 
 [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_webflow_connect_url
+
+> <GetWebflowConnectUrl200Response> get_webflow_connect_url(profile_id, opts)
+
+Get Webflow OAuth URL
+
+Returns Webflow's consent URL for the Zernio Webflow app. The user picks exactly one site there; Webflow then returns the browser to Zernio's internal callback, which connects that site and redirects to `redirect_url` (or the dashboard when omitted). Picking several sites connects none and redirects with `error=webflow_pick_one_site`. Connecting a site already connected with a site token upgrades the same account. Only an OAuth connection can install tracking tags on the site (`installTrackingTagOnStore`); blogs work with either. The token does not expire. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+}
+
+begin
+  # Get Webflow OAuth URL
+  result = api_instance.get_webflow_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_webflow_connect_url: #{e}"
+end
+```
+
+#### Using the get_webflow_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWebflowConnectUrl200Response>, Integer, Hash)> get_webflow_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get Webflow OAuth URL
+  data, status_code, headers = api_instance.get_webflow_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWebflowConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_webflow_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+
+### Return type
+
+[**GetWebflowConnectUrl200Response**](GetWebflowConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
