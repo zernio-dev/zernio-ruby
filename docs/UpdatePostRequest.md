@@ -11,6 +11,7 @@
 | **scheduled_for** | **Time** |  | [optional] |
 | **publish_now** | **Boolean** |  | [optional][default to false] |
 | **is_draft** | **Boolean** | When omitted, the post keeps its current draft status. Send &#x60;false&#x60; to promote a draft to scheduled (combined with &#x60;scheduledFor&#x60;, &#x60;publishNow&#x60;, or a queue). | [optional] |
+| **requires_approval** | **Boolean** | Send true on a draft to submit it for approval: it becomes pending_approval and publishes only after POST /v1/posts/{postId}/review approves it. Cannot be combined with isDraft, publishNow, queuedFromProfile or queueId. Returns 409 when the post is not a draft. | [optional] |
 | **timezone** | **String** |  | [optional] |
 | **visibility** | **String** |  | [optional] |
 | **tags** | **Array&lt;String&gt;** |  | [optional] |
@@ -37,6 +38,7 @@ instance = Zernio::UpdatePostRequest.new(
   scheduled_for: null,
   publish_now: null,
   is_draft: null,
+  requires_approval: null,
   timezone: null,
   visibility: null,
   tags: null,

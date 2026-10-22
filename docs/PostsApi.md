@@ -11,6 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_post**](PostsApi.md#get_post) | **GET** /v1/posts/{postId} | Get post |
 | [**list_posts**](PostsApi.md#list_posts) | **GET** /v1/posts | List posts |
 | [**retry_post**](PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post |
+| [**review_post**](PostsApi.md#review_post) | **POST** /v1/posts/{postId}/review | Approve or reject a post |
 | [**unpublish_post**](PostsApi.md#unpublish_post) | **POST** /v1/posts/{postId}/unpublish | Unpublish post |
 | [**update_post**](PostsApi.md#update_post) | **PUT** /v1/posts/{postId} | Update post |
 | [**update_post_metadata**](PostsApi.md#update_post_metadata) | **POST** /v1/posts/{postId}/update-metadata | Update post metadata |
@@ -546,6 +547,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## review_post
+
+> <PostGetResponse> review_post(post_id, review_post_request)
+
+Approve or reject a post
+
+Approves or rejects a post saved with `requiresApproval: true` (status `pending_approval`). `approve` schedules the post for its `scheduledFor` and fires the `post.scheduled` webhook. When that time has already passed, the post publishes within a couple of minutes. `reject` returns the post to `draft`. Returns 409 when the post is not `pending_approval`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PostsApi.new
+post_id = 'post_id_example' # String | 
+review_post_request = Zernio::ReviewPostRequest.new({decision: 'approve'}) # ReviewPostRequest | 
+
+begin
+  # Approve or reject a post
+  result = api_instance.review_post(post_id, review_post_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PostsApi->review_post: #{e}"
+end
+```
+
+#### Using the review_post_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PostGetResponse>, Integer, Hash)> review_post_with_http_info(post_id, review_post_request)
+
+```ruby
+begin
+  # Approve or reject a post
+  data, status_code, headers = api_instance.review_post_with_http_info(post_id, review_post_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PostGetResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling PostsApi->review_post_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **review_post_request** | [**ReviewPostRequest**](ReviewPostRequest.md) |  |  |
+
+### Return type
+
+[**PostGetResponse**](PostGetResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
