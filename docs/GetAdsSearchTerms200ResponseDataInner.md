@@ -7,6 +7,7 @@
 | **search_term** | **String** |  | [optional] |
 | **status** | **String** | ADDED / EXCLUDED / ADDED_EXCLUDED / NONE: whether the term is already a keyword or a negative. | [optional] |
 | **match_type** | **String** | How the term matched (BROAD, PHRASE, EXACT, NEAR_PHRASE, NEAR_EXACT). | [optional] |
+| **match_source** | **String** | What matched the term: ADVERTISER_PROVIDED_KEYWORD (one of your keywords), AI_MAX_BROAD_MATCH or AI_MAX_KEYWORDLESS (AI Max expansion). | [optional] |
 | **campaign_id** | **String** |  | [optional] |
 | **campaign_name** | **String** |  | [optional] |
 | **ad_group_id** | **String** |  | [optional] |
@@ -26,6 +27,7 @@ instance = Zernio::GetAdsSearchTerms200ResponseDataInner.new(
   search_term: null,
   status: null,
   match_type: null,
+  match_source: null,
   campaign_id: null,
   campaign_name: null,
   ad_group_id: null,
