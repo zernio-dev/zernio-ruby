@@ -19,6 +19,7 @@
 | **block_display_for_non_targeted_viewer** | **Boolean** |  | [optional] |
 | **question_page_custom_headline** | **String** |  | [optional] |
 | **context_card** | [**MetaLeadFormPlatformDataContextCard**](MetaLeadFormPlatformDataContextCard.md) |  | [optional] |
+| **custom_disclaimer** | [**MetaLeadFormPlatformDataCustomDisclaimer**](MetaLeadFormPlatformDataCustomDisclaimer.md) |  | [optional] |
 
 ## Example
 
@@ -40,7 +41,8 @@ instance = Zernio::MetaLeadFormPlatformData.new(
   is_phone_sms_verify_enabled: null,
   block_display_for_non_targeted_viewer: null,
   question_page_custom_headline: null,
-  context_card: null
+  context_card: null,
+  custom_disclaimer: null
 )
 ```
 

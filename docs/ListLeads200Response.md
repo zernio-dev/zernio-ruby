@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **status** | **String** |  | [optional] |
-| **leads** | [**Array&lt;ListLeads200ResponseLeadsInner&gt;**](ListLeads200ResponseLeadsInner.md) |  | [optional] |
+| **leads** | [**Array&lt;AdLead&gt;**](AdLead.md) |  | [optional] |
 | **pagination** | [**SearchTweets200ResponsePagination**](SearchTweets200ResponsePagination.md) |  | [optional] |
 | **meta** | [**ListLeads200ResponseMeta**](ListLeads200ResponseMeta.md) |  | [optional] |
 

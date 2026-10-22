@@ -12,6 +12,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_form_leads**](LeadGenApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form |
 | [**list_lead_forms**](LeadGenApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List lead forms |
 | [**list_leads**](LeadGenApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads |
+| [**update_lead**](LeadGenApi.md#update_lead) | **PATCH** /v1/ads/leads/{id} | Update a lead&#39;s status |
 
 
 ## archive_lead_form
@@ -609,5 +610,76 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## update_lead
+
+> <UpdateLead200Response> update_lead(id, update_lead_request)
+
+Update a lead's status
+
+Sets the status of a Meta lead (and optionally its value) so you can track it from lead to sale.  `{id}` is the Zernio lead id (`id` on `GET /v1/ads/leads`, `leadId` on `GET /v1/ads/lead-forms/{formId}/leads`) or the Meta `leadgenId` together with `accountId` in the body. Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::LeadGenApi.new
+id = 'id_example' # String | Zernio lead id, or the Meta leadgenId (then accountId is required).
+update_lead_request = Zernio::UpdateLeadRequest.new({status: 'new'}) # UpdateLeadRequest | 
+
+begin
+  # Update a lead's status
+  result = api_instance.update_lead(id, update_lead_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling LeadGenApi->update_lead: #{e}"
+end
+```
+
+#### Using the update_lead_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateLead200Response>, Integer, Hash)> update_lead_with_http_info(id, update_lead_request)
+
+```ruby
+begin
+  # Update a lead's status
+  data, status_code, headers = api_instance.update_lead_with_http_info(id, update_lead_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateLead200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling LeadGenApi->update_lead_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Zernio lead id, or the Meta leadgenId (then accountId is required). |  |
+| **update_lead_request** | [**UpdateLeadRequest**](UpdateLeadRequest.md) |  |  |
+
+### Return type
+
+[**UpdateLead200Response**](UpdateLead200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

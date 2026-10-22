@@ -46,6 +46,7 @@ docs/AdInsightsApi.md
 docs/AdKeyword.md
 docs/AdKeywordMetrics.md
 docs/AdKeywordQuality.md
+docs/AdLead.md
 docs/AdLibraryApi.md
 docs/AdMetrics.md
 docs/AdNegativeKeywordList.md
@@ -1659,7 +1660,6 @@ docs/ListInstagramStories200ResponseDataInner.md
 docs/ListInstagramTaggedMedia200Response.md
 docs/ListLeadForms200Response.md
 docs/ListLeads200Response.md
-docs/ListLeads200ResponseLeadsInner.md
 docs/ListLeads200ResponseMeta.md
 docs/ListLinkedInOrganizations200Response.md
 docs/ListLinkedInOrganizations200ResponseOrganizationsInner.md
@@ -1801,6 +1801,8 @@ docs/MetaLeadFormLegalContent.md
 docs/MetaLeadFormLegalContentPrivacyPolicy.md
 docs/MetaLeadFormPlatformData.md
 docs/MetaLeadFormPlatformDataContextCard.md
+docs/MetaLeadFormPlatformDataCustomDisclaimer.md
+docs/MetaLeadFormPlatformDataCustomDisclaimerCheckboxesInner.md
 docs/MetaLeadFormQuestionsInner.md
 docs/MetaLeadFormThankYouPage.md
 docs/MetaPageOwnership.md
@@ -2528,6 +2530,8 @@ docs/UpdateImessageSenderRequestContact.md
 docs/UpdateInboxConversation200Response.md
 docs/UpdateInboxConversation200ResponseData.md
 docs/UpdateInboxConversationRequest.md
+docs/UpdateLead200Response.md
+docs/UpdateLeadRequest.md
 docs/UpdateLinkedInOrganization200Response.md
 docs/UpdateLinkedInOrganizationRequest.md
 docs/UpdatePinterestBoardsRequest.md
@@ -2992,6 +2996,7 @@ lib/zernio-sdk/models/ad_funnel_counts.rb
 lib/zernio-sdk/models/ad_keyword.rb
 lib/zernio-sdk/models/ad_keyword_metrics.rb
 lib/zernio-sdk/models/ad_keyword_quality.rb
+lib/zernio-sdk/models/ad_lead.rb
 lib/zernio-sdk/models/ad_metrics.rb
 lib/zernio-sdk/models/ad_negative_keyword_list.rb
 lib/zernio-sdk/models/ad_negative_keyword_list_keyword.rb
@@ -4572,7 +4577,6 @@ lib/zernio-sdk/models/list_instagram_stories200_response_data_inner.rb
 lib/zernio-sdk/models/list_instagram_tagged_media200_response.rb
 lib/zernio-sdk/models/list_lead_forms200_response.rb
 lib/zernio-sdk/models/list_leads200_response.rb
-lib/zernio-sdk/models/list_leads200_response_leads_inner.rb
 lib/zernio-sdk/models/list_leads200_response_meta.rb
 lib/zernio-sdk/models/list_linked_in_organizations200_response.rb
 lib/zernio-sdk/models/list_linked_in_organizations200_response_organizations_inner.rb
@@ -4709,6 +4713,8 @@ lib/zernio-sdk/models/meta_lead_form_legal_content.rb
 lib/zernio-sdk/models/meta_lead_form_legal_content_privacy_policy.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data_context_card.rb
+lib/zernio-sdk/models/meta_lead_form_platform_data_custom_disclaimer.rb
+lib/zernio-sdk/models/meta_lead_form_platform_data_custom_disclaimer_checkboxes_inner.rb
 lib/zernio-sdk/models/meta_lead_form_questions_inner.rb
 lib/zernio-sdk/models/meta_lead_form_thank_you_page.rb
 lib/zernio-sdk/models/meta_page_ownership.rb
@@ -5419,6 +5425,8 @@ lib/zernio-sdk/models/update_imessage_sender_request_contact.rb
 lib/zernio-sdk/models/update_inbox_conversation200_response.rb
 lib/zernio-sdk/models/update_inbox_conversation200_response_data.rb
 lib/zernio-sdk/models/update_inbox_conversation_request.rb
+lib/zernio-sdk/models/update_lead200_response.rb
+lib/zernio-sdk/models/update_lead_request.rb
 lib/zernio-sdk/models/update_linked_in_organization200_response.rb
 lib/zernio-sdk/models/update_linked_in_organization_request.rb
 lib/zernio-sdk/models/update_pinterest_boards_request.rb
@@ -5862,6 +5870,7 @@ spec/models/ad_funnel_counts_spec.rb
 spec/models/ad_keyword_metrics_spec.rb
 spec/models/ad_keyword_quality_spec.rb
 spec/models/ad_keyword_spec.rb
+spec/models/ad_lead_spec.rb
 spec/models/ad_metrics_spec.rb
 spec/models/ad_negative_keyword_list_keyword_spec.rb
 spec/models/ad_negative_keyword_list_spec.rb
@@ -7442,7 +7451,6 @@ spec/models/list_instagram_stories200_response_data_inner_spec.rb
 spec/models/list_instagram_stories200_response_spec.rb
 spec/models/list_instagram_tagged_media200_response_spec.rb
 spec/models/list_lead_forms200_response_spec.rb
-spec/models/list_leads200_response_leads_inner_spec.rb
 spec/models/list_leads200_response_meta_spec.rb
 spec/models/list_leads200_response_spec.rb
 spec/models/list_linked_in_organizations200_response_organizations_inner_spec.rb
@@ -7578,6 +7586,8 @@ spec/models/meta_lead_form_context_card_spec.rb
 spec/models/meta_lead_form_legal_content_privacy_policy_spec.rb
 spec/models/meta_lead_form_legal_content_spec.rb
 spec/models/meta_lead_form_platform_data_context_card_spec.rb
+spec/models/meta_lead_form_platform_data_custom_disclaimer_checkboxes_inner_spec.rb
+spec/models/meta_lead_form_platform_data_custom_disclaimer_spec.rb
 spec/models/meta_lead_form_platform_data_spec.rb
 spec/models/meta_lead_form_questions_inner_spec.rb
 spec/models/meta_lead_form_spec.rb
@@ -8290,6 +8300,8 @@ spec/models/update_imessage_sender_request_spec.rb
 spec/models/update_inbox_conversation200_response_data_spec.rb
 spec/models/update_inbox_conversation200_response_spec.rb
 spec/models/update_inbox_conversation_request_spec.rb
+spec/models/update_lead200_response_spec.rb
+spec/models/update_lead_request_spec.rb
 spec/models/update_linked_in_organization200_response_spec.rb
 spec/models/update_linked_in_organization_request_spec.rb
 spec/models/update_pinterest_boards_request_spec.rb
