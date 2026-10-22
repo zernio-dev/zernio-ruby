@@ -1,4 +1,4 @@
-# Zernio::GetTikTokSmartPlusAdReview200ResponseMaterialsInner
+# Zernio::TikTokSmartPlusMaterialReview
 
 ## Properties
 
@@ -21,7 +21,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GetTikTokSmartPlusAdReview200ResponseMaterialsInner.new(
+instance = Zernio::TikTokSmartPlusMaterialReview.new(
   ad_material_id: null,
   material_type: null,
   tiktok_item_id: null,

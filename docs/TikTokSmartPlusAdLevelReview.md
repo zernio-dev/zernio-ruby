@@ -1,4 +1,4 @@
-# Zernio::GetTikTokSmartPlusAdReview200ResponseReview
+# Zernio::TikTokSmartPlusAdLevelReview
 
 ## Properties
 
@@ -17,7 +17,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GetTikTokSmartPlusAdReview200ResponseReview.new(
+instance = Zernio::TikTokSmartPlusAdLevelReview.new(
   review_status: null,
   raw_review_status: null,
   reject_reasons: null,
