@@ -6,6 +6,8 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**get_instagram_audio**](InstagramApi.md#get_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio/{audioId} | Get Instagram audio metadata |
 | [**get_instagram_business_discovery**](InstagramApi.md#get_instagram_business_discovery) | **GET** /v1/accounts/{accountId}/instagram/business-discovery | Look up a public Instagram Business account |
+| [**get_instagram_mentioned_comment**](InstagramApi.md#get_instagram_mentioned_comment) | **GET** /v1/accounts/{accountId}/instagram/mentions/comments/{commentId} | Get a comment that mentions an Instagram account |
+| [**get_instagram_mentioned_media**](InstagramApi.md#get_instagram_mentioned_media) | **GET** /v1/accounts/{accountId}/instagram/mentions/media/{mediaId} | Get a post that mentions an Instagram account in its caption |
 | [**get_instagram_publishing_limit**](InstagramApi.md#get_instagram_publishing_limit) | **GET** /v1/accounts/{accountId}/instagram/publishing-limit | Get Instagram publishing limit |
 | [**get_instagram_story_insights**](InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights |
 | [**list_instagram_live_media**](InstagramApi.md#list_instagram_live_media) | **GET** /v1/accounts/{accountId}/instagram/live-media | List the live broadcasts of an Instagram account |
@@ -150,6 +152,148 @@ end
 ### Return type
 
 [**InstagramBusinessDiscovery**](InstagramBusinessDiscovery.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_instagram_mentioned_comment
+
+> <InstagramMentionedComment> get_instagram_mentioned_comment(account_id, comment_id)
+
+Get a comment that mentions an Instagram account
+
+Returns a comment in which another Instagram user @mentioned the connected account, with the post it was left on. Meta sends the comment ID in its mention notification and offers no list of mentions, so this reads one mention by ID. Meta answers an error when comments are disabled on that post.  Requires an Instagram account connected via **Facebook Login**. Meta serves mentions on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (`instagram_mentions_require_facebook_login`) and must be reconnected choosing the Facebook option. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of a connected Instagram account (Facebook Login).
+comment_id = '17894227972186120' # String | Instagram comment ID of the comment that mentions the account (digits only).
+
+begin
+  # Get a comment that mentions an Instagram account
+  result = api_instance.get_instagram_mentioned_comment(account_id, comment_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_mentioned_comment: #{e}"
+end
+```
+
+#### Using the get_instagram_mentioned_comment_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<InstagramMentionedComment>, Integer, Hash)> get_instagram_mentioned_comment_with_http_info(account_id, comment_id)
+
+```ruby
+begin
+  # Get a comment that mentions an Instagram account
+  data, status_code, headers = api_instance.get_instagram_mentioned_comment_with_http_info(account_id, comment_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <InstagramMentionedComment>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_mentioned_comment_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Instagram account (Facebook Login). |  |
+| **comment_id** | **String** | Instagram comment ID of the comment that mentions the account (digits only). |  |
+
+### Return type
+
+[**InstagramMentionedComment**](InstagramMentionedComment.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_instagram_mentioned_media
+
+> <InstagramMentionedMedia> get_instagram_mentioned_media(account_id, media_id)
+
+Get a post that mentions an Instagram account in its caption
+
+Returns a post in which another Instagram user @mentioned the connected account in the caption. Meta sends the media ID in its mention notification and offers no list of mentions, so this reads one mention by ID. Mentions in Stories are not supported by Meta.  Requires an Instagram account connected via **Facebook Login**. Meta serves mentions on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (`instagram_mentions_require_facebook_login`) and must be reconnected choosing the Facebook option. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of a connected Instagram account (Facebook Login).
+media_id = '18027939643230671' # String | Instagram media ID of the post that mentions the account (digits only).
+
+begin
+  # Get a post that mentions an Instagram account in its caption
+  result = api_instance.get_instagram_mentioned_media(account_id, media_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_mentioned_media: #{e}"
+end
+```
+
+#### Using the get_instagram_mentioned_media_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<InstagramMentionedMedia>, Integer, Hash)> get_instagram_mentioned_media_with_http_info(account_id, media_id)
+
+```ruby
+begin
+  # Get a post that mentions an Instagram account in its caption
+  data, status_code, headers = api_instance.get_instagram_mentioned_media_with_http_info(account_id, media_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <InstagramMentionedMedia>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_mentioned_media_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Instagram account (Facebook Login). |  |
+| **media_id** | **String** | Instagram media ID of the post that mentions the account (digits only). |  |
+
+### Return type
+
+[**InstagramMentionedMedia**](InstagramMentionedMedia.md)
 
 ### Authorization
 

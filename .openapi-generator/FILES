@@ -1418,6 +1418,9 @@ docs/InstagramDemographicsResponse.md
 docs/InstagramDemographicsResponseDemographicsValueInner.md
 docs/InstagramLiveMedia.md
 docs/InstagramMediaCollaborator.md
+docs/InstagramMentionedComment.md
+docs/InstagramMentionedCommentMedia.md
+docs/InstagramMentionedMedia.md
 docs/InstagramPlatformData.md
 docs/InstagramPlatformDataAudioConfiguration.md
 docs/InstagramPlatformDataTrialParams.md
@@ -4342,6 +4345,9 @@ lib/zernio-sdk/models/instagram_demographics_response.rb
 lib/zernio-sdk/models/instagram_demographics_response_demographics_value_inner.rb
 lib/zernio-sdk/models/instagram_live_media.rb
 lib/zernio-sdk/models/instagram_media_collaborator.rb
+lib/zernio-sdk/models/instagram_mentioned_comment.rb
+lib/zernio-sdk/models/instagram_mentioned_comment_media.rb
+lib/zernio-sdk/models/instagram_mentioned_media.rb
 lib/zernio-sdk/models/instagram_platform_data.rb
 lib/zernio-sdk/models/instagram_platform_data_audio_configuration.rb
 lib/zernio-sdk/models/instagram_platform_data_trial_params.rb
@@ -7221,6 +7227,9 @@ spec/models/instagram_demographics_response_demographics_value_inner_spec.rb
 spec/models/instagram_demographics_response_spec.rb
 spec/models/instagram_live_media_spec.rb
 spec/models/instagram_media_collaborator_spec.rb
+spec/models/instagram_mentioned_comment_media_spec.rb
+spec/models/instagram_mentioned_comment_spec.rb
+spec/models/instagram_mentioned_media_spec.rb
 spec/models/instagram_platform_data_audio_configuration_spec.rb
 spec/models/instagram_platform_data_spec.rb
 spec/models/instagram_platform_data_trial_params_spec.rb
