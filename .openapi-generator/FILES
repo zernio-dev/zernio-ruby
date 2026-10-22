@@ -1896,6 +1896,8 @@ docs/PreflightSmsRegistration200Response.md
 docs/PreflightSmsRegistration200ResponseAdvisoriesInner.md
 docs/PreflightSmsRegistration200ResponseComposed.md
 docs/PreflightSmsRegistrationRequest.md
+docs/PrepareMedia200Response.md
+docs/PrepareMediaRequest.md
 docs/Product.md
 docs/ProductCatalogsApi.md
 docs/ProductImage.md
@@ -4808,6 +4810,8 @@ lib/zernio-sdk/models/preflight_sms_registration200_response.rb
 lib/zernio-sdk/models/preflight_sms_registration200_response_advisories_inner.rb
 lib/zernio-sdk/models/preflight_sms_registration200_response_composed.rb
 lib/zernio-sdk/models/preflight_sms_registration_request.rb
+lib/zernio-sdk/models/prepare_media200_response.rb
+lib/zernio-sdk/models/prepare_media_request.rb
 lib/zernio-sdk/models/product.rb
 lib/zernio-sdk/models/product_image.rb
 lib/zernio-sdk/models/product_options_inner.rb
@@ -7685,6 +7689,8 @@ spec/models/preflight_sms_registration200_response_advisories_inner_spec.rb
 spec/models/preflight_sms_registration200_response_composed_spec.rb
 spec/models/preflight_sms_registration200_response_spec.rb
 spec/models/preflight_sms_registration_request_spec.rb
+spec/models/prepare_media200_response_spec.rb
+spec/models/prepare_media_request_spec.rb
 spec/models/product_image_spec.rb
 spec/models/product_options_inner_spec.rb
 spec/models/product_seo_spec.rb
