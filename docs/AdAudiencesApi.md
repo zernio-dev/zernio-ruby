@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad_audience**](AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience |
 | [**get_ad_audience**](AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details |
 | [**list_ad_audiences**](AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences |
+| [**remove_users_from_ad_audience**](AdAudiencesApi.md#remove_users_from_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId}/users | Remove users from audience |
 | [**replace_ad_audience_companies**](AdAudiencesApi.md#replace_ad_audience_companies) | **POST** /v1/ads/audiences/{audienceId}/companies | Replace audience companies |
 | [**update_ad_audience**](AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience |
 
@@ -365,6 +366,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_users_from_ad_audience
+
+> <RemoveUsersFromAdAudience200Response> remove_users_from_ad_audience(audience_id, remove_users_from_ad_audience_request)
+
+Remove users from audience
+
+Removes customer emails and phone numbers from a Meta customer list audience. Same body as `POST /v1/ads/audiences/{audienceId}/users`: send plaintext rows, they are normalized and SHA256-hashed server-side exactly like an upload, so a row removes the person it added.  Meta only, customer_list only. Every other platform returns 422 with code `feature_not_available`, and every other audience type returns 422. Max 10,000 users per request. Meta applies the removal asynchronously, so the audience size does not drop immediately. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAudiencesApi.new
+audience_id = 'audience_id_example' # String | The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
+remove_users_from_ad_audience_request = Zernio::RemoveUsersFromAdAudienceRequest.new({users: [Zernio::AddUsersToAdAudienceRequestUsersInner.new]}) # RemoveUsersFromAdAudienceRequest | 
+
+begin
+  # Remove users from audience
+  result = api_instance.remove_users_from_ad_audience(audience_id, remove_users_from_ad_audience_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->remove_users_from_ad_audience: #{e}"
+end
+```
+
+#### Using the remove_users_from_ad_audience_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveUsersFromAdAudience200Response>, Integer, Hash)> remove_users_from_ad_audience_with_http_info(audience_id, remove_users_from_ad_audience_request)
+
+```ruby
+begin
+  # Remove users from audience
+  data, status_code, headers = api_instance.remove_users_from_ad_audience_with_http_info(audience_id, remove_users_from_ad_audience_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveUsersFromAdAudience200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->remove_users_from_ad_audience_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **audience_id** | **String** | The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id. |  |
+| **remove_users_from_ad_audience_request** | [**RemoveUsersFromAdAudienceRequest**](RemoveUsersFromAdAudienceRequest.md) |  |  |
+
+### Return type
+
+[**RemoveUsersFromAdAudience200Response**](RemoveUsersFromAdAudience200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

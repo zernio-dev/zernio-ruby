@@ -2013,6 +2013,8 @@ docs/RemovePageUser200Response.md
 docs/RemoveTrackingTagFromStore200Response.md
 docs/RemoveTrackingTagFromStore200ResponseInstall.md
 docs/RemoveTrackingTagUser200Response.md
+docs/RemoveUsersFromAdAudience200Response.md
+docs/RemoveUsersFromAdAudienceRequest.md
 docs/RemoveWhatsAppGroupParticipantsRequest.md
 docs/ReorderCommerceCollectionProductsRequest.md
 docs/ReorderCommerceCollectionProductsRequestMovesInner.md
@@ -4945,6 +4947,8 @@ lib/zernio-sdk/models/remove_page_user200_response.rb
 lib/zernio-sdk/models/remove_tracking_tag_from_store200_response.rb
 lib/zernio-sdk/models/remove_tracking_tag_from_store200_response_install.rb
 lib/zernio-sdk/models/remove_tracking_tag_user200_response.rb
+lib/zernio-sdk/models/remove_users_from_ad_audience200_response.rb
+lib/zernio-sdk/models/remove_users_from_ad_audience_request.rb
 lib/zernio-sdk/models/remove_whats_app_group_participants_request.rb
 lib/zernio-sdk/models/reorder_commerce_collection_products_request.rb
 lib/zernio-sdk/models/reorder_commerce_collection_products_request_moves_inner.rb
@@ -7849,6 +7853,8 @@ spec/models/remove_page_user200_response_spec.rb
 spec/models/remove_tracking_tag_from_store200_response_install_spec.rb
 spec/models/remove_tracking_tag_from_store200_response_spec.rb
 spec/models/remove_tracking_tag_user200_response_spec.rb
+spec/models/remove_users_from_ad_audience200_response_spec.rb
+spec/models/remove_users_from_ad_audience_request_spec.rb
 spec/models/remove_whats_app_group_participants_request_spec.rb
 spec/models/reorder_commerce_collection_products_request_moves_inner_spec.rb
 spec/models/reorder_commerce_collection_products_request_spec.rb
