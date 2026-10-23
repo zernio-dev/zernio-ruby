@@ -9,7 +9,7 @@
 | **display_name** | **String** | Display name (provided, from API, or derived from vanity URL) | [optional] |
 | **mention_format** | **String** | Ready-to-use mention format for post content | [optional] |
 | **vanity_name** | **String** | The vanity name/slug (only for organization mentions) | [optional] |
-| **warning** | **String** | Warning about clickable mentions (only present for person mentions if displayName was not provided) | [optional] |
+| **warning** | **String** | Only present for person mentions when displayName was not provided and the real name could not be resolved from LinkedIn | [optional] |
 
 ## Example
 
@@ -22,7 +22,7 @@ instance = Zernio::GetLinkedInMentions200Response.new(
   display_name: Miquel Palet,
   mention_format: @[Miquel Palet](urn:li:person:4qj5ox-agD),
   vanity_name: microsoft,
-  warning: For clickable person mentions, provide the displayName parameter with the exact name as shown on their LinkedIn profile.
+  warning: Could not resolve real name from LinkedIn. Display name was derived from the vanity URL and may not match the profile exactly.
 )
 ```
 
