@@ -8,6 +8,7 @@
 | **stats** | **Hash&lt;String, Array&lt;FollowerStatsResponseStatsValueInner&gt;&gt;** |  | [optional] |
 | **date_range** | [**FollowerStatsResponseDateRange**](FollowerStatsResponseDateRange.md) |  | [optional] |
 | **granularity** | **String** |  | [optional] |
+| **pagination** | [**AccountCursorPagination**](AccountCursorPagination.md) | Only present when limit or cursor is sent. | [optional] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = Zernio::FollowerStatsResponse.new(
   accounts: null,
   stats: null,
   date_range: null,
-  granularity: null
+  granularity: null,
+  pagination: null
 )
 ```
 

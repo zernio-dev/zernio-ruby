@@ -853,7 +853,9 @@ opts = {
   profile_id: 'profile_id_example', # String | Filter by profile ID
   from_date: Date.parse('2013-10-20'), # Date | Start date in YYYY-MM-DD format (defaults to 30 days ago)
   to_date: Date.parse('2013-10-20'), # Date | End date in YYYY-MM-DD format (defaults to today)
-  granularity: 'daily' # String | Data aggregation level
+  granularity: 'daily', # String | Data aggregation level
+  limit: 56, # Integer | Accounts per page, ordered by account id. Send it to page through accounts; the response then carries `pagination.nextCursor`. Without limit or cursor every matching account is returned.
+  cursor: 'cursor_example' # String | Opaque cursor from a previous response's `pagination.nextCursor`; returns the next page of `limit` accounts (25 when limit is omitted). A cursor we cannot parse returns 400.
 }
 
 begin
@@ -892,6 +894,8 @@ end
 | **from_date** | **Date** | Start date in YYYY-MM-DD format (defaults to 30 days ago) | [optional] |
 | **to_date** | **Date** | End date in YYYY-MM-DD format (defaults to today) | [optional] |
 | **granularity** | **String** | Data aggregation level | [optional][default to &#39;daily&#39;] |
+| **limit** | **Integer** | Accounts per page, ordered by account id. Send it to page through accounts; the response then carries &#x60;pagination.nextCursor&#x60;. Without limit or cursor every matching account is returned. | [optional] |
+| **cursor** | **String** | Opaque cursor from a previous response&#39;s &#x60;pagination.nextCursor&#x60;; returns the next page of &#x60;limit&#x60; accounts (25 when limit is omitted). A cursor we cannot parse returns 400. | [optional] |
 
 ### Return type
 
