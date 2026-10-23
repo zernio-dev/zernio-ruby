@@ -12,6 +12,7 @@
 | **page_size** | **Integer** |  | [optional] |
 | **total_rows** | **Integer** |  | [optional] |
 | **total_pages** | **Integer** |  | [optional] |
+| **missing_rows** | **Integer** | Rows TikTok declared that a read and its retry could not return. 0 when the result is complete. | [optional] |
 | **rows** | [**Array&lt;GetTikTokSmartPlusMaterialReport200ResponseRowsInner&gt;**](GetTikTokSmartPlusMaterialReport200ResponseRowsInner.md) |  | [optional] |
 
 ## Example
@@ -28,6 +29,7 @@ instance = Zernio::GetTikTokSmartPlusMaterialReport200Response.new(
   page_size: null,
   total_rows: null,
   total_pages: null,
+  missing_rows: null,
   rows: null
 )
 ```
