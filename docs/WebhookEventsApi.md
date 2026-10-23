@@ -13,7 +13,6 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_ad_delivery_issue**](WebhookEventsApi.md#on_ad_delivery_issue) | **POST** /ad.delivery_issue | Ad delivery issue event |
 | [**on_ad_review_approved**](WebhookEventsApi.md#on_ad_review_approved) | **POST** /ad.review.approved | Ad review approved event |
 | [**on_ad_review_rejected**](WebhookEventsApi.md#on_ad_review_rejected) | **POST** /ad.review.rejected | Ad review rejected event |
-| [**on_ad_rule_triggered**](WebhookEventsApi.md#on_ad_rule_triggered) | **POST** /ad_rule.triggered | Ad rule triggered event |
 | [**on_ad_status_changed**](WebhookEventsApi.md#on_ad_status_changed) | **POST** /ad.status_changed | Ad status changed event |
 | [**on_ad_video_processed**](WebhookEventsApi.md#on_ad_video_processed) | **POST** /ad.video.processed | Ad video processed event |
 | [**on_analytics_synced**](WebhookEventsApi.md#on_analytics_synced) | **POST** /analytics.synced | Analytics synced event |
@@ -693,74 +692,6 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_ad_review** | [**WebhookPayloadAdReview**](WebhookPayloadAdReview.md) |  |  |
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: Not defined
-
-
-## on_ad_rule_triggered
-
-> on_ad_rule_triggered(webhook_payload_ad_rule_triggered)
-
-Ad rule triggered event
-
-Fired when a scheduled ad rule run finds campaigns or ad sets meeting every condition, once per object per cooldown. Ad rules are in closed beta: the event only fires for accounts in the ad rules pilot. See `WebhookPayloadAdRuleTriggered` for when it fires and when it does not. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::WebhookEventsApi.new
-webhook_payload_ad_rule_triggered =  # WebhookPayloadAdRuleTriggered | 
-
-begin
-  # Ad rule triggered event
-  api_instance.on_ad_rule_triggered(webhook_payload_ad_rule_triggered)
-rescue Zernio::ApiError => e
-  puts "Error when calling WebhookEventsApi->on_ad_rule_triggered: #{e}"
-end
-```
-
-#### Using the on_ad_rule_triggered_with_http_info variant
-
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
-
-> <Array(nil, Integer, Hash)> on_ad_rule_triggered_with_http_info(webhook_payload_ad_rule_triggered)
-
-```ruby
-begin
-  # Ad rule triggered event
-  data, status_code, headers = api_instance.on_ad_rule_triggered_with_http_info(webhook_payload_ad_rule_triggered)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => nil
-rescue Zernio::ApiError => e
-  puts "Error when calling WebhookEventsApi->on_ad_rule_triggered_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **webhook_payload_ad_rule_triggered** | [**WebhookPayloadAdRuleTriggered**](WebhookPayloadAdRuleTriggered.md) |  |  |
 
 ### Return type
 
