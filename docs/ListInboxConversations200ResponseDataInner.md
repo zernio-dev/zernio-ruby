@@ -23,7 +23,8 @@
 | **is_group** | **Boolean** | iMessage only, true for a group thread. Manage it through the /v1/imessage/groups/{conversationId} endpoints. | [optional] |
 | **url** | **String** | Direct link to open the conversation on the platform (if available) | [optional] |
 | **instagram_profile** | [**ListInboxConversations200ResponseDataInnerInstagramProfile**](ListInboxConversations200ResponseDataInnerInstagramProfile.md) |  | [optional] |
-| **metadata** | [**ListInboxConversations200ResponseDataInnerMetadata**](ListInboxConversations200ResponseDataInnerMetadata.md) |  | [optional] |
+| **metadata** | [**InboxConversationAdMetadata**](InboxConversationAdMetadata.md) |  | [optional] |
+| **ad_attribution** | [**ConversationAdAttribution**](ConversationAdAttribution.md) |  | [optional] |
 
 ## Example
 
@@ -50,7 +51,8 @@ instance = Zernio::ListInboxConversations200ResponseDataInner.new(
   is_group: null,
   url: null,
   instagram_profile: null,
-  metadata: null
+  metadata: null,
+  ad_attribution: null
 )
 ```
 

@@ -416,6 +416,7 @@ docs/ConnectedAccount.md
 docs/ConnectedApp.md
 docs/ConnectedAppsApi.md
 docs/ContactsApi.md
+docs/ConversationAdAttribution.md
 docs/ConversionAction.md
 docs/ConversionActionTagSnippetsInner.md
 docs/ConversionDestination.md
@@ -1060,7 +1061,6 @@ docs/GetImessageSender200Response.md
 docs/GetImessageSender200ResponseHealth.md
 docs/GetInboxConversation200Response.md
 docs/GetInboxConversation200ResponseData.md
-docs/GetInboxConversation200ResponseDataMetadata.md
 docs/GetInboxConversationAnalytics200Response.md
 docs/GetInboxConversationAnalytics200ResponseBySourceInner.md
 docs/GetInboxConversationAnalytics200ResponseSummary.md
@@ -1383,6 +1383,7 @@ docs/ImessageSandboxContact.md
 docs/ImessageSender.md
 docs/ImessageSenderLifecycle.md
 docs/InboxAnalyticsApi.md
+docs/InboxConversationAdMetadata.md
 docs/InboxMessageEditAttachment.md
 docs/InboxMessageEditHistoryEntry.md
 docs/InboxWebhookAccount.md
@@ -1641,7 +1642,6 @@ docs/ListInboxConversationAnalytics200ResponsePagination.md
 docs/ListInboxConversations200Response.md
 docs/ListInboxConversations200ResponseDataInner.md
 docs/ListInboxConversations200ResponseDataInnerInstagramProfile.md
-docs/ListInboxConversations200ResponseDataInnerMetadata.md
 docs/ListInboxConversations200ResponseMeta.md
 docs/ListInboxConversations200ResponseMetaAccountsSkippedInner.md
 docs/ListInboxConversations200ResponseMetaFailedAccountsInner.md
@@ -2751,6 +2751,7 @@ docs/WebhookPayloadContactTagContact.md
 docs/WebhookPayloadConversationControlChanged.md
 docs/WebhookPayloadConversationControlChangedControl.md
 docs/WebhookPayloadConversationStarted.md
+docs/WebhookPayloadConversationStartedConversation.md
 docs/WebhookPayloadExternalPost.md
 docs/WebhookPayloadLead.md
 docs/WebhookPayloadLeadAccount.md
@@ -3378,6 +3379,7 @@ lib/zernio-sdk/models/connect_word_press_with_application_password_request.rb
 lib/zernio-sdk/models/connected.rb
 lib/zernio-sdk/models/connected_account.rb
 lib/zernio-sdk/models/connected_app.rb
+lib/zernio-sdk/models/conversation_ad_attribution.rb
 lib/zernio-sdk/models/conversion_action.rb
 lib/zernio-sdk/models/conversion_action_tag_snippets_inner.rb
 lib/zernio-sdk/models/conversion_destination.rb
@@ -4010,7 +4012,6 @@ lib/zernio-sdk/models/get_imessage_sender200_response.rb
 lib/zernio-sdk/models/get_imessage_sender200_response_health.rb
 lib/zernio-sdk/models/get_inbox_conversation200_response.rb
 lib/zernio-sdk/models/get_inbox_conversation200_response_data.rb
-lib/zernio-sdk/models/get_inbox_conversation200_response_data_metadata.rb
 lib/zernio-sdk/models/get_inbox_conversation_analytics200_response.rb
 lib/zernio-sdk/models/get_inbox_conversation_analytics200_response_by_source_inner.rb
 lib/zernio-sdk/models/get_inbox_conversation_analytics200_response_summary.rb
@@ -4331,6 +4332,7 @@ lib/zernio-sdk/models/imessage_audience_contact_opt_in.rb
 lib/zernio-sdk/models/imessage_sandbox_contact.rb
 lib/zernio-sdk/models/imessage_sender.rb
 lib/zernio-sdk/models/imessage_sender_lifecycle.rb
+lib/zernio-sdk/models/inbox_conversation_ad_metadata.rb
 lib/zernio-sdk/models/inbox_message_edit_attachment.rb
 lib/zernio-sdk/models/inbox_message_edit_history_entry.rb
 lib/zernio-sdk/models/inbox_webhook_account.rb
@@ -4585,7 +4587,6 @@ lib/zernio-sdk/models/list_inbox_conversation_analytics200_response_pagination.r
 lib/zernio-sdk/models/list_inbox_conversations200_response.rb
 lib/zernio-sdk/models/list_inbox_conversations200_response_data_inner.rb
 lib/zernio-sdk/models/list_inbox_conversations200_response_data_inner_instagram_profile.rb
-lib/zernio-sdk/models/list_inbox_conversations200_response_data_inner_metadata.rb
 lib/zernio-sdk/models/list_inbox_conversations200_response_meta.rb
 lib/zernio-sdk/models/list_inbox_conversations200_response_meta_accounts_skipped_inner.rb
 lib/zernio-sdk/models/list_inbox_conversations200_response_meta_failed_accounts_inner.rb
@@ -5667,6 +5668,7 @@ lib/zernio-sdk/models/webhook_payload_contact_tag_contact.rb
 lib/zernio-sdk/models/webhook_payload_conversation_control_changed.rb
 lib/zernio-sdk/models/webhook_payload_conversation_control_changed_control.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started.rb
+lib/zernio-sdk/models/webhook_payload_conversation_started_conversation.rb
 lib/zernio-sdk/models/webhook_payload_external_post.rb
 lib/zernio-sdk/models/webhook_payload_lead.rb
 lib/zernio-sdk/models/webhook_payload_lead_account.rb
@@ -6280,6 +6282,7 @@ spec/models/connect_word_press_with_application_password_request_spec.rb
 spec/models/connected_account_spec.rb
 spec/models/connected_app_spec.rb
 spec/models/connected_spec.rb
+spec/models/conversation_ad_attribution_spec.rb
 spec/models/conversion_action_spec.rb
 spec/models/conversion_action_tag_snippets_inner_spec.rb
 spec/models/conversion_destination_spec.rb
@@ -6910,7 +6913,6 @@ spec/models/get_imessage_group200_response_group_spec.rb
 spec/models/get_imessage_group200_response_spec.rb
 spec/models/get_imessage_sender200_response_health_spec.rb
 spec/models/get_imessage_sender200_response_spec.rb
-spec/models/get_inbox_conversation200_response_data_metadata_spec.rb
 spec/models/get_inbox_conversation200_response_data_spec.rb
 spec/models/get_inbox_conversation200_response_spec.rb
 spec/models/get_inbox_conversation_analytics200_response_by_source_inner_spec.rb
@@ -7233,6 +7235,7 @@ spec/models/imessage_audience_contact_spec.rb
 spec/models/imessage_sandbox_contact_spec.rb
 spec/models/imessage_sender_lifecycle_spec.rb
 spec/models/imessage_sender_spec.rb
+spec/models/inbox_conversation_ad_metadata_spec.rb
 spec/models/inbox_message_edit_attachment_spec.rb
 spec/models/inbox_message_edit_history_entry_spec.rb
 spec/models/inbox_webhook_account_spec.rb
@@ -7485,7 +7488,6 @@ spec/models/list_inbox_conversation_analytics200_response_items_inner_spec.rb
 spec/models/list_inbox_conversation_analytics200_response_pagination_spec.rb
 spec/models/list_inbox_conversation_analytics200_response_spec.rb
 spec/models/list_inbox_conversations200_response_data_inner_instagram_profile_spec.rb
-spec/models/list_inbox_conversations200_response_data_inner_metadata_spec.rb
 spec/models/list_inbox_conversations200_response_data_inner_spec.rb
 spec/models/list_inbox_conversations200_response_meta_accounts_skipped_inner_spec.rb
 spec/models/list_inbox_conversations200_response_meta_failed_accounts_inner_spec.rb
@@ -8567,6 +8569,7 @@ spec/models/webhook_payload_contact_tag_contact_spec.rb
 spec/models/webhook_payload_contact_tag_spec.rb
 spec/models/webhook_payload_conversation_control_changed_control_spec.rb
 spec/models/webhook_payload_conversation_control_changed_spec.rb
+spec/models/webhook_payload_conversation_started_conversation_spec.rb
 spec/models/webhook_payload_conversation_started_spec.rb
 spec/models/webhook_payload_external_post_spec.rb
 spec/models/webhook_payload_lead_account_spec.rb
