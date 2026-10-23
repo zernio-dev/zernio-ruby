@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **timestamp** | **Time** | When the event was sent to Meta. | [optional] |
-| **event_name** | **String** | One of LeadSubmitted, Purchase, AddToCart, InitiateCheckout, ViewContent. | [optional] |
+| **event_name** | **String** | One of LeadSubmitted, QualifiedLead, Purchase, AddToCart, InitiateCheckout, ViewContent, OrderCreated, OrderCanceled, OrderReturned. | [optional] |
 | **conversation_id** | **String** |  | [optional] |
 | **events_received** | **Integer** | Number of events Meta accepted on this send (usually 1). | [optional] |
 | **events_failed** | **Integer** | Number of events Meta rejected (usually 0). | [optional] |
