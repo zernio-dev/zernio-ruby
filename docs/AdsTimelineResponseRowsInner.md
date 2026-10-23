@@ -5,7 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **date** | **Date** |  | [optional] |
-| **spend** | **Float** | Native currency units (matches /ads/tree convention). | [optional] |
+| **currency** | **String** | ISO 4217 currency of every money field in this row (spend, cpc, cpm, costPerConversion, purchaseValue, actionValues). An account whose ad accounts bill in different currencies gets one row per currency for that day, never a sum across currencies. Null when the currency of the ad accounts in this row is unknown. Added 2026-10-23. | [optional] |
+| **spend** | **Float** | Native currency units (matches /ads/tree convention), in &#x60;currency&#x60;. | [optional] |
 | **impressions** | **Integer** |  | [optional] |
 | **reach** | **Integer** | Reach summed across the account&#39;s ads for this single day. A person seen by two ads the same day counts twice, and reach is de-duplicated per day only: do NOT sum it across days (people reached on multiple days would be double-counted). | [optional] |
 | **clicks** | **Integer** |  | [optional] |
@@ -28,6 +29,7 @@ require 'zernio-sdk'
 
 instance = Zernio::AdsTimelineResponseRowsInner.new(
   date: null,
+  currency: null,
   spend: null,
   impressions: null,
   reach: null,
