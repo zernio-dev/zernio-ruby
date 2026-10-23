@@ -8,6 +8,7 @@
 | **email** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
 | **role** | **String** |  | [optional] |
+| **disabled_resource_groups** | **Array&lt;String&gt;** | Resource groups turned off for this team member. Empty for owners and unrestricted members. | [optional] |
 | **created_at** | **Time** |  | [optional] |
 
 ## Example
@@ -20,6 +21,7 @@ instance = Zernio::User.new(
   email: null,
   name: null,
   role: null,
+  disabled_resource_groups: null,
   created_at: null
 )
 ```

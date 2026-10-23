@@ -22,6 +22,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_word_press_with_application_password**](ConnectApi.md#connect_word_press_with_application_password) | **POST** /v1/connect/wordpress/token | Connect self-hosted WordPress with an application password |
 | [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
 | [**create_youtube_playlist**](ConnectApi.md#create_youtube_playlist) | **POST** /v1/accounts/{accountId}/youtube-playlists | Create YouTube playlist |
+| [**get_connect_handoff**](ConnectApi.md#get_connect_handoff) | **GET** /v1/connect/handoffs/{handoffId} | Get a phone handoff |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**get_connect_welcome_screen**](ConnectApi.md#get_connect_welcome_screen) | **GET** /v1/connect/welcome-screen | Get the saved welcome screen |
 | [**get_facebook_pages**](ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages |
@@ -1356,6 +1357,75 @@ end
 - **Accept**: application/json
 
 
+## get_connect_handoff
+
+> <ConnectHandoff> get_connect_handoff(handoff_id)
+
+Get a phone handoff
+
+Where a connect started with `handoff=true` on `GET /v1/connect/{platform}` stands: `waiting` until the QR code is scanned, `opened` once the phone opened it, then `connected` with the new accounts or `failed` with the error the flow ended on (the same `error` codes as the redirect flow). `expired` when nobody opened the QR code within its 30 minutes. Poll it every 2 to 5 seconds while your QR code is shown, and stop once it is `connected`, `failed` or `expired`. Readable for 60 minutes after it was created, then 404, as is a handoff created by another workspace.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+handoff_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | `handoff.id` from the connect response.
+
+begin
+  # Get a phone handoff
+  result = api_instance.get_connect_handoff(handoff_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_connect_handoff: #{e}"
+end
+```
+
+#### Using the get_connect_handoff_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectHandoff>, Integer, Hash)> get_connect_handoff_with_http_info(handoff_id)
+
+```ruby
+begin
+  # Get a phone handoff
+  data, status_code, headers = api_instance.get_connect_handoff_with_http_info(handoff_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectHandoff>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_connect_handoff_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **handoff_id** | **String** | &#x60;handoff.id&#x60; from the connect response. |  |
+
+### Return type
+
+[**ConnectHandoff**](ConnectHandoff.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_connect_url
 
 > <GetConnectUrl200Response> get_connect_url(platform, profile_id, opts)
@@ -1394,7 +1464,8 @@ opts = {
   welcome: true, # Boolean | Any platform. When `true`, `authUrl` points to a Zernio-hosted welcome screen that shows your brand next to the platform (\"<brandName> wants to connect to your <platform>\") whose button reads Connecting for about a second and then sends the user on to the platform's own authorization screen, with no click; the rest of the flow is unchanged. `brandName`, `logoUrl`, `primaryColor` and `welcomeTheme` are optional and default to Zernio's own name, mark and look. The link is valid for 30 minutes, after which the page asks the user to start again. The brand also carries to the account and channel pickers Zernio shows after authorization, and when you pass no `redirect_url` the flow ends on a branded Zernio-hosted page saying whether the account connected, instead of the Zernio dashboard. Cannot be combined with `headless=true` or `signup=hosted` (400 `INVALID_FIELD_VALUE`). The platform's authorization screen still names the Zernio app. Recommended. When left out, the screen is shown if the workspace saved it as on by default (`PUT /v1/connect/welcome-screen`), except with `headless=true` or `signup=hosted`; pass `false` to skip it. Branding you leave out of the call comes from those saved settings, and a `welcomeTheme` you send is merged key by key over the saved theme.
   welcome_theme: 'welcome_theme_example', # String | Welcome screen only (`welcome=true`): a URL-encoded JSON object that restyles and rewords the screen. All keys are optional. Copy: `heading` (up to 120 characters), `trustLine`, `consentLine` and `statusLine` (up to 200 each, `statusLine` being the line above the button), `buttonLabel` (up to 30, the label of the link the button becomes if the redirect stalls); each may contain the placeholders `{brand}` and `{platform}`. Style: `primaryColor` (the button), `accentColor` (the header gradient, built as a scale of that colour, and the icons), `pageColor`, `cardColor` and `textColor` as `#RRGGBB`, `cornerRadius` as an integer from 0 to 24 (pixels), `font` as `sans`, `serif` or `mono`. A `primaryColor` here wins over the `primaryColor` parameter. Unknown keys, invalid JSON or an invalid value are a 400 `INVALID_FIELD_VALUE`. Rejected when the welcome screen is not shown. Example: `{\"heading\":\"Link your {platform} to {brand}\",\"cardColor\":\"#FFF7ED\",\"cornerRadius\":12}`.
   logo_url: 'logo_url_example', # String | Welcome screen only (`welcome=true`): https URL of your logo, shown in a square tile, so use a square image. Without it the tile shows the first letter of `brandName`, or the Zernio mark when there is no `brandName` either. Rejected with 400 `INVALID_FIELD_VALUE` when the welcome screen is not shown.
-  language: 'en' # String | Hosted signup page only (`signup=hosted`, WhatsApp): language of the page and its follow-along guide. Explainer videos stay in English. Default `en`. Rejected without `signup=hosted`.
+  language: 'en', # String | Hosted signup page only (`signup=hosted`, WhatsApp): language of the page and its follow-along guide. Explainer videos stay in English. Default `en`. Rejected without `signup=hosted`.
+  handoff: true # Boolean | Let the user finish on their phone. When `true`, the response also carries `handoff`: show `handoff.url` as a QR code in your app (any QR library), the user scans it and the welcome screen opens on the phone, already carrying this connect, so they log in to the platform there without signing in to anything else. The phone ends on a Zernio result screen telling them to go back to their computer. Learn the outcome by polling `GET /v1/connect/handoffs/{handoffId}` (every 2 to 5 seconds is fine) or from the `account.connected` webhook. Shows the welcome screen with your branding parameters or saved settings. Cannot be combined with `welcome=false`, `headless=true`, `signup`, `redirect=true` or `redirect_url` (400 `INVALID_FIELD_VALUE`). `handoff.url` works for 30 minutes. When the account is re-enabled straight away the response carries `account` instead, as without `handoff`.
 }
 
 begin
@@ -1446,6 +1517,7 @@ end
 | **welcome_theme** | **String** | Welcome screen only (&#x60;welcome&#x3D;true&#x60;): a URL-encoded JSON object that restyles and rewords the screen. All keys are optional. Copy: &#x60;heading&#x60; (up to 120 characters), &#x60;trustLine&#x60;, &#x60;consentLine&#x60; and &#x60;statusLine&#x60; (up to 200 each, &#x60;statusLine&#x60; being the line above the button), &#x60;buttonLabel&#x60; (up to 30, the label of the link the button becomes if the redirect stalls); each may contain the placeholders &#x60;{brand}&#x60; and &#x60;{platform}&#x60;. Style: &#x60;primaryColor&#x60; (the button), &#x60;accentColor&#x60; (the header gradient, built as a scale of that colour, and the icons), &#x60;pageColor&#x60;, &#x60;cardColor&#x60; and &#x60;textColor&#x60; as &#x60;#RRGGBB&#x60;, &#x60;cornerRadius&#x60; as an integer from 0 to 24 (pixels), &#x60;font&#x60; as &#x60;sans&#x60;, &#x60;serif&#x60; or &#x60;mono&#x60;. A &#x60;primaryColor&#x60; here wins over the &#x60;primaryColor&#x60; parameter. Unknown keys, invalid JSON or an invalid value are a 400 &#x60;INVALID_FIELD_VALUE&#x60;. Rejected when the welcome screen is not shown. Example: &#x60;{\&quot;heading\&quot;:\&quot;Link your {platform} to {brand}\&quot;,\&quot;cardColor\&quot;:\&quot;#FFF7ED\&quot;,\&quot;cornerRadius\&quot;:12}&#x60;. | [optional] |
 | **logo_url** | **String** | Welcome screen only (&#x60;welcome&#x3D;true&#x60;): https URL of your logo, shown in a square tile, so use a square image. Without it the tile shows the first letter of &#x60;brandName&#x60;, or the Zernio mark when there is no &#x60;brandName&#x60; either. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; when the welcome screen is not shown. | [optional] |
 | **language** | **String** | Hosted signup page only (&#x60;signup&#x3D;hosted&#x60;, WhatsApp): language of the page and its follow-along guide. Explainer videos stay in English. Default &#x60;en&#x60;. Rejected without &#x60;signup&#x3D;hosted&#x60;. | [optional] |
+| **handoff** | **Boolean** | Let the user finish on their phone. When &#x60;true&#x60;, the response also carries &#x60;handoff&#x60;: show &#x60;handoff.url&#x60; as a QR code in your app (any QR library), the user scans it and the welcome screen opens on the phone, already carrying this connect, so they log in to the platform there without signing in to anything else. The phone ends on a Zernio result screen telling them to go back to their computer. Learn the outcome by polling &#x60;GET /v1/connect/handoffs/{handoffId}&#x60; (every 2 to 5 seconds is fine) or from the &#x60;account.connected&#x60; webhook. Shows the welcome screen with your branding parameters or saved settings. Cannot be combined with &#x60;welcome&#x3D;false&#x60;, &#x60;headless&#x3D;true&#x60;, &#x60;signup&#x60;, &#x60;redirect&#x3D;true&#x60; or &#x60;redirect_url&#x60; (400 &#x60;INVALID_FIELD_VALUE&#x60;). &#x60;handoff.url&#x60; works for 30 minutes. When the account is re-enabled straight away the response carries &#x60;account&#x60; instead, as without &#x60;handoff&#x60;. | [optional][default to false] |
 
 ### Return type
 
@@ -2173,7 +2245,7 @@ end
 
 ## get_shopify_connect_url
 
-> <GetConnectUrl200Response> get_shopify_connect_url(profile_id, shop, opts)
+> <GetShopifyConnectUrl200Response> get_shopify_connect_url(profile_id, shop, opts)
 
 Get Shopify OAuth connect URL
 
@@ -2210,7 +2282,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetConnectUrl200Response>, Integer, Hash)> get_shopify_connect_url_with_http_info(profile_id, shop, opts)
+> <Array(<GetShopifyConnectUrl200Response>, Integer, Hash)> get_shopify_connect_url_with_http_info(profile_id, shop, opts)
 
 ```ruby
 begin
@@ -2218,7 +2290,7 @@ begin
   data, status_code, headers = api_instance.get_shopify_connect_url_with_http_info(profile_id, shop, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetConnectUrl200Response>
+  p data # => <GetShopifyConnectUrl200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_shopify_connect_url_with_http_info: #{e}"
 end
@@ -2234,7 +2306,7 @@ end
 
 ### Return type
 
-[**GetConnectUrl200Response**](GetConnectUrl200Response.md)
+[**GetShopifyConnectUrl200Response**](GetShopifyConnectUrl200Response.md)
 
 ### Authorization
 

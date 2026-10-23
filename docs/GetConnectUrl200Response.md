@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **auth_url** | **String** | URL to redirect your user to for OAuth authorization | [optional] |
 | **state** | **String** | State parameter for security (handled automatically) | [optional] |
+| **handoff** | [**ConnectHandoffLink**](ConnectHandoffLink.md) |  | [optional] |
 
 ## Example
 
@@ -14,7 +15,8 @@ require 'zernio-sdk'
 
 instance = Zernio::GetConnectUrl200Response.new(
   auth_url: null,
-  state: null
+  state: null,
+  handoff: null
 )
 ```
 
