@@ -10,8 +10,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**edit_post**](PostsApi.md#edit_post) | **POST** /v1/posts/{postId}/edit | Edit published post |
 | [**get_post**](PostsApi.md#get_post) | **GET** /v1/posts/{postId} | Get post |
 | [**list_posts**](PostsApi.md#list_posts) | **GET** /v1/posts | List posts |
+| [**pin_post**](PostsApi.md#pin_post) | **POST** /v1/posts/{postId}/pin | Pin post |
 | [**retry_post**](PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post |
 | [**review_post**](PostsApi.md#review_post) | **POST** /v1/posts/{postId}/review | Approve or reject a post |
+| [**unpin_post**](PostsApi.md#unpin_post) | **POST** /v1/posts/{postId}/unpin | Unpin post |
 | [**unpublish_post**](PostsApi.md#unpublish_post) | **POST** /v1/posts/{postId}/unpublish | Unpublish post |
 | [**update_post**](PostsApi.md#update_post) | **PUT** /v1/posts/{postId} | Update post |
 | [**update_post_metadata**](PostsApi.md#update_post_metadata) | **POST** /v1/posts/{postId}/update-metadata | Update post metadata |
@@ -481,6 +483,77 @@ end
 - **Accept**: application/json
 
 
+## pin_post
+
+> <PinPostResponse> pin_post(post_id, pin_post_request)
+
+Pin post
+
+Pins a published Facebook Page post to the top of its Page. Only Facebook posts can be pinned; any other platform answers 400 `platform_not_supported`. Works for posts on Pages connected through Facebook Login. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PostsApi.new
+post_id = 'post_id_example' # String | 
+pin_post_request = Zernio::PinPostRequest.new({platform: 'facebook'}) # PinPostRequest | 
+
+begin
+  # Pin post
+  result = api_instance.pin_post(post_id, pin_post_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PostsApi->pin_post: #{e}"
+end
+```
+
+#### Using the pin_post_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PinPostResponse>, Integer, Hash)> pin_post_with_http_info(post_id, pin_post_request)
+
+```ruby
+begin
+  # Pin post
+  data, status_code, headers = api_instance.pin_post_with_http_info(post_id, pin_post_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PinPostResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling PostsApi->pin_post_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **pin_post_request** | [**PinPostRequest**](PinPostRequest.md) |  |  |
+
+### Return type
+
+[**PinPostResponse**](PinPostResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## retry_post
 
 > <PostRetryResponse> retry_post(post_id)
@@ -610,6 +683,77 @@ end
 ### Return type
 
 [**PostGetResponse**](PostGetResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## unpin_post
+
+> <PinPostResponse> unpin_post(post_id, pin_post_request)
+
+Unpin post
+
+Unpins a published Facebook Page post from the top of its Page. Only Facebook posts can be unpinned; any other platform answers 400 `platform_not_supported`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PostsApi.new
+post_id = 'post_id_example' # String | 
+pin_post_request = Zernio::PinPostRequest.new({platform: 'facebook'}) # PinPostRequest | 
+
+begin
+  # Unpin post
+  result = api_instance.unpin_post(post_id, pin_post_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PostsApi->unpin_post: #{e}"
+end
+```
+
+#### Using the unpin_post_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PinPostResponse>, Integer, Hash)> unpin_post_with_http_info(post_id, pin_post_request)
+
+```ruby
+begin
+  # Unpin post
+  data, status_code, headers = api_instance.unpin_post_with_http_info(post_id, pin_post_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PinPostResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling PostsApi->unpin_post_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **pin_post_request** | [**PinPostRequest**](PinPostRequest.md) |  |  |
+
+### Return type
+
+[**PinPostResponse**](PinPostResponse.md)
 
 ### Authorization
 
