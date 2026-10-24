@@ -832,6 +832,7 @@ docs/ExternalPostSummary.md
 docs/ExternalPostSummaryAnalytics.md
 docs/ExternalPostWebhookPost.md
 docs/FacebookOrInstagramPost.md
+docs/FacebookPageInfo.md
 docs/FacebookPlatformData.md
 docs/FacebookPostEarningsResponse.md
 docs/FacebookPostEarningsResponseMetricsValue.md
@@ -2518,6 +2519,7 @@ docs/UpdateDiscordSettings200ResponseAccount.md
 docs/UpdateDiscordSettingsRequest.md
 docs/UpdateFacebookPage200Response.md
 docs/UpdateFacebookPage200ResponseSelectedPage.md
+docs/UpdateFacebookPageInfoRequest.md
 docs/UpdateFacebookPageRequest.md
 docs/UpdateGmbLocation200Response.md
 docs/UpdateGmbLocationRequest.md
@@ -3815,6 +3817,7 @@ lib/zernio-sdk/models/external_post_summary.rb
 lib/zernio-sdk/models/external_post_summary_analytics.rb
 lib/zernio-sdk/models/external_post_webhook_post.rb
 lib/zernio-sdk/models/facebook_or_instagram_post.rb
+lib/zernio-sdk/models/facebook_page_info.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
 lib/zernio-sdk/models/facebook_post_earnings_response.rb
 lib/zernio-sdk/models/facebook_post_earnings_response_metrics_value.rb
@@ -5464,6 +5467,7 @@ lib/zernio-sdk/models/update_discord_settings200_response_account.rb
 lib/zernio-sdk/models/update_discord_settings_request.rb
 lib/zernio-sdk/models/update_facebook_page200_response.rb
 lib/zernio-sdk/models/update_facebook_page200_response_selected_page.rb
+lib/zernio-sdk/models/update_facebook_page_info_request.rb
 lib/zernio-sdk/models/update_facebook_page_request.rb
 lib/zernio-sdk/models/update_gmb_location200_response.rb
 lib/zernio-sdk/models/update_gmb_location_request.rb
@@ -6741,6 +6745,7 @@ spec/models/external_post_summary_analytics_spec.rb
 spec/models/external_post_summary_spec.rb
 spec/models/external_post_webhook_post_spec.rb
 spec/models/facebook_or_instagram_post_spec.rb
+spec/models/facebook_page_info_spec.rb
 spec/models/facebook_platform_data_spec.rb
 spec/models/facebook_post_earnings_response_metrics_value_spec.rb
 spec/models/facebook_post_earnings_response_spec.rb
@@ -8390,6 +8395,7 @@ spec/models/update_discord_settings200_response_spec.rb
 spec/models/update_discord_settings_request_spec.rb
 spec/models/update_facebook_page200_response_selected_page_spec.rb
 spec/models/update_facebook_page200_response_spec.rb
+spec/models/update_facebook_page_info_request_spec.rb
 spec/models/update_facebook_page_request_spec.rb
 spec/models/update_gmb_location200_response_spec.rb
 spec/models/update_gmb_location_request_spec.rb
