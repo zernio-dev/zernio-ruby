@@ -606,6 +606,8 @@ docs/CreatePinterestBoard201Response.md
 docs/CreatePinterestBoard201ResponseBoard.md
 docs/CreatePinterestBoardRequest.md
 docs/CreatePost200Response.md
+docs/CreatePost400Response.md
+docs/CreatePost400ResponseDetails.md
 docs/CreatePost403Response.md
 docs/CreatePost409Response.md
 docs/CreatePost409ResponseDetails.md
@@ -1483,6 +1485,7 @@ docs/LinkedInLeadFormPlatformDataQuestionsInner.md
 docs/LinkedInLeadFormPlatformDataQuestionsInnerOneOf.md
 docs/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1.md
 docs/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner.md
+docs/LinkedInMentionIssue.md
 docs/LinkedInMentionsApi.md
 docs/LinkedInPlatformData.md
 docs/LinkedInPlatformDataAudience.md
@@ -3581,6 +3584,8 @@ lib/zernio-sdk/models/create_pinterest_board201_response.rb
 lib/zernio-sdk/models/create_pinterest_board201_response_board.rb
 lib/zernio-sdk/models/create_pinterest_board_request.rb
 lib/zernio-sdk/models/create_post200_response.rb
+lib/zernio-sdk/models/create_post400_response.rb
+lib/zernio-sdk/models/create_post400_response_details.rb
 lib/zernio-sdk/models/create_post403_response.rb
 lib/zernio-sdk/models/create_post409_response.rb
 lib/zernio-sdk/models/create_post409_response_details.rb
@@ -4442,6 +4447,7 @@ lib/zernio-sdk/models/linked_in_lead_form_platform_data_questions_inner.rb
 lib/zernio-sdk/models/linked_in_lead_form_platform_data_questions_inner_one_of.rb
 lib/zernio-sdk/models/linked_in_lead_form_platform_data_questions_inner_one_of1.rb
 lib/zernio-sdk/models/linked_in_lead_form_platform_data_questions_inner_one_of1_choices_inner.rb
+lib/zernio-sdk/models/linked_in_mention_issue.rb
 lib/zernio-sdk/models/linked_in_platform_data.rb
 lib/zernio-sdk/models/linked_in_platform_data_audience.rb
 lib/zernio-sdk/models/linked_in_platform_data_audience_interface_locales_inner.rb
@@ -6497,6 +6503,8 @@ spec/models/create_pinterest_board201_response_board_spec.rb
 spec/models/create_pinterest_board201_response_spec.rb
 spec/models/create_pinterest_board_request_spec.rb
 spec/models/create_post200_response_spec.rb
+spec/models/create_post400_response_details_spec.rb
+spec/models/create_post400_response_spec.rb
 spec/models/create_post403_response_spec.rb
 spec/models/create_post409_response_details_spec.rb
 spec/models/create_post409_response_spec.rb
@@ -7358,6 +7366,7 @@ spec/models/linked_in_lead_form_platform_data_questions_inner_one_of1_spec.rb
 spec/models/linked_in_lead_form_platform_data_questions_inner_one_of_spec.rb
 spec/models/linked_in_lead_form_platform_data_questions_inner_spec.rb
 spec/models/linked_in_lead_form_platform_data_spec.rb
+spec/models/linked_in_mention_issue_spec.rb
 spec/models/linked_in_platform_data_audience_interface_locales_inner_spec.rb
 spec/models/linked_in_platform_data_audience_spec.rb
 spec/models/linked_in_platform_data_poll_spec.rb
