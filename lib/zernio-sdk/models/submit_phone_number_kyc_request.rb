@@ -37,6 +37,9 @@ module Zernio
     # Area code (NDC) the number must be in. Hard constraint: an empty area pool fails with 409 code AREA_CODE_UNAVAILABLE instead of ordering from another area. Omit for any area. Options come from GET /v1/phone-numbers/availability (areaOptions); the purchase 202 kycUrl echoes the areaCode picked at purchase time so it can be passed here.
     attr_accessor :area_code
 
+    # Exact number to order, in E.164, taken from GET /v1/phone-numbers/available. It is ordered as is or the request fails with 409 code phone_number_unavailable; another number is never substituted and a pre-order is never placed. Requires quantity 1 (or omitted). Omit to let the carrier pick a number in the area.
+    attr_accessor :phone_number
+
     # With areaCode: pre-order that area when it has no stock (an area listed in soldOutAreas with preOrderable true) instead of failing with AREA_CODE_UNAVAILABLE. The carrier sources a number in that area. Without areaCode it accepts the pre-order a previous submit offered with 409 code area_pre_order_available (a geographic-match country whose address area has no stock): resend the same body with preOrder true and the order is placed for that area. A whole pair with no stock is pre-ordered without either flag.
     attr_accessor :pre_order
 
@@ -65,6 +68,7 @@ module Zernio
         :'reuse_option_id' => :'reuseOptionId',
         :'reuse_from' => :'reuseFrom',
         :'area_code' => :'areaCode',
+        :'phone_number' => :'phoneNumber',
         :'pre_order' => :'preOrder',
         :'end_user_first_name' => :'endUserFirstName',
         :'end_user_last_name' => :'endUserLastName',
@@ -95,6 +99,7 @@ module Zernio
         :'reuse_option_id' => :'String',
         :'reuse_from' => :'String',
         :'area_code' => :'String',
+        :'phone_number' => :'String',
         :'pre_order' => :'Boolean',
         :'end_user_first_name' => :'String',
         :'end_user_last_name' => :'String',
@@ -164,6 +169,10 @@ module Zernio
         self.area_code = attributes[:'area_code']
       end
 
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
+      end
+
       if attributes.key?(:'pre_order')
         self.pre_order = attributes[:'pre_order']
       end
@@ -219,6 +228,11 @@ module Zernio
         invalid_properties.push("invalid value for \"area_code\", must conform to the pattern #{pattern}.")
       end
 
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if !@phone_number.nil? && @phone_number !~ pattern
+        invalid_properties.push("invalid value for \"phone_number\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -231,6 +245,7 @@ module Zernio
       return false if !@quantity.nil? && @quantity > 5
       return false if !@quantity.nil? && @quantity < 1
       return false if !@area_code.nil? && @area_code !~ Regexp.new(/^\d{1,4}$/)
+      return false if !@phone_number.nil? && @phone_number !~ Regexp.new(/^\+[1-9]\d{6,14}$/)
       true
     end
 
@@ -287,6 +302,21 @@ module Zernio
       @area_code = area_code
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] phone_number Value to be assigned
+    def phone_number=(phone_number)
+      if phone_number.nil?
+        fail ArgumentError, 'phone_number cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if phone_number !~ pattern
+        fail ArgumentError, "invalid value for \"phone_number\", must conform to the pattern #{pattern}."
+      end
+
+      @phone_number = phone_number
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -300,6 +330,7 @@ module Zernio
           reuse_option_id == o.reuse_option_id &&
           reuse_from == o.reuse_from &&
           area_code == o.area_code &&
+          phone_number == o.phone_number &&
           pre_order == o.pre_order &&
           end_user_first_name == o.end_user_first_name &&
           end_user_last_name == o.end_user_last_name &&
@@ -317,7 +348,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, submission_id, quantity, reuse, reuse_option_id, reuse_from, area_code, pre_order, end_user_first_name, end_user_last_name, values, documents, address].hash
+      [profile_id, country, submission_id, quantity, reuse, reuse_option_id, reuse_from, area_code, phone_number, pre_order, end_user_first_name, end_user_last_name, values, documents, address].hash
     end
 
     # Builds the object from hash
