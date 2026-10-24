@@ -1099,7 +1099,7 @@ opts = {
   since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
   _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
   metric_type: 'time_series', # String | \"total_value\" (default) returns aggregated totals and supports breakdowns. \"time_series\" returns daily values but only works with the \"reach\" metric. 
-  breakdown: 'breakdown_example' # String | Breakdown dimension (only valid with metricType=total_value). Valid values depend on the metric: media_product_type, follow_type, follower_type, contact_button_type. 
+  breakdown: 'breakdown_example' # String | Breakdown dimension (only valid with metricType=total_value). Valid values per metric: reach and views take follow_type or media_product_type; follows_and_unfollows takes follow_type; profile_links_taps takes contact_button_type; comments, likes, saves, shares and total_interactions take media_product_type. 
 }
 
 begin
@@ -1140,7 +1140,7 @@ end
 | **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
 | **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
 | **metric_type** | **String** | \&quot;total_value\&quot; (default) returns aggregated totals and supports breakdowns. \&quot;time_series\&quot; returns daily values but only works with the \&quot;reach\&quot; metric.  | [optional][default to &#39;total_value&#39;] |
-| **breakdown** | **String** | Breakdown dimension (only valid with metricType&#x3D;total_value). Valid values depend on the metric: media_product_type, follow_type, follower_type, contact_button_type.  | [optional] |
+| **breakdown** | **String** | Breakdown dimension (only valid with metricType&#x3D;total_value). Valid values per metric: reach and views take follow_type or media_product_type; follows_and_unfollows takes follow_type; profile_links_taps takes contact_button_type; comments, likes, saves, shares and total_interactions take media_product_type.  | [optional] |
 
 ### Return type
 
