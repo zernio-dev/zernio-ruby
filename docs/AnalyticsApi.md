@@ -33,6 +33,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_you_tube_daily_views**](AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views |
 | [**get_you_tube_demographics**](AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube demographics |
 | [**get_you_tube_video_retention**](AnalyticsApi.md#get_you_tube_video_retention) | **GET** /v1/analytics/youtube/video-retention | Get YouTube video retention curve |
+| [**list_facebook_tagged_posts**](AnalyticsApi.md#list_facebook_tagged_posts) | **GET** /v1/accounts/{accountId}/facebook-tagged-posts | List the posts a Facebook Page is tagged in |
 | [**sync_external_posts**](AnalyticsApi.md#sync_external_posts) | **POST** /v1/posts/sync-external | Sync an external post |
 
 
@@ -2322,6 +2323,81 @@ end
 ### Return type
 
 [**YouTubeVideoRetentionResponse**](YouTubeVideoRetentionResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_facebook_tagged_posts
+
+> <ListFacebookTaggedPosts200Response> list_facebook_tagged_posts(account_id, opts)
+
+List the posts a Facebook Page is tagged in
+
+Returns the public posts where other people or Pages tagged the connected Facebook Page, as Meta returns them from the Page's `tagged` edge.  Cursor-paginated: pass `nextCursor` from the previous response as `cursor` to read the next page. `nextCursor` is null when there are no more pages. Meta does not say whether a page is the last one, so the final page can come back empty with `nextCursor` null.  Works for `facebook` accounts with a Page selected. Meta needs the `pages_read_user_content` permission on the connection: a connection made without it gets Meta's refusal back as `platform_api_error`, and reconnecting the account grants it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | The ID of a connected Facebook account.
+opts = {
+  limit: 56, # Integer | Page size.
+  cursor: 'cursor_example' # String | The `nextCursor` of the previous page.
+}
+
+begin
+  # List the posts a Facebook Page is tagged in
+  result = api_instance.list_facebook_tagged_posts(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->list_facebook_tagged_posts: #{e}"
+end
+```
+
+#### Using the list_facebook_tagged_posts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListFacebookTaggedPosts200Response>, Integer, Hash)> list_facebook_tagged_posts_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List the posts a Facebook Page is tagged in
+  data, status_code, headers = api_instance.list_facebook_tagged_posts_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListFacebookTaggedPosts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->list_facebook_tagged_posts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Facebook account. |  |
+| **limit** | **Integer** | Page size. | [optional][default to 25] |
+| **cursor** | **String** | The &#x60;nextCursor&#x60; of the previous page. | [optional] |
+
+### Return type
+
+[**ListFacebookTaggedPosts200Response**](ListFacebookTaggedPosts200Response.md)
 
 ### Authorization
 

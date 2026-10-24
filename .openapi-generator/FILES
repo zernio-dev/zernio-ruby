@@ -836,6 +836,8 @@ docs/FacebookPostEarningsResponseMetricsValue.md
 docs/FacebookPostEarningsResponseUnavailableMetricsInner.md
 docs/FacebookSettings.md
 docs/FacebookSettingsCarouselCardsInner.md
+docs/FacebookTaggedPost.md
+docs/FacebookTaggedPostFrom.md
 docs/FeedbackApi.md
 docs/FeedbackReceipt.md
 docs/FetchGoogleBusinessVerificationOptions200Response.md
@@ -1620,6 +1622,7 @@ docs/ListDiscordPinnedMessages200ResponseDataInner.md
 docs/ListDiscordScheduledEvents200Response.md
 docs/ListFacebookPages200Response.md
 docs/ListFacebookPages200ResponsePagesInner.md
+docs/ListFacebookTaggedPosts200Response.md
 docs/ListFormLeads200Response.md
 docs/ListFormLeads200ResponseLeadsInner.md
 docs/ListFormLeads200ResponseMeta.md
@@ -3806,6 +3809,8 @@ lib/zernio-sdk/models/facebook_post_earnings_response_metrics_value.rb
 lib/zernio-sdk/models/facebook_post_earnings_response_unavailable_metrics_inner.rb
 lib/zernio-sdk/models/facebook_settings.rb
 lib/zernio-sdk/models/facebook_settings_carousel_cards_inner.rb
+lib/zernio-sdk/models/facebook_tagged_post.rb
+lib/zernio-sdk/models/facebook_tagged_post_from.rb
 lib/zernio-sdk/models/feedback_receipt.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options200_response.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options200_response_options_inner.rb
@@ -4575,6 +4580,7 @@ lib/zernio-sdk/models/list_discord_pinned_messages200_response_data_inner.rb
 lib/zernio-sdk/models/list_discord_scheduled_events200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response_pages_inner.rb
+lib/zernio-sdk/models/list_facebook_tagged_posts200_response.rb
 lib/zernio-sdk/models/list_form_leads200_response.rb
 lib/zernio-sdk/models/list_form_leads200_response_leads_inner.rb
 lib/zernio-sdk/models/list_form_leads200_response_meta.rb
@@ -6719,6 +6725,8 @@ spec/models/facebook_post_earnings_response_spec.rb
 spec/models/facebook_post_earnings_response_unavailable_metrics_inner_spec.rb
 spec/models/facebook_settings_carousel_cards_inner_spec.rb
 spec/models/facebook_settings_spec.rb
+spec/models/facebook_tagged_post_from_spec.rb
+spec/models/facebook_tagged_post_spec.rb
 spec/models/feedback_receipt_spec.rb
 spec/models/fetch_google_business_verification_options200_response_options_inner_spec.rb
 spec/models/fetch_google_business_verification_options200_response_spec.rb
@@ -7488,6 +7496,7 @@ spec/models/list_discord_pinned_messages200_response_spec.rb
 spec/models/list_discord_scheduled_events200_response_spec.rb
 spec/models/list_facebook_pages200_response_pages_inner_spec.rb
 spec/models/list_facebook_pages200_response_spec.rb
+spec/models/list_facebook_tagged_posts200_response_spec.rb
 spec/models/list_form_leads200_response_leads_inner_spec.rb
 spec/models/list_form_leads200_response_meta_spec.rb
 spec/models/list_form_leads200_response_spec.rb
