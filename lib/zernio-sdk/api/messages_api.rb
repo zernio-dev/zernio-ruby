@@ -241,6 +241,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a conversation label
+    # Facebook Messenger only. Creates a custom label on the Page (Graph `POST /{page-id}/custom_labels`). Other platforms answer 400 `platform_not_supported`.
+    # @param create_inbox_label_request [CreateInboxLabelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateInboxLabel201Response]
+    def create_inbox_label(create_inbox_label_request, opts = {})
+      data, _status_code, _headers = create_inbox_label_with_http_info(create_inbox_label_request, opts)
+      data
+    end
+
+    # Create a conversation label
+    # Facebook Messenger only. Creates a custom label on the Page (Graph &#x60;POST /{page-id}/custom_labels&#x60;). Other platforms answer 400 &#x60;platform_not_supported&#x60;.
+    # @param create_inbox_label_request [CreateInboxLabelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateInboxLabel201Response, Integer, Hash)>] CreateInboxLabel201Response data, response status code and response headers
+    def create_inbox_label_with_http_info(create_inbox_label_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.create_inbox_label ...'
+      end
+      # verify the required parameter 'create_inbox_label_request' is set
+      if @api_client.config.client_side_validation && create_inbox_label_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_inbox_label_request' when calling MessagesApi.create_inbox_label"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/labels'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_inbox_label_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateInboxLabel201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.create_inbox_label",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#create_inbox_label\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Delete conversation
     # Permanently deletes Zernio's stored copy of one conversation and every message in it, in one transaction, and unlinks the contact channel that pointed at it. Nothing is deleted on the platform (the thread stays in WhatsApp, Messenger or Instagram), and the contact record is kept: call DELETE /v1/contacts/{contactId} to erase the person's name and number as well. A platform re-sync can import the thread again: WhatsApp coexistence numbers receive their messaging history from Meta repeatedly, and a Facebook or Instagram account whose DM history walk has not finished imports it on that walk. Inbound media copies Zernio stored are removed on a best-effort basis.
     # @param conversation_id [String] Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed.
@@ -307,6 +375,81 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: MessagesApi#delete_inbox_conversation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete a conversation label
+    # Facebook Messenger only. Deletes a custom label from the Page (Graph `DELETE /{label-id}`), which also removes it from every conversation. The id must be one of the Page's custom labels, otherwise 404 `resource_not_found`. Other platforms answer 400 `platform_not_supported`.
+    # @param label_id [String] Meta label id
+    # @param account_id [String] Facebook social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def delete_inbox_label(label_id, account_id, opts = {})
+      data, _status_code, _headers = delete_inbox_label_with_http_info(label_id, account_id, opts)
+      data
+    end
+
+    # Delete a conversation label
+    # Facebook Messenger only. Deletes a custom label from the Page (Graph &#x60;DELETE /{label-id}&#x60;), which also removes it from every conversation. The id must be one of the Page&#39;s custom labels, otherwise 404 &#x60;resource_not_found&#x60;. Other platforms answer 400 &#x60;platform_not_supported&#x60;.
+    # @param label_id [String] Meta label id
+    # @param account_id [String] Facebook social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def delete_inbox_label_with_http_info(label_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.delete_inbox_label ...'
+      end
+      # verify the required parameter 'label_id' is set
+      if @api_client.config.client_side_validation && label_id.nil?
+        fail ArgumentError, "Missing the required parameter 'label_id' when calling MessagesApi.delete_inbox_label"
+      end
+      pattern = Regexp.new(/^[0-9]+$/)
+      if @api_client.config.client_side_validation && label_id !~ pattern
+        fail ArgumentError, "invalid value for 'label_id' when calling MessagesApi.delete_inbox_label, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling MessagesApi.delete_inbox_label"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/labels/{labelId}'.sub('{' + 'labelId' + '}', CGI.escape(label_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.delete_inbox_label",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#delete_inbox_label\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -822,6 +965,70 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: MessagesApi#list_inbox_conversations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List the Page's conversation labels
+    # Facebook Messenger only. Lists the custom labels defined on the Page (Graph `/{page-id}/custom_labels`). Other platforms answer 400 `platform_not_supported`.
+    # @param account_id [String] Facebook social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [ListInboxLabels200Response]
+    def list_inbox_labels(account_id, opts = {})
+      data, _status_code, _headers = list_inbox_labels_with_http_info(account_id, opts)
+      data
+    end
+
+    # List the Page&#39;s conversation labels
+    # Facebook Messenger only. Lists the custom labels defined on the Page (Graph &#x60;/{page-id}/custom_labels&#x60;). Other platforms answer 400 &#x60;platform_not_supported&#x60;.
+    # @param account_id [String] Facebook social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListInboxLabels200Response, Integer, Hash)>] ListInboxLabels200Response data, response status code and response headers
+    def list_inbox_labels_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.list_inbox_labels ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling MessagesApi.list_inbox_labels"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/labels'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListInboxLabels200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.list_inbox_labels",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#list_inbox_labels\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

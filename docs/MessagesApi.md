@@ -7,13 +7,16 @@ All URIs are relative to *https://zernio.com/api*
 | [**accept_conversation_request**](MessagesApi.md#accept_conversation_request) | **POST** /v1/inbox/conversations/{conversationId}/accept | Accept a message request |
 | [**add_message_reaction**](MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction |
 | [**create_inbox_conversation**](MessagesApi.md#create_inbox_conversation) | **POST** /v1/inbox/conversations | Create conversation |
+| [**create_inbox_label**](MessagesApi.md#create_inbox_label) | **POST** /v1/inbox/labels | Create a conversation label |
 | [**delete_inbox_conversation**](MessagesApi.md#delete_inbox_conversation) | **DELETE** /v1/inbox/conversations/{conversationId} | Delete conversation |
+| [**delete_inbox_label**](MessagesApi.md#delete_inbox_label) | **DELETE** /v1/inbox/labels/{labelId} | Delete a conversation label |
 | [**delete_inbox_message**](MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message |
 | [**edit_inbox_message**](MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message |
 | [**get_inbox_conversation**](MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation |
 | [**get_inbox_conversation_messages**](MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages |
 | [**get_message_attachment**](MessagesApi.md#get_message_attachment) | **GET** /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index} | Resolve message attachment |
 | [**list_inbox_conversations**](MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations |
+| [**list_inbox_labels**](MessagesApi.md#list_inbox_labels) | **GET** /v1/inbox/labels | List the Page&#39;s conversation labels |
 | [**mark_conversation_read**](MessagesApi.md#mark_conversation_read) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read |
 | [**remove_message_reaction**](MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction |
 | [**search_inbox_conversations**](MessagesApi.md#search_inbox_conversations) | **GET** /v1/inbox/conversations/search | Search conversations |
@@ -237,6 +240,75 @@ end
 - **Accept**: application/json
 
 
+## create_inbox_label
+
+> <CreateInboxLabel201Response> create_inbox_label(create_inbox_label_request)
+
+Create a conversation label
+
+Facebook Messenger only. Creates a custom label on the Page (Graph `POST /{page-id}/custom_labels`). Other platforms answer 400 `platform_not_supported`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+create_inbox_label_request = Zernio::CreateInboxLabelRequest.new({account_id: 'account_id_example', name: 'name_example'}) # CreateInboxLabelRequest | 
+
+begin
+  # Create a conversation label
+  result = api_instance.create_inbox_label(create_inbox_label_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->create_inbox_label: #{e}"
+end
+```
+
+#### Using the create_inbox_label_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateInboxLabel201Response>, Integer, Hash)> create_inbox_label_with_http_info(create_inbox_label_request)
+
+```ruby
+begin
+  # Create a conversation label
+  data, status_code, headers = api_instance.create_inbox_label_with_http_info(create_inbox_label_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateInboxLabel201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->create_inbox_label_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_inbox_label_request** | [**CreateInboxLabelRequest**](CreateInboxLabelRequest.md) |  |  |
+
+### Return type
+
+[**CreateInboxLabel201Response**](CreateInboxLabel201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## delete_inbox_conversation
 
 > <DeleteInboxConversation200Response> delete_inbox_conversation(conversation_id, account_id)
@@ -297,6 +369,77 @@ end
 ### Return type
 
 [**DeleteInboxConversation200Response**](DeleteInboxConversation200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## delete_inbox_label
+
+> <UpdateYoutubeDefaultPlaylist200Response> delete_inbox_label(label_id, account_id)
+
+Delete a conversation label
+
+Facebook Messenger only. Deletes a custom label from the Page (Graph `DELETE /{label-id}`), which also removes it from every conversation. The id must be one of the Page's custom labels, otherwise 404 `resource_not_found`. Other platforms answer 400 `platform_not_supported`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+label_id = 'label_id_example' # String | Meta label id
+account_id = 'account_id_example' # String | Facebook social account ID
+
+begin
+  # Delete a conversation label
+  result = api_instance.delete_inbox_label(label_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->delete_inbox_label: #{e}"
+end
+```
+
+#### Using the delete_inbox_label_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> delete_inbox_label_with_http_info(label_id, account_id)
+
+```ruby
+begin
+  # Delete a conversation label
+  data, status_code, headers = api_instance.delete_inbox_label_with_http_info(label_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->delete_inbox_label_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **label_id** | **String** | Meta label id |  |
+| **account_id** | **String** | Facebook social account ID |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 
@@ -757,6 +900,75 @@ end
 ### Return type
 
 [**ListInboxConversations200Response**](ListInboxConversations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_inbox_labels
+
+> <ListInboxLabels200Response> list_inbox_labels(account_id)
+
+List the Page's conversation labels
+
+Facebook Messenger only. Lists the custom labels defined on the Page (Graph `/{page-id}/custom_labels`). Other platforms answer 400 `platform_not_supported`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+account_id = 'account_id_example' # String | Facebook social account ID
+
+begin
+  # List the Page's conversation labels
+  result = api_instance.list_inbox_labels(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->list_inbox_labels: #{e}"
+end
+```
+
+#### Using the list_inbox_labels_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListInboxLabels200Response>, Integer, Hash)> list_inbox_labels_with_http_info(account_id)
+
+```ruby
+begin
+  # List the Page's conversation labels
+  data, status_code, headers = api_instance.list_inbox_labels_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListInboxLabels200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->list_inbox_labels_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Facebook social account ID |  |
+
+### Return type
+
+[**ListInboxLabels200Response**](ListInboxLabels200Response.md)
 
 ### Authorization
 

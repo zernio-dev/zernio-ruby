@@ -71,6 +71,18 @@ describe 'MessagesApi' do
     end
   end
 
+  # unit tests for create_inbox_label
+  # Create a conversation label
+  # Facebook Messenger only. Creates a custom label on the Page (Graph &#x60;POST /{page-id}/custom_labels&#x60;). Other platforms answer 400 &#x60;platform_not_supported&#x60;.
+  # @param create_inbox_label_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateInboxLabel201Response]
+  describe 'create_inbox_label test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for delete_inbox_conversation
   # Delete conversation
   # Permanently deletes Zernio&#39;s stored copy of one conversation and every message in it, in one transaction, and unlinks the contact channel that pointed at it. Nothing is deleted on the platform (the thread stays in WhatsApp, Messenger or Instagram), and the contact record is kept: call DELETE /v1/contacts/{contactId} to erase the person&#39;s name and number as well. A platform re-sync can import the thread again: WhatsApp coexistence numbers receive their messaging history from Meta repeatedly, and a Facebook or Instagram account whose DM history walk has not finished imports it on that walk. Inbound media copies Zernio stored are removed on a best-effort basis.
@@ -79,6 +91,19 @@ describe 'MessagesApi' do
   # @param [Hash] opts the optional parameters
   # @return [DeleteInboxConversation200Response]
   describe 'delete_inbox_conversation test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_inbox_label
+  # Delete a conversation label
+  # Facebook Messenger only. Deletes a custom label from the Page (Graph &#x60;DELETE /{label-id}&#x60;), which also removes it from every conversation. The id must be one of the Page&#39;s custom labels, otherwise 404 &#x60;resource_not_found&#x60;. Other platforms answer 400 &#x60;platform_not_supported&#x60;.
+  # @param label_id Meta label id
+  # @param account_id Facebook social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'delete_inbox_label test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -171,6 +196,18 @@ describe 'MessagesApi' do
   # @option opts [String] :account_id Filter by specific account ID
   # @return [ListInboxConversations200Response]
   describe 'list_inbox_conversations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_inbox_labels
+  # List the Page&#39;s conversation labels
+  # Facebook Messenger only. Lists the custom labels defined on the Page (Graph &#x60;/{page-id}/custom_labels&#x60;). Other platforms answer 400 &#x60;platform_not_supported&#x60;.
+  # @param account_id Facebook social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [ListInboxLabels200Response]
+  describe 'list_inbox_labels test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

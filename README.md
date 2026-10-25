@@ -741,13 +741,16 @@ Class | Method | HTTP request | Description
 *Zernio::MessagesApi* | [**accept_conversation_request**](docs/MessagesApi.md#accept_conversation_request) | **POST** /v1/inbox/conversations/{conversationId}/accept | Accept a message request
 *Zernio::MessagesApi* | [**add_message_reaction**](docs/MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction
 *Zernio::MessagesApi* | [**create_inbox_conversation**](docs/MessagesApi.md#create_inbox_conversation) | **POST** /v1/inbox/conversations | Create conversation
+*Zernio::MessagesApi* | [**create_inbox_label**](docs/MessagesApi.md#create_inbox_label) | **POST** /v1/inbox/labels | Create a conversation label
 *Zernio::MessagesApi* | [**delete_inbox_conversation**](docs/MessagesApi.md#delete_inbox_conversation) | **DELETE** /v1/inbox/conversations/{conversationId} | Delete conversation
+*Zernio::MessagesApi* | [**delete_inbox_label**](docs/MessagesApi.md#delete_inbox_label) | **DELETE** /v1/inbox/labels/{labelId} | Delete a conversation label
 *Zernio::MessagesApi* | [**delete_inbox_message**](docs/MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message
 *Zernio::MessagesApi* | [**edit_inbox_message**](docs/MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message
 *Zernio::MessagesApi* | [**get_inbox_conversation**](docs/MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation
 *Zernio::MessagesApi* | [**get_inbox_conversation_messages**](docs/MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages
 *Zernio::MessagesApi* | [**get_message_attachment**](docs/MessagesApi.md#get_message_attachment) | **GET** /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index} | Resolve message attachment
 *Zernio::MessagesApi* | [**list_inbox_conversations**](docs/MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations
+*Zernio::MessagesApi* | [**list_inbox_labels**](docs/MessagesApi.md#list_inbox_labels) | **GET** /v1/inbox/labels | List the Page's conversation labels
 *Zernio::MessagesApi* | [**mark_conversation_read**](docs/MessagesApi.md#mark_conversation_read) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read
 *Zernio::MessagesApi* | [**remove_message_reaction**](docs/MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction
 *Zernio::MessagesApi* | [**search_inbox_conversations**](docs/MessagesApi.md#search_inbox_conversations) | **GET** /v1/inbox/conversations/search | Search conversations
@@ -1635,6 +1638,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateInboxConversationRequestTemplateCardsInner](docs/CreateInboxConversationRequestTemplateCardsInner.md)
  - [Zernio::CreateInboxConversationRequestTemplateCardsInnerButtonsInner](docs/CreateInboxConversationRequestTemplateCardsInnerButtonsInner.md)
  - [Zernio::CreateInboxConversationRequestTemplateCardsInnerHeaderMedia](docs/CreateInboxConversationRequestTemplateCardsInnerHeaderMedia.md)
+ - [Zernio::CreateInboxLabel201Response](docs/CreateInboxLabel201Response.md)
+ - [Zernio::CreateInboxLabelRequest](docs/CreateInboxLabelRequest.md)
  - [Zernio::CreateInviteToken201Response](docs/CreateInviteToken201Response.md)
  - [Zernio::CreateInviteTokenRequest](docs/CreateInviteTokenRequest.md)
  - [Zernio::CreateLeadForm200Response](docs/CreateLeadForm200Response.md)
@@ -2704,6 +2709,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListInboxConversations200ResponseMetaAccountsSkippedInner](docs/ListInboxConversations200ResponseMetaAccountsSkippedInner.md)
  - [Zernio::ListInboxConversations200ResponseMetaFailedAccountsInner](docs/ListInboxConversations200ResponseMetaFailedAccountsInner.md)
  - [Zernio::ListInboxConversations200ResponsePagination](docs/ListInboxConversations200ResponsePagination.md)
+ - [Zernio::ListInboxLabels200Response](docs/ListInboxLabels200Response.md)
+ - [Zernio::ListInboxLabels200ResponseLabelsInner](docs/ListInboxLabels200ResponseLabelsInner.md)
  - [Zernio::ListInboxMentions200Response](docs/ListInboxMentions200Response.md)
  - [Zernio::ListInboxMentions200ResponseDataInner](docs/ListInboxMentions200ResponseDataInner.md)
  - [Zernio::ListInboxMentions200ResponseMeta](docs/ListInboxMentions200ResponseMeta.md)
