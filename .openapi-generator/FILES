@@ -90,6 +90,7 @@ docs/AddCommerceDiscountCodesRequest.md
 docs/AddCommerceMarketingEngagement201Response.md
 docs/AddCommerceMarketingEngagementRequest.md
 docs/AddCommerceProductImagesRequest.md
+docs/AddConversationLabelRequest.md
 docs/AddConversionAssociations200Response.md
 docs/AddConversionAssociations200ResponseFailedInner.md
 docs/AddConversionAssociationsRequest.md
@@ -3095,6 +3096,7 @@ lib/zernio-sdk/models/add_commerce_discount_codes_request.rb
 lib/zernio-sdk/models/add_commerce_marketing_engagement201_response.rb
 lib/zernio-sdk/models/add_commerce_marketing_engagement_request.rb
 lib/zernio-sdk/models/add_commerce_product_images_request.rb
+lib/zernio-sdk/models/add_conversation_label_request.rb
 lib/zernio-sdk/models/add_conversion_associations200_response.rb
 lib/zernio-sdk/models/add_conversion_associations200_response_failed_inner.rb
 lib/zernio-sdk/models/add_conversion_associations_request.rb
@@ -6027,6 +6029,7 @@ spec/models/add_commerce_discount_codes_request_spec.rb
 spec/models/add_commerce_marketing_engagement201_response_spec.rb
 spec/models/add_commerce_marketing_engagement_request_spec.rb
 spec/models/add_commerce_product_images_request_spec.rb
+spec/models/add_conversation_label_request_spec.rb
 spec/models/add_conversion_associations200_response_failed_inner_spec.rb
 spec/models/add_conversion_associations200_response_spec.rb
 spec/models/add_conversion_associations_request_spec.rb
