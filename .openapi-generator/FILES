@@ -70,6 +70,7 @@ docs/AdRuleObjectEvaluationConditionsInner.md
 docs/AdRuleRun.md
 docs/AdRuleRunEvaluation.md
 docs/AdRuleRunEvaluationActionsInner.md
+docs/AdRuleRunEvaluationNotification.md
 docs/AdRuleSchedule.md
 docs/AdRulesApi.md
 docs/AdSchedule.md
@@ -3110,6 +3111,7 @@ lib/zernio-sdk/models/ad_rule_object_evaluation_conditions_inner.rb
 lib/zernio-sdk/models/ad_rule_run.rb
 lib/zernio-sdk/models/ad_rule_run_evaluation.rb
 lib/zernio-sdk/models/ad_rule_run_evaluation_actions_inner.rb
+lib/zernio-sdk/models/ad_rule_run_evaluation_notification.rb
 lib/zernio-sdk/models/ad_rule_schedule.rb
 lib/zernio-sdk/models/ad_schedule.rb
 lib/zernio-sdk/models/ad_schedule_window.rb
@@ -6071,6 +6073,7 @@ spec/models/ad_rule_level_spec.rb
 spec/models/ad_rule_object_evaluation_conditions_inner_spec.rb
 spec/models/ad_rule_object_evaluation_spec.rb
 spec/models/ad_rule_run_evaluation_actions_inner_spec.rb
+spec/models/ad_rule_run_evaluation_notification_spec.rb
 spec/models/ad_rule_run_evaluation_spec.rb
 spec/models/ad_rule_run_spec.rb
 spec/models/ad_rule_schedule_spec.rb

@@ -10,6 +10,7 @@
 | **currency** | **String** |  | [optional] |
 | **matched** | [**Array&lt;AdRuleObjectEvaluation&gt;**](AdRuleObjectEvaluation.md) |  | [optional] |
 | **actions** | [**Array&lt;AdRuleRunEvaluationActionsInner&gt;**](AdRuleRunEvaluationActionsInner.md) |  | [optional] |
+| **notification** | [**AdRuleRunEvaluationNotification**](AdRuleRunEvaluationNotification.md) |  | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::AdRuleRunEvaluation.new(
   timezone_assumed: null,
   currency: null,
   matched: null,
-  actions: null
+  actions: null,
+  notification: null
 )
 ```
 
