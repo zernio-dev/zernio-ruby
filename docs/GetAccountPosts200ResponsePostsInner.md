@@ -17,6 +17,11 @@
 | **share_count** | **Integer** |  | [optional] |
 | **cid** | **String** | Bluesky content id, required to reply to the post | [optional] |
 | **subreddit** | **String** | Reddit only | [optional] |
+| **title** | **String** | Pinterest only: native Pin title | [optional] |
+| **description** | **String** | Pinterest only: full native Pin description (Pinterest caps it at 800 characters) | [optional] |
+| **link** | **String** | Pinterest only: destination URL of the Pin, not the Pin page (see permalink) | [optional] |
+| **board_id** | **String** | Pinterest only: id of the board holding the Pin | [optional] |
+| **board_owner_username** | **String** | Pinterest only: username of the board owner | [optional] |
 
 ## Example
 
@@ -36,7 +41,12 @@ instance = Zernio::GetAccountPosts200ResponsePostsInner.new(
   reaction_count: null,
   share_count: null,
   cid: null,
-  subreddit: null
+  subreddit: null,
+  title: null,
+  description: null,
+  link: null,
+  board_id: null,
+  board_owner_username: null
 )
 ```
 
