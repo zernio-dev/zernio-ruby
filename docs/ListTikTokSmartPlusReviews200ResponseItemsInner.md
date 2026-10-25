@@ -9,7 +9,7 @@
 | **campaign_id** | **String** |  | [optional] |
 | **review** | [**TikTokSmartPlusAdLevelReview**](TikTokSmartPlusAdLevelReview.md) |  | [optional] |
 | **materials** | [**Array&lt;TikTokSmartPlusMaterialReview&gt;**](TikTokSmartPlusMaterialReview.md) | One entry per creative TikTok reviewed (&#x60;material_review_infos&#x60;). | [optional] |
-| **read_at** | **Time** | When the verdict was read from TikTok. | [optional] |
+| **read_at** | **Time** | When the verdict was read from TikTok, kept as is when served from the store. Older than &#x60;maxAgeSeconds&#x60; means stale. | [optional] |
 
 ## Example
 

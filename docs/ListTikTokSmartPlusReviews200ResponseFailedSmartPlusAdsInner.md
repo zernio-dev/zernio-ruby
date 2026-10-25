@@ -8,6 +8,7 @@
 | **ad_group_id** | **String** |  | [optional] |
 | **campaign_id** | **String** |  | [optional] |
 | **error** | [**ListTikTokSmartPlusReviews200ResponseFailedSmartPlusAdsInnerError**](ListTikTokSmartPlusReviews200ResponseFailedSmartPlusAdsInnerError.md) |  | [optional] |
+| **refused_at** | **Time** | When TikTok refused this ad. Null for a refusal stored before this field existed. | [optional] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = Zernio::ListTikTokSmartPlusReviews200ResponseFailedSmartPlusAdsInner.
   smart_plus_ad_id: null,
   ad_group_id: null,
   campaign_id: null,
-  error: null
+  error: null,
+  refused_at: null
 )
 ```
 
