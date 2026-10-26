@@ -47,6 +47,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**handle_o_auth_callback**](ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback |
 | [**initiate_telegram_connect**](ConnectApi.md#initiate_telegram_connect) | **POST** /v1/connect/telegram | Connect Telegram directly |
 | [**list_facebook_pages**](ConnectApi.md#list_facebook_pages) | **GET** /v1/connect/facebook/select-page | List Facebook pages |
+| [**list_google_analytics_properties**](ConnectApi.md#list_google_analytics_properties) | **GET** /v1/connect/googleanalytics/properties | List Google Analytics properties for a pending connect |
 | [**list_google_business_locations**](ConnectApi.md#list_google_business_locations) | **GET** /v1/connect/googlebusiness/locations | List Google Business Profile locations |
 | [**list_instagram_pages**](ConnectApi.md#list_instagram_pages) | **GET** /v1/connect/instagram/select-account | List Pages with a linked Instagram account |
 | [**list_linked_in_organizations**](ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs |
@@ -56,6 +57,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_whats_app_phone_numbers**](ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection |
 | [**resync_page_webhook_subscription**](ConnectApi.md#resync_page_webhook_subscription) | **POST** /v1/accounts/{accountId}/webhook-subscription | Re-subscribe a Facebook Page to Zernio&#39;s webhooks |
 | [**select_facebook_page**](ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page |
+| [**select_google_analytics_property**](ConnectApi.md#select_google_analytics_property) | **POST** /v1/connect/googleanalytics/select-property | Connect the chosen Google Analytics property |
 | [**select_google_business_location**](ConnectApi.md#select_google_business_location) | **POST** /v1/connect/googlebusiness/select-location | Select Google Business Profile location |
 | [**select_instagram_account**](ConnectApi.md#select_instagram_account) | **POST** /v1/connect/instagram/select-account | Select the Page whose Instagram account to connect |
 | [**select_linked_in_organization**](ConnectApi.md#select_linked_in_organization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org |
@@ -1756,7 +1758,7 @@ end
 
 Get Google Analytics OAuth connect URL
 
-Starts OAuth for Google Analytics (GA4). Each connected GA4 property becomes its own account with platform `googleanalytics`; it reads reports and does not post. Redirect the user to `authUrl`. When the Google account can read one property, Zernio connects it and redirects to `redirect_url` (or the dashboard) with `connected=googleanalytics`, `profileId`, `accountId` and `username` (the property name). When it can read several, the user first picks one on a Zernio-hosted page, which then redirects the same way. On failure the redirect carries `error`, `platform=googleanalytics` and `error_message`; errors include `googleanalytics_scope_missing` (the user unticked Analytics access) and `googleanalytics_no_properties`. Requested scope: `https://www.googleapis.com/auth/analytics.readonly`. 
+Starts OAuth for Google Analytics (GA4). Each connected GA4 property becomes its own account with platform `googleanalytics`; it reads reports and does not post. Redirect the user to `authUrl`. When the Google account can read one property, Zernio connects it and redirects to `redirect_url` (or the dashboard) with `connected=googleanalytics`, `profileId`, `accountId` and `username` (the property name). When it can read several, the user first picks one on a Zernio-hosted page, which then redirects the same way. To show your own picker instead, add `headless=true` to `redirect_url`: Zernio then redirects there with `step=select_property`, `profileId`, `platform=googleanalytics` and a `pendingDataToken` for `GET /v1/connect/googleanalytics/properties` and `POST /v1/connect/googleanalytics/select-property`. On failure the redirect carries `error`, `platform=googleanalytics` and `error_message`; errors include `googleanalytics_scope_missing` (the user unticked Analytics access) and `googleanalytics_no_properties`. Requested scope: `https://www.googleapis.com/auth/analytics.readonly`. 
 
 ### Examples
 
@@ -3215,6 +3217,80 @@ end
 - **Accept**: application/json
 
 
+## list_google_analytics_properties
+
+> <ListGoogleAnalyticsProperties200Response> list_google_analytics_properties(pending_data_token)
+
+List Google Analytics properties for a pending connect
+
+For headless flows. When the connect started with `redirect_url=...?headless=true` and the Google account can read several GA4 properties, Zernio redirects to your `redirect_url` with `step=select_property`, `profileId`, `platform=googleanalytics` and a `pendingDataToken`. Call this to list the properties and show your own picker, then call `POST /v1/connect/googleanalytics/select-property`. Listing does not consume the token. A headless token passes through your own URLs, so it is honored only together with your API key (or connect token) for the same profile. It expires after one hour. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+pending_data_token = 'pending_data_token_example' # String | Token from the headless redirect.
+
+begin
+  # List Google Analytics properties for a pending connect
+  result = api_instance.list_google_analytics_properties(pending_data_token)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_google_analytics_properties: #{e}"
+end
+```
+
+#### Using the list_google_analytics_properties_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListGoogleAnalyticsProperties200Response>, Integer, Hash)> list_google_analytics_properties_with_http_info(pending_data_token)
+
+```ruby
+begin
+  # List Google Analytics properties for a pending connect
+  data, status_code, headers = api_instance.list_google_analytics_properties_with_http_info(pending_data_token)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListGoogleAnalyticsProperties200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_google_analytics_properties_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **pending_data_token** | **String** | Token from the headless redirect. |  |
+
+### Return type
+
+[**ListGoogleAnalyticsProperties200Response**](ListGoogleAnalyticsProperties200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_google_business_locations
 
 > <ListGoogleBusinessLocations200Response> list_google_business_locations(opts)
@@ -3884,6 +3960,80 @@ end
 ### Return type
 
 [**SelectFacebookPage200Response**](SelectFacebookPage200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## select_google_analytics_property
+
+> <SelectGoogleAnalyticsProperty200Response> select_google_analytics_property(select_google_analytics_property_request)
+
+Connect the chosen Google Analytics property
+
+For headless flows. Connects the property the user picked as a `googleanalytics` account and returns where to send the user next: your `redirect_url` with `connected=googleanalytics`, `profileId`, `accountId` and `username`, or an `error` when the connect was refused (for example a billing block). Consumes the `pendingDataToken`; a refused or failed attempt leaves it usable for a retry. Send your API key (or connect token) for the same profile with a headless token. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+select_google_analytics_property_request = Zernio::SelectGoogleAnalyticsPropertyRequest.new({pending_data_token: 'pending_data_token_example', property_id: '312456789'}) # SelectGoogleAnalyticsPropertyRequest | 
+
+begin
+  # Connect the chosen Google Analytics property
+  result = api_instance.select_google_analytics_property(select_google_analytics_property_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->select_google_analytics_property: #{e}"
+end
+```
+
+#### Using the select_google_analytics_property_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SelectGoogleAnalyticsProperty200Response>, Integer, Hash)> select_google_analytics_property_with_http_info(select_google_analytics_property_request)
+
+```ruby
+begin
+  # Connect the chosen Google Analytics property
+  data, status_code, headers = api_instance.select_google_analytics_property_with_http_info(select_google_analytics_property_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SelectGoogleAnalyticsProperty200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->select_google_analytics_property_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **select_google_analytics_property_request** | [**SelectGoogleAnalyticsPropertyRequest**](SelectGoogleAnalyticsPropertyRequest.md) |  |  |
+
+### Return type
+
+[**SelectGoogleAnalyticsProperty200Response**](SelectGoogleAnalyticsProperty200Response.md)
 
 ### Authorization
 
