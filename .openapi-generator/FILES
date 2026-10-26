@@ -567,6 +567,8 @@ docs/CreateDiscordScheduledEventRequestEntityOneOf2.md
 docs/CreateDiscordThread200Response.md
 docs/CreateDiscordThread200ResponseData.md
 docs/CreateDiscordThreadRequest.md
+docs/CreateEventDestination201Response.md
+docs/CreateEventDestinationRequest.md
 docs/CreateGoogleAdAccountRequest.md
 docs/CreateGoogleAssetGroup200Response.md
 docs/CreateGoogleAssetGroup201Response.md
@@ -849,6 +851,7 @@ docs/ErrorResponseDetailsCreatedObjectsInner.md
 docs/ErrorResponseDetailsUnconfirmedWrite.md
 docs/EstimateAdReach200Response.md
 docs/EstimateAdReachRequest.md
+docs/EventDestination.md
 docs/Expired.md
 docs/ExternalPostMediaItem.md
 docs/ExternalPostSummary.md
@@ -1653,6 +1656,7 @@ docs/ListDiscordGuildRoles200ResponseDataInner.md
 docs/ListDiscordPinnedMessages200Response.md
 docs/ListDiscordPinnedMessages200ResponseDataInner.md
 docs/ListDiscordScheduledEvents200Response.md
+docs/ListEventDestinations200Response.md
 docs/ListFacebookPages200Response.md
 docs/ListFacebookPages200ResponsePagesInner.md
 docs/ListFacebookTaggedPosts200Response.md
@@ -2210,6 +2214,12 @@ docs/SendDiscordDirectMessage200ResponseAccount.md
 docs/SendDiscordDirectMessage200ResponseRecipient.md
 docs/SendDiscordDirectMessageRequest.md
 docs/SendDiscordDirectMessageRequestAttachmentsInner.md
+docs/SendEvents200Response.md
+docs/SendEvents200ResponseDestinationsInner.md
+docs/SendEvents200ResponseDestinationsInnerFailuresInner.md
+docs/SendEventsRequest.md
+docs/SendEventsRequestConsent.md
+docs/SendEventsRequestDestinationsInner.md
 docs/SendInboxMessage200Response.md
 docs/SendInboxMessage200ResponseData.md
 docs/SendInboxMessage200ResponseDataAttachmentsInner.md
@@ -3592,6 +3602,8 @@ lib/zernio-sdk/models/create_discord_scheduled_event_request_entity_one_of2.rb
 lib/zernio-sdk/models/create_discord_thread200_response.rb
 lib/zernio-sdk/models/create_discord_thread200_response_data.rb
 lib/zernio-sdk/models/create_discord_thread_request.rb
+lib/zernio-sdk/models/create_event_destination201_response.rb
+lib/zernio-sdk/models/create_event_destination_request.rb
 lib/zernio-sdk/models/create_google_ad_account_request.rb
 lib/zernio-sdk/models/create_google_asset_group200_response.rb
 lib/zernio-sdk/models/create_google_asset_group201_response.rb
@@ -3872,6 +3884,7 @@ lib/zernio-sdk/models/error_response_details_created_objects_inner.rb
 lib/zernio-sdk/models/error_response_details_unconfirmed_write.rb
 lib/zernio-sdk/models/estimate_ad_reach200_response.rb
 lib/zernio-sdk/models/estimate_ad_reach_request.rb
+lib/zernio-sdk/models/event_destination.rb
 lib/zernio-sdk/models/expired.rb
 lib/zernio-sdk/models/external_post_media_item.rb
 lib/zernio-sdk/models/external_post_summary.rb
@@ -4661,6 +4674,7 @@ lib/zernio-sdk/models/list_discord_guild_roles200_response_data_inner.rb
 lib/zernio-sdk/models/list_discord_pinned_messages200_response.rb
 lib/zernio-sdk/models/list_discord_pinned_messages200_response_data_inner.rb
 lib/zernio-sdk/models/list_discord_scheduled_events200_response.rb
+lib/zernio-sdk/models/list_event_destinations200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response_pages_inner.rb
 lib/zernio-sdk/models/list_facebook_tagged_posts200_response.rb
@@ -5202,6 +5216,12 @@ lib/zernio-sdk/models/send_discord_direct_message200_response_account.rb
 lib/zernio-sdk/models/send_discord_direct_message200_response_recipient.rb
 lib/zernio-sdk/models/send_discord_direct_message_request.rb
 lib/zernio-sdk/models/send_discord_direct_message_request_attachments_inner.rb
+lib/zernio-sdk/models/send_events200_response.rb
+lib/zernio-sdk/models/send_events200_response_destinations_inner.rb
+lib/zernio-sdk/models/send_events200_response_destinations_inner_failures_inner.rb
+lib/zernio-sdk/models/send_events_request.rb
+lib/zernio-sdk/models/send_events_request_consent.rb
+lib/zernio-sdk/models/send_events_request_destinations_inner.rb
 lib/zernio-sdk/models/send_inbox_message200_response.rb
 lib/zernio-sdk/models/send_inbox_message200_response_data.rb
 lib/zernio-sdk/models/send_inbox_message200_response_data_attachments_inner.rb
@@ -6558,6 +6578,8 @@ spec/models/create_discord_scheduled_event_request_spec.rb
 spec/models/create_discord_thread200_response_data_spec.rb
 spec/models/create_discord_thread200_response_spec.rb
 spec/models/create_discord_thread_request_spec.rb
+spec/models/create_event_destination201_response_spec.rb
+spec/models/create_event_destination_request_spec.rb
 spec/models/create_google_ad_account_request_spec.rb
 spec/models/create_google_asset_group200_response_spec.rb
 spec/models/create_google_asset_group201_response_asset_group_spec.rb
@@ -6838,6 +6860,7 @@ spec/models/error_response_details_unconfirmed_write_spec.rb
 spec/models/error_response_spec.rb
 spec/models/estimate_ad_reach200_response_spec.rb
 spec/models/estimate_ad_reach_request_spec.rb
+spec/models/event_destination_spec.rb
 spec/models/expired_spec.rb
 spec/models/external_post_media_item_spec.rb
 spec/models/external_post_summary_analytics_spec.rb
@@ -7627,6 +7650,7 @@ spec/models/list_discord_guild_roles200_response_spec.rb
 spec/models/list_discord_pinned_messages200_response_data_inner_spec.rb
 spec/models/list_discord_pinned_messages200_response_spec.rb
 spec/models/list_discord_scheduled_events200_response_spec.rb
+spec/models/list_event_destinations200_response_spec.rb
 spec/models/list_facebook_pages200_response_pages_inner_spec.rb
 spec/models/list_facebook_pages200_response_spec.rb
 spec/models/list_facebook_tagged_posts200_response_spec.rb
@@ -8168,6 +8192,12 @@ spec/models/send_discord_direct_message200_response_recipient_spec.rb
 spec/models/send_discord_direct_message200_response_spec.rb
 spec/models/send_discord_direct_message_request_attachments_inner_spec.rb
 spec/models/send_discord_direct_message_request_spec.rb
+spec/models/send_events200_response_destinations_inner_failures_inner_spec.rb
+spec/models/send_events200_response_destinations_inner_spec.rb
+spec/models/send_events200_response_spec.rb
+spec/models/send_events_request_consent_spec.rb
+spec/models/send_events_request_destinations_inner_spec.rb
+spec/models/send_events_request_spec.rb
 spec/models/send_inbox_message200_response_data_attachments_inner_spec.rb
 spec/models/send_inbox_message200_response_data_partial_failure_platform_error_spec.rb
 spec/models/send_inbox_message200_response_data_partial_failure_spec.rb
