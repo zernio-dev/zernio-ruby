@@ -1,4 +1,4 @@
-# Zernio::GoogleListingGroupDimensionProductBrand
+# Zernio::GoogleAnalyticsReportRowsInnerDimensionValuesInner
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GoogleListingGroupDimensionProductBrand.new(
+instance = Zernio::GoogleAnalyticsReportRowsInnerDimensionValuesInner.new(
   value: null
 )
 ```

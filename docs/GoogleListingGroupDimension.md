@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **product_brand** | [**GoogleListingGroupDimensionProductBrand**](GoogleListingGroupDimensionProductBrand.md) |  | [optional] |
+| **product_brand** | [**GoogleAnalyticsReportRowsInnerDimensionValuesInner**](GoogleAnalyticsReportRowsInnerDimensionValuesInner.md) |  | [optional] |
 | **product_category** | [**GoogleListingGroupDimensionProductCategory**](GoogleListingGroupDimensionProductCategory.md) |  | [optional] |
 | **product_type** | [**GoogleListingGroupDimensionProductType**](GoogleListingGroupDimensionProductType.md) |  | [optional] |
-| **product_item_id** | [**GoogleListingGroupDimensionProductBrand**](GoogleListingGroupDimensionProductBrand.md) |  | [optional] |
+| **product_item_id** | [**GoogleAnalyticsReportRowsInnerDimensionValuesInner**](GoogleAnalyticsReportRowsInnerDimensionValuesInner.md) |  | [optional] |
 | **product_condition** | [**GoogleListingGroupDimensionProductCondition**](GoogleListingGroupDimensionProductCondition.md) |  | [optional] |
 | **product_channel** | [**GoogleListingGroupDimensionProductChannel**](GoogleListingGroupDimensionProductChannel.md) |  | [optional] |
 | **product_custom_attribute** | [**GoogleListingGroupDimensionProductCustomAttribute**](GoogleListingGroupDimensionProductCustomAttribute.md) |  | [optional] |

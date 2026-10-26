@@ -15,6 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_facebook_post_earnings**](AnalyticsApi.md#get_facebook_post_earnings) | **GET** /v1/analytics/facebook/post-earnings | Get Facebook post monetization earnings |
 | [**get_facebook_post_reactions**](AnalyticsApi.md#get_facebook_post_reactions) | **GET** /v1/accounts/{accountId}/facebook-post-reactions | Get Facebook post reactions |
 | [**get_follower_stats**](AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
+| [**get_google_analytics_metadata**](AnalyticsApi.md#get_google_analytics_metadata) | **GET** /v1/analytics/googleanalytics/metadata | List Google Analytics (GA4) dimensions and metrics |
 | [**get_google_business_performance**](AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get Google Business Profile performance metrics |
 | [**get_google_business_search_keywords**](AnalyticsApi.md#get_google_business_search_keywords) | **GET** /v1/analytics/googlebusiness/search-keywords | Get Google Business Profile search keywords |
 | [**get_instagram_account_insights**](AnalyticsApi.md#get_instagram_account_insights) | **GET** /v1/analytics/instagram/account-insights | Get Instagram insights |
@@ -35,6 +36,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_you_tube_video_retention**](AnalyticsApi.md#get_you_tube_video_retention) | **GET** /v1/analytics/youtube/video-retention | Get YouTube video retention curve |
 | [**list_facebook_tagged_posts**](AnalyticsApi.md#list_facebook_tagged_posts) | **GET** /v1/accounts/{accountId}/facebook-tagged-posts | List the posts a Facebook Page is tagged in |
 | [**list_facebook_visitor_posts**](AnalyticsApi.md#list_facebook_visitor_posts) | **GET** /v1/accounts/{accountId}/facebook-visitor-posts | List visitor posts on a Facebook Page |
+| [**run_google_analytics_realtime_report**](AnalyticsApi.md#run_google_analytics_realtime_report) | **POST** /v1/analytics/googleanalytics/realtime | Run a Google Analytics (GA4) realtime report |
+| [**run_google_analytics_report**](AnalyticsApi.md#run_google_analytics_report) | **POST** /v1/analytics/googleanalytics/report | Run a Google Analytics (GA4) report |
 | [**sync_external_posts**](AnalyticsApi.md#sync_external_posts) | **POST** /v1/posts/sync-external | Sync an external post |
 
 
@@ -902,6 +905,75 @@ end
 ### Return type
 
 [**FollowerStatsResponse**](FollowerStatsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_google_analytics_metadata
+
+> <GetGoogleAnalyticsMetadata200Response> get_google_analytics_metadata(account_id)
+
+List Google Analytics (GA4) dimensions and metrics
+
+Every dimension and metric the connected GA4 property accepts in a report, including its custom definitions. Cached for one hour. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | Zernio account ID of the Google Analytics connection.
+
+begin
+  # List Google Analytics (GA4) dimensions and metrics
+  result = api_instance.get_google_analytics_metadata(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_google_analytics_metadata: #{e}"
+end
+```
+
+#### Using the get_google_analytics_metadata_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetGoogleAnalyticsMetadata200Response>, Integer, Hash)> get_google_analytics_metadata_with_http_info(account_id)
+
+```ruby
+begin
+  # List Google Analytics (GA4) dimensions and metrics
+  data, status_code, headers = api_instance.get_google_analytics_metadata_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetGoogleAnalyticsMetadata200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_google_analytics_metadata_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio account ID of the Google Analytics connection. |  |
+
+### Return type
+
+[**GetGoogleAnalyticsMetadata200Response**](GetGoogleAnalyticsMetadata200Response.md)
 
 ### Authorization
 
@@ -2482,6 +2554,144 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## run_google_analytics_realtime_report
+
+> <GoogleAnalyticsReport> run_google_analytics_realtime_report(run_google_analytics_realtime_report_request)
+
+Run a Google Analytics (GA4) realtime report
+
+Activity on a connected GA4 property in the last 30 minutes (up to 60 for Analytics 360), through Google's `runRealtimeReport`. Not cached. Only realtime dimensions and metrics are accepted, e.g. `country`, `unifiedScreenName` with `activeUsers`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+run_google_analytics_realtime_report_request = Zernio::RunGoogleAnalyticsRealtimeReportRequest.new({account_id: 'account_id_example', metrics: [sessions,  activeUsers]}) # RunGoogleAnalyticsRealtimeReportRequest | 
+
+begin
+  # Run a Google Analytics (GA4) realtime report
+  result = api_instance.run_google_analytics_realtime_report(run_google_analytics_realtime_report_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->run_google_analytics_realtime_report: #{e}"
+end
+```
+
+#### Using the run_google_analytics_realtime_report_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GoogleAnalyticsReport>, Integer, Hash)> run_google_analytics_realtime_report_with_http_info(run_google_analytics_realtime_report_request)
+
+```ruby
+begin
+  # Run a Google Analytics (GA4) realtime report
+  data, status_code, headers = api_instance.run_google_analytics_realtime_report_with_http_info(run_google_analytics_realtime_report_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GoogleAnalyticsReport>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->run_google_analytics_realtime_report_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **run_google_analytics_realtime_report_request** | [**RunGoogleAnalyticsRealtimeReportRequest**](RunGoogleAnalyticsRealtimeReportRequest.md) |  |  |
+
+### Return type
+
+[**GoogleAnalyticsReport**](GoogleAnalyticsReport.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## run_google_analytics_report
+
+> <GoogleAnalyticsReport> run_google_analytics_report(run_google_analytics_report_request)
+
+Run a Google Analytics (GA4) report
+
+Runs a report on a connected GA4 property through Google's Data API (`runReport`). Pick any GA4 dimensions and metrics; filters and ordering use Google's own shapes. Identical requests on the same property are cached for 10 minutes. Google meters each property by quota tokens; when it is used up the request returns 429 until Google refills it (hourly quotas within the hour, daily ones at midnight Pacific time). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+run_google_analytics_report_request = Zernio::RunGoogleAnalyticsReportRequest.new({account_id: 'account_id_example', metrics: [sessions,  activeUsers]}) # RunGoogleAnalyticsReportRequest | 
+
+begin
+  # Run a Google Analytics (GA4) report
+  result = api_instance.run_google_analytics_report(run_google_analytics_report_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->run_google_analytics_report: #{e}"
+end
+```
+
+#### Using the run_google_analytics_report_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GoogleAnalyticsReport>, Integer, Hash)> run_google_analytics_report_with_http_info(run_google_analytics_report_request)
+
+```ruby
+begin
+  # Run a Google Analytics (GA4) report
+  data, status_code, headers = api_instance.run_google_analytics_report_with_http_info(run_google_analytics_report_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GoogleAnalyticsReport>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->run_google_analytics_report_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **run_google_analytics_report_request** | [**RunGoogleAnalyticsReportRequest**](RunGoogleAnalyticsReportRequest.md) |  |  |
+
+### Return type
+
+[**GoogleAnalyticsReport**](GoogleAnalyticsReport.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
