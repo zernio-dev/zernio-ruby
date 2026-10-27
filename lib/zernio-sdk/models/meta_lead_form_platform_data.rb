@@ -29,8 +29,14 @@ module Zernio
 
     attr_accessor :thank_you_button_text
 
-    # Meta thank_you_page.button_type. Defaults to VIEW_WEBSITE. Meta rejects MESSAGE_BUSINESS on thank-you pages with (#100) This button type is not yet supported for Thank You Page.
+    # Meta thank_you_page.button_type. Defaults to VIEW_WEBSITE. Case-insensitive, sent to Meta in uppercase. CALL_BUSINESS requires businessPhoneNumber and countryCode (a 400 otherwise). Meta rejects MESSAGE_BUSINESS on thank-you pages with (#100) This button type is not yet supported for Thank You Page.
     attr_accessor :thank_you_button_type
+
+    # International E.164 number the CALL_BUSINESS thank-you button dials (Meta thank_you_page.business_phone_number). It must start with + and the country calling code matching countryCode; spaces, dashes, dots and parentheses are stripped, and a local number such as 2025550123 is a 400. Required when thankYouButtonType is CALL_BUSINESS and a 400 with any other button type. Accepted only inside platformSpecificData: a top-level businessPhoneNumber is a 400.
+    attr_accessor :business_phone_number
+
+    # ISO 3166-1 alpha-2 country of businessPhoneNumber (Meta thank_you_page.country_code), sent in uppercase. Required when thankYouButtonType is CALL_BUSINESS and a 400 with any other button type. Accepted only inside platformSpecificData: a top-level countryCode is a 400.
+    attr_accessor :country_code
 
     attr_accessor :thank_you_website_url
 
@@ -62,6 +68,8 @@ module Zernio
         :'thank_you_body' => :'thankYouBody',
         :'thank_you_button_text' => :'thankYouButtonText',
         :'thank_you_button_type' => :'thankYouButtonType',
+        :'business_phone_number' => :'businessPhoneNumber',
+        :'country_code' => :'countryCode',
         :'thank_you_website_url' => :'thankYouWebsiteUrl',
         :'thank_you_enable_messenger' => :'thankYouEnableMessenger',
         :'is_optimized_for_quality' => :'isOptimizedForQuality',
@@ -94,6 +102,8 @@ module Zernio
         :'thank_you_body' => :'String',
         :'thank_you_button_text' => :'String',
         :'thank_you_button_type' => :'String',
+        :'business_phone_number' => :'String',
+        :'country_code' => :'String',
         :'thank_you_website_url' => :'String',
         :'thank_you_enable_messenger' => :'Boolean',
         :'is_optimized_for_quality' => :'Boolean',
@@ -163,6 +173,14 @@ module Zernio
         self.thank_you_button_type = attributes[:'thank_you_button_type']
       end
 
+      if attributes.key?(:'business_phone_number')
+        self.business_phone_number = attributes[:'business_phone_number']
+      end
+
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
+      end
+
       if attributes.key?(:'thank_you_website_url')
         self.thank_you_website_url = attributes[:'thank_you_website_url']
       end
@@ -217,6 +235,11 @@ module Zernio
         invalid_properties.push('invalid value for "privacy_policy_link_text", the character length must be smaller than or equal to 70.')
       end
 
+      pattern = Regexp.new(/^[A-Za-z]{2}$/)
+      if !@country_code.nil? && @country_code !~ pattern
+        invalid_properties.push("invalid value for \"country_code\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -227,6 +250,7 @@ module Zernio
       return false if @questions.nil?
       return false if @questions.length < 1
       return false if !@privacy_policy_link_text.nil? && @privacy_policy_link_text.to_s.length > 70
+      return false if !@country_code.nil? && @country_code !~ Regexp.new(/^[A-Za-z]{2}$/)
       true
     end
 
@@ -258,6 +282,21 @@ module Zernio
       @privacy_policy_link_text = privacy_policy_link_text
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] country_code Value to be assigned
+    def country_code=(country_code)
+      if country_code.nil?
+        fail ArgumentError, 'country_code cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[A-Za-z]{2}$/)
+      if country_code !~ pattern
+        fail ArgumentError, "invalid value for \"country_code\", must conform to the pattern #{pattern}."
+      end
+
+      @country_code = country_code
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -271,6 +310,8 @@ module Zernio
           thank_you_body == o.thank_you_body &&
           thank_you_button_text == o.thank_you_button_text &&
           thank_you_button_type == o.thank_you_button_type &&
+          business_phone_number == o.business_phone_number &&
+          country_code == o.country_code &&
           thank_you_website_url == o.thank_you_website_url &&
           thank_you_enable_messenger == o.thank_you_enable_messenger &&
           is_optimized_for_quality == o.is_optimized_for_quality &&
@@ -290,7 +331,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [questions, privacy_policy_link_text, follow_up_action_url, locale, thank_you_title, thank_you_body, thank_you_button_text, thank_you_button_type, thank_you_website_url, thank_you_enable_messenger, is_optimized_for_quality, is_phone_sms_verify_enabled, block_display_for_non_targeted_viewer, question_page_custom_headline, context_card, custom_disclaimer].hash
+      [questions, privacy_policy_link_text, follow_up_action_url, locale, thank_you_title, thank_you_body, thank_you_button_text, thank_you_button_type, business_phone_number, country_code, thank_you_website_url, thank_you_enable_messenger, is_optimized_for_quality, is_phone_sms_verify_enabled, block_display_for_non_targeted_viewer, question_page_custom_headline, context_card, custom_disclaimer].hash
     end
 
     # Builds the object from hash
