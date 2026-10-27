@@ -28,6 +28,7 @@ docs/AdActivationStatus.md
 docs/AdAnalyticsResponse.md
 docs/AdAnalyticsResponseAd.md
 docs/AdAnalyticsResponseAnalytics.md
+docs/AdAppliedDefaults.md
 docs/AdAudiencesApi.md
 docs/AdBudget.md
 docs/AdCampaign.md
@@ -3114,6 +3115,7 @@ lib/zernio-sdk/models/ad_activation_status.rb
 lib/zernio-sdk/models/ad_analytics_response.rb
 lib/zernio-sdk/models/ad_analytics_response_ad.rb
 lib/zernio-sdk/models/ad_analytics_response_analytics.rb
+lib/zernio-sdk/models/ad_applied_defaults.rb
 lib/zernio-sdk/models/ad_budget.rb
 lib/zernio-sdk/models/ad_campaign.rb
 lib/zernio-sdk/models/ad_campaign_budget.rb
@@ -6119,6 +6121,7 @@ spec/models/ad_activation_status_spec.rb
 spec/models/ad_analytics_response_ad_spec.rb
 spec/models/ad_analytics_response_analytics_spec.rb
 spec/models/ad_analytics_response_spec.rb
+spec/models/ad_applied_defaults_spec.rb
 spec/models/ad_budget_spec.rb
 spec/models/ad_campaign_budget_spec.rb
 spec/models/ad_campaign_spec.rb

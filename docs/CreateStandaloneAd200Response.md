@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **validate_only** | **Boolean** | Always true in a validate-only response. | [optional] |
+| **applied_defaults** | [**AdAppliedDefaults**](AdAppliedDefaults.md) |  | [optional] |
 | **results** | [**Array&lt;CreateStandaloneAd200ResponseResultsInner&gt;**](CreateStandaloneAd200ResponseResultsInner.md) |  | [optional] |
 | **message** | **String** |  | [optional] |
 
@@ -15,6 +16,7 @@ require 'zernio-sdk'
 
 instance = Zernio::CreateStandaloneAd200Response.new(
   validate_only: null,
+  applied_defaults: null,
   results: null,
   message: null
 )

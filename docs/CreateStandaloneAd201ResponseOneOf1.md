@@ -7,6 +7,7 @@
 | **ads** | [**Array&lt;Ad&gt;**](Ad.md) |  | [optional] |
 | **platform_campaign_id** | **String** |  | [optional] |
 | **platform_ad_set_id** | **String** |  | [optional] |
+| **applied_defaults** | [**AdAppliedDefaults**](AdAppliedDefaults.md) |  | [optional] |
 | **message** | **String** |  | [optional] |
 
 ## Example
@@ -18,6 +19,7 @@ instance = Zernio::CreateStandaloneAd201ResponseOneOf1.new(
   ads: null,
   platform_campaign_id: null,
   platform_ad_set_id: null,
+  applied_defaults: null,
   message: null
 )
 ```
