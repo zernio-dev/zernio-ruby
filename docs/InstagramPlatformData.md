@@ -7,6 +7,7 @@
 | **content_type** | **String** | Set to &#39;story&#39; to publish as a Story. Default posts become Reels or feed depending on media. | [optional] |
 | **share_to_feed** | **Boolean** | For Reels only. When true (default), the Reel appears on both the Reels tab and your main profile feed. Set to false to post to the Reels tab only. | [optional][default to true] |
 | **collaborators** | **Array&lt;String&gt;** | Up to 3 Instagram usernames to invite as collaborators (feed/Reels only) | [optional] |
+| **dropped_collaborators** | [**Array&lt;InstagramPlatformDataDroppedCollaboratorsInner&gt;**](InstagramPlatformDataDroppedCollaboratorsInner.md) | Output only. Set by Zernio when Instagram rejected these collaborators and the retry was sent without them. | [optional] |
 | **first_comment** | **String** | Optional first comment to add after the post is created (not applied to Stories) | [optional] |
 | **trial_params** | [**InstagramPlatformDataTrialParams**](InstagramPlatformDataTrialParams.md) |  | [optional] |
 | **user_tags** | [**Array&lt;InstagramPlatformDataUserTagsInner&gt;**](InstagramPlatformDataUserTagsInner.md) | Tag Instagram users by username. The tag shape depends on the media: photos require x/y coordinates, Reels and videos take username only (coordinates are ignored), stories accept optional coordinates. For carousels, use mediaIndex to target specific slides (defaults to 0); video slides take username-only tags. Photo tags without valid coordinates are skipped. | [optional] |
@@ -31,6 +32,7 @@ instance = Zernio::InstagramPlatformData.new(
   content_type: null,
   share_to_feed: null,
   collaborators: null,
+  dropped_collaborators: null,
   first_comment: null,
   trial_params: null,
   user_tags: null,

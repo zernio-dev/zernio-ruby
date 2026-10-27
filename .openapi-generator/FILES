@@ -1535,6 +1535,7 @@ docs/InstagramMentionedCommentMedia.md
 docs/InstagramMentionedMedia.md
 docs/InstagramPlatformData.md
 docs/InstagramPlatformDataAudioConfiguration.md
+docs/InstagramPlatformDataDroppedCollaboratorsInner.md
 docs/InstagramPlatformDataTrialParams.md
 docs/InstagramPlatformDataUserTagsInner.md
 docs/InstagramTaggedMedia.md
@@ -4672,6 +4673,7 @@ lib/zernio-sdk/models/instagram_mentioned_comment_media.rb
 lib/zernio-sdk/models/instagram_mentioned_media.rb
 lib/zernio-sdk/models/instagram_platform_data.rb
 lib/zernio-sdk/models/instagram_platform_data_audio_configuration.rb
+lib/zernio-sdk/models/instagram_platform_data_dropped_collaborators_inner.rb
 lib/zernio-sdk/models/instagram_platform_data_trial_params.rb
 lib/zernio-sdk/models/instagram_platform_data_user_tags_inner.rb
 lib/zernio-sdk/models/instagram_tagged_media.rb
@@ -7763,6 +7765,7 @@ spec/models/instagram_mentioned_comment_media_spec.rb
 spec/models/instagram_mentioned_comment_spec.rb
 spec/models/instagram_mentioned_media_spec.rb
 spec/models/instagram_platform_data_audio_configuration_spec.rb
+spec/models/instagram_platform_data_dropped_collaborators_inner_spec.rb
 spec/models/instagram_platform_data_spec.rb
 spec/models/instagram_platform_data_trial_params_spec.rb
 spec/models/instagram_platform_data_user_tags_inner_spec.rb
