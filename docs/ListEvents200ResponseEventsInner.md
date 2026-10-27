@@ -19,6 +19,7 @@
 | **has_email** | **Boolean** |  | [optional] |
 | **has_phone** | **Boolean** |  | [optional] |
 | **has_external_id** | **Boolean** |  | [optional] |
+| **ad** | [**ListEvents200ResponseEventsInnerAd**](ListEvents200ResponseEventsInnerAd.md) |  | [optional] |
 
 ## Example
 
@@ -40,7 +41,8 @@ instance = Zernio::ListEvents200ResponseEventsInner.new(
   destinations_sent: null,
   has_email: null,
   has_phone: null,
-  has_external_id: null
+  has_external_id: null,
+  ad: null
 )
 ```
 

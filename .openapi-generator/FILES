@@ -1738,6 +1738,7 @@ docs/ListEmailThreads200Response.md
 docs/ListEventDestinations200Response.md
 docs/ListEvents200Response.md
 docs/ListEvents200ResponseEventsInner.md
+docs/ListEvents200ResponseEventsInnerAd.md
 docs/ListEvents200ResponseEventsInnerClickIds.md
 docs/ListEvents200ResponseEventsInnerUtm.md
 docs/ListFacebookPages200Response.md
@@ -4879,6 +4880,7 @@ lib/zernio-sdk/models/list_email_threads200_response.rb
 lib/zernio-sdk/models/list_event_destinations200_response.rb
 lib/zernio-sdk/models/list_events200_response.rb
 lib/zernio-sdk/models/list_events200_response_events_inner.rb
+lib/zernio-sdk/models/list_events200_response_events_inner_ad.rb
 lib/zernio-sdk/models/list_events200_response_events_inner_click_ids.rb
 lib/zernio-sdk/models/list_events200_response_events_inner_utm.rb
 lib/zernio-sdk/models/list_facebook_pages200_response.rb
@@ -7976,6 +7978,7 @@ spec/models/list_email_folders200_response_spec.rb
 spec/models/list_email_messages200_response_spec.rb
 spec/models/list_email_threads200_response_spec.rb
 spec/models/list_event_destinations200_response_spec.rb
+spec/models/list_events200_response_events_inner_ad_spec.rb
 spec/models/list_events200_response_events_inner_click_ids_spec.rb
 spec/models/list_events200_response_events_inner_spec.rb
 spec/models/list_events200_response_events_inner_utm_spec.rb
