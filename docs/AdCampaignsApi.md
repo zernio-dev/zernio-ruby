@@ -19,6 +19,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad**](AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
 | [**delete_ad_set**](AdCampaignsApi.md#delete_ad_set) | **DELETE** /v1/ads/ad-sets/{adSetId} | Delete an ad set |
+| [**dismiss_ads_alert**](AdCampaignsApi.md#dismiss_ads_alert) | **POST** /v1/ads/alerts/{alertId}/dismiss | Dismiss an ads alert |
 | [**dismiss_google_recommendations**](AdCampaignsApi.md#dismiss_google_recommendations) | **POST** /v1/ads/recommendations/dismiss | Dismiss Google Ads recommendations |
 | [**duplicate_ad**](AdCampaignsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad |
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
@@ -41,6 +42,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_keywords**](AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords |
 | [**list_ad_sets**](AdCampaignsApi.md#list_ad_sets) | **GET** /v1/ads/ad-sets | List ad sets |
 | [**list_ads**](AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads |
+| [**list_ads_alerts**](AdCampaignsApi.md#list_ads_alerts) | **GET** /v1/ads/alerts | List ads that need attention |
 | [**list_bid_strategies**](AdCampaignsApi.md#list_bid_strategies) | **GET** /v1/ads/bid-strategies | List portfolio bid strategies |
 | [**list_campaign_assets**](AdCampaignsApi.md#list_campaign_assets) | **GET** /v1/ads/campaigns/{campaignId}/assets | List campaign assets |
 | [**list_campaign_negative_keyword_lists**](AdCampaignsApi.md#list_campaign_negative_keyword_lists) | **GET** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | List campaign negative lists |
@@ -1131,6 +1133,75 @@ end
 - **Accept**: application/json
 
 
+## dismiss_ads_alert
+
+> <DismissAdsAlert200Response> dismiss_ads_alert(alert_id)
+
+Dismiss an ads alert
+
+Hides an alert from `GET /v1/ads/alerts` for 30 days for the calling user. If the problem is still there after that, the alert comes back. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+alert_id = 'alert_id_example' # String | The `id` of an alert from GET /v1/ads/alerts.
+
+begin
+  # Dismiss an ads alert
+  result = api_instance.dismiss_ads_alert(alert_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->dismiss_ads_alert: #{e}"
+end
+```
+
+#### Using the dismiss_ads_alert_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DismissAdsAlert200Response>, Integer, Hash)> dismiss_ads_alert_with_http_info(alert_id)
+
+```ruby
+begin
+  # Dismiss an ads alert
+  data, status_code, headers = api_instance.dismiss_ads_alert_with_http_info(alert_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DismissAdsAlert200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->dismiss_ads_alert_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **alert_id** | **String** | The &#x60;id&#x60; of an alert from GET /v1/ads/alerts. |  |
+
+### Return type
+
+[**DismissAdsAlert200Response**](DismissAdsAlert200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## dismiss_google_recommendations
 
 > <ApplyGoogleRecommendations200Response> dismiss_google_recommendations(dismiss_google_recommendations_request)
@@ -1829,7 +1900,8 @@ opts = {
   min_spend: 8.14, # Float | Return only campaigns whose spend between `fromDate` and `toDate` reaches this amount. Expressed in each campaign's OWN currency (the `currency` field on the campaign node): spend is stored per ad account in its native currency and one response can span several. Implies `hasDelivery`; `minSpend=0` applies no filter.
   sort: 'newest', # String | Campaign-level sort order. `newest` (default) / `oldest` order by the campaign's newest-ad createdAt. `spend_desc` / `spend_asc` order by aggregated spend in the requested date range; campaigns with no spend land at the end.
   time_increment: 1, # Integer | Set to `1` to also return a daily breakdown. Mirrors Meta Insights' `time_increment=1`: each node gains a `daily[]` array of per-day metrics (same fields as the aggregated `metrics`) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only `1` (daily) is supported. The daily series covers the same date range and uses the same source data as `metrics`, except `reach` on Meta and TikTok: the range total is the platform's de-duplicated value, so daily reach does not sum to it. See `dailyLevel` to control which levels carry it.
-  daily_level: 'campaign' # String | Which tree levels get the `daily[]` series when `timeIncrement=1`. `campaign` (default) attaches it on campaign nodes only: the common per-campaign-trend case, and the smallest payload. `adset` adds it on ad sets too; `ad` adds it on every ad in `ads[]` as well (heaviest: a long range × up to 100 ads per ad set). Scope with `campaignId` to keep `ad`-level responses small. Ignored when `timeIncrement` is unset.
+  daily_level: 'campaign', # String | Which tree levels get the `daily[]` series when `timeIncrement=1`. `campaign` (default) attaches it on campaign nodes only: the common per-campaign-trend case, and the smallest payload. `adset` adds it on ad sets too; `ad` adds it on every ad in `ads[]` as well (heaviest: a long range × up to 100 ads per ad set). Scope with `campaignId` to keep `ad`-level responses small. Ignored when `timeIncrement` is unset.
+  compare: 'previous' # String | Set to `previous` to also read the period of the same length that ends the day before `fromDate`. Every campaign, ad set and ad gains `previousMetrics` (same fields as `metrics`) and the response gains `previousRange`, so a table can show the change against the previous period in one call.
 }
 
 begin
@@ -1882,6 +1954,7 @@ end
 | **sort** | **String** | Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. | [optional][default to &#39;newest&#39;] |
 | **time_increment** | **Integer** | Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it. | [optional] |
 | **daily_level** | **String** | Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only: the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest: a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset. | [optional][default to &#39;campaign&#39;] |
+| **compare** | **String** | Set to &#x60;previous&#x60; to also read the period of the same length that ends the day before &#x60;fromDate&#x60;. Every campaign, ad set and ad gains &#x60;previousMetrics&#x60; (same fields as &#x60;metrics&#x60;) and the response gains &#x60;previousRange&#x60;, so a table can show the change against the previous period in one call. | [optional] |
 
 ### Return type
 
@@ -1922,7 +1995,8 @@ opts = {
   ad_account_id: 'ad_account_id_example', # String | Optional platform-native ad account ID (e.g. Meta `act_…`, TikTok advertiser ID). Use when the connection wraps multiple platform ad accounts and the chart should show one only. Note: rows ingested before 2026-05-13 don't carry this column; the recurring 7-day re-sync repopulates them naturally.
   from_date: Date.parse('2013-10-20'), # Date | Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago.
   to_date: Date.parse('2013-10-20'), # Date | Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range.
-  platform: 'facebook' # String | Restrict to one platform.
+  platform: 'facebook', # String | Restrict to one platform.
+  compare: 'previous' # String | Set to `previous` to also return `previousRows` for the period of the same length that ends the day before `fromDate`, with that period as `previousRange`. Needs a `fromDate` (sent or defaulted); `toDate` alone answers 400.
 }
 
 begin
@@ -1961,6 +2035,7 @@ end
 | **from_date** | **Date** | Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
 | **to_date** | **Date** | Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range. | [optional] |
 | **platform** | **String** | Restrict to one platform. | [optional] |
+| **compare** | **String** | Set to &#x60;previous&#x60; to also return &#x60;previousRows&#x60; for the period of the same length that ends the day before &#x60;fromDate&#x60;, with that period as &#x60;previousRange&#x60;. Needs a &#x60;fromDate&#x60; (sent or defaulted); &#x60;toDate&#x60; alone answers 400. | [optional] |
 
 ### Return type
 
@@ -2864,6 +2939,79 @@ end
 ### Return type
 
 [**AdsListResponse**](AdsListResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ads_alerts
+
+> <ListAdsAlerts200Response> list_ads_alerts(opts)
+
+List ads that need attention
+
+Lists what needs attention across your ads, most severe first: ads created in the last 90 days that were rejected, campaigns the platform reports delivery issues on, Meta ad accounts with a failed or overdue payment or disabled while holding live ads, campaigns that spent on 3 or more of the last 7 days without a result (conversion, lead, purchase or conversation goals), and budgets spent to their daily cap yesterday.  Built from stored data and the last 7 days of synced metrics, so it costs no platform call. Each alert has a stable `id`; dismiss one with `POST /v1/ads/alerts/{alertId}/dismiss` to hide it for 30 days. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+opts = {
+  account_id: 'account_id_example', # String | Only alerts of this ads connection (sibling-expanded like /v1/ads/tree). Omit for every ad account the API key can reach.
+  include_dismissed: true # Boolean | Also return dismissed alerts, with `dismissed: true`.
+}
+
+begin
+  # List ads that need attention
+  result = api_instance.list_ads_alerts(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ads_alerts: #{e}"
+end
+```
+
+#### Using the list_ads_alerts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdsAlerts200Response>, Integer, Hash)> list_ads_alerts_with_http_info(opts)
+
+```ruby
+begin
+  # List ads that need attention
+  data, status_code, headers = api_instance.list_ads_alerts_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdsAlerts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ads_alerts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Only alerts of this ads connection (sibling-expanded like /v1/ads/tree). Omit for every ad account the API key can reach. | [optional] |
+| **include_dismissed** | **Boolean** | Also return dismissed alerts, with &#x60;dismissed: true&#x60;. | [optional][default to false] |
+
+### Return type
+
+[**ListAdsAlerts200Response**](ListAdsAlerts200Response.md)
 
 ### Authorization
 

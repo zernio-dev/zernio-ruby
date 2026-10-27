@@ -20,6 +20,7 @@
 | **is_budget_schedule_enabled** | **Boolean** | Meta-only. Mirrors Campaign.is_budget_schedule_enabled: true when the campaign uses budget scheduling (time-based budget changes). Independent of CBO/ABO. | [optional][default to false] |
 | **currency** | **String** | ISO 4217 currency code (e.g. USD, EUR, CLP, JPY) for all budget amounts in this campaign node. Budgets are NOT normalized to USD. | [optional] |
 | **metrics** | [**AdMetrics**](AdMetrics.md) |  | [optional] |
+| **previous_metrics** | [**AdMetrics**](AdMetrics.md) | Only with &#x60;compare&#x3D;previous&#x60;. The same metrics over &#x60;previousRange&#x60;. | [optional] |
 | **platform_ad_account_id** | **String** |  | [optional] |
 | **platform_ad_account_name** | **String** | Human-readable advertiser/account name from the platform. Refreshed on every sync. | [optional] |
 | **account_id** | **String** |  | [optional] |
@@ -57,6 +58,7 @@ instance = Zernio::AdTreeCampaign.new(
   is_budget_schedule_enabled: null,
   currency: null,
   metrics: null,
+  previous_metrics: null,
   platform_ad_account_id: null,
   platform_ad_account_name: null,
   account_id: null,

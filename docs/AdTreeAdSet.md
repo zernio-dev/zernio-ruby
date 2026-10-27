@@ -13,6 +13,7 @@
 | **budget** | [**AdTreeAdSetBudget**](AdTreeAdSetBudget.md) |  | [optional] |
 | **ad_set_budget** | [**AdTreeAdSetAdSetBudget**](AdTreeAdSetAdSetBudget.md) |  | [optional] |
 | **metrics** | [**AdMetrics**](AdMetrics.md) |  | [optional] |
+| **previous_metrics** | [**AdMetrics**](AdMetrics.md) | Only with &#x60;compare&#x3D;previous&#x60;. The same metrics over &#x60;previousRange&#x60;. | [optional] |
 | **optimization_goal** | **String** | What the delivery system optimizes for. Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION), or on LinkedIn the campaign&#39;s effective optimizationTargetType (NONE means manual bidding). See the &#x60;optimizationGoal&#x60; field on &#x60;Ad&#x60; for the full value spaces. | [optional] |
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
 | **bid_amount** | **Float** | Bid amount in whole currency units. On Meta/TikTok populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP; on LinkedIn it is the campaign&#39;s effective unitCost and pairs with &#x60;costType&#x60;, where 0 is a real, delivery-stopping value. | [optional] |
@@ -38,6 +39,7 @@ instance = Zernio::AdTreeAdSet.new(
   budget: null,
   ad_set_budget: null,
   metrics: null,
+  previous_metrics: null,
   optimization_goal: null,
   bid_strategy: null,
   bid_amount: null,
