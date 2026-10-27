@@ -1,4 +1,4 @@
-# Zernio::BoostPostRequestRegionalRegulationIdentitiesValue
+# Zernio::UpdateAdSetRequestRegionalRegulationIdentitiesValue
 
 ## Properties
 
@@ -10,6 +10,6 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::BoostPostRequestRegionalRegulationIdentitiesValue.new()
+instance = Zernio::UpdateAdSetRequestRegionalRegulationIdentitiesValue.new()
 ```
 
