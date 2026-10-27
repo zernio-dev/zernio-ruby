@@ -21,6 +21,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_conversion_destinations**](ConversionsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List conversion destinations |
 | [**list_custom_conversion_goals**](ConversionsApi.md#list_custom_conversion_goals) | **GET** /v1/ads/conversions/custom-goals | List custom conversion goals |
 | [**list_event_destinations**](ConversionsApi.md#list_event_destinations) | **GET** /v1/events/destinations | List event destinations |
+| [**list_events**](ConversionsApi.md#list_events) | **GET** /v1/events | List stored events |
 | [**remove_conversion_associations**](ConversionsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns |
 | [**remove_custom_conversion_goal**](ConversionsApi.md#remove_custom_conversion_goal) | **DELETE** /v1/ads/conversions/custom-goals/{goalId} | Remove a custom conversion goal |
 | [**send_conversions**](ConversionsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events |
@@ -1248,6 +1249,87 @@ end
 ### Return type
 
 [**ListEventDestinations200Response**](ListEventDestinations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_events
+
+> <ListEvents200Response> list_events(profile_id, opts)
+
+List stored events
+
+Lists the conversion events stored for a profile by `POST /v1/events`, newest first. Personal data is never returned: `hasEmail`, `hasPhone` and `hasExternalId` only say whether the event carried that identifier. Events sent with `testCode` are not stored, so they never appear here.  Paginate with `cursor`: pass the `nextCursor` of the previous page until it comes back `null`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConversionsApi.new
+profile_id = 'profile_id_example' # String | 
+opts = {
+  limit: 56, # Integer | 
+  from: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Only events at or after this time (ISO 8601, on the event time).
+  to: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Only events before this time (ISO 8601, on the event time).
+  event_name: 'event_name_example', # String | Only events with this name, such as `Purchase`.
+  cursor: 'cursor_example' # String | `nextCursor` from the previous page.
+}
+
+begin
+  # List stored events
+  result = api_instance.list_events(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->list_events: #{e}"
+end
+```
+
+#### Using the list_events_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListEvents200Response>, Integer, Hash)> list_events_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # List stored events
+  data, status_code, headers = api_instance.list_events_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListEvents200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConversionsApi->list_events_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** |  |  |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **from** | **Time** | Only events at or after this time (ISO 8601, on the event time). | [optional] |
+| **to** | **Time** | Only events before this time (ISO 8601, on the event time). | [optional] |
+| **event_name** | **String** | Only events with this name, such as &#x60;Purchase&#x60;. | [optional] |
+| **cursor** | **String** | &#x60;nextCursor&#x60; from the previous page. | [optional] |
+
+### Return type
+
+[**ListEvents200Response**](ListEvents200Response.md)
 
 ### Authorization
 

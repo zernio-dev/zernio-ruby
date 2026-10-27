@@ -1262,6 +1262,93 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List stored events
+    # Lists the conversion events stored for a profile by `POST /v1/events`, newest first. Personal data is never returned: `hasEmail`, `hasPhone` and `hasExternalId` only say whether the event carried that identifier. Events sent with `testCode` are not stored, so they never appear here.  Paginate with `cursor`: pass the `nextCursor` of the previous page until it comes back `null`. 
+    # @param profile_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 50)
+    # @option opts [Time] :from Only events at or after this time (ISO 8601, on the event time).
+    # @option opts [Time] :to Only events before this time (ISO 8601, on the event time).
+    # @option opts [String] :event_name Only events with this name, such as &#x60;Purchase&#x60;.
+    # @option opts [String] :cursor &#x60;nextCursor&#x60; from the previous page.
+    # @return [ListEvents200Response]
+    def list_events(profile_id, opts = {})
+      data, _status_code, _headers = list_events_with_http_info(profile_id, opts)
+      data
+    end
+
+    # List stored events
+    # Lists the conversion events stored for a profile by &#x60;POST /v1/events&#x60;, newest first. Personal data is never returned: &#x60;hasEmail&#x60;, &#x60;hasPhone&#x60; and &#x60;hasExternalId&#x60; only say whether the event carried that identifier. Events sent with &#x60;testCode&#x60; are not stored, so they never appear here.  Paginate with &#x60;cursor&#x60;: pass the &#x60;nextCursor&#x60; of the previous page until it comes back &#x60;null&#x60;. 
+    # @param profile_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 50)
+    # @option opts [Time] :from Only events at or after this time (ISO 8601, on the event time).
+    # @option opts [Time] :to Only events before this time (ISO 8601, on the event time).
+    # @option opts [String] :event_name Only events with this name, such as &#x60;Purchase&#x60;.
+    # @option opts [String] :cursor &#x60;nextCursor&#x60; from the previous page.
+    # @return [Array<(ListEvents200Response, Integer, Hash)>] ListEvents200Response data, response status code and response headers
+    def list_events_with_http_info(profile_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConversionsApi.list_events ...'
+      end
+      # verify the required parameter 'profile_id' is set
+      if @api_client.config.client_side_validation && profile_id.nil?
+        fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConversionsApi.list_events"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 200
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ConversionsApi.list_events, must be smaller than or equal to 200.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ConversionsApi.list_events, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/events'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'profileId'] = profile_id
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'from'] = opts[:'from'] if !opts[:'from'].nil?
+      query_params[:'to'] = opts[:'to'] if !opts[:'to'].nil?
+      query_params[:'eventName'] = opts[:'event_name'] if !opts[:'event_name'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListEvents200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConversionsApi.list_events",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConversionsApi#list_events\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Remove associated campaigns
     # Unlinks campaigns from a LinkedIn conversion rule so they stop tracking it.  Pass `adAccountId` and `campaignIds` as query parameters (`campaignIds` is comma-separated). The route also accepts a JSON body with the same fields for clients that prefer DELETE-with-body, but the documented surface is query-only because some SDK code generators (e.g. Python) collapse query + body parameters with the same name into a single kwarg. 
     # @param account_id [String] 

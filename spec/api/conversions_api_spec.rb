@@ -258,6 +258,23 @@ describe 'ConversionsApi' do
     end
   end
 
+  # unit tests for list_events
+  # List stored events
+  # Lists the conversion events stored for a profile by &#x60;POST /v1/events&#x60;, newest first. Personal data is never returned: &#x60;hasEmail&#x60;, &#x60;hasPhone&#x60; and &#x60;hasExternalId&#x60; only say whether the event carried that identifier. Events sent with &#x60;testCode&#x60; are not stored, so they never appear here.  Paginate with &#x60;cursor&#x60;: pass the &#x60;nextCursor&#x60; of the previous page until it comes back &#x60;null&#x60;. 
+  # @param profile_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit 
+  # @option opts [Time] :from Only events at or after this time (ISO 8601, on the event time).
+  # @option opts [Time] :to Only events before this time (ISO 8601, on the event time).
+  # @option opts [String] :event_name Only events with this name, such as &#x60;Purchase&#x60;.
+  # @option opts [String] :cursor &#x60;nextCursor&#x60; from the previous page.
+  # @return [ListEvents200Response]
+  describe 'list_events test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for remove_conversion_associations
   # Remove associated campaigns
   # Unlinks campaigns from a LinkedIn conversion rule so they stop tracking it.  Pass &#x60;adAccountId&#x60; and &#x60;campaignIds&#x60; as query parameters (&#x60;campaignIds&#x60; is comma-separated). The route also accepts a JSON body with the same fields for clients that prefer DELETE-with-body, but the documented surface is query-only because some SDK code generators (e.g. Python) collapse query + body parameters with the same name into a single kwarg. 

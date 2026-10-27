@@ -650,6 +650,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConversionsApi* | [**list_conversion_destinations**](docs/ConversionsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List conversion destinations
 *Zernio::ConversionsApi* | [**list_custom_conversion_goals**](docs/ConversionsApi.md#list_custom_conversion_goals) | **GET** /v1/ads/conversions/custom-goals | List custom conversion goals
 *Zernio::ConversionsApi* | [**list_event_destinations**](docs/ConversionsApi.md#list_event_destinations) | **GET** /v1/events/destinations | List event destinations
+*Zernio::ConversionsApi* | [**list_events**](docs/ConversionsApi.md#list_events) | **GET** /v1/events | List stored events
 *Zernio::ConversionsApi* | [**remove_conversion_associations**](docs/ConversionsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns
 *Zernio::ConversionsApi* | [**remove_custom_conversion_goal**](docs/ConversionsApi.md#remove_custom_conversion_goal) | **DELETE** /v1/ads/conversions/custom-goals/{goalId} | Remove a custom conversion goal
 *Zernio::ConversionsApi* | [**send_conversions**](docs/ConversionsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events
@@ -2826,6 +2827,10 @@ Class | Method | HTTP request | Description
  - [Zernio::ListEmailMessages200Response](docs/ListEmailMessages200Response.md)
  - [Zernio::ListEmailThreads200Response](docs/ListEmailThreads200Response.md)
  - [Zernio::ListEventDestinations200Response](docs/ListEventDestinations200Response.md)
+ - [Zernio::ListEvents200Response](docs/ListEvents200Response.md)
+ - [Zernio::ListEvents200ResponseEventsInner](docs/ListEvents200ResponseEventsInner.md)
+ - [Zernio::ListEvents200ResponseEventsInnerClickIds](docs/ListEvents200ResponseEventsInnerClickIds.md)
+ - [Zernio::ListEvents200ResponseEventsInnerUtm](docs/ListEvents200ResponseEventsInnerUtm.md)
  - [Zernio::ListFacebookPages200Response](docs/ListFacebookPages200Response.md)
  - [Zernio::ListFacebookPages200ResponsePagesInner](docs/ListFacebookPages200ResponsePagesInner.md)
  - [Zernio::ListFacebookTaggedPosts200Response](docs/ListFacebookTaggedPosts200Response.md)
