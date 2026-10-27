@@ -22,6 +22,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**detach_ad_label**](AdAccountsApi.md#detach_ad_label) | **DELETE** /v1/ads/labels/{labelId}/assignments | Detach a Google Ads label |
 | [**get_ad_account_billing**](AdAccountsApi.md#get_ad_account_billing) | **GET** /v1/ads/accounts/billing | Get ad account billing |
 | [**get_ad_account_finance**](AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances |
+| [**get_ad_account_health**](AdAccountsApi.md#get_ad_account_health) | **GET** /v1/ads/accounts/health | Check an ad account before creating ads |
 | [**get_ad_account_hierarchy**](AdAccountsApi.md#get_ad_account_hierarchy) | **GET** /v1/ads/accounts/hierarchy | Get manager account hierarchy |
 | [**get_ad_account_live_entities**](AdAccountsApi.md#get_ad_account_live_entities) | **GET** /v1/ads/accounts/live | Read an ad account&#39;s campaigns and ad sets live |
 | [**get_ad_comments**](AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
@@ -1353,6 +1354,77 @@ end
 ### Return type
 
 [**GetAdAccountFinance200Response**](GetAdAccountFinance200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_account_health
+
+> <GetAdAccountHealth200Response> get_ad_account_health(account_id, ad_account_id)
+
+Check an ad account before creating ads
+
+Checks whether a Meta ad account can run ads right now, with a fix link for each problem.  Reads the account status, the payment method, the account spending limit, the Facebook Page and its Instagram account, the Page's Lead Ads terms, the newest pixel event and the WhatsApp number linked to the Page. Each check reads on its own: one this connection cannot see comes back `unknown` instead of failing the request.  `status` is `blocked` when any check is `error` (ads will be refused), `attention` when one is `warning`, else `ok`. `missing` marks an optional asset that is not set up (a pixel, a WhatsApp number): only the ads that need it are affected. A `fix.url` is either a Meta page or a Zernio dashboard path (starting with `/`).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'act_123' # String | Meta ad account id (act_<n>).
+
+begin
+  # Check an ad account before creating ads
+  result = api_instance.get_ad_account_health(account_id, ad_account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_ad_account_health: #{e}"
+end
+```
+
+#### Using the get_ad_account_health_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdAccountHealth200Response>, Integer, Hash)> get_ad_account_health_with_http_info(account_id, ad_account_id)
+
+```ruby
+begin
+  # Check an ad account before creating ads
+  data, status_code, headers = api_instance.get_ad_account_health_with_http_info(account_id, ad_account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdAccountHealth200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_ad_account_health_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+
+### Return type
+
+[**GetAdAccountHealth200Response**](GetAdAccountHealth200Response.md)
 
 ### Authorization
 

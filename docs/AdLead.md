@@ -23,6 +23,8 @@
 | **currency** | **String** |  | [optional] |
 | **contact_id** | **String** | The contact a lead_received workflow created or matched for this lead. | [optional] |
 | **first_contacted_at** | **Time** | When the first WhatsApp message to the lead was delivered. | [optional] |
+| **conversation_id** | **String** | The Inbox conversation a lead_received workflow opened with the lead. | [optional] |
+| **webhook_delivered_at** | **Time** | Meta leads only. When the &#x60;lead.received&#x60; webhook was delivered; null while it has not been. | [optional] |
 
 ## Example
 
@@ -48,7 +50,9 @@ instance = Zernio::AdLead.new(
   value: null,
   currency: null,
   contact_id: null,
-  first_contacted_at: null
+  first_contacted_at: null,
+  conversation_id: null,
+  webhook_delivered_at: null
 )
 ```
 

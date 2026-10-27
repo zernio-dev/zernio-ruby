@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**archive_lead_form**](LeadGenApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form |
+| [**count_leads**](LeadGenApi.md#count_leads) | **GET** /v1/ads/leads/counts | Count leads by status |
 | [**create_lead_form**](LeadGenApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form |
 | [**create_test_lead**](LeadGenApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a test lead |
 | [**delete_test_lead**](LeadGenApi.md#delete_test_lead) | **DELETE** /v1/ads/lead-forms/{formId}/test-leads | Delete a test lead |
@@ -75,6 +76,79 @@ end
 ### Return type
 
 [**ArchiveLeadForm200Response**](ArchiveLeadForm200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## count_leads
+
+> <CountLeads200Response> count_leads(opts)
+
+Count leads by status
+
+Counts your team's stored Meta leads per status, for a status filter or a \"new leads\" badge.  Every status is present, with 0 when no lead has it. Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::LeadGenApi.new
+opts = {
+  account_id: 'account_id_example', # String | Count one connected account only.
+  campaign_id: 'campaign_id_example' # String | The platform campaign id the leads came from.
+}
+
+begin
+  # Count leads by status
+  result = api_instance.count_leads(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling LeadGenApi->count_leads: #{e}"
+end
+```
+
+#### Using the count_leads_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CountLeads200Response>, Integer, Hash)> count_leads_with_http_info(opts)
+
+```ruby
+begin
+  # Count leads by status
+  data, status_code, headers = api_instance.count_leads_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CountLeads200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling LeadGenApi->count_leads_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Count one connected account only. | [optional] |
+| **campaign_id** | **String** | The platform campaign id the leads came from. | [optional] |
+
+### Return type
+
+[**CountLeads200Response**](CountLeads200Response.md)
 
 ### Authorization
 
@@ -555,6 +629,11 @@ api_instance = Zernio::LeadGenApi.new
 opts = {
   form_id: 'form_id_example', # String | Filter to a single lead form.
   account_id: 'account_id_example', # String | Filter to a single connected account. LinkedIn ads accounts switch to the live fetch.
+  account_ids: 'account_ids_example', # String | Meta only. Comma-separated connected account ids, to list several accounts at once. Without accountId or accountIds every account of the team is listed.
+  status: 'new,contacted', # String | Meta only. Comma-separated lead statuses: new, contacted, unreachable, qualified, converted, disqualified.
+  campaign_id: 'campaign_id_example', # String | Meta only. The platform campaign id the lead came from.
+  platform: 'meta', # String | meta skips the LinkedIn live fetch; linkedin requires accountId to be a LinkedIn ads connection (400 otherwise).
+  q: 'q_example', # String | Meta only. Case-insensitive text search over the lead's answers and the form name.
   ad_account_id: 'ad_account_id_example', # String | LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder).
   limit: 56, # Integer | 
   since: 1757404800, # Integer | Unix seconds; only leads created at/after this timestamp. Millisecond timestamps return 400 with instructions to divide by 1000.
@@ -594,6 +673,11 @@ end
 | ---- | ---- | ----------- | ----- |
 | **form_id** | **String** | Filter to a single lead form. | [optional] |
 | **account_id** | **String** | Filter to a single connected account. LinkedIn ads accounts switch to the live fetch. | [optional] |
+| **account_ids** | **String** | Meta only. Comma-separated connected account ids, to list several accounts at once. Without accountId or accountIds every account of the team is listed. | [optional] |
+| **status** | **String** | Meta only. Comma-separated lead statuses: new, contacted, unreachable, qualified, converted, disqualified. | [optional] |
+| **campaign_id** | **String** | Meta only. The platform campaign id the lead came from. | [optional] |
+| **platform** | **String** | meta skips the LinkedIn live fetch; linkedin requires accountId to be a LinkedIn ads connection (400 otherwise). | [optional] |
+| **q** | **String** | Meta only. Case-insensitive text search over the lead&#39;s answers and the form name. | [optional] |
 | **ad_account_id** | **String** | LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder). | [optional] |
 | **limit** | **Integer** |  | [optional][default to 25] |
 | **since** | **Integer** | Unix seconds; only leads created at/after this timestamp. Millisecond timestamps return 400 with instructions to divide by 1000. | [optional] |

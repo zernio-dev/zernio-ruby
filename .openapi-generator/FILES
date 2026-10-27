@@ -456,6 +456,8 @@ docs/ConversionEventMessaging.md
 docs/ConversionEventUser.md
 docs/ConversionEventUserClickIds.md
 docs/ConversionsApi.md
+docs/CountLeads200Response.md
+docs/CountLeads200ResponseCounts.md
 docs/CreateAccountGroup201Response.md
 docs/CreateAccountGroup201ResponseGroup.md
 docs/CreateAccountGroupRequest.md
@@ -929,6 +931,9 @@ docs/GetAdAccountBilling200ResponsePaymentsAccountsInner.md
 docs/GetAdAccountBilling200ResponsePendingBudgetProposalsInner.md
 docs/GetAdAccountFinance200Response.md
 docs/GetAdAccountFinance200ResponseFundingSource.md
+docs/GetAdAccountHealth200Response.md
+docs/GetAdAccountHealth200ResponseChecksInner.md
+docs/GetAdAccountHealth200ResponseChecksInnerFix.md
 docs/GetAdAccountHierarchy200Response.md
 docs/GetAdAccountHierarchy200ResponseDirectCustomersInner.md
 docs/GetAdAccountHierarchy200ResponseDirectCustomersInnerPendingInvitationsInner.md
@@ -3516,6 +3521,8 @@ lib/zernio-sdk/models/conversion_event_items_inner.rb
 lib/zernio-sdk/models/conversion_event_messaging.rb
 lib/zernio-sdk/models/conversion_event_user.rb
 lib/zernio-sdk/models/conversion_event_user_click_ids.rb
+lib/zernio-sdk/models/count_leads200_response.rb
+lib/zernio-sdk/models/count_leads200_response_counts.rb
 lib/zernio-sdk/models/create_account_group201_response.rb
 lib/zernio-sdk/models/create_account_group201_response_group.rb
 lib/zernio-sdk/models/create_account_group_request.rb
@@ -3978,6 +3985,9 @@ lib/zernio-sdk/models/get_ad_account_billing200_response_payments_accounts_inner
 lib/zernio-sdk/models/get_ad_account_billing200_response_pending_budget_proposals_inner.rb
 lib/zernio-sdk/models/get_ad_account_finance200_response.rb
 lib/zernio-sdk/models/get_ad_account_finance200_response_funding_source.rb
+lib/zernio-sdk/models/get_ad_account_health200_response.rb
+lib/zernio-sdk/models/get_ad_account_health200_response_checks_inner.rb
+lib/zernio-sdk/models/get_ad_account_health200_response_checks_inner_fix.rb
 lib/zernio-sdk/models/get_ad_account_hierarchy200_response.rb
 lib/zernio-sdk/models/get_ad_account_hierarchy200_response_direct_customers_inner.rb
 lib/zernio-sdk/models/get_ad_account_hierarchy200_response_direct_customers_inner_pending_invitations_inner.rb
@@ -6517,6 +6527,8 @@ spec/models/conversion_event_messaging_spec.rb
 spec/models/conversion_event_spec.rb
 spec/models/conversion_event_user_click_ids_spec.rb
 spec/models/conversion_event_user_spec.rb
+spec/models/count_leads200_response_counts_spec.rb
+spec/models/count_leads200_response_spec.rb
 spec/models/create_account_group201_response_group_spec.rb
 spec/models/create_account_group201_response_spec.rb
 spec/models/create_account_group_request_spec.rb
@@ -6979,6 +6991,9 @@ spec/models/get_ad_account_billing200_response_pending_budget_proposals_inner_sp
 spec/models/get_ad_account_billing200_response_spec.rb
 spec/models/get_ad_account_finance200_response_funding_source_spec.rb
 spec/models/get_ad_account_finance200_response_spec.rb
+spec/models/get_ad_account_health200_response_checks_inner_fix_spec.rb
+spec/models/get_ad_account_health200_response_checks_inner_spec.rb
+spec/models/get_ad_account_health200_response_spec.rb
 spec/models/get_ad_account_hierarchy200_response_direct_customers_inner_pending_invitations_inner_spec.rb
 spec/models/get_ad_account_hierarchy200_response_direct_customers_inner_spec.rb
 spec/models/get_ad_account_hierarchy200_response_roots_inner_manager_links_inner_spec.rb
