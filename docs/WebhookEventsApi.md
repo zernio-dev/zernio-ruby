@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_ads_sync_recovered**](WebhookEventsApi.md#on_account_ads_sync_recovered) | **POST** /account.ads.sync_recovered | Ads sync recovered event |
 | [**on_account_connected**](WebhookEventsApi.md#on_account_connected) | **POST** /account.connected | Account connected event |
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
+| [**on_account_rate_limited**](WebhookEventsApi.md#on_account_rate_limited) | **POST** /account.rate_limited | Mailbox sending cooldown started |
 | [**on_ad_account_status_changed**](WebhookEventsApi.md#on_ad_account_status_changed) | **POST** /ad_account.status_changed | Ad account status changed event |
 | [**on_ad_delivery_issue**](WebhookEventsApi.md#on_ad_delivery_issue) | **POST** /ad.delivery_issue | Ad delivery issue event |
 | [**on_ad_review_approved**](WebhookEventsApi.md#on_ad_review_approved) | **POST** /ad.review.approved | Ad review approved event |
@@ -21,6 +22,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_branded_calling_identity_action_required**](WebhookEventsApi.md#on_branded_calling_identity_action_required) | **POST** /branded_calling.identity.action_required | Caller identity action required event |
 | [**on_branded_calling_identity_status_updated**](WebhookEventsApi.md#on_branded_calling_identity_status_updated) | **POST** /branded_calling.identity.status_updated | Caller identity status updated event |
 | [**on_branded_calling_number_status_updated**](WebhookEventsApi.md#on_branded_calling_number_status_updated) | **POST** /branded_calling.number.status_updated | Branded number status updated event |
+| [**on_calendar_event_created**](WebhookEventsApi.md#on_calendar_event_created) | **POST** /calendar.event.created | Calendar event created |
+| [**on_calendar_event_deleted**](WebhookEventsApi.md#on_calendar_event_deleted) | **POST** /calendar.event.deleted | Calendar event deleted |
+| [**on_calendar_event_updated**](WebhookEventsApi.md#on_calendar_event_updated) | **POST** /calendar.event.updated | Calendar event updated |
 | [**on_call_ended**](WebhookEventsApi.md#on_call_ended) | **POST** /call.ended | Call ended event |
 | [**on_call_failed**](WebhookEventsApi.md#on_call_failed) | **POST** /call.failed | Call failed event |
 | [**on_call_permission_request**](WebhookEventsApi.md#on_call_permission_request) | **POST** /call.permission_request | Call permission request reply event |
@@ -33,11 +37,17 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_commerce_product_created**](WebhookEventsApi.md#on_commerce_product_created) | **POST** /commerce.product.created | Commerce product created event |
 | [**on_commerce_product_deleted**](WebhookEventsApi.md#on_commerce_product_deleted) | **POST** /commerce.product.deleted | Commerce product deleted event |
 | [**on_commerce_product_updated**](WebhookEventsApi.md#on_commerce_product_updated) | **POST** /commerce.product.updated | Commerce product updated event |
+| [**on_contact_deleted**](WebhookEventsApi.md#on_contact_deleted) | **POST** /contact.deleted | Contact deleted |
 | [**on_contact_field_changed**](WebhookEventsApi.md#on_contact_field_changed) | **POST** /contact.field_changed | Contact field changed event |
 | [**on_contact_tag_added**](WebhookEventsApi.md#on_contact_tag_added) | **POST** /contact.tag_added | Contact tag added event |
 | [**on_contact_tag_removed**](WebhookEventsApi.md#on_contact_tag_removed) | **POST** /contact.tag_removed | Contact tag removed event |
+| [**on_contact_updated**](WebhookEventsApi.md#on_contact_updated) | **POST** /contact.updated | Contact updated |
 | [**on_conversation_control_changed**](WebhookEventsApi.md#on_conversation_control_changed) | **POST** /conversation.control_changed | Conversation control changed event |
 | [**on_conversation_started**](WebhookEventsApi.md#on_conversation_started) | **POST** /conversation.started | Conversation started event |
+| [**on_file_created**](WebhookEventsApi.md#on_file_created) | **POST** /file.created | File created |
+| [**on_file_deleted**](WebhookEventsApi.md#on_file_deleted) | **POST** /file.deleted | File deleted |
+| [**on_file_picked**](WebhookEventsApi.md#on_file_picked) | **POST** /file.picked | Files picked |
+| [**on_file_updated**](WebhookEventsApi.md#on_file_updated) | **POST** /file.updated | File updated |
 | [**on_lead_received**](WebhookEventsApi.md#on_lead_received) | **POST** /lead.received | Lead received event |
 | [**on_message_deleted**](WebhookEventsApi.md#on_message_deleted) | **POST** /message.deleted | Message deleted event |
 | [**on_message_delivered**](WebhookEventsApi.md#on_message_delivered) | **POST** /message.delivered | Message delivered event |
@@ -421,6 +431,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_account_disconnected** | [**WebhookPayloadAccountDisconnected**](WebhookPayloadAccountDisconnected.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_account_rate_limited
+
+> on_account_rate_limited(webhook_payload_account_rate_limited)
+
+Mailbox sending cooldown started
+
+Fired when a Google or Microsoft mailbox enters a sending cooldown (same body to more than 50 recipients in an hour, or a later trigger). Sends answer 429 until `account.resetsAt`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_account_rate_limited =  # WebhookPayloadAccountRateLimited | 
+
+begin
+  # Mailbox sending cooldown started
+  api_instance.on_account_rate_limited(webhook_payload_account_rate_limited)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_rate_limited: #{e}"
+end
+```
+
+#### Using the on_account_rate_limited_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_account_rate_limited_with_http_info(webhook_payload_account_rate_limited)
+
+```ruby
+begin
+  # Mailbox sending cooldown started
+  data, status_code, headers = api_instance.on_account_rate_limited_with_http_info(webhook_payload_account_rate_limited)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_rate_limited_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_account_rate_limited** | [**WebhookPayloadAccountRateLimited**](WebhookPayloadAccountRateLimited.md) |  |  |
 
 ### Return type
 
@@ -1252,6 +1330,206 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_calendar_event_created
+
+> on_calendar_event_created(webhook_payload_calendar_event)
+
+Calendar event created
+
+A new event appeared on a connected Microsoft calendar (push, seconds after the change).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_calendar_event =  # WebhookPayloadCalendarEvent | 
+
+begin
+  # Calendar event created
+  api_instance.on_calendar_event_created(webhook_payload_calendar_event)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_calendar_event_created: #{e}"
+end
+```
+
+#### Using the on_calendar_event_created_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_calendar_event_created_with_http_info(webhook_payload_calendar_event)
+
+```ruby
+begin
+  # Calendar event created
+  data, status_code, headers = api_instance.on_calendar_event_created_with_http_info(webhook_payload_calendar_event)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_calendar_event_created_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_calendar_event** | [**WebhookPayloadCalendarEvent**](WebhookPayloadCalendarEvent.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_calendar_event_deleted
+
+> on_calendar_event_deleted(webhook_payload_calendar_event)
+
+Calendar event deleted
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_calendar_event =  # WebhookPayloadCalendarEvent | 
+
+begin
+  # Calendar event deleted
+  api_instance.on_calendar_event_deleted(webhook_payload_calendar_event)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_calendar_event_deleted: #{e}"
+end
+```
+
+#### Using the on_calendar_event_deleted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_calendar_event_deleted_with_http_info(webhook_payload_calendar_event)
+
+```ruby
+begin
+  # Calendar event deleted
+  data, status_code, headers = api_instance.on_calendar_event_deleted_with_http_info(webhook_payload_calendar_event)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_calendar_event_deleted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_calendar_event** | [**WebhookPayloadCalendarEvent**](WebhookPayloadCalendarEvent.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_calendar_event_updated
+
+> on_calendar_event_updated(webhook_payload_calendar_event)
+
+Calendar event updated
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_calendar_event =  # WebhookPayloadCalendarEvent | 
+
+begin
+  # Calendar event updated
+  api_instance.on_calendar_event_updated(webhook_payload_calendar_event)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_calendar_event_updated: #{e}"
+end
+```
+
+#### Using the on_calendar_event_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_calendar_event_updated_with_http_info(webhook_payload_calendar_event)
+
+```ruby
+begin
+  # Calendar event updated
+  data, status_code, headers = api_instance.on_calendar_event_updated_with_http_info(webhook_payload_calendar_event)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_calendar_event_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_calendar_event** | [**WebhookPayloadCalendarEvent**](WebhookPayloadCalendarEvent.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_call_ended
 
 > on_call_ended(webhook_payload_call_ended)
@@ -2068,6 +2346,74 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_contact_deleted
+
+> on_contact_deleted(webhook_payload_contact)
+
+Contact deleted
+
+The provider contact was deleted; its email channel is removed, the contact row stays when other channels remain.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_contact =  # WebhookPayloadContact | 
+
+begin
+  # Contact deleted
+  api_instance.on_contact_deleted(webhook_payload_contact)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_deleted: #{e}"
+end
+```
+
+#### Using the on_contact_deleted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_contact_deleted_with_http_info(webhook_payload_contact)
+
+```ruby
+begin
+  # Contact deleted
+  data, status_code, headers = api_instance.on_contact_deleted_with_http_info(webhook_payload_contact)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_deleted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_contact** | [**WebhookPayloadContact**](WebhookPayloadContact.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_contact_field_changed
 
 > on_contact_field_changed(webhook_payload_contact_field_changed)
@@ -2272,6 +2618,74 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_contact_updated
+
+> on_contact_updated(webhook_payload_contact)
+
+Contact updated
+
+A provider contacts sync created or changed a contact.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_contact =  # WebhookPayloadContact | 
+
+begin
+  # Contact updated
+  api_instance.on_contact_updated(webhook_payload_contact)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_updated: #{e}"
+end
+```
+
+#### Using the on_contact_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_contact_updated_with_http_info(webhook_payload_contact)
+
+```ruby
+begin
+  # Contact updated
+  data, status_code, headers = api_instance.on_contact_updated_with_http_info(webhook_payload_contact)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_contact_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_contact** | [**WebhookPayloadContact**](WebhookPayloadContact.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_conversation_control_changed
 
 > on_conversation_control_changed(webhook_payload_conversation_control_changed)
@@ -2393,6 +2807,276 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_conversation_started** | [**WebhookPayloadConversationStarted**](WebhookPayloadConversationStarted.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_file_created
+
+> on_file_created(webhook_payload_file)
+
+File created
+
+A file or folder appeared in a connected Drive or OneDrive (push, seconds after the change).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_file =  # WebhookPayloadFile | 
+
+begin
+  # File created
+  api_instance.on_file_created(webhook_payload_file)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_file_created: #{e}"
+end
+```
+
+#### Using the on_file_created_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_file_created_with_http_info(webhook_payload_file)
+
+```ruby
+begin
+  # File created
+  data, status_code, headers = api_instance.on_file_created_with_http_info(webhook_payload_file)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_file_created_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_file** | [**WebhookPayloadFile**](WebhookPayloadFile.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_file_deleted
+
+> on_file_deleted(webhook_payload_file)
+
+File deleted
+
+The item was trashed or removed on the provider.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_file =  # WebhookPayloadFile | 
+
+begin
+  # File deleted
+  api_instance.on_file_deleted(webhook_payload_file)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_file_deleted: #{e}"
+end
+```
+
+#### Using the on_file_deleted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_file_deleted_with_http_info(webhook_payload_file)
+
+```ruby
+begin
+  # File deleted
+  data, status_code, headers = api_instance.on_file_deleted_with_http_info(webhook_payload_file)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_file_deleted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_file** | [**WebhookPayloadFile**](WebhookPayloadFile.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_file_picked
+
+> on_file_picked(webhook_payload_file_picked)
+
+Files picked
+
+The user finished a hosted picker session (`POST /v1/files/picker-sessions`) and picked at least one file. The app can now open those files. Not sent on cancel.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_file_picked =  # WebhookPayloadFilePicked | 
+
+begin
+  # Files picked
+  api_instance.on_file_picked(webhook_payload_file_picked)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_file_picked: #{e}"
+end
+```
+
+#### Using the on_file_picked_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_file_picked_with_http_info(webhook_payload_file_picked)
+
+```ruby
+begin
+  # Files picked
+  data, status_code, headers = api_instance.on_file_picked_with_http_info(webhook_payload_file_picked)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_file_picked_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_file_picked** | [**WebhookPayloadFilePicked**](WebhookPayloadFilePicked.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_file_updated
+
+> on_file_updated(webhook_payload_file)
+
+File updated
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_file =  # WebhookPayloadFile | 
+
+begin
+  # File updated
+  api_instance.on_file_updated(webhook_payload_file)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_file_updated: #{e}"
+end
+```
+
+#### Using the on_file_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_file_updated_with_http_info(webhook_payload_file)
+
+```ruby
+begin
+  # File updated
+  data, status_code, headers = api_instance.on_file_updated_with_http_info(webhook_payload_file)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_file_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_file** | [**WebhookPayloadFile**](WebhookPayloadFile.md) |  |  |
 
 ### Return type
 

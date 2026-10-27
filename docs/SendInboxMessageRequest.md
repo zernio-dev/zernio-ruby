@@ -13,6 +13,7 @@
 | **attachment_name** | **String** | WhatsApp only. Display name for a document sent via attachmentUrl with attachmentType: file (e.g. \&quot;Report.pdf\&quot;). Maps to the recipient&#39;s file name; without it WhatsApp derives the name from the URL and shows \&quot;Untitled\&quot;. Ignored for image/video/audio and for binary uploads (which use the uploaded file&#39;s name). | [optional] |
 | **voice_note** | **Boolean** | WhatsApp only. When &#x60;true&#x60; on an audio attachment, the message is sent as a voice message (PTT): the recipient sees the waveform + voice-note UI instead of a basic audio attachment. The audio file MUST be &#x60;.ogg&#x60; encoded with the OPUS codec (mono) per Meta&#39;s voice-message contract; other formats are rejected by WhatsApp. Ignored for non-audio attachments.  | [optional] |
 | **subject** | **String** | iMessage only (JSON body only). Bold title line rendered above the message text. Rejected with 400 on other platforms; ignored on voice-message sends. | [optional] |
+| **cc** | **Array&lt;String&gt;** | Email threads only (Google / Microsoft accounts, JSON body only). Extra recipients copied on the reply. | [optional] |
 | **effect** | **String** | iMessage only (JSON body only). Apple screen/bubble animation played when the message arrives. Rejected with 400 on other platforms. | [optional] |
 | **contact_card** | **Boolean** | iMessage only (JSON body only). When &#x60;true&#x60;, attaches the sender&#39;s contact card (vCard) so the recipient can save the sender. Counts as message content on its own, so &#x60;message&#x60; becomes optional. | [optional] |
 | **channel** | **String** | iMessage only (JSON body only). Overrides the delivery channel for this one send; the provider otherwise picks it automatically. The sender must carry the matching add-on (SMS, RCS or WhatsApp), or the send fails. Not a default to set on every request. Rejected with 400 on other platforms. | [optional] |
@@ -44,6 +45,7 @@ instance = Zernio::SendInboxMessageRequest.new(
   attachment_name: null,
   voice_note: null,
   subject: null,
+  cc: null,
   effect: null,
   contact_card: null,
   channel: null,

@@ -7,6 +7,8 @@
 | **account_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **integration_lane** | **String** | TikTok only. The TikTok integration the account is connected through: business (TikTok for Business, Accounts API) or developer (the original integration). Absent on other platforms. | [optional] |
+| **send_cap** | [**GetAccountHealth200ResponseSendCap**](GetAccountHealth200ResponseSendCap.md) |  | [optional] |
+| **push** | **String** | Google and Microsoft only: state of the provider change-notification subscriptions behind &#x60;message.received&#x60; and &#x60;calendar.event.*&#x60;. &#x60;pending&#x60; means a granted area has no live subscription yet (retried every 6 hours), &#x60;failed&#x60; that renewals keep failing (reconnect the account). | [optional] |
 | **username** | **String** |  | [optional] |
 | **display_name** | **String** |  | [optional] |
 | **status** | **String** | Overall health status | [optional] |
@@ -27,6 +29,8 @@ instance = Zernio::GetAccountHealth200Response.new(
   account_id: null,
   platform: null,
   integration_lane: null,
+  send_cap: null,
+  push: null,
   username: null,
   display_name: null,
   status: null,
