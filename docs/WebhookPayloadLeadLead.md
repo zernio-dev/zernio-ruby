@@ -12,6 +12,7 @@
 | **adset_id** | **String** |  | [optional] |
 | **campaign_id** | **String** |  | [optional] |
 | **fields** | **Hash&lt;String, String&gt;** | Flattened question key -&gt; answer map. For multiple-choice questions the value is the option key (e.g. \&quot;k1\&quot;), not the display label.  |  |
+| **consents** | [**Array&lt;AdLeadConsent&gt;**](AdLeadConsent.md) | Sent on every delivery since 2026-10-25. Absent when an older event is redelivered, since redeliveries replay the stored payload. | [optional] |
 | **is_organic** | **Boolean** | True when the lead came from an organic post rather than a paid ad |  |
 | **created_at** | **Time** | Meta&#39;s lead creation time (ISO 8601) |  |
 
@@ -29,6 +30,7 @@ instance = Zernio::WebhookPayloadLeadLead.new(
   adset_id: null,
   campaign_id: null,
   fields: null,
+  consents: null,
   is_organic: null,
   created_at: null
 )
