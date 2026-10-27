@@ -520,6 +520,7 @@ docs/CreateAdRule201Response.md
 docs/CreateAdRuleRequest.md
 docs/CreateAdSet201Response.md
 docs/CreateAdSetRequest.md
+docs/CreateAdSetRequestPromotedObject.md
 docs/CreateApiKey201Response.md
 docs/CreateApiKeyRequest.md
 docs/CreateBidStrategy201Response.md
@@ -3674,6 +3675,7 @@ lib/zernio-sdk/models/create_ad_rule201_response.rb
 lib/zernio-sdk/models/create_ad_rule_request.rb
 lib/zernio-sdk/models/create_ad_set201_response.rb
 lib/zernio-sdk/models/create_ad_set_request.rb
+lib/zernio-sdk/models/create_ad_set_request_promoted_object.rb
 lib/zernio-sdk/models/create_api_key201_response.rb
 lib/zernio-sdk/models/create_api_key_request.rb
 lib/zernio-sdk/models/create_bid_strategy201_response.rb
@@ -6766,6 +6768,7 @@ spec/models/create_ad_negative_keyword_list_request_spec.rb
 spec/models/create_ad_rule201_response_spec.rb
 spec/models/create_ad_rule_request_spec.rb
 spec/models/create_ad_set201_response_spec.rb
+spec/models/create_ad_set_request_promoted_object_spec.rb
 spec/models/create_ad_set_request_spec.rb
 spec/models/create_api_key201_response_spec.rb
 spec/models/create_api_key_request_spec.rb
