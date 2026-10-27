@@ -354,7 +354,7 @@ end
 
 ## boost_post
 
-> <BoostPost201Response> boost_post(boost_post_request, opts)
+> <BoostPost200Response> boost_post(boost_post_request, opts)
 
 Boost post as ad
 
@@ -390,7 +390,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BoostPost201Response>, Integer, Hash)> boost_post_with_http_info(boost_post_request, opts)
+> <Array(<BoostPost200Response>, Integer, Hash)> boost_post_with_http_info(boost_post_request, opts)
 
 ```ruby
 begin
@@ -398,7 +398,7 @@ begin
   data, status_code, headers = api_instance.boost_post_with_http_info(boost_post_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <BoostPost201Response>
+  p data # => <BoostPost200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->boost_post_with_http_info: #{e}"
 end
@@ -413,7 +413,7 @@ end
 
 ### Return type
 
-[**BoostPost201Response**](BoostPost201Response.md)
+[**BoostPost200Response**](BoostPost200Response.md)
 
 ### Authorization
 
