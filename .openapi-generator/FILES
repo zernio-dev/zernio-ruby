@@ -654,6 +654,8 @@ docs/CreateMessagingAd200ResponseResultsInner.md
 docs/CreateMessagingAd201Response.md
 docs/CreateMessagingAdRequest.md
 docs/CreateMetaAdAccountRequest.md
+docs/CreateOAuthApp201Response.md
+docs/CreateOAuthAppRequest.md
 docs/CreatePhoneNumberKycLink200Response.md
 docs/CreatePhoneNumberKycLinkRequest.md
 docs/CreatePhoneNumberKycLinkRequestBranding.md
@@ -816,6 +818,7 @@ docs/DeleteInboxConversation200Response.md
 docs/DeleteInboxConversation200ResponseData.md
 docs/DeleteInboxReviewReply200Response.md
 docs/DeleteInboxReviewReplyRequest.md
+docs/DeleteOAuthApp200Response.md
 docs/DeleteSmsSenderId200Response.md
 docs/DeleteTestLead200Response.md
 docs/DeleteTrackingTagEvent200Response.md
@@ -1821,6 +1824,8 @@ docs/ListLogs200ResponseLogsInner.md
 docs/ListLogs200ResponsePagination.md
 docs/ListMetaBusinessUsers200Response.md
 docs/ListMetaBusinesses200Response.md
+docs/ListOAuthApps200Response.md
+docs/ListOAuthApps200ResponsePagination.md
 docs/ListPageUsers200Response.md
 docs/ListPartnershipAdContent200Response.md
 docs/ListPartnershipAdContent200ResponseMediaInner.md
@@ -1977,6 +1982,9 @@ docs/MoveAccountToProfile200Response.md
 docs/MoveAccountToProfileRequest.md
 docs/MoveWhatsAppNumberToProfile200Response.md
 docs/MoveWhatsAppNumberToProfileRequest.md
+docs/OAuthApp.md
+docs/OAuthAppSetup.md
+docs/OAuthAppSetupScopeAreasInner.md
 docs/OnBrandedCallingIdentityActionRequiredRequest.md
 docs/OnBrandedCallingIdentityActionRequiredRequestIdentity.md
 docs/OnBrandedCallingIdentityStatusUpdatedRequest.md
@@ -2729,6 +2737,7 @@ docs/UpdateLead200Response.md
 docs/UpdateLeadRequest.md
 docs/UpdateLinkedInOrganization200Response.md
 docs/UpdateLinkedInOrganizationRequest.md
+docs/UpdateOAuthAppRequest.md
 docs/UpdatePinterestBoardsRequest.md
 docs/UpdatePostMetadata200Response.md
 docs/UpdatePostMetadataRequest.md
@@ -2882,6 +2891,8 @@ docs/WebhookPayloadAccountConnected.md
 docs/WebhookPayloadAccountConnectedAccount.md
 docs/WebhookPayloadAccountDisconnected.md
 docs/WebhookPayloadAccountDisconnectedAccount.md
+docs/WebhookPayloadAccountPermissionsChanged.md
+docs/WebhookPayloadAccountPermissionsChangedAccount.md
 docs/WebhookPayloadAccountRateLimited.md
 docs/WebhookPayloadAccountRateLimitedAccount.md
 docs/WebhookPayloadAdAccountStatusChanged.md
@@ -3818,6 +3829,8 @@ lib/zernio-sdk/models/create_messaging_ad200_response_results_inner.rb
 lib/zernio-sdk/models/create_messaging_ad201_response.rb
 lib/zernio-sdk/models/create_messaging_ad_request.rb
 lib/zernio-sdk/models/create_meta_ad_account_request.rb
+lib/zernio-sdk/models/create_o_auth_app201_response.rb
+lib/zernio-sdk/models/create_o_auth_app_request.rb
 lib/zernio-sdk/models/create_phone_number_kyc_link200_response.rb
 lib/zernio-sdk/models/create_phone_number_kyc_link_request.rb
 lib/zernio-sdk/models/create_phone_number_kyc_link_request_branding.rb
@@ -3979,6 +3992,7 @@ lib/zernio-sdk/models/delete_inbox_conversation200_response.rb
 lib/zernio-sdk/models/delete_inbox_conversation200_response_data.rb
 lib/zernio-sdk/models/delete_inbox_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
+lib/zernio-sdk/models/delete_o_auth_app200_response.rb
 lib/zernio-sdk/models/delete_sms_sender_id200_response.rb
 lib/zernio-sdk/models/delete_test_lead200_response.rb
 lib/zernio-sdk/models/delete_tracking_tag_event200_response.rb
@@ -4966,6 +4980,8 @@ lib/zernio-sdk/models/list_logs200_response_logs_inner.rb
 lib/zernio-sdk/models/list_logs200_response_pagination.rb
 lib/zernio-sdk/models/list_meta_business_users200_response.rb
 lib/zernio-sdk/models/list_meta_businesses200_response.rb
+lib/zernio-sdk/models/list_o_auth_apps200_response.rb
+lib/zernio-sdk/models/list_o_auth_apps200_response_pagination.rb
 lib/zernio-sdk/models/list_page_users200_response.rb
 lib/zernio-sdk/models/list_partnership_ad_content200_response.rb
 lib/zernio-sdk/models/list_partnership_ad_content200_response_media_inner.rb
@@ -5117,6 +5133,9 @@ lib/zernio-sdk/models/move_account_to_profile200_response.rb
 lib/zernio-sdk/models/move_account_to_profile_request.rb
 lib/zernio-sdk/models/move_whats_app_number_to_profile200_response.rb
 lib/zernio-sdk/models/move_whats_app_number_to_profile_request.rb
+lib/zernio-sdk/models/o_auth_app.rb
+lib/zernio-sdk/models/o_auth_app_setup.rb
+lib/zernio-sdk/models/o_auth_app_setup_scope_areas_inner.rb
 lib/zernio-sdk/models/on_branded_calling_identity_action_required_request.rb
 lib/zernio-sdk/models/on_branded_calling_identity_action_required_request_identity.rb
 lib/zernio-sdk/models/on_branded_calling_identity_status_updated_request.rb
@@ -5852,6 +5871,7 @@ lib/zernio-sdk/models/update_lead200_response.rb
 lib/zernio-sdk/models/update_lead_request.rb
 lib/zernio-sdk/models/update_linked_in_organization200_response.rb
 lib/zernio-sdk/models/update_linked_in_organization_request.rb
+lib/zernio-sdk/models/update_o_auth_app_request.rb
 lib/zernio-sdk/models/update_pinterest_boards_request.rb
 lib/zernio-sdk/models/update_post_metadata200_response.rb
 lib/zernio-sdk/models/update_post_metadata_request.rb
@@ -5999,6 +6019,8 @@ lib/zernio-sdk/models/webhook_payload_account_connected.rb
 lib/zernio-sdk/models/webhook_payload_account_connected_account.rb
 lib/zernio-sdk/models/webhook_payload_account_disconnected.rb
 lib/zernio-sdk/models/webhook_payload_account_disconnected_account.rb
+lib/zernio-sdk/models/webhook_payload_account_permissions_changed.rb
+lib/zernio-sdk/models/webhook_payload_account_permissions_changed_account.rb
 lib/zernio-sdk/models/webhook_payload_account_rate_limited.rb
 lib/zernio-sdk/models/webhook_payload_account_rate_limited_account.rb
 lib/zernio-sdk/models/webhook_payload_ad_account_status_changed.rb
@@ -6921,6 +6943,8 @@ spec/models/create_messaging_ad200_response_spec.rb
 spec/models/create_messaging_ad201_response_spec.rb
 spec/models/create_messaging_ad_request_spec.rb
 spec/models/create_meta_ad_account_request_spec.rb
+spec/models/create_o_auth_app201_response_spec.rb
+spec/models/create_o_auth_app_request_spec.rb
 spec/models/create_phone_number_kyc_link200_response_spec.rb
 spec/models/create_phone_number_kyc_link_request_branding_spec.rb
 spec/models/create_phone_number_kyc_link_request_spec.rb
@@ -7082,6 +7106,7 @@ spec/models/delete_inbox_conversation200_response_data_spec.rb
 spec/models/delete_inbox_conversation200_response_spec.rb
 spec/models/delete_inbox_review_reply200_response_spec.rb
 spec/models/delete_inbox_review_reply_request_spec.rb
+spec/models/delete_o_auth_app200_response_spec.rb
 spec/models/delete_sms_sender_id200_response_spec.rb
 spec/models/delete_test_lead200_response_spec.rb
 spec/models/delete_tracking_tag_event200_response_spec.rb
@@ -8069,6 +8094,8 @@ spec/models/list_logs200_response_pagination_spec.rb
 spec/models/list_logs200_response_spec.rb
 spec/models/list_meta_business_users200_response_spec.rb
 spec/models/list_meta_businesses200_response_spec.rb
+spec/models/list_o_auth_apps200_response_pagination_spec.rb
+spec/models/list_o_auth_apps200_response_spec.rb
 spec/models/list_page_users200_response_spec.rb
 spec/models/list_partnership_ad_content200_response_media_inner_spec.rb
 spec/models/list_partnership_ad_content200_response_spec.rb
@@ -8220,6 +8247,9 @@ spec/models/move_account_to_profile200_response_spec.rb
 spec/models/move_account_to_profile_request_spec.rb
 spec/models/move_whats_app_number_to_profile200_response_spec.rb
 spec/models/move_whats_app_number_to_profile_request_spec.rb
+spec/models/o_auth_app_setup_scope_areas_inner_spec.rb
+spec/models/o_auth_app_setup_spec.rb
+spec/models/o_auth_app_spec.rb
 spec/models/on_branded_calling_identity_action_required_request_identity_spec.rb
 spec/models/on_branded_calling_identity_action_required_request_spec.rb
 spec/models/on_branded_calling_identity_status_updated_request_identity_spec.rb
@@ -8955,6 +8985,7 @@ spec/models/update_lead200_response_spec.rb
 spec/models/update_lead_request_spec.rb
 spec/models/update_linked_in_organization200_response_spec.rb
 spec/models/update_linked_in_organization_request_spec.rb
+spec/models/update_o_auth_app_request_spec.rb
 spec/models/update_pinterest_boards_request_spec.rb
 spec/models/update_post_metadata200_response_spec.rb
 spec/models/update_post_metadata_request_spec.rb
@@ -9101,6 +9132,8 @@ spec/models/webhook_payload_account_connected_account_spec.rb
 spec/models/webhook_payload_account_connected_spec.rb
 spec/models/webhook_payload_account_disconnected_account_spec.rb
 spec/models/webhook_payload_account_disconnected_spec.rb
+spec/models/webhook_payload_account_permissions_changed_account_spec.rb
+spec/models/webhook_payload_account_permissions_changed_spec.rb
 spec/models/webhook_payload_account_rate_limited_account_spec.rb
 spec/models/webhook_payload_account_rate_limited_spec.rb
 spec/models/webhook_payload_ad_account_status_changed_ad_account_spec.rb

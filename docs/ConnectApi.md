@@ -20,8 +20,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_whats_app_embedded_signup**](ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup |
 | [**connect_whop_ads_credentials**](ConnectApi.md#connect_whop_ads_credentials) | **POST** /v1/connect/whop-ads/credentials | Connect a Whop account |
 | [**connect_word_press_with_application_password**](ConnectApi.md#connect_word_press_with_application_password) | **POST** /v1/connect/wordpress/token | Connect self-hosted WordPress with an application password |
+| [**create_o_auth_app**](ConnectApi.md#create_o_auth_app) | **POST** /v1/connect/oauth-apps | Add an OAuth app |
 | [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
 | [**create_youtube_playlist**](ConnectApi.md#create_youtube_playlist) | **POST** /v1/accounts/{accountId}/youtube-playlists | Create YouTube playlist |
+| [**delete_o_auth_app**](ConnectApi.md#delete_o_auth_app) | **DELETE** /v1/connect/oauth-apps/{appId} | Remove an OAuth app |
 | [**get_connect_handoff**](ConnectApi.md#get_connect_handoff) | **GET** /v1/connect/handoffs/{handoffId} | Get a phone handoff |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**get_connect_welcome_screen**](ConnectApi.md#get_connect_welcome_screen) | **GET** /v1/connect/welcome-screen | Get the saved welcome screen |
@@ -30,6 +32,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_google_analytics_connect_url**](ConnectApi.md#get_google_analytics_connect_url) | **GET** /v1/connect/googleanalytics | Get Google Analytics OAuth connect URL |
 | [**get_hub_spot_connect_url**](ConnectApi.md#get_hub_spot_connect_url) | **GET** /v1/connect/hubspot | Get HubSpot OAuth connect URL |
 | [**get_linked_in_organizations**](ConnectApi.md#get_linked_in_organizations) | **GET** /v1/accounts/{accountId}/linkedin-organizations | List LinkedIn orgs |
+| [**get_o_auth_app**](ConnectApi.md#get_o_auth_app) | **GET** /v1/connect/oauth-apps/{appId} | Get an OAuth app |
 | [**get_page_webhook_subscription**](ConnectApi.md#get_page_webhook_subscription) | **GET** /v1/accounts/{accountId}/webhook-subscription | Read a Facebook Page&#39;s webhook subscription |
 | [**get_pending_o_auth_data**](ConnectApi.md#get_pending_o_auth_data) | **GET** /v1/connect/pending-data | Get pending OAuth data |
 | [**get_pinterest_boards**](ConnectApi.md#get_pinterest_boards) | **GET** /v1/accounts/{accountId}/pinterest-boards | List Pinterest boards |
@@ -51,6 +54,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_google_business_locations**](ConnectApi.md#list_google_business_locations) | **GET** /v1/connect/googlebusiness/locations | List Google Business Profile locations |
 | [**list_instagram_pages**](ConnectApi.md#list_instagram_pages) | **GET** /v1/connect/instagram/select-account | List Pages with a linked Instagram account |
 | [**list_linked_in_organizations**](ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs |
+| [**list_o_auth_apps**](ConnectApi.md#list_o_auth_apps) | **GET** /v1/connect/oauth-apps | List your OAuth apps |
 | [**list_pinterest_boards_for_selection**](ConnectApi.md#list_pinterest_boards_for_selection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards |
 | [**list_slack_channels**](ConnectApi.md#list_slack_channels) | **GET** /v1/connect/slack | List Slack channels for the channel picker |
 | [**list_snapchat_profiles**](ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles |
@@ -65,10 +69,12 @@ All URIs are relative to *https://zernio.com/api*
 | [**select_snapchat_profile**](ConnectApi.md#select_snapchat_profile) | **POST** /v1/connect/snapchat/select-profile | Select Snapchat profile |
 | [**set_reddit_post_flair**](ConnectApi.md#set_reddit_post_flair) | **POST** /v1/accounts/{accountId}/reddit-flairs | Set Reddit post flair |
 | [**start_microsoft_admin_consent**](ConnectApi.md#start_microsoft_admin_consent) | **GET** /v1/connect/microsoft/admin-consent | Admin-consent link for a Microsoft tenant |
+| [**test_o_auth_app**](ConnectApi.md#test_o_auth_app) | **POST** /v1/connect/oauth-apps/{appId}/test | Check an OAuth app&#39;s keys |
 | [**update_connect_welcome_screen**](ConnectApi.md#update_connect_welcome_screen) | **PUT** /v1/connect/welcome-screen | Save the welcome screen |
 | [**update_facebook_page**](ConnectApi.md#update_facebook_page) | **PUT** /v1/accounts/{accountId}/facebook-page | Update Facebook page |
 | [**update_gmb_location**](ConnectApi.md#update_gmb_location) | **PUT** /v1/accounts/{accountId}/gmb-locations | Update Google Business Profile location |
 | [**update_linked_in_organization**](ConnectApi.md#update_linked_in_organization) | **PUT** /v1/accounts/{accountId}/linkedin-organization | Switch LinkedIn account type |
+| [**update_o_auth_app**](ConnectApi.md#update_o_auth_app) | **PATCH** /v1/connect/oauth-apps/{appId} | Update an OAuth app |
 | [**update_pinterest_boards**](ConnectApi.md#update_pinterest_boards) | **PUT** /v1/accounts/{accountId}/pinterest-boards | Set default Pinterest board |
 | [**update_reddit_subreddits**](ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit |
 | [**update_youtube_default_playlist**](ConnectApi.md#update_youtube_default_playlist) | **PUT** /v1/accounts/{accountId}/youtube-playlists | Set default YouTube playlist |
@@ -1219,6 +1225,75 @@ end
 - **Accept**: application/json
 
 
+## create_o_auth_app
+
+> <CreateOAuthApp201Response> create_o_auth_app(create_o_auth_app_request)
+
+Add an OAuth app
+
+Saves your app's client ID and secret for a platform. The keys are checked with the platform first: keys it rejects return 400 OAUTH_APP_KEYS_REJECTED and are not saved; keys it could not check are saved with status `unchecked`. Allow the returned `redirectUri` in your app's settings on the platform before connecting. Only the account owner or a full-access team member can add apps, and not with a profile-scoped API key.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+create_o_auth_app_request = Zernio::CreateOAuthAppRequest.new({platform: 'platform_example', label: 'label_example', client_id: 'client_id_example', client_secret: 'client_secret_example'}) # CreateOAuthAppRequest | 
+
+begin
+  # Add an OAuth app
+  result = api_instance.create_o_auth_app(create_o_auth_app_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_o_auth_app: #{e}"
+end
+```
+
+#### Using the create_o_auth_app_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateOAuthApp201Response>, Integer, Hash)> create_o_auth_app_with_http_info(create_o_auth_app_request)
+
+```ruby
+begin
+  # Add an OAuth app
+  data, status_code, headers = api_instance.create_o_auth_app_with_http_info(create_o_auth_app_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateOAuthApp201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_o_auth_app_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_o_auth_app_request** | [**CreateOAuthAppRequest**](CreateOAuthAppRequest.md) |  |  |
+
+### Return type
+
+[**CreateOAuthApp201Response**](CreateOAuthApp201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## create_pinterest_board
 
 > <CreatePinterestBoard201Response> create_pinterest_board(account_id, create_pinterest_board_request)
@@ -1361,6 +1436,79 @@ end
 - **Accept**: application/json
 
 
+## delete_o_auth_app
+
+> <DeleteOAuthApp200Response> delete_o_auth_app(app_id, opts)
+
+Remove an OAuth app
+
+Removes the app. Accounts connected through it can no longer refresh their tokens, so when any are connected the call returns 409 OAUTH_APP_IN_USE with `details.accountCount` unless `confirm=true` is passed. With confirm, those accounts are marked as needing reconnection and each fires `account.disconnected`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+app_id = 'app_id_example' # String | 
+opts = {
+  confirm: true # Boolean | 
+}
+
+begin
+  # Remove an OAuth app
+  result = api_instance.delete_o_auth_app(app_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->delete_o_auth_app: #{e}"
+end
+```
+
+#### Using the delete_o_auth_app_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteOAuthApp200Response>, Integer, Hash)> delete_o_auth_app_with_http_info(app_id, opts)
+
+```ruby
+begin
+  # Remove an OAuth app
+  data, status_code, headers = api_instance.delete_o_auth_app_with_http_info(app_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteOAuthApp200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->delete_o_auth_app_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **app_id** | **String** |  |  |
+| **confirm** | **Boolean** |  | [optional][default to false] |
+
+### Return type
+
+[**DeleteOAuthApp200Response**](DeleteOAuthApp200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_connect_handoff
 
 > <ConnectHandoff> get_connect_handoff(handoff_id)
@@ -1454,6 +1602,7 @@ platform = 'facebook' # String | Social media platform to connect. `snapchat` is
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409.
 opts = {
   reconnect_account_id: 'reconnect_account_id_example', # String | Refresh this existing account (a Zernio account id of the same platform on this profile; otherwise 400). The OAuth callback and the selection endpoints (select-page, select-organization, select-board, select-location, Instagram and Snapchat selection) refuse, with `reconnect_account_mismatch`, a login that would write to a different account of the platform on this profile instead of this one. In headless mode the marker travels in the redirect_url we hand you, so pass that URL back unchanged to the selection endpoint. On X it counts toward the OAuth state limit described under redirect_url.
+  oauth_app_id: 'oauth_app_id_example', # String | Connect through one of your own OAuth apps (see /v1/connect/oauth-apps), so the consent screen shows your app and the platform's limits are your app's. Without it the connect runs on Zernio's app, whatever apps the workspace has saved. Only platforms listed in `platforms` of GET /v1/connect/oauth-apps accept an app; any other, and connects that end on a destination picker (Facebook Pages, Instagram through Facebook Login), return 400. The connect requests the app's `scopeAreas`; `scopes` may narrow them but not add an area the app does not enable (400). If the user does not grant every requested area, the account still connects and the redirect carries `missing_permissions=<areas>` (the headless POST returns `missingPermissions`). If the platform refuses a permission your app is not approved for, the redirect carries `error=oauth_app_scope_not_allowed`. The account remembers the app, and token refresh, publishing and inbox run on it; reconnecting through another app, or without one, moves the account to that app.
   expected_platform_user_id: 'expected_platform_user_id_example', # String | Only connect if the login lands on this platform account; any other account ends the flow with `error=account_mismatch` (a 409 `account_mismatch` on POST /v1/connect/instagram/select-account) and nothing is written. Compared with every id the platform reports for the authorized account: the `platformUserId` of a Zernio account on this platform, or on Instagram either the app-scoped id or the professional account id (`metadata.instagramScopedId`, the `17841...` id that Facebook Login accounts hold as platformUserId). TikTok open_ids are app-scoped, so an id from your own TikTok app never matches; use expectedUsername there. Honoured by the OAuth callback (every platform that connects without a selection step, Instagram Login included) and by the Instagram selection step; on the other selection endpoints you choose the destination yourself. In headless mode the marker travels in the redirect_url we hand you, so pass that URL back unchanged. On X it counts toward the OAuth state limit described under redirect_url.
   expected_username: 'expected_username_example', # String | Only connect if the authorized account's handle is this one (case-insensitive, a leading @ is ignored); otherwise the flow ends with `error=account_mismatch`, `error_message` naming the handle that was authorized, and nothing is written. Same coverage and transport as expectedPlatformUserId; when both are sent both must match. Use this on a first connection, where you hold the handle the user typed but no Zernio id yet.
   force_reauth: true, # Boolean | Instagram Login only (the default loginMethod); ignored elsewhere. Makes Instagram show its login page and ask for the credentials of the account to connect even when another Instagram account is logged in on the device or in the app, and hides the Facebook login option on that page. Use it when the person connecting manages several Instagram accounts on one phone: Instagram otherwise logs in, and converts to a professional account, whichever account is active, before any consent screen. Pair it with expectedUsername to also refuse a wrong account at the end.
@@ -1507,6 +1656,7 @@ end
 | **platform** | **String** | Social media platform to connect. &#x60;snapchat&#x60; is a closed beta with no public release date: it returns 403 &#x60;PLATFORM_BETA_RESTRICTED&#x60; until the account is approved. |  |
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409. |  |
 | **reconnect_account_id** | **String** | Refresh this existing account (a Zernio account id of the same platform on this profile; otherwise 400). The OAuth callback and the selection endpoints (select-page, select-organization, select-board, select-location, Instagram and Snapchat selection) refuse, with &#x60;reconnect_account_mismatch&#x60;, a login that would write to a different account of the platform on this profile instead of this one. In headless mode the marker travels in the redirect_url we hand you, so pass that URL back unchanged to the selection endpoint. On X it counts toward the OAuth state limit described under redirect_url. | [optional] |
+| **oauth_app_id** | **String** | Connect through one of your own OAuth apps (see /v1/connect/oauth-apps), so the consent screen shows your app and the platform&#39;s limits are your app&#39;s. Without it the connect runs on Zernio&#39;s app, whatever apps the workspace has saved. Only platforms listed in &#x60;platforms&#x60; of GET /v1/connect/oauth-apps accept an app; any other, and connects that end on a destination picker (Facebook Pages, Instagram through Facebook Login), return 400. The connect requests the app&#39;s &#x60;scopeAreas&#x60;; &#x60;scopes&#x60; may narrow them but not add an area the app does not enable (400). If the user does not grant every requested area, the account still connects and the redirect carries &#x60;missing_permissions&#x3D;&lt;areas&gt;&#x60; (the headless POST returns &#x60;missingPermissions&#x60;). If the platform refuses a permission your app is not approved for, the redirect carries &#x60;error&#x3D;oauth_app_scope_not_allowed&#x60;. The account remembers the app, and token refresh, publishing and inbox run on it; reconnecting through another app, or without one, moves the account to that app. | [optional] |
 | **expected_platform_user_id** | **String** | Only connect if the login lands on this platform account; any other account ends the flow with &#x60;error&#x3D;account_mismatch&#x60; (a 409 &#x60;account_mismatch&#x60; on POST /v1/connect/instagram/select-account) and nothing is written. Compared with every id the platform reports for the authorized account: the &#x60;platformUserId&#x60; of a Zernio account on this platform, or on Instagram either the app-scoped id or the professional account id (&#x60;metadata.instagramScopedId&#x60;, the &#x60;17841...&#x60; id that Facebook Login accounts hold as platformUserId). TikTok open_ids are app-scoped, so an id from your own TikTok app never matches; use expectedUsername there. Honoured by the OAuth callback (every platform that connects without a selection step, Instagram Login included) and by the Instagram selection step; on the other selection endpoints you choose the destination yourself. In headless mode the marker travels in the redirect_url we hand you, so pass that URL back unchanged. On X it counts toward the OAuth state limit described under redirect_url. | [optional] |
 | **expected_username** | **String** | Only connect if the authorized account&#39;s handle is this one (case-insensitive, a leading @ is ignored); otherwise the flow ends with &#x60;error&#x3D;account_mismatch&#x60;, &#x60;error_message&#x60; naming the handle that was authorized, and nothing is written. Same coverage and transport as expectedPlatformUserId; when both are sent both must match. Use this on a first connection, where you hold the handle the user typed but no Zernio id yet. | [optional] |
 | **force_reauth** | **Boolean** | Instagram Login only (the default loginMethod); ignored elsewhere. Makes Instagram show its login page and ask for the credentials of the account to connect even when another Instagram account is logged in on the device or in the app, and hides the Facebook login option on that page. Use it when the person connecting manages several Instagram accounts on one phone: Instagram otherwise logs in, and converts to a professional account, whichever account is active, before any consent screen. Pair it with expectedUsername to also refuse a wrong account at the end. | [optional][default to false] |
@@ -1971,6 +2121,73 @@ end
 ### Return type
 
 [**GetLinkedInOrganizations200Response**](GetLinkedInOrganizations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_o_auth_app
+
+> <CreateOAuthApp201Response> get_o_auth_app(app_id)
+
+Get an OAuth app
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+app_id = 'app_id_example' # String | 
+
+begin
+  # Get an OAuth app
+  result = api_instance.get_o_auth_app(app_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_o_auth_app: #{e}"
+end
+```
+
+#### Using the get_o_auth_app_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateOAuthApp201Response>, Integer, Hash)> get_o_auth_app_with_http_info(app_id)
+
+```ruby
+begin
+  # Get an OAuth app
+  data, status_code, headers = api_instance.get_o_auth_app_with_http_info(app_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateOAuthApp201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_o_auth_app_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **app_id** | **String** |  |  |
+
+### Return type
+
+[**CreateOAuthApp201Response**](CreateOAuthApp201Response.md)
 
 ### Authorization
 
@@ -3531,6 +3748,79 @@ end
 - **Accept**: application/json
 
 
+## list_o_auth_apps
+
+> <ListOAuthApps200Response> list_o_auth_apps(opts)
+
+List your OAuth apps
+
+Your own OAuth apps on social platforms. A connect runs on one when it passes its id as `oauthAppId`: the consent screen then shows your app's name and logo, and the platform's rate limits and quotas are your app's. Add as many as you need, any number per platform. Also lists, in `platforms`, which platforms accept your own app and what to set up on each. Pages are ordered by id: pass `pagination.nextCursor` back as `cursor` until it is null. Like every OAuth-app call, it needs the account owner or a full-access team member, on a session or a full-scope API key.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+opts = {
+  limit: 56, # Integer | 
+  cursor: 'cursor_example' # String | `pagination.nextCursor` from the previous page.
+}
+
+begin
+  # List your OAuth apps
+  result = api_instance.list_o_auth_apps(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_o_auth_apps: #{e}"
+end
+```
+
+#### Using the list_o_auth_apps_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListOAuthApps200Response>, Integer, Hash)> list_o_auth_apps_with_http_info(opts)
+
+```ruby
+begin
+  # List your OAuth apps
+  data, status_code, headers = api_instance.list_o_auth_apps_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListOAuthApps200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_o_auth_apps_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **cursor** | **String** | &#x60;pagination.nextCursor&#x60; from the previous page. | [optional] |
+
+### Return type
+
+[**ListOAuthApps200Response**](ListOAuthApps200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_pinterest_boards_for_selection
 
 > <ListPinterestBoardsForSelection200Response> list_pinterest_boards_for_selection(x_connect_token, profile_id, temp_token)
@@ -4551,6 +4841,75 @@ end
 - **Accept**: application/json
 
 
+## test_o_auth_app
+
+> <CreateOAuthApp201Response> test_o_auth_app(app_id)
+
+Check an OAuth app's keys
+
+Checks the saved keys with the platform again and records the outcome in `status` and `lastError`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+app_id = 'app_id_example' # String | 
+
+begin
+  # Check an OAuth app's keys
+  result = api_instance.test_o_auth_app(app_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->test_o_auth_app: #{e}"
+end
+```
+
+#### Using the test_o_auth_app_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateOAuthApp201Response>, Integer, Hash)> test_o_auth_app_with_http_info(app_id)
+
+```ruby
+begin
+  # Check an OAuth app's keys
+  data, status_code, headers = api_instance.test_o_auth_app_with_http_info(app_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateOAuthApp201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->test_o_auth_app_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **app_id** | **String** |  |  |
+
+### Return type
+
+[**CreateOAuthApp201Response**](CreateOAuthApp201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## update_connect_welcome_screen
 
 > <ConnectWelcomeScreen> update_connect_welcome_screen(update_connect_welcome_screen_request)
@@ -4822,6 +5181,77 @@ end
 ### Return type
 
 [**UpdateLinkedInOrganization200Response**](UpdateLinkedInOrganization200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_o_auth_app
+
+> <CreateOAuthApp201Response> update_o_auth_app(app_id, update_o_auth_app_request)
+
+Update an OAuth app
+
+Renames the app or rotates its secret. A new secret is checked with the platform before it is saved, and takes effect for every account on the app at once; their tokens keep working. The client ID cannot change: a different client ID is a different app, so add it and reconnect the accounts through it.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+app_id = 'app_id_example' # String | 
+update_o_auth_app_request = Zernio::UpdateOAuthAppRequest.new # UpdateOAuthAppRequest | 
+
+begin
+  # Update an OAuth app
+  result = api_instance.update_o_auth_app(app_id, update_o_auth_app_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->update_o_auth_app: #{e}"
+end
+```
+
+#### Using the update_o_auth_app_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateOAuthApp201Response>, Integer, Hash)> update_o_auth_app_with_http_info(app_id, update_o_auth_app_request)
+
+```ruby
+begin
+  # Update an OAuth app
+  data, status_code, headers = api_instance.update_o_auth_app_with_http_info(app_id, update_o_auth_app_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateOAuthApp201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->update_o_auth_app_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **app_id** | **String** |  |  |
+| **update_o_auth_app_request** | [**UpdateOAuthAppRequest**](UpdateOAuthAppRequest.md) |  |  |
+
+### Return type
+
+[**CreateOAuthApp201Response**](CreateOAuthApp201Response.md)
 
 ### Authorization
 

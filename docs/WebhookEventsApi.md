@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_ads_sync_recovered**](WebhookEventsApi.md#on_account_ads_sync_recovered) | **POST** /account.ads.sync_recovered | Ads sync recovered event |
 | [**on_account_connected**](WebhookEventsApi.md#on_account_connected) | **POST** /account.connected | Account connected event |
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
+| [**on_account_permissions_changed**](WebhookEventsApi.md#on_account_permissions_changed) | **POST** /account.permissions_changed | Account permissions changed event |
 | [**on_account_rate_limited**](WebhookEventsApi.md#on_account_rate_limited) | **POST** /account.rate_limited | Mailbox sending cooldown started |
 | [**on_ad_account_status_changed**](WebhookEventsApi.md#on_ad_account_status_changed) | **POST** /ad_account.status_changed | Ad account status changed event |
 | [**on_ad_delivery_issue**](WebhookEventsApi.md#on_ad_delivery_issue) | **POST** /ad.delivery_issue | Ad delivery issue event |
@@ -431,6 +432,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_account_disconnected** | [**WebhookPayloadAccountDisconnected**](WebhookPayloadAccountDisconnected.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_account_permissions_changed
+
+> on_account_permissions_changed(webhook_payload_account_permissions_changed)
+
+Account permissions changed event
+
+Fired when a publish on an account connected through your own OAuth app fails for a missing permission. The account stays connected; only the missing area stops working until the permission is granted and the account reconnected.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_account_permissions_changed =  # WebhookPayloadAccountPermissionsChanged | 
+
+begin
+  # Account permissions changed event
+  api_instance.on_account_permissions_changed(webhook_payload_account_permissions_changed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_permissions_changed: #{e}"
+end
+```
+
+#### Using the on_account_permissions_changed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_account_permissions_changed_with_http_info(webhook_payload_account_permissions_changed)
+
+```ruby
+begin
+  # Account permissions changed event
+  data, status_code, headers = api_instance.on_account_permissions_changed_with_http_info(webhook_payload_account_permissions_changed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_permissions_changed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_account_permissions_changed** | [**WebhookPayloadAccountPermissionsChanged**](WebhookPayloadAccountPermissionsChanged.md) |  |  |
 
 ### Return type
 
