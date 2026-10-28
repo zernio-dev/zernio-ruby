@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **deleted** | **Boolean** |  | [optional] |
-| **ad_count** | **Integer** | Local Ad documents marked cancelled | [optional] |
+| **ad_count** | **Integer** | Local Ad documents marked cancelled (0 for an ad set with no ads) | [optional] |
 
 ## Example
 
