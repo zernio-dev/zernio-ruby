@@ -813,6 +813,7 @@ docs/CreatorCampaignEconomicsCpm.md
 docs/CreatorCampaignEconomicsPerPost.md
 docs/CreatorCampaignEconomicsPool.md
 docs/CreatorCampaignsApi.md
+docs/CreatorPortalApi.md
 docs/CreatorPortalCampaign.md
 docs/CreatorPortalEconomics.md
 docs/CreatorPortalInvite.md
@@ -823,7 +824,6 @@ docs/CreatorPortalParticipantParticipant.md
 docs/CreatorPortalPayoutEntry.md
 docs/CreatorPortalPayoutSetup.md
 docs/CreatorPortalPayoutSetupTransfersInner.md
-docs/CreatorPortalPublicApi.md
 docs/CreatorPortalSubmission.md
 docs/CrosspostDiscordMessage200Response.md
 docs/CtwaAdRequestBody.md
@@ -3293,7 +3293,7 @@ lib/zernio-sdk/api/connected_apps_api.rb
 lib/zernio-sdk/api/contacts_api.rb
 lib/zernio-sdk/api/conversions_api.rb
 lib/zernio-sdk/api/creator_campaigns_api.rb
-lib/zernio-sdk/api/creator_portal_public_api.rb
+lib/zernio-sdk/api/creator_portal_api.rb
 lib/zernio-sdk/api/custom_fields_api.rb
 lib/zernio-sdk/api/discord_api.rb
 lib/zernio-sdk/api/email_api.rb
@@ -6555,7 +6555,7 @@ spec/api/connected_apps_api_spec.rb
 spec/api/contacts_api_spec.rb
 spec/api/conversions_api_spec.rb
 spec/api/creator_campaigns_api_spec.rb
-spec/api/creator_portal_public_api_spec.rb
+spec/api/creator_portal_api_spec.rb
 spec/api/custom_fields_api_spec.rb
 spec/api/discord_api_spec.rb
 spec/api/email_api_spec.rb

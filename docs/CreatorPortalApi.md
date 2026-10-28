@@ -1,18 +1,18 @@
-# Zernio::CreatorPortalPublicApi
+# Zernio::CreatorPortalApi
 
 All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_creator_payout_login**](CreatorPortalPublicApi.md#create_creator_payout_login) | **POST** /public/creator-campaigns/{token}/payout-login | Open the creator&#39;s Stripe dashboard |
-| [**get_creator_payout_statement**](CreatorPortalPublicApi.md#get_creator_payout_statement) | **GET** /public/creator-campaigns/{token}/payouts/{transferId}/statement | Download a payout statement |
-| [**get_creator_payouts**](CreatorPortalPublicApi.md#get_creator_payouts) | **GET** /public/creator-campaigns/{token}/payouts | List a creator&#39;s earnings history |
-| [**get_creator_portal**](CreatorPortalPublicApi.md#get_creator_portal) | **GET** /public/creator-campaigns/{token} | Read a creator invite or participant page |
-| [**join_creator_campaign**](CreatorPortalPublicApi.md#join_creator_campaign) | **POST** /public/creator-campaigns/{token} | Join a campaign |
-| [**recover_creator_portal_links**](CreatorPortalPublicApi.md#recover_creator_portal_links) | **POST** /public/creator-campaigns/recover-link | Email a creator their campaign links |
-| [**start_creator_connect**](CreatorPortalPublicApi.md#start_creator_connect) | **POST** /public/creator-campaigns/{token}/connect | Start connecting a creator account |
-| [**start_creator_payouts**](CreatorPortalPublicApi.md#start_creator_payouts) | **POST** /public/creator-campaigns/{token}/payouts | Start payout onboarding |
-| [**submit_creator_post**](CreatorPortalPublicApi.md#submit_creator_post) | **POST** /public/creator-campaigns/{token}/submissions | Submit a post |
+| [**create_creator_payout_login**](CreatorPortalApi.md#create_creator_payout_login) | **POST** /public/creator-campaigns/{token}/payout-login | Open the creator&#39;s Stripe dashboard |
+| [**get_creator_payout_statement**](CreatorPortalApi.md#get_creator_payout_statement) | **GET** /public/creator-campaigns/{token}/payouts/{transferId}/statement | Download a payout statement |
+| [**get_creator_payouts**](CreatorPortalApi.md#get_creator_payouts) | **GET** /public/creator-campaigns/{token}/payouts | List a creator&#39;s earnings history |
+| [**get_creator_portal**](CreatorPortalApi.md#get_creator_portal) | **GET** /public/creator-campaigns/{token} | Read a creator invite or participant page |
+| [**join_creator_campaign**](CreatorPortalApi.md#join_creator_campaign) | **POST** /public/creator-campaigns/{token} | Join a campaign |
+| [**recover_creator_portal_links**](CreatorPortalApi.md#recover_creator_portal_links) | **POST** /public/creator-campaigns/recover-link | Email a creator their campaign links |
+| [**start_creator_connect**](CreatorPortalApi.md#start_creator_connect) | **POST** /public/creator-campaigns/{token}/connect | Start connecting a creator account |
+| [**start_creator_payouts**](CreatorPortalApi.md#start_creator_payouts) | **POST** /public/creator-campaigns/{token}/payouts | Start payout onboarding |
+| [**submit_creator_post**](CreatorPortalApi.md#submit_creator_post) | **POST** /public/creator-campaigns/{token}/submissions | Submit a post |
 
 
 ## create_creator_payout_login
@@ -29,7 +29,7 @@ Returns a one-time link into the creator's Stripe Express dashboard, where they 
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
 
 begin
@@ -37,7 +37,7 @@ begin
   result = api_instance.create_creator_payout_login(token)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->create_creator_payout_login: #{e}"
+  puts "Error when calling CreatorPortalApi->create_creator_payout_login: #{e}"
 end
 ```
 
@@ -55,7 +55,7 @@ begin
   p headers # => { ... }
   p data # => <StartCreatorPayouts200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->create_creator_payout_login_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->create_creator_payout_login_with_http_info: #{e}"
 end
 ```
 
@@ -93,7 +93,7 @@ A PDF statement of one paid payout to this creator: who paid, the campaign, the 
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
 transfer_id = 'transfer_id_example' # String | 
 
@@ -102,7 +102,7 @@ begin
   result = api_instance.get_creator_payout_statement(token, transfer_id)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->get_creator_payout_statement: #{e}"
+  puts "Error when calling CreatorPortalApi->get_creator_payout_statement: #{e}"
 end
 ```
 
@@ -120,7 +120,7 @@ begin
   p headers # => { ... }
   p data # => File
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->get_creator_payout_statement_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->get_creator_payout_statement_with_http_info: #{e}"
 end
 ```
 
@@ -159,7 +159,7 @@ The participant's ledger entries, newest first, with the bucket each one moved m
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
 opts = {
   limit: 56, # Integer | 
@@ -171,7 +171,7 @@ begin
   result = api_instance.get_creator_payouts(token, opts)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->get_creator_payouts: #{e}"
+  puts "Error when calling CreatorPortalApi->get_creator_payouts: #{e}"
 end
 ```
 
@@ -189,7 +189,7 @@ begin
   p headers # => { ... }
   p data # => <GetCreatorPayouts200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->get_creator_payouts_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->get_creator_payouts_with_http_info: #{e}"
 end
 ```
 
@@ -229,7 +229,7 @@ What a creator sees behind a campaign link, with no API key. `token` is either a
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
 
 begin
@@ -237,7 +237,7 @@ begin
   result = api_instance.get_creator_portal(token)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->get_creator_portal: #{e}"
+  puts "Error when calling CreatorPortalApi->get_creator_portal: #{e}"
 end
 ```
 
@@ -255,7 +255,7 @@ begin
   p headers # => { ... }
   p data # => <GetCreatorPortal200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->get_creator_portal_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->get_creator_portal_with_http_info: #{e}"
 end
 ```
 
@@ -293,7 +293,7 @@ Accepts a participant invite, or joins through an open invite link. With a parti
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
 opts = {
   join_creator_campaign_request: Zernio::JoinCreatorCampaignRequest.new # JoinCreatorCampaignRequest | 
@@ -304,7 +304,7 @@ begin
   result = api_instance.join_creator_campaign(token, opts)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->join_creator_campaign: #{e}"
+  puts "Error when calling CreatorPortalApi->join_creator_campaign: #{e}"
 end
 ```
 
@@ -322,7 +322,7 @@ begin
   p headers # => { ... }
   p data # => <JoinCreatorCampaign201Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->join_creator_campaign_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->join_creator_campaign_with_http_info: #{e}"
 end
 ```
 
@@ -361,7 +361,7 @@ For a creator who lost their link. Emails every personal participant link held b
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 recover_creator_portal_links_request = Zernio::RecoverCreatorPortalLinksRequest.new({email: 'email_example'}) # RecoverCreatorPortalLinksRequest | 
 
 begin
@@ -369,7 +369,7 @@ begin
   result = api_instance.recover_creator_portal_links(recover_creator_portal_links_request)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->recover_creator_portal_links: #{e}"
+  puts "Error when calling CreatorPortalApi->recover_creator_portal_links: #{e}"
 end
 ```
 
@@ -387,7 +387,7 @@ begin
   p headers # => { ... }
   p data # => <RecoverCreatorPortalLinks202Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->recover_creator_portal_links_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->recover_creator_portal_links_with_http_info: #{e}"
 end
 ```
 
@@ -425,7 +425,7 @@ Returns the authorization URL that connects one of the creator's own social acco
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
 start_creator_connect_request = Zernio::StartCreatorConnectRequest.new({platform: 'platform_example'}) # StartCreatorConnectRequest | 
 
@@ -434,7 +434,7 @@ begin
   result = api_instance.start_creator_connect(token, start_creator_connect_request)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->start_creator_connect: #{e}"
+  puts "Error when calling CreatorPortalApi->start_creator_connect: #{e}"
 end
 ```
 
@@ -452,7 +452,7 @@ begin
   p headers # => { ... }
   p data # => <StartCreatorConnect200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->start_creator_connect_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->start_creator_connect_with_http_info: #{e}"
 end
 ```
 
@@ -491,7 +491,7 @@ For a campaign that pays through the Zernio treasury: creates the creator's paye
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
 start_creator_payouts_request = Zernio::StartCreatorPayoutsRequest.new({action: 'onboard'}) # StartCreatorPayoutsRequest | 
 
@@ -500,7 +500,7 @@ begin
   result = api_instance.start_creator_payouts(token, start_creator_payouts_request)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->start_creator_payouts: #{e}"
+  puts "Error when calling CreatorPortalApi->start_creator_payouts: #{e}"
 end
 ```
 
@@ -518,7 +518,7 @@ begin
   p headers # => { ... }
   p data # => <StartCreatorPayouts200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->start_creator_payouts_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->start_creator_payouts_with_http_info: #{e}"
 end
 ```
 
@@ -557,7 +557,7 @@ Submits the link to a post the creator published from a connected account. The p
 require 'time'
 require 'zernio-sdk'
 
-api_instance = Zernio::CreatorPortalPublicApi.new
+api_instance = Zernio::CreatorPortalApi.new
 token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
 submit_creator_post_request = Zernio::SubmitCreatorPostRequest.new({url: 'url_example'}) # SubmitCreatorPostRequest | 
 
@@ -566,7 +566,7 @@ begin
   result = api_instance.submit_creator_post(token, submit_creator_post_request)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->submit_creator_post: #{e}"
+  puts "Error when calling CreatorPortalApi->submit_creator_post: #{e}"
 end
 ```
 
@@ -584,7 +584,7 @@ begin
   p headers # => { ... }
   p data # => <SubmitCreatorPost201Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling CreatorPortalPublicApi->submit_creator_post_with_http_info: #{e}"
+  puts "Error when calling CreatorPortalApi->submit_creator_post_with_http_info: #{e}"
 end
 ```
 

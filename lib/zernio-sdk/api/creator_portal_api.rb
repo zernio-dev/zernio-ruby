@@ -13,7 +13,7 @@ Generator version: 7.19.0
 require 'cgi'
 
 module Zernio
-  class CreatorPortalPublicApi
+  class CreatorPortalApi
     attr_accessor :api_client
 
     def initialize(api_client = ApiClient.default)
@@ -36,15 +36,15 @@ module Zernio
     # @return [Array<(StartCreatorPayouts200Response, Integer, Hash)>] StartCreatorPayouts200Response data, response status code and response headers
     def create_creator_payout_login_with_http_info(token, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.create_creator_payout_login ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.create_creator_payout_login ...'
       end
       # verify the required parameter 'token' is set
       if @api_client.config.client_side_validation && token.nil?
-        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalPublicApi.create_creator_payout_login"
+        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalApi.create_creator_payout_login"
       end
       pattern = Regexp.new(/^[A-Za-z0-9_-]{16,128}$/)
       if @api_client.config.client_side_validation && token !~ pattern
-        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalPublicApi.create_creator_payout_login, must conform to the pattern #{pattern}."
+        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalApi.create_creator_payout_login, must conform to the pattern #{pattern}."
       end
 
       # resource path
@@ -71,7 +71,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.create_creator_payout_login",
+        :operation => :"CreatorPortalApi.create_creator_payout_login",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -82,7 +82,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#create_creator_payout_login\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#create_creator_payout_login\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -106,20 +106,20 @@ module Zernio
     # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
     def get_creator_payout_statement_with_http_info(token, transfer_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.get_creator_payout_statement ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.get_creator_payout_statement ...'
       end
       # verify the required parameter 'token' is set
       if @api_client.config.client_side_validation && token.nil?
-        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalPublicApi.get_creator_payout_statement"
+        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalApi.get_creator_payout_statement"
       end
       pattern = Regexp.new(/^[A-Za-z0-9_-]{16,128}$/)
       if @api_client.config.client_side_validation && token !~ pattern
-        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalPublicApi.get_creator_payout_statement, must conform to the pattern #{pattern}."
+        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalApi.get_creator_payout_statement, must conform to the pattern #{pattern}."
       end
 
       # verify the required parameter 'transfer_id' is set
       if @api_client.config.client_side_validation && transfer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'transfer_id' when calling CreatorPortalPublicApi.get_creator_payout_statement"
+        fail ArgumentError, "Missing the required parameter 'transfer_id' when calling CreatorPortalApi.get_creator_payout_statement"
       end
       # resource path
       local_var_path = '/public/creator-campaigns/{token}/payouts/{transferId}/statement'.sub('{' + 'token' + '}', CGI.escape(token.to_s)).sub('{' + 'transferId' + '}', CGI.escape(transfer_id.to_s))
@@ -145,7 +145,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.get_creator_payout_statement",
+        :operation => :"CreatorPortalApi.get_creator_payout_statement",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -156,7 +156,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#get_creator_payout_statement\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#get_creator_payout_statement\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -182,27 +182,27 @@ module Zernio
     # @return [Array<(GetCreatorPayouts200Response, Integer, Hash)>] GetCreatorPayouts200Response data, response status code and response headers
     def get_creator_payouts_with_http_info(token, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.get_creator_payouts ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.get_creator_payouts ...'
       end
       # verify the required parameter 'token' is set
       if @api_client.config.client_side_validation && token.nil?
-        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalPublicApi.get_creator_payouts"
+        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalApi.get_creator_payouts"
       end
       pattern = Regexp.new(/^[A-Za-z0-9_-]{16,128}$/)
       if @api_client.config.client_side_validation && token !~ pattern
-        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalPublicApi.get_creator_payouts, must conform to the pattern #{pattern}."
+        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalApi.get_creator_payouts, must conform to the pattern #{pattern}."
       end
 
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 200
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CreatorPortalPublicApi.get_creator_payouts, must be smaller than or equal to 200.'
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CreatorPortalApi.get_creator_payouts, must be smaller than or equal to 200.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CreatorPortalPublicApi.get_creator_payouts, must be greater than or equal to 1.'
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CreatorPortalApi.get_creator_payouts, must be greater than or equal to 1.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'skip'].nil? && opts[:'skip'] < 0
-        fail ArgumentError, 'invalid value for "opts[:"skip"]" when calling CreatorPortalPublicApi.get_creator_payouts, must be greater than or equal to 0.'
+        fail ArgumentError, 'invalid value for "opts[:"skip"]" when calling CreatorPortalApi.get_creator_payouts, must be greater than or equal to 0.'
       end
 
       # resource path
@@ -231,7 +231,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.get_creator_payouts",
+        :operation => :"CreatorPortalApi.get_creator_payouts",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -242,7 +242,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#get_creator_payouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#get_creator_payouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -264,15 +264,15 @@ module Zernio
     # @return [Array<(GetCreatorPortal200Response, Integer, Hash)>] GetCreatorPortal200Response data, response status code and response headers
     def get_creator_portal_with_http_info(token, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.get_creator_portal ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.get_creator_portal ...'
       end
       # verify the required parameter 'token' is set
       if @api_client.config.client_side_validation && token.nil?
-        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalPublicApi.get_creator_portal"
+        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalApi.get_creator_portal"
       end
       pattern = Regexp.new(/^[A-Za-z0-9_-]{16,128}$/)
       if @api_client.config.client_side_validation && token !~ pattern
-        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalPublicApi.get_creator_portal, must conform to the pattern #{pattern}."
+        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalApi.get_creator_portal, must conform to the pattern #{pattern}."
       end
 
       # resource path
@@ -299,7 +299,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.get_creator_portal",
+        :operation => :"CreatorPortalApi.get_creator_portal",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -310,7 +310,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#get_creator_portal\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#get_creator_portal\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -334,15 +334,15 @@ module Zernio
     # @return [Array<(JoinCreatorCampaign201Response, Integer, Hash)>] JoinCreatorCampaign201Response data, response status code and response headers
     def join_creator_campaign_with_http_info(token, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.join_creator_campaign ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.join_creator_campaign ...'
       end
       # verify the required parameter 'token' is set
       if @api_client.config.client_side_validation && token.nil?
-        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalPublicApi.join_creator_campaign"
+        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalApi.join_creator_campaign"
       end
       pattern = Regexp.new(/^[A-Za-z0-9_-]{16,128}$/)
       if @api_client.config.client_side_validation && token !~ pattern
-        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalPublicApi.join_creator_campaign, must conform to the pattern #{pattern}."
+        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalApi.join_creator_campaign, must conform to the pattern #{pattern}."
       end
 
       # resource path
@@ -374,7 +374,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.join_creator_campaign",
+        :operation => :"CreatorPortalApi.join_creator_campaign",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -385,7 +385,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#join_creator_campaign\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#join_creator_campaign\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -407,11 +407,11 @@ module Zernio
     # @return [Array<(RecoverCreatorPortalLinks202Response, Integer, Hash)>] RecoverCreatorPortalLinks202Response data, response status code and response headers
     def recover_creator_portal_links_with_http_info(recover_creator_portal_links_request, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.recover_creator_portal_links ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.recover_creator_portal_links ...'
       end
       # verify the required parameter 'recover_creator_portal_links_request' is set
       if @api_client.config.client_side_validation && recover_creator_portal_links_request.nil?
-        fail ArgumentError, "Missing the required parameter 'recover_creator_portal_links_request' when calling CreatorPortalPublicApi.recover_creator_portal_links"
+        fail ArgumentError, "Missing the required parameter 'recover_creator_portal_links_request' when calling CreatorPortalApi.recover_creator_portal_links"
       end
       # resource path
       local_var_path = '/public/creator-campaigns/recover-link'
@@ -442,7 +442,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.recover_creator_portal_links",
+        :operation => :"CreatorPortalApi.recover_creator_portal_links",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -453,7 +453,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#recover_creator_portal_links\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#recover_creator_portal_links\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -477,20 +477,20 @@ module Zernio
     # @return [Array<(StartCreatorConnect200Response, Integer, Hash)>] StartCreatorConnect200Response data, response status code and response headers
     def start_creator_connect_with_http_info(token, start_creator_connect_request, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.start_creator_connect ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.start_creator_connect ...'
       end
       # verify the required parameter 'token' is set
       if @api_client.config.client_side_validation && token.nil?
-        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalPublicApi.start_creator_connect"
+        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalApi.start_creator_connect"
       end
       pattern = Regexp.new(/^[A-Za-z0-9_-]{16,128}$/)
       if @api_client.config.client_side_validation && token !~ pattern
-        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalPublicApi.start_creator_connect, must conform to the pattern #{pattern}."
+        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalApi.start_creator_connect, must conform to the pattern #{pattern}."
       end
 
       # verify the required parameter 'start_creator_connect_request' is set
       if @api_client.config.client_side_validation && start_creator_connect_request.nil?
-        fail ArgumentError, "Missing the required parameter 'start_creator_connect_request' when calling CreatorPortalPublicApi.start_creator_connect"
+        fail ArgumentError, "Missing the required parameter 'start_creator_connect_request' when calling CreatorPortalApi.start_creator_connect"
       end
       # resource path
       local_var_path = '/public/creator-campaigns/{token}/connect'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
@@ -521,7 +521,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.start_creator_connect",
+        :operation => :"CreatorPortalApi.start_creator_connect",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -532,7 +532,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#start_creator_connect\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#start_creator_connect\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -556,20 +556,20 @@ module Zernio
     # @return [Array<(StartCreatorPayouts200Response, Integer, Hash)>] StartCreatorPayouts200Response data, response status code and response headers
     def start_creator_payouts_with_http_info(token, start_creator_payouts_request, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.start_creator_payouts ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.start_creator_payouts ...'
       end
       # verify the required parameter 'token' is set
       if @api_client.config.client_side_validation && token.nil?
-        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalPublicApi.start_creator_payouts"
+        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalApi.start_creator_payouts"
       end
       pattern = Regexp.new(/^[A-Za-z0-9_-]{16,128}$/)
       if @api_client.config.client_side_validation && token !~ pattern
-        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalPublicApi.start_creator_payouts, must conform to the pattern #{pattern}."
+        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalApi.start_creator_payouts, must conform to the pattern #{pattern}."
       end
 
       # verify the required parameter 'start_creator_payouts_request' is set
       if @api_client.config.client_side_validation && start_creator_payouts_request.nil?
-        fail ArgumentError, "Missing the required parameter 'start_creator_payouts_request' when calling CreatorPortalPublicApi.start_creator_payouts"
+        fail ArgumentError, "Missing the required parameter 'start_creator_payouts_request' when calling CreatorPortalApi.start_creator_payouts"
       end
       # resource path
       local_var_path = '/public/creator-campaigns/{token}/payouts'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
@@ -600,7 +600,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.start_creator_payouts",
+        :operation => :"CreatorPortalApi.start_creator_payouts",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -611,7 +611,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#start_creator_payouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#start_creator_payouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -635,20 +635,20 @@ module Zernio
     # @return [Array<(SubmitCreatorPost201Response, Integer, Hash)>] SubmitCreatorPost201Response data, response status code and response headers
     def submit_creator_post_with_http_info(token, submit_creator_post_request, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CreatorPortalPublicApi.submit_creator_post ...'
+        @api_client.config.logger.debug 'Calling API: CreatorPortalApi.submit_creator_post ...'
       end
       # verify the required parameter 'token' is set
       if @api_client.config.client_side_validation && token.nil?
-        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalPublicApi.submit_creator_post"
+        fail ArgumentError, "Missing the required parameter 'token' when calling CreatorPortalApi.submit_creator_post"
       end
       pattern = Regexp.new(/^[A-Za-z0-9_-]{16,128}$/)
       if @api_client.config.client_side_validation && token !~ pattern
-        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalPublicApi.submit_creator_post, must conform to the pattern #{pattern}."
+        fail ArgumentError, "invalid value for 'token' when calling CreatorPortalApi.submit_creator_post, must conform to the pattern #{pattern}."
       end
 
       # verify the required parameter 'submit_creator_post_request' is set
       if @api_client.config.client_side_validation && submit_creator_post_request.nil?
-        fail ArgumentError, "Missing the required parameter 'submit_creator_post_request' when calling CreatorPortalPublicApi.submit_creator_post"
+        fail ArgumentError, "Missing the required parameter 'submit_creator_post_request' when calling CreatorPortalApi.submit_creator_post"
       end
       # resource path
       local_var_path = '/public/creator-campaigns/{token}/submissions'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
@@ -679,7 +679,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || []
 
       new_options = opts.merge(
-        :operation => :"CreatorPortalPublicApi.submit_creator_post",
+        :operation => :"CreatorPortalApi.submit_creator_post",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -690,7 +690,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CreatorPortalPublicApi#submit_creator_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CreatorPortalApi#submit_creator_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
