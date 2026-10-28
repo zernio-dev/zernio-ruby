@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_ad_rule**](AdRulesApi.md#create_ad_rule) | **POST** /v1/ads/rules | Create an ad rule |
 | [**delete_ad_rule**](AdRulesApi.md#delete_ad_rule) | **DELETE** /v1/ads/rules/{ruleId} | Delete an ad rule |
 | [**get_ad_rule**](AdRulesApi.md#get_ad_rule) | **GET** /v1/ads/rules/{ruleId} | Get an ad rule |
+| [**list_ad_rule_activity**](AdRulesApi.md#list_ad_rule_activity) | **GET** /v1/ads/rules/activity | List every change ad rules made |
 | [**list_ad_rule_runs**](AdRulesApi.md#list_ad_rule_runs) | **GET** /v1/ads/rules/{ruleId}/runs | List an ad rule&#39;s runs |
 | [**list_ad_rules**](AdRulesApi.md#list_ad_rules) | **GET** /v1/ads/rules | List ad rules |
 | [**preview_ad_rule**](AdRulesApi.md#preview_ad_rule) | **POST** /v1/ads/rules/{ruleId}/preview | Preview an ad rule |
@@ -220,13 +221,96 @@ end
 - **Accept**: application/json
 
 
+## list_ad_rule_activity
+
+> <ListAdRuleActivity200Response> list_ad_rule_activity(opts)
+
+List every change ad rules made
+
+The permanent record of what your rules did: one entry per pause, reactivation or budget change (including skipped and failed attempts), newest first, across all rules of the profiles the key can reach. Entries stay after a rule is renamed or deleted; `ruleName` is the rule's name when it acted. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdRulesApi.new
+opts = {
+  rule_id: 'rule_id_example', # String | 
+  account_id: 'account_id_example', # String | Only changes of rules on this ads connection.
+  type: 'pause', # String | 
+  from: Time.parse('2013-10-20T19:20:30+01:00'), # Time | ISO 8601 date-time, inclusive.
+  to: Time.parse('2013-10-20T19:20:30+01:00'), # Time | ISO 8601 date-time, inclusive.
+  limit: 56, # Integer | 
+  cursor: 'cursor_example' # String | `nextCursor` from the previous page.
+}
+
+begin
+  # List every change ad rules made
+  result = api_instance.list_ad_rule_activity(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->list_ad_rule_activity: #{e}"
+end
+```
+
+#### Using the list_ad_rule_activity_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdRuleActivity200Response>, Integer, Hash)> list_ad_rule_activity_with_http_info(opts)
+
+```ruby
+begin
+  # List every change ad rules made
+  data, status_code, headers = api_instance.list_ad_rule_activity_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdRuleActivity200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->list_ad_rule_activity_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **rule_id** | **String** |  | [optional] |
+| **account_id** | **String** | Only changes of rules on this ads connection. | [optional] |
+| **type** | **String** |  | [optional] |
+| **from** | **Time** | ISO 8601 date-time, inclusive. | [optional] |
+| **to** | **Time** | ISO 8601 date-time, inclusive. | [optional] |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **cursor** | **String** | &#x60;nextCursor&#x60; from the previous page. | [optional] |
+
+### Return type
+
+[**ListAdRuleActivity200Response**](ListAdRuleActivity200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_ad_rule_runs
 
 > <ListAdRuleRuns200Response> list_ad_rule_runs(rule_id, opts)
 
 List an ad rule's runs
 
-Lists a rule's scheduled runs, newest first: what each run evaluated, matched and did. 
+Lists a rule's scheduled runs, newest first: what each run evaluated, matched and did. Runs that changed something (or tried to) are kept permanently, also after the rule is deleted; runs that changed nothing are dropped after about 31 days. For every change across all rules, use `GET /v1/ads/rules/activity`. 
 
 ### Examples
 

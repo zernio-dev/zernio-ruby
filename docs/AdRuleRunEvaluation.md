@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **rule** | [**AdRuleRunEvaluationRule**](AdRuleRunEvaluationRule.md) |  | [optional] |
 | **today** | **Date** |  | [optional] |
 | **timezone** | **String** |  | [optional] |
 | **timezone_assumed** | **Boolean** |  | [optional] |
@@ -18,6 +19,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::AdRuleRunEvaluation.new(
+  rule: null,
   today: null,
   timezone: null,
   timezone_assumed: null,
