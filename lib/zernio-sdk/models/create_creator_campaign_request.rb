@@ -24,6 +24,7 @@ module Zernio
 
     attr_accessor :economics
 
+    # Omitted, the campaign starts with authenticityThreshold 40 and no other caps.
     attr_accessor :caps
 
     # Platforms creators may post on. At least one is needed to activate.

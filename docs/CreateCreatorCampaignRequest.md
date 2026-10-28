@@ -8,7 +8,7 @@
 | **name** | **String** |  |  |
 | **brand_name** | **String** |  |  |
 | **economics** | [**CreatorCampaignEconomics**](CreatorCampaignEconomics.md) |  |  |
-| **caps** | [**CreatorCampaignCaps**](CreatorCampaignCaps.md) |  | [optional] |
+| **caps** | [**CreatorCampaignCaps**](CreatorCampaignCaps.md) | Omitted, the campaign starts with authenticityThreshold 40 and no other caps. | [optional] |
 | **platforms** | **Array&lt;String&gt;** | Platforms creators may post on. At least one is needed to activate. | [optional] |
 | **content_rules** | **String** |  | [optional] |
 | **starts_at** | **Time** |  | [optional] |
