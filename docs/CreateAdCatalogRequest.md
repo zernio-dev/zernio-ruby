@@ -9,7 +9,7 @@
 | **ad_account_id** | **String** | Ad account whose owner business creates the catalog | [optional] |
 | **business_id** | **String** | Business portfolio that owns the catalog | [optional] |
 | **name** | **String** |  |  |
-| **vertical** | **String** |  | [optional][default to &#39;commerce&#39;] |
+| **vertical** | **String** | Meta catalog vertical. Use services for a professional services catalog (for example one linked to WhatsApp). local_service_business is a deprecated alias of local_service_businesses. The product endpoints under /v1/ads/catalogs/{catalogId}/products write commerce product items only. | [optional][default to &#39;commerce&#39;] |
 
 ## Example
 
