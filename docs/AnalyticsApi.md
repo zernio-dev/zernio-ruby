@@ -4,6 +4,7 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**cancel_tracking_window**](AnalyticsApi.md#cancel_tracking_window) | **DELETE** /v1/analytics/tracking/{windowId} | Cancel a tracking window |
 | [**get_analytics**](AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics |
 | [**get_analytics_dashboard**](AnalyticsApi.md#get_analytics_dashboard) | **GET** /v1/analytics/dashboard | Get an analytics dashboard |
 | [**get_analytics_delta**](AnalyticsApi.md#get_analytics_delta) | **GET** /v1/analytics/delta | Analytics changed since a cursor |
@@ -27,18 +28,93 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_linked_in_org_aggregate_analytics**](AnalyticsApi.md#get_linked_in_org_aggregate_analytics) | **GET** /v1/analytics/linkedin/org-aggregate-analytics | Get LinkedIn org analytics |
 | [**get_linked_in_post_analytics**](AnalyticsApi.md#get_linked_in_post_analytics) | **GET** /v1/accounts/{accountId}/linkedin-post-analytics | Get LinkedIn post stats |
 | [**get_linked_in_post_reactions**](AnalyticsApi.md#get_linked_in_post_reactions) | **GET** /v1/accounts/{accountId}/linkedin-post-reactions | Get LinkedIn post reactions |
+| [**get_post_authenticity**](AnalyticsApi.md#get_post_authenticity) | **GET** /v1/posts/{postId}/authenticity | Get a post&#39;s authenticity score |
+| [**get_post_samples**](AnalyticsApi.md#get_post_samples) | **GET** /v1/analytics/samples | Get post samples |
 | [**get_post_timeline**](AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline |
 | [**get_posting_frequency**](AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get frequency vs engagement |
 | [**get_tik_tok_account_insights**](AnalyticsApi.md#get_tik_tok_account_insights) | **GET** /v1/analytics/tiktok/account-insights | Get TikTok account-level insights |
+| [**get_tracking_window**](AnalyticsApi.md#get_tracking_window) | **GET** /v1/analytics/tracking/{windowId} | Get a tracking window |
 | [**get_you_tube_channel_insights**](AnalyticsApi.md#get_you_tube_channel_insights) | **GET** /v1/analytics/youtube/channel-insights | Get YouTube channel insights |
 | [**get_you_tube_daily_views**](AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views |
 | [**get_you_tube_demographics**](AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube demographics |
 | [**get_you_tube_video_retention**](AnalyticsApi.md#get_you_tube_video_retention) | **GET** /v1/analytics/youtube/video-retention | Get YouTube video retention curve |
 | [**list_facebook_tagged_posts**](AnalyticsApi.md#list_facebook_tagged_posts) | **GET** /v1/accounts/{accountId}/facebook-tagged-posts | List the posts a Facebook Page is tagged in |
 | [**list_facebook_visitor_posts**](AnalyticsApi.md#list_facebook_visitor_posts) | **GET** /v1/accounts/{accountId}/facebook-visitor-posts | List visitor posts on a Facebook Page |
+| [**list_post_authenticity**](AnalyticsApi.md#list_post_authenticity) | **GET** /v1/analytics/authenticity | List authenticity scores |
+| [**list_tracking_windows**](AnalyticsApi.md#list_tracking_windows) | **GET** /v1/analytics/tracking | List tracking windows |
+| [**open_tracking_window**](AnalyticsApi.md#open_tracking_window) | **POST** /v1/analytics/tracking | Open a tracking window |
 | [**run_google_analytics_realtime_report**](AnalyticsApi.md#run_google_analytics_realtime_report) | **POST** /v1/analytics/googleanalytics/realtime | Run a Google Analytics (GA4) realtime report |
 | [**run_google_analytics_report**](AnalyticsApi.md#run_google_analytics_report) | **POST** /v1/analytics/googleanalytics/report | Run a Google Analytics (GA4) report |
 | [**sync_external_posts**](AnalyticsApi.md#sync_external_posts) | **POST** /v1/posts/sync-external | Sync an external post |
+
+
+## cancel_tracking_window
+
+> <TrackingWindowResponse> cancel_tracking_window(window_id)
+
+Cancel a tracking window
+
+Stops tracking and returns the window with its final status. A window that already completed keeps its `completed` status and its final read. A cancelled window gets no final read and fires no `post.tracking_completed` webhook. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+window_id = 'window_id_example' # String | 
+
+begin
+  # Cancel a tracking window
+  result = api_instance.cancel_tracking_window(window_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->cancel_tracking_window: #{e}"
+end
+```
+
+#### Using the cancel_tracking_window_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<TrackingWindowResponse>, Integer, Hash)> cancel_tracking_window_with_http_info(window_id)
+
+```ruby
+begin
+  # Cancel a tracking window
+  data, status_code, headers = api_instance.cancel_tracking_window_with_http_info(window_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <TrackingWindowResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->cancel_tracking_window_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **window_id** | **String** |  |  |
+
+### Return type
+
+[**TrackingWindowResponse**](TrackingWindowResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## get_analytics
@@ -1844,6 +1920,152 @@ end
 - **Accept**: application/json
 
 
+## get_post_authenticity
+
+> <PostAuthenticity> get_post_authenticity(post_id)
+
+Get a post's authenticity score
+
+Returns Zernio's authenticity score for a post: an integer from 0 to 100 where higher means the view pattern looks more like organic viewing. The score is ours. It is computed only from the verified samples we fetched from the platform, never from anything the creator or caller reported, and `reasons` lists each factor that lowered it with its weight in points. `confidence` (0 to 1) says how much data the score rests on. A stored score newer than 30 minutes is returned as is, otherwise it is recomputed. The `post.authenticity_changed` webhook fires when a score crosses 40. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+post_id = 'post_id_example' # String | An external post id, a platform post id or a Zernio post id.
+
+begin
+  # Get a post's authenticity score
+  result = api_instance.get_post_authenticity(post_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_post_authenticity: #{e}"
+end
+```
+
+#### Using the get_post_authenticity_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PostAuthenticity>, Integer, Hash)> get_post_authenticity_with_http_info(post_id)
+
+```ruby
+begin
+  # Get a post's authenticity score
+  data, status_code, headers = api_instance.get_post_authenticity_with_http_info(post_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PostAuthenticity>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_post_authenticity_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** | An external post id, a platform post id or a Zernio post id. |  |
+
+### Return type
+
+[**PostAuthenticity**](PostAuthenticity.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_post_samples
+
+> <GetPostSamples200Response> get_post_samples(post_id, opts)
+
+Get post samples
+
+Returns the raw readings behind a post's numbers, oldest first. Each sample is one analytics sync: the views and engagement as the platform reported them at `syncedAt`. Zernio only stores what it fetched from the platform, so nothing here was self-reported. `shares` and `saves` are null on platforms that do not return that counter, which is different from a real zero. `watchSeconds` and `completionRate` are null when the platform gives no watch signal. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+post_id = 'post_id_example' # String | The post to read samples for. Accepts an external post id, a platform post id or a Zernio post id.
+opts = {
+  from_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Earliest sample to return (ISO 8601).
+  to_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Latest sample to return (ISO 8601).
+  limit: 56 # Integer | Maximum number of samples.
+}
+
+begin
+  # Get post samples
+  result = api_instance.get_post_samples(post_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_post_samples: #{e}"
+end
+```
+
+#### Using the get_post_samples_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetPostSamples200Response>, Integer, Hash)> get_post_samples_with_http_info(post_id, opts)
+
+```ruby
+begin
+  # Get post samples
+  data, status_code, headers = api_instance.get_post_samples_with_http_info(post_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetPostSamples200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_post_samples_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** | The post to read samples for. Accepts an external post id, a platform post id or a Zernio post id. |  |
+| **from_date** | **Time** | Earliest sample to return (ISO 8601). | [optional] |
+| **to_date** | **Time** | Latest sample to return (ISO 8601). | [optional] |
+| **limit** | **Integer** | Maximum number of samples. | [optional][default to 500] |
+
+### Return type
+
+[**GetPostSamples200Response**](GetPostSamples200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_post_timeline
 
 > <GetPostTimeline200Response> get_post_timeline(post_id, opts)
@@ -2068,6 +2290,75 @@ end
 ### Return type
 
 [**InstagramAccountInsightsResponse**](InstagramAccountInsightsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_tracking_window
+
+> <TrackingWindowResponse> get_tracking_window(window_id)
+
+Get a tracking window
+
+Returns one tracking window with the latest verified numbers we read from the platform. Once the window has completed, `finalReadAt` and `completionReason` say how it closed. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+window_id = 'window_id_example' # String | 
+
+begin
+  # Get a tracking window
+  result = api_instance.get_tracking_window(window_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_tracking_window: #{e}"
+end
+```
+
+#### Using the get_tracking_window_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<TrackingWindowResponse>, Integer, Hash)> get_tracking_window_with_http_info(window_id)
+
+```ruby
+begin
+  # Get a tracking window
+  data, status_code, headers = api_instance.get_tracking_window_with_http_info(window_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <TrackingWindowResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_tracking_window_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **window_id** | **String** |  |  |
+
+### Return type
+
+[**TrackingWindowResponse**](TrackingWindowResponse.md)
 
 ### Authorization
 
@@ -2554,6 +2845,235 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_post_authenticity
+
+> <ListPostAuthenticity200Response> list_post_authenticity(account_id, opts)
+
+List authenticity scores
+
+Lists the stored authenticity scores for one connected account, newest first. Scores are 0 to 100 and come from Zernio's own model over verified platform samples. Filter with `minScore` and `maxScore` to find posts that look inflated, and with `from` and `to` to bound when the score was computed. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | The connected account to list scores for.
+opts = {
+  min_score: 56, # Integer | Only scores at or above this value.
+  max_score: 56, # Integer | Only scores at or below this value.
+  from: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Only scores computed at or after this time (ISO 8601).
+  to: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Only scores computed at or before this time (ISO 8601).
+  limit: 56, # Integer | Page size.
+  skip: 56 # Integer | Number of scores to skip.
+}
+
+begin
+  # List authenticity scores
+  result = api_instance.list_post_authenticity(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->list_post_authenticity: #{e}"
+end
+```
+
+#### Using the list_post_authenticity_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListPostAuthenticity200Response>, Integer, Hash)> list_post_authenticity_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List authenticity scores
+  data, status_code, headers = api_instance.list_post_authenticity_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListPostAuthenticity200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->list_post_authenticity_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The connected account to list scores for. |  |
+| **min_score** | **Integer** | Only scores at or above this value. | [optional] |
+| **max_score** | **Integer** | Only scores at or below this value. | [optional] |
+| **from** | **Time** | Only scores computed at or after this time (ISO 8601). | [optional] |
+| **to** | **Time** | Only scores computed at or before this time (ISO 8601). | [optional] |
+| **limit** | **Integer** | Page size. | [optional][default to 50] |
+| **skip** | **Integer** | Number of scores to skip. | [optional][default to 0] |
+
+### Return type
+
+[**ListPostAuthenticity200Response**](ListPostAuthenticity200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_tracking_windows
+
+> <ListTrackingWindows200Response> list_tracking_windows(opts)
+
+List tracking windows
+
+Lists the tracking windows you can see, newest first. Each window carries the latest verified numbers we read from the platform. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+opts = {
+  account_id: 'account_id_example', # String | Only windows for this connected account.
+  status: 'open', # String | Only windows in this status.
+  limit: 56, # Integer | Page size.
+  skip: 56 # Integer | Number of windows to skip.
+}
+
+begin
+  # List tracking windows
+  result = api_instance.list_tracking_windows(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->list_tracking_windows: #{e}"
+end
+```
+
+#### Using the list_tracking_windows_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListTrackingWindows200Response>, Integer, Hash)> list_tracking_windows_with_http_info(opts)
+
+```ruby
+begin
+  # List tracking windows
+  data, status_code, headers = api_instance.list_tracking_windows_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListTrackingWindows200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->list_tracking_windows_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Only windows for this connected account. | [optional] |
+| **status** | **String** | Only windows in this status. | [optional] |
+| **limit** | **Integer** | Page size. | [optional][default to 50] |
+| **skip** | **Integer** | Number of windows to skip. | [optional][default to 0] |
+
+### Return type
+
+[**ListTrackingWindows200Response**](ListTrackingWindows200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## open_tracking_window
+
+> <TrackingWindowResponse> open_tracking_window(open_tracking_window_request)
+
+Open a tracking window
+
+Starts watching a post's views and engagement. Zernio fetches the numbers from the platform itself on its regular analytics sync, so every reading is verified: it is a value we read from the platform, never one the creator or the caller reported. The window runs for `trackingDays` (30 by default, 90 at most) and ends with one final read, after which the `post.tracking_completed` webhook fires. Identify the post with `postId` (an external post id from Zernio), or with `accountId` together with the post's `url`. Opening a window for a post that is already tracked returns the existing window with `200`. A new window returns `201`. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+open_tracking_window_request = Zernio::OpenTrackingWindowRequest.new # OpenTrackingWindowRequest | 
+
+begin
+  # Open a tracking window
+  result = api_instance.open_tracking_window(open_tracking_window_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->open_tracking_window: #{e}"
+end
+```
+
+#### Using the open_tracking_window_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<TrackingWindowResponse>, Integer, Hash)> open_tracking_window_with_http_info(open_tracking_window_request)
+
+```ruby
+begin
+  # Open a tracking window
+  data, status_code, headers = api_instance.open_tracking_window_with_http_info(open_tracking_window_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <TrackingWindowResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->open_tracking_window_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **open_tracking_window_request** | [**OpenTrackingWindowRequest**](OpenTrackingWindowRequest.md) |  |  |
+
+### Return type
+
+[**TrackingWindowResponse**](TrackingWindowResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
