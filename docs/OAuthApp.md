@@ -14,6 +14,7 @@
 | **last_error** | **String** |  | [optional] |
 | **account_count** | **Integer** | Connected accounts currently running on this app. |  |
 | **redirect_uri** | **String** | The OAuth redirect URI to allow in your app&#39;s settings on the platform. |  |
+| **webhook** | [**OAuthAppWebhook**](OAuthAppWebhook.md) |  | [optional] |
 | **created_at** | **Time** |  |  |
 
 ## Example
@@ -32,6 +33,7 @@ instance = Zernio::OAuthApp.new(
   last_error: null,
   account_count: null,
   redirect_uri: null,
+  webhook: null,
   created_at: null
 )
 ```

@@ -1985,6 +1985,7 @@ docs/MoveWhatsAppNumberToProfileRequest.md
 docs/OAuthApp.md
 docs/OAuthAppSetup.md
 docs/OAuthAppSetupScopeAreasInner.md
+docs/OAuthAppWebhook.md
 docs/OnBrandedCallingIdentityActionRequiredRequest.md
 docs/OnBrandedCallingIdentityActionRequiredRequestIdentity.md
 docs/OnBrandedCallingIdentityStatusUpdatedRequest.md
@@ -5136,6 +5137,7 @@ lib/zernio-sdk/models/move_whats_app_number_to_profile_request.rb
 lib/zernio-sdk/models/o_auth_app.rb
 lib/zernio-sdk/models/o_auth_app_setup.rb
 lib/zernio-sdk/models/o_auth_app_setup_scope_areas_inner.rb
+lib/zernio-sdk/models/o_auth_app_webhook.rb
 lib/zernio-sdk/models/on_branded_calling_identity_action_required_request.rb
 lib/zernio-sdk/models/on_branded_calling_identity_action_required_request_identity.rb
 lib/zernio-sdk/models/on_branded_calling_identity_status_updated_request.rb
@@ -8250,6 +8252,7 @@ spec/models/move_whats_app_number_to_profile_request_spec.rb
 spec/models/o_auth_app_setup_scope_areas_inner_spec.rb
 spec/models/o_auth_app_setup_spec.rb
 spec/models/o_auth_app_spec.rb
+spec/models/o_auth_app_webhook_spec.rb
 spec/models/on_branded_calling_identity_action_required_request_identity_spec.rb
 spec/models/on_branded_calling_identity_action_required_request_spec.rb
 spec/models/on_branded_calling_identity_status_updated_request_identity_spec.rb
