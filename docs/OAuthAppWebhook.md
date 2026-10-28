@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **callback_url** | **String** |  |  |
 | **verify_token** | **String** |  |  |
-| **object** | **String** | The webhook object to configure. |  |
+| **object** | [**OAuthAppWebhookObject**](OAuthAppWebhookObject.md) |  |  |
 | **fields** | **Array&lt;String&gt;** | Subscribe the app to these fields. |  |
 
 ## Example

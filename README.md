@@ -3081,6 +3081,7 @@ Class | Method | HTTP request | Description
  - [Zernio::OAuthAppSetup](docs/OAuthAppSetup.md)
  - [Zernio::OAuthAppSetupScopeAreasInner](docs/OAuthAppSetupScopeAreasInner.md)
  - [Zernio::OAuthAppWebhook](docs/OAuthAppWebhook.md)
+ - [Zernio::OAuthAppWebhookObject](docs/OAuthAppWebhookObject.md)
  - [Zernio::OnBrandedCallingIdentityActionRequiredRequest](docs/OnBrandedCallingIdentityActionRequiredRequest.md)
  - [Zernio::OnBrandedCallingIdentityActionRequiredRequestIdentity](docs/OnBrandedCallingIdentityActionRequiredRequestIdentity.md)
  - [Zernio::OnBrandedCallingIdentityStatusUpdatedRequest](docs/OnBrandedCallingIdentityStatusUpdatedRequest.md)

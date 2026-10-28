@@ -42,10 +42,6 @@ describe Zernio::OAuthAppWebhook do
   describe 'test attribute "object"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["page", "instagram"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.object = value }.not_to raise_error
-      # end
     end
   end
 

@@ -20,7 +20,6 @@ module Zernio
 
     attr_accessor :verify_token
 
-    # The webhook object to configure.
     attr_accessor :object
 
     # Subscribe the app to these fields.
@@ -73,7 +72,7 @@ module Zernio
       {
         :'callback_url' => :'String',
         :'verify_token' => :'String',
-        :'object' => :'String',
+        :'object' => :'OAuthAppWebhookObject',
         :'fields' => :'Array<String>'
       }
     end
@@ -158,8 +157,6 @@ module Zernio
       return false if @callback_url.nil?
       return false if @verify_token.nil?
       return false if @object.nil?
-      object_validator = EnumAttributeValidator.new('String', ["page", "instagram"])
-      return false unless object_validator.valid?(@object)
       return false if @fields.nil?
       true
     end
@@ -184,13 +181,13 @@ module Zernio
       @verify_token = verify_token
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
+    # Custom attribute writer method with validation
+    # @param [Object] object Value to be assigned
     def object=(object)
-      validator = EnumAttributeValidator.new('String', ["page", "instagram"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
+      if object.nil?
+        fail ArgumentError, 'object cannot be nil'
       end
+
       @object = object
     end
 
