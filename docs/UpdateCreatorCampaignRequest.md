@@ -12,7 +12,7 @@
 | **ends_at** | **Time** |  | [optional] |
 | **tracking_days** | **Integer** |  | [optional] |
 | **hold_days** | **Integer** |  | [optional] |
-| **max_post_age_minutes** | **Integer** |  | [optional] |
+| **max_post_age_minutes** | **Integer** | Null removes the limit. | [optional] |
 | **settlement** | **String** |  | [optional] |
 | **economics** | [**CreatorCampaignEconomics**](CreatorCampaignEconomics.md) |  | [optional] |
 | **caps** | [**CreatorCampaignCaps**](CreatorCampaignCaps.md) |  | [optional] |

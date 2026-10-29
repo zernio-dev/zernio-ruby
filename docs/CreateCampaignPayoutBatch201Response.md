@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **batch** | [**PayoutBatch**](PayoutBatch.md) |  |  |
-| **url** | **String** | Stripe Checkout for the card payment. |  |
+| **payment** | [**CreateCampaignPayoutBatch201ResponsePayment**](CreateCampaignPayoutBatch201ResponsePayment.md) |  |  |
 
 ## Example
 
@@ -14,7 +14,7 @@ require 'zernio-sdk'
 
 instance = Zernio::CreateCampaignPayoutBatch201Response.new(
   batch: null,
-  url: null
+  payment: null
 )
 ```
 

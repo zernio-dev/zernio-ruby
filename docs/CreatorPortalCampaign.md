@@ -16,7 +16,7 @@
 | **ends_at** | **Time** |  |  |
 | **currency** | **String** |  |  |
 | **economics** | [**CreatorPortalEconomics**](CreatorPortalEconomics.md) |  |  |
-| **max_post_age_minutes** | **Integer** | A post must be submitted within this many minutes of publishing. |  |
+| **max_post_age_minutes** | **Integer** | A post must be submitted within this many minutes of publishing. Null means any age. Either way, only posts published after the campaign started are accepted. |  |
 | **hold_days** | **Integer** | Days approved earnings stay owed before they become payable. |  |
 | **tracking_days** | **Integer** | Days each submitted post is tracked for views. |  |
 

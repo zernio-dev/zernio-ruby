@@ -4,8 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **topup_id** | **String** |  | [optional] |
-| **url** | **String** | Stripe Checkout URL to send the payer to | [optional] |
+| **topup_id** | **String** |  |  |
+| **status** | **String** |  |  |
+| **client_secret** | **String** | PaymentIntent client secret for Stripe.js handleNextAction; set only when status is requires_action |  |
 
 ## Example
 
@@ -14,7 +15,8 @@ require 'zernio-sdk'
 
 instance = Zernio::CreateTopup201Response.new(
   topup_id: null,
-  url: null
+  status: null,
+  client_secret: null
 )
 ```
 
