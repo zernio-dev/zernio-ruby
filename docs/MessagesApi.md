@@ -999,7 +999,8 @@ opts = {
   sort_order: 'asc', # String | Sort order by updated time
   limit: 56, # Integer | Maximum number of conversations to return; values above 100 are served as 100.
   cursor: 'cursor_example', # String | Pagination cursor for next page
-  account_id: 'account_id_example' # String | Filter by specific account ID
+  account_id: 'account_id_example', # String | Filter by specific account ID
+  tags: 'tags_example' # String | Comma-separated contact tags. Returns only conversations whose contact has any of them. Cannot be combined with folder=requests.
 }
 
 begin
@@ -1041,6 +1042,7 @@ end
 | **limit** | **Integer** | Maximum number of conversations to return; values above 100 are served as 100. | [optional][default to 50] |
 | **cursor** | **String** | Pagination cursor for next page | [optional] |
 | **account_id** | **String** | Filter by specific account ID | [optional] |
+| **tags** | **String** | Comma-separated contact tags. Returns only conversations whose contact has any of them. Cannot be combined with folder&#x3D;requests. | [optional] |
 
 ### Return type
 
