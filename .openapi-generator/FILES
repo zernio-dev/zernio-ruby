@@ -84,6 +84,7 @@ docs/AdTargetingApi.md
 docs/AdTracking.md
 docs/AdTreeAdSet.md
 docs/AdTreeAdSetAdSetBudget.md
+docs/AdTreeAdSetAttributionSpecInner.md
 docs/AdTreeAdSetBudget.md
 docs/AdTreeAdSetPromotedObject.md
 docs/AdTreeCampaign.md
@@ -3421,6 +3422,7 @@ lib/zernio-sdk/models/ad_status.rb
 lib/zernio-sdk/models/ad_tracking.rb
 lib/zernio-sdk/models/ad_tree_ad_set.rb
 lib/zernio-sdk/models/ad_tree_ad_set_ad_set_budget.rb
+lib/zernio-sdk/models/ad_tree_ad_set_attribution_spec_inner.rb
 lib/zernio-sdk/models/ad_tree_ad_set_budget.rb
 lib/zernio-sdk/models/ad_tree_ad_set_promoted_object.rb
 lib/zernio-sdk/models/ad_tree_campaign.rb
@@ -6677,6 +6679,7 @@ spec/models/ad_spec.rb
 spec/models/ad_status_spec.rb
 spec/models/ad_tracking_spec.rb
 spec/models/ad_tree_ad_set_ad_set_budget_spec.rb
+spec/models/ad_tree_ad_set_attribution_spec_inner_spec.rb
 spec/models/ad_tree_ad_set_budget_spec.rb
 spec/models/ad_tree_ad_set_promoted_object_spec.rb
 spec/models/ad_tree_ad_set_spec.rb
