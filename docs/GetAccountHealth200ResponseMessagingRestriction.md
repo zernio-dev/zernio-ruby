@@ -1,0 +1,28 @@
+# Zernio::GetAccountHealth200ResponseMessagingRestriction
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **code** | **Integer** | WhatsApp Cloud API error code. Null on Facebook and Instagram. | [optional] |
+| **subcode** | **Integer** | Meta error subcode (Facebook and Instagram). Null on WhatsApp. | [optional] |
+| **message** | **String** |  | [optional] |
+| **first_seen_at** | **Time** |  | [optional] |
+| **last_seen_at** | **Time** |  | [optional] |
+| **paused_until** | **Time** | When held automation DMs are next retried. Null when nothing is held. | [optional] |
+
+## Example
+
+```ruby
+require 'zernio-sdk'
+
+instance = Zernio::GetAccountHealth200ResponseMessagingRestriction.new(
+  code: null,
+  subcode: null,
+  message: null,
+  first_seen_at: null,
+  last_seen_at: null,
+  paused_until: null
+)
+```
+

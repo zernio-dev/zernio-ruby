@@ -175,7 +175,7 @@ end
 
 Reply to review
 
-Post a reply to a review. Requires accountId in request body.  **Idempotency:** send an `Idempotency-Key` header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with `Idempotent-Replayed: true`) instead of sending the reply to the platform again; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different reviewId returns 422 rather than replaying the other review's response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \"request succeeded but the response was lost\" case. After an ambiguous failure (a 5xx or a network timeout) fetch the review before retrying with the same key, and treat a missing reply as inconclusive rather than as proof nothing was sent. 
+Post a reply to a review. Requires accountId in request body.  ### Idempotency  Send an `Idempotency-Key` header to make retries safe (e.g. after a client-side timeout where delivery is unknown).  - Same key + same body: replays the original response (with `Idempotent-Replayed: true`) instead of sending the reply to the platform again. - Same key + different body: returns 422. - A key still in flight: returns 409.  Keys are retained for 24 hours and are scoped to the credential and to this exact path. Reusing a key against a different reviewId returns 422 rather than replaying the other review's response.  ### Failed requests  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \"request succeeded but the response was lost\" case.  After an ambiguous failure (a 5xx or a network timeout), fetch the review before retrying with the same key. Treat a missing reply as inconclusive rather than as proof nothing was sent. 
 
 ### Examples
 
@@ -192,7 +192,7 @@ api_instance = Zernio::ReviewsApi.new
 review_id = 'review_id_example' # String | Review ID (URL-encoded for Google Business Profile)
 reply_to_inbox_review_request = Zernio::ReplyToInboxReviewRequest.new({account_id: 'account_id_example', message: 'message_example'}) # ReplyToInboxReviewRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. A request cut off mid-handler (for example by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
 }
 
 begin
@@ -228,7 +228,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **review_id** | **String** | Review ID (URL-encoded for Google Business Profile) |  |
 | **reply_to_inbox_review_request** | [**ReplyToInboxReviewRequest**](ReplyToInboxReviewRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. A request cut off mid-handler (for example by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
 
 ### Return type
 

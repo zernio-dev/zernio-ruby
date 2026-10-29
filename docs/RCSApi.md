@@ -96,7 +96,7 @@ end
 
 Request an RCS agent
 
-Requests a new agent for a profile, with a new company (`brand`) or an existing one (`brandId`, skips vetting when it is already verified). The request lands in our review: nothing is filed with the carriers or billed until we submit it. A profile can hold several agents. Requires usage-based billing and a card on file. Send an `Idempotency-Key` header to make retries safe. 
+Requests a new agent for a profile, with a new company (`brand`) or an existing one (`brandId`, skips vetting when it is already verified). A profile can hold several agents.  The request lands in our review: nothing is filed with the carriers or billed until we submit it.  - Requires usage-based billing and a card on file. - Send an `Idempotency-Key` header to make retries safe. 
 
 ### Examples
 
@@ -112,7 +112,7 @@ end
 api_instance = Zernio::RCSApi.new
 create_rcs_agent_request = Zernio::CreateRcsAgentRequest.new({profile_id: 'profile_id_example', display_name: 'display_name_example', use_case: 'MULTI_USE', profile: Zernio::RcsAgentProfile.new({description: 'description_example', logo_url: 'logo_url_example', hero_url: 'hero_url_example', brand_color: 'brand_color_example', privacy_policy_url: 'privacy_policy_url_example', terms_url: 'terms_url_example'})}) # CreateRcsAgentRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. A request cut off mid-handler (for example by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
 }
 
 begin
@@ -147,7 +147,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_rcs_agent_request** | [**CreateRcsAgentRequest**](CreateRcsAgentRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. A request cut off mid-handler (for example by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
 
 ### Return type
 
@@ -647,7 +647,7 @@ end
 
 Send the launch filing
 
-Sends the launch details the carriers review (campaign, consent and a public test video). US agents send them once they are in `testing`; we review them before they reach the carriers. Agents in other markets send them while still in review (`requested`, `changes_requested` or `brand_vetting`), because we file everything with the carriers at once; this saves the details without changing the status. 
+Sends the launch details the carriers review (campaign, consent and a public test video).  ### When to send  - **US agents**: send them once they are in `testing`. We review them before they reach the carriers. - **Other markets**: send them while still in review (`requested`, `changes_requested` or `brand_vetting`), because we file everything with the carriers at once. This saves the details without changing the status. 
 
 ### Examples
 
@@ -718,7 +718,7 @@ end
 
 Send an RCS message
 
-Sends from one of your agents. Use `text` for a plain message or `content` for rich content (card, carousel, media, suggestion chips). Before launch an agent only reaches test phones that accepted the invite. With the agent's `smsFallbackFrom` set, phones without RCS get `fallbackText` (default: the message's readable text) as SMS.  Replies and status arrive as webhooks with `platform: \"rcs\"`: `message.received` (a tapped chip carries its postback in `metadata.postbackPayload`), `message.delivered`, `message.read` and `message.failed`. Send an `Idempotency-Key` header to make retries safe. 
+Sends an RCS message from one of your agents.  - Use `text` for a plain message or `content` for rich content (card, carousel, media, suggestion chips). - Before launch an agent only reaches test phones that accepted the invite. - With the agent's `smsFallbackFrom` set, phones without RCS get `fallbackText` (default: the message's readable text) as SMS.  Send an `Idempotency-Key` header to make retries safe.  ### Webhooks  Replies and status arrive as webhooks with `platform: \"rcs\"`:  - `message.received` (a tapped chip carries its postback in `metadata.postbackPayload`) - `message.delivered` - `message.read` - `message.failed` 
 
 ### Examples
 
@@ -734,7 +734,7 @@ end
 api_instance = Zernio::RCSApi.new
 send_rcs_message_request = Zernio::SendRcsMessageRequest.new({agent_id: 'agent_id_example', to: 'to_example'}) # SendRcsMessageRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. A request cut off mid-handler (for example by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
 }
 
 begin
@@ -769,7 +769,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **send_rcs_message_request** | [**SendRcsMessageRequest**](SendRcsMessageRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. A request cut off mid-handler (for example by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
 
 ### Return type
 

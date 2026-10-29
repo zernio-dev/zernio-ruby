@@ -527,7 +527,7 @@ end
 
 Get a call recording
 
-Resolves a fresh, playable MP3 URL for the call's recording. Provider-signed recording URLs expire ~10 minutes after signing, so the `recordingUrl` stored on the call is usually stale by the time it is played; this endpoint re-signs on demand. Default responds `302 Found` redirecting to the fresh URL (point an `<audio>` element or a link straight at this endpoint); pass `as=json` to receive `{ url }` instead. 
+Resolves a fresh, playable MP3 URL for the call's recording.  Provider-signed recording URLs expire ~10 minutes after signing, so the `recordingUrl` stored on the call is usually stale by the time it is played. This endpoint re-signs on demand.  - Default: responds `302 Found` redirecting to the fresh URL (point an `<audio>` element or a link straight at this endpoint). - Pass `as=json` to receive `{ url }` instead. 
 
 ### Examples
 
@@ -602,7 +602,7 @@ end
 
 Get calling config for a number
 
-The WhatsApp Business Calling configuration of this number, keyed the same way as the POST/PATCH/DELETE below (full read-write on one sub-resource). Encrypted secrets are never returned; only a boolean saying whether a SIP password is stored. The account-scoped read (`GET /v1/whatsapp/calling?accountId=`) remains for callers that only know the account id, and additionally carries account-level extras (billing eligibility, current-period spend). 
+The WhatsApp Business Calling configuration of this number, keyed the same way as the POST/PATCH/DELETE below (full read-write on one sub-resource).  Encrypted secrets are never returned; only a boolean saying whether a SIP password is stored.  The account-scoped read (`GET /v1/whatsapp/calling?accountId=`) remains for callers that only know the account id. It additionally carries account-level extras (billing eligibility, current-period spend). 
 
 ### Examples
 
@@ -671,7 +671,7 @@ end
 
 Get calling config for an account
 
-Returns the local calling configuration snapshot for the connected WhatsApp account: whether calling is enabled, the forward-to destination URI, recording opt-in state, the phone number record id (use as `{id}` on the read-write calling sub-resource at /v1/phone-numbers/{id}/whatsapp/calling) and whether SIP digest credentials are stored (the encrypted password itself is never returned). Also carries account-level extras (billing eligibility, current-period spend) that the number-keyed GET does not. 
+Returns the local calling configuration snapshot for the connected WhatsApp account:  - whether calling is enabled; - the forward-to destination URI; - recording opt-in state; - the phone number record id (use as `{id}` on the read-write calling sub-resource at /v1/phone-numbers/{id}/whatsapp/calling); - whether SIP digest credentials are stored (the encrypted password itself is never returned).  It also carries account-level extras (billing eligibility, current-period spend) that the number-keyed GET does not. 
 
 ### Examples
 
@@ -756,7 +756,7 @@ end
 api_instance = Zernio::WhatsAppCallingApi.new
 initiate_whats_app_call_request = Zernio::InitiateWhatsAppCallRequest.new({account_id: 'account_id_example', to: 'to_example'}) # InitiateWhatsAppCallRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. A request cut off mid-handler (for example by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
 }
 
 begin
@@ -791,7 +791,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **initiate_whats_app_call_request** | [**InitiateWhatsAppCallRequest**](InitiateWhatsAppCallRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. A request cut off mid-handler (for example by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
 
 ### Return type
 
@@ -896,7 +896,7 @@ end
 
 Start caller-ID verification for a customer-brought number
 
-Customer-brought (BYO) WhatsApp numbers cannot present themselves as caller ID on `tel:` call forwards until verified (carrier anti-spoofing); until then forwarded calls show a Zernio number (`callerIdMode: platform` on the calling config). This sends a one-time code to the number by SMS or voice call. Re-POST to resend. Zernio-purchased numbers never need this and get a 400. 
+Sends a one-time code to a customer-brought (BYO) WhatsApp number by SMS or voice call, to verify it as caller ID. Re-POST to resend.  BYO numbers cannot present themselves as caller ID on `tel:` call forwards until verified (carrier anti-spoofing). Until then forwarded calls show a Zernio number (`callerIdMode: platform` on the calling config).  Zernio-purchased numbers never need this and get a 400. 
 
 ### Examples
 

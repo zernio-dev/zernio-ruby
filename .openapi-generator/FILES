@@ -33,6 +33,7 @@ docs/AdAudiencesApi.md
 docs/AdBudget.md
 docs/AdCampaign.md
 docs/AdCampaignBudget.md
+docs/AdCampaignOptimizationGoal.md
 docs/AdCampaignsApi.md
 docs/AdCreative.md
 docs/AdCreativeAssets.md
@@ -393,6 +394,8 @@ docs/CheckPhoneNumberPortability200ResponseResultsInner.md
 docs/CheckPhoneNumberPortabilityRequest.md
 docs/CheckVerification200Response.md
 docs/CheckVerificationRequest.md
+docs/CheckWhatsAppNumberAvailability200Response.md
+docs/CheckWhatsAppNumberAvailability200ResponseAreaAvailability.md
 docs/CommentAutomationActions.md
 docs/CommentAutomationAudience.md
 docs/CommentAutomationDmMedia.md
@@ -760,6 +763,7 @@ docs/CreateStandaloneAdRequestPlatformSpecificData.md
 docs/CreateStandaloneAdRequestRegionsInner.md
 docs/CreateStandaloneAdRequestRegionsInnerOneOf.md
 docs/CreateStandaloneAdRequestSitelinksInner.md
+docs/CreateStandaloneAdRequestSmartTargeting.md
 docs/CreateStandaloneAdRequestStructuredSnippetsInner.md
 docs/CreateStandaloneAdRequestTranslationsInner.md
 docs/CreateStandaloneAdRequestVideo.md
@@ -791,6 +795,7 @@ docs/CreateWhatsAppGroupChat201Response.md
 docs/CreateWhatsAppGroupChat201ResponseGroup.md
 docs/CreateWhatsAppGroupChatRequest.md
 docs/CreateWhatsAppGroupInviteLink200Response.md
+docs/CreateWhatsAppNumberKycLinkRequest.md
 docs/CreateWhatsAppSandboxSession200Response.md
 docs/CreateWhatsAppSandboxSessionRequest.md
 docs/CreateWhatsAppTemplate200Response.md
@@ -1026,6 +1031,7 @@ docs/GenerateKeywordIdeas200ResponsePaging.md
 docs/GenerateKeywordIdeasRequest.md
 docs/GeoRestriction.md
 docs/GetAccountHealth200Response.md
+docs/GetAccountHealth200ResponseMessagingRestriction.md
 docs/GetAccountHealth200ResponsePermissions.md
 docs/GetAccountHealth200ResponsePermissionsPostingInner.md
 docs/GetAccountHealth200ResponsePlatformConnection.md
@@ -3377,6 +3383,7 @@ lib/zernio-sdk/models/ad_applied_defaults.rb
 lib/zernio-sdk/models/ad_budget.rb
 lib/zernio-sdk/models/ad_campaign.rb
 lib/zernio-sdk/models/ad_campaign_budget.rb
+lib/zernio-sdk/models/ad_campaign_optimization_goal.rb
 lib/zernio-sdk/models/ad_creative.rb
 lib/zernio-sdk/models/ad_creative_assets.rb
 lib/zernio-sdk/models/ad_creative_assets_marketing_images_inner.rb
@@ -3722,6 +3729,8 @@ lib/zernio-sdk/models/check_phone_number_portability200_response_results_inner.r
 lib/zernio-sdk/models/check_phone_number_portability_request.rb
 lib/zernio-sdk/models/check_verification200_response.rb
 lib/zernio-sdk/models/check_verification_request.rb
+lib/zernio-sdk/models/check_whats_app_number_availability200_response.rb
+lib/zernio-sdk/models/check_whats_app_number_availability200_response_area_availability.rb
 lib/zernio-sdk/models/comment_automation_actions.rb
 lib/zernio-sdk/models/comment_automation_audience.rb
 lib/zernio-sdk/models/comment_automation_dm_media.rb
@@ -4083,6 +4092,7 @@ lib/zernio-sdk/models/create_standalone_ad_request_platform_specific_data.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner_one_of.rb
 lib/zernio-sdk/models/create_standalone_ad_request_sitelinks_inner.rb
+lib/zernio-sdk/models/create_standalone_ad_request_smart_targeting.rb
 lib/zernio-sdk/models/create_standalone_ad_request_structured_snippets_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_translations_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
@@ -4114,6 +4124,7 @@ lib/zernio-sdk/models/create_whats_app_group_chat201_response.rb
 lib/zernio-sdk/models/create_whats_app_group_chat201_response_group.rb
 lib/zernio-sdk/models/create_whats_app_group_chat_request.rb
 lib/zernio-sdk/models/create_whats_app_group_invite_link200_response.rb
+lib/zernio-sdk/models/create_whats_app_number_kyc_link_request.rb
 lib/zernio-sdk/models/create_whats_app_sandbox_session200_response.rb
 lib/zernio-sdk/models/create_whats_app_sandbox_session_request.rb
 lib/zernio-sdk/models/create_whats_app_template200_response.rb
@@ -4334,6 +4345,7 @@ lib/zernio-sdk/models/generate_keyword_ideas200_response_paging.rb
 lib/zernio-sdk/models/generate_keyword_ideas_request.rb
 lib/zernio-sdk/models/geo_restriction.rb
 lib/zernio-sdk/models/get_account_health200_response.rb
+lib/zernio-sdk/models/get_account_health200_response_messaging_restriction.rb
 lib/zernio-sdk/models/get_account_health200_response_permissions.rb
 lib/zernio-sdk/models/get_account_health200_response_permissions_posting_inner.rb
 lib/zernio-sdk/models/get_account_health200_response_platform_connection.rb
@@ -6633,6 +6645,7 @@ spec/models/ad_analytics_response_spec.rb
 spec/models/ad_applied_defaults_spec.rb
 spec/models/ad_budget_spec.rb
 spec/models/ad_campaign_budget_spec.rb
+spec/models/ad_campaign_optimization_goal_spec.rb
 spec/models/ad_campaign_spec.rb
 spec/models/ad_creative_assets_marketing_images_inner_spec.rb
 spec/models/ad_creative_assets_spec.rb
@@ -6980,6 +6993,8 @@ spec/models/check_phone_number_portability200_response_spec.rb
 spec/models/check_phone_number_portability_request_spec.rb
 spec/models/check_verification200_response_spec.rb
 spec/models/check_verification_request_spec.rb
+spec/models/check_whats_app_number_availability200_response_area_availability_spec.rb
+spec/models/check_whats_app_number_availability200_response_spec.rb
 spec/models/comment_automation_actions_spec.rb
 spec/models/comment_automation_audience_spec.rb
 spec/models/comment_automation_dm_media_spec.rb
@@ -7340,6 +7355,7 @@ spec/models/create_standalone_ad_request_platform_specific_data_spec.rb
 spec/models/create_standalone_ad_request_regions_inner_one_of_spec.rb
 spec/models/create_standalone_ad_request_regions_inner_spec.rb
 spec/models/create_standalone_ad_request_sitelinks_inner_spec.rb
+spec/models/create_standalone_ad_request_smart_targeting_spec.rb
 spec/models/create_standalone_ad_request_spec.rb
 spec/models/create_standalone_ad_request_structured_snippets_inner_spec.rb
 spec/models/create_standalone_ad_request_translations_inner_spec.rb
@@ -7372,6 +7388,7 @@ spec/models/create_whats_app_group_chat201_response_group_spec.rb
 spec/models/create_whats_app_group_chat201_response_spec.rb
 spec/models/create_whats_app_group_chat_request_spec.rb
 spec/models/create_whats_app_group_invite_link200_response_spec.rb
+spec/models/create_whats_app_number_kyc_link_request_spec.rb
 spec/models/create_whats_app_sandbox_session200_response_spec.rb
 spec/models/create_whats_app_sandbox_session_request_spec.rb
 spec/models/create_whats_app_template200_response_spec.rb
@@ -7591,6 +7608,7 @@ spec/models/generate_keyword_ideas200_response_paging_spec.rb
 spec/models/generate_keyword_ideas200_response_spec.rb
 spec/models/generate_keyword_ideas_request_spec.rb
 spec/models/geo_restriction_spec.rb
+spec/models/get_account_health200_response_messaging_restriction_spec.rb
 spec/models/get_account_health200_response_permissions_posting_inner_spec.rb
 spec/models/get_account_health200_response_permissions_spec.rb
 spec/models/get_account_health200_response_platform_connection_meta_error_spec.rb

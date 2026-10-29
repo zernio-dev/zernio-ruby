@@ -13,7 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 
 List API changelog entries
 
-The API changelog, newest first. No API key needed; one address may make 120 requests a minute. Each entry is what the `api.changelog.published` webhook delivered: the announcement in `message`, its `impact` on existing integrations, and in `changes` the deterministic diff of the OpenAPI spec (operations and schemas added, removed and modified) for automation to act on. Page with `before` set to the previous page's `nextCursor`. 
+The API changelog, newest first. No API key needed; one address may make 120 requests a minute.  Each entry is what the `api.changelog.published` webhook delivered:  - `message`: the announcement - `impact`: its impact on existing integrations - `changes`: the deterministic diff of the OpenAPI spec (operations and schemas added, removed and modified) for automation to act on  Page with `before` set to the previous page's `nextCursor`. 
 
 ### Examples
 
