@@ -94,7 +94,7 @@ module Zernio
     end
 
     # List reviews
-    # Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile. 
+    # Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile.  Each account's reviews are read from the platform page by page within a 20-second budget per request, so very large accounts can come back truncated. Each account's listing is cached for up to 60 seconds. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id 
     # @option opts [String] :platform 
@@ -113,7 +113,7 @@ module Zernio
     end
 
     # List reviews
-    # Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile. 
+    # Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile.  Each account&#39;s reviews are read from the platform page by page within a 20-second budget per request, so very large accounts can come back truncated. Each account&#39;s listing is cached for up to 60 seconds. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id 
     # @option opts [String] :platform 
