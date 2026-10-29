@@ -16,6 +16,10 @@
 | **permissions** | [**GetAccountHealth200ResponsePermissions**](GetAccountHealth200ResponsePermissions.md) |  | [optional] |
 | **issues** | **Array&lt;String&gt;** | List of issues found | [optional] |
 | **recommendations** | **Array&lt;String&gt;** | Actionable recommendations to fix issues | [optional] |
+| **owner_user_id** | **String** | User id of the profile owner, not necessarily the team member who connected the account. | [optional] |
+| **disconnect_reason** | **String** | Why the connection is broken or its token refresh is failing, from the most recent current cause. Null when the connection is healthy, including when the account is unhealthy for another reason (analytics, messaging restriction, missing analytics scopes), or when no cause is stored. | [optional] |
+| **disconnection_type** | **String** | intentional: deliberately disconnected by the user or by Zernio (for example a plan downgrade), not a token failure. unintentional: token expired or revoked, or an auth failure. Null when disconnectReason is null. | [optional] |
+| **unhealthy_since** | **Time** | When the earliest current stored cause was recorded (the start of the outage); for an intentional disconnect, when it was disconnected. Null when the connection is healthy, including when the account is unhealthy for another reason (analytics, messaging restriction, missing analytics scopes), or when the time is unknown. | [optional] |
 | **analytics_sync** | [**GetAllAccountsHealth200ResponseAccountsInnerAnalyticsSync**](GetAllAccountsHealth200ResponseAccountsInnerAnalyticsSync.md) |  | [optional] |
 | **messaging_restriction** | [**GetAccountHealth200ResponseMessagingRestriction**](GetAccountHealth200ResponseMessagingRestriction.md) |  | [optional] |
 | **platform_connection** | [**GetAccountHealth200ResponsePlatformConnection**](GetAccountHealth200ResponsePlatformConnection.md) |  | [optional] |
@@ -38,6 +42,10 @@ instance = Zernio::GetAccountHealth200Response.new(
   permissions: null,
   issues: null,
   recommendations: null,
+  owner_user_id: null,
+  disconnect_reason: null,
+  disconnection_type: null,
+  unhealthy_since: null,
   analytics_sync: null,
   messaging_restriction: null,
   platform_connection: null
