@@ -8,6 +8,7 @@
 | **platform** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **account_username** | **String** |  | [optional] |
+| **page_id** | **String** | The bare Facebook Page id behind the account, for Facebook and Instagram connected through Facebook Login. Null when the account has no Facebook Page. | [optional] |
 | **participant_id** | **String** |  | [optional] |
 | **participant_name** | **String** |  | [optional] |
 | **participant_picture** | **String** |  | [optional] |
@@ -36,6 +37,7 @@ instance = Zernio::ListInboxConversations200ResponseDataInner.new(
   platform: null,
   account_id: null,
   account_username: null,
+  page_id: null,
   participant_id: null,
   participant_name: null,
   participant_picture: null,

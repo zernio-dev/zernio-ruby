@@ -10,6 +10,7 @@
 | **platform** | **String** |  |  |
 | **username** | **String** |  |  |
 | **display_name** | **String** |  | [optional] |
+| **page_id** | **String** | The bare Facebook Page id behind the account, to route inbound messages by Page. Present for Facebook accounts and Instagram accounts connected through Facebook Login; omitted otherwise. | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::InboxWebhookAccount.new(
   profile_id: null,
   platform: null,
   username: null,
-  display_name: null
+  display_name: null,
+  page_id: null
 )
 ```
 
