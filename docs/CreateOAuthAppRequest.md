@@ -8,6 +8,7 @@
 | **label** | **String** |  |  |
 | **client_id** | **String** |  |  |
 | **client_secret** | **String** |  |  |
+| **slack_signing_secret** | **String** | Slack only: the signing secret from the app&#39;s Basic Information page. Needed to receive events from your Slack app; any other platform is a 400. | [optional] |
 | **scope_areas** | **Array&lt;String&gt;** | Areas this app requests. Defaults to every area the platform supports; an area the platform cannot request separately is a 400. | [optional] |
 
 ## Example
@@ -20,6 +21,7 @@ instance = Zernio::CreateOAuthAppRequest.new(
   label: null,
   client_id: null,
   client_secret: null,
+  slack_signing_secret: null,
   scope_areas: null
 )
 ```

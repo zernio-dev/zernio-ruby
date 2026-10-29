@@ -16,6 +16,8 @@
 | **redirect_uri** | **String** | The OAuth redirect URI to allow in your app&#39;s settings on the platform. |  |
 | **webhook** | [**OAuthAppWebhook**](OAuthAppWebhook.md) |  | [optional] |
 | **shared_webhook_url** | **String** | TikTok only: set this as the webhook callback URL in your TikTok developer app. TikTok uses it to report when a video finishes publishing; Zernio also checks the publish status itself, so posting works without it. Null on other platforms. | [optional] |
+| **has_slack_signing_secret** | **Boolean** | Slack only: whether the signing secret of your Slack app is saved. Without it Zernio refuses every event sent to &#x60;slackEvents.requestUrl&#x60;. | [optional] |
+| **slack_events** | [**OAuthAppSlackEvents**](OAuthAppSlackEvents.md) |  | [optional] |
 | **created_at** | **Time** |  |  |
 
 ## Example
@@ -36,6 +38,8 @@ instance = Zernio::OAuthApp.new(
   redirect_uri: null,
   webhook: null,
   shared_webhook_url: null,
+  has_slack_signing_secret: null,
+  slack_events: null,
   created_at: null
 )
 ```
