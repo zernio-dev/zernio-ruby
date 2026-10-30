@@ -13,6 +13,7 @@
 | **platform_ad_account_id** | **String** |  | [optional] |
 | **entity** | [**AdsAlertEntity**](AdsAlertEntity.md) |  | [optional] |
 | **ad_id** | **String** | The Zernio ad id when the entity is an ad, for GET /v1/ads/{adId}. | [optional] |
+| **account_id** | **String** | The Zernio ads connection, on connection_lost and sync_failing alerts. | [optional] |
 | **currency** | **String** |  | [optional] |
 | **detected_at** | **Time** |  | [optional] |
 | **fix** | [**AdsAlertFix**](AdsAlertFix.md) |  | [optional] |
@@ -33,6 +34,7 @@ instance = Zernio::AdsAlert.new(
   platform_ad_account_id: null,
   entity: null,
   ad_id: null,
+  account_id: null,
   currency: null,
   detected_at: null,
   fix: null,
