@@ -90,7 +90,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_rcs_agent_status_updated**](WebhookEventsApi.md#on_rcs_agent_status_updated) | **POST** /rcs.agent.status_updated | RCS agent status updated event |
 | [**on_reaction_received**](WebhookEventsApi.md#on_reaction_received) | **POST** /reaction.received | Reaction received event |
 | [**on_referral_received**](WebhookEventsApi.md#on_referral_received) | **POST** /referral.received | Referral received event |
+| [**on_review_deleted**](WebhookEventsApi.md#on_review_deleted) | **POST** /review.deleted | Review deleted event |
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
+| [**on_review_restored**](WebhookEventsApi.md#on_review_restored) | **POST** /review.restored | Review restored event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
 | [**on_sequence_enrolled**](WebhookEventsApi.md#on_sequence_enrolled) | **POST** /sequence.enrolled | Sequence enrolled event |
 | [**on_sequence_exited**](WebhookEventsApi.md#on_sequence_exited) | **POST** /sequence.exited | Sequence exited event |
@@ -5964,6 +5966,74 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_review_deleted
+
+> on_review_deleted(webhook_payload_review_deleted)
+
+Review deleted event
+
+Google Business Profile stopped returning this review, for example after Google's spam filter removed it. Detected by polling: fires usually 6 to 12 hours after the review disappears, only for locations covered by a webhook subscribed to review.deleted or review.restored. If the review comes back, review.restored fires. May arrive for a review id you never received review.new for. A review hidden and restored by Google may produce review.deleted followed by review.restored, and a review.updated can arrive for a review previously reported by review.deleted (it is restored on the next check). Requires the Inbox add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_review_deleted =  # WebhookPayloadReviewDeleted | 
+
+begin
+  # Review deleted event
+  api_instance.on_review_deleted(webhook_payload_review_deleted)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_review_deleted: #{e}"
+end
+```
+
+#### Using the on_review_deleted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_review_deleted_with_http_info(webhook_payload_review_deleted)
+
+```ruby
+begin
+  # Review deleted event
+  data, status_code, headers = api_instance.on_review_deleted_with_http_info(webhook_payload_review_deleted)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_review_deleted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_review_deleted** | [**WebhookPayloadReviewDeleted**](WebhookPayloadReviewDeleted.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_review_new
 
 > on_review_new(webhook_payload_review_new)
@@ -6017,6 +6087,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_review_new** | [**WebhookPayloadReviewNew**](WebhookPayloadReviewNew.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_review_restored
+
+> on_review_restored(webhook_payload_review_restored)
+
+Review restored event
+
+A review reported by review.deleted is returned by Google again. Same payload as review.new. Requires the Inbox add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_review_restored =  # WebhookPayloadReviewRestored | 
+
+begin
+  # Review restored event
+  api_instance.on_review_restored(webhook_payload_review_restored)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_review_restored: #{e}"
+end
+```
+
+#### Using the on_review_restored_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_review_restored_with_http_info(webhook_payload_review_restored)
+
+```ruby
+begin
+  # Review restored event
+  data, status_code, headers = api_instance.on_review_restored_with_http_info(webhook_payload_review_restored)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_review_restored_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_review_restored** | [**WebhookPayloadReviewRestored**](WebhookPayloadReviewRestored.md) |  |  |
 
 ### Return type
 
