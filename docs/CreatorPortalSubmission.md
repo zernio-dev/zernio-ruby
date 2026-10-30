@@ -12,6 +12,7 @@
 | **submitted_at** | **Time** |  |  |
 | **published_at** | **Time** |  |  |
 | **views** | **Integer** | Latest view count read for the post. |  |
+| **engagements** | **Integer** | The campaign engagement types summed at the latest read. Null until the post is read. |  |
 | **earned_cents** | **Integer** |  |  |
 | **reject_reason** | **String** |  |  |
 | **flags** | **Array&lt;String&gt;** | Creator-safe flags only. Every other review flag shows as &#x60;under_review&#x60;. |  |
@@ -31,6 +32,7 @@ instance = Zernio::CreatorPortalSubmission.new(
   submitted_at: null,
   published_at: null,
   views: null,
+  engagements: null,
   earned_cents: null,
   reject_reason: null,
   flags: null,

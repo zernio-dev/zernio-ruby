@@ -10,6 +10,8 @@
 | **platform_post_url** | **String** |  |  |
 | **status** | **String** |  |  |
 | **views_at_submission** | **Integer** |  |  |
+| **views_eligible** | **Integer** | Views that count toward earnings at the latest read. |  |
+| **engagements_latest** | **Integer** | The campaign engagement types summed at the latest read. An engagements campaign earns on this count. |  |
 | **flags** | [**Array&lt;WebhookPayloadCampaignSubmissionSubmissionFlagsInner&gt;**](WebhookPayloadCampaignSubmissionSubmissionFlagsInner.md) |  |  |
 
 ## Example
@@ -24,6 +26,8 @@ instance = Zernio::WebhookPayloadCampaignSubmissionSubmission.new(
   platform_post_url: null,
   status: tracking,
   views_at_submission: null,
+  views_eligible: null,
+  engagements_latest: null,
   flags: null
 )
 ```

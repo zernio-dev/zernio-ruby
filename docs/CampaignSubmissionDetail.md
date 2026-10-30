@@ -25,6 +25,7 @@
 | **views_at_submission** | **Integer** | Views when the post was submitted. They count toward earnings like every later view. |  |
 | **views_latest** | **Integer** | Latest view count read for the post, frozen at the tracking window end. |  |
 | **views_eligible** | **Integer** | Views that count toward earnings: every view the platform reports for the post, including those before submission, read at the tracking window end at the latest: once the window completes or is cancelled, the last read at or before its end is final and this value stops moving. |  |
+| **engagements_latest** | **Integer** | The campaign engagement types summed at the latest read (all four on a views campaign), frozen at the tracking window end like &#x60;viewsEligible&#x60;. An &#x60;engagements&#x60; campaign earns on this count. |  |
 | **last_accrued_views** | **Integer** |  |  |
 | **accrued_cents** | **Integer** |  |  |
 | **approved_cents** | **Integer** |  |  |
@@ -69,6 +70,7 @@ instance = Zernio::CampaignSubmissionDetail.new(
   views_at_submission: null,
   views_latest: null,
   views_eligible: null,
+  engagements_latest: null,
   last_accrued_views: null,
   accrued_cents: null,
   approved_cents: null,
