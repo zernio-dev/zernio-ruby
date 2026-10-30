@@ -34,6 +34,7 @@ docs/AdBudget.md
 docs/AdCampaign.md
 docs/AdCampaignBudget.md
 docs/AdCampaignOptimizationGoal.md
+docs/AdCampaignResultsApi.md
 docs/AdCampaignsApi.md
 docs/AdCreative.md
 docs/AdCreativeAssets.md
@@ -356,6 +357,7 @@ docs/CampaignReportAuthenticityInner.md
 docs/CampaignReportParticipantsInner.md
 docs/CampaignReportSpend.md
 docs/CampaignReportViews.md
+docs/CampaignResultMetric.md
 docs/CampaignSettlement.md
 docs/CampaignSubmission.md
 docs/CampaignSubmissionAuthenticity.md
@@ -1142,6 +1144,8 @@ docs/GetCampaignBidding200Response.md
 docs/GetCampaignConversionGoals200Response.md
 docs/GetCampaignParticipant200Response.md
 docs/GetCampaignReport200Response.md
+docs/GetCampaignResultsUpload200Response.md
+docs/GetCampaignResultsUpload200ResponseUnmatchedInner.md
 docs/GetCampaignSubmission200Response.md
 docs/GetCampaignTargeting200Response.md
 docs/GetCampaignTargeting200ResponseDevicesInner.md
@@ -1786,6 +1790,9 @@ docs/ListCampaignNegativeKeywords200ResponseKeywordsInner.md
 docs/ListCampaignParticipants200Response.md
 docs/ListCampaignPayables200Response.md
 docs/ListCampaignPayoutBatches200Response.md
+docs/ListCampaignResultMetrics200Response.md
+docs/ListCampaignResults200Response.md
+docs/ListCampaignResults200ResponseCampaignsInner.md
 docs/ListCampaignSubmissions200Response.md
 docs/ListChangelog200Response.md
 docs/ListCommentAutomationLogs200Response.md
@@ -2524,6 +2531,8 @@ docs/SetBusinessAgentConnectorCredentialsRequest.md
 docs/SetBusinessAgentConnectorCredentialsRequestOneOf.md
 docs/SetBusinessAgentConnectorCredentialsRequestOneOf1.md
 docs/SetBusinessAgentConnectorCredentialsRequestOneOf2.md
+docs/SetCampaignResultMetric200Response.md
+docs/SetCampaignResultMetricRequest.md
 docs/SetCommentModerationRequest.md
 docs/SetCommerceDiscountActiveRequest.md
 docs/SetCommercePriceListPrices200Response.md
@@ -2927,6 +2936,9 @@ docs/UploadAdVideo202Response.md
 docs/UploadAdVideo202ResponseVideo.md
 docs/UploadAdVideoRequest.md
 docs/UploadBusinessAgentFileRequest.md
+docs/UploadCampaignResults202Response.md
+docs/UploadCampaignResultsRequest.md
+docs/UploadCampaignResultsRequestRowsInner.md
 docs/UploadFile201Response.md
 docs/UploadFileRequest.md
 docs/UploadMediaDirect200Response.md
@@ -3287,6 +3299,7 @@ lib/zernio-sdk/api/account_settings_api.rb
 lib/zernio-sdk/api/accounts_api.rb
 lib/zernio-sdk/api/ad_accounts_api.rb
 lib/zernio-sdk/api/ad_audiences_api.rb
+lib/zernio-sdk/api/ad_campaign_results_api.rb
 lib/zernio-sdk/api/ad_campaigns_api.rb
 lib/zernio-sdk/api/ad_creatives_api.rb
 lib/zernio-sdk/api/ad_insights_api.rb
@@ -3702,6 +3715,7 @@ lib/zernio-sdk/models/campaign_report_authenticity_inner.rb
 lib/zernio-sdk/models/campaign_report_participants_inner.rb
 lib/zernio-sdk/models/campaign_report_spend.rb
 lib/zernio-sdk/models/campaign_report_views.rb
+lib/zernio-sdk/models/campaign_result_metric.rb
 lib/zernio-sdk/models/campaign_settlement.rb
 lib/zernio-sdk/models/campaign_submission.rb
 lib/zernio-sdk/models/campaign_submission_authenticity.rb
@@ -4466,6 +4480,8 @@ lib/zernio-sdk/models/get_campaign_bidding200_response.rb
 lib/zernio-sdk/models/get_campaign_conversion_goals200_response.rb
 lib/zernio-sdk/models/get_campaign_participant200_response.rb
 lib/zernio-sdk/models/get_campaign_report200_response.rb
+lib/zernio-sdk/models/get_campaign_results_upload200_response.rb
+lib/zernio-sdk/models/get_campaign_results_upload200_response_unmatched_inner.rb
 lib/zernio-sdk/models/get_campaign_submission200_response.rb
 lib/zernio-sdk/models/get_campaign_targeting200_response.rb
 lib/zernio-sdk/models/get_campaign_targeting200_response_devices_inner.rb
@@ -5103,6 +5119,9 @@ lib/zernio-sdk/models/list_campaign_negative_keywords200_response_keywords_inner
 lib/zernio-sdk/models/list_campaign_participants200_response.rb
 lib/zernio-sdk/models/list_campaign_payables200_response.rb
 lib/zernio-sdk/models/list_campaign_payout_batches200_response.rb
+lib/zernio-sdk/models/list_campaign_result_metrics200_response.rb
+lib/zernio-sdk/models/list_campaign_results200_response.rb
+lib/zernio-sdk/models/list_campaign_results200_response_campaigns_inner.rb
 lib/zernio-sdk/models/list_campaign_submissions200_response.rb
 lib/zernio-sdk/models/list_changelog200_response.rb
 lib/zernio-sdk/models/list_comment_automation_logs200_response.rb
@@ -5824,6 +5843,8 @@ lib/zernio-sdk/models/set_business_agent_connector_credentials_request.rb
 lib/zernio-sdk/models/set_business_agent_connector_credentials_request_one_of.rb
 lib/zernio-sdk/models/set_business_agent_connector_credentials_request_one_of1.rb
 lib/zernio-sdk/models/set_business_agent_connector_credentials_request_one_of2.rb
+lib/zernio-sdk/models/set_campaign_result_metric200_response.rb
+lib/zernio-sdk/models/set_campaign_result_metric_request.rb
 lib/zernio-sdk/models/set_comment_moderation_request.rb
 lib/zernio-sdk/models/set_commerce_discount_active_request.rb
 lib/zernio-sdk/models/set_commerce_price_list_prices200_response.rb
@@ -6221,6 +6242,9 @@ lib/zernio-sdk/models/upload_ad_video202_response.rb
 lib/zernio-sdk/models/upload_ad_video202_response_video.rb
 lib/zernio-sdk/models/upload_ad_video_request.rb
 lib/zernio-sdk/models/upload_business_agent_file_request.rb
+lib/zernio-sdk/models/upload_campaign_results202_response.rb
+lib/zernio-sdk/models/upload_campaign_results_request.rb
+lib/zernio-sdk/models/upload_campaign_results_request_rows_inner.rb
 lib/zernio-sdk/models/upload_file201_response.rb
 lib/zernio-sdk/models/upload_file_request.rb
 lib/zernio-sdk/models/upload_media_direct200_response.rb
@@ -6566,6 +6590,7 @@ spec/api/account_settings_api_spec.rb
 spec/api/accounts_api_spec.rb
 spec/api/ad_accounts_api_spec.rb
 spec/api/ad_audiences_api_spec.rb
+spec/api/ad_campaign_results_api_spec.rb
 spec/api/ad_campaigns_api_spec.rb
 spec/api/ad_creatives_api_spec.rb
 spec/api/ad_insights_api_spec.rb
@@ -6976,6 +7001,7 @@ spec/models/campaign_report_participants_inner_spec.rb
 spec/models/campaign_report_spec.rb
 spec/models/campaign_report_spend_spec.rb
 spec/models/campaign_report_views_spec.rb
+spec/models/campaign_result_metric_spec.rb
 spec/models/campaign_settlement_spec.rb
 spec/models/campaign_submission_authenticity_spec.rb
 spec/models/campaign_submission_counts_spec.rb
@@ -7740,6 +7766,8 @@ spec/models/get_campaign_bidding200_response_spec.rb
 spec/models/get_campaign_conversion_goals200_response_spec.rb
 spec/models/get_campaign_participant200_response_spec.rb
 spec/models/get_campaign_report200_response_spec.rb
+spec/models/get_campaign_results_upload200_response_spec.rb
+spec/models/get_campaign_results_upload200_response_unmatched_inner_spec.rb
 spec/models/get_campaign_submission200_response_spec.rb
 spec/models/get_campaign_targeting200_response_devices_inner_spec.rb
 spec/models/get_campaign_targeting200_response_excluded_locations_inner_spec.rb
@@ -8377,6 +8405,9 @@ spec/models/list_campaign_negative_keywords200_response_spec.rb
 spec/models/list_campaign_participants200_response_spec.rb
 spec/models/list_campaign_payables200_response_spec.rb
 spec/models/list_campaign_payout_batches200_response_spec.rb
+spec/models/list_campaign_result_metrics200_response_spec.rb
+spec/models/list_campaign_results200_response_campaigns_inner_spec.rb
+spec/models/list_campaign_results200_response_spec.rb
 spec/models/list_campaign_submissions200_response_spec.rb
 spec/models/list_changelog200_response_spec.rb
 spec/models/list_comment_automation_logs200_response_misses_samples_inner_spec.rb
@@ -9098,6 +9129,8 @@ spec/models/set_business_agent_connector_credentials_request_one_of1_spec.rb
 spec/models/set_business_agent_connector_credentials_request_one_of2_spec.rb
 spec/models/set_business_agent_connector_credentials_request_one_of_spec.rb
 spec/models/set_business_agent_connector_credentials_request_spec.rb
+spec/models/set_campaign_result_metric200_response_spec.rb
+spec/models/set_campaign_result_metric_request_spec.rb
 spec/models/set_comment_moderation_request_spec.rb
 spec/models/set_commerce_discount_active_request_spec.rb
 spec/models/set_commerce_price_list_prices200_response_spec.rb
@@ -9495,6 +9528,9 @@ spec/models/upload_ad_video202_response_spec.rb
 spec/models/upload_ad_video202_response_video_spec.rb
 spec/models/upload_ad_video_request_spec.rb
 spec/models/upload_business_agent_file_request_spec.rb
+spec/models/upload_campaign_results202_response_spec.rb
+spec/models/upload_campaign_results_request_rows_inner_spec.rb
+spec/models/upload_campaign_results_request_spec.rb
 spec/models/upload_file201_response_spec.rb
 spec/models/upload_file_request_spec.rb
 spec/models/upload_media_direct200_response_spec.rb
