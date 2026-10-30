@@ -138,10 +138,10 @@ end
 
 api_instance = Zernio::AnalyticsApi.new
 opts = {
-  post_id: 'post_id_example', # String | Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics.
+  post_id: 'post_id_example', # String | Returns analytics for a single post. Accepts Zernio Post IDs, External Post IDs and the platform's native post ID. Zernio IDs are auto-resolved to External Post analytics.
   platform: 'platform_example', # String | Filter by platform (default \"all\")
-  profile_id: 'profile_id_example', # String | Filter by profile ID (default \"all\")
-  account_id: 'account_id_example', # String | Filter by account ID
+  profile_id: 'profile_id_example', # String | Filter by profile ID (default \"all\"). With a native postId, selects that profile's copy of the post.
+  account_id: 'account_id_example', # String | Filter by account ID. With a native postId, selects that account's copy of the post.
   source: 'all', # String | Filter by post source: late (posted via Zernio API), external (synced from platform), all (default)
   from_date: Date.parse('2013-10-20'), # Date | Inclusive lower bound (YYYY-MM-DD). Defaults to 90 days ago if omitted. Max range is 366 days.
   to_date: Date.parse('2013-10-20'), # Date | Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
@@ -183,10 +183,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **post_id** | **String** | Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics. | [optional] |
+| **post_id** | **String** | Returns analytics for a single post. Accepts Zernio Post IDs, External Post IDs and the platform&#39;s native post ID. Zernio IDs are auto-resolved to External Post analytics. | [optional] |
 | **platform** | **String** | Filter by platform (default \&quot;all\&quot;) | [optional] |
-| **profile_id** | **String** | Filter by profile ID (default \&quot;all\&quot;) | [optional] |
-| **account_id** | **String** | Filter by account ID | [optional] |
+| **profile_id** | **String** | Filter by profile ID (default \&quot;all\&quot;). With a native postId, selects that profile&#39;s copy of the post. | [optional] |
+| **account_id** | **String** | Filter by account ID. With a native postId, selects that account&#39;s copy of the post. | [optional] |
 | **source** | **String** | Filter by post source: late (posted via Zernio API), external (synced from platform), all (default) | [optional][default to &#39;all&#39;] |
 | **from_date** | **Date** | Inclusive lower bound (YYYY-MM-DD). Defaults to 90 days ago if omitted. Max range is 366 days. | [optional] |
 | **to_date** | **Date** | Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted. | [optional] |
