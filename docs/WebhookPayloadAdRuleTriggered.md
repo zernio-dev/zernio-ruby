@@ -11,7 +11,7 @@
 | **account** | [**WebhookAdsAccount**](WebhookAdsAccount.md) |  |  |
 | **rule** | [**WebhookPayloadAdRuleTriggeredRule**](WebhookPayloadAdRuleTriggeredRule.md) |  |  |
 | **run** | [**WebhookPayloadAdRuleTriggeredRun**](WebhookPayloadAdRuleTriggeredRun.md) |  |  |
-| **objects** | [**Array&lt;WebhookPayloadAdRuleTriggeredObjectsInner&gt;**](WebhookPayloadAdRuleTriggeredObjectsInner.md) | The campaigns or ad sets this run acted on, at the rule&#39;s &#x60;level&#x60;, including those whose action failed. Objects still in cooldown are left out. |  |
+| **objects** | [**Array&lt;WebhookPayloadAdRuleTriggeredObjectsInner&gt;**](WebhookPayloadAdRuleTriggeredObjectsInner.md) | The campaigns, ad sets or ads this run acted on, at the rule&#39;s &#x60;level&#x60;, including those whose action failed. Objects still in cooldown are left out. |  |
 | **timestamp** | **Time** | UTC time at which Zernio generated this event. |  |
 
 ## Example

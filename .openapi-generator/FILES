@@ -1722,6 +1722,8 @@ docs/ListAdLabels200ResponsePaging.md
 docs/ListAdNegativeKeywordLists200Response.md
 docs/ListAdRuleActivity200Response.md
 docs/ListAdRuleRuns200Response.md
+docs/ListAdRuleTemplates200Response.md
+docs/ListAdRuleTemplates200ResponseTemplatesInner.md
 docs/ListAdRules200Response.md
 docs/ListAdSets200Response.md
 docs/ListAdSets200ResponseAdSetsInner.md
@@ -5037,6 +5039,8 @@ lib/zernio-sdk/models/list_ad_labels200_response_paging.rb
 lib/zernio-sdk/models/list_ad_negative_keyword_lists200_response.rb
 lib/zernio-sdk/models/list_ad_rule_activity200_response.rb
 lib/zernio-sdk/models/list_ad_rule_runs200_response.rb
+lib/zernio-sdk/models/list_ad_rule_templates200_response.rb
+lib/zernio-sdk/models/list_ad_rule_templates200_response_templates_inner.rb
 lib/zernio-sdk/models/list_ad_rules200_response.rb
 lib/zernio-sdk/models/list_ad_sets200_response.rb
 lib/zernio-sdk/models/list_ad_sets200_response_ad_sets_inner.rb
@@ -8309,6 +8313,8 @@ spec/models/list_ad_labels200_response_spec.rb
 spec/models/list_ad_negative_keyword_lists200_response_spec.rb
 spec/models/list_ad_rule_activity200_response_spec.rb
 spec/models/list_ad_rule_runs200_response_spec.rb
+spec/models/list_ad_rule_templates200_response_spec.rb
+spec/models/list_ad_rule_templates200_response_templates_inner_spec.rb
 spec/models/list_ad_rules200_response_spec.rb
 spec/models/list_ad_sets200_response_ad_sets_inner_budget_spec.rb
 spec/models/list_ad_sets200_response_ad_sets_inner_schedule_spec.rb

@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad_rule**](AdRulesApi.md#get_ad_rule) | **GET** /v1/ads/rules/{ruleId} | Get an ad rule |
 | [**list_ad_rule_activity**](AdRulesApi.md#list_ad_rule_activity) | **GET** /v1/ads/rules/activity | List every change ad rules made |
 | [**list_ad_rule_runs**](AdRulesApi.md#list_ad_rule_runs) | **GET** /v1/ads/rules/{ruleId}/runs | List an ad rule&#39;s runs |
+| [**list_ad_rule_templates**](AdRulesApi.md#list_ad_rule_templates) | **GET** /v1/ads/rules/templates | List ready-made ad rules |
 | [**list_ad_rules**](AdRulesApi.md#list_ad_rules) | **GET** /v1/ads/rules | List ad rules |
 | [**preview_ad_rule**](AdRulesApi.md#preview_ad_rule) | **POST** /v1/ads/rules/{ruleId}/preview | Preview an ad rule |
 | [**update_ad_rule**](AdRulesApi.md#update_ad_rule) | **PATCH** /v1/ads/rules/{ruleId} | Update an ad rule |
@@ -368,6 +369,72 @@ end
 ### Return type
 
 [**ListAdRuleRuns200Response**](ListAdRuleRuns200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_rule_templates
+
+> <ListAdRuleTemplates200Response> list_ad_rule_templates
+
+List ready-made ad rules
+
+Common rules to start from: stop losers, scale winners, pause ads with no conversions, creative fatigue and spend spike alerts.  Each template is a complete rule body. Add `name`, `accountId` and `adAccountId`, adjust the thresholds to the ad account, and send it to `POST /v1/ads/rules`. Amounts are in the ad account currency. `platforms` lists the networks a template works on, or is null for all of them. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdRulesApi.new
+
+begin
+  # List ready-made ad rules
+  result = api_instance.list_ad_rule_templates
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->list_ad_rule_templates: #{e}"
+end
+```
+
+#### Using the list_ad_rule_templates_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdRuleTemplates200Response>, Integer, Hash)> list_ad_rule_templates_with_http_info
+
+```ruby
+begin
+  # List ready-made ad rules
+  data, status_code, headers = api_instance.list_ad_rule_templates_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdRuleTemplates200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->list_ad_rule_templates_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListAdRuleTemplates200Response**](ListAdRuleTemplates200Response.md)
 
 ### Authorization
 
