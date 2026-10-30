@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **results** | **Hash&lt;String, Float&gt;** | Only with &#x60;results&#x3D;true&#x60;. The values you sent for this campaign over the range, plus each formula they allow, by metric key. A metric with no value is absent. | [optional] |
 | **platform_campaign_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **campaign_name** | **String** |  | [optional] |
@@ -42,6 +43,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::AdTreeCampaign.new(
+  results: {revenue&#x3D;7800, sales&#x3D;4, cac_percent&#x3D;31.2, cost_per_sale&#x3D;608.5},
   platform_campaign_id: null,
   platform: null,
   campaign_name: null,

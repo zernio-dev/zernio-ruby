@@ -1144,6 +1144,7 @@ docs/GetCampaignBidding200Response.md
 docs/GetCampaignConversionGoals200Response.md
 docs/GetCampaignParticipant200Response.md
 docs/GetCampaignReport200Response.md
+docs/GetCampaignResultsTotals200Response.md
 docs/GetCampaignResultsUpload200Response.md
 docs/GetCampaignResultsUpload200ResponseUnmatchedInner.md
 docs/GetCampaignSubmission200Response.md
@@ -4480,6 +4481,7 @@ lib/zernio-sdk/models/get_campaign_bidding200_response.rb
 lib/zernio-sdk/models/get_campaign_conversion_goals200_response.rb
 lib/zernio-sdk/models/get_campaign_participant200_response.rb
 lib/zernio-sdk/models/get_campaign_report200_response.rb
+lib/zernio-sdk/models/get_campaign_results_totals200_response.rb
 lib/zernio-sdk/models/get_campaign_results_upload200_response.rb
 lib/zernio-sdk/models/get_campaign_results_upload200_response_unmatched_inner.rb
 lib/zernio-sdk/models/get_campaign_submission200_response.rb
@@ -7766,6 +7768,7 @@ spec/models/get_campaign_bidding200_response_spec.rb
 spec/models/get_campaign_conversion_goals200_response_spec.rb
 spec/models/get_campaign_participant200_response_spec.rb
 spec/models/get_campaign_report200_response_spec.rb
+spec/models/get_campaign_results_totals200_response_spec.rb
 spec/models/get_campaign_results_upload200_response_spec.rb
 spec/models/get_campaign_results_upload200_response_unmatched_inner_spec.rb
 spec/models/get_campaign_submission200_response_spec.rb

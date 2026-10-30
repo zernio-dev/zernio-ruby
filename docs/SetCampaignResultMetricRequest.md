@@ -7,6 +7,7 @@
 | **label** | **String** |  |  |
 | **kind** | **String** |  |  |
 | **currency** | **String** | ISO 4217, money metrics only. | [optional] |
+| **formula** | **String** | Makes it a computed metric. Null or absent for a number you send. | [optional] |
 
 ## Example
 
@@ -16,7 +17,8 @@ require 'zernio-sdk'
 instance = Zernio::SetCampaignResultMetricRequest.new(
   label: Qualified leads,
   kind: null,
-  currency: EUR
+  currency: EUR,
+  formula: spend / sales
 )
 ```
 

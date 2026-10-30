@@ -4,11 +4,87 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**get_campaign_results_totals**](AdCampaignResultsApi.md#get_campaign_results_totals) | **GET** /v1/ads/campaign-results/totals | Get your results totals |
 | [**get_campaign_results_upload**](AdCampaignResultsApi.md#get_campaign_results_upload) | **GET** /v1/ads/campaign-results/uploads/{uploadId} | Check a results upload |
 | [**list_campaign_result_metrics**](AdCampaignResultsApi.md#list_campaign_result_metrics) | **GET** /v1/ads/campaign-results/metrics | List your result metrics |
 | [**list_campaign_results**](AdCampaignResultsApi.md#list_campaign_results) | **GET** /v1/ads/campaign-results | List your results per campaign |
-| [**set_campaign_result_metric**](AdCampaignResultsApi.md#set_campaign_result_metric) | **PUT** /v1/ads/campaign-results/metrics/{key} | Name a result metric |
+| [**set_campaign_result_metric**](AdCampaignResultsApi.md#set_campaign_result_metric) | **PUT** /v1/ads/campaign-results/metrics/{key} | Name a result metric or define a formula |
 | [**upload_campaign_results**](AdCampaignResultsApi.md#upload_campaign_results) | **POST** /v1/ads/campaign-results | Upload your results per campaign |
+
+
+## get_campaign_results_totals
+
+> <GetCampaignResultsTotals200Response> get_campaign_results_totals(from_date, to_date, opts)
+
+Get your results totals
+
+Each metric you send summed over a date range across every campaign of the ad accounts your key can see, or of the ones you name. Each day counts its newest value only.  Formulas are not computed here, since they also read the platform's numbers: apply one to these totals and the account's spend for the same range, or read it per campaign from `GET /v1/ads/tree?results=true`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignResultsApi.new
+from_date = Date.parse('2013-10-20') # Date | 
+to_date = Date.parse('2013-10-20') # Date | Inclusive. At most 400 days after `fromDate`.
+opts = {
+  ad_account_ids: 'ad_account_ids_example' # String | Comma-separated platform ad account ids, at most 100. Omit for every ad account your key can see.
+}
+
+begin
+  # Get your results totals
+  result = api_instance.get_campaign_results_totals(from_date, to_date, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignResultsApi->get_campaign_results_totals: #{e}"
+end
+```
+
+#### Using the get_campaign_results_totals_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCampaignResultsTotals200Response>, Integer, Hash)> get_campaign_results_totals_with_http_info(from_date, to_date, opts)
+
+```ruby
+begin
+  # Get your results totals
+  data, status_code, headers = api_instance.get_campaign_results_totals_with_http_info(from_date, to_date, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCampaignResultsTotals200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignResultsApi->get_campaign_results_totals_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **from_date** | **Date** |  |  |
+| **to_date** | **Date** | Inclusive. At most 400 days after &#x60;fromDate&#x60;. |  |
+| **ad_account_ids** | **String** | Comma-separated platform ad account ids, at most 100. Omit for every ad account your key can see. | [optional] |
+
+### Return type
+
+[**GetCampaignResultsTotals200Response**](GetCampaignResultsTotals200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## get_campaign_results_upload
@@ -86,7 +162,7 @@ end
 
 List your result metrics
 
-The metric keys your team has sent, with their label and kind. A new key appears as a `count` labelled from the key; name it with `PUT /v1/ads/campaign-results/metrics/{key}`. 
+The metric keys your team has sent, with their label and kind, then the formulas: your own and the built-in ones (`cac_percent`, `cost_per_sale`, `cost_per_qualified_lead`, `lead_to_sale`). A new key appears as a `count` labelled from the key; name it, or define a formula, with `PUT /v1/ads/campaign-results/metrics/{key}`. 
 
 ### Examples
 
@@ -229,9 +305,9 @@ end
 
 > <SetCampaignResultMetric200Response> set_campaign_result_metric(key, set_campaign_result_metric_request)
 
-Name a result metric
+Name a result metric or define a formula
 
-Sets a metric key's label and kind: `count` for things you count (leads, sales) or `money` with its currency (revenue). 
+Sets a metric key's label and kind: `count` for things you count (leads, sales), `money` with its currency (revenue), `percent` or `ratio`.  Send `formula` to make it a computed metric: `+ - * /` and parentheses over `spend`, `impressions`, `clicks`, `conversions`, `purchase_value` and the metrics you send, at most 200 characters. A formula cannot read another formula.  It is computed per campaign over the summed values of the range, and has no value when an input is missing or a division is by zero. 
 
 ### Examples
 
@@ -249,7 +325,7 @@ key = 'key_example' # String |
 set_campaign_result_metric_request = Zernio::SetCampaignResultMetricRequest.new({label: 'Qualified leads', kind: 'count'}) # SetCampaignResultMetricRequest | 
 
 begin
-  # Name a result metric
+  # Name a result metric or define a formula
   result = api_instance.set_campaign_result_metric(key, set_campaign_result_metric_request)
   p result
 rescue Zernio::ApiError => e
@@ -265,7 +341,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Name a result metric
+  # Name a result metric or define a formula
   data, status_code, headers = api_instance.set_campaign_result_metric_with_http_info(key, set_campaign_result_metric_request)
   p status_code # => 2xx
   p headers # => { ... }

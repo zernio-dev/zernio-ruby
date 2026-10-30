@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **metric** | **String** | &#x60;ctr&#x60; is a percentage. &#x60;spend&#x60;, &#x60;cpc&#x60;, &#x60;cpm&#x60; and &#x60;cpa&#x60; are in the ad account currency. &#x60;reach&#x60; and &#x60;frequency&#x60; use the platform&#39;s de-duplicated reach, so they are accepted on Meta and TikTok only. |  |
-| **window** | **String** | Days in the ad account&#39;s own timezone. &#x60;last_7d&#x60; includes today. |  |
+| **metric** | **String** |  |  |
+| **window** | **String** | Days in the ad account&#39;s own timezone. &#x60;last_7d&#x60; is the 7 full days before today; only &#x60;today&#x60; reads the day in progress. |  |
 | **op** | **String** |  |  |
 | **value** | **Float** |  |  |
 | **actual** | **Float** | The object&#39;s value over the window. Null when it cannot be computed. |  |
