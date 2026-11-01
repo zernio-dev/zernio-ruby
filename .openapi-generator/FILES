@@ -983,6 +983,7 @@ docs/ExternalPostWebhookPost.md
 docs/FacebookOrInstagramPost.md
 docs/FacebookPageInfo.md
 docs/FacebookPlatformData.md
+docs/FacebookPlatformDataFailedCollaboratorsInner.md
 docs/FacebookPostEarningsResponse.md
 docs/FacebookPostEarningsResponseMetricsValue.md
 docs/FacebookPostEarningsResponseUnavailableMetricsInner.md
@@ -4330,6 +4331,7 @@ lib/zernio-sdk/models/external_post_webhook_post.rb
 lib/zernio-sdk/models/facebook_or_instagram_post.rb
 lib/zernio-sdk/models/facebook_page_info.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
+lib/zernio-sdk/models/facebook_platform_data_failed_collaborators_inner.rb
 lib/zernio-sdk/models/facebook_post_earnings_response.rb
 lib/zernio-sdk/models/facebook_post_earnings_response_metrics_value.rb
 lib/zernio-sdk/models/facebook_post_earnings_response_unavailable_metrics_inner.rb
@@ -7616,6 +7618,7 @@ spec/models/external_post_summary_spec.rb
 spec/models/external_post_webhook_post_spec.rb
 spec/models/facebook_or_instagram_post_spec.rb
 spec/models/facebook_page_info_spec.rb
+spec/models/facebook_platform_data_failed_collaborators_inner_spec.rb
 spec/models/facebook_platform_data_spec.rb
 spec/models/facebook_post_earnings_response_metrics_value_spec.rb
 spec/models/facebook_post_earnings_response_spec.rb
