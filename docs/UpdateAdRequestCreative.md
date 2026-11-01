@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **promotion** | **Object** | Not supported. Send null or omit the field, and set the Promotion on the ad in Ads Manager. Any object is rejected with 400 invalid_field_value.  Meta validates creative_sourcing_spec.promotion_metadata_spec on the create call and then discards it, so a Promotion set through the Marketing API never reaches the creative. Verified on 2026-09-11 across Graph v19.0 to v25.0 and every write path.  | [optional] |
 | **creative_features** | **Hash&lt;String, String&gt;** | Meta Advantage+ creative enhancements. Map snake_case feature names to OPT_IN or OPT_OUT; Meta validates supported keys and unspecified features default to OPT_OUT. auto_promotion_tag is an Advantage+ enhancement, not the Ads Manager Promotion setting. The deprecated standard_enhancements bundle is rejected by Meta. | [optional] |
+| **catalog_format** | **String** | Meta catalog template ads only. Rebuilds the creative with this &#x60;template_data.format_option&#x60; (same mapping as on create) and repoints the ad at the new creative.  Returns 400 on any other network, on a Meta ad without a catalog template creative, or with &#x60;existingCreativeId&#x60;. Copy or media fields return 422 on a catalog creative. | [optional] |
 | **headline** | **String** | Meta and LinkedIn (TikTok has no headline slot) | [optional] |
 | **long_headline** | **String** | Google Display only. Replaces the responsive display ad&#39;s long headline. | [optional] |
 | **business_name** | **String** | Google Display only. Replaces the responsive display ad&#39;s business name. | [optional] |
@@ -27,6 +28,7 @@ require 'zernio-sdk'
 instance = Zernio::UpdateAdRequestCreative.new(
   promotion: null,
   creative_features: {auto_promotion_tag&#x3D;OPT_IN},
+  catalog_format: null,
   headline: null,
   long_headline: null,
   business_name: null,
