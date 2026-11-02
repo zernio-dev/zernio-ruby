@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **daily_data** | [**Array&lt;GetDailyMetrics200ResponseDailyDataInner&gt;**](GetDailyMetrics200ResponseDailyDataInner.md) |  | [optional] |
 | **platform_breakdown** | [**Array&lt;GetDailyMetrics200ResponsePlatformBreakdownInner&gt;**](GetDailyMetrics200ResponsePlatformBreakdownInner.md) |  | [optional] |
+| **totals** | [**GetDailyMetrics200ResponseTotals**](GetDailyMetrics200ResponseTotals.md) |  | [optional] |
 
 ## Example
 
@@ -14,7 +15,8 @@ require 'zernio-sdk'
 
 instance = Zernio::GetDailyMetrics200Response.new(
   daily_data: null,
-  platform_breakdown: null
+  platform_breakdown: null,
+  totals: null
 )
 ```
 

@@ -1178,6 +1178,7 @@ docs/GetDailyMetrics200Response.md
 docs/GetDailyMetrics200ResponseDailyDataInner.md
 docs/GetDailyMetrics200ResponseDailyDataInnerMetrics.md
 docs/GetDailyMetrics200ResponsePlatformBreakdownInner.md
+docs/GetDailyMetrics200ResponseTotals.md
 docs/GetDiscordChannels200Response.md
 docs/GetDiscordChannels200ResponseChannelsInner.md
 docs/GetDiscordGuildMember200Response.md
@@ -4517,6 +4518,7 @@ lib/zernio-sdk/models/get_daily_metrics200_response.rb
 lib/zernio-sdk/models/get_daily_metrics200_response_daily_data_inner.rb
 lib/zernio-sdk/models/get_daily_metrics200_response_daily_data_inner_metrics.rb
 lib/zernio-sdk/models/get_daily_metrics200_response_platform_breakdown_inner.rb
+lib/zernio-sdk/models/get_daily_metrics200_response_totals.rb
 lib/zernio-sdk/models/get_discord_channels200_response.rb
 lib/zernio-sdk/models/get_discord_channels200_response_channels_inner.rb
 lib/zernio-sdk/models/get_discord_guild_member200_response.rb
@@ -7807,6 +7809,7 @@ spec/models/get_daily_metrics200_response_daily_data_inner_metrics_spec.rb
 spec/models/get_daily_metrics200_response_daily_data_inner_spec.rb
 spec/models/get_daily_metrics200_response_platform_breakdown_inner_spec.rb
 spec/models/get_daily_metrics200_response_spec.rb
+spec/models/get_daily_metrics200_response_totals_spec.rb
 spec/models/get_discord_channels200_response_channels_inner_spec.rb
 spec/models/get_discord_channels200_response_spec.rb
 spec/models/get_discord_guild_member200_response_spec.rb
