@@ -13,6 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_transfer**](TreasuryApi.md#create_transfer) | **POST** /v1/transfers | Create a transfer |
 | [**get_balance**](TreasuryApi.md#get_balance) | **GET** /v1/balance | Get balance |
 | [**get_payout_batch**](TreasuryApi.md#get_payout_batch) | **GET** /v1/payout-batches/{batchId} | Get a payout batch |
+| [**get_topup_card_fee**](TreasuryApi.md#get_topup_card_fee) | **GET** /v1/balance/top-ups/card-fee | Get the card fee for a top-up |
 | [**get_topup_receipt**](TreasuryApi.md#get_topup_receipt) | **GET** /v1/balance/top-ups/{topupId}/receipt | Get a top-up receipt |
 | [**get_transfer**](TreasuryApi.md#get_transfer) | **GET** /v1/transfers/{transferId} | Get a transfer |
 | [**list_payees**](TreasuryApi.md#list_payees) | **GET** /v1/payees | List payees |
@@ -371,7 +372,7 @@ end
 
 Create a top-up
 
-Charges the billing owner's saved card (the default one, or `paymentMethodId`) for `amountCents` while the payer is present.  - `status: succeeded`: the card was charged. The top-up is credited to `availableCents` within seconds, net of Stripe's processing fee. Transfers to payees can use it from 7 days after the charge. - `status: requires_action`: the bank asked for 3D Secure. Complete it with Stripe.js `handleNextAction({ clientSecret })`, then call `POST /v1/balance/top-ups/{topupId}/confirm`. One left unconfirmed is cancelled after 30 minutes.  ### Errors  - 402 `payment_required`: no saved card. - 402 `card_declined`: the bank's reason. - 400: `method: bank_transfer` (bank transfers are not available yet).  Needs an owner, admin or billing admin, signed in or through a full-access key they created. 
+Charges the billing owner's saved card (the default one, or `paymentMethodId`) `amountCents` plus the card fee, while the payer is present, and credits your balance what Stripe delivers.  The card fee is Stripe's own rate for the card, learned from its past charges (`GET /v1/balance/top-ups/card-fee` answers it).  - When `feeIsExact` is true you receive exactly `amountCents`. - When it is false (the first top-up on a card issued in the EEA, or Link, where Stripe prices by card product) the fee is the highest rate for the card's region. - You then receive at least `amountCents`: if Stripe charges less, the difference is added to your balance.  - `status: succeeded`: the card was charged. What Stripe delivered is credited to `availableCents` within seconds. Transfers to payees can use it from 7 days after the charge. - `status: requires_action`: the bank asked for 3D Secure. Complete it with Stripe.js `handleNextAction({ clientSecret })`, then call `POST /v1/balance/top-ups/{topupId}/confirm`. One left unconfirmed is cancelled after 30 minutes.  ### Errors  - 402 `payment_required`: no saved card. - 402 `card_declined`: the bank's reason. - 400: `method: bank_transfer` (bank transfers are not available yet).  Needs an owner, admin or billing admin, signed in or through a full-access key they created. 
 
 ### Examples
 
@@ -635,6 +636,77 @@ end
 ### Return type
 
 [**GetPayoutBatch200Response**](GetPayoutBatch200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_topup_card_fee
+
+> <GetTopupCardFee200Response> get_topup_card_fee(opts)
+
+Get the card fee for a top-up
+
+The card fee a top-up on the billing owner's saved card pays: `feeBps` of the charge plus `fixedCents`. The card is charged the smallest amount that leaves `amountCents` once Stripe takes `round_half_up(charge * feeBps / 10000) + fixedCents`.  The rate is Stripe's own for the card, learned from its past charges.  `feeIsExact` is false for a card Zernio has not charged yet whose region Stripe prices by card product (EEA) or whose country is unknown (Link). The rate is then that region's highest, and the top-up credits at least the amount.  Needs an owner, admin or billing admin, signed in or through a full-access key they created. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TreasuryApi.new
+opts = {
+  payment_method_id: 'payment_method_id_example' # String | A saved card of the billing owner's (`pm_...`). Defaults to the default payment method.
+}
+
+begin
+  # Get the card fee for a top-up
+  result = api_instance.get_topup_card_fee(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->get_topup_card_fee: #{e}"
+end
+```
+
+#### Using the get_topup_card_fee_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetTopupCardFee200Response>, Integer, Hash)> get_topup_card_fee_with_http_info(opts)
+
+```ruby
+begin
+  # Get the card fee for a top-up
+  data, status_code, headers = api_instance.get_topup_card_fee_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetTopupCardFee200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->get_topup_card_fee_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **payment_method_id** | **String** | A saved card of the billing owner&#39;s (&#x60;pm_...&#x60;). Defaults to the default payment method. | [optional] |
+
+### Return type
+
+[**GetTopupCardFee200Response**](GetTopupCardFee200Response.md)
 
 ### Authorization
 

@@ -1407,6 +1407,7 @@ docs/GetTikTokSmartPlusAdReview200Response.md
 docs/GetTikTokSmartPlusMaterialReport200Response.md
 docs/GetTikTokSmartPlusMaterialReport200ResponseRowsInner.md
 docs/GetTikTokSmartPlusMaterialReport200ResponseRowsInnerMetrics.md
+docs/GetTopupCardFee200Response.md
 docs/GetTopupReceipt200Response.md
 docs/GetTrackingTag200Response.md
 docs/GetTrackingTagDiagnostics200Response.md
@@ -4742,6 +4743,7 @@ lib/zernio-sdk/models/get_tik_tok_smart_plus_ad_review200_response.rb
 lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response.rb
 lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response_rows_inner.rb
 lib/zernio-sdk/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_metrics.rb
+lib/zernio-sdk/models/get_topup_card_fee200_response.rb
 lib/zernio-sdk/models/get_topup_receipt200_response.rb
 lib/zernio-sdk/models/get_tracking_tag200_response.rb
 lib/zernio-sdk/models/get_tracking_tag_diagnostics200_response.rb
@@ -8028,6 +8030,7 @@ spec/models/get_tik_tok_smart_plus_ad_review200_response_spec.rb
 spec/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_metrics_spec.rb
 spec/models/get_tik_tok_smart_plus_material_report200_response_rows_inner_spec.rb
 spec/models/get_tik_tok_smart_plus_material_report200_response_spec.rb
+spec/models/get_topup_card_fee200_response_spec.rb
 spec/models/get_topup_receipt200_response_spec.rb
 spec/models/get_tracking_tag200_response_spec.rb
 spec/models/get_tracking_tag_diagnostics200_response_spec.rb
