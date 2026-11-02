@@ -863,7 +863,7 @@ end
 
 Estimate call cost
 
-Pre-call cost estimate for a PSTN call: the carrier leg plus optional recording and transcription add-ons.  It uses the same billing formula as the post-call invoice, so the quote and the final charge can't disagree. The per-minute figure is deliberately conservative (the real cost comes from the settled carrier record after the call), so estimates trend slightly over the actual invoice.  Parity endpoint of `GET /v1/whatsapp/calls/estimate`, minus the Meta line. PSTN calls have no separate Meta bill, so `totalCostUSD` equals `billableCostUSD`. 
+Pre-call cost estimate for a PSTN call: the carrier leg plus optional recording and transcription add-ons.  It uses the same billing formula as the post-call invoice, so the quote and the final charge can't disagree. The carrier figure follows the carrier's per-destination rate card: a call dialed from a number in the destination country uses the local mobile rate, and a `tel:` forward destination is quoted as a second carrier leg billed from the same number. The real cost comes from the settled carrier record after the call.  Parity endpoint of `GET /v1/whatsapp/calls/estimate`, minus the Meta line. PSTN calls have no separate Meta bill, so `totalCostUSD` equals `billableCostUSD`. 
 
 ### Examples
 
@@ -880,6 +880,7 @@ api_instance = Zernio::VoiceApi.new
 to = 'to_example' # String | Destination number, E.164 (leading + optional).
 opts = {
   from: 'from_example', # String | The number the call would dial from, E.164. When it is verified on a Branded Calling identity and `to` is a US number, the estimate includes the per-call Branded Calling surcharge.
+  forward_to: 'forward_to_example', # String | Destination the call bridges to: `tel:+E164`, `sip:...` or `wss://...`. Defaults to the dialing number's configured forward. A `tel:` destination adds a second carrier leg to the quote. Encode the `+` as `%2B`.
   minutes: 56, # Integer | 
   recording: true, # Boolean | 
   transcription: true # Boolean | 
@@ -918,6 +919,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **to** | **String** | Destination number, E.164 (leading + optional). |  |
 | **from** | **String** | The number the call would dial from, E.164. When it is verified on a Branded Calling identity and &#x60;to&#x60; is a US number, the estimate includes the per-call Branded Calling surcharge. | [optional] |
+| **forward_to** | **String** | Destination the call bridges to: &#x60;tel:+E164&#x60;, &#x60;sip:...&#x60; or &#x60;wss://...&#x60;. Defaults to the dialing number&#39;s configured forward. A &#x60;tel:&#x60; destination adds a second carrier leg to the quote. Encode the &#x60;+&#x60; as &#x60;%2B&#x60;. | [optional] |
 | **minutes** | **Integer** |  | [optional][default to 1] |
 | **recording** | **Boolean** |  | [optional] |
 | **transcription** | **Boolean** |  | [optional] |
