@@ -22,6 +22,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_campaign_payout_batches**](CreatorCampaignsApi.md#list_campaign_payout_batches) | **GET** /v1/creator-campaigns/{campaignId}/payout-batches | List payout batches |
 | [**list_campaign_submissions**](CreatorCampaignsApi.md#list_campaign_submissions) | **GET** /v1/creator-campaigns/{campaignId}/submissions | List campaign submissions |
 | [**list_creator_campaigns**](CreatorCampaignsApi.md#list_creator_campaigns) | **GET** /v1/creator-campaigns | List creator campaigns |
+| [**move_campaign_participant**](CreatorCampaignsApi.md#move_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/move | Move participant to another campaign |
 | [**pause_creator_campaign**](CreatorCampaignsApi.md#pause_creator_campaign) | **POST** /v1/creator-campaigns/{campaignId}/pause | Pause creator campaign |
 | [**raise_creator_campaign_budget**](CreatorCampaignsApi.md#raise_creator_campaign_budget) | **POST** /v1/creator-campaigns/{campaignId}/budget | Raise creator campaign budget |
 | [**reinstate_campaign_participant**](CreatorCampaignsApi.md#reinstate_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/reinstate | Reinstate campaign participant |
@@ -1363,6 +1364,79 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## move_campaign_participant
+
+> <MoveCampaignParticipant200Response> move_campaign_participant(campaign_id, participant_id, move_campaign_participant_request)
+
+Move participant to another campaign
+
+Moves a creator invited or joined into the wrong campaign to another campaign of the same owner. The participant keeps its id, status and portal link, which now opens the target.  Posts that fit the target (platform accepted, published after it started) move with it. Undecided posts that do not fit are rejected in this campaign with the reason; decided ones stay.  Answers 409 when the target is closed or full, the creator is already in it, the participant was removed, or any money touched the participation (ledger entries, a payout batch or a transfer). Money never moves between campaigns.  Fires `campaign_participant.removed` here and, for a creator who joined, `campaign_participant.joined` on the target. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign the participant is in now.
+participant_id = 'participant_id_example' # String | Participant ID.
+move_campaign_participant_request = Zernio::MoveCampaignParticipantRequest.new({target_campaign_id: 'target_campaign_id_example'}) # MoveCampaignParticipantRequest | 
+
+begin
+  # Move participant to another campaign
+  result = api_instance.move_campaign_participant(campaign_id, participant_id, move_campaign_participant_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->move_campaign_participant: #{e}"
+end
+```
+
+#### Using the move_campaign_participant_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<MoveCampaignParticipant200Response>, Integer, Hash)> move_campaign_participant_with_http_info(campaign_id, participant_id, move_campaign_participant_request)
+
+```ruby
+begin
+  # Move participant to another campaign
+  data, status_code, headers = api_instance.move_campaign_participant_with_http_info(campaign_id, participant_id, move_campaign_participant_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <MoveCampaignParticipant200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->move_campaign_participant_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign the participant is in now. |  |
+| **participant_id** | **String** | Participant ID. |  |
+| **move_campaign_participant_request** | [**MoveCampaignParticipantRequest**](MoveCampaignParticipantRequest.md) |  |  |
+
+### Return type
+
+[**MoveCampaignParticipant200Response**](MoveCampaignParticipant200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
