@@ -10,6 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_creator_portal**](CreatorPortalApi.md#get_creator_portal) | **GET** /public/creator-campaigns/{token} | Read a creator invite or participant page |
 | [**join_creator_campaign**](CreatorPortalApi.md#join_creator_campaign) | **POST** /public/creator-campaigns/{token} | Join a campaign |
 | [**recover_creator_portal_links**](CreatorPortalApi.md#recover_creator_portal_links) | **POST** /public/creator-campaigns/recover-link | Email a creator their campaign links |
+| [**remove_creator_account**](CreatorPortalApi.md#remove_creator_account) | **DELETE** /public/creator-campaigns/{token}/accounts/{accountId} | Remove a connected account |
 | [**start_creator_connect**](CreatorPortalApi.md#start_creator_connect) | **POST** /public/creator-campaigns/{token}/connect | Start connecting a creator account |
 | [**start_creator_payouts**](CreatorPortalApi.md#start_creator_payouts) | **POST** /public/creator-campaigns/{token}/payouts | Start payout onboarding |
 | [**submit_creator_post**](CreatorPortalApi.md#submit_creator_post) | **POST** /public/creator-campaigns/{token}/submissions | Submit a post |
@@ -408,6 +409,72 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## remove_creator_account
+
+> <RemoveCreatorAccount200Response> remove_creator_account(token, account_id)
+
+Remove a connected account
+
+Disconnects one of the creator's accounts. The account belongs to the creator, not to one campaign, so it stops counting in every campaign of this brand they joined.  What its posts already earned stays: accrued, approved and paid amounts are not touched.  Refused while a post from the account is still counting views, because those views are read through the account. It can be removed once their tracking ends. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+
+api_instance = Zernio::CreatorPortalApi.new
+token = 'token_example' # String | A participant token or an open invite token. A malformed token answers 404 like an unknown one.
+account_id = 'account_id_example' # String | The `id` of one of the participant's `accounts`.
+
+begin
+  # Remove a connected account
+  result = api_instance.remove_creator_account(token, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorPortalApi->remove_creator_account: #{e}"
+end
+```
+
+#### Using the remove_creator_account_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveCreatorAccount200Response>, Integer, Hash)> remove_creator_account_with_http_info(token, account_id)
+
+```ruby
+begin
+  # Remove a connected account
+  data, status_code, headers = api_instance.remove_creator_account_with_http_info(token, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveCreatorAccount200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorPortalApi->remove_creator_account_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **token** | **String** | A participant token or an open invite token. A malformed token answers 404 like an unknown one. |  |
+| **account_id** | **String** | The &#x60;id&#x60; of one of the participant&#39;s &#x60;accounts&#x60;. |  |
+
+### Return type
+
+[**RemoveCreatorAccount200Response**](RemoveCreatorAccount200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

@@ -2286,6 +2286,7 @@ docs/RemoveAdLabel200Response.md
 docs/RemoveBookmark200Response.md
 docs/RemoveCampaignAssets200Response.md
 docs/RemoveConversionAssociations200Response.md
+docs/RemoveCreatorAccount200Response.md
 docs/RemoveCustomConversionGoal200Response.md
 docs/RemoveDiscordMemberRole200Response.md
 docs/RemoveGoogleAssetGroup200Response.md
@@ -5599,6 +5600,7 @@ lib/zernio-sdk/models/remove_ad_label200_response.rb
 lib/zernio-sdk/models/remove_bookmark200_response.rb
 lib/zernio-sdk/models/remove_campaign_assets200_response.rb
 lib/zernio-sdk/models/remove_conversion_associations200_response.rb
+lib/zernio-sdk/models/remove_creator_account200_response.rb
 lib/zernio-sdk/models/remove_custom_conversion_goal200_response.rb
 lib/zernio-sdk/models/remove_discord_member_role200_response.rb
 lib/zernio-sdk/models/remove_google_asset_group200_response.rb
@@ -8884,6 +8886,7 @@ spec/models/remove_ad_label200_response_spec.rb
 spec/models/remove_bookmark200_response_spec.rb
 spec/models/remove_campaign_assets200_response_spec.rb
 spec/models/remove_conversion_associations200_response_spec.rb
+spec/models/remove_creator_account200_response_spec.rb
 spec/models/remove_custom_conversion_goal200_response_spec.rb
 spec/models/remove_discord_member_role200_response_spec.rb
 spec/models/remove_google_asset_group200_response_spec.rb

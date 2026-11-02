@@ -14,11 +14,13 @@
 | **content_rules** | **String** |  |  |
 | **starts_at** | **Time** |  |  |
 | **ends_at** | **Time** |  |  |
+| **started_at** | **Time** | Posts published before this moment do not count: &#x60;startsAt&#x60;, else when the campaign went live. |  |
 | **currency** | **String** |  |  |
 | **economics** | [**CreatorPortalEconomics**](CreatorPortalEconomics.md) |  |  |
 | **max_post_age_minutes** | **Integer** | A post must be submitted within this many minutes of publishing. Null means any age. Either way, only posts published after the campaign started are accepted. |  |
 | **hold_days** | **Integer** | Days approved earnings stay owed before they become payable. |  |
 | **tracking_days** | **Integer** | Days each submitted post is tracked for views. |  |
+| **max_accounts_per_participant** | **Integer** | How many connected accounts can submit posts. Null means no limit. |  |
 
 ## Example
 
@@ -36,11 +38,13 @@ instance = Zernio::CreatorPortalCampaign.new(
   content_rules: null,
   starts_at: null,
   ends_at: null,
+  started_at: null,
   currency: null,
   economics: null,
   max_post_age_minutes: null,
   hold_days: null,
-  tracking_days: null
+  tracking_days: null,
+  max_accounts_per_participant: null
 )
 ```
 
