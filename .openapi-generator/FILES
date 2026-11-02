@@ -923,8 +923,6 @@ docs/DiscordScheduledEventEntityMetadata.md
 docs/DismissAdsAlert200Response.md
 docs/DismissGoogleRecommendationsRequest.md
 docs/DmButton.md
-docs/DownloadTikTokVideo200Response.md
-docs/DownloadTikTokVideo200ResponseFormatsInner.md
 docs/DuplicateAd200Response.md
 docs/DuplicateAdCampaign200Response.md
 docs/DuplicateAdCampaignRequest.md
@@ -2640,7 +2638,6 @@ docs/TikTokReviewRejectionContent.md
 docs/TikTokSmartPlusAdLevelReview.md
 docs/TikTokSmartPlusMaterialReview.md
 docs/TikTokSmartPlusReviewStatus.md
-docs/ToolsApi.md
 docs/TrackingTag.md
 docs/TrackingTagDiagnostic.md
 docs/TrackingTagEvent.md
@@ -3365,7 +3362,6 @@ lib/zernio-sdk/api/sequences_api.rb
 lib/zernio-sdk/api/slack_api.rb
 lib/zernio-sdk/api/sms_api.rb
 lib/zernio-sdk/api/support_assistant_api.rb
-lib/zernio-sdk/api/tools_api.rb
 lib/zernio-sdk/api/tracking_tags_api.rb
 lib/zernio-sdk/api/treasury_api.rb
 lib/zernio-sdk/api/twitter_engagement_api.rb
@@ -4272,8 +4268,6 @@ lib/zernio-sdk/models/discord_scheduled_event_entity_metadata.rb
 lib/zernio-sdk/models/dismiss_ads_alert200_response.rb
 lib/zernio-sdk/models/dismiss_google_recommendations_request.rb
 lib/zernio-sdk/models/dm_button.rb
-lib/zernio-sdk/models/download_tik_tok_video200_response.rb
-lib/zernio-sdk/models/download_tik_tok_video200_response_formats_inner.rb
 lib/zernio-sdk/models/duplicate_ad200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign_request.rb
@@ -6658,7 +6652,6 @@ spec/api/sequences_api_spec.rb
 spec/api/slack_api_spec.rb
 spec/api/sms_api_spec.rb
 spec/api/support_assistant_api_spec.rb
-spec/api/tools_api_spec.rb
 spec/api/tracking_tags_api_spec.rb
 spec/api/treasury_api_spec.rb
 spec/api/twitter_engagement_api_spec.rb
@@ -7560,8 +7553,6 @@ spec/models/discord_scheduled_event_spec.rb
 spec/models/dismiss_ads_alert200_response_spec.rb
 spec/models/dismiss_google_recommendations_request_spec.rb
 spec/models/dm_button_spec.rb
-spec/models/download_tik_tok_video200_response_formats_inner_spec.rb
-spec/models/download_tik_tok_video200_response_spec.rb
 spec/models/duplicate_ad200_response_spec.rb
 spec/models/duplicate_ad_campaign200_response_spec.rb
 spec/models/duplicate_ad_campaign_request_spec.rb
