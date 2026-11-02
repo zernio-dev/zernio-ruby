@@ -20,6 +20,7 @@
 | **can_like** | **Boolean** | Whether this comment can be liked (Facebook, X, Bluesky, Reddit, LinkedIn) | [optional] |
 | **is_hidden** | **Boolean** | Whether the comment is currently hidden. On Instagram accounts connected through Facebook Login, Meta leaves hidden comments (and their replies) out of the list entirely, so they never appear with isHidden true; Instagram Login accounts and Facebook Pages return them with isHidden true. | [optional] |
 | **is_liked** | **Boolean** | Whether the current user has liked this comment | [optional] |
+| **attachment** | [**CommentAttachment**](CommentAttachment.md) | Facebook only. The comment&#39;s sticker, GIF, photo, share or video, whenever Facebook returns one (replies included). Absent when the comment has no media and on every other platform. | [optional] |
 | **like_uri** | **String** | Bluesky like URI for unliking | [optional] |
 | **cid** | **String** | Bluesky content identifier | [optional] |
 | **parent_id** | **String** | ID of the parent comment.  - Facebook and Instagram: present on entries inside replies[]; omitted on top-level entries. - X: present inside replies[] and on top-level entries, where it holds the ID of the post replied to. - Every other platform: omitted; the parent relationship is expressed only through replies[] nesting.  When omitted, the key is absent, not null. | [optional] |
@@ -48,6 +49,7 @@ instance = Zernio::GetInboxPostComments200ResponseCommentsInner.new(
   can_like: null,
   is_hidden: null,
   is_liked: null,
+  attachment: null,
   like_uri: null,
   cid: null,
   parent_id: null,
