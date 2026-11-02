@@ -8,7 +8,9 @@
 | **status** | **String** |  |  |
 | **title** | **String** |  |  |
 | **message** | **String** |  |  |
-| **fix** | [**GetAdAccountHealth200ResponseChecksInnerFix**](GetAdAccountHealth200ResponseChecksInnerFix.md) |  | [optional] |
+| **code** | **String** | When the check is not &#x60;ok&#x60;: the error code a create refused for this reason returns. | [optional] |
+| **hint** | **String** |  | [optional] |
+| **fix** | [**GetAdAccountHealth200ResponseBlockersInnerFix**](GetAdAccountHealth200ResponseBlockersInnerFix.md) |  | [optional] |
 
 ## Example
 
@@ -20,6 +22,8 @@ instance = Zernio::GetAdAccountHealth200ResponseChecksInner.new(
   status: null,
   title: null,
   message: null,
+  code: null,
+  hint: null,
   fix: null
 )
 ```

@@ -1,4 +1,4 @@
-# Zernio::GetAdAccountHealth200ResponseChecksInnerFix
+# Zernio::GetAdAccountHealth200ResponseBlockersInnerFix
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GetAdAccountHealth200ResponseChecksInnerFix.new(
+instance = Zernio::GetAdAccountHealth200ResponseBlockersInnerFix.new(
   label: null,
   url: null
 )
