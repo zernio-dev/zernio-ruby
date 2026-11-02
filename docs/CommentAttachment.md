@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | **String** | Attachment type as Facebook reports it, for example sticker, animated_image_share, photo, image_share, share or video_inline. |  |
-| **image_url** | **String** | Rendered image/preview URL (from attachment.media.image.src). | [optional] |
-| **url** | **String** | Source URL (from attachment.url). For GIFs this is an l.facebook.com redirect. | [optional] |
+| **type** | **String** | The platform&#39;s own media kind, see the schema description for each platform&#39;s values. |  |
+| **image_url** | **String** | Rendered image or preview URL. | [optional] |
+| **url** | **String** | Source or playable URL. Facebook GIFs carry an l.facebook.com redirect, X videos an mp4, Bluesky videos an HLS playlist. | [optional] |
 
 ## Example
 
