@@ -20,7 +20,7 @@ module Zernio
     # Platform-native status string, forwarded verbatim (Meta `ACTIVE` / `DISAPPROVED`, TikTok `DISABLE`, ...).
     attr_accessor :raw
 
-    # Why the platform rejected the ad, when it says. Always empty on `approved`. Most networks only return a generic message today.
+    # Why the platform rejected the ad, when it says. Always empty on `approved`. Pinterest, LinkedIn and Reddit send their own reasons, X sends none, and most other networks only return a generic message.
     attr_accessor :reasons
 
     class EnumAttributeValidator
