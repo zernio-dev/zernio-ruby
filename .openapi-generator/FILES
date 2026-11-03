@@ -148,6 +148,10 @@ docs/AdsAlert.md
 docs/AdsAlertEntity.md
 docs/AdsAlertFix.md
 docs/AdsListResponse.md
+docs/AdsPerformanceResponse.md
+docs/AdsPerformanceResponseAdsInner.md
+docs/AdsPerformanceResponseAdsInnerCreative.md
+docs/AdsPerformanceResponseAdsInnerMetrics.md
 docs/AdsTimelineResponse.md
 docs/AdsTimelineResponsePreviousRange.md
 docs/AdsTimelineResponseRowsInner.md
@@ -1746,6 +1750,7 @@ docs/ListAds202Response.md
 docs/ListAdsAlerts200Response.md
 docs/ListAdsAlerts200ResponseCounts.md
 docs/ListAdsBusinessCenters200Response.md
+docs/ListAdsByPerformance202Response.md
 docs/ListAdsInstagramAccounts200Response.md
 docs/ListAdsInstagramAccounts200ResponseAccountsInner.md
 docs/ListAdsInstagramAccounts200ResponsePagesInner.md
@@ -3521,6 +3526,10 @@ lib/zernio-sdk/models/ads_alert.rb
 lib/zernio-sdk/models/ads_alert_entity.rb
 lib/zernio-sdk/models/ads_alert_fix.rb
 lib/zernio-sdk/models/ads_list_response.rb
+lib/zernio-sdk/models/ads_performance_response.rb
+lib/zernio-sdk/models/ads_performance_response_ads_inner.rb
+lib/zernio-sdk/models/ads_performance_response_ads_inner_creative.rb
+lib/zernio-sdk/models/ads_performance_response_ads_inner_metrics.rb
 lib/zernio-sdk/models/ads_timeline_response.rb
 lib/zernio-sdk/models/ads_timeline_response_previous_range.rb
 lib/zernio-sdk/models/ads_timeline_response_rows_inner.rb
@@ -5082,6 +5091,7 @@ lib/zernio-sdk/models/list_ads202_response.rb
 lib/zernio-sdk/models/list_ads_alerts200_response.rb
 lib/zernio-sdk/models/list_ads_alerts200_response_counts.rb
 lib/zernio-sdk/models/list_ads_business_centers200_response.rb
+lib/zernio-sdk/models/list_ads_by_performance202_response.rb
 lib/zernio-sdk/models/list_ads_instagram_accounts200_response.rb
 lib/zernio-sdk/models/list_ads_instagram_accounts200_response_accounts_inner.rb
 lib/zernio-sdk/models/list_ads_instagram_accounts200_response_pages_inner.rb
@@ -6815,6 +6825,10 @@ spec/models/ads_alert_entity_spec.rb
 spec/models/ads_alert_fix_spec.rb
 spec/models/ads_alert_spec.rb
 spec/models/ads_list_response_spec.rb
+spec/models/ads_performance_response_ads_inner_creative_spec.rb
+spec/models/ads_performance_response_ads_inner_metrics_spec.rb
+spec/models/ads_performance_response_ads_inner_spec.rb
+spec/models/ads_performance_response_spec.rb
 spec/models/ads_timeline_response_previous_range_spec.rb
 spec/models/ads_timeline_response_rows_inner_spec.rb
 spec/models/ads_timeline_response_spec.rb
@@ -8376,6 +8390,7 @@ spec/models/list_ads202_response_spec.rb
 spec/models/list_ads_alerts200_response_counts_spec.rb
 spec/models/list_ads_alerts200_response_spec.rb
 spec/models/list_ads_business_centers200_response_spec.rb
+spec/models/list_ads_by_performance202_response_spec.rb
 spec/models/list_ads_instagram_accounts200_response_accounts_inner_spec.rb
 spec/models/list_ads_instagram_accounts200_response_pages_inner_spec.rb
 spec/models/list_ads_instagram_accounts200_response_resolved_spec.rb

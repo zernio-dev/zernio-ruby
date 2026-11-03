@@ -44,6 +44,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_sets**](AdCampaignsApi.md#list_ad_sets) | **GET** /v1/ads/ad-sets | List ad sets |
 | [**list_ads**](AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**list_ads_alerts**](AdCampaignsApi.md#list_ads_alerts) | **GET** /v1/ads/alerts | List ads that need attention |
+| [**list_ads_by_performance**](AdCampaignsApi.md#list_ads_by_performance) | **GET** /v1/ads/performance | Rank ads by performance |
 | [**list_bid_strategies**](AdCampaignsApi.md#list_bid_strategies) | **GET** /v1/ads/bid-strategies | List portfolio bid strategies |
 | [**list_campaign_assets**](AdCampaignsApi.md#list_campaign_assets) | **GET** /v1/ads/campaigns/{campaignId}/assets | List campaign assets |
 | [**list_campaign_negative_keyword_lists**](AdCampaignsApi.md#list_campaign_negative_keyword_lists) | **GET** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | List campaign negative lists |
@@ -3096,6 +3097,89 @@ end
 ### Return type
 
 [**ListAdsAlerts200Response**](ListAdsAlerts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ads_by_performance
+
+> <AdsPerformanceResponse> list_ads_by_performance(account_id, from_date, to_date, opts)
+
+Rank ads by performance
+
+Returns an ads account's ads ranked by spend, impressions, clicks, results or ROAS over a date range, each with its creative (type, thumbnail, headline, body, link) and campaign.  Use it to see which creatives perform best. `accountId` is sibling-expanded like `/v1/ads/timeline`.  Money is ranked by its raw amount, so pass `adAccountId` when the connection's ad accounts bill in different currencies.  A Meta range older than the imported history answers `202` with `backfillPending: true` and the covered part; repeat the request until it returns 200. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+account_id = 'account_id_example' # String | Account ID. Sibling-expanded to its linked posting and ads pair. An id the API key cannot reach answers 404.
+from_date = Date.parse('2013-10-20') # Date | Inclusive start of the range (YYYY-MM-DD).
+to_date = Date.parse('2013-10-20') # Date | Inclusive end of the range (YYYY-MM-DD). Max 730-day range.
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Optional platform-native ad account ID (e.g. Meta `act_…`) to rank one ad account only.
+  platform: 'facebook', # String | Restrict to one platform.
+  sort_by: 'spend', # String | Metric the ads are ranked by, highest first.
+  limit: 56 # Integer | How many ads to return.
+}
+
+begin
+  # Rank ads by performance
+  result = api_instance.list_ads_by_performance(account_id, from_date, to_date, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ads_by_performance: #{e}"
+end
+```
+
+#### Using the list_ads_by_performance_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AdsPerformanceResponse>, Integer, Hash)> list_ads_by_performance_with_http_info(account_id, from_date, to_date, opts)
+
+```ruby
+begin
+  # Rank ads by performance
+  data, status_code, headers = api_instance.list_ads_by_performance_with_http_info(account_id, from_date, to_date, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AdsPerformanceResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ads_by_performance_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Account ID. Sibling-expanded to its linked posting and ads pair. An id the API key cannot reach answers 404. |  |
+| **from_date** | **Date** | Inclusive start of the range (YYYY-MM-DD). |  |
+| **to_date** | **Date** | Inclusive end of the range (YYYY-MM-DD). Max 730-day range. |  |
+| **ad_account_id** | **String** | Optional platform-native ad account ID (e.g. Meta &#x60;act_…&#x60;) to rank one ad account only. | [optional] |
+| **platform** | **String** | Restrict to one platform. | [optional] |
+| **sort_by** | **String** | Metric the ads are ranked by, highest first. | [optional][default to &#39;spend&#39;] |
+| **limit** | **Integer** | How many ads to return. | [optional][default to 50] |
+
+### Return type
+
+[**AdsPerformanceResponse**](AdsPerformanceResponse.md)
 
 ### Authorization
 
