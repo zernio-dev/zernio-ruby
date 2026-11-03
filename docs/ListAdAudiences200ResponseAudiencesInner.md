@@ -13,6 +13,7 @@
 | **spec** | [**TargetingSpec**](TargetingSpec.md) |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **size** | **Integer** |  | [optional] |
+| **summary** | **String** | Who the audience contains, in one line (e.g. &#39;1% lookalike of Customers in US&#39; or &#39;All website visitors, last 30 days&#39;). Meta only. | [optional] |
 | **status** | **String** |  | [optional] |
 
 ## Example
@@ -30,6 +31,7 @@ instance = Zernio::ListAdAudiences200ResponseAudiencesInner.new(
   spec: null,
   platform: null,
   size: null,
+  summary: null,
   status: null
 )
 ```
