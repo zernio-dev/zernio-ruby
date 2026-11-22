@@ -60,7 +60,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_conversion_action**](ConversionsApi.md#update_conversion_action) | **PATCH** /v1/ads/conversions/actions/{actionId} | Update a conversion action&#39;s settings |
 | [**update_conversion_destination**](ConversionsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination |
 | [**update_custom_conversion_goal**](ConversionsApi.md#update_custom_conversion_goal) | **PATCH** /v1/ads/conversions/custom-goals/{goalId} | Update a custom conversion goal |
-| [**update_forwarding_rule**](ConversionsApi.md#update_forwarding_rule) | **PATCH** /v1/events/forwarding-rules/{ruleId} | Change a forwarding rule&#39;s API secret |
+| [**update_forwarding_rule**](ConversionsApi.md#update_forwarding_rule) | **PATCH** /v1/events/forwarding-rules/{ruleId} | Update a forwarding rule |
 | [**update_tracking_site**](ConversionsApi.md#update_tracking_site) | **PATCH** /v1/tracking-sites/{siteId} | Update a tracking site |
 
 
@@ -768,7 +768,7 @@ end
 
 Add a forwarding rule
 
-Saves where a profile's events go: every event sent to `POST /v1/events` for that profile is then forwarded to this destination.  Pick `destinationId` from `GET /v1/ads/conversions/destinations`. Set `eventNames` to forward only those events, such as only `Purchase`; leave it out to forward every event. 
+Saves where a profile's events go: every event sent to `POST /v1/events` for that profile is then forwarded to this destination.  Pick `destinationId` from `GET /v1/ads/conversions/destinations`. Set `eventNames` to forward only those events, such as only `Purchase`; leave it out to forward every event.  - `eventNameMap` renames events for this destination (send your `Lead` as its `Purchase`). - `valueOverride` changes the value it gets (a fixed amount or a percent of the event's value). - `valueCondition` forwards only events above, below or equal to a value.  Each applies to this rule only: the event is stored, and sent to other rules, as received. 
 
 ### Examples
 
@@ -4127,9 +4127,9 @@ end
 
 > <CreateForwardingRule201Response> update_forwarding_rule(rule_id, update_forwarding_rule_request)
 
-Change a forwarding rule's API secret
+Update a forwarding rule
 
-Replaces the `apiSecret` of a rule whose destination needs one, such as a Google Analytics data stream's Measurement Protocol API secret. Before saving, Zernio sends one hit to Google's validation server; Google does not confirm the secret itself, so check GA4 Realtime after the next events. 
+Changes the fields you send and keeps the others. Send `eventNameMap: null` to stop renaming, `valueOverride: { \"mode\": \"original\" }` to send the event's own value again, and `valueCondition: null` to forward whatever the value.  `apiSecret` replaces the secret of a rule whose destination needs one, such as a Google Analytics data stream's Measurement Protocol API secret. Before saving, Zernio sends one hit to Google's validation server; Google does not confirm the secret itself, so check GA4 Realtime after the next events. 
 
 ### Examples
 
@@ -4144,10 +4144,10 @@ end
 
 api_instance = Zernio::ConversionsApi.new
 rule_id = 'rule_id_example' # String | The rule `id`.
-update_forwarding_rule_request = Zernio::UpdateForwardingRuleRequest.new({api_secret: 'api_secret_example'}) # UpdateForwardingRuleRequest | 
+update_forwarding_rule_request = Zernio::UpdateForwardingRuleRequest.new # UpdateForwardingRuleRequest | 
 
 begin
-  # Change a forwarding rule's API secret
+  # Update a forwarding rule
   result = api_instance.update_forwarding_rule(rule_id, update_forwarding_rule_request)
   p result
 rescue Zernio::ApiError => e
@@ -4163,7 +4163,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Change a forwarding rule's API secret
+  # Update a forwarding rule
   data, status_code, headers = api_instance.update_forwarding_rule_with_http_info(rule_id, update_forwarding_rule_request)
   p status_code # => 2xx
   p headers # => { ... }

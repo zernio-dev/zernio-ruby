@@ -1426,6 +1426,8 @@ docs/FoodMenuLabel.md
 docs/FoodMenuSection.md
 docs/ForwardEmailRequest.md
 docs/ForwardingRule.md
+docs/ForwardingRuleValueCondition.md
+docs/ForwardingRuleValueOverride.md
 docs/FreeBusyError.md
 docs/FromASharedTemplate.md
 docs/FromAZernioTemplate.md
@@ -5678,6 +5680,8 @@ lib/zernio-sdk/models/food_menu_label.rb
 lib/zernio-sdk/models/food_menu_section.rb
 lib/zernio-sdk/models/forward_email_request.rb
 lib/zernio-sdk/models/forwarding_rule.rb
+lib/zernio-sdk/models/forwarding_rule_value_condition.rb
+lib/zernio-sdk/models/forwarding_rule_value_override.rb
 lib/zernio-sdk/models/free_busy_error.rb
 lib/zernio-sdk/models/from_a_shared_template.rb
 lib/zernio-sdk/models/from_a_zernio_template.rb
@@ -9870,6 +9874,8 @@ spec/models/food_menu_section_spec.rb
 spec/models/food_menu_spec.rb
 spec/models/forward_email_request_spec.rb
 spec/models/forwarding_rule_spec.rb
+spec/models/forwarding_rule_value_condition_spec.rb
+spec/models/forwarding_rule_value_override_spec.rb
 spec/models/free_busy_error_spec.rb
 spec/models/from_a_shared_template_spec.rb
 spec/models/from_a_zernio_template_spec.rb
