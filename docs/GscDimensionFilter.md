@@ -1,4 +1,4 @@
-# Zernio::QueryGoogleSearchConsoleSearchAnalyticsRequestDimensionFilterGroupsInnerFiltersInner
+# Zernio::GscDimensionFilter
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::QueryGoogleSearchConsoleSearchAnalyticsRequestDimensionFilterGroupsInnerFiltersInner.new(
+instance = Zernio::GscDimensionFilter.new(
   dimension: null,
   operator: null,
   expression: null

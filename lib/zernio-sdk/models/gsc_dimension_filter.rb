@@ -14,10 +14,15 @@ require 'date'
 require 'time'
 
 module Zernio
-  class QueryGoogleSearchConsoleSearchAnalyticsRequestDimensionFilterGroupsInnerFilterListsInner < ApiModelBase
+  class GscDimensionFilter < ApiModelBase
+    # Narrow dates with fromDate and toDate instead.
     attr_accessor :dimension
 
-    attr_accessor :expressions
+    # Defaults to `equals`.
+    attr_accessor :operator
+
+    # The value to match. Countries are ISO 3166-1 alpha-3 codes (`usa`), devices `DESKTOP`, `MOBILE` or `TABLET`, brandedClassification `BRANDED` or `NON_BRANDED`.
+    attr_accessor :expression
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -45,7 +50,8 @@ module Zernio
     def self.attribute_map
       {
         :'dimension' => :'dimension',
-        :'expressions' => :'expressions'
+        :'operator' => :'operator',
+        :'expression' => :'expression'
       }
     end
 
@@ -63,7 +69,8 @@ module Zernio
     def self.openapi_types
       {
         :'dimension' => :'String',
-        :'expressions' => :'Array<String>'
+        :'operator' => :'String',
+        :'expression' => :'String'
       }
     end
 
@@ -77,14 +84,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::QueryGoogleSearchConsoleSearchAnalyticsRequestDimensionFilterGroupsInnerFilterListsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GscDimensionFilter` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::QueryGoogleSearchConsoleSearchAnalyticsRequestDimensionFilterGroupsInnerFilterListsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GscDimensionFilter`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -95,12 +102,14 @@ module Zernio
         self.dimension = nil
       end
 
-      if attributes.key?(:'expressions')
-        if (value = attributes[:'expressions']).is_a?(Array)
-          self.expressions = value
-        end
+      if attributes.key?(:'operator')
+        self.operator = attributes[:'operator']
+      end
+
+      if attributes.key?(:'expression')
+        self.expression = attributes[:'expression']
       else
-        self.expressions = nil
+        self.expression = nil
       end
     end
 
@@ -113,12 +122,8 @@ module Zernio
         invalid_properties.push('invalid value for "dimension", dimension cannot be nil.')
       end
 
-      if @expressions.nil?
-        invalid_properties.push('invalid value for "expressions", expressions cannot be nil.')
-      end
-
-      if @expressions.length < 1
-        invalid_properties.push('invalid value for "expressions", number of items must be greater than or equal to 1.')
+      if @expression.nil?
+        invalid_properties.push('invalid value for "expression", expression cannot be nil.')
       end
 
       invalid_properties
@@ -129,35 +134,42 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @dimension.nil?
-      dimension_validator = EnumAttributeValidator.new('String', ["country", "device"])
+      dimension_validator = EnumAttributeValidator.new('String', ["query", "page", "country", "device", "searchAppearance", "brandedClassification"])
       return false unless dimension_validator.valid?(@dimension)
-      return false if @expressions.nil?
-      return false if @expressions.length < 1
+      operator_validator = EnumAttributeValidator.new('String', ["equals", "notEquals", "contains", "notContains", "includingRegex", "excludingRegex"])
+      return false unless operator_validator.valid?(@operator)
+      return false if @expression.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] dimension Object to be assigned
     def dimension=(dimension)
-      validator = EnumAttributeValidator.new('String', ["country", "device"])
+      validator = EnumAttributeValidator.new('String', ["query", "page", "country", "device", "searchAppearance", "brandedClassification"])
       unless validator.valid?(dimension)
         fail ArgumentError, "invalid value for \"dimension\", must be one of #{validator.allowable_values}."
       end
       @dimension = dimension
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] operator Object to be assigned
+    def operator=(operator)
+      validator = EnumAttributeValidator.new('String', ["equals", "notEquals", "contains", "notContains", "includingRegex", "excludingRegex"])
+      unless validator.valid?(operator)
+        fail ArgumentError, "invalid value for \"operator\", must be one of #{validator.allowable_values}."
+      end
+      @operator = operator
+    end
+
     # Custom attribute writer method with validation
-    # @param [Object] expressions Value to be assigned
-    def expressions=(expressions)
-      if expressions.nil?
-        fail ArgumentError, 'expressions cannot be nil'
+    # @param [Object] expression Value to be assigned
+    def expression=(expression)
+      if expression.nil?
+        fail ArgumentError, 'expression cannot be nil'
       end
 
-      if expressions.length < 1
-        fail ArgumentError, 'invalid value for "expressions", number of items must be greater than or equal to 1.'
-      end
-
-      @expressions = expressions
+      @expression = expression
     end
 
     # Checks equality by comparing each attribute.
@@ -166,7 +178,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           dimension == o.dimension &&
-          expressions == o.expressions
+          operator == o.operator &&
+          expression == o.expression
     end
 
     # @see the `==` method
@@ -178,7 +191,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [dimension, expressions].hash
+      [dimension, operator, expression].hash
     end
 
     # Builds the object from hash

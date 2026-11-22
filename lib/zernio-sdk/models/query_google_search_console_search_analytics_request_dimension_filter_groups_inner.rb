@@ -68,8 +68,8 @@ module Zernio
     def self.openapi_types
       {
         :'group_type' => :'String',
-        :'filters' => :'Array<QueryGoogleSearchConsoleSearchAnalyticsRequestDimensionFilterGroupsInnerFiltersInner>',
-        :'filter_lists' => :'Array<QueryGoogleSearchConsoleSearchAnalyticsRequestDimensionFilterGroupsInnerFilterListsInner>'
+        :'filters' => :'Array<GscDimensionFilter>',
+        :'filter_lists' => :'Array<GscDimensionFilterList>'
       }
     end
 
