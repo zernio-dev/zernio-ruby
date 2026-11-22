@@ -24,6 +24,7 @@
 | **consent_scan** | [**ConversionAuditReportConsentScan**](ConversionAuditReportConsentScan.md) |  | [optional] |
 | **tag_managers** | **Array&lt;String&gt;** |  | [optional] |
 | **other_networks** | [**Array&lt;ConversionAuditReportOtherNetworksInner&gt;**](ConversionAuditReportOtherNetworksInner.md) | Ad networks found that the score does not cover. &#x60;relaySupported&#x60; is true when Zernio can send them conversions. | [optional] |
+| **other_networks_configured** | [**Array&lt;ConversionAuditReportOtherNetworksInner&gt;**](ConversionAuditReportOtherNetworksInner.md) | Rendered scans: unscored ad networks found only in a Google Tag Manager container that the visit never saw load or send. Not counted in &#x60;otherNetworks&#x60;. | [optional] |
 | **favicon_url** | **String** | The site&#39;s icon. Absent when the site was unreachable. | [optional] |
 | **summary** | **String** | One-paragraph summary of the audit. |  |
 
@@ -53,6 +54,7 @@ instance = Zernio::ConversionAuditReport.new(
   consent_scan: null,
   tag_managers: null,
   other_networks: null,
+  other_networks_configured: null,
   favicon_url: null,
   summary: null
 )
