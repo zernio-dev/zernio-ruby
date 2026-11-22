@@ -81,7 +81,7 @@ jobs:
             -o . \
             --skip-validate-spec \
             --additional-properties=gemName=zernio-sdk,moduleName=Zernio,gemVersion=0.1.0 \
-            --inline-schema-name-mappings "getGoogleBusinessLocationDetails_200_response_specialHours_specialHourPeriods_inner_startDate=GbpSpecialHourPeriodStartDate,getGoogleBusinessLocationDetails_200_response_specialHours_specialHourPeriods_inner=GbpSpecialHourPeriod,getGoogleBusinessLocationDetails_200_response_serviceItems_inner_freeFormServiceItem_label=GbpFreeFormServiceItemLabel,updateGoogleBusinessLocationDetails_request_serviceItems_inner_freeFormServiceItem_label=GbpUpdateFreeFormServiceItemLabel" \
+            --inline-schema-name-mappings "getGoogleBusinessLocationDetails_200_response_specialHours_specialHourPeriods_inner_startDate=GbpSpecialHourPeriodStartDate,getGoogleBusinessLocationDetails_200_response_specialHours_specialHourPeriods_inner=GbpSpecialHourPeriod,getGoogleBusinessLocationDetails_200_response_serviceItems_inner_freeFormServiceItem_label=GbpFreeFormServiceItemLabel,updateGoogleBusinessLocationDetails_request_serviceItems_inner_freeFormServiceItem_label=GbpUpdateFreeFormServiceItemLabel,queryGoogleSearchConsoleSearchAnalytics_request_dimensionFilterGroups_inner_filterLists_inner=GscDimensionFilterList,queryGoogleSearchConsoleSearchAnalytics_request_dimensionFilterGroups_inner_filters_inner=GscDimensionFilter" \
             --git-user-id=zernio-dev \
             --git-repo-id=zernio-ruby
 
@@ -130,6 +130,13 @@ jobs:
 
       - name: Run tests
         run: bundle exec rake spec
+
+      # gem build rejects any file name over 100 bytes (tar limit). Building here,
+      # before the commit and push, keeps an unpublishable generation off main.
+      - name: Check gem builds
+        run: |
+          gem build zernio-sdk.gemspec
+          rm -f zernio-sdk-*.gem
 
       - name: Check for changes
         id: changes
