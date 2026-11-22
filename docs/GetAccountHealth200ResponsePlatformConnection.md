@@ -9,6 +9,8 @@
 | **phone_status** | **String** | Meta&#39;s own &#x60;status&#x60; field from the phone-number node (for example CONNECTED), when the object was readable. Anything other than CONNECTED adds an issue and raises &#x60;status&#x60; (BANNED: error, others: warning). | [optional] |
 | **meta_error** | [**GetAccountHealth200ResponsePlatformConnectionMetaError**](GetAccountHealth200ResponsePlatformConnectionMetaError.md) |  | [optional] |
 | **inbound_webhook_subscribed** | **Boolean** | From the phone number&#39;s Meta health_status, overridden to &#x60;false&#x60; when subscribing the number&#39;s WhatsApp Business Account to Zernio&#39;s webhooks failed at connect.  - &#x60;false&#x60;: Meta says Zernio is not subscribed to the message webhook for this number, or the subscribe failed when the number was connected, so inbound messages are not delivered, though the number is CONNECTED and can still send. - &#x60;false&#x60;, fix: re-subscribe (reconnect the number). If it stays &#x60;false&#x60;, the number is routed to a different WhatsApp Business Account (typically after linking it to a Facebook Page). - &#x60;true&#x60;: Meta reports no such problem. - &#x60;null&#x60;: Meta did not report it (read failed or no health_status); not evidence either way.  | [optional] |
+| **can_send_message** | **String** | Top-level &#x60;can_send_message&#x60; from the phone number&#39;s Meta health_status: &#x60;AVAILABLE&#x60;, &#x60;LIMITED&#x60; or &#x60;BLOCKED&#x60;. &#x60;BLOCKED&#x60; adds an issue and raises &#x60;status&#x60; to at least &#x60;warning&#x60;. &#x60;null&#x60; when Meta did not report it. | [optional] |
+| **messaging_blockers** | [**Array&lt;GetAccountHealth200ResponsePlatformConnectionMessagingBlockersInner&gt;**](GetAccountHealth200ResponsePlatformConnectionMessagingBlockersInner.md) | The health_status entities that are not &#x60;AVAILABLE&#x60;, one item per Meta error, with calling-only signals (138024, 138025) removed. &#x60;null&#x60; when the read failed. | [optional] |
 
 ## Example
 
@@ -20,7 +22,9 @@ instance = Zernio::GetAccountHealth200ResponsePlatformConnection.new(
   checked_at: null,
   phone_status: null,
   meta_error: null,
-  inbound_webhook_subscribed: null
+  inbound_webhook_subscribed: null,
+  can_send_message: null,
+  messaging_blockers: null
 )
 ```
 

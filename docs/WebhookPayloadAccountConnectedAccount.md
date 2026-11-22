@@ -9,6 +9,8 @@
 | **platform** | **String** |  |  |
 | **username** | **String** |  |  |
 | **display_name** | **String** |  | [optional] |
+| **reconnected** | **Boolean** | Present and true when a reconnect restored an existing account in place, keeping its accountId. | [optional] |
+| **replaced_account_id** | **String** | The IMAP account this connection replaces, when a reconnected mailbox moved to Google or Microsoft. That account is retired at the same time, with account.disconnected and reasonCode replaced. | [optional] |
 
 ## Example
 
@@ -20,7 +22,9 @@ instance = Zernio::WebhookPayloadAccountConnectedAccount.new(
   profile_id: null,
   platform: null,
   username: null,
-  display_name: null
+  display_name: null,
+  reconnected: null,
+  replaced_account_id: null
 )
 ```
 

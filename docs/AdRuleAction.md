@@ -17,7 +17,13 @@ Zernio::AdRuleAction.openapi_one_of
 #   :'AdRuleActionOneOf',
 #   :'AdRuleActionOneOf1',
 #   :'AdRuleActionOneOf2',
-#   :'AdRuleActionOneOf3'
+#   :'AdRuleActionOneOf3',
+#   :'AdRuleActionOneOf4',
+#   :'AdRuleActionOneOf5',
+#   :'AdRuleActionOneOf6',
+#   :'AdRuleActionOneOf7',
+#   :'AdRuleActionOneOf8',
+#   :'AdRuleActionOneOf9'
 # ]
 ```
 
@@ -49,5 +55,11 @@ Zernio::AdRuleAction.build(data_that_doesnt_match)
 - `AdRuleActionOneOf1`
 - `AdRuleActionOneOf2`
 - `AdRuleActionOneOf3`
+- `AdRuleActionOneOf4`
+- `AdRuleActionOneOf5`
+- `AdRuleActionOneOf6`
+- `AdRuleActionOneOf7`
+- `AdRuleActionOneOf8`
+- `AdRuleActionOneOf9`
 - `nil` (if no type matches)
 

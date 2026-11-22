@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **status** | **String** |  | [optional] |
 | **posts** | [**Array&lt;GetAccountPosts200ResponsePostsInner&gt;**](GetAccountPosts200ResponsePostsInner.md) |  | [optional] |
+| **pagination** | [**GetAccountPosts200ResponsePagination**](GetAccountPosts200ResponsePagination.md) |  | [optional] |
 | **last_updated** | **Time** |  | [optional] |
 
 ## Example
@@ -16,6 +17,7 @@ require 'zernio-sdk'
 instance = Zernio::GetAccountPosts200Response.new(
   status: null,
   posts: null,
+  pagination: null,
   last_updated: null
 )
 ```

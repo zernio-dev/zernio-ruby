@@ -84,7 +84,7 @@ This endpoint does not need any parameter.
 
 Calling usage and cost
 
-Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call's billing snapshot, so this endpoint always agrees with the invoice: `billableUSD` is what Zernio bills; `metaUSD` is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional `groupBy` returns a breakdown by UTC day, by your number, or by channel. Defaults to the last 30 days. 
+Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call's billing snapshot, so this endpoint always agrees with the invoice: `billableUSD` is what Zernio bills; `metaUSD` is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional `groupBy` returns a breakdown by UTC day, by your number, by channel, or by profile. Defaults to the last 30 days.  ### Per profile  A call belongs to the profile of the account (number) it was placed on.  - `profileId` or `externalId` scopes every figure to one profile. - `groupBy=profile` returns one group per profile carrying its `profileId` and `externalId`. - Calls on numbers outside any of your profiles count in `totals` but in no group. - A profile-scoped API key or member only ever sees its own profiles' calls, with or without a filter (since 1.630.0), so `totals` and every group cover those profiles only. Full-access keys and sessions see the whole team. 
 
 ### Examples
 
@@ -103,7 +103,9 @@ opts = {
   _until: Time.parse('2013-10-20T19:20:30+01:00'), # Time | End of the window (exclusive). Default now.
   channel: 'whatsapp', # String | 
   number: 'number_example', # String | Scope to calls involving this number (typically one of YOUR numbers). E.164, leading + optional.
-  group_by: 'day' # String | 
+  group_by: 'day', # String | 
+  profile_id: 'profile_id_example', # String | Scope to the calls of this profile. Mutually exclusive with `externalId`. 404 when the profile is not in your team or outside a scoped key's profiles.
+  external_id: 'external_id_example' # String | Same as `profileId`, naming the profile by the `externalId` you set on it. 404 when none of your visible profiles carries it; 400 when two of them do.
 }
 
 begin
@@ -142,6 +144,8 @@ end
 | **channel** | **String** |  | [optional] |
 | **number** | **String** | Scope to calls involving this number (typically one of YOUR numbers). E.164, leading + optional. | [optional] |
 | **group_by** | **String** |  | [optional] |
+| **profile_id** | **String** | Scope to the calls of this profile. Mutually exclusive with &#x60;externalId&#x60;. 404 when the profile is not in your team or outside a scoped key&#39;s profiles. | [optional] |
+| **external_id** | **String** | Same as &#x60;profileId&#x60;, naming the profile by the &#x60;externalId&#x60; you set on it. 404 when none of your visible profiles carries it; 400 when two of them do. | [optional] |
 
 ### Return type
 
@@ -163,7 +167,7 @@ end
 
 SMS usage (volumes)
 
-Aggregated SMS/MMS volumes across your numbers: sent, received, and total message counts, with an optional breakdown by UTC day or by number. Defaults to the last 30 days.  Volumes only, deliberately: SMS cost is carrier-rated asynchronously and billed to your invoice, so per-message cost is not available here. Calling usage (GET /v1/usage/calls) does include billable cost. 
+Aggregated SMS/MMS volumes across your numbers: sent, received, and total message counts, with an optional breakdown by UTC day or by number. Defaults to the last 30 days.  Volumes only, deliberately: SMS cost is carrier-rated asynchronously and billed to your invoice, so per-message cost is not available here. Calling usage (GET /v1/usage/calls) does include billable cost.  ### Per profile  A message belongs to the profile of the SMS number it went through.  - `profileId` or `externalId` scopes the counts to one profile. Combined with `number`, only that number's messages on that profile count. - `groupBy=profile` returns one group per profile carrying its `profileId` and `externalId`. - Alphanumeric sender IDs sit on no profile, so their messages count in `totals` but in no group. - A profile-scoped API key or member only ever sees its own profiles' messages, with or without a filter (since 1.630.0). Full-access keys and sessions see every number. 
 
 ### Examples
 
@@ -181,7 +185,9 @@ opts = {
   since: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Start of the window (inclusive). Default 30 days before `until`.
   _until: Time.parse('2013-10-20T19:20:30+01:00'), # Time | End of the window (exclusive). Default now.
   number: 'number_example', # String | Scope to one of YOUR SMS-enabled numbers (E.164, leading + optional).
-  group_by: 'day' # String | 
+  group_by: 'day', # String | 
+  profile_id: 'profile_id_example', # String | Scope to the messages of this profile. Mutually exclusive with `externalId`. 404 when the profile is not in your team or outside a scoped key's profiles.
+  external_id: 'external_id_example' # String | Same as `profileId`, naming the profile by the `externalId` you set on it. 404 when none of your visible profiles carries it; 400 when two of them do.
 }
 
 begin
@@ -219,6 +225,8 @@ end
 | **_until** | **Time** | End of the window (exclusive). Default now. | [optional] |
 | **number** | **String** | Scope to one of YOUR SMS-enabled numbers (E.164, leading + optional). | [optional] |
 | **group_by** | **String** |  | [optional] |
+| **profile_id** | **String** | Scope to the messages of this profile. Mutually exclusive with &#x60;externalId&#x60;. 404 when the profile is not in your team or outside a scoped key&#39;s profiles. | [optional] |
+| **external_id** | **String** | Same as &#x60;profileId&#x60;, naming the profile by the &#x60;externalId&#x60; you set on it. 404 when none of your visible profiles carries it; 400 when two of them do. | [optional] |
 
 ### Return type
 
@@ -240,7 +248,7 @@ end
 
 Usage snapshot (default) or billed-spend metering (with params)
 
-Dual-mode endpoint, selected by query params, and fully backward compatible.  ### Without metering params (the default)  Returns the plan / quota / usage snapshot: plan name, billing period, limits, usage counts, access state. Identical to `GET /v1/usage-stats`. Existing integrations keep working unchanged.  ### With `range`, `granularity`, `from`, or `to`  Returns usage METERING: billed spend (USD) by product family over the window, at `day` / `month` / `total` granularity. Product families: `accounts`, `numbers`, `imessage`, `calls`, `sms`, `messages`, `verify`, `dlc`, `xApi`, `ads`, `credits`, `other`.  Data comes from the usage-based invoice breakdown (the CHARGE view, which always reconciles with what gets billed). Also served at `GET /v1/usage/daily`.  Usage-based accounts only: legacy Stripe accounts get `{ \"supported\": false, \"days\": [] }`.  ### Attribution (metering mode)  `groupBy=profile|account` adds an `attribution` breakdown of the window's spend per profile or account. It is assembled from your own records and pro-rated against the invoice so `sum(groups) + unattributed` equals `totals` exactly.  `profileId` / `accountId` instead project the whole payload (`days`, `totals`, `lineItems`) onto that one group:  - `peaks`, `callUsage` and `tax` are then `null` (team-level facts). - Projected `days` spread the group's period share over each day (usage is attributed per period, not per day). - `profileId` / `accountId` on their own do not select metering mode: pair them with `range`.  Profile-scoped API keys and members only see their profiles' groups (`attribution.restricted: true`, with `totals` summing the visible groups). Credits, 10DLC fees and Verify are always unattributed.  ### Related endpoints  - Per-domain consumption *volumes*: `GET /v1/usage/calls` and `GET /v1/usage/sms`. - The billing statement (balance, credits, caps, payment status): `GET /v1/billing`. 
+Dual-mode endpoint, selected by query params, and fully backward compatible.  ### Without metering params (the default)  Returns the plan / quota / usage snapshot: plan name, billing period, limits, usage counts, access state. Identical to `GET /v1/usage-stats`. Existing integrations keep working unchanged.  ### With `range`, `granularity`, `from`, or `to`  Returns usage METERING: billed spend (USD) by product family over the window, at `day` / `month` / `total` granularity. Product families: `accounts`, `numbers`, `imessage`, `calls`, `sms`, `messages`, `verify`, `dlc`, `xApi`, `ads`, `credits`, `other`.  Data comes from the usage-based invoice breakdown (the CHARGE view, which always reconciles with what gets billed). Also served at `GET /v1/usage/daily`.  Usage-based accounts only: legacy Stripe accounts get `{ \"supported\": false, \"days\": [] }`.  ### Attribution (metering mode)  `groupBy=profile|account` adds an `attribution` breakdown of the window's spend per profile or account. It is assembled from your own records and pro-rated against the invoice so `sum(groups) + unattributed` equals `totals` exactly.  `profileId` / `accountId` instead project the whole payload (`days`, `totals`, `lineItems`) onto that one group:  - `peaks`, `callUsage` and `tax` are then `null` (team-level facts). - Projected `days` spread the group's period share over each day (usage is attributed per period, not per day). - `profileId` / `accountId` on their own do not select metering mode: pair them with `range`. - `externalId` names the profile by the id you set on it (`POST /v1/profiles`), so you can bill a tenant without storing our profile id.  With `groupBy=profile`, each group also carries `profileId` and `externalId`.  Profile-scoped API keys and members only see their profiles' groups (`attribution.restricted: true`, with `totals` summing the visible groups). Credits, 10DLC fees and Verify are always unattributed.  Since 1.630.0 a profile-scoped key or member never gets the team payload in metering mode: without `groupBy` or a filter, `days`, `totals` and `lineItems` are projected onto its visible profiles, `peaks`, `callUsage` and `tax` are `null`, and no `attribution` is returned. Full-access keys and sessions keep the team payload.  ### Related endpoints  - Per-domain consumption *volumes*: `GET /v1/usage/calls` and `GET /v1/usage/sms`. - The billing statement (balance, credits, caps, payment status): `GET /v1/billing`. 
 
 ### Examples
 
@@ -261,8 +269,9 @@ opts = {
   to: Date.parse('2013-10-20'), # Date | Inclusive end (UTC date). Required when `range=custom`. Max span 366 days.
   granularity: 'day', # String | Bucketing of the `days` series: `day` (one row per UTC day), `month` (one row per calendar month, dated to the 1st), or `total` (no series, read `totals`). Does not affect `totals`. 
   group_by: 'profile', # String | Metering mode. Adds `attribution`: the window's spend split per profile or per account (keys are ids; resolve names via `GET /v1/profiles` / `GET /v1/accounts`).
-  profile_id: 'profile_id_example', # String | Metering mode (pair with `range`). Project the payload onto this profile's attributed share. Mutually exclusive with `accountId`, and `groupBy` (if given) must be `profile`; 404 when the profile is not in your team (or outside a scoped key's profiles).
-  account_id: 'account_id_example' # String | Metering mode (pair with `range`). Project the payload onto this account's attributed share. Mutually exclusive with `profileId`, and `groupBy` (if given) must be `account`; 404 when the account is not visible to the caller.
+  profile_id: 'profile_id_example', # String | Metering mode (pair with `range`). Project the payload onto this profile's attributed share. Mutually exclusive with `externalId` and `accountId`, and `groupBy` (if given) must be `profile`; 404 when the profile is not in your team (or outside a scoped key's profiles).
+  external_id: 'external_id_example', # String | Metering mode (pair with `range`). Same as `profileId`, naming the profile by the `externalId` you set on it. Ignored without metering params. 404 when none of your visible profiles carries it; 400 when two of them do (externalId is unique per user, not per team), then filter by `profileId`.
+  account_id: 'account_id_example' # String | Metering mode (pair with `range`). Project the payload onto this account's attributed share. Mutually exclusive with `profileId` and `externalId`, and `groupBy` (if given) must be `account`; 404 when the account is not visible to the caller.
 }
 
 begin
@@ -302,8 +311,9 @@ end
 | **to** | **Date** | Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. | [optional] |
 | **granularity** | **String** | Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series, read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;.  | [optional][default to &#39;day&#39;] |
 | **group_by** | **String** | Metering mode. Adds &#x60;attribution&#x60;: the window&#39;s spend split per profile or per account (keys are ids; resolve names via &#x60;GET /v1/profiles&#x60; / &#x60;GET /v1/accounts&#x60;). | [optional] |
-| **profile_id** | **String** | Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your team (or outside a scoped key&#39;s profiles). | [optional] |
-| **account_id** | **String** | Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. | [optional] |
+| **profile_id** | **String** | Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;externalId&#x60; and &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your team (or outside a scoped key&#39;s profiles). | [optional] |
+| **external_id** | **String** | Metering mode (pair with &#x60;range&#x60;). Same as &#x60;profileId&#x60;, naming the profile by the &#x60;externalId&#x60; you set on it. Ignored without metering params. 404 when none of your visible profiles carries it; 400 when two of them do (externalId is unique per user, not per team), then filter by &#x60;profileId&#x60;. | [optional] |
+| **account_id** | **String** | Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60; and &#x60;externalId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. | [optional] |
 
 ### Return type
 
@@ -325,7 +335,7 @@ end
 
 Get plan and usage snapshot (plan, limits, payment status)
 
-The plan / quota / payment-status snapshot: current plan name, billing period, plan limits, usage counts, and access state.  Identical to a bare `GET /v1/usage` call (this path is its deprecated alias).  ### Related endpoints  - Billed spend by product: call `GET /v1/usage` with `range` / `granularity` params. - The statement view (balance, credits, caps, payment status) lives at `GET /v1/billing`.  ### Response shape  The response shape depends on the account's `billingSystem`:  - Stripe users: per-period `usage.uploads` / `usage.profiles` counters. - Usage-based billing users: `usage.connectedAccounts`, `usage.xApiCallsByOperation` (per-operation X API call counts; resolve keys via `GET /v1/billing/x-pricing`), plus a `spend` block with `currentPeriodCents`, `xSpendCents`, and `xSpendLimitCents`.  The legacy `usage.xApiCalls` 3-tier aggregate is still emitted for back-compat. It excludes the $0.200 URL tier and any future tiers, so new clients should consume `xApiCallsByOperation` only. 
+The plan / quota / payment-status snapshot: current plan name, billing period, plan limits, usage counts, and access state.  Identical to a bare `GET /v1/usage` call (this path is its deprecated alias).  ### Related endpoints  - Billed spend by product: call `GET /v1/usage` with `range` / `granularity` params. - The statement view (balance, credits, caps, payment status) lives at `GET /v1/billing`.  ### Response shape  The response shape depends on the account's `billingSystem`:  - Stripe users: per-period `usage.uploads` / `usage.profiles` counters. - Usage-based billing users: `usage.connectedAccounts`, `usage.xApiCallsByOperation` (per-operation X API call counts; resolve keys via `GET /v1/billing/x-pricing`), plus a `spend` block with `currentPeriodCents`, `xSpendCents`, and `xSpendLimitCents`.  The legacy `usage.xApiCalls` 3-tier aggregate is still emitted for back-compat. It excludes the $0.200 URL tier and any future tiers, so new clients should consume `xApiCallsByOperation` only.  ### Per profile  `profileId` or `externalId` adds a `profile` block with the counters that are meaningful per profile (`usage.connectedAccounts`). Everything else (plan, limits, uploads, X usage, spend, payment state) stays team-level. These filters work on this path only: a bare `GET /v1/usage` ignores them.  Since 1.630.0 a profile-scoped API key or member gets a `profiles` array with one block per profile it can see (or the single `profile` block when it filters), and `usage.connectedAccounts` / `usage.profiles` count only those profiles.  Plan, billing and payment fields are unchanged. Full-access keys and sessions keep the team counts and get no `profiles` array. 
 
 ### Examples
 
@@ -340,7 +350,9 @@ end
 
 api_instance = Zernio::UsageApi.new
 opts = {
-  reconcile: true # Boolean | For Stripe subscription users, `true` forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass `false`, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
+  reconcile: true, # Boolean | For Stripe subscription users, `true` forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass `false`, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
+  profile_id: 'profile_id_example', # String | Add the `profile` block for this profile. Mutually exclusive with `externalId`. 404 when the profile is not in your team or outside a scoped key's profiles.
+  external_id: 'external_id_example' # String | Same as `profileId`, naming the profile by the `externalId` you set on it. 404 when none of your visible profiles carries it; 400 when two of them do.
 }
 
 begin
@@ -375,6 +387,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **reconcile** | **Boolean** | For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected.  | [optional] |
+| **profile_id** | **String** | Add the &#x60;profile&#x60; block for this profile. Mutually exclusive with &#x60;externalId&#x60;. 404 when the profile is not in your team or outside a scoped key&#39;s profiles. | [optional] |
+| **external_id** | **String** | Same as &#x60;profileId&#x60;, naming the profile by the &#x60;externalId&#x60; you set on it. 404 when none of your visible profiles carries it; 400 when two of them do. | [optional] |
 
 ### Return type
 

@@ -9,16 +9,20 @@ All URIs are relative to *https://zernio.com/api*
 | [**confirm_payout_batch**](TreasuryApi.md#confirm_payout_batch) | **POST** /v1/payout-batches/{batchId}/confirm | Confirm a payout batch payment |
 | [**confirm_topup**](TreasuryApi.md#confirm_topup) | **POST** /v1/balance/top-ups/{topupId}/confirm | Confirm a top-up |
 | [**create_payee_onboarding_link**](TreasuryApi.md#create_payee_onboarding_link) | **POST** /v1/payees/{payeeId}/onboarding-link | Create a payee onboarding link |
-| [**create_topup**](TreasuryApi.md#create_topup) | **POST** /v1/balance/top-ups | Create a top-up |
-| [**create_transfer**](TreasuryApi.md#create_transfer) | **POST** /v1/transfers | Create a transfer |
+| [**create_topup**](TreasuryApi.md#create_topup) | **POST** /v1/balance/top-ups | Add funds |
+| [**create_transfer**](TreasuryApi.md#create_transfer) | **POST** /v1/transfers | Create a transfer (removed) |
+| [**get_auto_recharge**](TreasuryApi.md#get_auto_recharge) | **GET** /v1/balance/auto-recharge | Get auto top-up settings |
 | [**get_balance**](TreasuryApi.md#get_balance) | **GET** /v1/balance | Get balance |
 | [**get_payout_batch**](TreasuryApi.md#get_payout_batch) | **GET** /v1/payout-batches/{batchId} | Get a payout batch |
-| [**get_topup_card_fee**](TreasuryApi.md#get_topup_card_fee) | **GET** /v1/balance/top-ups/card-fee | Get the card fee for a top-up |
+| [**get_topup_invoice**](TreasuryApi.md#get_topup_invoice) | **GET** /v1/balance/top-ups/{topupId}/invoice | Get a top-up invoice |
 | [**get_topup_receipt**](TreasuryApi.md#get_topup_receipt) | **GET** /v1/balance/top-ups/{topupId}/receipt | Get a top-up receipt |
+| [**get_topup_statement**](TreasuryApi.md#get_topup_statement) | **GET** /v1/balance/top-ups/{topupId}/statement | Get a top-up invoice (alias) |
 | [**get_transfer**](TreasuryApi.md#get_transfer) | **GET** /v1/transfers/{transferId} | Get a transfer |
 | [**list_payees**](TreasuryApi.md#list_payees) | **GET** /v1/payees | List payees |
 | [**list_topups**](TreasuryApi.md#list_topups) | **GET** /v1/balance/top-ups | List top-ups |
 | [**list_transfers**](TreasuryApi.md#list_transfers) | **GET** /v1/transfers | List transfers |
+| [**preview_topup**](TreasuryApi.md#preview_topup) | **POST** /v1/balance/top-ups/preview | Preview a top-up&#39;s tax |
+| [**update_auto_recharge**](TreasuryApi.md#update_auto_recharge) | **PATCH** /v1/balance/auto-recharge | Update auto top-up settings |
 
 
 ## cancel_payout_batch
@@ -370,9 +374,9 @@ end
 
 > <CreateTopup201Response> create_topup(create_topup_request, opts)
 
-Create a top-up
+Add funds
 
-Charges the billing owner's saved card (the default one, or `paymentMethodId`) `amountCents` plus the card fee, while the payer is present, and credits your balance what Stripe delivers.  The card fee is Stripe's own rate for the card, learned from its past charges (`GET /v1/balance/top-ups/card-fee` answers it).  - When `feeIsExact` is true you receive exactly `amountCents`. - When it is false (the first top-up on a card issued in the EEA, or Link, where Stripe prices by card product) the fee is the highest rate for the card's region. - You then receive at least `amountCents`: if Stripe charges less, the difference is added to your balance.  - `status: succeeded`: the card was charged. What Stripe delivered is credited to `availableCents` within seconds. Transfers to payees can use it from 7 days after the charge. - `status: requires_action`: the bank asked for 3D Secure. Complete it with Stripe.js `handleNextAction({ clientSecret })`, then call `POST /v1/balance/top-ups/{topupId}/confirm`. One left unconfirmed is cancelled after 30 minutes.  ### Errors  - 402 `payment_required`: no saved card. - 402 `card_declined`: the bank's reason. - 400: `method: bank_transfer` (bank transfers are not available yet).  Needs an owner, admin or billing admin, signed in or through a full-access key they created. 
+Charges the billing owner's saved card (the default one, or `paymentMethodId`) `amountCents` plus tax, while the payer is present, and credits your balance `amountCents`. There is no card fee.  Tax is added on top of the amount (`taxCents`, `totalCents`): VAT at 21% in Spain, at the customer's country rate for EU consumers; an EU business whose VAT id VIES confirms is reverse charged (no VAT, `reverseCharge: true`); outside the EU there is none.  The invoice also states the VAT in euros at the ECB rate of its date. Usage paid from the balance carries no further VAT. Get the figures before paying with `POST /v1/balance/top-ups/preview`.  Each top-up has an invoice, with VAT where it applies (`GET /v1/balance/top-ups/{topupId}/invoice`), and a card receipt (`GET /v1/balance/top-ups/{topupId}/receipt`).  - `status: succeeded`: the card was charged. `amountCents` is credited to `availableCents` within seconds. Transfers to payees can use it from 7 days after the charge. - `status: requires_action`: the bank asked for 3D Secure. Complete it with Stripe.js `handleNextAction({ clientSecret })`, then call `POST /v1/balance/top-ups/{topupId}/confirm`. One left unconfirmed is cancelled after 30 minutes.  ### Errors  - 402 `payment_required`: no saved card. - 402 `card_declined`: the bank's reason. - 400: `method: bank_transfer` (bank transfers are not available yet). - 400 `invalid_billing_address`: the billing address gives no tax location. Add it in Billing, then retry. - 400 `billing_address_required`: the total with tax is over EUR 400 (at the day's ECB rate) and the billing details hold no name and street address. An invoice over that amount must name the buyer and their address. Add them in Billing > Billing details, then retry. Nothing is charged. - 429 `payment_attempts_limited`: five card payments were declined in 24 hours. Nothing reaches the bank until `Retry-After` runs out.  Needs an owner, admin or billing admin, signed in or through a full-access key they created. 
 
 ### Examples
 
@@ -388,11 +392,11 @@ end
 api_instance = Zernio::TreasuryApi.new
 create_topup_request = Zernio::CreateTopupRequest.new({amount_cents: 37, method: 'card'}) # CreateTopupRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
-  # Create a top-up
+  # Add funds
   result = api_instance.create_topup(create_topup_request, opts)
   p result
 rescue Zernio::ApiError => e
@@ -408,7 +412,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create a top-up
+  # Add funds
   data, status_code, headers = api_instance.create_topup_with_http_info(create_topup_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -423,7 +427,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_topup_request** | [**CreateTopupRequest**](CreateTopupRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -441,11 +445,11 @@ end
 
 ## create_transfer
 
-> <TreasuryTransfer> create_transfer(create_transfer_request, opts)
+> create_transfer(create_transfer_request, opts)
 
-Create a transfer
+Create a transfer (removed)
 
-Moves money from your balance to a payee.  ### Fee  The payee receives the full `amountCents`. Zernio's fee (4%, 50 cent minimum) is added on top, so your balance is debited `totalCents` = `amountCents` + `feeCents`.  ### Who can call it  Needs an owner, admin or billing admin, signed in or through a full-access key they created. A profile-scoped key answers 403.  ### Errors  - 402: the balance does not cover the amount plus the fee. - 402: the balance is negative after a dispute or refund of a card top-up (\"Your balance is negative after a dispute or refund of a card top-up. Add funds to cover it before sending transfers.\"). - 409: the payee has not finished onboarding, or the Idempotency-Key is still processing. - 409 `payout_funds_locked`: money from a card top-up can be transferred from 7 days after the charge. The message names the amount and the day (\"$100.00 from your card top-up on Oct 29 can be paid out from Nov 5.\").  ### Retries  A same-key retry never makes the transfer twice within Stripe's 24-hour idempotency window. It answers 409 while another request is still waiting on Stripe for it.  A transfer Stripe has not confirmed after 24 hours answers 409 until the daily reconciliation marks it paid (Stripe made it) or failed (it did not). 
+Removed on 2026-11-06: the balance no longer pays creators. Every call answers 410.  Pay creators with one card payment per payout batch: `POST /v1/creator-campaigns/{campaignId}/payout-batches`. `GET /v1/transfers` still lists the transfers payout batches made. 
 
 ### Examples
 
@@ -461,13 +465,12 @@ end
 api_instance = Zernio::TreasuryApi.new
 create_transfer_request = Zernio::CreateTransferRequest.new({payee_id: 'payee_id_example', amount_cents: 37}) # CreateTransferRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
-  # Create a transfer
-  result = api_instance.create_transfer(create_transfer_request, opts)
-  p result
+  # Create a transfer (removed)
+  api_instance.create_transfer(create_transfer_request, opts)
 rescue Zernio::ApiError => e
   puts "Error when calling TreasuryApi->create_transfer: #{e}"
 end
@@ -475,17 +478,17 @@ end
 
 #### Using the create_transfer_with_http_info variant
 
-This returns an Array which contains the response data, status code and headers.
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(<TreasuryTransfer>, Integer, Hash)> create_transfer_with_http_info(create_transfer_request, opts)
+> <Array(nil, Integer, Hash)> create_transfer_with_http_info(create_transfer_request, opts)
 
 ```ruby
 begin
-  # Create a transfer
+  # Create a transfer (removed)
   data, status_code, headers = api_instance.create_transfer_with_http_info(create_transfer_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TreasuryTransfer>
+  p data # => nil
 rescue Zernio::ApiError => e
   puts "Error when calling TreasuryApi->create_transfer_with_http_info: #{e}"
 end
@@ -496,11 +499,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_transfer_request** | [**CreateTransferRequest**](CreateTransferRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
-[**TreasuryTransfer**](TreasuryTransfer.md)
+nil (empty response body)
 
 ### Authorization
 
@@ -512,13 +515,79 @@ end
 - **Accept**: application/json
 
 
+## get_auto_recharge
+
+> <AutoRecharge> get_auto_recharge
+
+Get auto top-up settings
+
+Your balance's auto top-up rule: when your balance drops below `belowCents`, we bring it back to `toCents` from the billing owner's saved card, tax added on top as for any top-up.  One charge is never more than `toCents` plus tax, unless the balance is below $0 (a purchase, usage past $0) or a monthly renewal is due, which the same charge also covers.  Account credit you held when you moved to the balance pays an auto top-up first, without a card charge or invoice (see `recentCreditRecharges` on `GET /v1/balance`). The card is charged only once that credit is used up, and only while the balance is still below `belowCents`.  The first read gives the default rule, sized from your last 30 days of pay-per-use: below about a week of spend (at least $5), back up by about two more weeks (at least $20).  Auto top-up turned on in the dashboard while adding funds starts from that payment instead: back to the amount paid (at most $20), below a quarter of it in whole dollars (at least $1).  - 409 `balance_billing_required`: the account is not on the prepaid balance, nor moved onto it at a date still ahead. An account moved onto it can read and change its rule before that date; nothing is charged until it.  A profile-scoped key answers 403. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TreasuryApi.new
+
+begin
+  # Get auto top-up settings
+  result = api_instance.get_auto_recharge
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->get_auto_recharge: #{e}"
+end
+```
+
+#### Using the get_auto_recharge_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AutoRecharge>, Integer, Hash)> get_auto_recharge_with_http_info
+
+```ruby
+begin
+  # Get auto top-up settings
+  data, status_code, headers = api_instance.get_auto_recharge_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AutoRecharge>
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->get_auto_recharge_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**AutoRecharge**](AutoRecharge.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_balance
 
 > <GetBalance200Response> get_balance
 
 Get balance
 
-Returns your team's balance:  - the balance you can transfer - the part of it that cannot be paid out to creators yet (`payoutLockedCents`, `payoutLocks`) - top-ups still waiting for payment - your latest top-ups  A card top-up is in `availableCents` as soon as it is paid. Transfers to payees can use it from 7 days after the charge, so a stolen card cannot be turned straight into payouts.  A transfer debits its amount plus the fee added on top; the payee receives the full amount.  A card dispute or refund on a top-up is debited from the available balance and can make it negative. Transfers are refused until it is positive again.  A profile-scoped key answers 403, since the balance belongs to the whole team. 
+Returns your team's balance:  - the balance pay-per-use draws on - funds added but still waiting for payment - your latest payments into the balance and payout batch payments  Funds added by card are in `availableCents` as soon as they are paid. The balance never pays creators: payouts are charged to your card per payout batch.  A card dispute or refund is debited from the available balance and can make it negative. New payout batches are refused until it is positive again.  A profile-scoped key answers 403, since the balance belongs to the whole team. 
 
 ### Examples
 
@@ -647,84 +716,13 @@ end
 - **Accept**: application/json
 
 
-## get_topup_card_fee
+## get_topup_invoice
 
-> <GetTopupCardFee200Response> get_topup_card_fee(opts)
+> <GetTopupInvoice200Response> get_topup_invoice(topup_id)
 
-Get the card fee for a top-up
+Get a top-up invoice
 
-The card fee a top-up on the billing owner's saved card pays: `feeBps` of the charge plus `fixedCents`. The card is charged the smallest amount that leaves `amountCents` once Stripe takes `round_half_up(charge * feeBps / 10000) + fixedCents`.  The rate is Stripe's own for the card, learned from its past charges.  `feeIsExact` is false for a card Zernio has not charged yet whose region Stripe prices by card product (EEA) or whose country is unknown (Link). The rate is then that region's highest, and the top-up credits at least the amount.  Needs an owner, admin or billing admin, signed in or through a full-access key they created. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::TreasuryApi.new
-opts = {
-  payment_method_id: 'payment_method_id_example' # String | A saved card of the billing owner's (`pm_...`). Defaults to the default payment method.
-}
-
-begin
-  # Get the card fee for a top-up
-  result = api_instance.get_topup_card_fee(opts)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling TreasuryApi->get_topup_card_fee: #{e}"
-end
-```
-
-#### Using the get_topup_card_fee_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<GetTopupCardFee200Response>, Integer, Hash)> get_topup_card_fee_with_http_info(opts)
-
-```ruby
-begin
-  # Get the card fee for a top-up
-  data, status_code, headers = api_instance.get_topup_card_fee_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <GetTopupCardFee200Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling TreasuryApi->get_topup_card_fee_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **payment_method_id** | **String** | A saved card of the billing owner&#39;s (&#x60;pm_...&#x60;). Defaults to the default payment method. | [optional] |
-
-### Return type
-
-[**GetTopupCardFee200Response**](GetTopupCardFee200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_topup_receipt
-
-> <GetTopupReceipt200Response> get_topup_receipt(topup_id)
-
-Get a top-up receipt
-
-The receipt for a paid top-up or creator payout payment (`purpose: payout_batch`). `format: pdf` is the Stripe invoice PDF; `format: page` is Stripe's receipt page, for payments that have no invoice. The link is short-lived, so fetch it when you need it. A profile-scoped key answers 403.
+The invoice for funds added to the balance, once paid: the PDF of the Stripe invoice it was paid through.  It shows the amount added to your balance and the tax charged on top: VAT where it applies, or a reverse charge note for an EU business with a valid VAT id. Usage paid from the balance carries no further VAT.  - `format: pdf` is the invoice PDF; `format: page` is its Stripe-hosted page when the PDF is not ready. - 404 before the top-up is paid, and for a payment with no invoice (top-ups before 2026-11-05, creator payout payments). Its card receipt is at getTopupReceipt.  The link is short-lived, so fetch it when you need it. A profile-scoped key answers 403. 
 
 ### Examples
 
@@ -741,29 +739,29 @@ api_instance = Zernio::TreasuryApi.new
 topup_id = 'topup_id_example' # String | 
 
 begin
-  # Get a top-up receipt
-  result = api_instance.get_topup_receipt(topup_id)
+  # Get a top-up invoice
+  result = api_instance.get_topup_invoice(topup_id)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling TreasuryApi->get_topup_receipt: #{e}"
+  puts "Error when calling TreasuryApi->get_topup_invoice: #{e}"
 end
 ```
 
-#### Using the get_topup_receipt_with_http_info variant
+#### Using the get_topup_invoice_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetTopupReceipt200Response>, Integer, Hash)> get_topup_receipt_with_http_info(topup_id)
+> <Array(<GetTopupInvoice200Response>, Integer, Hash)> get_topup_invoice_with_http_info(topup_id)
 
 ```ruby
 begin
-  # Get a top-up receipt
-  data, status_code, headers = api_instance.get_topup_receipt_with_http_info(topup_id)
+  # Get a top-up invoice
+  data, status_code, headers = api_instance.get_topup_invoice_with_http_info(topup_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetTopupReceipt200Response>
+  p data # => <GetTopupInvoice200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling TreasuryApi->get_topup_receipt_with_http_info: #{e}"
+  puts "Error when calling TreasuryApi->get_topup_invoice_with_http_info: #{e}"
 end
 ```
 
@@ -775,7 +773,149 @@ end
 
 ### Return type
 
-[**GetTopupReceipt200Response**](GetTopupReceipt200Response.md)
+[**GetTopupInvoice200Response**](GetTopupInvoice200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_topup_receipt
+
+> File get_topup_receipt(topup_id, opts)
+
+Get a top-up receipt
+
+The receipt for a paid top-up or creator payout payment (`purpose: payout_batch`). `url` is the payment's invoice PDF when it has one (`format: pdf`), else Stripe's card receipt page (`format: page`); `invoiceUrl` and `receiptUrl` give each on its own.  The invoice alone is at getTopupInvoice. The link is short-lived, so fetch it when you need it. A profile-scoped key answers 403.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TreasuryApi.new
+topup_id = 'topup_id_example' # String | 
+opts = {
+  download: true # Boolean | true answers the card receipt itself as a PDF file (application/pdf, as an attachment) instead of the JSON links.
+}
+
+begin
+  # Get a top-up receipt
+  result = api_instance.get_topup_receipt(topup_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->get_topup_receipt: #{e}"
+end
+```
+
+#### Using the get_topup_receipt_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(File, Integer, Hash)> get_topup_receipt_with_http_info(topup_id, opts)
+
+```ruby
+begin
+  # Get a top-up receipt
+  data, status_code, headers = api_instance.get_topup_receipt_with_http_info(topup_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => File
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->get_topup_receipt_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **topup_id** | **String** |  |  |
+| **download** | **Boolean** | true answers the card receipt itself as a PDF file (application/pdf, as an attachment) instead of the JSON links. | [optional] |
+
+### Return type
+
+**File**
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/pdf, application/json
+
+
+## get_topup_statement
+
+> <GetTopupInvoice200Response> get_topup_statement(topup_id)
+
+Get a top-up invoice (alias)
+
+Alias of getTopupInvoice, kept for clients written against its first name.  The invoice for funds added to the balance, once paid: the PDF of the Stripe invoice it was paid through.  It shows the amount added to your balance and the tax charged on top: VAT where it applies, or a reverse charge note for an EU business with a valid VAT id. Usage paid from the balance carries no further VAT.  - `format: pdf` is the invoice PDF; `format: page` is its Stripe-hosted page when the PDF is not ready. - 404 before the top-up is paid, and for a payment with no invoice (top-ups before 2026-11-05, creator payout payments). Its card receipt is at getTopupReceipt.  The link is short-lived, so fetch it when you need it. A profile-scoped key answers 403. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TreasuryApi.new
+topup_id = 'topup_id_example' # String | 
+
+begin
+  # Get a top-up invoice (alias)
+  result = api_instance.get_topup_statement(topup_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->get_topup_statement: #{e}"
+end
+```
+
+#### Using the get_topup_statement_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetTopupInvoice200Response>, Integer, Hash)> get_topup_statement_with_http_info(topup_id)
+
+```ruby
+begin
+  # Get a top-up invoice (alias)
+  data, status_code, headers = api_instance.get_topup_statement_with_http_info(topup_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetTopupInvoice200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->get_topup_statement_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **topup_id** | **String** |  |  |
+
+### Return type
+
+[**GetTopupInvoice200Response**](GetTopupInvoice200Response.md)
 
 ### Authorization
 
@@ -1059,5 +1199,143 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## preview_topup
+
+> <PreviewTopup200Response> preview_topup(preview_topup_request)
+
+Preview a top-up's tax
+
+The tax a top-up of `amountCents` will carry and the total the card is charged, calculated by Stripe Tax from the billing owner's billing address and tax ids, as the top-up's invoice will be. Charges nothing.  - 400 `invalid_billing_address`: the billing address gives no tax location, so a top-up would be refused too.  Needs a full-access key or a signed-in session; a profile-scoped key answers 403. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TreasuryApi.new
+preview_topup_request = Zernio::PreviewTopupRequest.new({amount_cents: 37}) # PreviewTopupRequest | 
+
+begin
+  # Preview a top-up's tax
+  result = api_instance.preview_topup(preview_topup_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->preview_topup: #{e}"
+end
+```
+
+#### Using the preview_topup_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PreviewTopup200Response>, Integer, Hash)> preview_topup_with_http_info(preview_topup_request)
+
+```ruby
+begin
+  # Preview a top-up's tax
+  data, status_code, headers = api_instance.preview_topup_with_http_info(preview_topup_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PreviewTopup200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->preview_topup_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **preview_topup_request** | [**PreviewTopupRequest**](PreviewTopupRequest.md) |  |  |
+
+### Return type
+
+[**PreviewTopup200Response**](PreviewTopup200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_auto_recharge
+
+> <AutoRecharge> update_auto_recharge(update_auto_recharge_request)
+
+Update auto top-up settings
+
+Changes the auto top-up rule. Omitted fields keep their value.  An auto top-up declined for insufficient funds or card velocity is retried once, 3 days later (`retryCount` 1, `nextRetryAt` set). Any other decline is not retried.  A failure that is not the card's (an outage) is tried again an hour later and never counts toward `retryCount`.  When the last try fails, auto top-up switches off (`disabledReason: payment_failed`) until the card is updated, and the billing owner gets one email. Adding funds yourself resets the retry.  A bank asking for 3D Secure counts as a decline that is not retried: the charge happens while you are away, so the email asks you to update the card in Billing.  A pay-per-use request that finds the balance at $0 runs the auto top-up first (with the rule on, a saved card and no retry pending) and goes through when the charge lands, so a new balance at $0 is charged on first use.  When this month's auto top-ups plus the next one would pass `monthlyLimitCents`, the card is not charged and you get one email that month. At $0, pay-per-use then answers 402 `usage_limit_reached`.  - 400: a field is out of range, `toCents` is not at least $4 above `belowCents`, or, while auto top-up is on, `monthlyLimitCents` is lower than the back-to amount `toCents` (one top-up from $0 would pass it, so it could never charge). Omitted fields are checked with their stored values. - 409 `balance_billing_required`: the account is not on the prepaid balance, nor moved onto it at a date still ahead. An account moved onto it can read and change its rule before that date; nothing is charged until it. - 409 `payment_method_required`: the change turns auto top-up on, or changes its amounts while on, and there is no saved card.  A change that turns auto top-up on (or back on), or changes its amounts while on, is recorded as the billing owner's consent: the card it charges and the auto top-up line, `consentWording` as your app showed it, or our own line for those amounts when you send none.  Needs an owner, admin or billing admin, signed in or through a full-access key they created. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TreasuryApi.new
+update_auto_recharge_request = Zernio::UpdateAutoRechargeRequest.new # UpdateAutoRechargeRequest | 
+
+begin
+  # Update auto top-up settings
+  result = api_instance.update_auto_recharge(update_auto_recharge_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->update_auto_recharge: #{e}"
+end
+```
+
+#### Using the update_auto_recharge_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AutoRecharge>, Integer, Hash)> update_auto_recharge_with_http_info(update_auto_recharge_request)
+
+```ruby
+begin
+  # Update auto top-up settings
+  data, status_code, headers = api_instance.update_auto_recharge_with_http_info(update_auto_recharge_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AutoRecharge>
+rescue Zernio::ApiError => e
+  puts "Error when calling TreasuryApi->update_auto_recharge_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_auto_recharge_request** | [**UpdateAutoRechargeRequest**](UpdateAutoRechargeRequest.md) |  |  |
+
+### Return type
+
+[**AutoRecharge**](AutoRecharge.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

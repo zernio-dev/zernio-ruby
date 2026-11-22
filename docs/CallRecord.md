@@ -33,6 +33,7 @@
 | **call_errors** | [**Array&lt;CallRecordCallErrorsInner&gt;**](CallRecordCallErrorsInner.md) | Per-call failure log (dial failed, bridge failed, recording error). | [optional] |
 | **recording_url** | **String** | May be expired. Resolve a fresh playable URL via GET /v1/calls/{id}/recording (any channel). | [optional] |
 | **last_transcript_snippet** | **String** | Most recent transcript segment, for list previews. | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content and the call asked for a recording, a transcript or a voicemail. Use the &#x60;call.transcript_segment&#x60; and &#x60;call.recording_ready&#x60; webhooks. | [optional] |
 | **transcript** | [**Array&lt;CallRecordTranscriptInner&gt;**](CallRecordTranscriptInner.md) | Full transcript segments (detail endpoint only; omitted from lists). | [optional] |
 | **billing** | [**CallRecordBilling**](CallRecordBilling.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
@@ -73,6 +74,7 @@ instance = Zernio::CallRecord.new(
   call_errors: null,
   recording_url: null,
   last_transcript_snippet: null,
+  content_not_retained: null,
   transcript: null,
   billing: null,
   created_at: null,

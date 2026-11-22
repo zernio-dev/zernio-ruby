@@ -9,7 +9,7 @@
 | **test** | **Boolean** | Always true when present: only a sample sent by POST /v1/webhooks/test with an event carries it. Real deliveries never do. | [optional] |
 | **event** | **String** |  |  |
 | **account** | [**WebhookPayloadCalendarEventAccount**](WebhookPayloadCalendarEventAccount.md) |  |  |
-| **file** | [**WebhookPayloadCalendarEventCalendarEvent**](WebhookPayloadCalendarEventCalendarEvent.md) |  |  |
+| **file** | [**WebhookPayloadFileFile**](WebhookPayloadFileFile.md) |  |  |
 | **timestamp** | **Time** |  |  |
 
 ## Example

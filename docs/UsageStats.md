@@ -15,6 +15,8 @@
 | **auto_upgrade_enabled** | **Boolean** | Stripe-only. Always false for accounts on usage-based billing. | [optional] |
 | **limits** | [**UsageStatsLimits**](UsageStatsLimits.md) |  | [optional] |
 | **usage** | [**UsageStatsUsage**](UsageStatsUsage.md) |  | [optional] |
+| **profiles** | [**Array&lt;UsageStatsProfilesInner&gt;**](UsageStatsProfilesInner.md) | Profile-scoped API keys and members only, without a filter: one block per profile the caller can see, shaped like &#x60;profile&#x60;. | [optional] |
+| **profile** | [**UsageStatsProfile**](UsageStatsProfile.md) |  | [optional] |
 | **spend** | [**UsageStatsSpend**](UsageStatsSpend.md) |  | [optional] |
 
 ## Example
@@ -34,6 +36,8 @@ instance = Zernio::UsageStats.new(
   auto_upgrade_enabled: null,
   limits: null,
   usage: null,
+  profiles: null,
+  profile: null,
   spend: null
 )
 ```

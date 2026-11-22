@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
 | **executions** | [**Array&lt;ListWorkflowExecutions200ResponseExecutionsInner&gt;**](ListWorkflowExecutions200ResponseExecutionsInner.md) |  | [optional] |
-| **pagination** | [**ListContacts200ResponsePagination**](ListContacts200ResponsePagination.md) |  | [optional] |
+| **pagination** | [**ListWorkflowExecutions200ResponsePagination**](ListWorkflowExecutions200ResponsePagination.md) |  | [optional] |
 
 ## Example
 

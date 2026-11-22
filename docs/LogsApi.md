@@ -31,7 +31,7 @@ opts = {
   type: 'all', # String | Log category to query. Use `all` for the unified view across every category, or `api_request` for your API request logs (method, path, status, latency). 
   status: 'success', # String | Filter by status
   platform: 'tiktok', # String | Filter by platform
-  action: 'action_example', # String | Filter by action (e.g., post.published, message.sent, account.connected, webhook.delivered)
+  action: 'action_example', # String | Filter by action (e.g., post.published, message.sent, message.media_download_failed, account.connected, webhook.delivered)
   search: 'search_example', # String | Free-text search across log fields
   days: 56, # Integer | Number of days to look back (max 90)
   limit: 56, # Integer | Maximum number of logs to return (max 100)
@@ -81,7 +81,7 @@ end
 | **type** | **String** | Log category to query. Use &#x60;all&#x60; for the unified view across every category, or &#x60;api_request&#x60; for your API request logs (method, path, status, latency).  | [optional][default to &#39;publishing&#39;] |
 | **status** | **String** | Filter by status | [optional] |
 | **platform** | **String** | Filter by platform | [optional] |
-| **action** | **String** | Filter by action (e.g., post.published, message.sent, account.connected, webhook.delivered) | [optional] |
+| **action** | **String** | Filter by action (e.g., post.published, message.sent, message.media_download_failed, account.connected, webhook.delivered) | [optional] |
 | **search** | **String** | Free-text search across log fields | [optional] |
 | **days** | **Integer** | Number of days to look back (max 90) | [optional][default to 90] |
 | **limit** | **Integer** | Maximum number of logs to return (max 100) | [optional][default to 50] |

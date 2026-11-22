@@ -4,7 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **telnyx_cost_usd** | **Float** |  | [optional] |
+| **telnyx_cost_usd** | **Float** | Raw Telnyx cost: carrierCostUSD plus callControlCostUSD. | [optional] |
+| **carrier_cost_usd** | **Float** | Raw carrier cost of the legs, without call control. | [optional] |
+| **call_control_cost_usd** | **Float** | Voice API call-control fee, part of telnyxCostUSD. 0 on trunk calls. | [optional] |
 | **recording_cost_usd** | **Float** |  | [optional] |
 | **transcription_cost_usd** | **Float** |  | [optional] |
 | **branded_call_usd** | **Float** | Branded Calling surcharge, 0 unless &#x60;from&#x60; is a verified branded number calling a US destination. | [optional] |
@@ -18,6 +20,8 @@ require 'zernio-sdk'
 
 instance = Zernio::GetVoiceCallEstimate200ResponseBreakdown.new(
   telnyx_cost_usd: null,
+  carrier_cost_usd: null,
+  call_control_cost_usd: null,
   recording_cost_usd: null,
   transcription_cost_usd: null,
   branded_call_usd: null,

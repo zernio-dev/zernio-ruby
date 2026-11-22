@@ -5,8 +5,10 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**appeal_sms_registration**](SMSApi.md#appeal_sms_registration) | **POST** /v1/sms/registrations/{id}/appeal | Appeal a rejected campaign |
+| [**create_sms_opt_out**](SMSApi.md#create_sms_opt_out) | **POST** /v1/sms/opt-outs | Record an SMS opt-out |
 | [**create_sms_sender_id**](SMSApi.md#create_sms_sender_id) | **POST** /v1/sms/sender-ids | Create an alphanumeric sender ID |
 | [**deactivate_sms_registration**](SMSApi.md#deactivate_sms_registration) | **DELETE** /v1/sms/registrations/{id} | Deactivate a brand/campaign registration |
+| [**delete_sms_opt_out**](SMSApi.md#delete_sms_opt_out) | **DELETE** /v1/sms/opt-outs | Remove an SMS opt-out |
 | [**delete_sms_sender_id**](SMSApi.md#delete_sms_sender_id) | **DELETE** /v1/sms/sender-ids/{id} | Delete an alphanumeric sender ID |
 | [**disable_sms_on_number**](SMSApi.md#disable_sms_on_number) | **DELETE** /v1/phone-numbers/{id}/sms | Disable SMS on a number |
 | [**enable_sms_on_number**](SMSApi.md#enable_sms_on_number) | **POST** /v1/phone-numbers/{id}/sms | Enable SMS on a number |
@@ -88,6 +90,75 @@ end
 ### Return type
 
 [**AppealSmsRegistration200Response**](AppealSmsRegistration200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_sms_opt_out
+
+> <CreateSmsOptOut200Response> create_sms_opt_out(sms_opt_out_request)
+
+Record an SMS opt-out
+
+Marks a recipient as opted out on one of your SMS numbers. Use it for opt-outs you collect yourself (for example keywords like UNSUB or REVOKE, which the carrier does not recognize). Sends from that number to the recipient are then refused with `409 recipient_opted_out`.  Idempotent. If the recipient is already opted out, the call succeeds and `source` keeps the original value (`inbound_stop` when they texted STOP). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+sms_opt_out_request = Zernio::SmsOptOutRequest.new({account_id: 'account_id_example', phone: 'phone_example'}) # SmsOptOutRequest | 
+
+begin
+  # Record an SMS opt-out
+  result = api_instance.create_sms_opt_out(sms_opt_out_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->create_sms_opt_out: #{e}"
+end
+```
+
+#### Using the create_sms_opt_out_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateSmsOptOut200Response>, Integer, Hash)> create_sms_opt_out_with_http_info(sms_opt_out_request)
+
+```ruby
+begin
+  # Record an SMS opt-out
+  data, status_code, headers = api_instance.create_sms_opt_out_with_http_info(sms_opt_out_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateSmsOptOut200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->create_sms_opt_out_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **sms_opt_out_request** | [**SmsOptOutRequest**](SmsOptOutRequest.md) |  |  |
+
+### Return type
+
+[**CreateSmsOptOut200Response**](CreateSmsOptOut200Response.md)
 
 ### Authorization
 
@@ -234,6 +305,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## delete_sms_opt_out
+
+> <DeleteSmsOptOut200Response> delete_sms_opt_out(sms_opt_out_request)
+
+Remove an SMS opt-out
+
+Re-subscribes a recipient you opted out with `POST /v1/sms/opt-outs`. Succeeds as a no-op when the recipient is not opted out.  An opt-out the recipient made themselves (texting STOP) cannot be removed here: the carrier keeps blocking the number until they text START, so this returns `409 recipient_opted_out`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+sms_opt_out_request = Zernio::SmsOptOutRequest.new({account_id: 'account_id_example', phone: 'phone_example'}) # SmsOptOutRequest | 
+
+begin
+  # Remove an SMS opt-out
+  result = api_instance.delete_sms_opt_out(sms_opt_out_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->delete_sms_opt_out: #{e}"
+end
+```
+
+#### Using the delete_sms_opt_out_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteSmsOptOut200Response>, Integer, Hash)> delete_sms_opt_out_with_http_info(sms_opt_out_request)
+
+```ruby
+begin
+  # Remove an SMS opt-out
+  data, status_code, headers = api_instance.delete_sms_opt_out_with_http_info(sms_opt_out_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteSmsOptOut200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->delete_sms_opt_out_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **sms_opt_out_request** | [**SmsOptOutRequest**](SmsOptOutRequest.md) |  |  |
+
+### Return type
+
+[**DeleteSmsOptOut200Response**](DeleteSmsOptOut200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -519,7 +659,7 @@ end
 
 List SMS opt-outs
 
-The recipients who opted out of SMS (replied STOP) across your numbers, most recent first. Compliance surface: you must be able to see and export your opt-out list. Read-only: a recipient is re-subscribed only by replying START. Pass `format=csv` to download a CSV instead of JSON. 
+The recipients who opted out of SMS across your numbers, most recent first: those who replied STOP and those you recorded with `POST /v1/sms/opt-outs`. `source` says which. Compliance surface: you must be able to see and export your opt-out list. Pass `format=csv` to download a CSV instead of JSON. 
 
 ### Examples
 
@@ -1157,7 +1297,7 @@ end
 api_instance = Zernio::SMSApi.new
 send_sms_request = Zernio::SendSmsRequest.new({from: 'from_example', to: 'to_example'}) # SendSmsRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -1192,7 +1332,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **send_sms_request** | [**SendSmsRequest**](SendSmsRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 

@@ -16,6 +16,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_workflows**](WorkflowsApi.md#list_workflows) | **GET** /v1/workflows | List workflows |
 | [**pause_workflow**](WorkflowsApi.md#pause_workflow) | **POST** /v1/workflows/{workflowId}/pause | Pause workflow |
 | [**restore_workflow_version**](WorkflowsApi.md#restore_workflow_version) | **POST** /v1/workflows/{workflowId}/versions/{version}/restore | Restore a workflow version |
+| [**take_over_workflow**](WorkflowsApi.md#take_over_workflow) | **POST** /v1/workflows/{workflowId}/take-over | Take over a workflow |
 | [**trigger_api_call_workflow**](WorkflowsApi.md#trigger_api_call_workflow) | **POST** /v1/workflows/{workflowId}/trigger | Start an API-triggered workflow |
 | [**trigger_workflow**](WorkflowsApi.md#trigger_workflow) | **POST** /v1/workflows/{workflowId}/executions | Manually start a workflow run |
 | [**update_workflow**](WorkflowsApi.md#update_workflow) | **PATCH** /v1/workflows/{workflowId} | Update workflow |
@@ -531,7 +532,8 @@ workflow_id = 'workflow_id_example' # String |
 opts = {
   status: 'running', # String | 
   limit: 56, # Integer | 
-  skip: 56 # Integer | 
+  skip: 56, # Integer | 
+  cursor: 'cursor_example' # String | The previous page's pagination.nextCursor. Pages stay stable while runs start or end; skip applies after it. Page past the first 1000 runs with the cursor: a larger skip may be refused with 400.
 }
 
 begin
@@ -569,6 +571,7 @@ end
 | **status** | **String** |  | [optional] |
 | **limit** | **Integer** |  | [optional][default to 25] |
 | **skip** | **Integer** |  | [optional][default to 0] |
+| **cursor** | **String** | The previous page&#39;s pagination.nextCursor. Pages stay stable while runs start or end; skip applies after it. Page past the first 1000 runs with the cursor: a larger skip may be refused with 400. | [optional] |
 
 ### Return type
 
@@ -859,6 +862,75 @@ end
 ### Return type
 
 [**RestoreWorkflowVersion200Response**](RestoreWorkflowVersion200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## take_over_workflow
+
+> <TakeOverWorkflow200Response> take_over_workflow(workflow_id)
+
+Take over a workflow
+
+Makes the caller the workflow's owner, so its AI steps use the caller's own AI key. Only the owner or an admin of the active workspace can take over, from the dashboard.  When the member who made a workflow leaves the workspace, its AI steps pause (they take the error edge with \"{Name} left this workspace. Add a workspace AI key or take over this automation.\") and every other step keeps running; taking it over starts the AI steps again. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WorkflowsApi.new
+workflow_id = 'workflow_id_example' # String | 
+
+begin
+  # Take over a workflow
+  result = api_instance.take_over_workflow(workflow_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->take_over_workflow: #{e}"
+end
+```
+
+#### Using the take_over_workflow_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<TakeOverWorkflow200Response>, Integer, Hash)> take_over_workflow_with_http_info(workflow_id)
+
+```ruby
+begin
+  # Take over a workflow
+  data, status_code, headers = api_instance.take_over_workflow_with_http_info(workflow_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <TakeOverWorkflow200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->take_over_workflow_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **workflow_id** | **String** |  |  |
+
+### Return type
+
+[**TakeOverWorkflow200Response**](TakeOverWorkflow200Response.md)
 
 ### Authorization
 

@@ -10,16 +10,20 @@
 | **bcc** | [**Array&lt;EmailAddress&gt;**](EmailAddress.md) |  | [optional] |
 | **reply_to** | [**Array&lt;EmailAddress&gt;**](EmailAddress.md) |  | [optional] |
 | **from_name** | **String** |  | [optional] |
+| **from** | **String** | Send from another address listed by &#x60;GET /v1/email/send-as&#x60;; on Outlook, declare a shared mailbox there first. An address not on the list answers 400, and Outlook refusing it at send time answers 403. Omitted, the mail leaves from the mailbox address. | [optional] |
+| **append_signature** | **Boolean** | Appends the signature of the sending address: its Zernio default first, else its Gmail signature. 400 when it has neither. | [optional] |
+| **signature_id** | **String** | Appends this Zernio signature instead. Wins over &#x60;appendSignature&#x60;. | [optional] |
 | **subject** | **String** | Optional on replies; the provider keeps the thread subject. |  |
 | **text** | **String** | Plain-text body. One of &#x60;text&#x60; or &#x60;html&#x60; is required. | [optional] |
 | **html** | **String** |  | [optional] |
-| **attachments** | [**Array&lt;SendEmailRequestAttachmentsInner&gt;**](SendEmailRequestAttachmentsInner.md) | 25 MB in total; 3 MB per attachment on Microsoft. | [optional] |
-| **headers** | **Hash&lt;String, String&gt;** | Custom &#x60;X-&#x60; headers only. &#x60;List-Unsubscribe&#x60; is dropped on Microsoft and reported in &#x60;metadata.droppedHeaders&#x60;. | [optional] |
+| **attachments** | [**Array&lt;SendEmailRequestAttachmentsInner&gt;**](SendEmailRequestAttachmentsInner.md) | 25 MB in total on every provider. Send files over 4 MB by url: request bodies are capped at 4.5 MB. | [optional] |
+| **headers** | **Hash&lt;String, String&gt;** | Custom headers: &#x60;X-&#x60; names, plus &#x60;List-Unsubscribe&#x60;, &#x60;List-Unsubscribe-Post&#x60;, &#x60;List-Id&#x60;, &#x60;Precedence&#x60; and &#x60;Auto-Submitted&#x60;. Other names, values with line breaks and header lines over 998 characters answer 400.  &#x60;List-Unsubscribe&#x60; takes one or more &#x60;&lt;https://...&gt;&#x60; or &#x60;&lt;mailto:...&gt;&#x60; URIs separated by commas. &#x60;List-Unsubscribe-Post&#x60; must be exactly &#x60;List-Unsubscribe&#x3D;One-Click&#x60; and needs an https URI in &#x60;List-Unsubscribe&#x60; (RFC 8058).  Gmail and IMAP send them all. Outlook sends only &#x60;X-&#x60; headers: the others are left out and named in &#x60;metadata.droppedHeaders&#x60; on the sent message. | [optional] |
 | **metadata** | **Hash&lt;String, String&gt;** |  | [optional] |
-| **scheduled_for** | **Time** | Reserved; currently rejected. | [optional] |
-| **hold_as_draft** | **Boolean** | Reserved; currently rejected. | [optional] |
-| **track_opens** | **Boolean** | Not available; must be false. | [optional] |
-| **track_links** | **Boolean** | Not available; must be false. | [optional] |
+| **scheduled_for** | **Time** | Send later, between 1 minute and 30 days from now. The request answers 202 with the scheduled send; it leaves within a minute of this time through the same caps as an immediate send. List or cancel it under &#x60;/v1/email/messages/scheduled&#x60;. | [optional] |
+| **hold_as_draft** | **Boolean** | Needs &#x60;scheduledFor&#x60;. Saves the email as a draft in the mailbox now and sends that draft at &#x60;scheduledFor&#x60;, with any edits the user made in their mail app. A draft deleted or sent from the mailbox first fails the send (&#x60;email.send_failed&#x60;). Cancelling deletes the draft. | [optional] |
+| **track_opens** | **Boolean** | Adds an open pixel to the html and fires &#x60;email.opened&#x60;. Needs &#x60;html&#x60;. | [optional] |
+| **track_links** | **Boolean** | Rewrites every http(s) link in the html through a Zernio redirect and fires &#x60;email.link_clicked&#x60;. Needs &#x60;html&#x60;. | [optional] |
+| **track_replies** | **Boolean** | Fires &#x60;email.thread_replied&#x60; when someone else writes in this message&#39;s thread. Works with text or html. | [optional] |
 | **mode** | **String** |  | [optional][default to &#39;reply&#39;] |
 
 ## Example
@@ -34,16 +38,20 @@ instance = Zernio::ReplyEmailMessageRequest.new(
   bcc: null,
   reply_to: null,
   from_name: null,
+  from: null,
+  append_signature: null,
+  signature_id: null,
   subject: null,
   text: null,
   html: null,
   attachments: null,
-  headers: null,
+  headers: {List-Unsubscribe&#x3D;&lt;https://example.com/unsubscribe?u&#x3D;123&gt;, &lt;mailto:unsubscribe@example.com&gt;, List-Unsubscribe-Post&#x3D;List-Unsubscribe&#x3D;One-Click},
   metadata: null,
   scheduled_for: null,
   hold_as_draft: null,
   track_opens: null,
   track_links: null,
+  track_replies: null,
   mode: null
 )
 ```

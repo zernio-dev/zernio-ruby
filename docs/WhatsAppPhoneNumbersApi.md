@@ -238,7 +238,7 @@ end
 
 ## get_whats_app_number_kyc_form
 
-> <GetWhatsAppNumberKycForm200Response> get_whats_app_number_kyc_form(country, profile_id)
+> <GetWhatsAppNumberKycForm200Response> get_whats_app_number_kyc_form(country, opts)
 
 Get KYC form spec
 
@@ -257,11 +257,13 @@ end
 
 api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 country = 'country_example' # String | 
-profile_id = 'profile_id_example' # String | 
+opts = {
+  profile_id: 'profile_id_example' # String | Profile the order is for. When given, `reusable.options` only lists verifications held by numbers on this profile. A key or team member limited to some profiles must pass it to get any options.
+}
 
 begin
   # Get KYC form spec
-  result = api_instance.get_whats_app_number_kyc_form(country, profile_id)
+  result = api_instance.get_whats_app_number_kyc_form(country, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_number_kyc_form: #{e}"
@@ -272,12 +274,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetWhatsAppNumberKycForm200Response>, Integer, Hash)> get_whats_app_number_kyc_form_with_http_info(country, profile_id)
+> <Array(<GetWhatsAppNumberKycForm200Response>, Integer, Hash)> get_whats_app_number_kyc_form_with_http_info(country, opts)
 
 ```ruby
 begin
   # Get KYC form spec
-  data, status_code, headers = api_instance.get_whats_app_number_kyc_form_with_http_info(country, profile_id)
+  data, status_code, headers = api_instance.get_whats_app_number_kyc_form_with_http_info(country, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppNumberKycForm200Response>
@@ -291,7 +293,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **country** | **String** |  |  |
-| **profile_id** | **String** |  |  |
+| **profile_id** | **String** | Profile the order is for. When given, &#x60;reusable.options&#x60; only lists verifications held by numbers on this profile. A key or team member limited to some profiles must pass it to get any options. | [optional] |
 
 ### Return type
 

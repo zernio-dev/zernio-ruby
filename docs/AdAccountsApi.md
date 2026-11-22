@@ -20,6 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad_negative_keyword_list**](AdAccountsApi.md#delete_ad_negative_keyword_list) | **DELETE** /v1/ads/accounts/negative-keyword-lists/{listId} | Delete a negative keyword list |
 | [**delete_value_rule_set**](AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set |
 | [**detach_ad_label**](AdAccountsApi.md#detach_ad_label) | **DELETE** /v1/ads/labels/{labelId}/assignments | Detach a Google Ads label |
+| [**edit_ad_negative_keyword_list_keywords**](AdAccountsApi.md#edit_ad_negative_keyword_list_keywords) | **PATCH** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Add or remove negative list keywords |
 | [**get_ad_account_billing**](AdAccountsApi.md#get_ad_account_billing) | **GET** /v1/ads/accounts/billing | Get ad account billing |
 | [**get_ad_account_finance**](AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances |
 | [**get_ad_account_health**](AdAccountsApi.md#get_ad_account_health) | **GET** /v1/ads/accounts/health | Check an ad account before creating ads |
@@ -495,11 +496,11 @@ end
 
 ## create_ad_account
 
-> <CreateAdAccount200Response> create_ad_account(create_ad_account_request)
+> <CreateAdAccount200Response> create_ad_account(create_ad_account_request, opts)
 
 Create ad account
 
-Creates a new Meta ad account in the user's own business portfolio, or a Google Ads client account under a manager (MCC) account the connection reaches. Billing must then be set up on the platform.  **Meta** (omit `platform` or send `meta`).  Creates a durable Meta ad account in the end user's own business portfolio using their connected Meta Ads token.  ### Meta requirements  - An active metaads accountId - Ads access - business_management permission - Business admin access  Discover portfolios with GET /v1/ads/businesses. System-user tokens may return an empty businesses list; supply the known business ID in that case.  ### Meta billing and limits  The self-serve account starts without a payment method. The user must add a payment method in Ads Manager before ads can deliver. Zernio cannot add payment methods.  Meta may require business verification and limits how many accounts a business can create. Closing an account does not guarantee more capacity. An ad account cannot truly be deleted, even after closing it and removing it from a business.  ### Meta fields  - timezoneId is Meta's numeric ID, not an IANA timezone name. Select it from https://developers.facebook.com/docs/marketing-api/reference/ad-account/timezone-ids/. For example, 1 is America/Los_Angeles. - Meta validates supported currencies and IDs. - endAdvertiser, mediaAgency and partner default to NONE for the self-serve flow.  ### Meta connection scope  The new account is added atomically to an existing scoped ad-account allowlist. Unrestricted connections stay unrestricted. Reconnecting the same Meta identity preserves this scope unless a caller explicitly replaces it.  Discovery is nudged immediately. Use the returned adAccountId with the existing ads endpoints.  ### Meta retries and failures  This operation is not idempotent and Zernio never automatically retries it. Unknown body fields are rejected. The Meta flow has no validateOnly or dry-run option.  - After a timeout or a 502 with details.creationStatus=unknown, check the business in Ads Manager before attempting another creation. - A 201 with connectionUpdated=false means the account exists but needs reconnecting via GET /v1/connect/facebook/ads, with adAccountIds containing the returned ID and the previous scoped IDs. Do not repeat the create call.  **Google** (send `platform: google`).  Google only creates accounts through a manager account. The new client account is created under `managerCustomerId`, which must be a manager the Google user behind the googleads `accountId` reaches (directly or as a sub-manager). List them with GET /v1/ads/accounts/hierarchy.  Whose manager it is (the integrator's or the end user's) is the caller's choice: pass the connection that reaches it.  ### Google fields and limits  - `currency` (ISO 4217) and `timeZone` (IANA name, for example Europe/Madrid) cannot be changed after creation. - The account starts without billing: set it up in Google Ads before ads can serve. - Google caps how many accounts a manager can create and how many active client accounts it can hold.  ### Google result and retries  The new customer is added to the connection (and to a scoped connection's allowlist). Discovery is nudged immediately, and the returned adAccountId works with every other ads endpoint.  `validateOnly: true` asks Google to validate the request without creating anything and returns 200.  A real create is not idempotent: after a 502 with details.creationStatus=unknown, check the manager in Google Ads before trying again. 
+Creates a new Meta ad account in the user's own business portfolio, or a Google Ads client account under a manager (MCC) account the connection reaches. Billing must then be set up on the platform.  **Meta** (omit `platform` or send `meta`).  Creates a durable Meta ad account in the end user's own business portfolio using their connected Meta Ads token.  ### Meta requirements  - An active metaads accountId - Ads access - business_management permission - Business admin access  Discover portfolios with GET /v1/ads/businesses. System-user tokens may return an empty businesses list; supply the known business ID in that case.  ### Meta billing and limits  The self-serve account starts without a payment method. The user must add a payment method in Ads Manager before ads can deliver. Zernio cannot add payment methods.  Meta may require business verification and limits how many accounts a business can create. Closing an account does not guarantee more capacity. An ad account cannot truly be deleted, even after closing it and removing it from a business.  ### Meta fields  - timezoneId is Meta's numeric ID, not an IANA timezone name. Select it from https://developers.facebook.com/docs/marketing-api/reference/ad-account/timezone-ids/. For example, 1 is America/Los_Angeles. - Meta validates supported currencies and IDs. - endAdvertiser, mediaAgency and partner default to NONE for the self-serve flow.  ### Meta connection scope  The new account is added atomically to an existing scoped ad-account allowlist. Unrestricted connections stay unrestricted. Reconnecting the same Meta identity preserves this scope unless a caller explicitly replaces it.  Discovery is nudged immediately. Use the returned adAccountId with the existing ads endpoints.  ### Meta retries and failures  Zernio never retries creation. Send an Idempotency-Key to make a resend safe: the same key and body replay the original 201 without creating again. Without a key every request creates a new account. Unknown body fields are rejected. The Meta flow has no validateOnly or dry-run option.  - After a timeout or a 502 with details.creationStatus=unknown, check the business in Ads Manager before attempting another creation. An Idempotency-Key does not cover that 502. - A 201 with connectionUpdated=false means the account exists but needs reconnecting via GET /v1/connect/facebook/ads, with adAccountIds containing the returned ID and the previous scoped IDs. Do not repeat the create call.  **Google** (send `platform: google`).  Google only creates accounts through a manager account. The new client account is created under `managerCustomerId`, which must be a manager the Google user behind the googleads `accountId` reaches (directly or as a sub-manager). List them with GET /v1/ads/accounts/hierarchy.  Whose manager it is (the integrator's or the end user's) is the caller's choice: pass the connection that reaches it.  ### Google fields and limits  - `currency` (ISO 4217) and `timeZone` (IANA name, for example Europe/Madrid) cannot be changed after creation. - The account starts without billing: set it up in Google Ads before ads can serve. - Google caps how many accounts a manager can create and how many active client accounts it can hold.  ### Google result and retries  The new customer is added to the connection (and to a scoped connection's allowlist). Discovery is nudged immediately, and the returned adAccountId works with every other ads endpoint.  `validateOnly: true` asks Google to validate the request without creating anything and returns 200.  Zernio never retries creation. Send an Idempotency-Key to make a resend safe: the same key and body replay the original 201 without creating again. Without a key every request creates a new account.  - A validateOnly call and the real create need different keys. - After a 502 with details.creationStatus=unknown, check the manager in Google Ads before trying again: an Idempotency-Key does not cover that 502. 
 
 ### Examples
 
@@ -514,10 +515,13 @@ end
 
 api_instance = Zernio::AdAccountsApi.new
 create_ad_account_request = Zernio::CreateGoogleAdAccountRequest.new({platform: 'google', account_id: 'account_id_example', manager_customer_id: 'manager_customer_id_example', name: 'name_example', currency: 'currency_example', time_zone: 'time_zone_example'}) # CreateAdAccountRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Create ad account
-  result = api_instance.create_ad_account(create_ad_account_request)
+  result = api_instance.create_ad_account(create_ad_account_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->create_ad_account: #{e}"
@@ -528,12 +532,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateAdAccount200Response>, Integer, Hash)> create_ad_account_with_http_info(create_ad_account_request)
+> <Array(<CreateAdAccount200Response>, Integer, Hash)> create_ad_account_with_http_info(create_ad_account_request, opts)
 
 ```ruby
 begin
   # Create ad account
-  data, status_code, headers = api_instance.create_ad_account_with_http_info(create_ad_account_request)
+  data, status_code, headers = api_instance.create_ad_account_with_http_info(create_ad_account_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateAdAccount200Response>
@@ -547,6 +551,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_ad_account_request** | [**CreateAdAccountRequest**](CreateAdAccountRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -633,7 +638,7 @@ end
 
 ## create_ad_negative_keyword_list
 
-> <CreateAdNegativeKeywordList201Response> create_ad_negative_keyword_list(create_ad_negative_keyword_list_request)
+> <CreateAdNegativeKeywordList201Response> create_ad_negative_keyword_list(create_ad_negative_keyword_list_request, opts)
 
 Create a negative keyword list
 
@@ -652,10 +657,13 @@ end
 
 api_instance = Zernio::AdAccountsApi.new
 create_ad_negative_keyword_list_request = Zernio::CreateAdNegativeKeywordListRequest.new({account_id: 'account_id_example', name: 'name_example'}) # CreateAdNegativeKeywordListRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Create a negative keyword list
-  result = api_instance.create_ad_negative_keyword_list(create_ad_negative_keyword_list_request)
+  result = api_instance.create_ad_negative_keyword_list(create_ad_negative_keyword_list_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->create_ad_negative_keyword_list: #{e}"
@@ -666,12 +674,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateAdNegativeKeywordList201Response>, Integer, Hash)> create_ad_negative_keyword_list_with_http_info(create_ad_negative_keyword_list_request)
+> <Array(<CreateAdNegativeKeywordList201Response>, Integer, Hash)> create_ad_negative_keyword_list_with_http_info(create_ad_negative_keyword_list_request, opts)
 
 ```ruby
 begin
   # Create a negative keyword list
-  data, status_code, headers = api_instance.create_ad_negative_keyword_list_with_http_info(create_ad_negative_keyword_list_request)
+  data, status_code, headers = api_instance.create_ad_negative_keyword_list_with_http_info(create_ad_negative_keyword_list_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateAdNegativeKeywordList201Response>
@@ -685,6 +693,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_ad_negative_keyword_list_request** | [**CreateAdNegativeKeywordListRequest**](CreateAdNegativeKeywordListRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -706,7 +715,7 @@ end
 
 Create custom conversion
 
-Creates a Meta custom conversion for ads to optimise toward, reusing an existing one with the same name and pixel.  It provisions the Meta custom conversion an ads flow optimises toward, and hands back the `customConversionId` for `promotedObject.customConversionId` on POST /v1/ads/create. This removes the manual \"create it in Ads Manager first\" step.  ### Reuse is ours, not Meta's  Meta's create is not idempotent, so a retried request would otherwise mint a duplicate carrying none of the original's optimisation history.  A non-archived conversion with the same `name` on the same `pixelId` is returned instead of created, with `reused: true` and a 200 rather than a 201.  ### Rule  `rule` is forwarded verbatim in Meta's own grammar (e.g. `{\"url\": {\"i_contains\": \"thank-you\"}}`). Meta validates it and rejects a malformed one with \"A conversion rule is required at creation time\". 
+The first path of `POST /v1/ads/conversions/custom-conversions` (`createAdCustomConversion`), which does the same with `accountId` as a parameter. It keeps working. 
 
 ### Examples
 
@@ -1009,6 +1018,7 @@ api_instance = Zernio::AdAccountsApi.new
 list_id = 'list_id_example' # String | 
 account_id = 'account_id_example' # String | 
 opts = {
+  idempotency_key: 'idempotency_key_example', # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
   ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example', # String | 
   platform: 'facebook' # String | 
@@ -1047,6 +1057,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **list_id** | **String** |  |  |
 | **account_id** | **String** |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 | **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
@@ -1218,6 +1229,81 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## edit_ad_negative_keyword_list_keywords
+
+> <ReplaceAdNegativeKeywordListKeywords200Response> edit_ad_negative_keyword_list_keywords(list_id, edit_ad_negative_keyword_list_keywords_request, opts)
+
+Add or remove negative list keywords
+
+Adds and removes single keywords in a shared Google Ads negative keyword list without resending the full set, affecting every campaign that uses the list.  - `remove` matches by normalized text and match type, and wins over `add` for the same keyword. - Keywords already in the list are not added twice; keywords not in it are skipped on remove. - Creates and removals are applied atomically in one mutation.  ### Quota  Each create or removal consumes one daily operation; the entire batch must fit the remaining quota. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+list_id = 'list_id_example' # String | 
+edit_ad_negative_keyword_list_keywords_request = Zernio::EditAdNegativeKeywordListKeywordsRequest.new({account_id: 'account_id_example'}) # EditAdNegativeKeywordListKeywordsRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Add or remove negative list keywords
+  result = api_instance.edit_ad_negative_keyword_list_keywords(list_id, edit_ad_negative_keyword_list_keywords_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->edit_ad_negative_keyword_list_keywords: #{e}"
+end
+```
+
+#### Using the edit_ad_negative_keyword_list_keywords_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ReplaceAdNegativeKeywordListKeywords200Response>, Integer, Hash)> edit_ad_negative_keyword_list_keywords_with_http_info(list_id, edit_ad_negative_keyword_list_keywords_request, opts)
+
+```ruby
+begin
+  # Add or remove negative list keywords
+  data, status_code, headers = api_instance.edit_ad_negative_keyword_list_keywords_with_http_info(list_id, edit_ad_negative_keyword_list_keywords_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ReplaceAdNegativeKeywordListKeywords200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->edit_ad_negative_keyword_list_keywords_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **list_id** | **String** |  |  |
+| **edit_ad_negative_keyword_list_keywords_request** | [**EditAdNegativeKeywordListKeywordsRequest**](EditAdNegativeKeywordListKeywordsRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**ReplaceAdNegativeKeywordListKeywords200Response**](ReplaceAdNegativeKeywordListKeywords200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -1758,7 +1844,7 @@ end
 
 Ad account change / audit log
 
-Shows who changed what in an ad account and when, as an audit log of edits to campaigns, ad sets and ads.  ### Google  Reads the customer's `change_event` history, newest first. `adAccountId` is the numeric customer id.  Google keeps 30 days of it, so `since` defaults to 29 days ago and an older `since` returns 400. `until` defaults to today.  Each change is mapped onto the Meta row shape:  - `event_type` = resource_change_operation (CREATE, UPDATE, REMOVE) - `event_time` = change_date_time - `actor_name` = user_email - `object_type` = change_resource_type - `object_id` = the last numeric id of `object_resource_name` - `application_name` = client_type - `changed_fields` (array) - `extra_data` = a JSON string `{ old, new }` with Google's old and new resource  #### Pagination  Pass `paging.after` back as `after` for the next page; it is null when nothing older is left.  A page never splits a change batch (the changes of one request share an `event_time`). So a page can hold fewer rows than `limit` while more follow, or more when one batch is larger than `limit`.  ### Meta  Account-level audit log from Meta's `/act_X/activities`: who changed what and when (creates, edits, status flips, budget changes...). Includes Meta's translated event names and the structured before/after in `extra_data`. Rows are returned verbatim.  Meta has no server-side per-object filter on this edge, so `objectId` filters the returned page client-side. Combine it with paging to walk history for one campaign/ad set/ad. 
+Shows who changed what in an ad account and when, as an audit log of edits to campaigns, ad sets and ads.  ### Google  Reads the customer's `change_event` history, newest first. `adAccountId` is the numeric customer id.  Google keeps 30 days of it, counted to the hour, so `since` defaults to 28 days ago on the account's clock, the oldest whole day always inside them, and an older `since` returns 400. `until` defaults to today.  Each change is mapped onto the Meta row shape:  - `event_type` = resource_change_operation (CREATE, UPDATE, REMOVE) - `event_time` = change_date_time - `actor_name` = user_email - `object_type` = change_resource_type - `object_id` = the last numeric id of `object_resource_name` - `application_name` = client_type - `changed_fields` (array) - `extra_data` = a JSON string `{ old, new }` with Google's old and new resource  #### Pagination  Pass `paging.after` back as `after` for the next page; it is null when nothing older is left.  A page never splits a change batch (the changes of one request share an `event_time`). So a page can hold fewer rows than `limit` while more follow, or more when one batch is larger than `limit`.  ### Meta  Account-level audit log from Meta's `/act_X/activities`: who changed what and when (creates, edits, status flips, budget changes...). Includes Meta's translated event names and the structured before/after in `extra_data`. Rows are returned verbatim.  Meta has no server-side per-object filter on this edge, so `objectId` filters the returned page client-side. Combine it with paging to walk history for one campaign/ad set/ad. 
 
 ### Examples
 
@@ -1775,7 +1861,7 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
 ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>), or the Google customer id (digits only).
 opts = {
-  since: Date.parse('2013-10-20'), # Date | Start of range (YYYY-MM-DD). Google: at most 29 days ago, the default.
+  since: Date.parse('2013-10-20'), # Date | Start of range (YYYY-MM-DD). Google: at most 28 days ago, the default.
   _until: Date.parse('2013-10-20'), # Date | End of range (YYYY-MM-DD).
   object_id: 'object_id_example', # String | Client-side filter to one object id (campaign, ad set / ad group or ad).
   limit: 56, # Integer | Rows per page
@@ -1815,7 +1901,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
 | **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;), or the Google customer id (digits only). |  |
-| **since** | **Date** | Start of range (YYYY-MM-DD). Google: at most 29 days ago, the default. | [optional] |
+| **since** | **Date** | Start of range (YYYY-MM-DD). Google: at most 28 days ago, the default. | [optional] |
 | **_until** | **Date** | End of range (YYYY-MM-DD). | [optional] |
 | **object_id** | **String** | Client-side filter to one object id (campaign, ad set / ad group or ad). | [optional] |
 | **limit** | **Integer** | Rows per page | [optional][default to 50] |
@@ -2788,7 +2874,7 @@ end
 
 List ad accounts
 
-Lists the ad accounts a connection can manage, such as Meta ad accounts, TikTok advertisers or Google Ads customers.  Returns the platform ad accounts available for the given account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  ### Meta  Meta business-login accounts use their own system-user token.  Fresh Meta discovery includes businessId and businessName from the owning Business Manager when available. Cached entries gain these fields after the next discovery refresh.  ### TikTok agencies  1. Zernio enumerates every advertiser under every Business Center the token can read (paginated server-side). 2. It then chunks the lookup against TikTok's `/advertiser/info/` endpoint (which has a per-call cap of ≤100 IDs).  Solo advertisers without a BC fall back to the OAuth-time `advertiser_ids` list. The result is cached for 1h on the SocialAccount and lazy-refreshed on first call after expiry.  ### Google Ads  Responds `429` when Google's API quota is temporarily exhausted (instead of an empty list). Retry after a delay.  ### Reddit Ads (`redditads`)  Every Reddit ad account the connected Reddit user can reach, with `businessId`, `approvalStatus` (Reddit's `admin_approval`), `timezone` and `type`.  ### Selection (`selected`)  Every listed ad account carries `selected`: whether it is in the connection's ad-account selection. That is the ad accounts picked at connect time or in the dashboard picker, the ones Zernio syncs. On a connection without a selection every ad account is `selected: true`.  Writes through /v1/ads endpoints to an ad account with `selected: false` answer `403 ad_account_not_selected`. Add it to the selection first (dashboard picker, or `GET /v1/connect/{platform}/ads` with `adAccountIds`).  The list includes unselected ad accounts by default. Pass `inScopeOnly=true` to get only the ones this connection can use. 
+Lists the ad accounts a connection can manage, such as Meta ad accounts, TikTok advertisers or Google Ads customers.  Returns the platform ad accounts available for the given account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  ### Meta  Meta business-login accounts use their own system-user token.  Fresh Meta discovery includes businessId and businessName from the owning Business Manager when available. Cached entries gain these fields after the next discovery refresh.  ### TikTok agencies  1. Zernio enumerates every advertiser under every Business Center the token can read (paginated server-side). 2. It then chunks the lookup against TikTok's `/advertiser/info/` endpoint (which has a per-call cap of ≤100 IDs).  Solo advertisers without a BC fall back to the OAuth-time `advertiser_ids` list. The result is cached for 1h on the SocialAccount and lazy-refreshed on first call after expiry.  ### Google Ads  Responds `429` when Google's API quota is temporarily exhausted (instead of an empty list). Retry after a delay.  ### Reddit Ads (`redditads`)  Every Reddit ad account the connected Reddit user can reach, with `businessId`, `approvalStatus` (Reddit's `admin_approval`), `timezone` and `type`.  ### Selection (`selected`)  Every listed ad account carries `selected`: whether it is in the connection's ad-account selection. That is the ad accounts picked at connect time or in the dashboard picker, the ones Zernio syncs. On a connection without a selection every ad account is `selected: true`.  Writes through /v1/ads endpoints to an ad account with `selected: false` answer `403 ad_account_not_selected`. Add it to the selection first (dashboard picker, or `GET /v1/connect/{platform}/ads` with `adAccountIds`).  The list includes unselected ad accounts by default, except on a Meta or TikTok connection with a selection, which lists them only with `live=true`. Pass `inScopeOnly=true` to get only the ones this connection can use. 
 
 ### Examples
 
@@ -2806,7 +2892,8 @@ account_id = 'account_id_example' # String | Account ID
 opts = {
   ad_account_id: 'ad_account_id_example', # String | Filter response to a single platform ad account ID (e.g. `act_123` for Meta, advertiser_id for TikTok). Returns at most one item.
   limit: 56, # Integer | Clamp the returned `accounts[]` length. Useful for typeahead pickers on agency tokens with hundreds of advertisers.
-  in_scope_only: true # Boolean | `true` returns only the ad accounts this connection accepts as `adAccountId` on the other /v1/ads endpoints, i.e. those inside its ad-account selection (every item then has `selected: true`). Without it, every ad account the login can reach is listed and `selected` flags selection membership.  - Meta, LinkedIn, X and Reddit: drops the ad accounts with `selected: false`; a connection without a selection keeps them all. - Google Ads: also drops customers the login reaches that are not on this connection (for example ones selected on another connection of the same login), which those endpoints answer with a 400. - TikTok and Pinterest: no selection, so the list is unchanged.
+  in_scope_only: true, # Boolean | `true` returns only the ad accounts this connection accepts as `adAccountId` on the other /v1/ads endpoints, i.e. those inside its ad-account selection (every item then has `selected: true`).  Without it, every ad account the login can reach is listed and `selected` flags selection membership. Exception: a Meta or TikTok connection with a selection lists unselected ad accounts only with `live=true`.  - Meta, LinkedIn, X, Reddit and TikTok: drops the ad accounts with `selected: false`; a connection without a selection keeps them all. - Google Ads: also drops customers the login reaches that are not on this connection (for example ones selected on another connection of the same login), which those endpoints answer with a 400. - Pinterest: no selection, so the list is unchanged.
+  live: true # Boolean | `true` lists the ad accounts the login reaches live from the platform instead of the stored catalog.  A Meta or TikTok connection with an ad-account selection stores only its selected ad accounts, so without `live=true` it lists only those (a stale catalog falls back to a live listing). With it, every reachable ad account is listed, the others with `selected: false`.
 }
 
 begin
@@ -2843,7 +2930,8 @@ end
 | **account_id** | **String** | Account ID |  |
 | **ad_account_id** | **String** | Filter response to a single platform ad account ID (e.g. &#x60;act_123&#x60; for Meta, advertiser_id for TikTok). Returns at most one item. | [optional] |
 | **limit** | **Integer** | Clamp the returned &#x60;accounts[]&#x60; length. Useful for typeahead pickers on agency tokens with hundreds of advertisers. | [optional] |
-| **in_scope_only** | **Boolean** | &#x60;true&#x60; returns only the ad accounts this connection accepts as &#x60;adAccountId&#x60; on the other /v1/ads endpoints, i.e. those inside its ad-account selection (every item then has &#x60;selected: true&#x60;). Without it, every ad account the login can reach is listed and &#x60;selected&#x60; flags selection membership.  - Meta, LinkedIn, X and Reddit: drops the ad accounts with &#x60;selected: false&#x60;; a connection without a selection keeps them all. - Google Ads: also drops customers the login reaches that are not on this connection (for example ones selected on another connection of the same login), which those endpoints answer with a 400. - TikTok and Pinterest: no selection, so the list is unchanged. | [optional][default to false] |
+| **in_scope_only** | **Boolean** | &#x60;true&#x60; returns only the ad accounts this connection accepts as &#x60;adAccountId&#x60; on the other /v1/ads endpoints, i.e. those inside its ad-account selection (every item then has &#x60;selected: true&#x60;).  Without it, every ad account the login can reach is listed and &#x60;selected&#x60; flags selection membership. Exception: a Meta or TikTok connection with a selection lists unselected ad accounts only with &#x60;live&#x3D;true&#x60;.  - Meta, LinkedIn, X, Reddit and TikTok: drops the ad accounts with &#x60;selected: false&#x60;; a connection without a selection keeps them all. - Google Ads: also drops customers the login reaches that are not on this connection (for example ones selected on another connection of the same login), which those endpoints answer with a 400. - Pinterest: no selection, so the list is unchanged. | [optional][default to false] |
+| **live** | **Boolean** | &#x60;true&#x60; lists the ad accounts the login reaches live from the platform instead of the stored catalog.  A Meta or TikTok connection with an ad-account selection stores only its selected ad accounts, so without &#x60;live&#x3D;true&#x60; it lists only those (a stale catalog falls back to a live listing). With it, every reachable ad account is listed, the others with &#x60;selected: false&#x60;. | [optional][default to false] |
 
 ### Return type
 
@@ -3169,7 +3257,7 @@ end
 
 List Instagram ad identities
 
-Lists the Instagram accounts a Meta ad connection can run ads as, so you can pick the identity for a new ad.  Discovers identities through connected_instagram_accounts, Page linkage and Page-backed identities, with a best-effort business fallback. Business permission errors do not fail discovery. The resolved object uses the same profile-scoped resolver as ad creation; null means no identity was resolved. Format-specific observed-actor fallbacks at creative creation are not predicted. 
+Lists the Instagram accounts a Meta ad connection can run ads as, so you can pick the identity for a new ad.  Discovers identities through connected_instagram_accounts, Page linkage and Page-backed identities, with a best-effort business fallback. Business permission errors do not fail discovery. The resolved object uses the same profile-scoped resolver as ad creation; null means no identity was resolved. Format-specific observed-actor fallbacks at creative creation are not predicted.  Instagram accounts and Pages that other businesses share with the ad account's business as partner assets are listed with source business_partner, and Pages the ad account promotes with source promote_pages. These reads are best effort: a failure there never fails discovery. 
 
 ### Examples
 
@@ -3386,11 +3474,11 @@ end
 
 ## list_custom_conversions
 
-> <ListCustomConversions200Response> list_custom_conversions(account_id, ad_account_id)
+> <ListAdCustomConversions200Response> list_custom_conversions(account_id, ad_account_id)
 
 List custom conversions
 
-Lists a Meta ad account's custom conversions, including archived ones.  The ad account's Meta custom conversions, including archived ones (`isArchived`). 
+The first path of `GET /v1/ads/conversions/custom-conversions` (`listAdCustomConversions`), which does the same with `accountId` as a parameter. It keeps working. 
 
 ### Examples
 
@@ -3420,7 +3508,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListCustomConversions200Response>, Integer, Hash)> list_custom_conversions_with_http_info(account_id, ad_account_id)
+> <Array(<ListAdCustomConversions200Response>, Integer, Hash)> list_custom_conversions_with_http_info(account_id, ad_account_id)
 
 ```ruby
 begin
@@ -3428,7 +3516,7 @@ begin
   data, status_code, headers = api_instance.list_custom_conversions_with_http_info(account_id, ad_account_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ListCustomConversions200Response>
+  p data # => <ListAdCustomConversions200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->list_custom_conversions_with_http_info: #{e}"
 end
@@ -3443,7 +3531,7 @@ end
 
 ### Return type
 
-[**ListCustomConversions200Response**](ListCustomConversions200Response.md)
+[**ListAdCustomConversions200Response**](ListAdCustomConversions200Response.md)
 
 ### Authorization
 
@@ -4363,7 +4451,7 @@ end
 
 ## replace_ad_negative_keyword_list_keywords
 
-> <ReplaceAdNegativeKeywordListKeywords200Response> replace_ad_negative_keyword_list_keywords(list_id, replace_ad_negative_keyword_list_keywords_request)
+> <ReplaceAdNegativeKeywordListKeywords200Response> replace_ad_negative_keyword_list_keywords(list_id, replace_ad_negative_keyword_list_keywords_request, opts)
 
 Replace negative list keywords
 
@@ -4383,10 +4471,13 @@ end
 api_instance = Zernio::AdAccountsApi.new
 list_id = 'list_id_example' # String | 
 replace_ad_negative_keyword_list_keywords_request = Zernio::ReplaceAdNegativeKeywordListKeywordsRequest.new({account_id: 'account_id_example', keywords: [Zernio::KeywordEntryOneOf.new({text: 'text_example'})]}) # ReplaceAdNegativeKeywordListKeywordsRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Replace negative list keywords
-  result = api_instance.replace_ad_negative_keyword_list_keywords(list_id, replace_ad_negative_keyword_list_keywords_request)
+  result = api_instance.replace_ad_negative_keyword_list_keywords(list_id, replace_ad_negative_keyword_list_keywords_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->replace_ad_negative_keyword_list_keywords: #{e}"
@@ -4397,12 +4488,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ReplaceAdNegativeKeywordListKeywords200Response>, Integer, Hash)> replace_ad_negative_keyword_list_keywords_with_http_info(list_id, replace_ad_negative_keyword_list_keywords_request)
+> <Array(<ReplaceAdNegativeKeywordListKeywords200Response>, Integer, Hash)> replace_ad_negative_keyword_list_keywords_with_http_info(list_id, replace_ad_negative_keyword_list_keywords_request, opts)
 
 ```ruby
 begin
   # Replace negative list keywords
-  data, status_code, headers = api_instance.replace_ad_negative_keyword_list_keywords_with_http_info(list_id, replace_ad_negative_keyword_list_keywords_request)
+  data, status_code, headers = api_instance.replace_ad_negative_keyword_list_keywords_with_http_info(list_id, replace_ad_negative_keyword_list_keywords_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReplaceAdNegativeKeywordListKeywords200Response>
@@ -4417,6 +4508,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **list_id** | **String** |  |  |
 | **replace_ad_negative_keyword_list_keywords_request** | [**ReplaceAdNegativeKeywordListKeywordsRequest**](ReplaceAdNegativeKeywordListKeywordsRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4866,7 +4958,7 @@ end
 
 Update ad account settings
 
-Changes a Meta ad account's name, spend cap or default EU DSA beneficiary and payor.  Pass any combination of fields. On Google Ads, only URL tracking fields apply (see below). Other platforms return 400.  ### Spend cap  `spendCap` is the total the account may spend before Meta pauses every campaign in it, in whole units of the account currency.  - `spendCap: null` removes the cap. - `resetAmountSpent: true` restarts the amount counted against it from zero.  When `name`, `spendCap` or `resetAmountSpent` is passed, the response carries `settings`: the account's finances re-read after the write (same shape as `GET /v1/ads/accounts/finance`). The effective cap can be confirmed in one call.  ### DSA defaults  Sets the default DSA beneficiary and payor on the ad account (EU DSA, Article 26). Set them once and every EU-targeted call to `/v1/ads/create`, `/v1/ads/boost` and `/v1/ads/ctwa` on that ad account can omit `dsaBeneficiary`/`dsaPayor`: Meta applies the defaults automatically.  The values are written to the ad account on Meta, the same setting Ads Manager edits. Nothing is stored in Zernio, and defaults already set in Ads Manager work identically.  Zernio never guesses these values for you. Beneficiary and payor are legal disclosures shown to EU users, so you must provide the entity names explicitly. Use `GET /v1/ads/dsa-recommendations` to offer suggestions in your UI.  If `defaultDsaPayor` is omitted, the beneficiary is also set as the payor. That covers the common case where the same entity benefits from and pays for the ads. Read the current values back with `GET /v1/ads/dsa-defaults`.  ### Google: account-level URL tracking  On a Google Ads connection, `adAccountId` is the customer id and only `trackingUrlTemplate` / `finalUrlSuffix` are accepted (the Meta fields return 400).  - They write `customer.tracking_url_template` and `customer.final_url_suffix`, one update mask leaf per field sent. - An empty string clears the field. - The response carries `urlTracking` with the values written.  For one campaign, send the same fields to PUT /v1/ads/campaigns/{campaignId}. 
+Changes a Meta ad account's name, spend cap or default EU DSA beneficiary and payor.  Pass any combination of fields. On Google Ads, only URL tracking fields apply (see below). Other platforms return 400.  ### Spend cap  `spendCap` is the total the account may spend before Meta pauses every campaign in it, in whole units of the account currency.  - `spendCap: null` removes the cap. - `resetAmountSpent: true` restarts the amount counted against it from zero. - Meta allows 10 spend cap changes per ad account per day (`spendCap`, `resetAmountSpent` and `spendCap: null` all count). Past that the call answers 429 `spend_cap_change_limit_reached` at once, and retrying fails until Meta's window resets.  When `name`, `spendCap` or `resetAmountSpent` is passed, the response carries `settings`: the account's finances re-read after the write (same shape as `GET /v1/ads/accounts/finance`). The effective cap can be confirmed in one call.  ### DSA defaults  Sets the default DSA beneficiary and payor on the ad account (EU DSA, Article 26). Set them once and every EU-targeted call to `/v1/ads/create`, `/v1/ads/boost` and `/v1/ads/ctwa` on that ad account can omit `dsaBeneficiary`/`dsaPayor`: Meta applies the defaults automatically.  The values are written to the ad account on Meta, the same setting Ads Manager edits. Nothing is stored in Zernio, and defaults already set in Ads Manager work identically.  Zernio never guesses these values for you. Beneficiary and payor are legal disclosures shown to EU users, so you must provide the entity names explicitly. Use `GET /v1/ads/dsa-recommendations` to offer suggestions in your UI.  If `defaultDsaPayor` is omitted, the beneficiary is also set as the payor. That covers the common case where the same entity benefits from and pays for the ads. Read the current values back with `GET /v1/ads/dsa-defaults`.  ### Google: account-level URL tracking  On a Google Ads connection, `adAccountId` is the customer id and only `trackingUrlTemplate` / `finalUrlSuffix` are accepted (the Meta fields return 400).  - They write `customer.tracking_url_template` and `customer.final_url_suffix`, one update mask leaf per field sent. - An empty string clears the field. - The response carries `urlTracking` with the values written.  For one campaign, send the same fields to PUT /v1/ads/campaigns/{campaignId}. 
 
 ### Examples
 
@@ -5071,7 +5163,7 @@ end
 
 ## update_ad_negative_keyword_list
 
-> <UpdateAdNegativeKeywordList200Response> update_ad_negative_keyword_list(list_id, update_ad_negative_keyword_list_request)
+> <UpdateAdNegativeKeywordList200Response> update_ad_negative_keyword_list(list_id, update_ad_negative_keyword_list_request, opts)
 
 Rename a negative keyword list
 
@@ -5091,10 +5183,13 @@ end
 api_instance = Zernio::AdAccountsApi.new
 list_id = 'list_id_example' # String | 
 update_ad_negative_keyword_list_request = Zernio::UpdateAdNegativeKeywordListRequest.new({account_id: 'account_id_example', name: 'name_example'}) # UpdateAdNegativeKeywordListRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Rename a negative keyword list
-  result = api_instance.update_ad_negative_keyword_list(list_id, update_ad_negative_keyword_list_request)
+  result = api_instance.update_ad_negative_keyword_list(list_id, update_ad_negative_keyword_list_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->update_ad_negative_keyword_list: #{e}"
@@ -5105,12 +5200,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdNegativeKeywordList200Response>, Integer, Hash)> update_ad_negative_keyword_list_with_http_info(list_id, update_ad_negative_keyword_list_request)
+> <Array(<UpdateAdNegativeKeywordList200Response>, Integer, Hash)> update_ad_negative_keyword_list_with_http_info(list_id, update_ad_negative_keyword_list_request, opts)
 
 ```ruby
 begin
   # Rename a negative keyword list
-  data, status_code, headers = api_instance.update_ad_negative_keyword_list_with_http_info(list_id, update_ad_negative_keyword_list_request)
+  data, status_code, headers = api_instance.update_ad_negative_keyword_list_with_http_info(list_id, update_ad_negative_keyword_list_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdNegativeKeywordList200Response>
@@ -5125,6 +5220,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **list_id** | **String** |  |  |
 | **update_ad_negative_keyword_list_request** | [**UpdateAdNegativeKeywordListRequest**](UpdateAdNegativeKeywordListRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 

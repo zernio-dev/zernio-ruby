@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **use_default** | **Boolean** |  | [optional] |
-| **overrides** | [**Array&lt;CalendarEventFieldsRemindersOverridesInner&gt;**](CalendarEventFieldsRemindersOverridesInner.md) |  | [optional] |
+| **overrides** | [**Array&lt;CalendarEventRemindersOverridesInner&gt;**](CalendarEventRemindersOverridesInner.md) |  | [optional] |
 
 ## Example
 

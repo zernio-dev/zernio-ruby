@@ -11,7 +11,7 @@
 | **post_click_attribution_window_size** | **Integer** | 365 only allowed for LEAD, PURCHASE, ADD_TO_CART, QUALIFIED_LEAD, SUBMIT_APPLICATION rule types.  | [optional] |
 | **view_through_attribution_window_size** | **Integer** | 365 only allowed for LEAD, PURCHASE, ADD_TO_CART, QUALIFIED_LEAD, SUBMIT_APPLICATION rule types.  | [optional] |
 | **value_type** | **String** |  | [optional] |
-| **value** | [**UpdateConversionDestinationRequestValue**](UpdateConversionDestinationRequestValue.md) |  | [optional] |
+| **value** | [**UpdateAdConversionDestinationRequestValue**](UpdateAdConversionDestinationRequestValue.md) |  | [optional] |
 
 ## Example
 

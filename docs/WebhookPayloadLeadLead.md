@@ -5,7 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Zernio lead ID (AdLead document ID) |  |
-| **leadgen_id** | **String** | Meta lead ID (the platform&#39;s leadgen_id) |  |
+| **platform** | **String** | The ad network the lead came from. | [optional] |
+| **leadgen_id** | **String** | The network&#39;s lead id: Meta&#39;s leadgen_id, or the Google lead form submission id |  |
 | **form_id** | **String** | Lead Gen form ID the lead was submitted against |  |
 | **form_name** | **String** | Human-readable form name (best-effort; may be null) | [optional] |
 | **ad_id** | **String** | Meta ad ID that drove the lead (null for organic/test leads) | [optional] |
@@ -23,6 +24,7 @@ require 'zernio-sdk'
 
 instance = Zernio::WebhookPayloadLeadLead.new(
   id: null,
+  platform: null,
   leadgen_id: null,
   form_id: null,
   form_name: null,

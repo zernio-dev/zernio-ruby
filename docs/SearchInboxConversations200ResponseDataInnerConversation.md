@@ -7,9 +7,11 @@
 | **id** | **String** | Conversation ID, usable with the conversation messages endpoints | [optional] |
 | **platform** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
+| **participant_id** | **String** |  | [optional] |
 | **participant_name** | **String** |  | [optional] |
 | **participant_username** | **String** |  | [optional] |
 | **participant_picture** | **String** |  | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content, so the content fields of this row are null. Identifiers and metadata stay. | [optional] |
 | **business_scoped_user_id** | **String** | WhatsApp only. Meta business-scoped user ID (BSUID), the stable identity anchor; present when Meta has sent it for this participant. | [optional] |
 | **whatsapp_username** | **String** | WhatsApp only. The participant&#39;s WhatsApp username (e.g. &#x60;jane.shop&#x60;, no leading @). Not a stable identifier, because users can change it: useful for display, not recommended as an identity anchor. Captured from inbound messages, so older threads fill in on their next inbound. | [optional] |
 | **status** | **String** |  | [optional] |
@@ -25,9 +27,11 @@ instance = Zernio::SearchInboxConversations200ResponseDataInnerConversation.new(
   id: null,
   platform: null,
   account_id: null,
+  participant_id: null,
   participant_name: null,
   participant_username: null,
   participant_picture: null,
+  content_not_retained: null,
   business_scoped_user_id: null,
   whatsapp_username: null,
   status: null,

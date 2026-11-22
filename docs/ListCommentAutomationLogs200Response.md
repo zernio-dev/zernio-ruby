@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
 | **logs** | [**Array&lt;CommentAutomationLog&gt;**](CommentAutomationLog.md) |  | [optional] |
-| **pagination** | [**ListContacts200ResponsePagination**](ListContacts200ResponsePagination.md) |  | [optional] |
+| **pagination** | [**ListWorkspaces200ResponsePagination**](ListWorkspaces200ResponsePagination.md) |  | [optional] |
 | **misses** | [**ListCommentAutomationLogs200ResponseMisses**](ListCommentAutomationLogs200ResponseMisses.md) |  | [optional] |
 
 ## Example

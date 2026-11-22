@@ -22,6 +22,7 @@
 | **link** | **String** | Pinterest only: destination URL of the Pin, not the Pin page (see permalink) | [optional] |
 | **board_id** | **String** | Pinterest only: id of the board holding the Pin | [optional] |
 | **board_owner_username** | **String** | Pinterest only: username of the board owner | [optional] |
+| **is_owner** | **Boolean** | Pinterest: true when the account created the Pin, false when it saved it from another user. Facebook: false for a collab post by another Page. Absent when the platform does not report it. | [optional] |
 
 ## Example
 
@@ -46,7 +47,8 @@ instance = Zernio::GetAccountPosts200ResponsePostsInner.new(
   description: null,
   link: null,
   board_id: null,
-  board_owner_username: null
+  board_owner_username: null,
+  is_owner: null
 )
 ```
 

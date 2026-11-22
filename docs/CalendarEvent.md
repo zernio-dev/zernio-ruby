@@ -25,6 +25,8 @@
 | **status** | **String** |  | [optional] |
 | **ical_uid** | **String** |  | [optional] |
 | **master_event_id** | **String** |  | [optional] |
+| **type** | **String** | &#x60;series&#x60; is a recurring master, &#x60;occurrence&#x60; one of its instances, and &#x60;exception&#x60; an instance changed on its own. Google flags an instance as an exception only when it was moved off its slot. | [optional] |
+| **original_start** | **String** | For an occurrence or exception, the start it has in the series pattern. | [optional] |
 | **html_link** | **String** |  | [optional] |
 | **read_only** | **Boolean** |  | [optional] |
 | **metadata** | **Hash&lt;String, String&gt;** |  | [optional] |
@@ -58,6 +60,8 @@ instance = Zernio::CalendarEvent.new(
   status: null,
   ical_uid: null,
   master_event_id: null,
+  type: null,
+  original_start: null,
   html_link: null,
   read_only: null,
   metadata: null,

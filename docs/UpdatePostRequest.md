@@ -19,6 +19,7 @@
 | **mentions** | **Array&lt;String&gt;** |  | [optional] |
 | **crossposting_enabled** | **Boolean** |  | [optional] |
 | **metadata** | **Hash&lt;String, Object&gt;** |  | [optional] |
+| **external_id** | **String** | Your own identifier for this post (see &#x60;externalId&#x60; on create). Send &#x60;null&#x60; to clear it. Also accepted on published posts. | [optional] |
 | **queued_from_profile** | **String** | Profile ID to schedule via queue. | [optional] |
 | **queue_id** | **String** | Specific queue ID to use when scheduling via queue. | [optional] |
 | **tiktok_settings** | [**TikTokPlatformData**](TikTokPlatformData.md) | Root-level TikTok settings applied to the TikTok platforms sent in the same request. Merged into each platform&#39;s platformSpecificData, with platform-specific settings taking precedence. Returns 400 if sent without a platforms array. | [optional] |
@@ -46,6 +47,7 @@ instance = Zernio::UpdatePostRequest.new(
   mentions: null,
   crossposting_enabled: null,
   metadata: null,
+  external_id: null,
   queued_from_profile: null,
   queue_id: null,
   tiktok_settings: null,

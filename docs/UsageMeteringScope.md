@@ -15,7 +15,7 @@ Zernio::UsageMeteringScope.openapi_one_of
 # =>
 # [
 #   :'DeleteInboxReviewReplyRequest',
-#   :'UsageMeteringScopeOneOf'
+#   :'UsageProfileRef'
 # ]
 ```
 
@@ -44,6 +44,6 @@ Zernio::UsageMeteringScope.build(data_that_doesnt_match)
 #### Return type
 
 - `DeleteInboxReviewReplyRequest`
-- `UsageMeteringScopeOneOf`
+- `UsageProfileRef`
 - `nil` (if no type matches)
 

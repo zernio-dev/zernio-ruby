@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_profile**](ProfilesApi.md#create_profile) | **POST** /v1/profiles | Create profile |
 | [**delete_profile**](ProfilesApi.md#delete_profile) | **DELETE** /v1/profiles/{profileId} | Delete profile |
 | [**get_profile**](ProfilesApi.md#get_profile) | **GET** /v1/profiles/{profileId} | Get profile |
+| [**get_profile_limits**](ProfilesApi.md#get_profile_limits) | **GET** /v1/profiles/{profileId}/limits | Get profile call limits |
 | [**list_profiles**](ProfilesApi.md#list_profiles) | **GET** /v1/profiles | List profiles |
 | [**update_profile**](ProfilesApi.md#update_profile) | **PUT** /v1/profiles/{profileId} | Update profile |
 
@@ -33,7 +34,7 @@ end
 api_instance = Zernio::ProfilesApi.new
 create_profile_request = Zernio::CreateProfileRequest.new({name: 'name_example'}) # CreateProfileRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -68,7 +69,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_profile_request** | [**CreateProfileRequest**](CreateProfileRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -222,6 +223,75 @@ end
 - **Accept**: application/json
 
 
+## get_profile_limits
+
+> <ProfileCallLimitsResponse> get_profile_limits(profile_id)
+
+Get profile call limits
+
+Returns every voice call limit that applies to calls on this profile's numbers: the profile's own limits (set with `maxOutboundCallsPerHour`, `maxDailyCallSpendUsd` and `maxForwardedMinutesPerDay` on the profile) and the team limits they sit inside.  Each entry has the limit, what is used in its window and what remains. Spend entries are in billed USD, the unit `maxDailyCallSpendUsd` uses.  A null `limit` (and `remaining`) means the profile sets no limit there; only the team limits apply. Past any limit an outbound call returns 429 `call_limit_reached` and a forward to a phone goes to voicemail. A profile-scoped API key can read its own profile. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ProfilesApi.new
+profile_id = 'profile_id_example' # String | 
+
+begin
+  # Get profile call limits
+  result = api_instance.get_profile_limits(profile_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ProfilesApi->get_profile_limits: #{e}"
+end
+```
+
+#### Using the get_profile_limits_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ProfileCallLimitsResponse>, Integer, Hash)> get_profile_limits_with_http_info(profile_id)
+
+```ruby
+begin
+  # Get profile call limits
+  data, status_code, headers = api_instance.get_profile_limits_with_http_info(profile_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ProfileCallLimitsResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling ProfilesApi->get_profile_limits_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** |  |  |
+
+### Return type
+
+[**ProfileCallLimitsResponse**](ProfileCallLimitsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_profiles
 
 > <ProfilesListResponse> list_profiles(opts)
@@ -307,7 +377,7 @@ end
 
 Update profile
 
-Updates a profile's name, description, color, default timezone, externalId, or default status.
+Updates a profile's name, description, color, default timezone, externalId, default status, zero content retention, or call limits.
 
 ### Examples
 

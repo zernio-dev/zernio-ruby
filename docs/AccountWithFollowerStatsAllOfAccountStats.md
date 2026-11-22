@@ -4,7 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **following_count** | **Float** | Number of accounts being followed | [optional] |
+| **following_count** | **Float** | Number of accounts being followed (TikTok, X, Pinterest, Bluesky) | [optional] |
+| **follows_count** | **Float** | Number of accounts being followed (Instagram) | [optional] |
 | **media_count** | **Float** | Total media posts (Instagram) | [optional] |
 | **video_count** | **Float** | Total videos (YouTube, TikTok) | [optional] |
 | **tweet_count** | **Float** | Total tweets (X) | [optional] |
@@ -12,7 +13,7 @@
 | **pin_count** | **Float** | Total pins (Pinterest) | [optional] |
 | **total_views** | **Float** | Total channel views (YouTube) | [optional] |
 | **likes_count** | **Float** | Total likes received (TikTok) | [optional] |
-| **monthly_views** | **Float** | Monthly profile views (Pinterest) | [optional] |
+| **monthly_views** | **Float** | Monthly profile views (Pinterest). null when Pinterest reports no window | [optional] |
 | **listed_count** | **Float** | Lists the user appears on (X) | [optional] |
 | **board_count** | **Float** | Total boards (Pinterest) | [optional] |
 
@@ -23,6 +24,7 @@ require 'zernio-sdk'
 
 instance = Zernio::AccountWithFollowerStatsAllOfAccountStats.new(
   following_count: null,
+  follows_count: null,
   media_count: null,
   video_count: null,
   tweet_count: null,

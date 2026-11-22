@@ -7,11 +7,15 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_ad_rule**](AdRulesApi.md#create_ad_rule) | **POST** /v1/ads/rules | Create an ad rule |
 | [**delete_ad_rule**](AdRulesApi.md#delete_ad_rule) | **DELETE** /v1/ads/rules/{ruleId} | Delete an ad rule |
 | [**get_ad_rule**](AdRulesApi.md#get_ad_rule) | **GET** /v1/ads/rules/{ruleId} | Get an ad rule |
+| [**get_ad_rule_hourly_windows**](AdRulesApi.md#get_ad_rule_hourly_windows) | **GET** /v1/ads/rules/hourly-windows | Check whether an ad account has hourly windows |
+| [**list_ad_account_rule_alerts**](AdRulesApi.md#list_ad_account_rule_alerts) | **GET** /v1/ads/rules/alerts | List an ad account&#39;s open alerts |
 | [**list_ad_rule_activity**](AdRulesApi.md#list_ad_rule_activity) | **GET** /v1/ads/rules/activity | List every change ad rules made |
+| [**list_ad_rule_alerts**](AdRulesApi.md#list_ad_rule_alerts) | **GET** /v1/ads/rules/{ruleId}/alerts | List a rule&#39;s alerts |
 | [**list_ad_rule_runs**](AdRulesApi.md#list_ad_rule_runs) | **GET** /v1/ads/rules/{ruleId}/runs | List an ad rule&#39;s runs |
 | [**list_ad_rule_templates**](AdRulesApi.md#list_ad_rule_templates) | **GET** /v1/ads/rules/templates | List ready-made ad rules |
 | [**list_ad_rules**](AdRulesApi.md#list_ad_rules) | **GET** /v1/ads/rules | List ad rules |
 | [**preview_ad_rule**](AdRulesApi.md#preview_ad_rule) | **POST** /v1/ads/rules/{ruleId}/preview | Preview an ad rule |
+| [**undo_ad_rule_activity**](AdRulesApi.md#undo_ad_rule_activity) | **POST** /v1/ads/rules/activity/{activityId}/undo | Undo a change an ad rule made |
 | [**update_ad_rule**](AdRulesApi.md#update_ad_rule) | **PATCH** /v1/ads/rules/{ruleId} | Update an ad rule |
 
 
@@ -21,7 +25,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Create an ad rule
 
-Creates a rule that checks the campaigns or ad sets of one ad account on a schedule and acts on each one that meets every condition.  Rules support Meta, Google, TikTok, LinkedIn, Pinterest, X and Reddit ads connections. Use `POST /v1/ads/rules/{ruleId}/preview` to see what a rule would match before enabling it.  ### Evaluation  Each campaign or ad set is evaluated on its own, over the ad account's calendar days, from the metrics Zernio syncs.  ### Actions  A rule can notify (the `ad_rule.triggered` webhook), and take at most one of:  - `pause` - `activate` - `adjust_budget`  ### Cooldown  After acting on an object, the rule leaves that object alone for `cooldownMinutes`. A rule that pauses, activates or adjusts budgets needs a cooldown at least as long as its schedule.  ### How `activate` works  `activate` only reactivates objects a rule paused, never ones you paused yourself, and only once the cooldown has passed since that pause.  If you reactivate and pause such an object yourself between two runs of a rule, Zernio cannot tell your pause from the rule's, and an `activate` rule may reactivate it. 
+Creates a rule that checks the campaigns, ad sets, ads, keywords or search terms of one ad account on a schedule and acts on each one that meets every condition.  Rules support Meta, Google, TikTok, LinkedIn, Pinterest, X and Reddit ads connections. Keyword and search term rules are Google only. Use `POST /v1/ads/rules/{ruleId}/preview` to see what a rule would match before enabling it.  ### Evaluation  Each object is evaluated on its own, over the ad account's calendar days. Campaigns, ad sets and ads read the metrics Zernio syncs; keywords and search terms are summed from the daily history Zernio keeps of them.  ### Actions  A rule can notify (the `ad_rule.triggered` webhook), and take at most one of:  - `pause` - `activate` - `adjust_budget` - `adjust_bid` - `adjust_target` - `reallocate_budget` - `duplicate` - `edit_name`  A keyword rule can notify and pause; a search term rule only notifies.  ### Cooldown  After acting on an object, the rule leaves that object alone for `cooldownMinutes`. A rule that changes ads (any action but `notify`) needs a cooldown at least as long as its schedule.  ### How `activate` works  `activate` only reactivates objects a rule paused, never ones you paused yourself (unless `includeManuallyPaused` is true), and only once the cooldown has passed since that pause.  A rule on set times (`schedule.times`) does not wait for the cooldown: it restarts only what a rule on set times paused, such as a morning restart after a night pause.  If you reactivate and pause such an object yourself between two runs of a rule, Zernio cannot tell your pause from the rule's, and an `activate` rule may reactivate it. 
 
 ### Examples
 
@@ -35,7 +39,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdRulesApi.new
-create_ad_rule_request = Zernio::CreateAdRuleRequest.new({name: 'name_example', account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', level: Zernio::AdRuleLevel::CAMPAIGN, conditions: Zernio::AdRuleConditions.new({all: [Zernio::AdRuleCondition.new({metric: 'spend', window: 'today', op: '>', value: 3.56})]}), actions: [Zernio::AdRuleActionOneOf.new({type: 'notify'})]}) # CreateAdRuleRequest | 
+create_ad_rule_request = Zernio::CreateAdRuleRequest.new({name: 'name_example', account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', level: Zernio::AdRuleLevel::CAMPAIGN, conditions: Zernio::AdRuleConditionsOneOf.new({all: [Zernio::AdRuleCondition.new({metric: 'spend', window: 'today', op: '>', value: 3.56})]}), actions: [Zernio::AdRuleActionOneOf.new({type: 'notify'})]}) # CreateAdRuleRequest | 
 
 begin
   # Create an ad rule
@@ -222,13 +226,161 @@ end
 - **Accept**: application/json
 
 
+## get_ad_rule_hourly_windows
+
+> <GetAdRuleHourlyWindows200Response> get_ad_rule_hourly_windows(account_id, ad_account_id)
+
+Check whether an ad account has hourly windows
+
+Hourly windows (`last_complete_hour`, `last_3h`, `today_so_far`) read campaign totals hour by hour, which Zernio syncs only for some Meta and Google ad accounts.  A rule with an hourly condition is saved only on an ad account that has them: on any other, creating or editing it returns 400. `hourlyWindows` says which case applies. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdRulesApi.new
+account_id = 'account_id_example' # String | The ads connection.
+ad_account_id = 'ad_account_id_example' # String | The ad account on that connection.
+
+begin
+  # Check whether an ad account has hourly windows
+  result = api_instance.get_ad_rule_hourly_windows(account_id, ad_account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->get_ad_rule_hourly_windows: #{e}"
+end
+```
+
+#### Using the get_ad_rule_hourly_windows_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdRuleHourlyWindows200Response>, Integer, Hash)> get_ad_rule_hourly_windows_with_http_info(account_id, ad_account_id)
+
+```ruby
+begin
+  # Check whether an ad account has hourly windows
+  data, status_code, headers = api_instance.get_ad_rule_hourly_windows_with_http_info(account_id, ad_account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdRuleHourlyWindows200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->get_ad_rule_hourly_windows_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ads connection. |  |
+| **ad_account_id** | **String** | The ad account on that connection. |  |
+
+### Return type
+
+[**GetAdRuleHourlyWindows200Response**](GetAdRuleHourlyWindows200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_account_rule_alerts
+
+> <ListAdAccountRuleAlerts200Response> list_ad_account_rule_alerts(account_id, ad_account_id, opts)
+
+List an ad account's open alerts
+
+The open alerts of every rule of one ad account, newest first, in one call: each alert names its rule in `ruleId`. Only `open` alerts are listed. For one rule's pending and resolved alerts, use `GET /v1/ads/rules/{ruleId}/alerts`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdRulesApi.new
+account_id = 'account_id_example' # String | The connected ads account the rules run on.
+ad_account_id = 'ad_account_id_example' # String | The platform ad account ID.
+opts = {
+  limit: 56, # Integer | 
+  cursor: 'cursor_example' # String | `nextCursor` from the previous page.
+}
+
+begin
+  # List an ad account's open alerts
+  result = api_instance.list_ad_account_rule_alerts(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->list_ad_account_rule_alerts: #{e}"
+end
+```
+
+#### Using the list_ad_account_rule_alerts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdAccountRuleAlerts200Response>, Integer, Hash)> list_ad_account_rule_alerts_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # List an ad account's open alerts
+  data, status_code, headers = api_instance.list_ad_account_rule_alerts_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdAccountRuleAlerts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->list_ad_account_rule_alerts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The connected ads account the rules run on. |  |
+| **ad_account_id** | **String** | The platform ad account ID. |  |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **cursor** | **String** | &#x60;nextCursor&#x60; from the previous page. | [optional] |
+
+### Return type
+
+[**ListAdAccountRuleAlerts200Response**](ListAdAccountRuleAlerts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_ad_rule_activity
 
 > <ListAdRuleActivity200Response> list_ad_rule_activity(opts)
 
 List every change ad rules made
 
-The permanent record of what your rules did: one entry per pause, reactivation or budget change (including skipped and failed attempts), newest first, across all rules of the profiles the key can reach. Entries stay after a rule is renamed or deleted; `ruleName` is the rule's name when it acted. 
+What your rules did over the last 31 days, newest first, across all rules of the profiles the key can reach.  There is one entry per change a rule made or tried: pause, reactivation, budget, bid or target change, copy or name tag. Skipped and failed attempts are included.  Entries stay for those 31 days after a rule is renamed or deleted; `ruleName` is the rule's name when it acted. 
 
 ### Examples
 
@@ -305,13 +457,90 @@ end
 - **Accept**: application/json
 
 
+## list_ad_rule_alerts
+
+> <ListAdRuleAlerts200Response> list_ad_rule_alerts(rule_id, opts)
+
+List a rule's alerts
+
+The alert episodes of a rule with a `lifecycle`, newest first. `pending` alerts are confirming, `open` ones were acted on, `resolved` ones ended, with `resolvedReason` saying why. Resolved alerts are kept 90 days. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdRulesApi.new
+rule_id = 'rule_id_example' # String | 
+opts = {
+  state: 'pending', # String | 
+  limit: 56, # Integer | 
+  cursor: 'cursor_example' # String | `nextCursor` from the previous page.
+}
+
+begin
+  # List a rule's alerts
+  result = api_instance.list_ad_rule_alerts(rule_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->list_ad_rule_alerts: #{e}"
+end
+```
+
+#### Using the list_ad_rule_alerts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdRuleAlerts200Response>, Integer, Hash)> list_ad_rule_alerts_with_http_info(rule_id, opts)
+
+```ruby
+begin
+  # List a rule's alerts
+  data, status_code, headers = api_instance.list_ad_rule_alerts_with_http_info(rule_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdRuleAlerts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->list_ad_rule_alerts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **rule_id** | **String** |  |  |
+| **state** | **String** |  | [optional] |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **cursor** | **String** | &#x60;nextCursor&#x60; from the previous page. | [optional] |
+
+### Return type
+
+[**ListAdRuleAlerts200Response**](ListAdRuleAlerts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_ad_rule_runs
 
 > <ListAdRuleRuns200Response> list_ad_rule_runs(rule_id, opts)
 
 List an ad rule's runs
 
-Lists a rule's scheduled runs, newest first: what each run evaluated, matched and did. Runs that changed something (or tried to) are kept permanently, also after the rule is deleted; runs that changed nothing are dropped after about 31 days. For every change across all rules, use `GET /v1/ads/rules/activity`. 
+Lists a rule's scheduled runs, newest first: what each run evaluated, matched and did. A run that matched nothing or did not happen (`no_match`, `paused`) is kept 7 days, any other run 31 days. For every change across all rules, use `GET /v1/ads/rules/activity`. 
 
 ### Examples
 
@@ -581,6 +810,75 @@ end
 ### Return type
 
 [**AdRuleEvaluation**](AdRuleEvaluation.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## undo_ad_rule_activity
+
+> <UndoAdRuleActivity200Response> undo_ad_rule_activity(activity_id)
+
+Undo a change an ad rule made
+
+Puts back a pause, reactivation, budget or bid change, or name tag a rule applied, as a new change recorded in the activity feed. The rule's cooldown then covers the object.  It is refused (409 `invalid_resource_state`) when the change was not applied, was already undone, is a copy, or when the object changed since: delivering again after a pause, paused again after a reactivation, or on another budget, bid or name. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdRulesApi.new
+activity_id = 'activity_id_example' # String | The `id` of an entry from `GET /v1/ads/rules/activity`.
+
+begin
+  # Undo a change an ad rule made
+  result = api_instance.undo_ad_rule_activity(activity_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->undo_ad_rule_activity: #{e}"
+end
+```
+
+#### Using the undo_ad_rule_activity_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UndoAdRuleActivity200Response>, Integer, Hash)> undo_ad_rule_activity_with_http_info(activity_id)
+
+```ruby
+begin
+  # Undo a change an ad rule made
+  data, status_code, headers = api_instance.undo_ad_rule_activity_with_http_info(activity_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UndoAdRuleActivity200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdRulesApi->undo_ad_rule_activity_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **activity_id** | **String** | The &#x60;id&#x60; of an entry from &#x60;GET /v1/ads/rules/activity&#x60;. |  |
+
+### Return type
+
+[**UndoAdRuleActivity200Response**](UndoAdRuleActivity200Response.md)
 
 ### Authorization
 

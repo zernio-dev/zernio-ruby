@@ -33,6 +33,7 @@
 | **bid_amount** | **Float** | Representative bid from the top-spending ad set (whole currency units). Meta: populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. LinkedIn: the campaign unitCost, ungated, where 0 is a real delivery-stopping value. | [optional] |
 | **roas_average_floor** | **Float** | Representative ROAS floor from the top-spending ad set. Decimal multiplier (2.0 &#x3D; 2.0x). | [optional] |
 | **promoted_object** | [**AdTreeCampaignPromotedObject**](AdTreeCampaignPromotedObject.md) |  | [optional] |
+| **special_ad_categories** | **Array&lt;String&gt;** | Special ad categories declared when Zernio created the campaign, read from the ad that created it (its earliest ad), e.g. [\&quot;HOUSING\&quot;]. Absent when none was declared or the campaign was created outside Zernio. | [optional] |
 | **earliest_ad** | **Time** |  | [optional] |
 | **latest_ad** | **Time** |  | [optional] |
 
@@ -71,6 +72,7 @@ instance = Zernio::AdCampaign.new(
   bid_amount: null,
   roas_average_floor: null,
   promoted_object: null,
+  special_ad_categories: null,
   earliest_ad: null,
   latest_ad: null
 )

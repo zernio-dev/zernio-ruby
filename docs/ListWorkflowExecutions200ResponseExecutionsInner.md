@@ -8,7 +8,7 @@
 | **status** | **String** |  | [optional] |
 | **current_node_id** | **String** |  | [optional] |
 | **waiting_for** | [**ListWorkflowExecutions200ResponseExecutionsInnerWaitingFor**](ListWorkflowExecutions200ResponseExecutionsInnerWaitingFor.md) |  | [optional] |
-| **variables** | **Hash&lt;String, Object&gt;** |  | [optional] |
+| **variables** | **Hash&lt;String, Object&gt;** | Empty once the run finishes when the team does not retain content. | [optional] |
 | **platform_identifier** | **String** |  | [optional] |
 | **conversation_id** | **String** | Null only while a comment-triggered run has not sent its private reply yet. | [optional] |
 | **step_count** | **Integer** |  | [optional] |

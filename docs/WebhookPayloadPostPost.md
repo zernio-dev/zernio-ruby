@@ -5,7 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  |  |
-| **content** | **String** |  |  |
+| **content** | **String** | Absent once publishing finishes when the team does not retain content. | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content and the post text was already cleared. | [optional] |
 | **status** | **String** |  |  |
 | **scheduled_for** | **Time** |  |  |
 | **published_at** | **Time** |  | [optional] |
@@ -20,6 +21,7 @@ require 'zernio-sdk'
 instance = Zernio::WebhookPayloadPostPost.new(
   id: null,
   content: null,
+  content_not_retained: null,
   status: null,
   scheduled_for: null,
   published_at: null,

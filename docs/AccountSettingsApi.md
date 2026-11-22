@@ -17,6 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_messenger_ice_breakers**](AccountSettingsApi.md#get_messenger_ice_breakers) | **GET** /v1/accounts/{accountId}/messenger-ice-breakers | Get FB ice breakers |
 | [**get_messenger_menu**](AccountSettingsApi.md#get_messenger_menu) | **GET** /v1/accounts/{accountId}/messenger-menu | Get persistent menu |
 | [**get_telegram_commands**](AccountSettingsApi.md#get_telegram_commands) | **GET** /v1/accounts/{accountId}/telegram-commands | Get TG bot commands |
+| [**get_wechat_server_config**](AccountSettingsApi.md#get_wechat_server_config) | **GET** /v1/accounts/{accountId}/wechat-server-config | Get WeChat server config |
 | [**set_instagram_ice_breakers**](AccountSettingsApi.md#set_instagram_ice_breakers) | **PUT** /v1/accounts/{accountId}/instagram-ice-breakers | Set IG ice breakers |
 | [**set_messenger_get_started**](AccountSettingsApi.md#set_messenger_get_started) | **PUT** /v1/accounts/{accountId}/messenger-get-started | Set FB Get Started button |
 | [**set_messenger_greeting**](AccountSettingsApi.md#set_messenger_greeting) | **PUT** /v1/accounts/{accountId}/messenger-greeting | Set FB greeting text |
@@ -909,6 +910,75 @@ end
 ### Return type
 
 [**GetTelegramCommands200Response**](GetTelegramCommands200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_wechat_server_config
+
+> <GetWechatServerConfig200Response> get_wechat_server_config(account_id)
+
+Get WeChat server config
+
+Returns the Server URL, Token and EncodingAESKey of a connected WeChat Official Account: the same values the connect response carries, for pasting into Server Configuration in the Official Accounts Platform (Safe mode). The AppSecret is never returned.  Needs write access from a session or an API key: read-only team members, read-only API keys and OAuth access tokens get 403. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountSettingsApi.new
+account_id = 'account_id_example' # String | 
+
+begin
+  # Get WeChat server config
+  result = api_instance.get_wechat_server_config(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountSettingsApi->get_wechat_server_config: #{e}"
+end
+```
+
+#### Using the get_wechat_server_config_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWechatServerConfig200Response>, Integer, Hash)> get_wechat_server_config_with_http_info(account_id)
+
+```ruby
+begin
+  # Get WeChat server config
+  data, status_code, headers = api_instance.get_wechat_server_config_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWechatServerConfig200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountSettingsApi->get_wechat_server_config_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**GetWechatServerConfig200Response**](GetWechatServerConfig200Response.md)
 
 ### Authorization
 

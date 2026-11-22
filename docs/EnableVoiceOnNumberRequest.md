@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **forward_to** | **String** | tel:+E164, sip:..., or wss://... destination for inbound calls. Empty string clears the forward (outbound-only); omitted preserves the current one. | [optional] |
+| **ring_in_browser** | **Boolean** | Ring the owner&#39;s open Zernio dashboard tabs first (registered via POST /v1/voice/calls/web/inbound). Unanswered after 20 seconds, declined, or with no tab open, the call takes the forward destination, else voicemail. Superseded by an active IVR. | [optional] |
 | **recording_enabled** | **Boolean** |  | [optional] |
 | **transcription_enabled** | **Boolean** |  | [optional] |
 | **transcription_language** | **String** |  | [optional] |
@@ -26,6 +27,7 @@ require 'zernio-sdk'
 
 instance = Zernio::EnableVoiceOnNumberRequest.new(
   forward_to: null,
+  ring_in_browser: null,
   recording_enabled: null,
   transcription_enabled: null,
   transcription_language: null,

@@ -11,12 +11,14 @@
 | **page_id** | **String** | The bare Facebook Page id behind the account, for Facebook and Instagram connected through Facebook Login. Null when the account has no Facebook Page. | [optional] |
 | **participant_id** | **String** |  | [optional] |
 | **participant_name** | **String** |  | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content, so the content fields of this row are null. Identifiers and metadata stay. | [optional] |
 | **participant_picture** | **String** |  | [optional] |
 | **participant_verified_type** | **String** | X verified badge type. Only present for X conversations. | [optional] |
 | **business_scoped_user_id** | **String** | WhatsApp only. Meta business-scoped user ID (BSUID), the stable identity anchor; present when Meta has sent it for this participant. | [optional] |
 | **whatsapp_username** | **String** | WhatsApp only. The participant&#39;s WhatsApp username (e.g. &#x60;jane.shop&#x60;, no leading @). Not a stable identifier, because users can change it: useful for display, not recommended as an identity anchor. Captured from inbound messages, so older threads fill in on their next inbound. | [optional] |
 | **last_message** | **String** |  | [optional] |
 | **updated_time** | **Time** |  | [optional] |
+| **updated_at** | **Time** | When Zernio last wrote this conversation (a new message, a status change, participant details). The key &#x60;updatedSince&#x60; filters and orders on. Absent on a conversation read live from the platform. | [optional] |
 | **status** | **String** |  | [optional] |
 | **unread_count** | **Integer** | Number of unread incoming messages, capped at 1000. Read from a replica, so it can trail a conversation you just marked read by a few seconds. | [optional] |
 | **thread_control** | **String** | Present once a handover has touched the thread (WhatsApp, Facebook, Instagram). ai_agent: Meta Business Agent answers (WhatsApp) and new inbound arrive flagged metadata.standby; app: you hold control; other: another app does (a WhatsApp partner, or a Messenger / Instagram receiver such as Page Inbox). Change it with POST /v1/inbox/conversations/{conversationId}/thread-control. | [optional] |
@@ -40,12 +42,14 @@ instance = Zernio::ListInboxConversations200ResponseDataInner.new(
   page_id: null,
   participant_id: null,
   participant_name: null,
+  content_not_retained: null,
   participant_picture: null,
   participant_verified_type: null,
   business_scoped_user_id: null,
   whatsapp_username: null,
   last_message: null,
   updated_time: null,
+  updated_at: null,
   status: null,
   unread_count: null,
   thread_control: null,

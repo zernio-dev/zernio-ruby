@@ -9,6 +9,7 @@
 | **participant_id** | **String** |  |  |
 | **creator_id** | **String** |  |  |
 | **account_id** | **String** | The creator account the post was published from. |  |
+| **has_spark_code** | **Boolean** | The creator pasted a TikTok Spark code for this post, so it can launch as a Spark Ad. The code itself is never returned. | [optional] |
 | **platform** | **String** |  |  |
 | **platform_post_id** | **String** |  |  |
 | **platform_post_url** | **String** |  |  |
@@ -34,9 +35,10 @@
 | **authenticity_score** | **Integer** |  |  |
 | **authenticity_confidence** | **Float** |  |  |
 | **flags** | [**Array&lt;CampaignSubmissionFlag&gt;**](CampaignSubmissionFlag.md) |  |  |
+| **draft_id** | **String** | The approved draft this post publishes, on a campaign with &#x60;requireDraftApproval&#x60;. |  |
 | **created_at** | **Time** |  |  |
 | **updated_at** | **Time** |  |  |
-| **creator** | [**WebhookPayloadCampaignSubmissionCreator**](WebhookPayloadCampaignSubmissionCreator.md) |  |  |
+| **creator** | [**CreatorCampaignAdResultsSubmissionsInnerCreator**](CreatorCampaignAdResultsSubmissionsInnerCreator.md) |  |  |
 | **authenticity** | [**CampaignSubmissionAuthenticity**](CampaignSubmissionAuthenticity.md) |  |  |
 | **earned_cents** | **Integer** | approvedCents once approved, otherwise accruedCents. |  |
 | **released_cents** | **Integer** | Approved cents whose hold is over, so payable or already paid out. 0 unless approved. |  |
@@ -56,6 +58,7 @@ instance = Zernio::CampaignSubmissionDetail.new(
   participant_id: null,
   creator_id: null,
   account_id: null,
+  has_spark_code: null,
   platform: null,
   platform_post_id: null,
   platform_post_url: null,
@@ -81,6 +84,7 @@ instance = Zernio::CampaignSubmissionDetail.new(
   authenticity_score: null,
   authenticity_confidence: null,
   flags: null,
+  draft_id: null,
   created_at: null,
   updated_at: null,
   creator: null,

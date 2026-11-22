@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | **String** |  | [optional] |
+| **type** | **String** | Same classification as the ad &#x60;creativeType&#x60;. | [optional] |
 | **thumbnail_url** | **String** |  | [optional] |
 | **headline** | **String** |  | [optional] |
 | **body** | **String** |  | [optional] |

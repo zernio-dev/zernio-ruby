@@ -6,6 +6,8 @@
 | ---- | ---- | ----------- | ----- |
 | **_id** | **String** |  | [optional] |
 | **phone_number** | **String** |  | [optional] |
+| **requested_phone_number** | **String** | The specific number you asked for at purchase (&#x60;phoneNumber&#x60; in the purchase body). Absent when you did not pick one. When it differs from &#x60;phoneNumber&#x60;, WhatsApp refused the picked number (it was likely registered on WhatsApp before), so a different number was issued. | [optional] |
+| **purchase_intent_id** | **String** | The purchaseIntentId the number was bought or KYC-submitted with. Absent when none was sent. | [optional] |
 | **country** | **String** |  | [optional] |
 | **number_type** | **String** | For example local, mobile, national or toll_free. | [optional] |
 | **status** | **String** |  | [optional] |
@@ -62,6 +64,7 @@
 | **forward_caller_id** | **String** |  | [optional] |
 | **pstn_voice_enabled** | **Boolean** | Whether Calls (PSTN voice) is on. | [optional] |
 | **pstn_forward_to** | **String** |  | [optional] |
+| **ring_in_browser** | **Boolean** | Inbound calls ring the owner&#39;s open dashboard tabs first, then take the forward or voicemail. | [optional] |
 | **voicemail_enabled** | **Boolean** |  | [optional] |
 | **voicemail_greeting** | **String** |  | [optional] |
 | **business_hours_enabled** | **Boolean** |  | [optional] |
@@ -80,6 +83,8 @@ require 'zernio-sdk'
 instance = Zernio::OwnedPhoneNumber.new(
   _id: null,
   phone_number: null,
+  requested_phone_number: null,
+  purchase_intent_id: null,
   country: null,
   number_type: null,
   status: null,
@@ -136,6 +141,7 @@ instance = Zernio::OwnedPhoneNumber.new(
   forward_caller_id: null,
   pstn_voice_enabled: null,
   pstn_forward_to: null,
+  ring_in_browser: null,
   voicemail_enabled: null,
   voicemail_greeting: null,
   business_hours_enabled: null,

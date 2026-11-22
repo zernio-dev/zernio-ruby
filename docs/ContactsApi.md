@@ -4,13 +4,90 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**autocomplete_contacts**](ContactsApi.md#autocomplete_contacts) | **GET** /v1/contacts/autocomplete | Search people |
 | [**bulk_create_contacts**](ContactsApi.md#bulk_create_contacts) | **POST** /v1/contacts/bulk | Bulk create contacts |
 | [**create_contact**](ContactsApi.md#create_contact) | **POST** /v1/contacts | Create contact |
 | [**delete_contact**](ContactsApi.md#delete_contact) | **DELETE** /v1/contacts/{contactId} | Delete contact |
 | [**get_contact**](ContactsApi.md#get_contact) | **GET** /v1/contacts/{contactId} | Get contact |
 | [**get_contact_channels**](ContactsApi.md#get_contact_channels) | **GET** /v1/contacts/{contactId}/channels | List channels for a contact |
+| [**list_contact_groups**](ContactsApi.md#list_contact_groups) | **GET** /v1/contacts/groups | List contact groups |
 | [**list_contacts**](ContactsApi.md#list_contacts) | **GET** /v1/contacts | List contacts |
 | [**update_contact**](ContactsApi.md#update_contact) | **PATCH** /v1/contacts/{contactId} | Update contact |
+
+
+## autocomplete_contacts
+
+> <AutocompleteContacts200Response> autocomplete_contacts(account_id, q, opts)
+
+Search people
+
+Finds people for an address field, read live from a Google or Microsoft account. Nothing is stored.  With the contacts area it searches the user's address book. With the directory area it also searches coworkers and the people the user mails: Microsoft ranks them by relevance, Google adds its Workspace directory and other contacts.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ContactsApi.new
+account_id = 'account_id_example' # String | A Google or Microsoft account connected with the contacts or directory area.
+q = 'q_example' # String | What the user typed: a name or the start of an email address.
+opts = {
+  limit: 56 # Integer | 
+}
+
+begin
+  # Search people
+  result = api_instance.autocomplete_contacts(account_id, q, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ContactsApi->autocomplete_contacts: #{e}"
+end
+```
+
+#### Using the autocomplete_contacts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AutocompleteContacts200Response>, Integer, Hash)> autocomplete_contacts_with_http_info(account_id, q, opts)
+
+```ruby
+begin
+  # Search people
+  data, status_code, headers = api_instance.autocomplete_contacts_with_http_info(account_id, q, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AutocompleteContacts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ContactsApi->autocomplete_contacts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | A Google or Microsoft account connected with the contacts or directory area. |  |
+| **q** | **String** | What the user typed: a name or the start of an email address. |  |
+| **limit** | **Integer** |  | [optional][default to 10] |
+
+### Return type
+
+[**AutocompleteContacts200Response**](AutocompleteContacts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## bulk_create_contacts
@@ -357,6 +434,75 @@ end
 - **Accept**: application/json
 
 
+## list_contact_groups
+
+> <ListContactGroups200Response> list_contact_groups(account_id)
+
+List contact groups
+
+Lists the groups of a Google or Microsoft account's address book, read live from the provider: Google contact labels, and Outlook contact folders and categories. The account needs the contacts area.  Each group id is what synced contacts carry in their channel's metadata.groups, and what the group filter of GET /v1/contacts takes.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ContactsApi.new
+account_id = 'account_id_example' # String | A Google or Microsoft account connected with the contacts area.
+
+begin
+  # List contact groups
+  result = api_instance.list_contact_groups(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ContactsApi->list_contact_groups: #{e}"
+end
+```
+
+#### Using the list_contact_groups_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListContactGroups200Response>, Integer, Hash)> list_contact_groups_with_http_info(account_id)
+
+```ruby
+begin
+  # List contact groups
+  data, status_code, headers = api_instance.list_contact_groups_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListContactGroups200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ContactsApi->list_contact_groups_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | A Google or Microsoft account connected with the contacts area. |  |
+
+### Return type
+
+[**ListContactGroups200Response**](ListContactGroups200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_contacts
 
 > <ListContacts200Response> list_contacts(opts)
@@ -384,6 +530,7 @@ opts = {
   tag: 'tag_example', # String | 
   tags: 'tags_example', # String | Comma-separated tags, matches contacts carrying any of them
   platform: 'instagram', # String | 
+  group: 'group_example', # String | A group id from GET /v1/contacts/groups, such as contactGroups/abc, folder:default or category:VIP. Returns the contacts the Google or Outlook contacts sync filed in that group on the account. Requires accountId. Memberships are not stored while content retention is off.
   is_subscribed: 'true', # String | 
   limit: 56, # Integer | 
   skip: 56 # Integer | 
@@ -426,6 +573,7 @@ end
 | **tag** | **String** |  | [optional] |
 | **tags** | **String** | Comma-separated tags, matches contacts carrying any of them | [optional] |
 | **platform** | **String** |  | [optional] |
+| **group** | **String** | A group id from GET /v1/contacts/groups, such as contactGroups/abc, folder:default or category:VIP. Returns the contacts the Google or Outlook contacts sync filed in that group on the account. Requires accountId. Memberships are not stored while content retention is off. | [optional] |
 | **is_subscribed** | **String** |  | [optional] |
 | **limit** | **Integer** |  | [optional][default to 50] |
 | **skip** | **Integer** |  | [optional][default to 0] |

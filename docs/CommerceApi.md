@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**add_commerce_discount_codes**](CommerceApi.md#add_commerce_discount_codes) | **POST** /v1/commerce/discounts/{discountId}/codes | Add codes to a discount |
 | [**add_commerce_marketing_engagement**](CommerceApi.md#add_commerce_marketing_engagement) | **POST** /v1/commerce/marketing-activities/{remoteId}/engagements | Report daily engagement |
 | [**add_commerce_product_images**](CommerceApi.md#add_commerce_product_images) | **POST** /v1/commerce/products/{productId}/images | Add images |
+| [**cancel_commerce_order**](CommerceApi.md#cancel_commerce_order) | **POST** /v1/commerce/orders/{orderId}/cancel | Cancel an order |
 | [**change_commerce_collection_channels**](CommerceApi.md#change_commerce_collection_channels) | **POST** /v1/commerce/collections/{collectionId}/channels | Publish or unpublish a collection |
 | [**change_commerce_collection_products**](CommerceApi.md#change_commerce_collection_products) | **POST** /v1/commerce/collections/{collectionId}/products | Add or remove products in a collection |
 | [**change_commerce_inventory**](CommerceApi.md#change_commerce_inventory) | **POST** /v1/commerce/products/{productId}/inventory | Set or adjust stock |
@@ -16,13 +17,16 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_commerce_catalog_sync**](CommerceApi.md#create_commerce_catalog_sync) | **POST** /v1/commerce/catalog-syncs | Sync a store into a Meta catalog |
 | [**create_commerce_collection**](CommerceApi.md#create_commerce_collection) | **POST** /v1/commerce/collections | Create a collection |
 | [**create_commerce_discount**](CommerceApi.md#create_commerce_discount) | **POST** /v1/commerce/discounts | Create a discount |
+| [**create_commerce_draft_order**](CommerceApi.md#create_commerce_draft_order) | **POST** /v1/commerce/draft-orders | Create a draft order |
 | [**create_commerce_menu**](CommerceApi.md#create_commerce_menu) | **POST** /v1/commerce/menus | Create a navigation menu |
 | [**create_commerce_metaobject**](CommerceApi.md#create_commerce_metaobject) | **POST** /v1/commerce/metaobjects | Create a metaobject |
+| [**create_commerce_order_edit**](CommerceApi.md#create_commerce_order_edit) | **POST** /v1/commerce/orders/{orderId}/edits | Edit an order |
 | [**create_commerce_page**](CommerceApi.md#create_commerce_page) | **POST** /v1/commerce/pages | Create a page |
 | [**create_commerce_product**](CommerceApi.md#create_commerce_product) | **POST** /v1/commerce/products | Create a product |
 | [**create_commerce_product_options**](CommerceApi.md#create_commerce_product_options) | **POST** /v1/commerce/products/{productId}/options | Add options |
 | [**create_commerce_product_variants**](CommerceApi.md#create_commerce_product_variants) | **POST** /v1/commerce/products/{productId}/variants | Add variants |
 | [**create_commerce_redirect**](CommerceApi.md#create_commerce_redirect) | **POST** /v1/commerce/redirects | Create a URL redirect |
+| [**create_commerce_refund**](CommerceApi.md#create_commerce_refund) | **POST** /v1/commerce/orders/{orderId}/refunds | Refund an order |
 | [**delete_commerce_catalog_sync**](CommerceApi.md#delete_commerce_catalog_sync) | **DELETE** /v1/commerce/catalog-syncs/{syncId} | Stop a catalog sync |
 | [**delete_commerce_collection**](CommerceApi.md#delete_commerce_collection) | **DELETE** /v1/commerce/collections/{collectionId} | Delete a collection |
 | [**delete_commerce_collection_metafields**](CommerceApi.md#delete_commerce_collection_metafields) | **DELETE** /v1/commerce/collections/{collectionId}/metafields | Delete collection metafields |
@@ -39,7 +43,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**duplicate_commerce_product**](CommerceApi.md#duplicate_commerce_product) | **POST** /v1/commerce/products/{productId}/duplicate | Duplicate a product |
 | [**get_commerce_catalog_sync**](CommerceApi.md#get_commerce_catalog_sync) | **GET** /v1/commerce/catalog-syncs/{syncId} | Get a catalog sync |
 | [**get_commerce_collection**](CommerceApi.md#get_commerce_collection) | **GET** /v1/commerce/collections/{collectionId} | Get a collection |
+| [**get_commerce_customer**](CommerceApi.md#get_commerce_customer) | **GET** /v1/commerce/customers/{customerId} | Get a customer |
 | [**get_commerce_discount**](CommerceApi.md#get_commerce_discount) | **GET** /v1/commerce/discounts/{discountId} | Get a discount |
+| [**get_commerce_draft_order**](CommerceApi.md#get_commerce_draft_order) | **GET** /v1/commerce/draft-orders/{draftOrderId} | Get a draft order |
 | [**get_commerce_menu**](CommerceApi.md#get_commerce_menu) | **GET** /v1/commerce/menus/{menuId} | Get a navigation menu |
 | [**get_commerce_metaobject**](CommerceApi.md#get_commerce_metaobject) | **GET** /v1/commerce/metaobjects/{metaobjectId} | Get a metaobject |
 | [**get_commerce_order**](CommerceApi.md#get_commerce_order) | **GET** /v1/commerce/orders/{orderId} | Get an order |
@@ -50,6 +56,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_commerce_channels**](CommerceApi.md#list_commerce_channels) | **GET** /v1/commerce/channels | List sales channels |
 | [**list_commerce_collection_metafields**](CommerceApi.md#list_commerce_collection_metafields) | **GET** /v1/commerce/collections/{collectionId}/metafields | List collection metafields |
 | [**list_commerce_collections**](CommerceApi.md#list_commerce_collections) | **GET** /v1/commerce/collections | List collections |
+| [**list_commerce_customers**](CommerceApi.md#list_commerce_customers) | **GET** /v1/commerce/customers | List customers |
 | [**list_commerce_discounts**](CommerceApi.md#list_commerce_discounts) | **GET** /v1/commerce/discounts | List discounts |
 | [**list_commerce_inventory**](CommerceApi.md#list_commerce_inventory) | **GET** /v1/commerce/inventory | Get a product&#39;s stock |
 | [**list_commerce_locations**](CommerceApi.md#list_commerce_locations) | **GET** /v1/commerce/locations | List locations |
@@ -67,6 +74,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**reorder_commerce_collection_products**](CommerceApi.md#reorder_commerce_collection_products) | **POST** /v1/commerce/collections/{collectionId}/reorder | Reorder products in a collection |
 | [**reorder_commerce_product_images**](CommerceApi.md#reorder_commerce_product_images) | **POST** /v1/commerce/products/{productId}/images/reorder | Reorder images |
 | [**run_commerce_catalog_sync**](CommerceApi.md#run_commerce_catalog_sync) | **POST** /v1/commerce/catalog-syncs/{syncId}/run | Run a catalog sync now |
+| [**send_commerce_draft_order_invoice**](CommerceApi.md#send_commerce_draft_order_invoice) | **POST** /v1/commerce/draft-orders/{draftOrderId}/invoice | Send a draft order invoice |
 | [**set_commerce_collection_metafields**](CommerceApi.md#set_commerce_collection_metafields) | **PUT** /v1/commerce/collections/{collectionId}/metafields | Set collection metafields |
 | [**set_commerce_discount_active**](CommerceApi.md#set_commerce_discount_active) | **POST** /v1/commerce/discounts/{discountId}/state | Activate or deactivate a discount |
 | [**set_commerce_price_list_prices**](CommerceApi.md#set_commerce_price_list_prices) | **PUT** /v1/commerce/price-lists/{priceListId}/prices | Set fixed prices |
@@ -75,6 +83,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_commerce_discount**](CommerceApi.md#update_commerce_discount) | **PATCH** /v1/commerce/discounts/{discountId} | Update a discount |
 | [**update_commerce_menu**](CommerceApi.md#update_commerce_menu) | **PUT** /v1/commerce/menus/{menuId} | Replace a navigation menu |
 | [**update_commerce_metaobject**](CommerceApi.md#update_commerce_metaobject) | **PATCH** /v1/commerce/metaobjects/{metaobjectId} | Update a metaobject |
+| [**update_commerce_order**](CommerceApi.md#update_commerce_order) | **PATCH** /v1/commerce/orders/{orderId} | Update an order&#39;s shipping address |
 | [**update_commerce_page**](CommerceApi.md#update_commerce_page) | **PATCH** /v1/commerce/pages/{pageId} | Update a page |
 | [**update_commerce_product**](CommerceApi.md#update_commerce_product) | **PATCH** /v1/commerce/products/{productId} | Update a product |
 | [**update_commerce_product_prices**](CommerceApi.md#update_commerce_product_prices) | **POST** /v1/commerce/products/{productId}/price | Update variant prices |
@@ -284,6 +293,77 @@ end
 ### Return type
 
 [**CreateCommerceProduct201Response**](CreateCommerceProduct201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## cancel_commerce_order
+
+> <CancelCommerceOrder200Response> cancel_commerce_order(order_id, cancel_commerce_order_request)
+
+Cancel an order
+
+Cancels an order, by default refunding it to the original payment methods and restocking it. Needs orders.cancel.  The platform cancels in the background. The call waits a few seconds: `200` with `cancelled: true` when it finished, `202` with `cancelled: false` when it is still running (the `commerce.order.updated` webhook reports the outcome). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+order_id = 'order_id_example' # String | Platform-native order id.
+cancel_commerce_order_request = Zernio::CancelCommerceOrderRequest.new({account_id: 'account_id_example', reason: 'customer'}) # CancelCommerceOrderRequest | 
+
+begin
+  # Cancel an order
+  result = api_instance.cancel_commerce_order(order_id, cancel_commerce_order_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->cancel_commerce_order: #{e}"
+end
+```
+
+#### Using the cancel_commerce_order_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CancelCommerceOrder200Response>, Integer, Hash)> cancel_commerce_order_with_http_info(order_id, cancel_commerce_order_request)
+
+```ruby
+begin
+  # Cancel an order
+  data, status_code, headers = api_instance.cancel_commerce_order_with_http_info(order_id, cancel_commerce_order_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CancelCommerceOrder200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->cancel_commerce_order_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **order_id** | **String** | Platform-native order id. |  |
+| **cancel_commerce_order_request** | [**CancelCommerceOrderRequest**](CancelCommerceOrderRequest.md) |  |  |
+
+### Return type
+
+[**CancelCommerceOrder200Response**](CancelCommerceOrder200Response.md)
 
 ### Authorization
 
@@ -861,7 +941,7 @@ end
 
 Create a discount
 
-Creates a code discount (buyers enter a code) or an automatic one (applied at checkout), as a percentage, a fixed amount or free shipping. It applies to every product unless productIds or collectionIds narrow it, and to every buyer. 
+Creates a code discount (buyers enter a code) or an automatic one (applied at checkout), as a percentage, a fixed amount or free shipping. It applies to every product unless productIds or collectionIds narrow it.  It applies to every buyer unless customerIds limits a code discount to chosen customers, for example a goodwill code only one shopper can use. 
 
 ### Examples
 
@@ -913,6 +993,79 @@ end
 ### Return type
 
 [**CreateCommerceDiscount201Response**](CreateCommerceDiscount201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_commerce_draft_order
+
+> <CreateCommerceDraftOrder201Response> create_commerce_draft_order(create_commerce_draft_order_request, opts)
+
+Create a draft order
+
+Creates a draft order for a customer, for a replacement, a phone order or a custom quote. Needs draft_orders.write.  Send the buyer its checkout link with the invoice endpoint; the draft becomes an order once they pay. Amounts in the response are in the currency the buyer pays in; custom prices you send are in the store currency. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+create_commerce_draft_order_request = Zernio::CreateCommerceDraftOrderRequest.new({account_id: 'account_id_example', line_items: [Zernio::CreateCommerceDraftOrderRequestLineItemsInner.new({quantity: 37})]}) # CreateCommerceDraftOrderRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | A retry with the same key returns the first draft instead of creating another.
+}
+
+begin
+  # Create a draft order
+  result = api_instance.create_commerce_draft_order(create_commerce_draft_order_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->create_commerce_draft_order: #{e}"
+end
+```
+
+#### Using the create_commerce_draft_order_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateCommerceDraftOrder201Response>, Integer, Hash)> create_commerce_draft_order_with_http_info(create_commerce_draft_order_request, opts)
+
+```ruby
+begin
+  # Create a draft order
+  data, status_code, headers = api_instance.create_commerce_draft_order_with_http_info(create_commerce_draft_order_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateCommerceDraftOrder201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->create_commerce_draft_order_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_commerce_draft_order_request** | [**CreateCommerceDraftOrderRequest**](CreateCommerceDraftOrderRequest.md) |  |  |
+| **idempotency_key** | **String** | A retry with the same key returns the first draft instead of creating another. | [optional] |
+
+### Return type
+
+[**CreateCommerceDraftOrder201Response**](CreateCommerceDraftOrder201Response.md)
 
 ### Authorization
 
@@ -1051,6 +1204,81 @@ end
 ### Return type
 
 [**CreateCommerceMetaobject201Response**](CreateCommerceMetaobject201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_commerce_order_edit
+
+> <CreateCommerceOrderEdit200Response> create_commerce_order_edit(order_id, create_commerce_order_edit_request, opts)
+
+Edit an order
+
+Adds products to an order and changes or removes its lines. Needs orders.edit.  - Preview first with `validateOnly: true`: it returns the new totals and what the buyer would owe, and changes nothing. - A real edit needs an `Idempotency-Key` header (a UUID per edit): a retry with the same key never applies it twice. - When the edit raises the total, the buyer owes `outstanding`; `notifyCustomer` emails them the change. When it lowers it, refund the difference with the refunds endpoint. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+order_id = 'order_id_example' # String | Platform-native order id.
+create_commerce_order_edit_request = Zernio::CreateCommerceOrderEditRequest.new({account_id: 'account_id_example'}) # CreateCommerceOrderEditRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Required unless validateOnly is true.
+}
+
+begin
+  # Edit an order
+  result = api_instance.create_commerce_order_edit(order_id, create_commerce_order_edit_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->create_commerce_order_edit: #{e}"
+end
+```
+
+#### Using the create_commerce_order_edit_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateCommerceOrderEdit200Response>, Integer, Hash)> create_commerce_order_edit_with_http_info(order_id, create_commerce_order_edit_request, opts)
+
+```ruby
+begin
+  # Edit an order
+  data, status_code, headers = api_instance.create_commerce_order_edit_with_http_info(order_id, create_commerce_order_edit_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateCommerceOrderEdit200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->create_commerce_order_edit_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **order_id** | **String** | Platform-native order id. |  |
+| **create_commerce_order_edit_request** | [**CreateCommerceOrderEditRequest**](CreateCommerceOrderEditRequest.md) |  |  |
+| **idempotency_key** | **String** | Required unless validateOnly is true. | [optional] |
+
+### Return type
+
+[**CreateCommerceOrderEdit200Response**](CreateCommerceOrderEdit200Response.md)
 
 ### Authorization
 
@@ -1400,6 +1628,81 @@ end
 ### Return type
 
 [**CreateCommerceRedirect201Response**](CreateCommerceRedirect201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_commerce_refund
+
+> <CreateCommerceRefund200Response> create_commerce_refund(order_id, create_commerce_refund_request, opts)
+
+Refund an order
+
+Refunds line items, shipping or an amount of money to the buyer's original payment methods. Needs orders.refund.  - Preview first with `validateOnly: true`: it returns what the buyer gets back and to which payments, without refunding anything. - A real refund needs an `Idempotency-Key` header (a UUID per refund): a retry with the same key never refunds twice. - Every amount, sent or returned, is in the currency the buyer paid in, the one refunds are made in. Send `currency` to have a mismatch refused instead of guessed. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+order_id = 'order_id_example' # String | Platform-native order id.
+create_commerce_refund_request = Zernio::CreateCommerceRefundRequest.new({account_id: 'account_id_example'}) # CreateCommerceRefundRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Required unless validateOnly is true. A retry with the same key returns the first response and never refunds twice.
+}
+
+begin
+  # Refund an order
+  result = api_instance.create_commerce_refund(order_id, create_commerce_refund_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->create_commerce_refund: #{e}"
+end
+```
+
+#### Using the create_commerce_refund_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateCommerceRefund200Response>, Integer, Hash)> create_commerce_refund_with_http_info(order_id, create_commerce_refund_request, opts)
+
+```ruby
+begin
+  # Refund an order
+  data, status_code, headers = api_instance.create_commerce_refund_with_http_info(order_id, create_commerce_refund_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateCommerceRefund200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->create_commerce_refund_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **order_id** | **String** | Platform-native order id. |  |
+| **create_commerce_refund_request** | [**CreateCommerceRefundRequest**](CreateCommerceRefundRequest.md) |  |  |
+| **idempotency_key** | **String** | Required unless validateOnly is true. A retry with the same key returns the first response and never refunds twice. | [optional] |
+
+### Return type
+
+[**CreateCommerceRefund200Response**](CreateCommerceRefund200Response.md)
 
 ### Authorization
 
@@ -2553,6 +2856,77 @@ end
 - **Accept**: application/json
 
 
+## get_commerce_customer
+
+> <GetCommerceCustomer200Response> get_commerce_customer(customer_id, account_id)
+
+Get a customer
+
+One customer with their order count, total spent and default address. Needs customers.read.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+customer_id = 'customer_id_example' # String | Platform-native customer id.
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+
+begin
+  # Get a customer
+  result = api_instance.get_commerce_customer(customer_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->get_commerce_customer: #{e}"
+end
+```
+
+#### Using the get_commerce_customer_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCommerceCustomer200Response>, Integer, Hash)> get_commerce_customer_with_http_info(customer_id, account_id)
+
+```ruby
+begin
+  # Get a customer
+  data, status_code, headers = api_instance.get_commerce_customer_with_http_info(customer_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCommerceCustomer200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->get_commerce_customer_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **customer_id** | **String** | Platform-native customer id. |  |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+
+### Return type
+
+[**GetCommerceCustomer200Response**](GetCommerceCustomer200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_commerce_discount
 
 > <CreateCommerceDiscount201Response> get_commerce_discount(discount_id, account_id)
@@ -2613,6 +2987,77 @@ end
 ### Return type
 
 [**CreateCommerceDiscount201Response**](CreateCommerceDiscount201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_commerce_draft_order
+
+> <CreateCommerceDraftOrder201Response> get_commerce_draft_order(draft_order_id, account_id)
+
+Get a draft order
+
+One draft order with its status, checkout link and, once paid, the order it became. Needs draft_orders.read.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+draft_order_id = 'draft_order_id_example' # String | Platform-native draft order id.
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+
+begin
+  # Get a draft order
+  result = api_instance.get_commerce_draft_order(draft_order_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->get_commerce_draft_order: #{e}"
+end
+```
+
+#### Using the get_commerce_draft_order_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateCommerceDraftOrder201Response>, Integer, Hash)> get_commerce_draft_order_with_http_info(draft_order_id, account_id)
+
+```ruby
+begin
+  # Get a draft order
+  data, status_code, headers = api_instance.get_commerce_draft_order_with_http_info(draft_order_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateCommerceDraftOrder201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->get_commerce_draft_order_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **draft_order_id** | **String** | Platform-native draft order id. |  |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+
+### Return type
+
+[**CreateCommerceDraftOrder201Response**](CreateCommerceDraftOrder201Response.md)
 
 ### Authorization
 
@@ -3334,6 +3779,87 @@ end
 - **Accept**: application/json
 
 
+## list_commerce_customers
+
+> <ListCommerceCustomers200Response> list_commerce_customers(account_id, opts)
+
+List customers
+
+The store's customers, most recently updated first. Needs customers.read.  Find the customer behind a support ticket with `email`, `phone` or `search`, then read their orders with `GET /v1/commerce/orders?customerId=`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+account_id = 'account_id_example' # String | Connected store SocialAccount id.
+opts = {
+  limit: 56, # Integer | 
+  cursor: 'cursor_example', # String | 
+  email: 'email_example', # String | 
+  phone: 'phone_example', # String | 
+  search: 'search_example' # String | Free text matched against name, email and phone.
+}
+
+begin
+  # List customers
+  result = api_instance.list_commerce_customers(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->list_commerce_customers: #{e}"
+end
+```
+
+#### Using the list_commerce_customers_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCommerceCustomers200Response>, Integer, Hash)> list_commerce_customers_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List customers
+  data, status_code, headers = api_instance.list_commerce_customers_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCommerceCustomers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->list_commerce_customers_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Connected store SocialAccount id. |  |
+| **limit** | **Integer** |  | [optional][default to 20] |
+| **cursor** | **String** |  | [optional] |
+| **email** | **String** |  | [optional] |
+| **phone** | **String** |  | [optional] |
+| **search** | **String** | Free text matched against name, email and phone. | [optional] |
+
+### Return type
+
+[**ListCommerceCustomers200Response**](ListCommerceCustomers200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_commerce_discounts
 
 > <ListCommerceDiscounts200Response> list_commerce_discounts(account_id, opts)
@@ -3861,7 +4387,10 @@ opts = {
   cursor: 'cursor_example', # String | 
   created_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | 
   created_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | 
-  updated_after: Time.parse('2013-10-20T19:20:30+01:00') # Time | Only orders changed after this time, oldest change first.
+  updated_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Only orders changed after this time, oldest change first.
+  customer_id: 'customer_id_example', # String | Only this customer's orders (`customer.id` on an order, or `id` from the customers endpoints).
+  email: 'email_example', # String | Only orders placed with this email. Shopify only; WooCommerce answers 400 platform_not_supported.
+  number: '1234' # String | The order number a buyer quotes, with or without the \"#\" (`number` on an order). Shopify only; on WooCommerce the number is the order id, so read GET /v1/commerce/orders/{orderId} (this filter answers 400 platform_not_supported).
 }
 
 begin
@@ -3901,6 +4430,9 @@ end
 | **created_after** | **Time** |  | [optional] |
 | **created_before** | **Time** |  | [optional] |
 | **updated_after** | **Time** | Only orders changed after this time, oldest change first. | [optional] |
+| **customer_id** | **String** | Only this customer&#39;s orders (&#x60;customer.id&#x60; on an order, or &#x60;id&#x60; from the customers endpoints). | [optional] |
+| **email** | **String** | Only orders placed with this email. Shopify only; WooCommerce answers 400 platform_not_supported. | [optional] |
+| **number** | **String** | The order number a buyer quotes, with or without the \&quot;#\&quot; (&#x60;number&#x60; on an order). Shopify only; on WooCommerce the number is the order id, so read GET /v1/commerce/orders/{orderId} (this filter answers 400 platform_not_supported). | [optional] |
 
 ### Return type
 
@@ -4575,6 +5107,77 @@ end
 - **Accept**: application/json
 
 
+## send_commerce_draft_order_invoice
+
+> <CreateCommerceDraftOrder201Response> send_commerce_draft_order_invoice(draft_order_id, send_commerce_draft_order_invoice_request)
+
+Send a draft order invoice
+
+Emails the buyer the draft's checkout link. The draft becomes an order when they pay. Needs draft_orders.write.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+draft_order_id = 'draft_order_id_example' # String | Platform-native draft order id.
+send_commerce_draft_order_invoice_request = Zernio::SendCommerceDraftOrderInvoiceRequest.new({account_id: 'account_id_example'}) # SendCommerceDraftOrderInvoiceRequest | 
+
+begin
+  # Send a draft order invoice
+  result = api_instance.send_commerce_draft_order_invoice(draft_order_id, send_commerce_draft_order_invoice_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->send_commerce_draft_order_invoice: #{e}"
+end
+```
+
+#### Using the send_commerce_draft_order_invoice_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateCommerceDraftOrder201Response>, Integer, Hash)> send_commerce_draft_order_invoice_with_http_info(draft_order_id, send_commerce_draft_order_invoice_request)
+
+```ruby
+begin
+  # Send a draft order invoice
+  data, status_code, headers = api_instance.send_commerce_draft_order_invoice_with_http_info(draft_order_id, send_commerce_draft_order_invoice_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateCommerceDraftOrder201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->send_commerce_draft_order_invoice_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **draft_order_id** | **String** | Platform-native draft order id. |  |
+| **send_commerce_draft_order_invoice_request** | [**SendCommerceDraftOrderInvoiceRequest**](SendCommerceDraftOrderInvoiceRequest.md) |  |  |
+
+### Return type
+
+[**CreateCommerceDraftOrder201Response**](CreateCommerceDraftOrder201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## set_commerce_collection_metafields
 
 > <ListCommerceProductMetafields200Response> set_commerce_collection_metafields(collection_id, set_commerce_product_metafields_request)
@@ -5132,6 +5735,77 @@ end
 ### Return type
 
 [**CreateCommerceMetaobject201Response**](CreateCommerceMetaobject201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_commerce_order
+
+> <GetCommerceOrder200Response> update_commerce_order(order_id, update_commerce_order_request)
+
+Update an order's shipping address
+
+Replaces the order's shipping address, for a buyer who asks to fix it before the order ships. Needs orders.update. Items and quantities change through POST /v1/commerce/orders/{orderId}/edits.  The whole address is replaced: send every line, not only the one that changes. Fulfillments already shipped keep the address they were sent to. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommerceApi.new
+order_id = 'order_id_example' # String | Platform-native order id.
+update_commerce_order_request = Zernio::UpdateCommerceOrderRequest.new({account_id: 'account_id_example', shipping_address: Zernio::UpdateCommerceOrderRequestShippingAddress.new({country_code: 'country_code_example'})}) # UpdateCommerceOrderRequest | 
+
+begin
+  # Update an order's shipping address
+  result = api_instance.update_commerce_order(order_id, update_commerce_order_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->update_commerce_order: #{e}"
+end
+```
+
+#### Using the update_commerce_order_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCommerceOrder200Response>, Integer, Hash)> update_commerce_order_with_http_info(order_id, update_commerce_order_request)
+
+```ruby
+begin
+  # Update an order's shipping address
+  data, status_code, headers = api_instance.update_commerce_order_with_http_info(order_id, update_commerce_order_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCommerceOrder200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommerceApi->update_commerce_order_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **order_id** | **String** | Platform-native order id. |  |
+| **update_commerce_order_request** | [**UpdateCommerceOrderRequest**](UpdateCommerceOrderRequest.md) |  |  |
+
+### Return type
+
+[**GetCommerceOrder200Response**](GetCommerceOrder200Response.md)
 
 ### Authorization
 

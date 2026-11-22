@@ -11,6 +11,8 @@
 | **permalink** | **String** | Public Instagram permalink to the story (only viewable while live). | [optional] |
 | **thumbnail_url** | **String** | Thumbnail URL for video stories. | [optional] |
 | **timestamp** | **Time** | When the story was posted. | [optional] |
+| **expired** | **Boolean** | Only with &#x60;includeExpired&#x3D;true&#x60;. True for an archived story that is no longer live; its media urls point to Zernio storage. | [optional] |
+| **metrics** | [**ListInstagramStories200ResponseDataInnerMetrics**](ListInstagramStories200ResponseDataInnerMetrics.md) |  | [optional] |
 
 ## Example
 
@@ -24,7 +26,9 @@ instance = Zernio::ListInstagramStories200ResponseDataInner.new(
   media_url: null,
   permalink: null,
   thumbnail_url: null,
-  timestamp: null
+  timestamp: null,
+  expired: null,
+  metrics: null
 )
 ```
 

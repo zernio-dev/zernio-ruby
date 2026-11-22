@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **status** | **String** |  | [optional] |
 | **data** | [**Array&lt;ListInboxReviews200ResponseDataInner&gt;**](ListInboxReviews200ResponseDataInner.md) |  | [optional] |
-| **pagination** | [**ListFiles200ResponsePagination**](ListFiles200ResponsePagination.md) |  | [optional] |
+| **pagination** | [**ListCalendarEventInstances200ResponsePagination**](ListCalendarEventInstances200ResponsePagination.md) |  | [optional] |
 | **meta** | [**ListInboxConversations200ResponseMeta**](ListInboxConversations200ResponseMeta.md) |  | [optional] |
 | **summary** | [**ListInboxReviews200ResponseSummary**](ListInboxReviews200ResponseSummary.md) |  | [optional] |
 

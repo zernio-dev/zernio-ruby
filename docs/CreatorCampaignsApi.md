@@ -5,6 +5,9 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**activate_creator_campaign**](CreatorCampaignsApi.md#activate_creator_campaign) | **POST** /v1/creator-campaigns/{campaignId}/activate | Activate creator campaign |
+| [**approve_campaign_draft**](CreatorCampaignsApi.md#approve_campaign_draft) | **POST** /v1/creator-campaigns/{campaignId}/drafts/{draftId}/approve | Approve campaign draft |
+| [**approve_campaign_participant**](CreatorCampaignsApi.md#approve_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/approve | Approve pending campaign participant |
+| [**approve_campaign_sample**](CreatorCampaignsApi.md#approve_campaign_sample) | **POST** /v1/creator-campaigns/{campaignId}/samples/{sampleId}/approve | Approve campaign sample request |
 | [**approve_campaign_submission**](CreatorCampaignsApi.md#approve_campaign_submission) | **POST** /v1/creator-campaigns/{campaignId}/submissions/{submissionId}/approve | Approve campaign submission |
 | [**close_creator_campaign**](CreatorCampaignsApi.md#close_creator_campaign) | **POST** /v1/creator-campaigns/{campaignId}/close | Close creator campaign |
 | [**create_campaign_adjustment**](CreatorCampaignsApi.md#create_campaign_adjustment) | **POST** /v1/creator-campaigns/{campaignId}/adjustments | Create campaign adjustment |
@@ -12,25 +15,37 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_campaign_participant**](CreatorCampaignsApi.md#create_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants | Invite campaign participant |
 | [**create_campaign_payout_batch**](CreatorCampaignsApi.md#create_campaign_payout_batch) | **POST** /v1/creator-campaigns/{campaignId}/payout-batches | Pay creators with one card payment |
 | [**create_creator_campaign**](CreatorCampaignsApi.md#create_creator_campaign) | **POST** /v1/creator-campaigns | Create creator campaign |
+| [**decline_campaign_sample**](CreatorCampaignsApi.md#decline_campaign_sample) | **POST** /v1/creator-campaigns/{campaignId}/samples/{sampleId}/decline | Decline campaign sample request |
+| [**deny_campaign_participant**](CreatorCampaignsApi.md#deny_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/deny | Deny pending campaign participant |
+| [**get_campaign_ad_results**](CreatorCampaignsApi.md#get_campaign_ad_results) | **GET** /v1/creator-campaigns/{campaignId}/ad-results | Get campaign ad results |
+| [**get_campaign_draft**](CreatorCampaignsApi.md#get_campaign_draft) | **GET** /v1/creator-campaigns/{campaignId}/drafts/{draftId} | Get campaign draft |
 | [**get_campaign_participant**](CreatorCampaignsApi.md#get_campaign_participant) | **GET** /v1/creator-campaigns/{campaignId}/participants/{participantId} | Get campaign participant |
 | [**get_campaign_report**](CreatorCampaignsApi.md#get_campaign_report) | **GET** /v1/creator-campaigns/{campaignId}/report | Get campaign report |
 | [**get_campaign_submission**](CreatorCampaignsApi.md#get_campaign_submission) | **GET** /v1/creator-campaigns/{campaignId}/submissions/{submissionId} | Get campaign submission |
 | [**get_creator_campaign**](CreatorCampaignsApi.md#get_creator_campaign) | **GET** /v1/creator-campaigns/{campaignId} | Get creator campaign |
+| [**launch_campaign_ads**](CreatorCampaignsApi.md#launch_campaign_ads) | **POST** /v1/creator-campaigns/{campaignId}/ads/launch | Launch campaign posts as ads |
+| [**list_campaign_drafts**](CreatorCampaignsApi.md#list_campaign_drafts) | **GET** /v1/creator-campaigns/{campaignId}/drafts | List campaign drafts |
 | [**list_campaign_ledger**](CreatorCampaignsApi.md#list_campaign_ledger) | **GET** /v1/creator-campaigns/{campaignId}/ledger | List campaign ledger |
+| [**list_campaign_orders**](CreatorCampaignsApi.md#list_campaign_orders) | **GET** /v1/creator-campaigns/{campaignId}/orders | List campaign orders |
 | [**list_campaign_participants**](CreatorCampaignsApi.md#list_campaign_participants) | **GET** /v1/creator-campaigns/{campaignId}/participants | List campaign participants |
 | [**list_campaign_payables**](CreatorCampaignsApi.md#list_campaign_payables) | **GET** /v1/creator-campaigns/{campaignId}/payables | List campaign payables |
 | [**list_campaign_payout_batches**](CreatorCampaignsApi.md#list_campaign_payout_batches) | **GET** /v1/creator-campaigns/{campaignId}/payout-batches | List payout batches |
+| [**list_campaign_samples**](CreatorCampaignsApi.md#list_campaign_samples) | **GET** /v1/creator-campaigns/{campaignId}/samples | List campaign sample requests |
 | [**list_campaign_submissions**](CreatorCampaignsApi.md#list_campaign_submissions) | **GET** /v1/creator-campaigns/{campaignId}/submissions | List campaign submissions |
 | [**list_creator_campaigns**](CreatorCampaignsApi.md#list_creator_campaigns) | **GET** /v1/creator-campaigns | List creator campaigns |
 | [**move_campaign_participant**](CreatorCampaignsApi.md#move_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/move | Move participant to another campaign |
 | [**pause_creator_campaign**](CreatorCampaignsApi.md#pause_creator_campaign) | **POST** /v1/creator-campaigns/{campaignId}/pause | Pause creator campaign |
+| [**preview_campaign_payout_batch**](CreatorCampaignsApi.md#preview_campaign_payout_batch) | **POST** /v1/creator-campaigns/{campaignId}/payout-batches/preview | Preview a payout batch |
 | [**raise_creator_campaign_budget**](CreatorCampaignsApi.md#raise_creator_campaign_budget) | **POST** /v1/creator-campaigns/{campaignId}/budget | Raise creator campaign budget |
 | [**reinstate_campaign_participant**](CreatorCampaignsApi.md#reinstate_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/reinstate | Reinstate campaign participant |
+| [**reject_campaign_draft**](CreatorCampaignsApi.md#reject_campaign_draft) | **POST** /v1/creator-campaigns/{campaignId}/drafts/{draftId}/reject | Reject campaign draft |
 | [**reject_campaign_submission**](CreatorCampaignsApi.md#reject_campaign_submission) | **POST** /v1/creator-campaigns/{campaignId}/submissions/{submissionId}/reject | Reject campaign submission |
 | [**remove_campaign_participant**](CreatorCampaignsApi.md#remove_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/remove | Remove campaign participant |
 | [**reopen_campaign_submission**](CreatorCampaignsApi.md#reopen_campaign_submission) | **POST** /v1/creator-campaigns/{campaignId}/submissions/{submissionId}/reopen | Reopen campaign submission |
+| [**request_campaign_draft_revision**](CreatorCampaignsApi.md#request_campaign_draft_revision) | **POST** /v1/creator-campaigns/{campaignId}/drafts/{draftId}/request-revision | Request changes on a campaign draft |
 | [**resend_campaign_participant_invite**](CreatorCampaignsApi.md#resend_campaign_participant_invite) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/resend-invite | Resend campaign participant invite |
 | [**settle_campaign_participant**](CreatorCampaignsApi.md#settle_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/settle | Settle campaign participant |
+| [**ship_campaign_sample**](CreatorCampaignsApi.md#ship_campaign_sample) | **POST** /v1/creator-campaigns/{campaignId}/samples/{sampleId}/ship | Mark campaign sample shipped |
 | [**suspend_campaign_participant**](CreatorCampaignsApi.md#suspend_campaign_participant) | **POST** /v1/creator-campaigns/{campaignId}/participants/{participantId}/suspend | Suspend campaign participant |
 | [**update_creator_campaign**](CreatorCampaignsApi.md#update_creator_campaign) | **PATCH** /v1/creator-campaigns/{campaignId} | Update creator campaign |
 
@@ -104,6 +119,231 @@ end
 - **Accept**: application/json
 
 
+## approve_campaign_draft
+
+> <ApproveCampaignDraft200Response> approve_campaign_draft(campaign_id, draft_id, opts)
+
+Approve campaign draft
+
+Approves a `submitted` draft version, emails the creator and fires `campaign_draft.approved`. The creator can then publish it and submit the live post with this `draftId`; each approved draft backs one post only.  Each version is decided once: a version that is no longer `submitted` answers 409. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+draft_id = 'draft_id_example' # String | Draft version ID.
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Approve campaign draft
+  result = api_instance.approve_campaign_draft(campaign_id, draft_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->approve_campaign_draft: #{e}"
+end
+```
+
+#### Using the approve_campaign_draft_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ApproveCampaignDraft200Response>, Integer, Hash)> approve_campaign_draft_with_http_info(campaign_id, draft_id, opts)
+
+```ruby
+begin
+  # Approve campaign draft
+  data, status_code, headers = api_instance.approve_campaign_draft_with_http_info(campaign_id, draft_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ApproveCampaignDraft200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->approve_campaign_draft_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **draft_id** | **String** | Draft version ID. |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**ApproveCampaignDraft200Response**](ApproveCampaignDraft200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## approve_campaign_participant
+
+> <GetCampaignParticipant200Response> approve_campaign_participant(campaign_id, participant_id, opts)
+
+Approve pending campaign participant
+
+Lets a `pending` creator into the campaign: they become `active`, `joinedAt` is set, the creator is emailed and `campaign_participant.approved` fires (not `campaign_participant.joined`).  A creator is `pending` when they joined through the open link of a campaign with `joinApproval: manual`. Personal invites are never held.  ### Creator limit  Pending creators do not count toward `caps.maxParticipants`; the limit is checked here instead. A full campaign refuses the approval with 403 `feature_not_available` and the creator stays `pending`.  ### Errors  - 403 `feature_not_available`: the campaign reached `caps.maxParticipants`. - 409 `invalid_resource_state`: the participant is not `pending`, or the campaign is closed. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+participant_id = 'participant_id_example' # String | Participant ID.
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Approve pending campaign participant
+  result = api_instance.approve_campaign_participant(campaign_id, participant_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->approve_campaign_participant: #{e}"
+end
+```
+
+#### Using the approve_campaign_participant_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCampaignParticipant200Response>, Integer, Hash)> approve_campaign_participant_with_http_info(campaign_id, participant_id, opts)
+
+```ruby
+begin
+  # Approve pending campaign participant
+  data, status_code, headers = api_instance.approve_campaign_participant_with_http_info(campaign_id, participant_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCampaignParticipant200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->approve_campaign_participant_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **participant_id** | **String** | Participant ID. |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**GetCampaignParticipant200Response**](GetCampaignParticipant200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## approve_campaign_sample
+
+> <ApproveCampaignSample200Response> approve_campaign_sample(campaign_id, sample_id, opts)
+
+Approve campaign sample request
+
+Approves a `pending` sample request. Zernio creates a 100%-off, single-use discount code (`SAMPLE-XXXXXXXX`) limited to the requested product in the campaign's store (Shopify or WooCommerce), returns it as `discountCode`, emails it to the creator and fires `campaign_sample.approved`. The creator redeems it at checkout.  The code is created before the request changes, so when the store refuses (missing discount permission, an unsupported store, a store error) its error is returned and the request stays `pending`. The approval also starts the `sampleContentDueDays` clock behind `contentDueAt` and `contentOwed`.  ### Errors  - 400 `platform_not_supported`: the store cannot create discounts. - 403: the store has not granted the permission discounts need. - 409 `invalid_resource_state`: the request is not `pending`. - 502 `platform_api_error`: the store is unavailable. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+sample_id = 'sample_id_example' # String | Sample request ID.
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Approve campaign sample request
+  result = api_instance.approve_campaign_sample(campaign_id, sample_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->approve_campaign_sample: #{e}"
+end
+```
+
+#### Using the approve_campaign_sample_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ApproveCampaignSample200Response>, Integer, Hash)> approve_campaign_sample_with_http_info(campaign_id, sample_id, opts)
+
+```ruby
+begin
+  # Approve campaign sample request
+  data, status_code, headers = api_instance.approve_campaign_sample_with_http_info(campaign_id, sample_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ApproveCampaignSample200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->approve_campaign_sample_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **sample_id** | **String** | Sample request ID. |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**ApproveCampaignSample200Response**](ApproveCampaignSample200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## approve_campaign_submission
 
 > <ApproveCampaignSubmission200Response> approve_campaign_submission(campaign_id, submission_id, opts)
@@ -127,7 +367,7 @@ api_instance = Zernio::CreatorCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Campaign ID.
 submission_id = 'submission_id_example' # String | Submission ID.
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -163,7 +403,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Campaign ID. |  |
 | **submission_id** | **String** | Submission ID. |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -271,7 +511,7 @@ api_instance = Zernio::CreatorCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Campaign ID.
 create_campaign_adjustment_request = Zernio::CreateCampaignAdjustmentRequest.new({participant_id: 'participant_id_example', amount_cents: 37, cause: 'cause_example'}) # CreateCampaignAdjustmentRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -307,7 +547,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Campaign ID. |  |
 | **create_campaign_adjustment_request** | [**CreateCampaignAdjustmentRequest**](CreateCampaignAdjustmentRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -415,7 +655,7 @@ api_instance = Zernio::CreatorCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Campaign ID.
 create_campaign_participant_request = Zernio::CreateCampaignParticipantRequest.new({display_name: 'display_name_example'}) # CreateCampaignParticipantRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -451,7 +691,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Campaign ID. |  |
 | **create_campaign_participant_request** | [**CreateCampaignParticipantRequest**](CreateCampaignParticipantRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -473,7 +713,7 @@ end
 
 Pay creators with one card payment
 
-Pays exactly what is owed to the creators of a `treasury` campaign by charging the billing owner's saved card, with no redirect.  ### How it works  1. Every payable creator who finished payout setup (or only `participantIds`, minus `excludeParticipantIds`) is held in `settling`. 2. The saved card (the default one, or `paymentMethodId`) is charged the total plus the fee (4% per creator, 50 cent minimum) while the payer is present. 3. Once the charge succeeds, each creator gets a transfer funded by it, and the batch ends `paid` or `partially_failed`.  A creator whose payouts were disabled before the payment landed is skipped and stays payable.  ### 3D Secure  `payment.status: requires_action` means the bank asked the payer to confirm. Complete it with Stripe.js `handleNextAction({ clientSecret })`, then call `POST /v1/payout-batches/{batchId}/confirm`.  One left unfinished is cancelled after 30 minutes and every amount is payable again. Cancel it sooner with `POST /v1/payout-batches/{batchId}/cancel`.  ### Limits and errors  - 402 `payment_required`: no saved card. Nothing is held. - 402 `card_declined`: the bank's reason; every amount is payable again. - 402: card payouts are limited to $10,000.00 gross per rolling 30 days by default. Over it the call answers \"Over your instant payout limit. Top up your balance to pay more this month, or contact support to raise the limit.\" - 400: nothing payable (\"Nothing is payable.\").  ### Access and retries  Needs an owner, admin or billing admin, signed in or through a full-access key they created.  Send an `Idempotency-Key` so a retry never opens a second batch. 
+Pays exactly what is owed to the creators of a `treasury` campaign by charging the billing owner's saved card, with no redirect. Payouts are never paid from your balance.  ### How it works  1. Every payable creator who finished payout setup (or only `participantIds`, minus `excludeParticipantIds`) is held in `settling`. 2. The saved card (the default one, or `paymentMethodId`) pays one invoice while the payer is present: the payouts, plus the fee (4%, 50 cents minimum per payout) and the VAT on the fee where it applies. 3. Card payments are held 7 days against chargebacks (`releasesAt`). Then each creator gets a transfer funded by the charge, and the batch ends `paid` or `partially_failed`.  Zernio collects the payouts and pays each creator on your behalf and in your name, so the payouts carry no VAT.  A creator whose payouts were disabled before the hold ended is skipped and stays payable. A charge refunded or disputed during the hold pays nobody: every amount is payable again.  Preview the charge with `POST /v1/creator-campaigns/{campaignId}/payout-batches/preview`.  ### 3D Secure  `payment.status: requires_action` means the bank asked the payer to confirm. Complete it with Stripe.js `handleNextAction({ clientSecret })`, then call `POST /v1/payout-batches/{batchId}/confirm`.  One left unfinished is cancelled after 30 minutes and every amount is payable again. Cancel it sooner with `POST /v1/payout-batches/{batchId}/cancel`.  ### Limits and errors  - 402 `payment_required`: no saved card. Nothing is held. - 402 `card_declined`: the bank's reason; every amount is payable again. - 402: card payouts are limited to $10,000.00 gross per rolling 30 days by default. Over it the call answers \"Over your instant payout limit for the last 30 days. Contact support to raise it.\" - 402: your balance is negative after a dispute or refund. - 400: nothing payable (\"Nothing is payable.\"). - 400 `invalid_billing_address`: Stripe cannot place your billing address, so it cannot tax the fee. Nothing is held. - 429 `payment_attempts_limited`: five card payments were declined in 24 hours. Nothing is held and nothing reaches the bank until `Retry-After` runs out.  ### Access and retries  Needs an owner, admin or billing admin, signed in or through a full-access key they created.  Send an `Idempotency-Key` so a retry never opens a second batch. 
 
 ### Examples
 
@@ -489,7 +729,7 @@ end
 api_instance = Zernio::CreatorCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Campaign ID.
 opts = {
-  idempotency_key: 'idempotency_key_example', # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example', # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
   create_campaign_payout_batch_request: Zernio::CreateCampaignPayoutBatchRequest.new # CreateCampaignPayoutBatchRequest | 
 }
 
@@ -525,7 +765,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Campaign ID. |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 | **create_campaign_payout_batch_request** | [**CreateCampaignPayoutBatchRequest**](CreateCampaignPayoutBatchRequest.md) |  | [optional] |
 
 ### Return type
@@ -562,9 +802,9 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::CreatorCampaignsApi.new
-create_creator_campaign_request = Zernio::CreateCreatorCampaignRequest.new({profile_id: 'profile_id_example', name: 'name_example', brand_name: 'brand_name_example', economics: Zernio::CreatorCampaignEconomicsCpm.new({type: 'cpm', rate_per1k_cents: 37, min_views_to_earn: 37, budget_cents: 37})}) # CreateCreatorCampaignRequest | 
+create_creator_campaign_request = Zernio::CreateCreatorCampaignRequest.new({profile_id: 'profile_id_example', name: 'name_example', brand_name: 'brand_name_example', economics: Zernio::CreatorCampaignEconomicsAdPerformance.new({type: 'ad_performance', metric: 'spend', budget_cents: 37})}) # CreateCreatorCampaignRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -599,7 +839,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_creator_campaign_request** | [**CreateCreatorCampaignRequest**](CreateCreatorCampaignRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -612,6 +852,306 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## decline_campaign_sample
+
+> <ApproveCampaignSample200Response> decline_campaign_sample(campaign_id, sample_id, decline_campaign_sample_request, opts)
+
+Decline campaign sample request
+
+Declines a `pending` sample request with a reason, emails the creator and fires `campaign_sample.declined`. The creator can ask for the same product again. Any other status answers 409. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+sample_id = 'sample_id_example' # String | Sample request ID.
+decline_campaign_sample_request = Zernio::DeclineCampaignSampleRequest.new({reason: 'reason_example'}) # DeclineCampaignSampleRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Decline campaign sample request
+  result = api_instance.decline_campaign_sample(campaign_id, sample_id, decline_campaign_sample_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->decline_campaign_sample: #{e}"
+end
+```
+
+#### Using the decline_campaign_sample_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ApproveCampaignSample200Response>, Integer, Hash)> decline_campaign_sample_with_http_info(campaign_id, sample_id, decline_campaign_sample_request, opts)
+
+```ruby
+begin
+  # Decline campaign sample request
+  data, status_code, headers = api_instance.decline_campaign_sample_with_http_info(campaign_id, sample_id, decline_campaign_sample_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ApproveCampaignSample200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->decline_campaign_sample_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **sample_id** | **String** | Sample request ID. |  |
+| **decline_campaign_sample_request** | [**DeclineCampaignSampleRequest**](DeclineCampaignSampleRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**ApproveCampaignSample200Response**](ApproveCampaignSample200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## deny_campaign_participant
+
+> <GetCampaignParticipant200Response> deny_campaign_participant(campaign_id, participant_id, opts)
+
+Deny pending campaign participant
+
+Turns a `pending` creator away: they become `denied`, the creator is emailed and `campaign_participant.denied` fires. A denied creator cannot submit posts, drafts or sample requests. Any status other than `pending` answers 409. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+participant_id = 'participant_id_example' # String | Participant ID.
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Deny pending campaign participant
+  result = api_instance.deny_campaign_participant(campaign_id, participant_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->deny_campaign_participant: #{e}"
+end
+```
+
+#### Using the deny_campaign_participant_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCampaignParticipant200Response>, Integer, Hash)> deny_campaign_participant_with_http_info(campaign_id, participant_id, opts)
+
+```ruby
+begin
+  # Deny pending campaign participant
+  data, status_code, headers = api_instance.deny_campaign_participant_with_http_info(campaign_id, participant_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCampaignParticipant200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->deny_campaign_participant_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **participant_id** | **String** | Participant ID. |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**GetCampaignParticipant200Response**](GetCampaignParticipant200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_campaign_ad_results
+
+> <GetCampaignAdResults200Response> get_campaign_ad_results(campaign_id, opts)
+
+Get campaign ad results
+
+What the campaign's posts did as ads: totals, each post with its ads and launches, and the creators ranked by `rankBy`.  An ad counts for a post when it was launched from the post, or when it runs the post (a boosted post, the Instagram media it shows, or a TikTok Spark item).  Figures come from the ads' daily metrics; money is in the campaign currency, and ads billed in another currency are left out of money figures. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+opts = {
+  rank_by: 'spend', # String | How `creators` is ranked.
+  from: Date.parse('2013-10-20'), # Date | First day counted (YYYY-MM-DD, UTC). Omit to count from the first day of data.
+  to: Date.parse('2013-10-20') # Date | Last day counted (YYYY-MM-DD, UTC). Omit to count through the latest day of data.
+}
+
+begin
+  # Get campaign ad results
+  result = api_instance.get_campaign_ad_results(campaign_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->get_campaign_ad_results: #{e}"
+end
+```
+
+#### Using the get_campaign_ad_results_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCampaignAdResults200Response>, Integer, Hash)> get_campaign_ad_results_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # Get campaign ad results
+  data, status_code, headers = api_instance.get_campaign_ad_results_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCampaignAdResults200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->get_campaign_ad_results_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **rank_by** | **String** | How &#x60;creators&#x60; is ranked. | [optional][default to &#39;spend&#39;] |
+| **from** | **Date** | First day counted (YYYY-MM-DD, UTC). Omit to count from the first day of data. | [optional] |
+| **to** | **Date** | Last day counted (YYYY-MM-DD, UTC). Omit to count through the latest day of data. | [optional] |
+
+### Return type
+
+[**GetCampaignAdResults200Response**](GetCampaignAdResults200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_campaign_draft
+
+> <GetCampaignDraft200Response> get_campaign_draft(campaign_id, draft_id)
+
+Get campaign draft
+
+Returns one draft version and every version of its chain (`versions`, newest first, including this one), each with its review comments. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+draft_id = 'draft_id_example' # String | Draft version ID.
+
+begin
+  # Get campaign draft
+  result = api_instance.get_campaign_draft(campaign_id, draft_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->get_campaign_draft: #{e}"
+end
+```
+
+#### Using the get_campaign_draft_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCampaignDraft200Response>, Integer, Hash)> get_campaign_draft_with_http_info(campaign_id, draft_id)
+
+```ruby
+begin
+  # Get campaign draft
+  data, status_code, headers = api_instance.get_campaign_draft_with_http_info(campaign_id, draft_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCampaignDraft200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->get_campaign_draft_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **draft_id** | **String** | Draft version ID. |  |
+
+### Return type
+
+[**GetCampaignDraft200Response**](GetCampaignDraft200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -895,6 +1435,160 @@ end
 - **Accept**: application/json
 
 
+## launch_campaign_ads
+
+> <LaunchCampaignAds200Response> launch_campaign_ads(campaign_id, launch_campaign_ads_request, opts)
+
+Launch campaign posts as ads
+
+Runs approved posts of an active campaign as ads, each post on its own: a post that cannot run is reported in `results` and never stops the rest.  A post already launched (or launching) into the same placement is reported as `already_launched` or `in_progress` and never gets a second ad, so a retry is safe.  ### What each post becomes  - **Meta, `identity: brand`**: a new ad from the post media in the existing ad set `adSetId`, under the brand's Page. - **Meta, `identity: creator`**: a Partnership Ad of the Instagram post under the creator's handle. Partnership Ads are a limited release while Meta reviews the permission they need (`capabilities.partnershipAds` in `GET /v1/creator-campaigns/{campaignId}/ad-results`); without it these posts fail with a message to launch them with brand identity. Facebook posts only run with brand identity. - **TikTok** (`identity: creator` only): a Spark Ad of the creator's post in its own ad group with `dailyBudget`, inside the existing campaign `existingCampaignId`. Needs the Spark code the creator pasted on their campaign page (`hasSparkCode` on the submission).  One launch runs on one network: posts from the other network fail with a message to launch them separately. Needs ads access (403 `ads_addon_required`) and room in the managed ads allowance (403 `ads_allowance_exceeded`). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+launch_campaign_ads_request = Zernio::LaunchCampaignAdsRequest.new({submission_ids: ['submission_ids_example'], network: 'meta', account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', identity: 'brand'}) # LaunchCampaignAdsRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Launch campaign posts as ads
+  result = api_instance.launch_campaign_ads(campaign_id, launch_campaign_ads_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->launch_campaign_ads: #{e}"
+end
+```
+
+#### Using the launch_campaign_ads_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LaunchCampaignAds200Response>, Integer, Hash)> launch_campaign_ads_with_http_info(campaign_id, launch_campaign_ads_request, opts)
+
+```ruby
+begin
+  # Launch campaign posts as ads
+  data, status_code, headers = api_instance.launch_campaign_ads_with_http_info(campaign_id, launch_campaign_ads_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LaunchCampaignAds200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->launch_campaign_ads_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **launch_campaign_ads_request** | [**LaunchCampaignAdsRequest**](LaunchCampaignAdsRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**LaunchCampaignAds200Response**](LaunchCampaignAds200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## list_campaign_drafts
+
+> <ListCampaignDrafts200Response> list_campaign_drafts(campaign_id, opts)
+
+List campaign drafts
+
+Lists the drafts creators uploaded for review on a campaign with `requireDraftApproval`, newest first.  Each draft is a chain of versions: a revision is a new version in the same `chainId`. Only the latest version of each chain is listed, so `status` is the chain's current state and `total` counts chains. Earlier versions come with `GET /v1/creator-campaigns/{campaignId}/drafts/{draftId}`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+opts = {
+  status: 'submitted', # String | Only drafts whose latest version is in this status. `submitted` is the review queue.
+  participant_id: 'participant_id_example', # String | Only drafts of this participant.
+  limit: 56, # Integer | 
+  skip: 56 # Integer | 
+}
+
+begin
+  # List campaign drafts
+  result = api_instance.list_campaign_drafts(campaign_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->list_campaign_drafts: #{e}"
+end
+```
+
+#### Using the list_campaign_drafts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCampaignDrafts200Response>, Integer, Hash)> list_campaign_drafts_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # List campaign drafts
+  data, status_code, headers = api_instance.list_campaign_drafts_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCampaignDrafts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->list_campaign_drafts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **status** | **String** | Only drafts whose latest version is in this status. &#x60;submitted&#x60; is the review queue. | [optional] |
+| **participant_id** | **String** | Only drafts of this participant. | [optional] |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **skip** | **Integer** |  | [optional][default to 0] |
+
+### Return type
+
+[**ListCampaignDrafts200Response**](ListCampaignDrafts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_campaign_ledger
 
 > <ListCampaignLedger200Response> list_campaign_ledger(campaign_id, opts)
@@ -963,6 +1657,85 @@ end
 ### Return type
 
 [**ListCampaignLedger200Response**](ListCampaignLedger200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_campaign_orders
+
+> <ListCampaignOrders200Response> list_campaign_orders(campaign_id, opts)
+
+List campaign orders
+
+Lists the store orders a commission or smart retainer campaign credited to its creators, newest first, and every active creator's discount code and tracking link.  An order is `pending` while the store is still attributing it (Shopify does so for a few minutes after checkout), `matched` once it is credited to a creator and `unmatched` when it never was. Commission is approved `holdDays` after the order was placed. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+opts = {
+  participant_id: 'participant_id_example', # String | Only this creator's orders.
+  status: 'pending', # String | 
+  limit: 56, # Integer | 
+  skip: 56 # Integer | 
+}
+
+begin
+  # List campaign orders
+  result = api_instance.list_campaign_orders(campaign_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->list_campaign_orders: #{e}"
+end
+```
+
+#### Using the list_campaign_orders_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCampaignOrders200Response>, Integer, Hash)> list_campaign_orders_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # List campaign orders
+  data, status_code, headers = api_instance.list_campaign_orders_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCampaignOrders200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->list_campaign_orders_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **participant_id** | **String** | Only this creator&#39;s orders. | [optional] |
+| **status** | **String** |  | [optional] |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **skip** | **Integer** |  | [optional][default to 0] |
+
+### Return type
+
+[**ListCampaignOrders200Response**](ListCampaignOrders200Response.md)
 
 ### Authorization
 
@@ -1184,6 +1957,85 @@ end
 ### Return type
 
 [**ListCampaignPayoutBatches200Response**](ListCampaignPayoutBatches200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_campaign_samples
+
+> <ListCampaignSamples200Response> list_campaign_samples(campaign_id, opts)
+
+List campaign sample requests
+
+Lists the free product samples creators asked for, newest first. `contentOwed` marks an approved or shipped sample whose creator submitted no post in the `sampleContentDueDays` since the approval. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+opts = {
+  status: 'pending', # String | Only requests in this status. `pending` is the review queue.
+  participant_id: 'participant_id_example', # String | Only requests of this participant.
+  limit: 56, # Integer | 
+  skip: 56 # Integer | 
+}
+
+begin
+  # List campaign sample requests
+  result = api_instance.list_campaign_samples(campaign_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->list_campaign_samples: #{e}"
+end
+```
+
+#### Using the list_campaign_samples_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCampaignSamples200Response>, Integer, Hash)> list_campaign_samples_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # List campaign sample requests
+  data, status_code, headers = api_instance.list_campaign_samples_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCampaignSamples200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->list_campaign_samples_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **status** | **String** | Only requests in this status. &#x60;pending&#x60; is the review queue. | [optional] |
+| **participant_id** | **String** | Only requests of this participant. | [optional] |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **skip** | **Integer** |  | [optional][default to 0] |
+
+### Return type
+
+[**ListCampaignSamples200Response**](ListCampaignSamples200Response.md)
 
 ### Authorization
 
@@ -1509,6 +2361,77 @@ end
 - **Accept**: application/json
 
 
+## preview_campaign_payout_batch
+
+> <PreviewCampaignPayoutBatch200Response> preview_campaign_payout_batch(campaign_id, preview_campaign_payout_batch_request)
+
+Preview a payout batch
+
+What `POST /v1/creator-campaigns/{campaignId}/payout-batches` with the same body would charge your card now. Holds and charges nothing.  The payouts carry no VAT. `taxCents` is the VAT on Zernio's fee where it applies, from Stripe Tax for your billing address: 21% in Spain, your country's rate for EU consumers, reverse charged (`reverseCharge: true`, no VAT) for EU businesses whose VAT id VIES confirms, none outside the EU.  Creators who have not finished payout setup are left out, as paying would. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+preview_campaign_payout_batch_request = Zernio::PreviewCampaignPayoutBatchRequest.new # PreviewCampaignPayoutBatchRequest | 
+
+begin
+  # Preview a payout batch
+  result = api_instance.preview_campaign_payout_batch(campaign_id, preview_campaign_payout_batch_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->preview_campaign_payout_batch: #{e}"
+end
+```
+
+#### Using the preview_campaign_payout_batch_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PreviewCampaignPayoutBatch200Response>, Integer, Hash)> preview_campaign_payout_batch_with_http_info(campaign_id, preview_campaign_payout_batch_request)
+
+```ruby
+begin
+  # Preview a payout batch
+  data, status_code, headers = api_instance.preview_campaign_payout_batch_with_http_info(campaign_id, preview_campaign_payout_batch_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PreviewCampaignPayoutBatch200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->preview_campaign_payout_batch_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **preview_campaign_payout_batch_request** | [**PreviewCampaignPayoutBatchRequest**](PreviewCampaignPayoutBatchRequest.md) |  |  |
+
+### Return type
+
+[**PreviewCampaignPayoutBatch200Response**](PreviewCampaignPayoutBatch200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## raise_creator_campaign_budget
 
 > <CreateCreatorCampaign201Response> raise_creator_campaign_budget(campaign_id, raise_creator_campaign_budget_request, opts)
@@ -1532,7 +2455,7 @@ api_instance = Zernio::CreatorCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Campaign ID.
 raise_creator_campaign_budget_request = Zernio::RaiseCreatorCampaignBudgetRequest.new({budget_cents: 37}) # RaiseCreatorCampaignBudgetRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -1568,7 +2491,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Campaign ID. |  |
 | **raise_creator_campaign_budget_request** | [**RaiseCreatorCampaignBudgetRequest**](RaiseCreatorCampaignBudgetRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -1655,6 +2578,83 @@ end
 - **Accept**: application/json
 
 
+## reject_campaign_draft
+
+> <ApproveCampaignDraft200Response> reject_campaign_draft(campaign_id, draft_id, reject_campaign_draft_request, opts)
+
+Reject campaign draft
+
+Rejects a `submitted` draft version for good, emails the creator and fires `campaign_draft.rejected`. The reason is stored as `reviewNote`. A rejected draft takes no new version and backs no post.  Each version is decided once: a version that is no longer `submitted` answers 409. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+draft_id = 'draft_id_example' # String | Draft version ID.
+reject_campaign_draft_request = Zernio::RejectCampaignDraftRequest.new({reason: 'reason_example'}) # RejectCampaignDraftRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Reject campaign draft
+  result = api_instance.reject_campaign_draft(campaign_id, draft_id, reject_campaign_draft_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->reject_campaign_draft: #{e}"
+end
+```
+
+#### Using the reject_campaign_draft_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ApproveCampaignDraft200Response>, Integer, Hash)> reject_campaign_draft_with_http_info(campaign_id, draft_id, reject_campaign_draft_request, opts)
+
+```ruby
+begin
+  # Reject campaign draft
+  data, status_code, headers = api_instance.reject_campaign_draft_with_http_info(campaign_id, draft_id, reject_campaign_draft_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ApproveCampaignDraft200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->reject_campaign_draft_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **draft_id** | **String** | Draft version ID. |  |
+| **reject_campaign_draft_request** | [**RejectCampaignDraftRequest**](RejectCampaignDraftRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**ApproveCampaignDraft200Response**](ApproveCampaignDraft200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## reject_campaign_submission
 
 > <ApproveCampaignSubmission200Response> reject_campaign_submission(campaign_id, submission_id, reject_campaign_submission_request, opts)
@@ -1679,7 +2679,7 @@ campaign_id = 'campaign_id_example' # String | Campaign ID.
 submission_id = 'submission_id_example' # String | Submission ID.
 reject_campaign_submission_request = Zernio::RejectCampaignSubmissionRequest.new({reason: 'reason_example'}) # RejectCampaignSubmissionRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -1716,7 +2716,7 @@ end
 | **campaign_id** | **String** | Campaign ID. |  |
 | **submission_id** | **String** | Submission ID. |  |
 | **reject_campaign_submission_request** | [**RejectCampaignSubmissionRequest**](RejectCampaignSubmissionRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -1826,7 +2826,7 @@ api_instance = Zernio::CreatorCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Campaign ID.
 submission_id = 'submission_id_example' # String | Submission ID.
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -1862,7 +2862,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Campaign ID. |  |
 | **submission_id** | **String** | Submission ID. |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -1875,6 +2875,83 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## request_campaign_draft_revision
+
+> <ApproveCampaignDraft200Response> request_campaign_draft_revision(campaign_id, draft_id, request_campaign_draft_revision_request, opts)
+
+Request changes on a campaign draft
+
+Marks a `submitted` draft version `revision_requested`, emails the creator and fires `campaign_draft.revision_requested`. The creator answers with one new version (`revisionOf` set to this version).  Send a `note`, at least one entry in `comments`, or both; neither answers 400 `missing_required_field`. A comment with `atMs` is pinned to that moment of the video.  Each version is decided once: a version that is no longer `submitted` answers 409. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+draft_id = 'draft_id_example' # String | Draft version ID.
+request_campaign_draft_revision_request = Zernio::RequestCampaignDraftRevisionRequest.new # RequestCampaignDraftRevisionRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Request changes on a campaign draft
+  result = api_instance.request_campaign_draft_revision(campaign_id, draft_id, request_campaign_draft_revision_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->request_campaign_draft_revision: #{e}"
+end
+```
+
+#### Using the request_campaign_draft_revision_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ApproveCampaignDraft200Response>, Integer, Hash)> request_campaign_draft_revision_with_http_info(campaign_id, draft_id, request_campaign_draft_revision_request, opts)
+
+```ruby
+begin
+  # Request changes on a campaign draft
+  data, status_code, headers = api_instance.request_campaign_draft_revision_with_http_info(campaign_id, draft_id, request_campaign_draft_revision_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ApproveCampaignDraft200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->request_campaign_draft_revision_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **draft_id** | **String** | Draft version ID. |  |
+| **request_campaign_draft_revision_request** | [**RequestCampaignDraftRevisionRequest**](RequestCampaignDraftRevisionRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**ApproveCampaignDraft200Response**](ApproveCampaignDraft200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -1901,7 +2978,7 @@ api_instance = Zernio::CreatorCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Campaign ID.
 participant_id = 'participant_id_example' # String | Participant ID.
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -1937,7 +3014,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Campaign ID. |  |
 | **participant_id** | **String** | Participant ID. |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -1959,7 +3036,7 @@ end
 
 Settle campaign participant
 
-Records a payout of the participant's payable balance and fires `campaign_payout.settled`.  Omit `amountCents` to settle the whole payable balance. An amount above it answers 400, and nothing payable answers 409. Send an `Idempotency-Key` so a retry never records the payout twice.  ### Settlement modes  - `none` settlement: records a payout you made elsewhere. - `external` settlement: pay from your own rails when `campaign_payout.payable` fires, then call this with your payout id in `externalReference` (required in this mode). - `treasury` settlement: transfers the amount from your Zernio balance to the creator's connected Stripe account, then records it with the Stripe transfer id as `externalReference`.  ### Treasury payouts  The transfer fee (4%, $0.50 minimum) is added on top: the creator receives the full amount and your balance is debited `totalCents`.  - The creator must have finished payout setup from their campaign page (409 otherwise). - A balance that does not cover the amount plus the fee answers 402. - Money from a card top-up charged under 7 days ago cannot be paid out yet: a payout that needs it answers 409 `payout_funds_locked` with the day it can be sent.  Set `recordOnly: true` to record a payout you made yourself instead of moving money through the treasury (the webhook then carries `recorded: true`).  A treasury payout needs an owner, admin or billing admin, signed in or through a full-access key they created (403 otherwise). Recording with `recordOnly` does not.  #### While Stripe confirms the transfer  The amount sits in the participant's `settling` balance; a reject in that window cannot reverse it.  - If Stripe refuses the transfer, the amount returns to payable. - If Stripe does not answer, the amount stays in `settling`. The next settle call for this participant finishes that payout first (even with nothing payable left).  #### Conflicts (409)  - A retry asking for a different `amountCents` than the payout in progress answers 409 with the amount in progress. - A settle while another request is still waiting on Stripe for the same payout answers 409 (\"This payout is being sent to Stripe right now. Try again in a minute.\"). - A payout Stripe has not confirmed after 24 hours answers 409 (\"This payout is being confirmed with Stripe. Try again after the next reconciliation (within 24 hours).\") until the daily reconciliation finishes it: settled if Stripe made the transfer, returned to payable if it did not. - A creator held by an unfinished payout batch answers 409 (\"This creator is in a card payout that is not finished yet.\"). 
+Records a payout of the participant's payable balance and fires `campaign_payout.settled`. No money moves through Zernio.  Omit `amountCents` to settle the whole payable balance. An amount above it answers 400, and nothing payable answers 409. Send an `Idempotency-Key` so a retry never records the payout twice.  ### Settlement modes  - `none` settlement: records a payout you made elsewhere. - `external` settlement: pay from your own rails when `campaign_payout.payable` fires, then call this with your payout id in `externalReference` (required in this mode). - `treasury` settlement: send `recordOnly: true` to record a payout you made yourself (the webhook then carries `recorded: true`). Without it the call answers 409: Zernio pays creators of these campaigns by card with `POST /v1/creator-campaigns/{campaignId}/payout-batches`, never from your balance. 
 
 ### Examples
 
@@ -1977,7 +3054,7 @@ campaign_id = 'campaign_id_example' # String | Campaign ID.
 participant_id = 'participant_id_example' # String | Participant ID.
 settle_campaign_participant_request = Zernio::SettleCampaignParticipantRequest.new # SettleCampaignParticipantRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -2014,11 +3091,88 @@ end
 | **campaign_id** | **String** | Campaign ID. |  |
 | **participant_id** | **String** | Participant ID. |  |
 | **settle_campaign_participant_request** | [**SettleCampaignParticipantRequest**](SettleCampaignParticipantRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
 [**SettleCampaignParticipant201Response**](SettleCampaignParticipant201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## ship_campaign_sample
+
+> <ApproveCampaignSample200Response> ship_campaign_sample(campaign_id, sample_id, opts)
+
+Mark campaign sample shipped
+
+Records that you sent an `approved` sample yourself, with an optional tracking link, emails the creator and fires `campaign_sample.shipped`. No store call or money is involved. Any other status answers 409. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CreatorCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Campaign ID.
+sample_id = 'sample_id_example' # String | Sample request ID.
+opts = {
+  idempotency_key: 'idempotency_key_example', # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+  ship_campaign_sample_request: Zernio::ShipCampaignSampleRequest.new # ShipCampaignSampleRequest | Optional: no body marks the sample shipped without a tracking link.
+}
+
+begin
+  # Mark campaign sample shipped
+  result = api_instance.ship_campaign_sample(campaign_id, sample_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->ship_campaign_sample: #{e}"
+end
+```
+
+#### Using the ship_campaign_sample_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ApproveCampaignSample200Response>, Integer, Hash)> ship_campaign_sample_with_http_info(campaign_id, sample_id, opts)
+
+```ruby
+begin
+  # Mark campaign sample shipped
+  data, status_code, headers = api_instance.ship_campaign_sample_with_http_info(campaign_id, sample_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ApproveCampaignSample200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CreatorCampaignsApi->ship_campaign_sample_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Campaign ID. |  |
+| **sample_id** | **String** | Sample request ID. |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+| **ship_campaign_sample_request** | [**ShipCampaignSampleRequest**](ShipCampaignSampleRequest.md) | Optional: no body marks the sample shipped without a tracking link. | [optional] |
+
+### Return type
+
+[**ApproveCampaignSample200Response**](ApproveCampaignSample200Response.md)
 
 ### Authorization
 

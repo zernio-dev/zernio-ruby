@@ -1,0 +1,26 @@
+# Zernio::GetEventsOverview200ResponseSitesInner
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **site_id** | **String** |  | [optional] |
+| **profile_id** | **String** | The profile the site belongs to. | [optional] |
+| **hits_today** | **Integer** | Hits today. | [optional] |
+| **last_active_on** | **Date** | The last day in the past 7 with a hit. &#x60;null&#x60; when none. | [optional] |
+| **totals** | [**GetEventsOverview200ResponseSitesInnerTotals**](GetEventsOverview200ResponseSitesInnerTotals.md) |  | [optional] |
+
+## Example
+
+```ruby
+require 'zernio-sdk'
+
+instance = Zernio::GetEventsOverview200ResponseSitesInner.new(
+  site_id: null,
+  profile_id: null,
+  hits_today: null,
+  last_active_on: null,
+  totals: null
+)
+```
+

@@ -13,6 +13,7 @@
 | **message_ids** | **Array&lt;String&gt;** |  | [optional] |
 | **draft_ids** | **Array&lt;String&gt;** |  | [optional] |
 | **folders** | **Array&lt;String&gt;** |  | [optional] |
+| **labels** | **Array&lt;String&gt;** | Every label (Gmail) or category (Outlook) on any message of the thread. | [optional] |
 | **has_attachments** | **Boolean** |  | [optional] |
 | **has_drafts** | **Boolean** |  | [optional] |
 | **unread** | **Boolean** |  | [optional] |
@@ -37,6 +38,7 @@ instance = Zernio::GetEmailThread200ResponseData.new(
   message_ids: null,
   draft_ids: null,
   folders: null,
+  labels: null,
   has_attachments: null,
   has_drafts: null,
   unread: null,

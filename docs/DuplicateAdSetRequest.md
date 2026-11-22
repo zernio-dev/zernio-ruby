@@ -14,6 +14,7 @@
 | **rename_prefix** | **String** | Text prepended to each renamed object&#39;s name. | [optional] |
 | **rename_suffix** | **String** | Text appended to each renamed object&#39;s name. | [optional] |
 | **sync_after** | **Boolean** |  | [optional][default to true] |
+| **website_only** | **Boolean** | Meta only. Rebuilds each copied ad (new creative and ad) instead of using Meta&#39;s native copy, so the creative carries applink_treatment web_only and Ads Manager shows Website as the only destination.  - Omitted or false: keeps the native copy. - 400 with &#x60;deepCopy: false&#x60;, and when an ad runs an existing post (its creative cannot be rebuilt). - Meta rejects it when the campaign uses Website and App conversion locations.  | [optional] |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = Zernio::DuplicateAdSetRequest.new(
   rename_strategy: null,
   rename_prefix: null,
   rename_suffix: null,
-  sync_after: null
+  sync_after: null,
+  website_only: null
 )
 ```
 

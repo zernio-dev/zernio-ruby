@@ -27,7 +27,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Delete comment
 
-Delete a comment on a post. Supported by Facebook, Instagram, Threads, LinkedIn, Reddit, Bluesky, X (Twitter), YouTube, and TikTok (accounts connected through the TikTok for Business app). Not supported on Google Business (reviews only). Requires accountId and commentId query parameters. 
+Delete a comment on a post. Supported by Facebook, Instagram, Threads, LinkedIn, Reddit, Bluesky, X (Twitter), YouTube, and TikTok (accounts connected through the TikTok for Business app). Not supported on Google Business (reviews only). Requires accountId and commentId query parameters.  Zernio does not check `canDelete` before calling the platform. When the platform refuses, the call fails with the platform's message, normally as `platform_api_error` with the platform's own 4xx status.  On Facebook, Instagram and LinkedIn organization accounts, the account can delete anyone's comment on its own posts. On Threads, Meta refuses deleting other people's replies; hide them instead. On TikTok only the account's own comments can be deleted; hide the others.  On YouTube, a comment the channel did not write is rejected instead, through the same moderation status as `setCommentModeration`, and the response still reports it as deleted. Use `setCommentModeration` directly to reverse the rejection later or to ban the author. 
 
 ### Examples
 
@@ -193,7 +193,8 @@ opts = {
   subreddit: 'subreddit_example', # String | (Reddit only) Subreddit name
   limit: 56, # Integer | Maximum number of comments to return
   cursor: 'cursor_example', # String | Pagination cursor, returned by a previous call as `pagination.cursor`. This is the platform's own opaque paging value passed through verbatim: never construct, decode or validate it client-side.
-  comment_id: 'comment_id_example' # String | (Facebook, Instagram, Reddit and TikTok) Get replies to a specific comment. On Facebook and Instagram, the requested comment is returned in the top-level `comment` field and comments[] holds its replies.
+  comment_id: 'comment_id_example', # String | (Facebook, Instagram, Reddit and TikTok) Get replies to a specific comment. On Facebook and Instagram, the requested comment is returned in the top-level `comment` field and comments[] holds its replies.
+  view: 'full' # String | `full` returns every comment as before. `summary` is a lighter page for agents and large polls:  - Each comment leaves out `from.picture`, `url`, `platform` and every flag that is false. - At most 3 nested replies per comment. A comment with more replies than it carries has `repliesHasMore: true`: fetch the rest with `commentId` (Facebook, Instagram, Reddit, TikTok) or with view=full. - `post` leaves out `thumbnailUrl` and `mediaUrl`. 
 }
 
 begin
@@ -233,6 +234,7 @@ end
 | **limit** | **Integer** | Maximum number of comments to return | [optional][default to 25] |
 | **cursor** | **String** | Pagination cursor, returned by a previous call as &#x60;pagination.cursor&#x60;. This is the platform&#39;s own opaque paging value passed through verbatim: never construct, decode or validate it client-side. | [optional] |
 | **comment_id** | **String** | (Facebook, Instagram, Reddit and TikTok) Get replies to a specific comment. On Facebook and Instagram, the requested comment is returned in the top-level &#x60;comment&#x60; field and comments[] holds its replies. | [optional] |
+| **view** | **String** | &#x60;full&#x60; returns every comment as before. &#x60;summary&#x60; is a lighter page for agents and large polls:  - Each comment leaves out &#x60;from.picture&#x60;, &#x60;url&#x60;, &#x60;platform&#x60; and every flag that is false. - At most 3 nested replies per comment. A comment with more replies than it carries has &#x60;repliesHasMore: true&#x60;: fetch the rest with &#x60;commentId&#x60; (Facebook, Instagram, Reddit, TikTok) or with view&#x3D;full. - &#x60;post&#x60; leaves out &#x60;thumbnailUrl&#x60; and &#x60;mediaUrl&#x60;.  | [optional][default to &#39;full&#39;] |
 
 ### Return type
 
@@ -254,7 +256,7 @@ end
 
 Hide comment
 
-Hide a comment on a post. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). Hidden comments are only visible to the commenter and page admin. For X, the reply must belong to a conversation started by the authenticated user. 
+Hide a comment on a post. Supported by Facebook, Instagram, Threads, X, and TikTok (accounts connected through the TikTok for Business app). Hidden comments are only visible to the commenter and page admin.  For X, the reply must belong to a conversation started by the authenticated user.  On Threads only top-level replies can be hidden, and hiding one also hides its nested replies. 
 
 ### Examples
 
@@ -327,7 +329,7 @@ end
 
 Like comment
 
-Like or upvote a comment on a post. Supported platforms: Facebook, X, Bluesky, Reddit, LinkedIn, and Instagram in limited release (see below).  ### Platform notes  - Bluesky: the cid (content identifier) is required in the request body. - LinkedIn: pass the composite comment URN returned by the comments endpoints as commentId. An optional reactionType picks the reaction (defaults to LIKE). - LinkedIn: accounts connected before the social-feed scopes were requested get a 403 with code `linkedin_reconnect_required`.  ### Instagram (limited release)  Instagram is in LIMITED RELEASE and not generally available. The call needs `instagram_manage_engagement`, which Meta has so far granted this app only under Standard Access.  It works for app admins, developers and testers of our Meta app, and returns a 403 with code `PLATFORM_BETA_RESTRICTED` for every other account. That restriction lifts when Meta App Review grants Advanced Access; the constraints below apply once it does.  Instagram covers comments and replies on feed posts, reels and carousels. Only an account connected through Facebook Login can be granted `instagram_manage_engagement`.  - 400 `instagram_likes_require_facebook_login`: the account is an Instagram Login connection. - 403 `reconnect_required`: the account's token predates the permission. - Content from private accounts cannot be liked.  Instagram enforces a burst limit of 50 like or unlike calls per 5 seconds per Instagram account. Exceeding it locks that account out of the like API for an hour, so pace bulk loops. 
+Like or upvote a comment on a post. Supported platforms: Facebook, X, Bluesky, Reddit, LinkedIn, TikTok, and Instagram in limited release (see below).  ### Platform notes  - Bluesky: the cid (content identifier) is required in the request body. - LinkedIn: pass the composite comment URN returned by the comments endpoints as commentId. An optional reactionType picks the reaction (defaults to LIKE). - LinkedIn: accounts connected before the social-feed scopes were requested get a 403 with code `linkedin_reconnect_required`. - TikTok: works only on accounts connected through the TikTok Business (Accounts API) connection. An account on the older developer-app connection gets a 400 with code `PLATFORM_LIMITATION`.  ### Instagram (limited release)  Instagram is in LIMITED RELEASE and not generally available. The call needs `instagram_manage_engagement`, which Meta has so far granted this app only under Standard Access.  It works for app admins, developers and testers of our Meta app, and returns a 403 with code `PLATFORM_BETA_RESTRICTED` for every other account. That restriction lifts when Meta App Review grants Advanced Access; the constraints below apply once it does.  Instagram covers comments and replies on feed posts, reels and carousels. Only an account connected through Facebook Login can be granted `instagram_manage_engagement`.  - 400 `instagram_likes_require_facebook_login`: the account is an Instagram Login connection. - 403 `reconnect_required`: the account's token predates the permission. - Content from private accounts cannot be liked.  Instagram enforces a burst limit of 50 like or unlike calls per 5 seconds per Instagram account. Exceeding it locks that account out of the like API for an hour, so pace bulk loops. 
 
 ### Examples
 
@@ -493,6 +495,7 @@ opts = {
   sort_by: 'date', # String | Sort field
   sort_order: 'asc', # String | Sort order
   limit: 56, # Integer | 
+  view: 'full', # String | full returns every post as before. summary leaves out `picture` and cuts `content` to 280 characters, marking a cut caption with `contentTruncated: true`.
   cursor: 'cursor_example', # String | 
   account_id: 'account_id_example' # String | Filter by specific account ID.  With `platform=metaads` it takes the Meta Ads account ID, or the Facebook or Instagram account ID the Meta Ads connection belongs to, which returns that connection's ad rows.  A Facebook or Instagram account with no Meta Ads connection returns no rows. An account on any other platform returns 400. 
 }
@@ -535,6 +538,7 @@ end
 | **sort_by** | **String** | Sort field | [optional][default to &#39;date&#39;] |
 | **sort_order** | **String** | Sort order | [optional][default to &#39;desc&#39;] |
 | **limit** | **Integer** |  | [optional][default to 50] |
+| **view** | **String** | full returns every post as before. summary leaves out &#x60;picture&#x60; and cuts &#x60;content&#x60; to 280 characters, marking a cut caption with &#x60;contentTruncated: true&#x60;. | [optional][default to &#39;full&#39;] |
 | **cursor** | **String** |  | [optional] |
 | **account_id** | **String** | Filter by specific account ID.  With &#x60;platform&#x3D;metaads&#x60; it takes the Meta Ads account ID, or the Facebook or Instagram account ID the Meta Ads connection belongs to, which returns that connection&#39;s ad rows.  A Facebook or Instagram account with no Meta Ads connection returns no rows. An account on any other platform returns 400.  | [optional] |
 
@@ -648,7 +652,7 @@ api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | Zernio post ID or platform-specific post ID. On LinkedIn, pass the post id exactly as the feed returns it (urn:li:share:<id> or urn:li:ugcPost:<id>); a bare number is read as an activity id (urn:li:activity:<n>).
 reply_to_inbox_post_request = Zernio::ReplyToInboxPostRequest.new({account_id: 'account_id_example', message: 'message_example'}) # ReplyToInboxPostRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -684,7 +688,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **post_id** | **String** | Zernio post ID or platform-specific post ID. On LinkedIn, pass the post id exactly as the feed returns it (urn:li:share:&lt;id&gt; or urn:li:ugcPost:&lt;id&gt;); a bare number is read as an activity id (urn:li:activity:&lt;n&gt;). |  |
 | **reply_to_inbox_post_request** | [**ReplyToInboxPostRequest**](ReplyToInboxPostRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -706,7 +710,7 @@ end
 
 Send private reply
 
-Send a direct message to the author of a comment. Supported on Instagram and Facebook only.  One reply per comment, must be sent within 7 days.  ### Interactive elements  Optionally attach one of these (`quickReplies` and `buttons` are mutually exclusive):  - `quickReplies`: chips above the keyboard, max 13. Chips do not render in the Instagram Message Requests folder. - `buttons`: 1-3 inline postback/url buttons rendered in the same bubble via Meta's button_template.  ### Non-followers on Instagram  Instagram can refuse buttons, cards and attachments to commenters who do not follow the account. This is Meta code 2, subcode 1545133, returned here as a non-retryable 400 that says so.  The refusal is uneven: most accounts do not get it, and an affected account gets it on many of its non-followers. Only that account's own past refusals show whether it is affected.  The failed call still consumes the comment's single private reply. On an affected account, send plain text to reach non-followers and add buttons once they reply.  ### Errors  - 400 with `details.privateReplyConsumed: true`: the comment's single private reply is spent (by this call or an earlier one). Never retry it. - 502: Meta answered a server error after receiving the reply. It carries `details.privateReplyOutcome: \"unknown\"`. The reply is usually delivered and the comment's private reply spent, so check the conversation before retrying.  ### Recording  The reply is recorded in the inbox conversation with the commenter (`sentVia` `api` for key auth, `human` for a session) and fires `message.sent` once. 
+Send a direct message to the author of a comment. Supported on Instagram and Facebook only.  One reply per comment, must be sent within 7 days.  ### Interactive elements  Optionally attach one of these (`quickReplies` and `buttons` are mutually exclusive):  - `quickReplies`: chips above the keyboard, max 13. Chips do not render in the Instagram Message Requests folder. - `buttons`: 1-3 inline postback/url buttons rendered in the same bubble via Meta's button_template.  ### Non-followers on Instagram  Instagram can refuse buttons, cards and attachments to commenters who do not follow the account. This is Meta code 2, subcode 1545133, returned here as a non-retryable 400 that says so.  The refusal is uneven: most accounts do not get it, and an affected account gets it on many of its non-followers. Only that account's own past refusals show whether it is affected.  The failed call still consumes the comment's single private reply. On an affected account, send plain text to reach non-followers and add buttons once they reply.  ### Errors  - 400 with `details.privateReplyConsumed: true`: the comment's single private reply is spent (by this call or an earlier one). Never retry it. - 429 with `details.privateReplyOutcome: \"not_sent\"`: Instagram's messaging rate limit for the account (Meta code 613). The reply was not sent and the comment's private reply is not spent. Retry after the `Retry-After` header. - 502: Meta answered a server error after receiving the reply. It carries `details.privateReplyOutcome: \"unknown\"`. The reply is usually delivered and the comment's private reply spent, so check the conversation before retrying. - Meta-originated failures carry Meta's error object in `platformError` (`code`, `error_subcode`, `message`, `type`, `fbtrace_id`). Common Instagram subcodes: 2534014 commenter not found (no reason given), 2534023 already replied, 2534024 older than 7 days, 2534025 not eligible for a private reply, 2534066 declined.  ### Recording  The reply is recorded in the inbox conversation with the commenter (`sentVia` `api` for key auth, `human` for a session) and fires `message.sent` once.  A success response and `message.sent` mean Meta accepted the reply, not that the commenter saw it. Instagram has no delivery event, and the reply can land in the commenter's Message Requests folder, where they may never open it. 
 
 ### Examples
 
@@ -925,7 +929,7 @@ end
 
 Unlike comment
 
-Remove a like from a comment. Supported platforms: Facebook, X, Bluesky, Reddit, LinkedIn, and Instagram in limited release. For Bluesky, the likeUri query parameter is required. Instagram has the same limited release, Facebook Login, `instagram_manage_engagement` and burst-limit constraints as liking. 
+Remove a like from a comment. Supported platforms: Facebook, X, Bluesky, Reddit, LinkedIn, TikTok, and Instagram in limited release.  - Bluesky: the likeUri query parameter is required. - TikTok: works only on accounts connected through the TikTok Business (Accounts API) connection. An account on the older developer-app connection gets a 400 with code `PLATFORM_LIMITATION`. - Instagram: the same limited release, Facebook Login, `instagram_manage_engagement` and burst-limit constraints as liking. 
 
 ### Examples
 

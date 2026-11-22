@@ -5,7 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Zernio lead id. | [optional] |
-| **leadgen_id** | **String** | Meta lead id. On LinkedIn, the leadFormResponse id. | [optional] |
+| **platform** | **String** | The ad network the lead came from. &#x60;web&#x60; is a lead from your own form: a tracked website with lead capture on, or &#x60;POST /v1/leads&#x60;. | [optional] |
+| **leadgen_id** | **String** | Meta lead id. On Google, the lead form submission id; on LinkedIn, the leadFormResponse id. | [optional] |
 | **form_id** | **String** |  | [optional] |
 | **form_name** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
@@ -17,6 +18,7 @@
 | **fields** | **Hash&lt;String, String&gt;** | Question key → answer. On LinkedIn, the key is the lowercased predefinedField, else the question name, else the numeric questionId; multiple-choice values are option labels (unlike Meta, which returns the option key). | [optional] |
 | **field_data** | **Array&lt;Object&gt;** | Raw Meta field_data. | [optional] |
 | **consents** | [**Array&lt;AdLeadConsent&gt;**](AdLeadConsent.md) | Meta lead forms only: the answer to every custom disclaimer checkbox, required or optional. Empty when the form has none, and may be empty on leads stored before 2026-10-22. LinkedIn leads do not carry the field. | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content, so the content fields of this row are null. Identifiers and metadata stay. | [optional] |
 | **status** | **String** | Meta leads only. &#x60;contacted&#x60; is set when the first WhatsApp message of a lead_received workflow is delivered, &#x60;unreachable&#x60; when it fails or the phone number is not valid. | [optional] |
 | **status_changed_at** | **Time** |  | [optional] |
 | **value** | **Float** |  | [optional] |
@@ -25,6 +27,7 @@
 | **first_contacted_at** | **Time** | When the first WhatsApp message to the lead was delivered. | [optional] |
 | **conversation_id** | **String** | The Inbox conversation a lead_received workflow opened with the lead. | [optional] |
 | **webhook_delivered_at** | **Time** | Meta leads only. When the &#x60;lead.received&#x60; webhook was delivered; null while it has not been. | [optional] |
+| **attribution** | [**AdLeadAttribution**](AdLeadAttribution.md) |  | [optional] |
 
 ## Example
 
@@ -33,6 +36,7 @@ require 'zernio-sdk'
 
 instance = Zernio::AdLead.new(
   id: null,
+  platform: null,
   leadgen_id: null,
   form_id: null,
   form_name: null,
@@ -45,6 +49,7 @@ instance = Zernio::AdLead.new(
   fields: null,
   field_data: null,
   consents: null,
+  content_not_retained: null,
   status: null,
   status_changed_at: null,
   value: null,
@@ -52,7 +57,8 @@ instance = Zernio::AdLead.new(
   contact_id: null,
   first_contacted_at: null,
   conversation_id: null,
-  webhook_delivered_at: null
+  webhook_delivered_at: null,
+  attribution: null
 )
 ```
 

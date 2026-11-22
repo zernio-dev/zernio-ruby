@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**attach_number_to_sip_trunk**](VoiceApi.md#attach_number_to_sip_trunk) | **POST** /v1/phone-numbers/{id}/sip-trunk | Attach a number to a SIP trunk |
 | [**create_sip_trunk**](VoiceApi.md#create_sip_trunk) | **POST** /v1/phone-numbers/sip-trunks | Create a SIP trunk |
 | [**create_voice_call**](VoiceApi.md#create_voice_call) | **POST** /v1/voice/calls | Place an outbound phone call |
+| [**create_voice_web_inbound_session**](VoiceApi.md#create_voice_web_inbound_session) | **POST** /v1/voice/calls/web/inbound | Register a browser to receive calls |
 | [**create_voice_web_session**](VoiceApi.md#create_voice_web_session) | **POST** /v1/voice/calls/web | Mint a browser softphone session |
 | [**delete_sip_trunk**](VoiceApi.md#delete_sip_trunk) | **DELETE** /v1/phone-numbers/sip-trunks/{id} | Delete a SIP trunk |
 | [**detach_number_from_sip_trunk**](VoiceApi.md#detach_number_from_sip_trunk) | **DELETE** /v1/phone-numbers/{id}/sip-trunk | Detach a number from its SIP trunk |
@@ -170,7 +171,7 @@ end
 
 Place an outbound phone call
 
-Dials `to` FROM one of your voice-enabled numbers and, on answer, bridges the callee to the number's stored forward destination, or to the per-call `forwardTo` override.  Destinations can be your own AI voice agent (Vapi/Retell), a phone, or a SIP endpoint. An optional `greeting` is spoken to the callee before the bridge.  ### Response and limits  The 200 response means the call is dialing. The lifecycle continues asynchronously: track it via `GET /v1/voice/calls/{id}` or the `call.*` webhooks.  Outbound calls are capped per rolling hour (429 when hit).  ### Idempotency  Send an `Idempotency-Key` header to make retries safe. Same key + same body replays the original response instead of dialing (and billing) a second call. 
+Dials `to` FROM one of your voice-enabled numbers and, on answer, bridges the callee to the number's stored forward destination, or to the per-call `forwardTo` override.  Destinations can be your own AI voice agent (Vapi/Retell), a phone, or a SIP endpoint. An optional `greeting` is spoken to the callee before the bridge.  ### Response and limits  The 200 response means the call is dialing. The lifecycle continues asynchronously: track it via `GET /v1/voice/calls/{id}` or the `call.*` webhooks.  Calls are not capped by count. Each team runs at most 10 calls at once (outbound calls plus calls forwarded to a phone) and has a daily safety limit on calling spend over the last 24 hours.  The profile of the calling number can set tighter limits of its own (`maxOutboundCallsPerHour`, `maxDailyCallSpendUsd` on the profile; see `GET /v1/profiles/{profileId}/limits`).  Past a limit the call is refused with 429 `call_limit_reached`, and `details.limit` names it.  ### Balance time limit  On balance billing a call runs only as long as the balance, plus what auto top-up can still add this month, funds at its per-minute price, minus calls already in progress. Then it ends with `hangup_cause: time_limit`. Under one minute is refused with 402.  ### Idempotency  Send an `Idempotency-Key` header to make retries safe. Same key + same body replays the original response instead of dialing (and billing) a second call. 
 
 ### Examples
 
@@ -186,7 +187,7 @@ end
 api_instance = Zernio::VoiceApi.new
 create_voice_call_request = Zernio::CreateVoiceCallRequest.new({to: 'to_example'}) # CreateVoiceCallRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -221,7 +222,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_voice_call_request** | [**CreateVoiceCallRequest**](CreateVoiceCallRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -234,6 +235,72 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_voice_web_inbound_session
+
+> <CreateVoiceWebInboundSession200Response> create_voice_web_inbound_session
+
+Register a browser to receive calls
+
+Mints a login token for the `@telnyx/webrtc` SDK so a browser can receive inbound calls to numbers with `ringInBrowser` on.  The token belongs to one long-lived credential per number owner, so every registered tab (including teammates' with calls access) rings together. Tokens last about 24 hours; request a new one to re-register.  Dashboard sessions only: API keys and connector tokens get `403`. Returns `{ enabled: false }` when none of the owner's numbers ring in the browser. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::VoiceApi.new
+
+begin
+  # Register a browser to receive calls
+  result = api_instance.create_voice_web_inbound_session
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling VoiceApi->create_voice_web_inbound_session: #{e}"
+end
+```
+
+#### Using the create_voice_web_inbound_session_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateVoiceWebInboundSession200Response>, Integer, Hash)> create_voice_web_inbound_session_with_http_info
+
+```ruby
+begin
+  # Register a browser to receive calls
+  data, status_code, headers = api_instance.create_voice_web_inbound_session_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateVoiceWebInboundSession200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling VoiceApi->create_voice_web_inbound_session_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CreateVoiceWebInboundSession200Response**](CreateVoiceWebInboundSession200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -447,7 +514,7 @@ end
 
 Dial from the browser softphone
 
-Step 2 of the browser softphone handshake: rings the browser registered with the credential from `POST /v1/voice/calls/web` first, and dials the target only once the browser answers.  The callee's pickup then connects immediately, with no ringing after they answer.  - The call is logged as outbound (from = your number, to = target) and recorded per the number's settings. - `ringTimeoutSeconds` applies to the target's phone, not to the browser. 
+Step 2 of the browser softphone handshake: rings the browser registered with the credential from `POST /v1/voice/calls/web` first, and dials the target only once the browser answers.  The callee's pickup then connects immediately, with no ringing after they answer.  - The call is logged as outbound (from = your number, to = target) and recorded per the number's settings. - `ringTimeoutSeconds` applies to the target's phone, not to the browser. - On balance billing the call gets the same time limit as `POST /v1/voice/calls`. 
 
 ### Examples
 
@@ -863,7 +930,7 @@ end
 
 Estimate call cost
 
-Pre-call cost estimate for a PSTN call: the carrier leg plus optional recording and transcription add-ons.  It uses the same billing formula as the post-call invoice, so the quote and the final charge can't disagree.  The carrier figure follows the carrier's per-destination rate card: a call dialed from a number in the destination country uses the local mobile rate, and a `tel:` forward destination is quoted as a second carrier leg billed from the same number.  The real cost comes from the settled carrier record after the call.  Parity endpoint of `GET /v1/whatsapp/calls/estimate`, minus the Meta line. PSTN calls have no separate Meta bill, so `totalCostUSD` equals `billableCostUSD`. 
+Pre-call cost estimate for an outbound phone call, placed through the Voice API or through a [SIP trunk](/platforms/voice/integrations/elevenlabs).  Rates come from the carrier's live price list. The carrier prices a route by the caller ID, so pass the number you will call from (`from` or `fromNumberId`).  - **Caller-ID rates.** A caller in the destination country gets local rates. EEA callers get cheaper rates to EEA destinations, and some caller prefixes pay a surcharge. `rates.*.origination` names the band used. - **Mobile and landline.** `rates.mobile` and `rates.landline` are quoted separately, with every network the carrier lists. `lineType` says which one `to` is, and `perMinuteUsd` follows it. - **Trunk or Voice API.** Trunk calls bill twice the carrier rate. Voice API calls add a $0.002/min call-control fee before the markup, plus optional forward, recording and transcription legs.  `via` defaults to `trunk` when the caller number is attached to a SIP trunk (or `trunkId` is passed), and to `voice` otherwise. For trunk calls, `trunk` reports whether the trunk's limits would refuse the call.  `trunk.maxDestinationRateUsd` is compared with the carrier's rate for the route, which is half the billed rate. Isle of Man, Jersey and Guernsey numbers on +44 count as their own countries for the whitelist.  The dialed network cannot be known from the number, so the invoice can differ within the `minPerMinuteUsd` to `maxPerMinuteUsd` range. The real cost comes from the settled carrier record after the call.  PSTN calls have no separate Meta bill, so `totalCostUSD` equals `billableCostUSD`. 
 
 ### Examples
 
@@ -879,11 +946,14 @@ end
 api_instance = Zernio::VoiceApi.new
 to = 'to_example' # String | Destination number, E.164 (leading + optional).
 opts = {
-  from: 'from_example', # String | The number the call would dial from, E.164. When it is verified on a Branded Calling identity and `to` is a US number, the estimate includes the per-call Branded Calling surcharge.
-  forward_to: 'forward_to_example', # String | Destination the call bridges to: `tel:+E164`, `sip:...` or `wss://...`. Defaults to the dialing number's configured forward. A `tel:` destination adds a second carrier leg to the quote. Encode the `+` as `%2B`.
+  from: 'from_example', # String | Caller ID the call would present, E.164. Picks the carrier's caller-ID rates, and prices a trunk call when the number is attached to a SIP trunk. A verified Branded Calling number calling the US adds the per-call surcharge.
+  from_number_id: 'from_number_id_example', # String | Id of one of your numbers to use as the caller ID, instead of `from`.
+  trunk_id: 'trunk_id_example', # String | SIP trunk the call goes through. Prices it as a trunk call and checks that trunk's limits. Without `from`, a number attached to the trunk is the caller ID.
+  via: 'trunk', # String | Force trunk or Voice API pricing. Defaults from the caller number, see above. `trunk` without a caller ID quotes the dearest caller band.
+  forward_to: 'forward_to_example', # String | Voice API only. Destination the call bridges to: `tel:+E164`, `sip:...` or `wss://...`. Defaults to the dialing number's configured forward. A `tel:` destination adds a second carrier leg to the quote. Encode the `+` as `%2B`.
   minutes: 56, # Integer | 
-  recording: true, # Boolean | 
-  transcription: true # Boolean | 
+  recording: true, # Boolean | Voice API only.
+  transcription: true # Boolean | Voice API only.
 }
 
 begin
@@ -918,11 +988,14 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **to** | **String** | Destination number, E.164 (leading + optional). |  |
-| **from** | **String** | The number the call would dial from, E.164. When it is verified on a Branded Calling identity and &#x60;to&#x60; is a US number, the estimate includes the per-call Branded Calling surcharge. | [optional] |
-| **forward_to** | **String** | Destination the call bridges to: &#x60;tel:+E164&#x60;, &#x60;sip:...&#x60; or &#x60;wss://...&#x60;. Defaults to the dialing number&#39;s configured forward. A &#x60;tel:&#x60; destination adds a second carrier leg to the quote. Encode the &#x60;+&#x60; as &#x60;%2B&#x60;. | [optional] |
+| **from** | **String** | Caller ID the call would present, E.164. Picks the carrier&#39;s caller-ID rates, and prices a trunk call when the number is attached to a SIP trunk. A verified Branded Calling number calling the US adds the per-call surcharge. | [optional] |
+| **from_number_id** | **String** | Id of one of your numbers to use as the caller ID, instead of &#x60;from&#x60;. | [optional] |
+| **trunk_id** | **String** | SIP trunk the call goes through. Prices it as a trunk call and checks that trunk&#39;s limits. Without &#x60;from&#x60;, a number attached to the trunk is the caller ID. | [optional] |
+| **via** | **String** | Force trunk or Voice API pricing. Defaults from the caller number, see above. &#x60;trunk&#x60; without a caller ID quotes the dearest caller band. | [optional] |
+| **forward_to** | **String** | Voice API only. Destination the call bridges to: &#x60;tel:+E164&#x60;, &#x60;sip:...&#x60; or &#x60;wss://...&#x60;. Defaults to the dialing number&#39;s configured forward. A &#x60;tel:&#x60; destination adds a second carrier leg to the quote. Encode the &#x60;+&#x60; as &#x60;%2B&#x60;. | [optional] |
 | **minutes** | **Integer** |  | [optional][default to 1] |
-| **recording** | **Boolean** |  | [optional] |
-| **transcription** | **Boolean** |  | [optional] |
+| **recording** | **Boolean** | Voice API only. | [optional] |
+| **transcription** | **Boolean** | Voice API only. | [optional] |
 
 ### Return type
 
@@ -1081,7 +1154,7 @@ This endpoint does not need any parameter.
 
 List phone calls
 
-Your PSTN voice calls (inbound + outbound), newest first. Cursor pagination: pass the returned `nextCursor` as `before` for the next page. For a history that also includes WhatsApp calls, use `GET /v1/calls`. 
+Your PSTN voice calls (inbound + outbound), newest first. Cursor pagination: pass the returned `nextCursor` as `before` for the next page. For a history that also includes WhatsApp calls, use `GET /v1/calls`.  `profileId` or `externalId` lists one profile's calls: a call belongs to the profile of the account (number) it was placed on.  A profile-scoped API key or member only ever lists its own profiles' calls, with or without a filter (since 1.630.0). Full-access keys and sessions list the whole team's. 
 
 ### Examples
 
@@ -1100,7 +1173,9 @@ opts = {
   direction: 'inbound', # String | 
   number: 'number_example', # String | Exact filter: calls involving this number (typically one of your DIDs). E.164, leading + optional.
   before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | 
-  limit: 56 # Integer | 
+  limit: 56, # Integer | 
+  profile_id: 'profile_id_example', # String | Only calls of this profile. Mutually exclusive with `externalId`. 404 when the profile is not in your team or outside a scoped key's profiles.
+  external_id: 'external_id_example' # String | Same as `profileId`, naming the profile by the `externalId` you set on it. 404 when none of your visible profiles carries it; 400 when two of them do.
 }
 
 begin
@@ -1139,6 +1214,8 @@ end
 | **number** | **String** | Exact filter: calls involving this number (typically one of your DIDs). E.164, leading + optional. | [optional] |
 | **before** | **Time** |  | [optional] |
 | **limit** | **Integer** |  | [optional][default to 50] |
+| **profile_id** | **String** | Only calls of this profile. Mutually exclusive with &#x60;externalId&#x60;. 404 when the profile is not in your team or outside a scoped key&#39;s profiles. | [optional] |
+| **external_id** | **String** | Same as &#x60;profileId&#x60;, naming the profile by the &#x60;externalId&#x60; you set on it. 404 when none of your visible profiles carries it; 400 when two of them do. | [optional] |
 
 ### Return type
 

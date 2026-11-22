@@ -4,44 +4,69 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**add_org_connection_mailbox**](ConnectApi.md#add_org_connection_mailbox) | **POST** /v1/org-connections/{orgConnectionId}/mailboxes | Add a mailbox from an organization connection |
 | [**assign_google_business_location**](ConnectApi.md#assign_google_business_location) | **POST** /v1/accounts/{accountId}/gmb-locations/assign | Assign Google Business Profile location to another profile |
 | [**complete_meta_ads_business_login**](ConnectApi.md#complete_meta_ads_business_login) | **GET** /v1/connect/meta-ads/callback | Complete Meta business login |
 | [**complete_telegram_connect**](ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status |
 | [**complete_whats_app_phone_selection**](ConnectApi.md#complete_whats_app_phone_selection) | **POST** /v1/connect/whatsapp/select-phone-number | Complete number selection |
 | [**configure_tik_tok_ads_brand_identity**](ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Set TikTok brand identity |
 | [**connect_ads**](ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform |
+| [**connect_app_lovin_ads_credentials**](ConnectApi.md#connect_app_lovin_ads_credentials) | **POST** /v1/connect/applovin-ads/credentials | Connect an AppLovin Axon account |
+| [**connect_attentive_credentials**](ConnectApi.md#connect_attentive_credentials) | **POST** /v1/connect/attentive/credentials | Connect an Attentive company |
+| [**connect_awin_credentials**](ConnectApi.md#connect_awin_credentials) | **POST** /v1/connect/awin/credentials | Connect an Awin advertiser |
 | [**connect_bluesky_credentials**](ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account |
 | [**connect_discord_channel**](ConnectApi.md#connect_discord_channel) | **POST** /v1/connect/discord | Connect a Discord channel |
+| [**connect_impact_credentials**](ConnectApi.md#connect_impact_credentials) | **POST** /v1/connect/impact/credentials | Connect an Impact program |
+| [**connect_klaviyo_credentials**](ConnectApi.md#connect_klaviyo_credentials) | **POST** /v1/connect/klaviyo/credentials | Connect a Klaviyo account |
+| [**connect_line_credentials**](ConnectApi.md#connect_line_credentials) | **POST** /v1/connect/line/credentials | Connect LINE Official Account |
 | [**connect_open_ai_ads_credentials**](ConnectApi.md#connect_open_ai_ads_credentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account |
 | [**connect_shopify_with_token**](ConnectApi.md#connect_shopify_with_token) | **POST** /v1/connect/shopify/token | Connect a Shopify store with a custom-app Admin token |
 | [**connect_slack_channel**](ConnectApi.md#connect_slack_channel) | **POST** /v1/connect/slack | Connect a Slack channel |
+| [**connect_snapchat_ads_credentials**](ConnectApi.md#connect_snapchat_ads_credentials) | **POST** /v1/connect/snapchat-ads/credentials | Connect a Snapchat Ads pixel |
+| [**connect_taboola_ads_credentials**](ConnectApi.md#connect_taboola_ads_credentials) | **POST** /v1/connect/taboola-ads/credentials | Connect a Taboola account |
+| [**connect_trade_desk_ads_credentials**](ConnectApi.md#connect_trade_desk_ads_credentials) | **POST** /v1/connect/tradedesk-ads/credentials | Connect a Trade Desk tracking tag |
 | [**connect_webflow_with_site_token**](ConnectApi.md#connect_webflow_with_site_token) | **POST** /v1/connect/webflow/token | Connect Webflow with a site API token |
+| [**connect_wechat_credentials**](ConnectApi.md#connect_wechat_credentials) | **POST** /v1/connect/wechat/credentials | Connect WeChat Official Account |
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
 | [**connect_whats_app_embedded_signup**](ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup |
 | [**connect_whop_ads_credentials**](ConnectApi.md#connect_whop_ads_credentials) | **POST** /v1/connect/whop-ads/credentials | Connect a Whop account |
 | [**connect_word_press_with_application_password**](ConnectApi.md#connect_word_press_with_application_password) | **POST** /v1/connect/wordpress/token | Connect self-hosted WordPress with an application password |
+| [**create_google_business_location**](ConnectApi.md#create_google_business_location) | **POST** /v1/accounts/{accountId}/gmb-locations | Create Google Business Profile location |
+| [**create_google_org_connection**](ConnectApi.md#create_google_org_connection) | **POST** /v1/connect/google/org | Start a Google Workspace organization connection |
+| [**create_microsoft_org_connection**](ConnectApi.md#create_microsoft_org_connection) | **POST** /v1/connect/microsoft/org | Start a Microsoft 365 organization connection |
 | [**create_o_auth_app**](ConnectApi.md#create_o_auth_app) | **POST** /v1/connect/oauth-apps | Add an OAuth app |
 | [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
+| [**create_platform_invite**](ConnectApi.md#create_platform_invite) | **POST** /v1/platform-invites | Create a connect link |
 | [**create_youtube_playlist**](ConnectApi.md#create_youtube_playlist) | **POST** /v1/accounts/{accountId}/youtube-playlists | Create YouTube playlist |
 | [**delete_o_auth_app**](ConnectApi.md#delete_o_auth_app) | **DELETE** /v1/connect/oauth-apps/{appId} | Remove an OAuth app |
+| [**delete_org_connection**](ConnectApi.md#delete_org_connection) | **DELETE** /v1/org-connections/{orgConnectionId} | Delete an organization connection |
+| [**get_amazon_ads_connect_url**](ConnectApi.md#get_amazon_ads_connect_url) | **GET** /v1/connect/amazonads | Get Amazon Ads OAuth connect URL |
+| [**get_campaign_manager_connect_url**](ConnectApi.md#get_campaign_manager_connect_url) | **GET** /v1/connect/campaignmanager360 | Get Campaign Manager 360 OAuth connect URL |
 | [**get_connect_handoff**](ConnectApi.md#get_connect_handoff) | **GET** /v1/connect/handoffs/{handoffId} | Get a phone handoff |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**get_connect_welcome_screen**](ConnectApi.md#get_connect_welcome_screen) | **GET** /v1/connect/welcome-screen | Get the saved welcome screen |
+| [**get_email_connect_url**](ConnectApi.md#get_email_connect_url) | **GET** /v1/connect/email | Get a hosted link to connect any mailbox |
 | [**get_facebook_pages**](ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages |
 | [**get_gmb_locations**](ConnectApi.md#get_gmb_locations) | **GET** /v1/accounts/{accountId}/gmb-locations | List Google Business Profile locations |
+| [**get_gohighlevel_connect_url**](ConnectApi.md#get_gohighlevel_connect_url) | **GET** /v1/connect/gohighlevel | Get HighLevel OAuth connect URL |
 | [**get_google_analytics_connect_url**](ConnectApi.md#get_google_analytics_connect_url) | **GET** /v1/connect/googleanalytics | Get Google Analytics OAuth connect URL |
+| [**get_google_search_console_connect_url**](ConnectApi.md#get_google_search_console_connect_url) | **GET** /v1/connect/googlesearchconsole | Get Google Search Console OAuth connect URL |
 | [**get_hub_spot_connect_url**](ConnectApi.md#get_hub_spot_connect_url) | **GET** /v1/connect/hubspot | Get HubSpot OAuth connect URL |
 | [**get_linked_in_organizations**](ConnectApi.md#get_linked_in_organizations) | **GET** /v1/accounts/{accountId}/linkedin-organizations | List LinkedIn orgs |
 | [**get_o_auth_app**](ConnectApi.md#get_o_auth_app) | **GET** /v1/connect/oauth-apps/{appId} | Get an OAuth app |
-| [**get_page_webhook_subscription**](ConnectApi.md#get_page_webhook_subscription) | **GET** /v1/accounts/{accountId}/webhook-subscription | Read a Facebook Page&#39;s webhook subscription |
+| [**get_org_connection**](ConnectApi.md#get_org_connection) | **GET** /v1/org-connections/{orgConnectionId} | Get an organization connection |
+| [**get_page_webhook_subscription**](ConnectApi.md#get_page_webhook_subscription) | **GET** /v1/accounts/{accountId}/webhook-subscription | Read an account&#39;s webhook subscription |
 | [**get_pending_o_auth_data**](ConnectApi.md#get_pending_o_auth_data) | **GET** /v1/connect/pending-data | Get pending OAuth data |
 | [**get_pinterest_boards**](ConnectApi.md#get_pinterest_boards) | **GET** /v1/accounts/{accountId}/pinterest-boards | List Pinterest boards |
 | [**get_reddit_flairs**](ConnectApi.md#get_reddit_flairs) | **GET** /v1/accounts/{accountId}/reddit-flairs | List subreddit flairs |
 | [**get_reddit_subreddits**](ConnectApi.md#get_reddit_subreddits) | **GET** /v1/accounts/{accountId}/reddit-subreddits | List Reddit subreddits |
+| [**get_salesforce_connect_url**](ConnectApi.md#get_salesforce_connect_url) | **GET** /v1/connect/salesforce | Get Salesforce OAuth connect URL |
 | [**get_shopify_connect_url**](ConnectApi.md#get_shopify_connect_url) | **GET** /v1/connect/shopify | Get Shopify OAuth connect URL |
+| [**get_stripe_connect_url**](ConnectApi.md#get_stripe_connect_url) | **GET** /v1/connect/stripe | Get Stripe connect URL |
 | [**get_subreddit_rules**](ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules |
 | [**get_telegram_connect_status**](ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code |
 | [**get_webflow_connect_url**](ConnectApi.md#get_webflow_connect_url) | **GET** /v1/connect/webflow | Get Webflow OAuth URL |
+| [**get_wechat_ip_whitelist**](ConnectApi.md#get_wechat_ip_whitelist) | **GET** /v1/connect/wechat/ip-whitelist | Get WeChat IP whitelist |
 | [**get_whats_app_sdk_config**](ConnectApi.md#get_whats_app_sdk_config) | **GET** /v1/connect/whatsapp/sdk-config | Get Embedded Signup SDK config |
 | [**get_wix_connect_url**](ConnectApi.md#get_wix_connect_url) | **GET** /v1/connect/wix | Get Wix site install URL |
 | [**get_word_press_auth_url**](ConnectApi.md#get_word_press_auth_url) | **GET** /v1/connect/wordpress | Get WordPress.com OAuth connect URL |
@@ -49,20 +74,28 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_youtube_playlists**](ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists |
 | [**handle_o_auth_callback**](ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback |
 | [**initiate_telegram_connect**](ConnectApi.md#initiate_telegram_connect) | **POST** /v1/connect/telegram | Connect Telegram directly |
+| [**list_campaign_manager_profiles**](ConnectApi.md#list_campaign_manager_profiles) | **GET** /v1/connect/campaignmanager360/profiles | List Campaign Manager 360 profiles for a pending connect |
 | [**list_facebook_pages**](ConnectApi.md#list_facebook_pages) | **GET** /v1/connect/facebook/select-page | List Facebook pages |
 | [**list_google_analytics_properties**](ConnectApi.md#list_google_analytics_properties) | **GET** /v1/connect/googleanalytics/properties | List Google Analytics properties for a pending connect |
+| [**list_google_business_categories**](ConnectApi.md#list_google_business_categories) | **GET** /v1/accounts/{accountId}/gmb-categories | List Google Business Profile categories |
 | [**list_google_business_locations**](ConnectApi.md#list_google_business_locations) | **GET** /v1/connect/googlebusiness/locations | List Google Business Profile locations |
+| [**list_google_search_console_sites**](ConnectApi.md#list_google_search_console_sites) | **GET** /v1/connect/googlesearchconsole/sites | List Search Console sites for a pending connect |
 | [**list_instagram_pages**](ConnectApi.md#list_instagram_pages) | **GET** /v1/connect/instagram/select-account | List Pages with a linked Instagram account |
 | [**list_linked_in_organizations**](ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs |
 | [**list_o_auth_apps**](ConnectApi.md#list_o_auth_apps) | **GET** /v1/connect/oauth-apps | List your OAuth apps |
+| [**list_org_connection_users**](ConnectApi.md#list_org_connection_users) | **GET** /v1/org-connections/{orgConnectionId}/users | List an organization&#39;s users |
+| [**list_org_connections**](ConnectApi.md#list_org_connections) | **GET** /v1/org-connections | List organization connections |
 | [**list_pinterest_boards_for_selection**](ConnectApi.md#list_pinterest_boards_for_selection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards |
 | [**list_slack_channels**](ConnectApi.md#list_slack_channels) | **GET** /v1/connect/slack | List Slack channels for the channel picker |
 | [**list_snapchat_profiles**](ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles |
 | [**list_whats_app_phone_numbers**](ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection |
-| [**resync_page_webhook_subscription**](ConnectApi.md#resync_page_webhook_subscription) | **POST** /v1/accounts/{accountId}/webhook-subscription | Re-subscribe a Facebook Page to Zernio&#39;s webhooks |
+| [**resync_page_webhook_subscription**](ConnectApi.md#resync_page_webhook_subscription) | **POST** /v1/accounts/{accountId}/webhook-subscription | Re-subscribe an account to Zernio&#39;s webhooks |
+| [**search_google_business_locations**](ConnectApi.md#search_google_business_locations) | **POST** /v1/accounts/{accountId}/gmb-locations/search | Search existing Google listings |
+| [**select_campaign_manager_profile**](ConnectApi.md#select_campaign_manager_profile) | **POST** /v1/connect/campaignmanager360/select-profile | Connect the chosen Campaign Manager 360 profile |
 | [**select_facebook_page**](ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page |
 | [**select_google_analytics_property**](ConnectApi.md#select_google_analytics_property) | **POST** /v1/connect/googleanalytics/select-property | Connect the chosen Google Analytics property |
 | [**select_google_business_location**](ConnectApi.md#select_google_business_location) | **POST** /v1/connect/googlebusiness/select-location | Select Google Business Profile location |
+| [**select_google_search_console_site**](ConnectApi.md#select_google_search_console_site) | **POST** /v1/connect/googlesearchconsole/select-site | Connect the chosen Search Console site |
 | [**select_instagram_account**](ConnectApi.md#select_instagram_account) | **POST** /v1/connect/instagram/select-account | Select the Page whose Instagram account to connect |
 | [**select_linked_in_organization**](ConnectApi.md#select_linked_in_organization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org |
 | [**select_pinterest_board**](ConnectApi.md#select_pinterest_board) | **POST** /v1/connect/pinterest/select-board | Select Pinterest board |
@@ -75,10 +108,83 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_gmb_location**](ConnectApi.md#update_gmb_location) | **PUT** /v1/accounts/{accountId}/gmb-locations | Update Google Business Profile location |
 | [**update_linked_in_organization**](ConnectApi.md#update_linked_in_organization) | **PUT** /v1/accounts/{accountId}/linkedin-organization | Switch LinkedIn account type |
 | [**update_o_auth_app**](ConnectApi.md#update_o_auth_app) | **PATCH** /v1/connect/oauth-apps/{appId} | Update an OAuth app |
+| [**update_org_connection**](ConnectApi.md#update_org_connection) | **PATCH** /v1/org-connections/{orgConnectionId} | Update an organization connection |
 | [**update_pinterest_boards**](ConnectApi.md#update_pinterest_boards) | **PUT** /v1/accounts/{accountId}/pinterest-boards | Set default Pinterest board |
 | [**update_reddit_subreddits**](ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit |
 | [**update_youtube_default_playlist**](ConnectApi.md#update_youtube_default_playlist) | **PUT** /v1/accounts/{accountId}/youtube-playlists | Set default YouTube playlist |
+| [**verify_org_connection**](ConnectApi.md#verify_org_connection) | **POST** /v1/org-connections/{orgConnectionId}/verify | Verify an organization connection |
 | [**vote_reddit_thing**](ConnectApi.md#vote_reddit_thing) | **POST** /v1/accounts/{accountId}/reddit-vote | Vote on a Reddit post or comment |
+
+
+## add_org_connection_mailbox
+
+> <InlineObject2> add_org_connection_mailbox(org_connection_id, add_org_connection_mailbox_request)
+
+Add a mailbox from an organization connection
+
+Adds one mailbox from an active organization connection, with no sign-in from its user. It becomes a `google` or `microsoft` account on the connection's profile and works with every email, calendar, files and contacts endpoint.  `201` for a new account, `200` when the address was already on the profile and now runs on the organization grant. `account.connected` fires. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+org_connection_id = 'org_connection_id_example' # String | 
+add_org_connection_mailbox_request = Zernio::AddOrgConnectionMailboxRequest.new({email: 'email_example'}) # AddOrgConnectionMailboxRequest | 
+
+begin
+  # Add a mailbox from an organization connection
+  result = api_instance.add_org_connection_mailbox(org_connection_id, add_org_connection_mailbox_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->add_org_connection_mailbox: #{e}"
+end
+```
+
+#### Using the add_org_connection_mailbox_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<InlineObject2>, Integer, Hash)> add_org_connection_mailbox_with_http_info(org_connection_id, add_org_connection_mailbox_request)
+
+```ruby
+begin
+  # Add a mailbox from an organization connection
+  data, status_code, headers = api_instance.add_org_connection_mailbox_with_http_info(org_connection_id, add_org_connection_mailbox_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <InlineObject2>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->add_org_connection_mailbox_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **org_connection_id** | **String** |  |  |
+| **add_org_connection_mailbox_request** | [**AddOrgConnectionMailboxRequest**](AddOrgConnectionMailboxRequest.md) |  |  |
+
+### Return type
+
+[**InlineObject2**](InlineObject2.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## assign_google_business_location
@@ -310,9 +416,10 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-complete_whats_app_phone_selection_request = Zernio::CompleteWhatsAppPhoneSelectionRequest.new({profile_id: 'profile_id_example', phone_number_id: 'phone_number_id_example', waba_id: 'waba_id_example', temp_token: 'temp_token_example'}) # CompleteWhatsAppPhoneSelectionRequest | 
+complete_whats_app_phone_selection_request = Zernio::CompleteWhatsAppPhoneSelectionRequest.new({profile_id: 'profile_id_example', phone_number_id: 'phone_number_id_example', waba_id: 'waba_id_example'}) # CompleteWhatsAppPhoneSelectionRequest | 
 opts = {
-  x_connect_token: 'x_connect_token_example' # String | Alternative auth for API users' end customers
+  x_connect_token: 'x_connect_token_example', # String | Alternative auth for API users' end customers
+  x_temp_token: 'x_temp_token_example' # String | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way.
 }
 
 begin
@@ -348,6 +455,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **complete_whats_app_phone_selection_request** | [**CompleteWhatsAppPhoneSelectionRequest**](CompleteWhatsAppPhoneSelectionRequest.md) |  |  |
 | **x_connect_token** | **String** | Alternative auth for API users&#39; end customers | [optional] |
+| **x_temp_token** | **String** | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way. | [optional] |
 
 ### Return type
 
@@ -438,7 +546,7 @@ end
 
 Connect ads for a platform
 
-Starts connecting a platform's ads account, giving you a dedicated ads connection to manage campaigns without touching posting accounts. It creates a dedicated ads SocialAccount for the specified platform.  Ads accounts appear as regular SocialAccount documents with ads platform values (e.g., metaads, tiktokads) in GET /v1/accounts.  ### Meta business login (opt-in)  Set `loginMode=business` for `facebook` or `instagram` to use Facebook Login for Business and a Business Integration System User token. No posting account is created or required.  This mode always returns an authUrl. It returns 503 when the server has no META_ADS_CONFIG_ID. Complete the dialog in a browser.  The callback creates or reconnects only the metaads account, preserving its ID and history. Non-empty successful subscription results replace subscribedAdAccountIds to remove stale grants; an empty result leaves routing unchanged.  #### Reconnecting  A reconnect is accepted when the new grant shares at least one ad account with the existing connection, so re-running the dialog can add, drop or swap ad accounts.  The existing connection's ad accounts are its scopedAdAccountIds plus the previous grant, or the ad accounts its old token can read when neither is stored.  - A grant with zero overlap is refused before changing the account and redirects with `error=invalid_field_value` and `error_reason=reconnect_mismatch` (disconnect and connect again to switch). - When the previous ad accounts cannot be read at all, it redirects with `error=reconnect_required`.  On an accepted reconnect the scope is rebuilt from the new grant:  - `adAccountIds` passed on the re-auth become the scope. - Otherwise a stored scope keeps its ad accounts that are still granted, plus any granted for the first time. - An unscoped connection follows the new grant.  #### Page selection  Pass `pageId` to select a granted Page for creatives and lead forms. API integrations otherwise reuse the previous Page or the sole granted Page.  Multiple Pages without a selection return 400 with available Page IDs for API integrations; restart with pageId. Dashboard session logins use the sole current grant automatically, or open the existing Facebook Page picker for several grants, including reconnects. Selection completes the Meta Ads connection.  #### Result redirects  Success redirects with connected=metaads, profileId and accountId.  Every failure after Meta's dialog redirects to redirect_url (or the dashboard) with `error`, `platform=metaads`, `error_message`, `request_id` and `stage`, plus `is_user_fixable` and `error_reason` when known. `error` is the API error code:  - `invalid_field_value`, with `error_reason`:   - `no_pages_granted`: no Page ticked   - `page_not_granted`: pageId not in the grant   - `ad_accounts_not_granted`   - `reconnect_mismatch`: the grant shares no ad account with the existing connection - `reconnect_required`, `ads_addon_required`, `payment_required` and the profile gates of GET /v1/connect/{platform} - `invalid_state` with `error_reason=state_expired`: after the 30-minute window - `connection_failed`: Meta refuses the code (e.g. a replayed callback) - `meta_ads_authorization_denied`: a denial in the dialog, with the `platform_error*` params  Only a state that cannot be decrypted at all still answers 400 JSON, since it names no redirect_url.  #### Tokens  Business login reports metadata.tokenType=system-user in GET /v1/accounts. An absent Meta expires_in leaves tokenExpiresAt absent; no personal-token re-exchange occurs.  Subsequent classic requests can change the ad-account scope using the business token. force=true (or disconnecting the business connection first) switches the profile to the standard Facebook login; the ads account is then held by the user token.  ### Same-token platforms (facebook, instagram, linkedin, pinterest)  The ads SocialAccount (metaads, linkedinads, pinterestads) reuses the OAuth token of the parent posting account, but only when:  - an active parent exists, and - for facebook and instagram, its stored token carries ads_management and ads_read (linkedin and pinterest need no extra scope).  In that case no extra OAuth happens and the response is alreadyConnected: true.  When no such parent exists, or the scopes are missing, the endpoint returns an authUrl and a full OAuth round trip is required.  Errors:  - 400 RECONNECT_REQUIRED: a parent exists but carries no token usable for ad accounts - 403 ADS_ADDON_REQUIRED: no ads add-on (independently of the branch) - 402 PAYMENT_REQUIRED: the billing gate is closed (independently of the branch)  #### Meta Ads needs a Facebook Page  Connecting Meta Ads (via facebook or instagram) requires a Facebook Page. Not because the ad account is read through a Page, but because both parent posting accounts are:  - the facebook flow only offers Pages you manage - the instagram flow with loginMethod=facebook_login only offers Instagram accounts linked to one of those Pages  Without a Page there is no parent account to inherit a token from. A user who manages no Facebook Page cannot complete this connection, and the facebook flow ends with error=no_facebook_pages.  ### Separate-token platforms (tiktok, twitter)  Starts the platform-specific marketing API OAuth flow and creates an ads SocialAccount (tiktokads, xads) with its own token. If the ads account already exists, returns alreadyConnected: true.  - twitter (X Ads): accountId is REQUIRED. There's no ads-only mode, because tweets need to be authored by a real X user. - tiktok: accountId is OPTIONAL.  #### TikTok with or without accountId  - With accountId, the new tiktokads account links to that posting account (parentAccountId set), so Spark Ads + standalone ads using the posting TT_USER identity become available. - Without accountId, ads-only mode kicks in: the new tiktokads account has parentAccountId=null and standalone ads use a synthetic CUSTOMIZED_USER (\"Brand Identity\"). Spark Ads are unavailable because TikTok requires a posting account for them.  The Brand Identity is configured separately via PATCH /v1/connect/tiktok-ads (or inline on POST /v1/ads/create via the brandIdentity field).  ### Standalone platforms (googleads)  Starts the Google Ads OAuth flow and creates a standalone ads SocialAccount (googleads) with no parent.  - If the account already exists and has at least one discovered Google Ads customer account, returns alreadyConnected: true. - When the existing connection has zero customer accounts (metadata.googleAdsCustomerIds is empty) or is flagged needsReconnection, it returns an authUrl instead. Completing it reconnects the same account (same accountId) and re-runs ad account discovery.  Discovery includes the client accounts under every manager (MCC) the Google user can reach. It also includes Google Ads test accounts, which Google always reports with status CLOSED.  When discovery finds no usable customer account, the callback saves nothing and redirects with `error=google_ads_no_ad_accounts`, `platform=googleads` and an `error_message`.  The message names each customer the Google user can reach and why it was left out (for example CUSTOMER_NOT_ENABLED). Sign in with a Google user that has access to the ad account or to its manager account.  When the user unticks the Google Ads permission on Google's consent screen, the callback saves nothing and redirects with `error=missing_google_permissions`, `platform=googleads`, `is_user_fixable=true` and `missing_scopes`.  An existing connection whose token lacks that permission is flagged needsReconnection, and the health endpoints report \"Google Ads permission not granted\". This endpoint then returns an authUrl for it.  ### Standalone platforms (redditads)  Starts the Reddit Ads OAuth flow (Reddit permissions `adsread`, `adsedit` and `adsconversions`) and creates a standalone ads SocialAccount (redditads) with no parent, separate from any organic `reddit` posting account. It is reached only as `redditads` in the path.  If an active Reddit Ads connection already exists on the profile, is not flagged needsReconnection and holds every one of those permissions, returns alreadyConnected: true. Otherwise it returns an authUrl; completing it reconnects the same account (same accountId).  A connection authorized without `adsconversions` keeps managing ads, but:  - the health endpoints list an issue asking to reconnect Reddit Ads and allow every permission - the Conversions API answers 403 `reconnect_required` - this endpoint returns an authUrl for it  Discovery lists every Reddit ad account the Reddit user can reach. The callback redirects with `platform=redditads` and:  - `error=reddit_ads_scope_not_granted`: the user unticks `adsread` or `adsedit` on Reddit's consent screen (nothing is saved) - `error=reddit_ads_no_ad_accounts`: the user reaches no Reddit ad account  Without `redirect_url` the browser lands on the Zernio dashboard's ad account picker for the new connection.  ### Standalone platforms (microsoftads)  Starts the Microsoft Advertising OAuth flow and creates a standalone ads SocialAccount (microsoftads) with no parent. It is reached only as `microsoftads` in the path.  Microsoft Advertising users sign in with a Microsoft account by default. A user who signs in to ads.microsoft.com with Google passes `identityProvider=google`, and the flow runs on Google's consent screen instead.  If an active Microsoft Ads connection already exists on the profile, is not flagged needsReconnection and was signed in with the same identity provider, returns alreadyConnected: true. Otherwise it returns an authUrl; completing it reconnects the same account (same accountId).  Discovery lists every Microsoft Advertising ad account the user can reach. The callback redirects with `platform=microsoftads` and:  - `error=microsoft_ads_scope_not_granted`: the user declines the Microsoft Advertising permission (nothing is saved) - `error=microsoft_ads_unknown_user`: the account that signed in is not a Microsoft Advertising user, for example a Google user connecting without `identityProvider=google` (nothing is saved) - `error=microsoft_ads_no_ad_accounts`: the user reaches no Microsoft Advertising ad account  Without `redirect_url` the browser lands on the Zernio dashboard's ad account picker for the new connection. 
+Starts connecting a platform's ads account, giving you a dedicated ads connection to manage campaigns without touching posting accounts. It creates a dedicated ads SocialAccount for the specified platform.  Ads accounts appear as regular SocialAccount documents with ads platform values (e.g., metaads, tiktokads) in GET /v1/accounts.  ### Meta business login (opt-in)  Set `loginMode=business` for `facebook` or `instagram` to use Facebook Login for Business and a Business Integration System User token. No posting account is created or required.  This mode always returns an authUrl. It returns 503 when the server has no META_ADS_CONFIG_ID. Complete the dialog in a browser.  The callback creates or reconnects only the metaads account, preserving its ID and history. Non-empty successful subscription results replace subscribedAdAccountIds to remove stale grants; an empty result leaves routing unchanged.  #### Reconnecting  A reconnect is accepted when the new grant shares at least one ad account with the existing connection, so re-running the dialog can add, drop or swap ad accounts.  The existing connection's ad accounts are its scopedAdAccountIds plus the previous grant, or the ad accounts its old token can read when neither is stored.  - A grant with zero overlap is refused before changing the account and redirects with `error=invalid_field_value` and `error_reason=reconnect_mismatch` (disconnect and connect again to switch). - When the previous ad accounts cannot be read at all, it redirects with `error=reconnect_required`.  On an accepted reconnect the scope is rebuilt from the new grant:  - `adAccountIds` passed on the re-auth become the scope. - Otherwise a stored scope keeps its ad accounts that are still granted, plus any granted for the first time. - An unscoped connection follows the new grant.  #### Page selection  Pass `pageId` to select a granted Page for creatives and lead forms. API integrations otherwise reuse the previous Page or the sole granted Page.  Multiple Pages without a selection return 400 with available Page IDs for API integrations; restart with pageId. Dashboard session logins use the sole current grant automatically, or open the existing Facebook Page picker for several grants, including reconnects. Selection completes the Meta Ads connection.  #### Result redirects  Success redirects with connected=metaads, profileId and accountId.  Every failure after Meta's dialog redirects to redirect_url (or the dashboard) with `error`, `platform=metaads`, `error_message`, `request_id` and `stage`, plus `is_user_fixable` and `error_reason` when known. `error` is the API error code:  - `invalid_field_value`, with `error_reason`:   - `no_pages_granted`: no Page ticked   - `page_not_granted`: pageId not in the grant   - `ad_accounts_not_granted`   - `reconnect_mismatch`: the grant shares no ad account with the existing connection - `reconnect_required`, `ads_addon_required`, `payment_required` and the profile gates of GET /v1/connect/{platform} - `invalid_state` with `error_reason=state_expired`: after the 30-minute window - `connection_failed`: Meta refuses the code (e.g. a replayed callback) - `meta_ads_authorization_denied`: a denial in the dialog, with the `platform_error*` params  Only a state that cannot be decrypted at all still answers 400 JSON, since it names no redirect_url.  #### Tokens  Business login reports metadata.tokenType=system-user in GET /v1/accounts. An absent Meta expires_in leaves tokenExpiresAt absent; no personal-token re-exchange occurs.  Subsequent classic requests can change the ad-account scope using the business token. force=true (or disconnecting the business connection first) switches the profile to the standard Facebook login; the ads account is then held by the user token.  ### Same-token platforms (facebook, instagram, linkedin, pinterest)  The ads SocialAccount (metaads, linkedinads, pinterestads) reuses the OAuth token of the parent posting account, but only when:  - an active parent exists, and - for facebook and instagram, its stored token carries ads_management and ads_read (linkedin and pinterest need no extra scope).  In that case no extra OAuth happens and the response is alreadyConnected: true.  When no such parent exists, or the scopes are missing, the endpoint returns an authUrl and a full OAuth round trip is required.  Errors:  - 400 RECONNECT_REQUIRED: a parent exists but carries no token usable for ad accounts - 403 ADS_ADDON_REQUIRED: no ads add-on (independently of the branch) - 402 PAYMENT_REQUIRED: the billing gate is closed (independently of the branch)  #### Meta Ads needs a Facebook Page  Connecting Meta Ads (via facebook or instagram) requires a Facebook Page. Not because the ad account is read through a Page, but because both parent posting accounts are:  - the facebook flow only offers Pages you manage - the instagram flow with loginMethod=facebook_login only offers Instagram accounts linked to one of those Pages  Without a Page there is no parent account to inherit a token from. A user who manages no Facebook Page cannot complete this connection, and the facebook flow ends with error=no_facebook_pages.  ### Separate-token platforms (tiktok, twitter)  Starts the platform-specific marketing API OAuth flow and creates an ads SocialAccount (tiktokads, xads) with its own token. If the ads account already exists, returns alreadyConnected: true.  - twitter (X Ads): accountId is REQUIRED. There's no ads-only mode, because tweets need to be authored by a real X user. - tiktok: accountId is OPTIONAL.  #### TikTok with or without accountId  - With accountId, the new tiktokads account links to that posting account (parentAccountId set), so Spark Ads + standalone ads using the posting TT_USER identity become available. - Without accountId, ads-only mode kicks in: the new tiktokads account has parentAccountId=null and standalone ads use a synthetic CUSTOMIZED_USER (\"Brand Identity\"). Spark Ads are unavailable because TikTok requires a posting account for them.  The Brand Identity is configured separately via PATCH /v1/connect/tiktok-ads (or inline on POST /v1/ads/create via the brandIdentity field).  ### Standalone platforms (googleads)  Starts the Google Ads OAuth flow and creates a standalone ads SocialAccount (googleads) with no parent.  - If the account already exists and has at least one discovered Google Ads customer account, returns alreadyConnected: true. - When the profile's accounts are already one per ad account of a single Google login, it also returns alreadyConnected: true and adds an account per new `adAccountIds` entry. Existing accounts are never de-scoped, and `accountId` is a reused account. - Accounts of several Google logins return an authUrl to sign in again. - When the existing connection has zero customer accounts (metadata.googleAdsCustomerIds is empty) or is flagged needsReconnection, it returns an authUrl instead. Completing it reconnects the same account (same accountId) and re-runs ad account discovery.  Discovery includes the client accounts under every manager (MCC) the Google user can reach. It also includes Google Ads test accounts, which Google always reports with status CLOSED.  When discovery finds no usable customer account, the callback saves nothing and redirects with `error=google_ads_no_ad_accounts`, `platform=googleads` and an `error_message`.  The message names each customer the Google user can reach and why it was left out (for example CUSTOMER_NOT_ENABLED). Sign in with a Google user that has access to the ad account or to its manager account.  When the user unticks the Google Ads permission on Google's consent screen, the callback saves nothing and redirects with `error=missing_google_permissions`, `platform=googleads`, `is_user_fixable=true` and `missing_scopes`.  An existing connection whose token lacks that permission is flagged needsReconnection, and the health endpoints report \"Google Ads permission not granted\". This endpoint then returns an authUrl for it.  ### Standalone platforms (redditads)  Starts the Reddit Ads OAuth flow (Reddit permissions `adsread`, `adsedit` and `adsconversions`) and creates a standalone ads SocialAccount (redditads) with no parent, separate from any organic `reddit` posting account. It is reached only as `redditads` in the path.  If an active Reddit Ads connection already exists on the profile, is not flagged needsReconnection and holds every one of those permissions, returns alreadyConnected: true. Otherwise it returns an authUrl; completing it reconnects the same account (same accountId).  A connection authorized without `adsconversions` keeps managing ads, but:  - the health endpoints list an issue asking to reconnect Reddit Ads and allow every permission - the Conversions API answers 403 `reconnect_required` - this endpoint returns an authUrl for it  Discovery lists every Reddit ad account the Reddit user can reach. The callback redirects with `platform=redditads` and:  - `error=reddit_ads_scope_not_granted`: the user unticks `adsread` or `adsedit` on Reddit's consent screen (nothing is saved) - `error=reddit_ads_no_ad_accounts`: the user reaches no Reddit ad account  Without `redirect_url` the browser lands on the Zernio dashboard's ad account picker for the new connection.  ### Standalone platforms (microsoftads)  Starts the Microsoft Advertising OAuth flow and creates a standalone ads SocialAccount (microsoftads) with no parent. It is reached only as `microsoftads` in the path.  Microsoft Advertising users sign in with a Microsoft account by default. A user who signs in to ads.microsoft.com with Google passes `identityProvider=google`, and the flow runs on Google's consent screen instead.  If an active Microsoft Ads connection already exists on the profile, is not flagged needsReconnection and was signed in with the same identity provider, returns alreadyConnected: true. Otherwise it returns an authUrl; completing it reconnects the same account (same accountId).  Discovery lists every Microsoft Advertising ad account the user can reach. The callback redirects with `platform=microsoftads` and:  - `error=microsoft_ads_scope_not_granted`: the user declines the Microsoft Advertising permission (nothing is saved) - `error=microsoft_ads_unknown_user`: the account that signed in is not a Microsoft Advertising user, for example a Google user connecting without `identityProvider=google` (nothing is saved) - `error=microsoft_ads_no_ad_accounts`: the user reaches no Microsoft Advertising ad account  Without `redirect_url` the browser lands on the Zernio dashboard's ad account picker for the new connection. 
 
 ### Examples
 
@@ -463,9 +571,9 @@ opts = {
   redirect_url: 'redirect_url_example', # String | Custom URL the browser is sent to once the OAuth flow finishes. When omitted, the browser lands on the Zernio dashboard. Honored on every ads platform, including the separate-token (`tiktok`, `twitter`) and standalone (`googleads`, `redditads`, `microsoftads`) flows.  MUST be an absolute http(s) URL or a custom app scheme for mobile deeplinks (e.g. myapp://callback). A relative path is rejected with 400 INVALID_REDIRECT_URL.  On success:  - `tiktok`: lands on the URL unchanged. - `twitter`, `googleads`, `redditads` and `microsoftads`: append `connected` (the ads platform id: `xads`, `googleads`, `redditads` or `microsoftads`), `profileId`, `accountId` (the ads connection) and `username`. - Same-token platforms (`facebook`, `instagram`, `linkedin`, `pinterest`): append `connected`, `profileId`, `accountId`, `username` and, on API-key calls, `connect_token`.  On failure the same error contract applies as on GET /v1/connect/{platform}: `error` and `platform` are always appended, other params are optional, and the value list there is not exhaustive.  On the tiktok, twitter, googleads, redditads and microsoftads flows, `platform` carries the ads platform id (`tiktokads`, `xads`, `googleads`, `redditads`, `microsoftads`), not the value used in the request path. 
   headless: true, # Boolean | Enable headless mode (same-token platforms only)
   force: true, # Boolean | Force a fresh OAuth even when an account already exists.  Normally the endpoint returns `alreadyConnected: true` whenever a connected account is found, keyed off its active state rather than token liveness. Set `force=true` to bypass that and always receive an `authUrl`. Completing the returned OAuth refreshes the stored token on the existing posting and ads accounts in place.  An `alreadyConnected` response re-runs ad discovery and webhook subscriptions in the background at most once every 15 minutes per ads account (always when the call changes the ad-account scope), so it is not a sync trigger.  To check the connection's health, read GET /v1/ads/accounts?accountId=<ads account ID>. 
-  ad_account_id: 'act_1330190928038136', # String | Scopes ad sync to a single platform ad account. Without it, sync covers every ad account the connected token can see. For multiple accounts use `adAccountIds` instead.  Supported on:  - `facebook`/`instagram` (Meta): `act_<digits>`. - `linkedin`: bare numeric sponsored-account id. - `googleads`: bare customer id digits. - `redditads`: Reddit ad account id, `a2_<id>` or `t2_<id>`. - `microsoftads`: bare numeric account id (the Id, not the account number). - `twitter` (X Ads): base36 account id.  `tiktok` scopes advertisers at OAuth and `pinterest` has no ads discovery, so both ignore it.  **Meta validation** against the connected token:  - An id the token cannot see returns 400 `invalid_field_value`. - An id it can see but that Meta marks unusable for ads (disabled, closed, under risk review, settlement pending) returns 400 `ad_account_unusable` with `details.accountStatus` (Meta's `account_status`) and, when Meta gives one, `details.disableReason`. - Unsettled and in-grace accounts are accepted, matching the `selectable` flag of `GET /v1/ads/accounts`.  **Effects**: setting a scope removes already synced ads, campaigns, ad sets and keywords from de-scoped ad accounts. On Meta it also decides which ad accounts Zernio subscribes to ad-account webhooks: only the scoped ones, instead of every ad account the login can reach.  **Through OAuth**: on Meta the scope is kept when this call returns an `authUrl`, so the Meta Ads account created after OAuth is scoped (only its scoped ad accounts synced and subscribed) from the start.  On `googleads`, `redditads` and `microsoftads` it is kept through OAuth when `redirect_url` is set, so the new connection syncs only scoped ad accounts from the first sync.  **Reconnects**: business-login reconnects preserve the existing scope; supplied IDs are checked against the new grant. To change the scope after migration, call this endpoint with the IDs and omit loginMode. 
-  ad_account_ids: ['inner_example'], # Array<String> | Scope ad sync to multiple platform ad accounts (same platform support and id shapes as `adAccountId`). Repeat the param (`?adAccountIds=act_1&adAccountIds=act_2`) or comma-separate (`?adAccountIds=act_1,act_2`).  - Persisted server-side; the latest call wins. De-scoped ad accounts have their synced ads, campaigns, ad sets and keywords removed. - On Meta only the scoped ad accounts get webhook subscriptions, including when the call starts a fresh OAuth. - Omitting both `adAccountId` and `adAccountIds` keeps any previously persisted scope unchanged (no scope means every reachable ad account). 
-  welcome: true, # Boolean | When `true`, `authUrl` opens on the Zernio-hosted welcome screen with your brand, as on GET /v1/connect/{platform}, naming the ads platform (\"<brandName> wants to connect to your Meta Ads\").  - With no `redirect_url`, the flow ends on the branded result page instead of the Zernio dashboard. - Shown only with `welcome=true`: the workspace's saved \"on by default\" (`PUT /v1/connect/welcome-screen`) applies to GET /v1/connect/{platform} only, so ads links behave as before unless you opt in. The saved brand still fills in what the call leaves out. - Without `adAccountId` or `adAccountIds`, on Meta, Google, LinkedIn, X, Reddit and Microsoft, the user then picks the ad accounts to connect on a branded Zernio-hosted page (skipped when the login reaches only one). - After that page the flow ends on your `redirect_url` with `connected` set to the ads platform and `accountId` to the ads connection. - Cannot be combined with `headless=true` (400 `INVALID_FIELD_VALUE`). - Responses with `alreadyConnected: true` carry no `authUrl`, so they show no screen. 
+  ad_account_id: 'act_1330190928038136', # String | Scopes ad sync to a single platform ad account. Without it, sync covers every ad account the connected token can see. For multiple accounts use `adAccountIds` instead.  Supported on:  - `facebook`/`instagram` (Meta): `act_<digits>`. - `linkedin`: bare numeric sponsored-account id. - `googleads`: bare customer id digits. - `redditads`: Reddit ad account id, `a2_<id>` or `t2_<id>`. - `microsoftads`: bare numeric account id (the Id, not the account number). - `twitter` (X Ads): base36 account id. - `tiktok` (TikTok Ads): numeric advertiser id.  `pinterest` has no ads discovery, so it ignores it.  **Meta validation** against the connected token:  - An id the token cannot see returns 400 `invalid_field_value`. - An id it can see but that Meta marks unusable for ads (disabled, closed, under risk review, settlement pending) returns 400 `ad_account_unusable` with `details.accountStatus` (Meta's `account_status`) and, when Meta gives one, `details.disableReason`. - Unsettled and in-grace accounts are accepted, matching the `selectable` flag of `GET /v1/ads/accounts`.  **Effects**: setting a scope removes already synced ads, campaigns, ad sets and keywords from de-scoped ad accounts. On Meta it also decides which ad accounts Zernio subscribes to ad-account webhooks: only the scoped ones, instead of every ad account the login can reach.  **Through OAuth**: on Meta the scope is kept when this call returns an `authUrl`, so the Meta Ads account created after OAuth is scoped (only its scoped ad accounts synced and subscribed) from the start.  On `googleads`, `redditads` and `microsoftads` it is kept through OAuth when `redirect_url` is set, so the new connection syncs only scoped ad accounts from the first sync.  On `tiktok` it is kept through OAuth with or without `redirect_url`. The TikTok Ads connection holds only the scoped advertisers from the first sync, and is named after the first of them. Its `platformUserId` and cached Brand Identity follow that advertiser too.  A TikTok login otherwise reaches every advertiser of every Business Center it belongs to. Advertisers the login does not reach are ignored; when it reaches none of them, the connection keeps every advertiser.  On an existing TikTok Ads connection, ids it does not reach are ignored, and a list it reaches none of returns 400 `invalid_field_value`. A reconnect keeps the stored scope, minus advertisers the new login no longer reaches.  **Reconnects**: business-login reconnects preserve the existing scope; supplied IDs are checked against the new grant. To change the scope after migration, call this endpoint with the IDs and omit loginMode. 
+  ad_account_ids: ['inner_example'], # Array<String> | Scope ad sync to multiple platform ad accounts (same platform support and id shapes as `adAccountId`). Repeat the param (`?adAccountIds=act_1&adAccountIds=act_2`) or comma-separate (`?adAccountIds=act_1,act_2`).  - Persisted server-side; the latest call wins. De-scoped ad accounts have their synced ads, campaigns, ad sets and keywords removed. Where ad accounts are already split into one account each, the call only adds accounts for new ids and never removes one (disconnect that account instead). - On Meta only the scoped ad accounts get webhook subscriptions, including when the call starts a fresh OAuth. - On Meta, ad accounts left out of the scope are unsubscribed from Zernio's ad-account webhooks (unless another connection still holds them) and are no longer stored, so syncs do not add them back. `GET /v1/ads/accounts` lists them (`selected: false`) only with `live=true`; passing them again reselects them. - On TikTok, advertisers left out of the scope are no longer synced or stored either, and are listed (`selected: false`) only with `live=true`. - On TikTok, pixels, tracking tags, offline events, targeting search and Brand Identity default to the first selected advertiser. A TikTok Ads connection with no scope keeps every advertiser the login reaches, as before. - Omitting both `adAccountId` and `adAccountIds` keeps any previously persisted scope unchanged (no scope means every reachable ad account). 
+  welcome: true, # Boolean | When `true`, `authUrl` opens on the Zernio-hosted welcome screen with your brand, as on GET /v1/connect/{platform}, naming the ads platform (\"<brandName> wants to connect to your Meta Ads\").  - With no `redirect_url`, the flow ends on the branded result page instead of the Zernio dashboard. - Shown only with `welcome=true`: the workspace's saved \"on by default\" (`PUT /v1/connect/welcome-screen`) applies to GET /v1/connect/{platform} only, so ads links behave as before unless you opt in. The saved brand still fills in what the call leaves out. - Without `adAccountId` or `adAccountIds`, on Meta, Google, LinkedIn, X, Reddit, Microsoft and TikTok, the user then picks the ad accounts to connect on a branded Zernio-hosted page (skipped when the login reaches only one). On Meta and TikTok that page starts with no ad account selected and offers Select all. - After that page the flow ends on your `redirect_url` with `connected` set to the ads platform and `accountId` to the ads connection. - Cannot be combined with `headless=true` (400 `INVALID_FIELD_VALUE`). - Responses with `alreadyConnected: true` carry no `authUrl`, so they show no screen. 
   brand_name: 'brand_name_example', # String | Welcome screen only: your product name in its heading. Same rules as on GET /v1/connect/{platform}.
   logo_url: 'logo_url_example', # String | Welcome screen only: https URL of your square logo. Rejected with 400 `INVALID_FIELD_VALUE` when the welcome screen is not shown.
   primary_color: 'primary_color_example', # String | Welcome screen only: hex colour (`#RRGGBB`) of its button.
@@ -513,9 +621,9 @@ end
 | **redirect_url** | **String** | Custom URL the browser is sent to once the OAuth flow finishes. When omitted, the browser lands on the Zernio dashboard. Honored on every ads platform, including the separate-token (&#x60;tiktok&#x60;, &#x60;twitter&#x60;) and standalone (&#x60;googleads&#x60;, &#x60;redditads&#x60;, &#x60;microsoftads&#x60;) flows.  MUST be an absolute http(s) URL or a custom app scheme for mobile deeplinks (e.g. myapp://callback). A relative path is rejected with 400 INVALID_REDIRECT_URL.  On success:  - &#x60;tiktok&#x60;: lands on the URL unchanged. - &#x60;twitter&#x60;, &#x60;googleads&#x60;, &#x60;redditads&#x60; and &#x60;microsoftads&#x60;: append &#x60;connected&#x60; (the ads platform id: &#x60;xads&#x60;, &#x60;googleads&#x60;, &#x60;redditads&#x60; or &#x60;microsoftads&#x60;), &#x60;profileId&#x60;, &#x60;accountId&#x60; (the ads connection) and &#x60;username&#x60;. - Same-token platforms (&#x60;facebook&#x60;, &#x60;instagram&#x60;, &#x60;linkedin&#x60;, &#x60;pinterest&#x60;): append &#x60;connected&#x60;, &#x60;profileId&#x60;, &#x60;accountId&#x60;, &#x60;username&#x60; and, on API-key calls, &#x60;connect_token&#x60;.  On failure the same error contract applies as on GET /v1/connect/{platform}: &#x60;error&#x60; and &#x60;platform&#x60; are always appended, other params are optional, and the value list there is not exhaustive.  On the tiktok, twitter, googleads, redditads and microsoftads flows, &#x60;platform&#x60; carries the ads platform id (&#x60;tiktokads&#x60;, &#x60;xads&#x60;, &#x60;googleads&#x60;, &#x60;redditads&#x60;, &#x60;microsoftads&#x60;), not the value used in the request path.  | [optional] |
 | **headless** | **Boolean** | Enable headless mode (same-token platforms only) | [optional][default to false] |
 | **force** | **Boolean** | Force a fresh OAuth even when an account already exists.  Normally the endpoint returns &#x60;alreadyConnected: true&#x60; whenever a connected account is found, keyed off its active state rather than token liveness. Set &#x60;force&#x3D;true&#x60; to bypass that and always receive an &#x60;authUrl&#x60;. Completing the returned OAuth refreshes the stored token on the existing posting and ads accounts in place.  An &#x60;alreadyConnected&#x60; response re-runs ad discovery and webhook subscriptions in the background at most once every 15 minutes per ads account (always when the call changes the ad-account scope), so it is not a sync trigger.  To check the connection&#39;s health, read GET /v1/ads/accounts?accountId&#x3D;&lt;ads account ID&gt;.  | [optional][default to false] |
-| **ad_account_id** | **String** | Scopes ad sync to a single platform ad account. Without it, sync covers every ad account the connected token can see. For multiple accounts use &#x60;adAccountIds&#x60; instead.  Supported on:  - &#x60;facebook&#x60;/&#x60;instagram&#x60; (Meta): &#x60;act_&lt;digits&gt;&#x60;. - &#x60;linkedin&#x60;: bare numeric sponsored-account id. - &#x60;googleads&#x60;: bare customer id digits. - &#x60;redditads&#x60;: Reddit ad account id, &#x60;a2_&lt;id&gt;&#x60; or &#x60;t2_&lt;id&gt;&#x60;. - &#x60;microsoftads&#x60;: bare numeric account id (the Id, not the account number). - &#x60;twitter&#x60; (X Ads): base36 account id.  &#x60;tiktok&#x60; scopes advertisers at OAuth and &#x60;pinterest&#x60; has no ads discovery, so both ignore it.  **Meta validation** against the connected token:  - An id the token cannot see returns 400 &#x60;invalid_field_value&#x60;. - An id it can see but that Meta marks unusable for ads (disabled, closed, under risk review, settlement pending) returns 400 &#x60;ad_account_unusable&#x60; with &#x60;details.accountStatus&#x60; (Meta&#39;s &#x60;account_status&#x60;) and, when Meta gives one, &#x60;details.disableReason&#x60;. - Unsettled and in-grace accounts are accepted, matching the &#x60;selectable&#x60; flag of &#x60;GET /v1/ads/accounts&#x60;.  **Effects**: setting a scope removes already synced ads, campaigns, ad sets and keywords from de-scoped ad accounts. On Meta it also decides which ad accounts Zernio subscribes to ad-account webhooks: only the scoped ones, instead of every ad account the login can reach.  **Through OAuth**: on Meta the scope is kept when this call returns an &#x60;authUrl&#x60;, so the Meta Ads account created after OAuth is scoped (only its scoped ad accounts synced and subscribed) from the start.  On &#x60;googleads&#x60;, &#x60;redditads&#x60; and &#x60;microsoftads&#x60; it is kept through OAuth when &#x60;redirect_url&#x60; is set, so the new connection syncs only scoped ad accounts from the first sync.  **Reconnects**: business-login reconnects preserve the existing scope; supplied IDs are checked against the new grant. To change the scope after migration, call this endpoint with the IDs and omit loginMode.  | [optional] |
-| **ad_account_ids** | [**Array&lt;String&gt;**](String.md) | Scope ad sync to multiple platform ad accounts (same platform support and id shapes as &#x60;adAccountId&#x60;). Repeat the param (&#x60;?adAccountIds&#x3D;act_1&amp;adAccountIds&#x3D;act_2&#x60;) or comma-separate (&#x60;?adAccountIds&#x3D;act_1,act_2&#x60;).  - Persisted server-side; the latest call wins. De-scoped ad accounts have their synced ads, campaigns, ad sets and keywords removed. - On Meta only the scoped ad accounts get webhook subscriptions, including when the call starts a fresh OAuth. - Omitting both &#x60;adAccountId&#x60; and &#x60;adAccountIds&#x60; keeps any previously persisted scope unchanged (no scope means every reachable ad account).  | [optional] |
-| **welcome** | **Boolean** | When &#x60;true&#x60;, &#x60;authUrl&#x60; opens on the Zernio-hosted welcome screen with your brand, as on GET /v1/connect/{platform}, naming the ads platform (\&quot;&lt;brandName&gt; wants to connect to your Meta Ads\&quot;).  - With no &#x60;redirect_url&#x60;, the flow ends on the branded result page instead of the Zernio dashboard. - Shown only with &#x60;welcome&#x3D;true&#x60;: the workspace&#39;s saved \&quot;on by default\&quot; (&#x60;PUT /v1/connect/welcome-screen&#x60;) applies to GET /v1/connect/{platform} only, so ads links behave as before unless you opt in. The saved brand still fills in what the call leaves out. - Without &#x60;adAccountId&#x60; or &#x60;adAccountIds&#x60;, on Meta, Google, LinkedIn, X, Reddit and Microsoft, the user then picks the ad accounts to connect on a branded Zernio-hosted page (skipped when the login reaches only one). - After that page the flow ends on your &#x60;redirect_url&#x60; with &#x60;connected&#x60; set to the ads platform and &#x60;accountId&#x60; to the ads connection. - Cannot be combined with &#x60;headless&#x3D;true&#x60; (400 &#x60;INVALID_FIELD_VALUE&#x60;). - Responses with &#x60;alreadyConnected: true&#x60; carry no &#x60;authUrl&#x60;, so they show no screen.  | [optional] |
+| **ad_account_id** | **String** | Scopes ad sync to a single platform ad account. Without it, sync covers every ad account the connected token can see. For multiple accounts use &#x60;adAccountIds&#x60; instead.  Supported on:  - &#x60;facebook&#x60;/&#x60;instagram&#x60; (Meta): &#x60;act_&lt;digits&gt;&#x60;. - &#x60;linkedin&#x60;: bare numeric sponsored-account id. - &#x60;googleads&#x60;: bare customer id digits. - &#x60;redditads&#x60;: Reddit ad account id, &#x60;a2_&lt;id&gt;&#x60; or &#x60;t2_&lt;id&gt;&#x60;. - &#x60;microsoftads&#x60;: bare numeric account id (the Id, not the account number). - &#x60;twitter&#x60; (X Ads): base36 account id. - &#x60;tiktok&#x60; (TikTok Ads): numeric advertiser id.  &#x60;pinterest&#x60; has no ads discovery, so it ignores it.  **Meta validation** against the connected token:  - An id the token cannot see returns 400 &#x60;invalid_field_value&#x60;. - An id it can see but that Meta marks unusable for ads (disabled, closed, under risk review, settlement pending) returns 400 &#x60;ad_account_unusable&#x60; with &#x60;details.accountStatus&#x60; (Meta&#39;s &#x60;account_status&#x60;) and, when Meta gives one, &#x60;details.disableReason&#x60;. - Unsettled and in-grace accounts are accepted, matching the &#x60;selectable&#x60; flag of &#x60;GET /v1/ads/accounts&#x60;.  **Effects**: setting a scope removes already synced ads, campaigns, ad sets and keywords from de-scoped ad accounts. On Meta it also decides which ad accounts Zernio subscribes to ad-account webhooks: only the scoped ones, instead of every ad account the login can reach.  **Through OAuth**: on Meta the scope is kept when this call returns an &#x60;authUrl&#x60;, so the Meta Ads account created after OAuth is scoped (only its scoped ad accounts synced and subscribed) from the start.  On &#x60;googleads&#x60;, &#x60;redditads&#x60; and &#x60;microsoftads&#x60; it is kept through OAuth when &#x60;redirect_url&#x60; is set, so the new connection syncs only scoped ad accounts from the first sync.  On &#x60;tiktok&#x60; it is kept through OAuth with or without &#x60;redirect_url&#x60;. The TikTok Ads connection holds only the scoped advertisers from the first sync, and is named after the first of them. Its &#x60;platformUserId&#x60; and cached Brand Identity follow that advertiser too.  A TikTok login otherwise reaches every advertiser of every Business Center it belongs to. Advertisers the login does not reach are ignored; when it reaches none of them, the connection keeps every advertiser.  On an existing TikTok Ads connection, ids it does not reach are ignored, and a list it reaches none of returns 400 &#x60;invalid_field_value&#x60;. A reconnect keeps the stored scope, minus advertisers the new login no longer reaches.  **Reconnects**: business-login reconnects preserve the existing scope; supplied IDs are checked against the new grant. To change the scope after migration, call this endpoint with the IDs and omit loginMode.  | [optional] |
+| **ad_account_ids** | [**Array&lt;String&gt;**](String.md) | Scope ad sync to multiple platform ad accounts (same platform support and id shapes as &#x60;adAccountId&#x60;). Repeat the param (&#x60;?adAccountIds&#x3D;act_1&amp;adAccountIds&#x3D;act_2&#x60;) or comma-separate (&#x60;?adAccountIds&#x3D;act_1,act_2&#x60;).  - Persisted server-side; the latest call wins. De-scoped ad accounts have their synced ads, campaigns, ad sets and keywords removed. Where ad accounts are already split into one account each, the call only adds accounts for new ids and never removes one (disconnect that account instead). - On Meta only the scoped ad accounts get webhook subscriptions, including when the call starts a fresh OAuth. - On Meta, ad accounts left out of the scope are unsubscribed from Zernio&#39;s ad-account webhooks (unless another connection still holds them) and are no longer stored, so syncs do not add them back. &#x60;GET /v1/ads/accounts&#x60; lists them (&#x60;selected: false&#x60;) only with &#x60;live&#x3D;true&#x60;; passing them again reselects them. - On TikTok, advertisers left out of the scope are no longer synced or stored either, and are listed (&#x60;selected: false&#x60;) only with &#x60;live&#x3D;true&#x60;. - On TikTok, pixels, tracking tags, offline events, targeting search and Brand Identity default to the first selected advertiser. A TikTok Ads connection with no scope keeps every advertiser the login reaches, as before. - Omitting both &#x60;adAccountId&#x60; and &#x60;adAccountIds&#x60; keeps any previously persisted scope unchanged (no scope means every reachable ad account).  | [optional] |
+| **welcome** | **Boolean** | When &#x60;true&#x60;, &#x60;authUrl&#x60; opens on the Zernio-hosted welcome screen with your brand, as on GET /v1/connect/{platform}, naming the ads platform (\&quot;&lt;brandName&gt; wants to connect to your Meta Ads\&quot;).  - With no &#x60;redirect_url&#x60;, the flow ends on the branded result page instead of the Zernio dashboard. - Shown only with &#x60;welcome&#x3D;true&#x60;: the workspace&#39;s saved \&quot;on by default\&quot; (&#x60;PUT /v1/connect/welcome-screen&#x60;) applies to GET /v1/connect/{platform} only, so ads links behave as before unless you opt in. The saved brand still fills in what the call leaves out. - Without &#x60;adAccountId&#x60; or &#x60;adAccountIds&#x60;, on Meta, Google, LinkedIn, X, Reddit, Microsoft and TikTok, the user then picks the ad accounts to connect on a branded Zernio-hosted page (skipped when the login reaches only one). On Meta and TikTok that page starts with no ad account selected and offers Select all. - After that page the flow ends on your &#x60;redirect_url&#x60; with &#x60;connected&#x60; set to the ads platform and &#x60;accountId&#x60; to the ads connection. - Cannot be combined with &#x60;headless&#x3D;true&#x60; (400 &#x60;INVALID_FIELD_VALUE&#x60;). - Responses with &#x60;alreadyConnected: true&#x60; carry no &#x60;authUrl&#x60;, so they show no screen.  | [optional] |
 | **brand_name** | **String** | Welcome screen only: your product name in its heading. Same rules as on GET /v1/connect/{platform}. | [optional] |
 | **logo_url** | **String** | Welcome screen only: https URL of your square logo. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; when the welcome screen is not shown. | [optional] |
 | **primary_color** | **String** | Welcome screen only: hex colour (&#x60;#RRGGBB&#x60;) of its button. | [optional] |
@@ -532,6 +640,213 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## connect_app_lovin_ads_credentials
+
+> <ConnectAppLovinAdsCredentials200Response> connect_app_lovin_ads_credentials(connect_app_lovin_ads_credentials_request)
+
+Connect an AppLovin Axon account
+
+Connect AppLovin Axon with the Conversion API key and Event Key from the Keys page of Axon Ads Manager.  Zernio checks both keys with Axon before saving them. The account then receives the conversion events you forward to it (`POST /v1/events`, forwarding rules), and its Event Key works as a site tag on tracking sites.  Add the optional Report Key to sync AppLovin spend. Every few hours Zernio reads spend, impressions and clicks per campaign and creative set for the last 7 days, so AppLovin campaigns show in the ads campaign listings and in campaign results.  Zernio checks the Report Key with AppLovin before saving it. Connecting again without a Report Key keeps the one already saved.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_app_lovin_ads_credentials_request = Zernio::ConnectAppLovinAdsCredentialsRequest.new({api_key: 'api_key_example', event_key: 'event_key_example', profile_id: 'profile_id_example'}) # ConnectAppLovinAdsCredentialsRequest | 
+
+begin
+  # Connect an AppLovin Axon account
+  result = api_instance.connect_app_lovin_ads_credentials(connect_app_lovin_ads_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_app_lovin_ads_credentials: #{e}"
+end
+```
+
+#### Using the connect_app_lovin_ads_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectAppLovinAdsCredentials200Response>, Integer, Hash)> connect_app_lovin_ads_credentials_with_http_info(connect_app_lovin_ads_credentials_request)
+
+```ruby
+begin
+  # Connect an AppLovin Axon account
+  data, status_code, headers = api_instance.connect_app_lovin_ads_credentials_with_http_info(connect_app_lovin_ads_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectAppLovinAdsCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_app_lovin_ads_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_app_lovin_ads_credentials_request** | [**ConnectAppLovinAdsCredentialsRequest**](ConnectAppLovinAdsCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectAppLovinAdsCredentials200Response**](ConnectAppLovinAdsCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_attentive_credentials
+
+> <ConnectAttentiveCredentials200Response> connect_attentive_credentials(connect_attentive_credentials_request)
+
+Connect an Attentive company
+
+Connect Attentive with the API key of a custom app (Integrations, Custom apps) that can write Custom Events and eCommerce events.  Zernio reads the key's company from Attentive once to check it, then sends the events you forward to it to Attentive. Connecting the same company again replaces its key.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_attentive_credentials_request = Zernio::ConnectAttentiveCredentialsRequest.new({api_key: 'api_key_example', profile_id: 'profile_id_example'}) # ConnectAttentiveCredentialsRequest | 
+
+begin
+  # Connect an Attentive company
+  result = api_instance.connect_attentive_credentials(connect_attentive_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_attentive_credentials: #{e}"
+end
+```
+
+#### Using the connect_attentive_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectAttentiveCredentials200Response>, Integer, Hash)> connect_attentive_credentials_with_http_info(connect_attentive_credentials_request)
+
+```ruby
+begin
+  # Connect an Attentive company
+  data, status_code, headers = api_instance.connect_attentive_credentials_with_http_info(connect_attentive_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectAttentiveCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_attentive_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_attentive_credentials_request** | [**ConnectAttentiveCredentialsRequest**](ConnectAttentiveCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectAttentiveCredentials200Response**](ConnectAttentiveCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_awin_credentials
+
+> <ConnectAwinCredentials200Response> connect_awin_credentials(connect_awin_credentials_request)
+
+Connect an Awin advertiser
+
+Connect Awin with your advertiser id and an API key (Settings, User settings, API credentials).  Zernio checks the key with one test order (`isTest`, not tracked by Awin) before saving it. Events sent with `testCode` reach Awin the same way.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_awin_credentials_request = Zernio::ConnectAwinCredentialsRequest.new({api_key: 'api_key_example', advertiser_id: 'advertiser_id_example', profile_id: 'profile_id_example'}) # ConnectAwinCredentialsRequest | 
+
+begin
+  # Connect an Awin advertiser
+  result = api_instance.connect_awin_credentials(connect_awin_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_awin_credentials: #{e}"
+end
+```
+
+#### Using the connect_awin_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectAwinCredentials200Response>, Integer, Hash)> connect_awin_credentials_with_http_info(connect_awin_credentials_request)
+
+```ruby
+begin
+  # Connect an Awin advertiser
+  data, status_code, headers = api_instance.connect_awin_credentials_with_http_info(connect_awin_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectAwinCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_awin_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_awin_credentials_request** | [**ConnectAwinCredentialsRequest**](ConnectAwinCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectAwinCredentials200Response**](ConnectAwinCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -661,6 +976,213 @@ end
 ### Return type
 
 nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_impact_credentials
+
+> <ConnectImpactCredentials200Response> connect_impact_credentials(connect_impact_credentials_request)
+
+Connect an Impact program
+
+Connect impact.com with an access token (Settings, API) that can read Campaigns and write Conversions, the program the conversions count in and the event type they count as.  Zernio lists the account's programs once to check the token, then sends the conversions you forward to it to `<programId>:<eventTypeId>`. Another event type of the same account is another forwarding rule with that `destinationId`.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_impact_credentials_request = Zernio::ConnectImpactCredentialsRequest.new({account_sid: 'account_sid_example', auth_token: 'auth_token_example', program_id: 'program_id_example', event_type_id: 'event_type_id_example', profile_id: 'profile_id_example'}) # ConnectImpactCredentialsRequest | 
+
+begin
+  # Connect an Impact program
+  result = api_instance.connect_impact_credentials(connect_impact_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_impact_credentials: #{e}"
+end
+```
+
+#### Using the connect_impact_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectImpactCredentials200Response>, Integer, Hash)> connect_impact_credentials_with_http_info(connect_impact_credentials_request)
+
+```ruby
+begin
+  # Connect an Impact program
+  data, status_code, headers = api_instance.connect_impact_credentials_with_http_info(connect_impact_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectImpactCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_impact_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_impact_credentials_request** | [**ConnectImpactCredentialsRequest**](ConnectImpactCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectImpactCredentials200Response**](ConnectImpactCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_klaviyo_credentials
+
+> <ConnectKlaviyoCredentials200Response> connect_klaviyo_credentials(connect_klaviyo_credentials_request)
+
+Connect a Klaviyo account
+
+Connect Klaviyo with a private API key (Settings, API keys) that has the Events (write) and Accounts (read) scopes.  Zernio reads the key's account once to check it, then sends the events you forward to it (`POST /v1/events`, forwarding rules) to Klaviyo's Events API. Connecting the same account again replaces its key.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_klaviyo_credentials_request = Zernio::ConnectKlaviyoCredentialsRequest.new({api_key: 'api_key_example', profile_id: 'profile_id_example'}) # ConnectKlaviyoCredentialsRequest | 
+
+begin
+  # Connect a Klaviyo account
+  result = api_instance.connect_klaviyo_credentials(connect_klaviyo_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_klaviyo_credentials: #{e}"
+end
+```
+
+#### Using the connect_klaviyo_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectKlaviyoCredentials200Response>, Integer, Hash)> connect_klaviyo_credentials_with_http_info(connect_klaviyo_credentials_request)
+
+```ruby
+begin
+  # Connect a Klaviyo account
+  data, status_code, headers = api_instance.connect_klaviyo_credentials_with_http_info(connect_klaviyo_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectKlaviyoCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_klaviyo_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_klaviyo_credentials_request** | [**ConnectKlaviyoCredentialsRequest**](ConnectKlaviyoCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectKlaviyoCredentials200Response**](ConnectKlaviyoCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_line_credentials
+
+> <ConnectLineCredentials200Response> connect_line_credentials(connect_line_credentials_request)
+
+Connect LINE Official Account
+
+Connect a LINE Official Account with the Channel ID and Channel secret of its Messaging API channel (LINE Official Account Manager > Settings > Messaging API, also shown in the LINE Developers Console under the channel's Basic settings).  Zernio issues a channel access token, reads the bot's profile and sets the channel's webhook URL for you. A channel has one webhook URL, so if it already pointed somewhere else, that integration stops receiving events; the response names it in `webhook.previousUrl`.  Two settings stay on the customer's side, in LINE Official Account Manager > Settings > Response settings. `nextSteps` in the response lists them:  - Turn on Webhooks. Until it is on, LINE delivers nothing to Zernio. LINE's API cannot turn it on, so Zernio reads it back as `webhook.active`.   When it is `false`, `message` and the first entry of `nextSteps` say to turn it on. `GET /v1/accounts/{accountId}/health` keeps reporting it after connect. - Turn off auto-response and greeting messages.  Reconnecting the same channel on the same profile updates the existing account. To get your userId for the state parameter, call GET /v1/users which includes a currentUserId field. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_line_credentials_request = Zernio::ConnectLineCredentialsRequest.new({channel_id: 'channel_id_example', channel_secret: 'channel_secret_example', state: '6507a1b2c3d4e5f6a7b8c9d0-6507a1b2c3d4e5f6a7b8c9d1'}) # ConnectLineCredentialsRequest | 
+
+begin
+  # Connect LINE Official Account
+  result = api_instance.connect_line_credentials(connect_line_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_line_credentials: #{e}"
+end
+```
+
+#### Using the connect_line_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectLineCredentials200Response>, Integer, Hash)> connect_line_credentials_with_http_info(connect_line_credentials_request)
+
+```ruby
+begin
+  # Connect LINE Official Account
+  data, status_code, headers = api_instance.connect_line_credentials_with_http_info(connect_line_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectLineCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_line_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_line_credentials_request** | [**ConnectLineCredentialsRequest**](ConnectLineCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectLineCredentials200Response**](ConnectLineCredentials200Response.md)
 
 ### Authorization
 
@@ -878,6 +1400,213 @@ nil (empty response body)
 - **Accept**: application/json
 
 
+## connect_snapchat_ads_credentials
+
+> <ConnectSnapchatAdsCredentials200Response> connect_snapchat_ads_credentials(connect_snapchat_ads_credentials_request)
+
+Connect a Snapchat Ads pixel
+
+Connect a Snap Pixel with its Pixel ID and a Conversions API token generated in Snapchat Ads Manager (Business Details, Conversions API Tokens, visible to Organization Admins).  Zernio checks the token against the pixel on Snap's validate endpoint before saving it. The account then receives the conversion events you forward to it (`POST /v1/events`, forwarding rules). Connecting the same pixel again replaces its token.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_snapchat_ads_credentials_request = Zernio::ConnectSnapchatAdsCredentialsRequest.new({access_token: 'access_token_example', pixel_id: 'pixel_id_example', profile_id: 'profile_id_example'}) # ConnectSnapchatAdsCredentialsRequest | 
+
+begin
+  # Connect a Snapchat Ads pixel
+  result = api_instance.connect_snapchat_ads_credentials(connect_snapchat_ads_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_snapchat_ads_credentials: #{e}"
+end
+```
+
+#### Using the connect_snapchat_ads_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectSnapchatAdsCredentials200Response>, Integer, Hash)> connect_snapchat_ads_credentials_with_http_info(connect_snapchat_ads_credentials_request)
+
+```ruby
+begin
+  # Connect a Snapchat Ads pixel
+  data, status_code, headers = api_instance.connect_snapchat_ads_credentials_with_http_info(connect_snapchat_ads_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectSnapchatAdsCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_snapchat_ads_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_snapchat_ads_credentials_request** | [**ConnectSnapchatAdsCredentialsRequest**](ConnectSnapchatAdsCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectSnapchatAdsCredentials200Response**](ConnectSnapchatAdsCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_taboola_ads_credentials
+
+> <ConnectTaboolaAdsCredentials200Response> connect_taboola_ads_credentials(connect_taboola_ads_credentials_request)
+
+Connect a Taboola account
+
+Connect a Taboola advertiser account by its numeric Account ID from Taboola Realize. Taboola's S2S postback takes no credential, so nothing secret is stored and nothing is checked with Taboola.  The account then receives the conversion events you forward to it (`POST /v1/events`, forwarding rules). Each event needs the Taboola click ID (`clickIds.tblci`).  Taboola counts an event only when its name equals the Event Name of a conversion rule in Realize. Rename events in the forwarding rule when they differ.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_taboola_ads_credentials_request = Zernio::ConnectTaboolaAdsCredentialsRequest.new({taboola_account_id: 'taboola_account_id_example', profile_id: 'profile_id_example'}) # ConnectTaboolaAdsCredentialsRequest | 
+
+begin
+  # Connect a Taboola account
+  result = api_instance.connect_taboola_ads_credentials(connect_taboola_ads_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_taboola_ads_credentials: #{e}"
+end
+```
+
+#### Using the connect_taboola_ads_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectTaboolaAdsCredentials200Response>, Integer, Hash)> connect_taboola_ads_credentials_with_http_info(connect_taboola_ads_credentials_request)
+
+```ruby
+begin
+  # Connect a Taboola account
+  data, status_code, headers = api_instance.connect_taboola_ads_credentials_with_http_info(connect_taboola_ads_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectTaboolaAdsCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_taboola_ads_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_taboola_ads_credentials_request** | [**ConnectTaboolaAdsCredentialsRequest**](ConnectTaboolaAdsCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectTaboolaAdsCredentials200Response**](ConnectTaboolaAdsCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_trade_desk_ads_credentials
+
+> <ConnectTradeDeskAdsCredentials200Response> connect_trade_desk_ads_credentials(connect_trade_desk_ads_credentials_request)
+
+Connect a Trade Desk tracking tag
+
+Connect a Trade Desk advertiser and the tracking tag your conversions count against, for the Real-Time Conversions API. The API takes no secret, so nothing secret is stored: get the Advertiser ID from Advertiser Preferences and ask your Trade Desk representative for a Real-Time Conversion tracking tag.  The Trade Desk does not check either id when it receives events, so a wrong id loses conversions silently: check the tag's conversions in The Trade Desk after the first sends. Connecting the same tag again replaces its advertiser.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_trade_desk_ads_credentials_request = Zernio::ConnectTradeDeskAdsCredentialsRequest.new({advertiser_id: 'advertiser_id_example', tracker_id: 'tracker_id_example', profile_id: 'profile_id_example'}) # ConnectTradeDeskAdsCredentialsRequest | 
+
+begin
+  # Connect a Trade Desk tracking tag
+  result = api_instance.connect_trade_desk_ads_credentials(connect_trade_desk_ads_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_trade_desk_ads_credentials: #{e}"
+end
+```
+
+#### Using the connect_trade_desk_ads_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectTradeDeskAdsCredentials200Response>, Integer, Hash)> connect_trade_desk_ads_credentials_with_http_info(connect_trade_desk_ads_credentials_request)
+
+```ruby
+begin
+  # Connect a Trade Desk tracking tag
+  data, status_code, headers = api_instance.connect_trade_desk_ads_credentials_with_http_info(connect_trade_desk_ads_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectTradeDeskAdsCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_trade_desk_ads_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_trade_desk_ads_credentials_request** | [**ConnectTradeDeskAdsCredentialsRequest**](ConnectTradeDeskAdsCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectTradeDeskAdsCredentials200Response**](ConnectTradeDeskAdsCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## connect_webflow_with_site_token
 
 > <ConnectWebflowWithSiteToken200Response> connect_webflow_with_site_token(connect_webflow_with_site_token_request)
@@ -945,6 +1674,75 @@ end
 ### Authorization
 
 [connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_wechat_credentials
+
+> <ConnectWechatCredentials200Response> connect_wechat_credentials(connect_wechat_credentials_request)
+
+Connect WeChat Official Account
+
+Connect a verified WeChat Official Account (Service Account) with its AppID and AppSecret (Weixin Official Accounts Platform > Settings and Development > Basic Configuration).  Before calling this, add every IP from GET /v1/connect/wechat/ip-whitelist to the account's API IP whitelist on the same page. WeChat refuses calls from any other IP, and this endpoint then returns 400 with code `wechat_ip_not_whitelisted`.  The response carries a Server URL, a Token and an EncodingAESKey. Paste them into Server Configuration on the same page, choose Safe mode for message encryption, and enable the configuration. Until then WeChat delivers nothing to Zernio.  Enabling Server Configuration turns off the auto-replies and menus set in the WeChat dashboard.  Reconnecting the same AppID on the same profile keeps the existing Token and EncodingAESKey, so nothing has to be pasted again. To get your userId for the state parameter, call GET /v1/users which includes a currentUserId field. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_wechat_credentials_request = Zernio::ConnectWechatCredentialsRequest.new({app_id: 'app_id_example', app_secret: 'app_secret_example', state: '6507a1b2c3d4e5f6a7b8c9d0-6507a1b2c3d4e5f6a7b8c9d1'}) # ConnectWechatCredentialsRequest | 
+
+begin
+  # Connect WeChat Official Account
+  result = api_instance.connect_wechat_credentials(connect_wechat_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_wechat_credentials: #{e}"
+end
+```
+
+#### Using the connect_wechat_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectWechatCredentials200Response>, Integer, Hash)> connect_wechat_credentials_with_http_info(connect_wechat_credentials_request)
+
+```ruby
+begin
+  # Connect WeChat Official Account
+  data, status_code, headers = api_instance.connect_wechat_credentials_with_http_info(connect_wechat_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectWechatCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_wechat_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_wechat_credentials_request** | [**ConnectWechatCredentialsRequest**](ConnectWechatCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectWechatCredentials200Response**](ConnectWechatCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -1237,6 +2035,219 @@ end
 - **Accept**: application/json
 
 
+## create_google_business_location
+
+> <CreateGoogleBusinessLocation200Response> create_google_business_location(account_id, create_google_business_location_request, opts)
+
+Create Google Business Profile location
+
+Creates a Google Business Profile listing under the Google account of this Zernio account and attaches it to this account, so verification, details, posts and reviews work on it right away.  Only for an account with no location yet (connected with `allowNoLocation`). If the account already has a location, the request is rejected with 409 and nothing is created.  Search first with `POST /v1/accounts/{accountId}/gmb-locations/search` to avoid duplicating an existing listing, and pick `primaryCategory` from `GET /v1/accounts/{accountId}/gmb-categories`.  Required by Google: `title`, `languageCode` (immutable once set) and `primaryCategory`. At least one of `storefrontAddress` or `serviceArea` is required. When `storefrontAddress` is absent, at least one of `phone` or `websiteUri` is required. Both rules are checked before Google is called and a violation returns 400 naming the field.  Set `validateOnly` to check the request with Google without creating anything: the response carries the would-be `location` and nothing is attached.  A new listing is not on Google Maps until it is verified. `voiceOfMerchantState.hasVoiceOfMerchant` is `false` after creation; start verification with the `gmb-verifications` endpoints. `voiceOfMerchantState` is `null` if Google could not return it, and the listing was still created.  If Google creates the listing but it cannot be attached, the error message names the created `locations/<id>`; attach it with `PUT /v1/accounts/{accountId}/gmb-locations`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | 
+create_google_business_location_request = Zernio::CreateGoogleBusinessLocationRequest.new({title: 'title_example', language_code: 'language_code_example', primary_category: 'primary_category_example'}) # CreateGoogleBusinessLocationRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Create Google Business Profile location
+  result = api_instance.create_google_business_location(account_id, create_google_business_location_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_google_business_location: #{e}"
+end
+```
+
+#### Using the create_google_business_location_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateGoogleBusinessLocation200Response>, Integer, Hash)> create_google_business_location_with_http_info(account_id, create_google_business_location_request, opts)
+
+```ruby
+begin
+  # Create Google Business Profile location
+  data, status_code, headers = api_instance.create_google_business_location_with_http_info(account_id, create_google_business_location_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateGoogleBusinessLocation200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_google_business_location_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **create_google_business_location_request** | [**CreateGoogleBusinessLocationRequest**](CreateGoogleBusinessLocationRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**CreateGoogleBusinessLocation200Response**](CreateGoogleBusinessLocation200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_google_org_connection
+
+> <CreateGoogleOrgConnection201Response> create_google_org_connection(create_google_org_connection_request)
+
+Start a Google Workspace organization connection
+
+Creates an organization connection for a Google Workspace domain. A super admin then delegates Zernio's client ID with the returned scopes, and you add mailboxes without each user signing in.  ### Flow  1. Add `setup.dnsRecord` (a TXT record) to the domain. It proves the domain's owner set up this connection. 2. A super admin adds `setup.clientId` with `setup.scopes` under domain-wide delegation in the Admin console. 3. Call `POST /v1/org-connections/{orgConnectionId}/verify` with any mailbox in the domain. 4. Add mailboxes with `POST /v1/org-connections/{orgConnectionId}/mailboxes`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+create_google_org_connection_request = Zernio::CreateGoogleOrgConnectionRequest.new({profile_id: 'profile_id_example', domain: 'acme.com', scopes: ['email']}) # CreateGoogleOrgConnectionRequest | 
+
+begin
+  # Start a Google Workspace organization connection
+  result = api_instance.create_google_org_connection(create_google_org_connection_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_google_org_connection: #{e}"
+end
+```
+
+#### Using the create_google_org_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateGoogleOrgConnection201Response>, Integer, Hash)> create_google_org_connection_with_http_info(create_google_org_connection_request)
+
+```ruby
+begin
+  # Start a Google Workspace organization connection
+  data, status_code, headers = api_instance.create_google_org_connection_with_http_info(create_google_org_connection_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateGoogleOrgConnection201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_google_org_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_google_org_connection_request** | [**CreateGoogleOrgConnectionRequest**](CreateGoogleOrgConnectionRequest.md) |  |  |
+
+### Return type
+
+[**CreateGoogleOrgConnection201Response**](CreateGoogleOrgConnection201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_microsoft_org_connection
+
+> <CreateGoogleOrgConnection201Response> create_microsoft_org_connection(create_microsoft_org_connection_request)
+
+Start a Microsoft 365 organization connection
+
+Creates an organization connection for a Microsoft 365 tenant. An administrator opens `setup.adminConsentUrl` and approves Zernio's application permissions once, then you add mailboxes without each user signing in.  After consent Microsoft sends the administrator to `redirectUrl` with `orgConnectionId`, `status` (`active`, `pending` or `denied`) and `tenant`.  Application permissions reach every mailbox in the tenant. Administrators can scope them with an Exchange Online application access policy or RBAC for Applications. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+create_microsoft_org_connection_request = Zernio::CreateMicrosoftOrgConnectionRequest.new({profile_id: 'profile_id_example', scopes: ['email']}) # CreateMicrosoftOrgConnectionRequest | 
+
+begin
+  # Start a Microsoft 365 organization connection
+  result = api_instance.create_microsoft_org_connection(create_microsoft_org_connection_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_microsoft_org_connection: #{e}"
+end
+```
+
+#### Using the create_microsoft_org_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateGoogleOrgConnection201Response>, Integer, Hash)> create_microsoft_org_connection_with_http_info(create_microsoft_org_connection_request)
+
+```ruby
+begin
+  # Start a Microsoft 365 organization connection
+  data, status_code, headers = api_instance.create_microsoft_org_connection_with_http_info(create_microsoft_org_connection_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateGoogleOrgConnection201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_microsoft_org_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_microsoft_org_connection_request** | [**CreateMicrosoftOrgConnectionRequest**](CreateMicrosoftOrgConnectionRequest.md) |  |  |
+
+### Return type
+
+[**CreateGoogleOrgConnection201Response**](CreateGoogleOrgConnection201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## create_o_auth_app
 
 > <CreateOAuthApp201Response> create_o_auth_app(create_o_auth_app_request)
@@ -1366,6 +2377,75 @@ end
 ### Return type
 
 [**CreatePinterestBoard201Response**](CreatePinterestBoard201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_platform_invite
+
+> <CreatePlatformInvite200Response> create_platform_invite(create_platform_invite_request)
+
+Create a connect link
+
+Create a single-use link that lets someone else connect their account to one of your profiles, without a Zernio login.  For Instagram, choose how they sign in with loginMethod. With facebook_login they sign in with Facebook and pick the Page linked to their Instagram account. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+create_platform_invite_request = Zernio::CreatePlatformInviteRequest.new({profile_id: 'profile_id_example', platform: 'facebook'}) # CreatePlatformInviteRequest | 
+
+begin
+  # Create a connect link
+  result = api_instance.create_platform_invite(create_platform_invite_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_platform_invite: #{e}"
+end
+```
+
+#### Using the create_platform_invite_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreatePlatformInvite200Response>, Integer, Hash)> create_platform_invite_with_http_info(create_platform_invite_request)
+
+```ruby
+begin
+  # Create a connect link
+  data, status_code, headers = api_instance.create_platform_invite_with_http_info(create_platform_invite_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreatePlatformInvite200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_platform_invite_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_platform_invite_request** | [**CreatePlatformInviteRequest**](CreatePlatformInviteRequest.md) |  |  |
+
+### Return type
+
+[**CreatePlatformInvite200Response**](CreatePlatformInvite200Response.md)
 
 ### Authorization
 
@@ -1521,6 +2601,235 @@ end
 - **Accept**: application/json
 
 
+## delete_org_connection
+
+> <DeleteOrgConnection200Response> delete_org_connection(org_connection_id)
+
+Delete an organization connection
+
+Deletes the connection. Mailboxes added from it stay on the profile and answer `401` `reconnect_required` until you disconnect them or connect them another way.  `mailboxAccountIds` lists them. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+org_connection_id = 'org_connection_id_example' # String | 
+
+begin
+  # Delete an organization connection
+  result = api_instance.delete_org_connection(org_connection_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->delete_org_connection: #{e}"
+end
+```
+
+#### Using the delete_org_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteOrgConnection200Response>, Integer, Hash)> delete_org_connection_with_http_info(org_connection_id)
+
+```ruby
+begin
+  # Delete an organization connection
+  data, status_code, headers = api_instance.delete_org_connection_with_http_info(org_connection_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteOrgConnection200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->delete_org_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **org_connection_id** | **String** |  |  |
+
+### Return type
+
+[**DeleteOrgConnection200Response**](DeleteOrgConnection200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_amazon_ads_connect_url
+
+> <GetAmazonAdsConnectUrl200Response> get_amazon_ads_connect_url(profile_id, opts)
+
+Get Amazon Ads OAuth connect URL
+
+Starts Login with Amazon for Amazon Ads (scope `advertising::campaign_management`). The Amazon login becomes an account with platform `amazonads`; every advertiser profile it reaches, in the NA, EU and FE regions, is a conversions destination (`GET /v1/ads/conversions/destinations`).  Errors on the redirect: `amazonads_no_profiles` (the login reaches no advertiser), `amazonads_no_refresh_token`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme.
+  reconnect_account_id: 'reconnect_account_id_example' # String | Zernio account ID of the Amazon Ads account being reconnected.
+}
+
+begin
+  # Get Amazon Ads OAuth connect URL
+  result = api_instance.get_amazon_ads_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_amazon_ads_connect_url: #{e}"
+end
+```
+
+#### Using the get_amazon_ads_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAmazonAdsConnectUrl200Response>, Integer, Hash)> get_amazon_ads_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get Amazon Ads OAuth connect URL
+  data, status_code, headers = api_instance.get_amazon_ads_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAmazonAdsConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_amazon_ads_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme. | [optional] |
+| **reconnect_account_id** | **String** | Zernio account ID of the Amazon Ads account being reconnected. | [optional] |
+
+### Return type
+
+[**GetAmazonAdsConnectUrl200Response**](GetAmazonAdsConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_campaign_manager_connect_url
+
+> <GetGoogleAnalyticsConnectUrl200Response> get_campaign_manager_connect_url(profile_id, opts)
+
+Get Campaign Manager 360 OAuth connect URL
+
+Starts Google OAuth for Campaign Manager 360 (Floodlight). Each connected CM360 user profile becomes an account with platform `campaignmanager360`; it receives the conversions you forward to its Floodlight activities and does not post.  Requested scopes: `https://www.googleapis.com/auth/datamanager` (conversions go through Google's Data Manager API) and `https://www.googleapis.com/auth/dfatrafficking` (only to list advertisers and Floodlight activities; Campaign Manager has no read-only trafficking scope).  ### Flow  Redirect the user to `authUrl`.  - **One CM360 user profile:** Zernio connects it and redirects to `redirect_url` (or the dashboard) with `connected=campaignmanager360`, `profileId`, `accountId` and `username`. - **Several:** the user first picks one on a Zernio-hosted page, which then redirects the same way.  Then list the Floodlight activities with `GET /v1/ads/conversions/destinations?accountId=...`.  ### Your own picker  Add `headless=true` to `redirect_url`. Zernio then redirects there with `step=select_profile`, `profileId`, `platform=campaignmanager360` and a `pendingDataToken` for `GET /v1/connect/campaignmanager360/profiles` and `POST /v1/connect/campaignmanager360/select-profile`.  ### Errors  On failure the redirect carries `error`, `platform=campaignmanager360` and `error_message`. Errors include:  - `campaignmanager360_scope_missing`: the user unticked one of the two permissions. - `campaignmanager360_no_profiles`: the Google account has no Campaign Manager 360 user profile. - `campaignmanager360_no_refresh_token`: Google returned no refresh token; connect again. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example' # String | Zernio account ID of the Campaign Manager 360 account being reconnected. Picking a different CM360 profile then fails instead of adding a second account.
+}
+
+begin
+  # Get Campaign Manager 360 OAuth connect URL
+  result = api_instance.get_campaign_manager_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_campaign_manager_connect_url: #{e}"
+end
+```
+
+#### Using the get_campaign_manager_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetGoogleAnalyticsConnectUrl200Response>, Integer, Hash)> get_campaign_manager_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get Campaign Manager 360 OAuth connect URL
+  data, status_code, headers = api_instance.get_campaign_manager_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetGoogleAnalyticsConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_campaign_manager_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | Zernio account ID of the Campaign Manager 360 account being reconnected. Picking a different CM360 profile then fails instead of adding a second account. | [optional] |
+
+### Return type
+
+[**GetGoogleAnalyticsConnectUrl200Response**](GetGoogleAnalyticsConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_connect_handoff
 
 > <ConnectHandoff> get_connect_handoff(handoff_id)
@@ -1596,7 +2905,7 @@ end
 
 Get OAuth connect URL
 
-Initiate an OAuth connection flow. Returns an authUrl to redirect the user to.  ### Modes  - Standard flow: Zernio hosts the selection UI, then redirects to your redirect_url. - Headless mode (headless=true): user is redirected to your redirect_url with OAuth data for custom UI. Use the platform-specific selection endpoints to complete.  ### Several accounts per platform  A profile can hold several accounts of the same platform. Connecting a different account adds it as a new account, and reconnecting the SAME account keeps it and all of its history.  Ads connections stay one per profile.  On a legacy plan limited to N profiles, a new account is refused with 403 `platform_account_limit` once N accounts of its platform are connected.  ### TikTok  Every connection now goes through the TikTok for Business app.  An authorization that leaves out a permission the connected account needs changes nothing at all and comes back as `missing_tiktok_permissions`. Connect again and accept every permission on TikTok's screen. 
+Initiate an OAuth connection flow. Returns an authUrl to redirect the user to.  **X on prepaid-balance billing:** connecting is free, but every X post is paid from the balance ($0.015, or $0.20 with a link). At a $0 balance, POST /v1/posts to X returns 402 `insufficient_balance` (or waits for funds when scheduled), so fund the balance before the first post.  ### Modes  - Standard flow: Zernio hosts the selection UI, then redirects to your redirect_url. - Headless mode (headless=true): user is redirected to your redirect_url with OAuth data for custom UI. Use the platform-specific selection endpoints to complete.  ### Several accounts per platform  A profile can hold several accounts of the same platform. Connecting a different account adds it as a new account, and reconnecting the SAME account keeps it and all of its history.  Ads connections stay one per profile.  On a legacy plan limited to N profiles, a new account is refused with 403 `platform_account_limit` once N accounts of its platform are connected.  ### TikTok  Every connection now goes through the TikTok for Business app.  An authorization that leaves out a permission the connected account needs changes nothing at all and comes back as `missing_tiktok_permissions`. Connect again and accept every permission on TikTok's screen. 
 
 ### Examples
 
@@ -1614,12 +2923,15 @@ platform = 'facebook' # String | Social media platform to connect. `snapchat` is
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409.
 opts = {
   reconnect_account_id: 'reconnect_account_id_example', # String | Refresh this existing account: a Zernio account id of the same platform on this profile (otherwise 400).  The OAuth callback and the selection endpoints (select-page, select-organization, select-board, select-location, Instagram and Snapchat selection) refuse with `reconnect_account_mismatch` a login that would write to a different account of the platform on this profile instead of this one.  In headless mode the marker travels in the redirect_url we hand you, so pass that URL back unchanged to the selection endpoint. On X it counts toward the OAuth state limit described under redirect_url. 
-  oauth_app_id: 'oauth_app_id_example', # String | Connect through one of your own OAuth apps (see /v1/connect/oauth-apps), so the consent screen shows your app and the platform's limits are your app's. Without it the connect runs on Zernio's app, whatever apps the workspace has saved.  - Only platforms listed in `platforms` of GET /v1/connect/oauth-apps accept an app. Any other returns 400, and so do ads connects (`adsConnect=true` in the redirect URL). - Connects that end on a destination picker also return 400, except Facebook Pages, Google Business locations, Pinterest boards and Snapchat public profiles (Instagram through Facebook Login, for example). - A LinkedIn connect through an app saves the member's own profile: organization pages, and mention lookups, stay on Zernio's app. - The connect requests the app's `scopeAreas`. `scopes` may narrow them but not add an area the app does not enable (400). - If the user does not grant every requested area, the account still connects and the redirect carries `missing_permissions=<areas>` (the headless POST returns `missingPermissions`). - If the platform refuses a permission your app is not approved for, the redirect carries `error=oauth_app_scope_not_allowed`.  The account remembers the app, and token refresh, publishing and inbox run on it. Reconnecting through another app, or without one, moves the account to that app. 
+  oauth_app_id: 'oauth_app_id_example', # String | Connect through one of your own OAuth apps (see /v1/connect/oauth-apps), so the consent screen shows your app and the platform's limits are your app's. Without it the connect runs on Zernio's app, whatever apps the workspace has saved.  - Only platforms listed in `platforms` of GET /v1/connect/oauth-apps accept an app. Any other returns 400, and so do ads connects (`adsConnect=true` in the redirect URL). - Connects that end on a destination picker also return 400, except Facebook Pages, Google Business locations, Pinterest boards and Snapchat public profiles (Instagram through Facebook Login, for example). - A LinkedIn connect through an app saves the member's own profile: organization pages, and mention lookups, stay on Zernio's app. - The connect requests the app's `scopeAreas`. `scopes` may narrow them but not add an area the app does not enable (400). - If the user does not grant every requested area, the account still connects and the redirect carries `missing_permissions=<areas>` (the headless POST returns `missingPermissions`). - A Microsoft login that connected with `email` or `calendar` but has no Exchange Online mailbox still connects (files work), and the redirect carries `mailboxNotice=mailbox_not_available`. Mail and calendar requests then answer 412 `mailbox_not_available`. - If the platform refuses a permission your app is not approved for, the redirect carries `error=oauth_app_scope_not_allowed`.  The account remembers the app, and token refresh, publishing and inbox run on it. Reconnecting through another app, or without one, moves the account to that app. 
+  purpose: 'notifications', # String | Connect the account for notifications only. Slack and Telegram only: `GET /v1/connect/{platform}` returns 400 for any other platform, and other platforms' own connect endpoints ignore it.  The account is free, receives Zernio notifications, and cannot publish. To publish with it, connect it again without `purpose`. Refused with 400 when the channel or chat is already connected for publishing: connect a separate one for notifications. 
   expected_platform_user_id: 'expected_platform_user_id_example', # String | Only connect if the login lands on this platform account. Any other account ends the flow with `error=account_mismatch` (a 409 `account_mismatch` on POST /v1/connect/instagram/select-account) and nothing is written.  Compared with every id the platform reports for the authorized account:  - Any platform: the `platformUserId` of a Zernio account on this platform. - Instagram: either the app-scoped id or the professional account id (`metadata.instagramScopedId`, the `17841...` id that Facebook Login accounts hold as platformUserId). - TikTok: open_ids are app-scoped, so an id from your own TikTok app never matches. Use expectedUsername there.  Honoured by the OAuth callback (every platform that connects without a selection step, Instagram Login included) and by the Instagram selection step. On the other selection endpoints you choose the destination yourself.  In headless mode the marker travels in the redirect_url we hand you, so pass that URL back unchanged. On X it counts toward the OAuth state limit described under redirect_url. 
   expected_username: 'expected_username_example', # String | Only connect if the authorized account's handle is this one (case-insensitive, a leading @ is ignored). Otherwise the flow ends with `error=account_mismatch` and `error_message` naming the handle that was authorized, and nothing is written.  Same coverage and transport as expectedPlatformUserId; when both are sent, both must match. Use this on a first connection, where you hold the handle the user typed but no Zernio id yet. 
+  expected_phone_number: 'expected_phone_number_example', # String | WhatsApp with `signup=hosted` only; ignored on other flows. The number (E.164) the user must connect. If they pick a different number in Meta's popup, the hosted page ends with a 409 `NUMBER_MISMATCH` naming the number they picked, and nothing is saved.  The full international number is compared, country code included. A number that differs only in its country code, or shares only its last digits, is a mismatch.  The only spellings treated as the same number are national re-spellings of one line, such as a Brazilian mobile with or without its ninth digit, or a Mexican mobile with or without the `1` after `+52`.  The pin is held server-side on the connect token, not in the hosted page URL, so removing it from the URL does not lift it.  It is also enforced on late completions: when the browser closes before the signup finishes, Zernio only connects the number in the background if it matches.  Use it to reconnect a known number safely. For a number bought from Zernio, the hosted page already expects that number and this value is ignored. 
   force_reauth: true, # Boolean | Instagram Login only (the default loginMethod); ignored elsewhere. Makes Instagram show its login page and ask for the credentials of the account to connect, even when another Instagram account is logged in on the device or app. Also hides the Facebook login option on that page.  Use it when the person connecting manages several Instagram accounts on one phone: otherwise Instagram logs in, and converts to a professional account, whichever account is active, before any consent screen. Pair it with expectedUsername to also refuse a wrong account at the end. 
-  redirect_url: 'redirect_url_example', # String | Your custom redirect URL after the connection completes. It MUST be an absolute http(s) URL or a custom app scheme for mobile deeplinks (e.g. myapp://callback). A relative path is rejected with 400 `INVALID_REDIRECT_URL`.  **Exit notice:** when `redirect_url` is an http(s) URL on another site (anything but zernio.com), every redirect of the flow lands first on `https://zernio.com/connect/continue?to=<your URL>`, a Zernio page that names your site and continues to it with one click. All params below reach your URL unchanged.  A custom app scheme (myapp://...) never goes through the notice. In headless mode the redirects we hand you (and the `redirect_url` returned by the selection endpoints) are notice URLs: pass them back or navigate to them as they are.  **X (twitter) length limit:** X caps the OAuth `state` at 500 characters and the redirect travels inside it (wrapped in the notice URL for an http(s) URL on another site). The URL-encoded form must be at most 258 characters for API callers, 310 for dashboard sessions.  In headless mode the appended `headless=true` counts toward that limit. A plain https URL on another site leaves about 165 to 190 characters of your own URL, depending on encoding. A longer one is rejected with 400 `INVALID_REDIRECT_URL`, and the error says by how much.  **Success params** are appended with the URL API, so an existing query string is preserved:  - Standard mode: connected={platform}&profileId=X&accountId=Y&username=Z. - Headless mode: OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.  **Failure params:** the browser goes to the same redirect_url with `error` and `platform` appended (always present). `error_message`, `is_user_fixable`, `reason`, `dashboard_url`, `missing_scopes`, `error_reason` and the `platform_error*` params are conditional: treat them as optional.  Your own query params are kept on every redirect, but ours overwrite one of yours with the same name. On an error redirect we remove the internal `headless`, `adsConnect`, `adsScope`, `reconnectAccountId`, `expectedPlatformUserId` and `expectedUsername` markers added during the flow.  **Correlation** params appear on every redirect from an OAuth callback (success and failure) and on the `redirect_url` returned by the selection endpoints such as POST /v1/connect/facebook/select-page:  - `request_id`: the id we log that request under. Quote it when reporting a problem. - `stage`: where the flow ended. `authorize` = the platform's consent dialog returned an error or denial instead of a code. `callback` = we processed the returned code (success, a selection step, or a failure). - `stage` = `select_page`: the destination-selection endpoint (page, account, organization, board, location, profile or phone number) completed it.  **Error details:**  - `oauth_denied`: carries `error_message` and, when the platform sent them, its own `platform_error` (e.g. `access_denied`), `platform_error_reason` (e.g. `user_denied`) and `platform_error_description` (truncated to 500 characters). `is_user_fixable=true` when the platform reported that the user cancelled or declined. - `no_facebook_pages`: comes with `is_user_fixable=true`, an `error_message` telling the user to click \"Edit previous settings\" in Meta's dialog and tick the Page (or create one), and `error_reason` when Meta's token debug answered (values below). - `code_already_redeemed`: the same authorization code arrived more than once and an earlier request already processed it (the code is never sent to the platform twice). Not a failure: check GET /v1/accounts or wait for the `account.connected` webhook. - `missing_google_permissions` (YouTube, Google Business and Google Ads): the user unchecked permissions on Google's consent screen. Always with `is_user_fixable=true`. When Google reported granted scopes, `missing_scopes` lists the requested scopes not granted (comma-separated). Ask the user to connect again keeping every permission checked. - `no_youtube_channel`: Google authorized the account but it has no YouTube channel we can connect. Always with `is_user_fixable=true` and an `error_message`.  Usual causes of `no_youtube_channel`: the user picked their personal Google identity instead of the Brand Account in Google's account chooser, they only have YouTube Studio access (not Brand Account owner or manager), or the account has no channel yet.  `error_reason` values for `no_facebook_pages`:  - `pages_permission_declined`: the user declined the pages_show_list permission. - `no_pages_granted`: the permission was granted with no Page ticked. Meta reports a user who manages no Page the same way, so this covers both. - `granted_pages_not_listed`: Pages were ticked but Meta listed none the user can manage, and a direct read of each ticked Page returned no access token.  **Headless `userProfile`:** on headless Facebook success (`step=select_page`) and headless Instagram `facebook_login` success (`step=select_account`), `userProfile` is JSON percent-encoded once before being set as a query param, so it is encoded twice on the wire.  After your framework decodes the query string once, run one more decodeURIComponent (or equivalent), then JSON.parse it. `tempToken` and `connect_token` are plain values.  **Error values.** This list is NOT exhaustive and new values may be added at any time: treat an unrecognized value as a generic failure rather than matching exhaustively. Existing values are not renamed or removed without notice.  - OAuth and callback: `oauth_denied`, `invalid_callback`, `invalid_state`, `unsupported_platform`, `connection_failed`, `internal_error`, `token_exchange_failed`, `byok_config_error`, `personal_account_not_supported`, `missing_google_permissions`, `missing_tiktok_permissions`, `platform_requires_destination`, `reconnect_account_mismatch`, `account_mismatch`, `instagram_login_method_mismatch`, `invalid_request`, `code_already_redeemed`. - Access and limits: `profile_not_found`, `invalid_profile_id`, `access_denied`, `account_limit_exceeded`, `profile_limit_exceeded`, `payment_required`. - Destination selection: `no_facebook_pages`, `facebook_pages_error`, `no_google_locations`, `google_locations_error`, `google_permission_denied`, `no_snapchat_public_profiles`, `snapchat_profiles_error`, `no_youtube_channel`, `discord_no_guild`, `slack_no_team`. - WhatsApp: `whatsapp_error`, `one_whatsapp_per_profile`, `whatsapp_number_already_connected`, `whatsapp_number_pinned_to_profile`, `whatsapp_coexistence_not_registered`, `connection_cancelled`. - Google Ads (platform=googleads): `google_ads_auth_failed`, `google_ads_invalid_state`, `google_ads_config_error`, `google_ads_token_failed`, `google_ads_quota_exhausted`, `google_ads_callback_error`. - TikTok Ads (platform=tiktokads): `tiktok_ads_auth_failed`, `tiktok_ads_invalid_state`, `tiktok_ads_access_denied`, `tiktok_ads_config_error`, `tiktok_ads_token_failed`, `tiktok_ads_account_not_found`, `tiktok_ads_callback_error`. - X Ads (platform=xads): `x_ads_denied`, `x_ads_auth_failed`, `x_ads_config_error`, `x_ads_account_not_found`, `x_ads_state_error`, `x_ads_token_failed`, `x_ads_token_missing`, `x_ads_callback_error`. - Reddit Ads (platform=redditads): `reddit_ads_auth_failed`, `reddit_ads_invalid_state`, `reddit_ads_access_denied`, `reddit_ads_scope_not_granted`, `reddit_ads_no_ad_accounts`, `reddit_ads_callback_error`. - Microsoft Ads (platform=microsoftads): `microsoft_ads_auth_failed`, `microsoft_ads_invalid_state`, `microsoft_ads_access_denied`, `microsoft_ads_scope_not_granted`, `microsoft_ads_unknown_user`, `microsoft_ads_no_ad_accounts`, `microsoft_ads_callback_error`. - Shopify (platform=shopify): `shopify_auth_failed`, `shopify_config_error`, `shopify_invalid_state`, `shopify_invalid_hmac`, `shopify_invalid_shop`, `shopify_missing_scopes`, `shopify_callback_error`.  Notes:  1. On this endpoint every upstream OAuth error collapses into `oauth_denied`, with the provider's values in the `platform_error*` params. The dedicated ads flows differ: they use their own denial slugs, and `google_ads_auth_failed` and `tiktok_ads_auth_failed` may carry the provider's raw error string in `error_message`. 2. On the tiktok and twitter ads flows `platform` carries the ads platform id (`tiktokads`, `xads`), not the value in the request path. The googleads, redditads, microsoftads and shopify flows report `googleads`, `redditads`, `microsoftads` and `shopify`. 3. `missing_tiktok_permissions`: the TikTok authorization left out a permission the already-connected account needs, so nothing changed and it keeps working as before. User-fixable: connect again and accept every permission on TikTok's screen. 4. `instagram_login_method_mismatch`: an Instagram Login authorization landed on a profile whose Instagram account is connected through Facebook Login, so nothing changed. To refresh it, connect again with `loginMethod=facebook_login`. To move it to Instagram Login, disconnect it first. 
-  scopes: 'posting,analytics', # String | Comma-separated permission areas to request instead of the platform's full permission set.  **Values:** `posting`, `analytics`, `comments`, `messaging`, `ads`; on google and microsoft, `email`, `calendar`, `files`, `contacts`.  **Default:** omit it (what the dashboard does) to request everything the platform supports. Google and microsoft REQUIRE it (400 `INVALID_FIELD_VALUE` when absent) because their consent screens are reviewed per area.  When present, the consent dialog asks only for the scopes behind those areas, plus the scopes every connection needs (identity, token refresh, listing the pages, organizations or channels the user picks from).  - Scopes never asked for are absent from the account's `permissions`, and the health endpoints report them as not granted. A `posting`-only account cannot read analytics or the inbox until reconnected with more areas. - First comments need `comments`: a `posting`-only account publishes the post and skips the first comment. - Scopes in none of the areas (X likes, bookmarks and follows, Pinterest ads-only extras) are requested only when the parameter is omitted.  **Supported on** facebook, instagram (both login methods), linkedin, twitter, tiktok, youtube, threads, reddit, pinterest, googlebusiness and slack (via `GET /v1/connect/slack`).  **Rejected** with 400 `INVALID_FIELD_VALUE` (`param: scopes`) on bluesky, telegram, discord, snapchat and whatsapp (their dialog cannot be reduced), and for an empty list or an unknown area.  What each area asks for, per platform (Google scopes shortened to their last path segment):  | Platform | `posting` | `analytics` | `comments` | `messaging` | `ads` | Always requested | |---|---|---|---|---|---|---| | facebook | `pages_manage_posts` | `read_insights`, `pages_read_user_content` | `pages_manage_engagement`, `pages_read_user_content` | `pages_messaging` | `ads_management`, `ads_read`, `leads_retrieval`, `pages_manage_ads`, `instagram_basic`, `business_management` | `pages_show_list`, `pages_read_engagement`, `pages_manage_metadata` | | instagram (Instagram Login) | `instagram_business_content_publish` | `instagram_business_manage_insights` | `instagram_business_manage_comments` | `instagram_business_manage_messages` | none | `instagram_business_basic` | | instagram (`loginMethod=facebook_login`) | `instagram_content_publish` | `instagram_manage_insights` | `instagram_manage_comments` | `instagram_manage_messages` | `ads_management`, `ads_read`, `leads_retrieval`, `pages_manage_ads` | `instagram_basic`, `pages_show_list`, `pages_read_engagement`, `business_management`, `pages_messaging`, `pages_manage_metadata` | | linkedin | `w_member_social`, `w_organization_social`, `r_organization_social`, `r_organization_followers` | `r_member_postAnalytics`, `r_member_profileAnalytics`, `rw_organization_admin`, `r_organization_social`, `r_organization_followers` | `w_member_social`, `w_member_social_feed`, `w_organization_social`, `w_organization_social_feed`, `r_organization_social`, `r_organization_social_feed` | none | `r_ads`, `rw_ads`, `r_ads_reporting`, `r_marketing_leadgen_automation`, `rw_conversions` | `openid`, `profile`, `email`, `r_basicprofile`, `rw_organization_admin` | | twitter | `tweet.write`, `media.write` | (in the always-requested set) | `tweet.write`, `like.write`, `tweet.moderate.write` | `dm.read`, `dm.write`, `media.write` | none | `tweet.read`, `users.read`, `offline.access` | | tiktok | `video.publish` | `user.info.stats`, `user.insights`, `video.list`, `video.insights` | `comment.list`, `comment.list.manage`, `video.list` | `message.list.read`, `message.list.send`, `message.list.manage` | none | `user.info.basic`, `user.info.username`, `user.info.profile`, `user.account.type`, `video.publish`, `video.upload`, `video.list` | | youtube | `youtube.upload` | `yt-analytics.readonly` | `youtube.force-ssl` | none | none | `youtube` | | threads | `threads_content_publish`, `threads_manage_replies`, `threads_delete` | `threads_manage_insights` | `threads_content_publish`, `threads_read_replies`, `threads_manage_replies`, `threads_delete` | none | none | `threads_basic` | | reddit | `submit`, `read`, `mysubreddits`, `flair`, `history`, `edit` | `read`, `history` | `read`, `history`, `edit`, `vote` | `privatemessages` | none | `identity` | | pinterest | `boards:write`, `pins:read`, `pins:write` | `pins:read`, `user_accounts:read` | none | none | `ads:read`, `ads:write`, `boards:write`, `pins:read`, `pins:write` | `boards:read`, `user_accounts:read` | | googlebusiness | `business.manage` | `business.manage` | `business.manage` | none | none | `business.manage`, `userinfo.profile`, `userinfo.email` | | slack | `chat:write`, `chat:write.public`, `chat:write.customize`, `files:write`, `files:read` | none | none | `chat:write`, `chat:write.customize`, `files:write`, `files:read`, `channels:history`, `groups:history`, `im:history`, `mpim:history`, `im:read`, `im:write`, `mpim:read`, `users:read`, `reactions:read`, `reactions:write` | none | `channels:join`, `channels:read`, `groups:read`, `team:read` |  Google and Microsoft accounts use the mailbox areas instead (`scopes` is required there):  | Platform | `email` | `calendar` | `files` | `contacts` | Always requested | |---|---|---|---|---|---| | google | `gmail.modify` | `calendar` | `drive.file` (only files Zernio created or the user picked, see the Files tag) | `contacts.readonly` | `openid`, `userinfo.email`, `userinfo.profile` | | microsoft | `Mail.ReadWrite`, `Mail.Send` | `Calendars.ReadWrite` | `Files.ReadWrite` | `Contacts.Read` | `openid`, `profile`, `email`, `offline_access`, `User.Read` |  Areas accumulate: reconnecting with more areas widens the grant, and `GET /v1/accounts/{accountId}/health` reports the result. 
+  allow_no_location: true, # Boolean | Google Business only (`platform=googlebusiness`); any other platform answers 400. Lets a Google account with no Business Profile location finish the connect instead of ending with `error=no_google_locations`.  The selection step (`step=select_location`, or the hosted page) then lists no locations. Call `POST /v1/connect/googlebusiness/select-location` without `locationId` or `locations` to connect the account with no location (`needsLocation: true`).  Without it, a sign-in that lists no location still ends with `no_google_locations`. The marker travels in the redirect_url we hand you, so pass that URL back unchanged in headless mode. 
+  redirect_url: 'redirect_url_example', # String | Your custom redirect URL after the connection completes. It MUST be an absolute http(s) URL or a custom app scheme for mobile deeplinks (e.g. myapp://callback). A relative path is rejected with 400 `INVALID_REDIRECT_URL`.  **Exit notice:** when `redirect_url` is an http(s) URL on another site (anything but zernio.com), every redirect of the flow lands first on `https://zernio.com/connect/continue?to=<your URL>`, a Zernio page that names your site and continues to it with one click. All params below reach your URL unchanged.  A custom app scheme (myapp://...) never goes through the notice. In headless mode the redirects we hand you (and the `redirect_url` returned by the selection endpoints) are notice URLs: pass them back or navigate to them as they are.  **X (twitter) length limit:** X caps the OAuth `state` at 500 characters and the redirect travels inside it (wrapped in the notice URL for an http(s) URL on another site). The URL-encoded form must be at most 258 characters for API callers, 310 for dashboard sessions.  In headless mode the appended `headless=true` counts toward that limit. A plain https URL on another site leaves about 165 to 190 characters of your own URL, depending on encoding. A longer one is rejected with 400 `INVALID_REDIRECT_URL`, and the error says by how much.  **Success params** are appended with the URL API, so an existing query string is preserved:  - Standard mode: connected={platform}&profileId=X&accountId=Y&username=Z. - X on prepaid-balance billing at a $0 balance: `billingNotice=x_balance_required` is added. The account is connected, but X posts wait or are refused (402 `insufficient_balance`) until the balance is funded. - Headless mode: OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.  **Failure params:** the browser goes to the same redirect_url with `error` and `platform` appended (always present). `error_message`, `is_user_fixable`, `reason`, `dashboard_url`, `missing_scopes`, `error_reason` and the `platform_error*` params are conditional: treat them as optional.  Your own query params are kept on every redirect, but ours overwrite one of yours with the same name. On an error redirect we remove the internal `headless`, `adsConnect`, `adsScope`, `reconnectAccountId`, `expectedPlatformUserId` and `expectedUsername` markers added during the flow.  **Correlation** params appear on every redirect from an OAuth callback (success and failure) and on the `redirect_url` returned by the selection endpoints such as POST /v1/connect/facebook/select-page:  - `request_id`: the id we log that request under. Quote it when reporting a problem. - `stage`: where the flow ended. `authorize` = the platform's consent dialog returned an error or denial instead of a code. `callback` = we processed the returned code (success, a selection step, or a failure). - `stage` = `select_page`: the destination-selection endpoint (page, account, organization, board, location, profile or phone number) completed it.  **Error details:**  - `oauth_denied`: carries `error_message` and, when the platform sent them, its own `platform_error` (e.g. `access_denied`), `platform_error_reason` (e.g. `user_denied`) and `platform_error_description` (truncated to 500 characters). `is_user_fixable=true` when the platform reported that the user cancelled or declined. - `no_facebook_pages`: comes with `is_user_fixable=true`, an `error_message` telling the user to click \"Edit previous settings\" in Meta's dialog and tick the Page (or create one), and `error_reason` when Meta's token debug answered (values below). - `code_already_redeemed`: the same authorization code arrived more than once and an earlier request already processed it (the code is never sent to the platform twice). Not a failure: check GET /v1/accounts or wait for the `account.connected` webhook. - `missing_google_permissions` (YouTube, Google Business and Google Ads): the user unchecked permissions on Google's consent screen. Always with `is_user_fixable=true`. When Google reported granted scopes, `missing_scopes` lists the requested scopes not granted (comma-separated). Ask the user to connect again keeping every permission checked. - `no_youtube_channel`: Google authorized the account but it has no YouTube channel we can connect. Always with `is_user_fixable=true` and an `error_message`.  Usual causes of `no_youtube_channel`: the user picked their personal Google identity instead of the Brand Account in Google's account chooser, they only have YouTube Studio access (not Brand Account owner or manager), or the account has no channel yet.  `error_reason` values for `no_facebook_pages`:  - `pages_permission_declined`: the user declined the pages_show_list permission. - `no_pages_granted`: the permission was granted with no Page ticked. Meta reports a user who manages no Page the same way, so this covers both. - `granted_pages_not_listed`: Pages were ticked but Meta listed none the user can manage, and a direct read of each ticked Page returned no access token.  **Headless `userProfile`:** on headless Facebook success (`step=select_page`) and headless Instagram `facebook_login` success (`step=select_account`), `userProfile` is JSON percent-encoded once before being set as a query param, so it is encoded twice on the wire.  After your framework decodes the query string once, run one more decodeURIComponent (or equivalent), then JSON.parse it. `tempToken` and `connect_token` are plain values.  **Error values.** This list is NOT exhaustive and new values may be added at any time: treat an unrecognized value as a generic failure rather than matching exhaustively. Existing values are not renamed or removed without notice.  - OAuth and callback: `oauth_denied`, `invalid_callback`, `invalid_state`, `unsupported_platform`, `connection_failed`, `internal_error`, `token_exchange_failed`, `byok_config_error`, `personal_account_not_supported`, `missing_google_permissions`, `missing_tiktok_permissions`, `platform_requires_destination`, `reconnect_account_mismatch`, `account_mismatch`, `instagram_login_method_mismatch`, `invalid_request`, `code_already_redeemed`. - Access and limits: `profile_not_found`, `invalid_profile_id`, `access_denied`, `account_limit_exceeded`, `profile_limit_exceeded`, `payment_required`. - Destination selection: `no_facebook_pages`, `facebook_pages_error`, `no_google_locations`, `google_locations_error`, `google_permission_denied`, `no_snapchat_public_profiles`, `snapchat_profiles_error`, `no_youtube_channel`, `discord_no_guild`, `slack_no_team`. - WhatsApp: `whatsapp_error`, `one_whatsapp_per_profile`, `whatsapp_number_already_connected`, `whatsapp_number_pinned_to_profile`, `whatsapp_coexistence_not_registered`, `connection_cancelled`. - Google Ads (platform=googleads): `google_ads_auth_failed`, `google_ads_invalid_state`, `google_ads_config_error`, `google_ads_token_failed`, `google_ads_quota_exhausted`, `google_ads_callback_error`. - TikTok Ads (platform=tiktokads): `tiktok_ads_auth_failed`, `tiktok_ads_invalid_state`, `tiktok_ads_access_denied`, `tiktok_ads_config_error`, `tiktok_ads_token_failed`, `tiktok_ads_account_not_found`, `tiktok_ads_callback_error`. - X Ads (platform=xads): `x_ads_denied`, `x_ads_auth_failed`, `x_ads_config_error`, `x_ads_account_not_found`, `x_ads_state_error`, `x_ads_token_failed`, `x_ads_token_missing`, `x_ads_callback_error`. - Reddit Ads (platform=redditads): `reddit_ads_auth_failed`, `reddit_ads_invalid_state`, `reddit_ads_access_denied`, `reddit_ads_scope_not_granted`, `reddit_ads_no_ad_accounts`, `reddit_ads_callback_error`. - Microsoft Ads (platform=microsoftads): `microsoft_ads_auth_failed`, `microsoft_ads_invalid_state`, `microsoft_ads_access_denied`, `microsoft_ads_scope_not_granted`, `microsoft_ads_unknown_user`, `microsoft_ads_no_ad_accounts`, `microsoft_ads_callback_error`. - Shopify (platform=shopify): `shopify_auth_failed`, `shopify_config_error`, `shopify_invalid_state`, `shopify_invalid_hmac`, `shopify_invalid_shop`, `shopify_missing_scopes`, `shopify_callback_error`.  Notes:  1. On this endpoint every upstream OAuth error collapses into `oauth_denied`, with the provider's values in the `platform_error*` params. The dedicated ads flows differ: they use their own denial slugs, and `google_ads_auth_failed` and `tiktok_ads_auth_failed` may carry the provider's raw error string in `error_message`. 2. On the tiktok and twitter ads flows `platform` carries the ads platform id (`tiktokads`, `xads`), not the value in the request path. The googleads, redditads, microsoftads and shopify flows report `googleads`, `redditads`, `microsoftads` and `shopify`. 3. `missing_tiktok_permissions`: the TikTok authorization left out a permission the already-connected account needs, so nothing changed and it keeps working as before. User-fixable: connect again and accept every permission on TikTok's screen. 4. `instagram_login_method_mismatch`: an Instagram Login authorization landed on a profile whose Instagram account is connected through Facebook Login, so nothing changed. To refresh it, connect again with `loginMethod=facebook_login`. To move it to Instagram Login, disconnect it first. 
+  scopes: 'posting,analytics', # String | Comma-separated permission areas to request instead of the platform's full permission set.  **Values:** `posting`, `analytics`, `comments`, `messaging`, `ads`; on google and microsoft, `email`, `calendar`, `files`, `contacts`, `directory`; on microsoft only, `shared_mailboxes`. `directory` adds people search (Google: `directory.readonly` and `contacts.other.readonly`; Microsoft: `People.Read` and `User.ReadBasic.All`).  `shared_mailboxes` (Microsoft only) adds `Mail.ReadWrite.Shared` and `Mail.Send.Shared`, so the account can add shared mailboxes it has access to with `POST /v1/email/shared-mailboxes`. Pass it next to `email`. To add it to a connected account, reconnect with `scopes=email,shared_mailboxes`.  **Default:** omit it (what the dashboard does) to request everything the platform supports. Google and microsoft REQUIRE it (400 `INVALID_FIELD_VALUE` when absent) because their consent screens are reviewed per area.  When present, the consent dialog asks only for the scopes behind those areas, plus the scopes every connection needs (identity, token refresh, listing the pages, organizations or channels the user picks from).  - Scopes never asked for are absent from the account's `permissions`. The account keeps the requested areas in `scopeAreas`. - The health endpoints judge the account against those areas: an area never asked for reads `not_requested` and does not make it unhealthy, so an `analytics`-only account reports `canPost: false` with `status: healthy`. - A `posting`-only account cannot read analytics or the inbox until reconnected with more areas. - First comments need `comments`: a `posting`-only account publishes the post and skips the first comment. - Scopes in none of the areas (X likes, bookmarks and follows, Pinterest ads-only extras) are requested only when the parameter is omitted.  **Supported on** facebook, instagram (both login methods), linkedin, twitter, tiktok, youtube, threads, reddit, pinterest, googlebusiness and slack (via `GET /v1/connect/slack`).  **Rejected** with 400 `INVALID_FIELD_VALUE` (`param: scopes`) on bluesky, telegram, discord, snapchat and whatsapp (their dialog cannot be reduced), and for an empty list or an unknown area.  What each area asks for, per platform (Google scopes shortened to their last path segment):  | Platform | `posting` | `analytics` | `comments` | `messaging` | `ads` | Always requested | |---|---|---|---|---|---|---| | facebook | `pages_manage_posts` | `read_insights`, `pages_read_user_content` | `pages_manage_engagement`, `pages_read_user_content` | `pages_messaging` | `ads_management`, `ads_read`, `leads_retrieval`, `pages_manage_ads`, `instagram_basic`, `business_management` | `pages_show_list`, `pages_read_engagement`, `pages_manage_metadata` | | instagram (Instagram Login) | `instagram_business_content_publish` | `instagram_business_manage_insights` | `instagram_business_manage_comments` | `instagram_business_manage_messages` | none | `instagram_business_basic` | | instagram (`loginMethod=facebook_login`) | `instagram_content_publish` | `instagram_manage_insights` | `instagram_manage_comments` | `instagram_manage_messages` | `ads_management`, `ads_read`, `leads_retrieval`, `pages_manage_ads` | `instagram_basic`, `pages_show_list`, `pages_read_engagement`, `business_management`, `pages_messaging`, `pages_manage_metadata` | | linkedin | `w_member_social`, `w_organization_social`, `r_organization_social`, `r_organization_followers` | `r_member_postAnalytics`, `r_member_profileAnalytics`, `rw_organization_admin`, `r_organization_social`, `r_organization_followers` | `w_member_social`, `w_member_social_feed`, `w_organization_social`, `w_organization_social_feed`, `r_organization_social`, `r_organization_social_feed` | none | `r_ads`, `rw_ads`, `r_ads_reporting`, `r_marketing_leadgen_automation`, `rw_conversions` | `openid`, `profile`, `email`, `r_basicprofile`, `rw_organization_admin` | | twitter | `tweet.write`, `media.write` | (in the always-requested set) | `tweet.write`, `like.write`, `tweet.moderate.write` | `dm.read`, `dm.write`, `media.write` | none | `tweet.read`, `users.read`, `offline.access` | | tiktok | `video.publish`, `video.upload` | `user.info.stats`, `user.insights`, `video.list`, `video.insights` | `comment.list`, `comment.list.manage`, `video.list` | `message.list.read`, `message.list.send`, `message.list.manage` | none | `user.info.basic`, `user.info.username`, `user.info.profile`, `user.account.type`, `video.list` | | youtube | `youtube.upload` | `yt-analytics.readonly` | `youtube.force-ssl` | none | none | `youtube` | | threads | `threads_content_publish`, `threads_manage_replies`, `threads_delete` | `threads_manage_insights` | `threads_content_publish`, `threads_read_replies`, `threads_manage_replies`, `threads_delete` | none | none | `threads_basic` | | reddit | `submit`, `read`, `mysubreddits`, `flair`, `history`, `edit` | `read`, `history` | `read`, `history`, `edit`, `vote` | `privatemessages` | none | `identity` | | pinterest | `boards:write`, `pins:read`, `pins:write` | `pins:read`, `user_accounts:read` | none | none | `ads:read`, `ads:write`, `boards:write`, `pins:read`, `pins:write` | `boards:read`, `user_accounts:read` | | googlebusiness | `business.manage` | `business.manage` | `business.manage` | none | none | `business.manage`, `userinfo.profile`, `userinfo.email` | | slack | `chat:write`, `chat:write.public`, `chat:write.customize`, `files:write`, `files:read` | none | none | `chat:write`, `chat:write.customize`, `files:write`, `files:read`, `channels:history`, `groups:history`, `im:history`, `mpim:history`, `im:read`, `im:write`, `mpim:read`, `users:read`, `reactions:read`, `reactions:write` | none | `channels:join`, `channels:read`, `groups:read`, `team:read` |  Google and Microsoft accounts use the mailbox areas instead (`scopes` is required there):  | Platform | `email` | `calendar` | `files` | `contacts` | Always requested | |---|---|---|---|---|---| | google | `gmail.modify` | `calendar` | `drive.file` (only files Zernio created or the user picked, see the Files tag) | `contacts.readonly` | `openid`, `userinfo.email`, `userinfo.profile` | | microsoft | `Mail.ReadWrite`, `Mail.Send` | `Calendars.ReadWrite` | `Files.ReadWrite` | `Contacts.Read` | `openid`, `profile`, `email`, `offline_access`, `User.Read` |  Areas accumulate: reconnecting with more areas widens the grant, and `GET /v1/accounts/{accountId}/health` reports the result.  On tiktok, a connect without `posting` returns 409 `INVALID_RESOURCE_STATE` (`param: scopes`) when the profile already holds an account from Zernio's older TikTok app: that account can only be replaced by a grant that includes posting. 
   login_hint: 'login_hint_example', # String | google and microsoft only: pre-fills the account picker with this address so the user lands on the right mailbox.
   headless: true, # Boolean | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio's default account selection UI. Use this to build a custom connect experience.
   login_method: 'instagram_login', # String | Instagram only: which of the two Instagram connection methods to use. Ignored for every other platform.  - `instagram_login` (default when omitted): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required. Exception: if omitted and `reconnectAccountId` names an account connected with `facebook_login`, the reconnect keeps that method. - `facebook_login`: the Facebook Login dialog (\"Instagram API with Facebook Login\"). The user authorizes a Facebook Page with a linked Instagram professional account, and every API call for that account runs through the Page. Use it when the customer manages Instagram through a Page and expects the Facebook consent screen.  With `facebook_login` the user picks a Page, so the callback continues at the account-selection step, `/v1/connect/instagram/select-account`. The default `instagram_login` has no selection step and connects directly.  `facebook_login` supports `headless=true` like the other selection platforms. The callback redirects to your `redirect_url` with `profileId`, `tempToken`, `platform=instagram`, `step=select_account`, `userProfile` and `connect_token`.  `userProfile` is the Facebook user's profile, same shape and encoding as the Facebook `step=select_page` redirect. Pass `profileId`, `tempToken` and `connect_token` into the select-account endpoints to finish. 
@@ -1628,7 +2940,7 @@ opts = {
   brand_name: 'brand_name_example', # String | Your product name, for the two branded pages. Trimmed; 1 to 60 characters.  - With `signup=hosted` (WhatsApp): replaces Zernio in the page title (\"Connect your WhatsApp number to <brandName>\"). - With `welcome=true`: fills the heading (\"<brandName> wants to connect to your <platform>\"). Without it the screen shows Zernio and the Zernio mark.  Both pages keep a Zernio mark: they are co-branded, not white-label. Rejected with 400 `INVALID_FIELD_VALUE` without `signup=hosted` or `welcome=true`. Sealed into the page link at issue time, so editing the URL cannot change it. 
   primary_color: 'primary_color_example', # String | Hex colour (`#RRGGBB`) for the primary button on the hosted WhatsApp signup page (`signup=hosted`) or the welcome screen (`welcome=true`). Validated server-side; anything else is a 400 `INVALID_FIELD_VALUE`. Rejected without one of the two.
   welcome: true, # Boolean | Any platform. When `true`, `authUrl` points to a Zernio-hosted welcome screen showing your brand next to the platform (\"<brandName> wants to connect to your <platform>\"). Its button reads Connecting for about a second, then sends the user to the platform's authorization screen with no click.  The rest of the flow is unchanged.  - `brandName`, `logoUrl`, `primaryColor` and `welcomeTheme` are optional and default to Zernio's own name, mark and look. - The link is valid for 30 minutes; after that the page asks the user to start again. - The brand also carries to the account and channel pickers Zernio shows after authorization. - With no `redirect_url`, the flow ends on a branded Zernio-hosted page saying whether the account connected, instead of the Zernio dashboard. - Cannot be combined with `headless=true` or `signup=hosted` (400 `INVALID_FIELD_VALUE`). - The platform's authorization screen still names the Zernio app.  Recommended. When left out, the screen is shown if the workspace saved it as on by default (`PUT /v1/connect/welcome-screen`), except with `headless=true` or `signup=hosted`. Pass `false` to skip it.  Branding you leave out of the call comes from those saved settings, and a `welcomeTheme` you send is merged key by key over the saved theme. 
-  welcome_theme: 'welcome_theme_example', # String | Welcome screen only (`welcome=true`). A URL-encoded JSON object that restyles and rewords the screen. All keys are optional.  - **Copy**: `heading` (up to 120 characters); `trustLine`, `consentLine` and `statusLine` (up to 200 each, `statusLine` being the line above the button); `buttonLabel` (up to 30, the label of the link the button becomes if the redirect stalls). - **Closing page** (shown when there is no `redirect_url`): `successHeading` and `errorHeading` (up to 120), `successBody` and `errorBody` (up to 200). All copy may contain the placeholders `{brand}` and `{platform}`. - **Colors**: `primaryColor` (the button), `accentColor` (the header gradient, built as a scale of that colour, and the icons), `pageColor`, `cardColor` and `textColor`, all as `#RRGGBB`. - **Style**: `cornerRadius` as an integer from 0 to 24 (pixels); `font` as `sans`, `serif` or `mono`; `bannerStyle` as `halftone` (default), `solid` (a flat tint of `accentColor`) or `plain` (no banner fill). - **Icons**: `trustLineIcon` (default `shield`) and `consentLineIcon` (default `link`), each one of `shield`, `lock`, `link`, `check`, `user`, `sparkles` or `none`. - **Visibility**: `hide`, an array of any of `heading`, `trustLine`, `consentLine`, `statusLine`, `successBody` and `errorBody`, removes those lines from the screens. - **Links**: `termsUrl` and `privacyUrl` (https, up to 2048 characters) add small Terms and Privacy links at the bottom of every hosted screen.  A `primaryColor` here wins over the `primaryColor` parameter. Unknown keys, invalid JSON or an invalid value are a 400 `INVALID_FIELD_VALUE`. Rejected when the welcome screen is not shown.  Example: `{\"heading\":\"Link your {platform} to {brand}\",\"cardColor\":\"#FFF7ED\",\"cornerRadius\":12}`. 
+  welcome_theme: 'welcome_theme_example', # String | Welcome screen only (`welcome=true`). A URL-encoded JSON object that restyles and rewords the screen. All keys are optional.  - **Copy**: `heading` (up to 120 characters); `trustLine`, `consentLine` and `statusLine` (up to 200 each, `statusLine` being the line above the button); `buttonLabel` (up to 30, the label of the link the button becomes if the redirect stalls). - **Closing page** (shown when there is no `redirect_url`): `successHeading` and `errorHeading` (up to 120), `successBody` and `errorBody` (up to 200). All copy may contain the placeholders `{brand}` and `{platform}`. - **Colors**: `primaryColor` (the button), `accentColor` (the header gradient, built as a scale of that colour, and the icons), `pageColor`, `cardColor` and `textColor`, all as `#RRGGBB`. - **Style**: `cornerRadius` as an integer from 0 to 24 (pixels); `font` as `sans`, `serif` or `mono`; `bannerStyle` as `waves` (default, halftone waves in `accentColor`), `solid` (a flat tint of `accentColor`) or `plain` (no banner fill); `halftone`, the former default, is still accepted and shows as `waves`. - **Icons**: `trustLineIcon` (default `shield`) and `consentLineIcon` (default `user`), each one of `shield`, `lock`, `link`, `check`, `user`, `sparkles` or `none`. - **Visibility**: `hide`, an array of any of `heading`, `trustLine`, `consentLine`, `statusLine`, `successBody` and `errorBody`, removes those lines from the screens. - **Links**: `termsUrl` and `privacyUrl` (https, up to 2048 characters) add small Terms and Privacy links at the bottom of every hosted screen.  A `primaryColor` here wins over the `primaryColor` parameter. Unknown keys, invalid JSON or an invalid value are a 400 `INVALID_FIELD_VALUE`. Rejected when the welcome screen is not shown.  Example: `{\"heading\":\"Link your {platform} to {brand}\",\"cardColor\":\"#FFF7ED\",\"cornerRadius\":12}`. 
   logo_url: 'logo_url_example', # String | Welcome screen only (`welcome=true`): https URL of your logo, shown in a square tile, so use a square image. Without it the tile shows the first letter of `brandName`, or the Zernio mark when there is no `brandName` either. Rejected with 400 `INVALID_FIELD_VALUE` when the welcome screen is not shown.
   language: 'en', # String | Hosted signup page only (`signup=hosted`, WhatsApp): language of the page and its follow-along guide. Explainer videos stay in English. Default `en`. Rejected without `signup=hosted`.
   handoff: true # Boolean | Let the user finish on their phone. When `true`, the response also carries `handoff`. Show `handoff.url` as a QR code in your app (any QR library); the user scans it and the welcome screen opens on the phone, already carrying this connect.  They log in to the platform there without signing in to anything else. The phone ends on a Zernio result screen telling them to go back to their computer.  - Learn the outcome by polling `GET /v1/connect/handoffs/{handoffId}` (every 2 to 5 seconds is fine) or from the `account.connected` webhook. - Shows the welcome screen with your branding parameters or saved settings. - Cannot be combined with `welcome=false`, `headless=true`, `signup`, `redirect=true` or `redirect_url` (400 `INVALID_FIELD_VALUE`). - `handoff.url` works for 30 minutes. - When the account is re-enabled straight away, the response carries `account` instead, as without `handoff`. 
@@ -1668,12 +2980,15 @@ end
 | **platform** | **String** | Social media platform to connect. &#x60;snapchat&#x60; is a closed beta with no public release date: it returns 403 &#x60;PLATFORM_BETA_RESTRICTED&#x60; until the account is approved. |  |
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409. |  |
 | **reconnect_account_id** | **String** | Refresh this existing account: a Zernio account id of the same platform on this profile (otherwise 400).  The OAuth callback and the selection endpoints (select-page, select-organization, select-board, select-location, Instagram and Snapchat selection) refuse with &#x60;reconnect_account_mismatch&#x60; a login that would write to a different account of the platform on this profile instead of this one.  In headless mode the marker travels in the redirect_url we hand you, so pass that URL back unchanged to the selection endpoint. On X it counts toward the OAuth state limit described under redirect_url.  | [optional] |
-| **oauth_app_id** | **String** | Connect through one of your own OAuth apps (see /v1/connect/oauth-apps), so the consent screen shows your app and the platform&#39;s limits are your app&#39;s. Without it the connect runs on Zernio&#39;s app, whatever apps the workspace has saved.  - Only platforms listed in &#x60;platforms&#x60; of GET /v1/connect/oauth-apps accept an app. Any other returns 400, and so do ads connects (&#x60;adsConnect&#x3D;true&#x60; in the redirect URL). - Connects that end on a destination picker also return 400, except Facebook Pages, Google Business locations, Pinterest boards and Snapchat public profiles (Instagram through Facebook Login, for example). - A LinkedIn connect through an app saves the member&#39;s own profile: organization pages, and mention lookups, stay on Zernio&#39;s app. - The connect requests the app&#39;s &#x60;scopeAreas&#x60;. &#x60;scopes&#x60; may narrow them but not add an area the app does not enable (400). - If the user does not grant every requested area, the account still connects and the redirect carries &#x60;missing_permissions&#x3D;&lt;areas&gt;&#x60; (the headless POST returns &#x60;missingPermissions&#x60;). - If the platform refuses a permission your app is not approved for, the redirect carries &#x60;error&#x3D;oauth_app_scope_not_allowed&#x60;.  The account remembers the app, and token refresh, publishing and inbox run on it. Reconnecting through another app, or without one, moves the account to that app.  | [optional] |
+| **oauth_app_id** | **String** | Connect through one of your own OAuth apps (see /v1/connect/oauth-apps), so the consent screen shows your app and the platform&#39;s limits are your app&#39;s. Without it the connect runs on Zernio&#39;s app, whatever apps the workspace has saved.  - Only platforms listed in &#x60;platforms&#x60; of GET /v1/connect/oauth-apps accept an app. Any other returns 400, and so do ads connects (&#x60;adsConnect&#x3D;true&#x60; in the redirect URL). - Connects that end on a destination picker also return 400, except Facebook Pages, Google Business locations, Pinterest boards and Snapchat public profiles (Instagram through Facebook Login, for example). - A LinkedIn connect through an app saves the member&#39;s own profile: organization pages, and mention lookups, stay on Zernio&#39;s app. - The connect requests the app&#39;s &#x60;scopeAreas&#x60;. &#x60;scopes&#x60; may narrow them but not add an area the app does not enable (400). - If the user does not grant every requested area, the account still connects and the redirect carries &#x60;missing_permissions&#x3D;&lt;areas&gt;&#x60; (the headless POST returns &#x60;missingPermissions&#x60;). - A Microsoft login that connected with &#x60;email&#x60; or &#x60;calendar&#x60; but has no Exchange Online mailbox still connects (files work), and the redirect carries &#x60;mailboxNotice&#x3D;mailbox_not_available&#x60;. Mail and calendar requests then answer 412 &#x60;mailbox_not_available&#x60;. - If the platform refuses a permission your app is not approved for, the redirect carries &#x60;error&#x3D;oauth_app_scope_not_allowed&#x60;.  The account remembers the app, and token refresh, publishing and inbox run on it. Reconnecting through another app, or without one, moves the account to that app.  | [optional] |
+| **purpose** | **String** | Connect the account for notifications only. Slack and Telegram only: &#x60;GET /v1/connect/{platform}&#x60; returns 400 for any other platform, and other platforms&#39; own connect endpoints ignore it.  The account is free, receives Zernio notifications, and cannot publish. To publish with it, connect it again without &#x60;purpose&#x60;. Refused with 400 when the channel or chat is already connected for publishing: connect a separate one for notifications.  | [optional] |
 | **expected_platform_user_id** | **String** | Only connect if the login lands on this platform account. Any other account ends the flow with &#x60;error&#x3D;account_mismatch&#x60; (a 409 &#x60;account_mismatch&#x60; on POST /v1/connect/instagram/select-account) and nothing is written.  Compared with every id the platform reports for the authorized account:  - Any platform: the &#x60;platformUserId&#x60; of a Zernio account on this platform. - Instagram: either the app-scoped id or the professional account id (&#x60;metadata.instagramScopedId&#x60;, the &#x60;17841...&#x60; id that Facebook Login accounts hold as platformUserId). - TikTok: open_ids are app-scoped, so an id from your own TikTok app never matches. Use expectedUsername there.  Honoured by the OAuth callback (every platform that connects without a selection step, Instagram Login included) and by the Instagram selection step. On the other selection endpoints you choose the destination yourself.  In headless mode the marker travels in the redirect_url we hand you, so pass that URL back unchanged. On X it counts toward the OAuth state limit described under redirect_url.  | [optional] |
 | **expected_username** | **String** | Only connect if the authorized account&#39;s handle is this one (case-insensitive, a leading @ is ignored). Otherwise the flow ends with &#x60;error&#x3D;account_mismatch&#x60; and &#x60;error_message&#x60; naming the handle that was authorized, and nothing is written.  Same coverage and transport as expectedPlatformUserId; when both are sent, both must match. Use this on a first connection, where you hold the handle the user typed but no Zernio id yet.  | [optional] |
+| **expected_phone_number** | **String** | WhatsApp with &#x60;signup&#x3D;hosted&#x60; only; ignored on other flows. The number (E.164) the user must connect. If they pick a different number in Meta&#39;s popup, the hosted page ends with a 409 &#x60;NUMBER_MISMATCH&#x60; naming the number they picked, and nothing is saved.  The full international number is compared, country code included. A number that differs only in its country code, or shares only its last digits, is a mismatch.  The only spellings treated as the same number are national re-spellings of one line, such as a Brazilian mobile with or without its ninth digit, or a Mexican mobile with or without the &#x60;1&#x60; after &#x60;+52&#x60;.  The pin is held server-side on the connect token, not in the hosted page URL, so removing it from the URL does not lift it.  It is also enforced on late completions: when the browser closes before the signup finishes, Zernio only connects the number in the background if it matches.  Use it to reconnect a known number safely. For a number bought from Zernio, the hosted page already expects that number and this value is ignored.  | [optional] |
 | **force_reauth** | **Boolean** | Instagram Login only (the default loginMethod); ignored elsewhere. Makes Instagram show its login page and ask for the credentials of the account to connect, even when another Instagram account is logged in on the device or app. Also hides the Facebook login option on that page.  Use it when the person connecting manages several Instagram accounts on one phone: otherwise Instagram logs in, and converts to a professional account, whichever account is active, before any consent screen. Pair it with expectedUsername to also refuse a wrong account at the end.  | [optional][default to false] |
-| **redirect_url** | **String** | Your custom redirect URL after the connection completes. It MUST be an absolute http(s) URL or a custom app scheme for mobile deeplinks (e.g. myapp://callback). A relative path is rejected with 400 &#x60;INVALID_REDIRECT_URL&#x60;.  **Exit notice:** when &#x60;redirect_url&#x60; is an http(s) URL on another site (anything but zernio.com), every redirect of the flow lands first on &#x60;https://zernio.com/connect/continue?to&#x3D;&lt;your URL&gt;&#x60;, a Zernio page that names your site and continues to it with one click. All params below reach your URL unchanged.  A custom app scheme (myapp://...) never goes through the notice. In headless mode the redirects we hand you (and the &#x60;redirect_url&#x60; returned by the selection endpoints) are notice URLs: pass them back or navigate to them as they are.  **X (twitter) length limit:** X caps the OAuth &#x60;state&#x60; at 500 characters and the redirect travels inside it (wrapped in the notice URL for an http(s) URL on another site). The URL-encoded form must be at most 258 characters for API callers, 310 for dashboard sessions.  In headless mode the appended &#x60;headless&#x3D;true&#x60; counts toward that limit. A plain https URL on another site leaves about 165 to 190 characters of your own URL, depending on encoding. A longer one is rejected with 400 &#x60;INVALID_REDIRECT_URL&#x60;, and the error says by how much.  **Success params** are appended with the URL API, so an existing query string is preserved:  - Standard mode: connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. - Headless mode: OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.  **Failure params:** the browser goes to the same redirect_url with &#x60;error&#x60; and &#x60;platform&#x60; appended (always present). &#x60;error_message&#x60;, &#x60;is_user_fixable&#x60;, &#x60;reason&#x60;, &#x60;dashboard_url&#x60;, &#x60;missing_scopes&#x60;, &#x60;error_reason&#x60; and the &#x60;platform_error*&#x60; params are conditional: treat them as optional.  Your own query params are kept on every redirect, but ours overwrite one of yours with the same name. On an error redirect we remove the internal &#x60;headless&#x60;, &#x60;adsConnect&#x60;, &#x60;adsScope&#x60;, &#x60;reconnectAccountId&#x60;, &#x60;expectedPlatformUserId&#x60; and &#x60;expectedUsername&#x60; markers added during the flow.  **Correlation** params appear on every redirect from an OAuth callback (success and failure) and on the &#x60;redirect_url&#x60; returned by the selection endpoints such as POST /v1/connect/facebook/select-page:  - &#x60;request_id&#x60;: the id we log that request under. Quote it when reporting a problem. - &#x60;stage&#x60;: where the flow ended. &#x60;authorize&#x60; &#x3D; the platform&#39;s consent dialog returned an error or denial instead of a code. &#x60;callback&#x60; &#x3D; we processed the returned code (success, a selection step, or a failure). - &#x60;stage&#x60; &#x3D; &#x60;select_page&#x60;: the destination-selection endpoint (page, account, organization, board, location, profile or phone number) completed it.  **Error details:**  - &#x60;oauth_denied&#x60;: carries &#x60;error_message&#x60; and, when the platform sent them, its own &#x60;platform_error&#x60; (e.g. &#x60;access_denied&#x60;), &#x60;platform_error_reason&#x60; (e.g. &#x60;user_denied&#x60;) and &#x60;platform_error_description&#x60; (truncated to 500 characters). &#x60;is_user_fixable&#x3D;true&#x60; when the platform reported that the user cancelled or declined. - &#x60;no_facebook_pages&#x60;: comes with &#x60;is_user_fixable&#x3D;true&#x60;, an &#x60;error_message&#x60; telling the user to click \&quot;Edit previous settings\&quot; in Meta&#39;s dialog and tick the Page (or create one), and &#x60;error_reason&#x60; when Meta&#39;s token debug answered (values below). - &#x60;code_already_redeemed&#x60;: the same authorization code arrived more than once and an earlier request already processed it (the code is never sent to the platform twice). Not a failure: check GET /v1/accounts or wait for the &#x60;account.connected&#x60; webhook. - &#x60;missing_google_permissions&#x60; (YouTube, Google Business and Google Ads): the user unchecked permissions on Google&#39;s consent screen. Always with &#x60;is_user_fixable&#x3D;true&#x60;. When Google reported granted scopes, &#x60;missing_scopes&#x60; lists the requested scopes not granted (comma-separated). Ask the user to connect again keeping every permission checked. - &#x60;no_youtube_channel&#x60;: Google authorized the account but it has no YouTube channel we can connect. Always with &#x60;is_user_fixable&#x3D;true&#x60; and an &#x60;error_message&#x60;.  Usual causes of &#x60;no_youtube_channel&#x60;: the user picked their personal Google identity instead of the Brand Account in Google&#39;s account chooser, they only have YouTube Studio access (not Brand Account owner or manager), or the account has no channel yet.  &#x60;error_reason&#x60; values for &#x60;no_facebook_pages&#x60;:  - &#x60;pages_permission_declined&#x60;: the user declined the pages_show_list permission. - &#x60;no_pages_granted&#x60;: the permission was granted with no Page ticked. Meta reports a user who manages no Page the same way, so this covers both. - &#x60;granted_pages_not_listed&#x60;: Pages were ticked but Meta listed none the user can manage, and a direct read of each ticked Page returned no access token.  **Headless &#x60;userProfile&#x60;:** on headless Facebook success (&#x60;step&#x3D;select_page&#x60;) and headless Instagram &#x60;facebook_login&#x60; success (&#x60;step&#x3D;select_account&#x60;), &#x60;userProfile&#x60; is JSON percent-encoded once before being set as a query param, so it is encoded twice on the wire.  After your framework decodes the query string once, run one more decodeURIComponent (or equivalent), then JSON.parse it. &#x60;tempToken&#x60; and &#x60;connect_token&#x60; are plain values.  **Error values.** This list is NOT exhaustive and new values may be added at any time: treat an unrecognized value as a generic failure rather than matching exhaustively. Existing values are not renamed or removed without notice.  - OAuth and callback: &#x60;oauth_denied&#x60;, &#x60;invalid_callback&#x60;, &#x60;invalid_state&#x60;, &#x60;unsupported_platform&#x60;, &#x60;connection_failed&#x60;, &#x60;internal_error&#x60;, &#x60;token_exchange_failed&#x60;, &#x60;byok_config_error&#x60;, &#x60;personal_account_not_supported&#x60;, &#x60;missing_google_permissions&#x60;, &#x60;missing_tiktok_permissions&#x60;, &#x60;platform_requires_destination&#x60;, &#x60;reconnect_account_mismatch&#x60;, &#x60;account_mismatch&#x60;, &#x60;instagram_login_method_mismatch&#x60;, &#x60;invalid_request&#x60;, &#x60;code_already_redeemed&#x60;. - Access and limits: &#x60;profile_not_found&#x60;, &#x60;invalid_profile_id&#x60;, &#x60;access_denied&#x60;, &#x60;account_limit_exceeded&#x60;, &#x60;profile_limit_exceeded&#x60;, &#x60;payment_required&#x60;. - Destination selection: &#x60;no_facebook_pages&#x60;, &#x60;facebook_pages_error&#x60;, &#x60;no_google_locations&#x60;, &#x60;google_locations_error&#x60;, &#x60;google_permission_denied&#x60;, &#x60;no_snapchat_public_profiles&#x60;, &#x60;snapchat_profiles_error&#x60;, &#x60;no_youtube_channel&#x60;, &#x60;discord_no_guild&#x60;, &#x60;slack_no_team&#x60;. - WhatsApp: &#x60;whatsapp_error&#x60;, &#x60;one_whatsapp_per_profile&#x60;, &#x60;whatsapp_number_already_connected&#x60;, &#x60;whatsapp_number_pinned_to_profile&#x60;, &#x60;whatsapp_coexistence_not_registered&#x60;, &#x60;connection_cancelled&#x60;. - Google Ads (platform&#x3D;googleads): &#x60;google_ads_auth_failed&#x60;, &#x60;google_ads_invalid_state&#x60;, &#x60;google_ads_config_error&#x60;, &#x60;google_ads_token_failed&#x60;, &#x60;google_ads_quota_exhausted&#x60;, &#x60;google_ads_callback_error&#x60;. - TikTok Ads (platform&#x3D;tiktokads): &#x60;tiktok_ads_auth_failed&#x60;, &#x60;tiktok_ads_invalid_state&#x60;, &#x60;tiktok_ads_access_denied&#x60;, &#x60;tiktok_ads_config_error&#x60;, &#x60;tiktok_ads_token_failed&#x60;, &#x60;tiktok_ads_account_not_found&#x60;, &#x60;tiktok_ads_callback_error&#x60;. - X Ads (platform&#x3D;xads): &#x60;x_ads_denied&#x60;, &#x60;x_ads_auth_failed&#x60;, &#x60;x_ads_config_error&#x60;, &#x60;x_ads_account_not_found&#x60;, &#x60;x_ads_state_error&#x60;, &#x60;x_ads_token_failed&#x60;, &#x60;x_ads_token_missing&#x60;, &#x60;x_ads_callback_error&#x60;. - Reddit Ads (platform&#x3D;redditads): &#x60;reddit_ads_auth_failed&#x60;, &#x60;reddit_ads_invalid_state&#x60;, &#x60;reddit_ads_access_denied&#x60;, &#x60;reddit_ads_scope_not_granted&#x60;, &#x60;reddit_ads_no_ad_accounts&#x60;, &#x60;reddit_ads_callback_error&#x60;. - Microsoft Ads (platform&#x3D;microsoftads): &#x60;microsoft_ads_auth_failed&#x60;, &#x60;microsoft_ads_invalid_state&#x60;, &#x60;microsoft_ads_access_denied&#x60;, &#x60;microsoft_ads_scope_not_granted&#x60;, &#x60;microsoft_ads_unknown_user&#x60;, &#x60;microsoft_ads_no_ad_accounts&#x60;, &#x60;microsoft_ads_callback_error&#x60;. - Shopify (platform&#x3D;shopify): &#x60;shopify_auth_failed&#x60;, &#x60;shopify_config_error&#x60;, &#x60;shopify_invalid_state&#x60;, &#x60;shopify_invalid_hmac&#x60;, &#x60;shopify_invalid_shop&#x60;, &#x60;shopify_missing_scopes&#x60;, &#x60;shopify_callback_error&#x60;.  Notes:  1. On this endpoint every upstream OAuth error collapses into &#x60;oauth_denied&#x60;, with the provider&#39;s values in the &#x60;platform_error*&#x60; params. The dedicated ads flows differ: they use their own denial slugs, and &#x60;google_ads_auth_failed&#x60; and &#x60;tiktok_ads_auth_failed&#x60; may carry the provider&#39;s raw error string in &#x60;error_message&#x60;. 2. On the tiktok and twitter ads flows &#x60;platform&#x60; carries the ads platform id (&#x60;tiktokads&#x60;, &#x60;xads&#x60;), not the value in the request path. The googleads, redditads, microsoftads and shopify flows report &#x60;googleads&#x60;, &#x60;redditads&#x60;, &#x60;microsoftads&#x60; and &#x60;shopify&#x60;. 3. &#x60;missing_tiktok_permissions&#x60;: the TikTok authorization left out a permission the already-connected account needs, so nothing changed and it keeps working as before. User-fixable: connect again and accept every permission on TikTok&#39;s screen. 4. &#x60;instagram_login_method_mismatch&#x60;: an Instagram Login authorization landed on a profile whose Instagram account is connected through Facebook Login, so nothing changed. To refresh it, connect again with &#x60;loginMethod&#x3D;facebook_login&#x60;. To move it to Instagram Login, disconnect it first.  | [optional] |
-| **scopes** | **String** | Comma-separated permission areas to request instead of the platform&#39;s full permission set.  **Values:** &#x60;posting&#x60;, &#x60;analytics&#x60;, &#x60;comments&#x60;, &#x60;messaging&#x60;, &#x60;ads&#x60;; on google and microsoft, &#x60;email&#x60;, &#x60;calendar&#x60;, &#x60;files&#x60;, &#x60;contacts&#x60;.  **Default:** omit it (what the dashboard does) to request everything the platform supports. Google and microsoft REQUIRE it (400 &#x60;INVALID_FIELD_VALUE&#x60; when absent) because their consent screens are reviewed per area.  When present, the consent dialog asks only for the scopes behind those areas, plus the scopes every connection needs (identity, token refresh, listing the pages, organizations or channels the user picks from).  - Scopes never asked for are absent from the account&#39;s &#x60;permissions&#x60;, and the health endpoints report them as not granted. A &#x60;posting&#x60;-only account cannot read analytics or the inbox until reconnected with more areas. - First comments need &#x60;comments&#x60;: a &#x60;posting&#x60;-only account publishes the post and skips the first comment. - Scopes in none of the areas (X likes, bookmarks and follows, Pinterest ads-only extras) are requested only when the parameter is omitted.  **Supported on** facebook, instagram (both login methods), linkedin, twitter, tiktok, youtube, threads, reddit, pinterest, googlebusiness and slack (via &#x60;GET /v1/connect/slack&#x60;).  **Rejected** with 400 &#x60;INVALID_FIELD_VALUE&#x60; (&#x60;param: scopes&#x60;) on bluesky, telegram, discord, snapchat and whatsapp (their dialog cannot be reduced), and for an empty list or an unknown area.  What each area asks for, per platform (Google scopes shortened to their last path segment):  | Platform | &#x60;posting&#x60; | &#x60;analytics&#x60; | &#x60;comments&#x60; | &#x60;messaging&#x60; | &#x60;ads&#x60; | Always requested | |---|---|---|---|---|---|---| | facebook | &#x60;pages_manage_posts&#x60; | &#x60;read_insights&#x60;, &#x60;pages_read_user_content&#x60; | &#x60;pages_manage_engagement&#x60;, &#x60;pages_read_user_content&#x60; | &#x60;pages_messaging&#x60; | &#x60;ads_management&#x60;, &#x60;ads_read&#x60;, &#x60;leads_retrieval&#x60;, &#x60;pages_manage_ads&#x60;, &#x60;instagram_basic&#x60;, &#x60;business_management&#x60; | &#x60;pages_show_list&#x60;, &#x60;pages_read_engagement&#x60;, &#x60;pages_manage_metadata&#x60; | | instagram (Instagram Login) | &#x60;instagram_business_content_publish&#x60; | &#x60;instagram_business_manage_insights&#x60; | &#x60;instagram_business_manage_comments&#x60; | &#x60;instagram_business_manage_messages&#x60; | none | &#x60;instagram_business_basic&#x60; | | instagram (&#x60;loginMethod&#x3D;facebook_login&#x60;) | &#x60;instagram_content_publish&#x60; | &#x60;instagram_manage_insights&#x60; | &#x60;instagram_manage_comments&#x60; | &#x60;instagram_manage_messages&#x60; | &#x60;ads_management&#x60;, &#x60;ads_read&#x60;, &#x60;leads_retrieval&#x60;, &#x60;pages_manage_ads&#x60; | &#x60;instagram_basic&#x60;, &#x60;pages_show_list&#x60;, &#x60;pages_read_engagement&#x60;, &#x60;business_management&#x60;, &#x60;pages_messaging&#x60;, &#x60;pages_manage_metadata&#x60; | | linkedin | &#x60;w_member_social&#x60;, &#x60;w_organization_social&#x60;, &#x60;r_organization_social&#x60;, &#x60;r_organization_followers&#x60; | &#x60;r_member_postAnalytics&#x60;, &#x60;r_member_profileAnalytics&#x60;, &#x60;rw_organization_admin&#x60;, &#x60;r_organization_social&#x60;, &#x60;r_organization_followers&#x60; | &#x60;w_member_social&#x60;, &#x60;w_member_social_feed&#x60;, &#x60;w_organization_social&#x60;, &#x60;w_organization_social_feed&#x60;, &#x60;r_organization_social&#x60;, &#x60;r_organization_social_feed&#x60; | none | &#x60;r_ads&#x60;, &#x60;rw_ads&#x60;, &#x60;r_ads_reporting&#x60;, &#x60;r_marketing_leadgen_automation&#x60;, &#x60;rw_conversions&#x60; | &#x60;openid&#x60;, &#x60;profile&#x60;, &#x60;email&#x60;, &#x60;r_basicprofile&#x60;, &#x60;rw_organization_admin&#x60; | | twitter | &#x60;tweet.write&#x60;, &#x60;media.write&#x60; | (in the always-requested set) | &#x60;tweet.write&#x60;, &#x60;like.write&#x60;, &#x60;tweet.moderate.write&#x60; | &#x60;dm.read&#x60;, &#x60;dm.write&#x60;, &#x60;media.write&#x60; | none | &#x60;tweet.read&#x60;, &#x60;users.read&#x60;, &#x60;offline.access&#x60; | | tiktok | &#x60;video.publish&#x60; | &#x60;user.info.stats&#x60;, &#x60;user.insights&#x60;, &#x60;video.list&#x60;, &#x60;video.insights&#x60; | &#x60;comment.list&#x60;, &#x60;comment.list.manage&#x60;, &#x60;video.list&#x60; | &#x60;message.list.read&#x60;, &#x60;message.list.send&#x60;, &#x60;message.list.manage&#x60; | none | &#x60;user.info.basic&#x60;, &#x60;user.info.username&#x60;, &#x60;user.info.profile&#x60;, &#x60;user.account.type&#x60;, &#x60;video.publish&#x60;, &#x60;video.upload&#x60;, &#x60;video.list&#x60; | | youtube | &#x60;youtube.upload&#x60; | &#x60;yt-analytics.readonly&#x60; | &#x60;youtube.force-ssl&#x60; | none | none | &#x60;youtube&#x60; | | threads | &#x60;threads_content_publish&#x60;, &#x60;threads_manage_replies&#x60;, &#x60;threads_delete&#x60; | &#x60;threads_manage_insights&#x60; | &#x60;threads_content_publish&#x60;, &#x60;threads_read_replies&#x60;, &#x60;threads_manage_replies&#x60;, &#x60;threads_delete&#x60; | none | none | &#x60;threads_basic&#x60; | | reddit | &#x60;submit&#x60;, &#x60;read&#x60;, &#x60;mysubreddits&#x60;, &#x60;flair&#x60;, &#x60;history&#x60;, &#x60;edit&#x60; | &#x60;read&#x60;, &#x60;history&#x60; | &#x60;read&#x60;, &#x60;history&#x60;, &#x60;edit&#x60;, &#x60;vote&#x60; | &#x60;privatemessages&#x60; | none | &#x60;identity&#x60; | | pinterest | &#x60;boards:write&#x60;, &#x60;pins:read&#x60;, &#x60;pins:write&#x60; | &#x60;pins:read&#x60;, &#x60;user_accounts:read&#x60; | none | none | &#x60;ads:read&#x60;, &#x60;ads:write&#x60;, &#x60;boards:write&#x60;, &#x60;pins:read&#x60;, &#x60;pins:write&#x60; | &#x60;boards:read&#x60;, &#x60;user_accounts:read&#x60; | | googlebusiness | &#x60;business.manage&#x60; | &#x60;business.manage&#x60; | &#x60;business.manage&#x60; | none | none | &#x60;business.manage&#x60;, &#x60;userinfo.profile&#x60;, &#x60;userinfo.email&#x60; | | slack | &#x60;chat:write&#x60;, &#x60;chat:write.public&#x60;, &#x60;chat:write.customize&#x60;, &#x60;files:write&#x60;, &#x60;files:read&#x60; | none | none | &#x60;chat:write&#x60;, &#x60;chat:write.customize&#x60;, &#x60;files:write&#x60;, &#x60;files:read&#x60;, &#x60;channels:history&#x60;, &#x60;groups:history&#x60;, &#x60;im:history&#x60;, &#x60;mpim:history&#x60;, &#x60;im:read&#x60;, &#x60;im:write&#x60;, &#x60;mpim:read&#x60;, &#x60;users:read&#x60;, &#x60;reactions:read&#x60;, &#x60;reactions:write&#x60; | none | &#x60;channels:join&#x60;, &#x60;channels:read&#x60;, &#x60;groups:read&#x60;, &#x60;team:read&#x60; |  Google and Microsoft accounts use the mailbox areas instead (&#x60;scopes&#x60; is required there):  | Platform | &#x60;email&#x60; | &#x60;calendar&#x60; | &#x60;files&#x60; | &#x60;contacts&#x60; | Always requested | |---|---|---|---|---|---| | google | &#x60;gmail.modify&#x60; | &#x60;calendar&#x60; | &#x60;drive.file&#x60; (only files Zernio created or the user picked, see the Files tag) | &#x60;contacts.readonly&#x60; | &#x60;openid&#x60;, &#x60;userinfo.email&#x60;, &#x60;userinfo.profile&#x60; | | microsoft | &#x60;Mail.ReadWrite&#x60;, &#x60;Mail.Send&#x60; | &#x60;Calendars.ReadWrite&#x60; | &#x60;Files.ReadWrite&#x60; | &#x60;Contacts.Read&#x60; | &#x60;openid&#x60;, &#x60;profile&#x60;, &#x60;email&#x60;, &#x60;offline_access&#x60;, &#x60;User.Read&#x60; |  Areas accumulate: reconnecting with more areas widens the grant, and &#x60;GET /v1/accounts/{accountId}/health&#x60; reports the result.  | [optional] |
+| **allow_no_location** | **Boolean** | Google Business only (&#x60;platform&#x3D;googlebusiness&#x60;); any other platform answers 400. Lets a Google account with no Business Profile location finish the connect instead of ending with &#x60;error&#x3D;no_google_locations&#x60;.  The selection step (&#x60;step&#x3D;select_location&#x60;, or the hosted page) then lists no locations. Call &#x60;POST /v1/connect/googlebusiness/select-location&#x60; without &#x60;locationId&#x60; or &#x60;locations&#x60; to connect the account with no location (&#x60;needsLocation: true&#x60;).  Without it, a sign-in that lists no location still ends with &#x60;no_google_locations&#x60;. The marker travels in the redirect_url we hand you, so pass that URL back unchanged in headless mode.  | [optional][default to false] |
+| **redirect_url** | **String** | Your custom redirect URL after the connection completes. It MUST be an absolute http(s) URL or a custom app scheme for mobile deeplinks (e.g. myapp://callback). A relative path is rejected with 400 &#x60;INVALID_REDIRECT_URL&#x60;.  **Exit notice:** when &#x60;redirect_url&#x60; is an http(s) URL on another site (anything but zernio.com), every redirect of the flow lands first on &#x60;https://zernio.com/connect/continue?to&#x3D;&lt;your URL&gt;&#x60;, a Zernio page that names your site and continues to it with one click. All params below reach your URL unchanged.  A custom app scheme (myapp://...) never goes through the notice. In headless mode the redirects we hand you (and the &#x60;redirect_url&#x60; returned by the selection endpoints) are notice URLs: pass them back or navigate to them as they are.  **X (twitter) length limit:** X caps the OAuth &#x60;state&#x60; at 500 characters and the redirect travels inside it (wrapped in the notice URL for an http(s) URL on another site). The URL-encoded form must be at most 258 characters for API callers, 310 for dashboard sessions.  In headless mode the appended &#x60;headless&#x3D;true&#x60; counts toward that limit. A plain https URL on another site leaves about 165 to 190 characters of your own URL, depending on encoding. A longer one is rejected with 400 &#x60;INVALID_REDIRECT_URL&#x60;, and the error says by how much.  **Success params** are appended with the URL API, so an existing query string is preserved:  - Standard mode: connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. - X on prepaid-balance billing at a $0 balance: &#x60;billingNotice&#x3D;x_balance_required&#x60; is added. The account is connected, but X posts wait or are refused (402 &#x60;insufficient_balance&#x60;) until the balance is funded. - Headless mode: OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.  **Failure params:** the browser goes to the same redirect_url with &#x60;error&#x60; and &#x60;platform&#x60; appended (always present). &#x60;error_message&#x60;, &#x60;is_user_fixable&#x60;, &#x60;reason&#x60;, &#x60;dashboard_url&#x60;, &#x60;missing_scopes&#x60;, &#x60;error_reason&#x60; and the &#x60;platform_error*&#x60; params are conditional: treat them as optional.  Your own query params are kept on every redirect, but ours overwrite one of yours with the same name. On an error redirect we remove the internal &#x60;headless&#x60;, &#x60;adsConnect&#x60;, &#x60;adsScope&#x60;, &#x60;reconnectAccountId&#x60;, &#x60;expectedPlatformUserId&#x60; and &#x60;expectedUsername&#x60; markers added during the flow.  **Correlation** params appear on every redirect from an OAuth callback (success and failure) and on the &#x60;redirect_url&#x60; returned by the selection endpoints such as POST /v1/connect/facebook/select-page:  - &#x60;request_id&#x60;: the id we log that request under. Quote it when reporting a problem. - &#x60;stage&#x60;: where the flow ended. &#x60;authorize&#x60; &#x3D; the platform&#39;s consent dialog returned an error or denial instead of a code. &#x60;callback&#x60; &#x3D; we processed the returned code (success, a selection step, or a failure). - &#x60;stage&#x60; &#x3D; &#x60;select_page&#x60;: the destination-selection endpoint (page, account, organization, board, location, profile or phone number) completed it.  **Error details:**  - &#x60;oauth_denied&#x60;: carries &#x60;error_message&#x60; and, when the platform sent them, its own &#x60;platform_error&#x60; (e.g. &#x60;access_denied&#x60;), &#x60;platform_error_reason&#x60; (e.g. &#x60;user_denied&#x60;) and &#x60;platform_error_description&#x60; (truncated to 500 characters). &#x60;is_user_fixable&#x3D;true&#x60; when the platform reported that the user cancelled or declined. - &#x60;no_facebook_pages&#x60;: comes with &#x60;is_user_fixable&#x3D;true&#x60;, an &#x60;error_message&#x60; telling the user to click \&quot;Edit previous settings\&quot; in Meta&#39;s dialog and tick the Page (or create one), and &#x60;error_reason&#x60; when Meta&#39;s token debug answered (values below). - &#x60;code_already_redeemed&#x60;: the same authorization code arrived more than once and an earlier request already processed it (the code is never sent to the platform twice). Not a failure: check GET /v1/accounts or wait for the &#x60;account.connected&#x60; webhook. - &#x60;missing_google_permissions&#x60; (YouTube, Google Business and Google Ads): the user unchecked permissions on Google&#39;s consent screen. Always with &#x60;is_user_fixable&#x3D;true&#x60;. When Google reported granted scopes, &#x60;missing_scopes&#x60; lists the requested scopes not granted (comma-separated). Ask the user to connect again keeping every permission checked. - &#x60;no_youtube_channel&#x60;: Google authorized the account but it has no YouTube channel we can connect. Always with &#x60;is_user_fixable&#x3D;true&#x60; and an &#x60;error_message&#x60;.  Usual causes of &#x60;no_youtube_channel&#x60;: the user picked their personal Google identity instead of the Brand Account in Google&#39;s account chooser, they only have YouTube Studio access (not Brand Account owner or manager), or the account has no channel yet.  &#x60;error_reason&#x60; values for &#x60;no_facebook_pages&#x60;:  - &#x60;pages_permission_declined&#x60;: the user declined the pages_show_list permission. - &#x60;no_pages_granted&#x60;: the permission was granted with no Page ticked. Meta reports a user who manages no Page the same way, so this covers both. - &#x60;granted_pages_not_listed&#x60;: Pages were ticked but Meta listed none the user can manage, and a direct read of each ticked Page returned no access token.  **Headless &#x60;userProfile&#x60;:** on headless Facebook success (&#x60;step&#x3D;select_page&#x60;) and headless Instagram &#x60;facebook_login&#x60; success (&#x60;step&#x3D;select_account&#x60;), &#x60;userProfile&#x60; is JSON percent-encoded once before being set as a query param, so it is encoded twice on the wire.  After your framework decodes the query string once, run one more decodeURIComponent (or equivalent), then JSON.parse it. &#x60;tempToken&#x60; and &#x60;connect_token&#x60; are plain values.  **Error values.** This list is NOT exhaustive and new values may be added at any time: treat an unrecognized value as a generic failure rather than matching exhaustively. Existing values are not renamed or removed without notice.  - OAuth and callback: &#x60;oauth_denied&#x60;, &#x60;invalid_callback&#x60;, &#x60;invalid_state&#x60;, &#x60;unsupported_platform&#x60;, &#x60;connection_failed&#x60;, &#x60;internal_error&#x60;, &#x60;token_exchange_failed&#x60;, &#x60;byok_config_error&#x60;, &#x60;personal_account_not_supported&#x60;, &#x60;missing_google_permissions&#x60;, &#x60;missing_tiktok_permissions&#x60;, &#x60;platform_requires_destination&#x60;, &#x60;reconnect_account_mismatch&#x60;, &#x60;account_mismatch&#x60;, &#x60;instagram_login_method_mismatch&#x60;, &#x60;invalid_request&#x60;, &#x60;code_already_redeemed&#x60;. - Access and limits: &#x60;profile_not_found&#x60;, &#x60;invalid_profile_id&#x60;, &#x60;access_denied&#x60;, &#x60;account_limit_exceeded&#x60;, &#x60;profile_limit_exceeded&#x60;, &#x60;payment_required&#x60;. - Destination selection: &#x60;no_facebook_pages&#x60;, &#x60;facebook_pages_error&#x60;, &#x60;no_google_locations&#x60;, &#x60;google_locations_error&#x60;, &#x60;google_permission_denied&#x60;, &#x60;no_snapchat_public_profiles&#x60;, &#x60;snapchat_profiles_error&#x60;, &#x60;no_youtube_channel&#x60;, &#x60;discord_no_guild&#x60;, &#x60;slack_no_team&#x60;. - WhatsApp: &#x60;whatsapp_error&#x60;, &#x60;one_whatsapp_per_profile&#x60;, &#x60;whatsapp_number_already_connected&#x60;, &#x60;whatsapp_number_pinned_to_profile&#x60;, &#x60;whatsapp_coexistence_not_registered&#x60;, &#x60;connection_cancelled&#x60;. - Google Ads (platform&#x3D;googleads): &#x60;google_ads_auth_failed&#x60;, &#x60;google_ads_invalid_state&#x60;, &#x60;google_ads_config_error&#x60;, &#x60;google_ads_token_failed&#x60;, &#x60;google_ads_quota_exhausted&#x60;, &#x60;google_ads_callback_error&#x60;. - TikTok Ads (platform&#x3D;tiktokads): &#x60;tiktok_ads_auth_failed&#x60;, &#x60;tiktok_ads_invalid_state&#x60;, &#x60;tiktok_ads_access_denied&#x60;, &#x60;tiktok_ads_config_error&#x60;, &#x60;tiktok_ads_token_failed&#x60;, &#x60;tiktok_ads_account_not_found&#x60;, &#x60;tiktok_ads_callback_error&#x60;. - X Ads (platform&#x3D;xads): &#x60;x_ads_denied&#x60;, &#x60;x_ads_auth_failed&#x60;, &#x60;x_ads_config_error&#x60;, &#x60;x_ads_account_not_found&#x60;, &#x60;x_ads_state_error&#x60;, &#x60;x_ads_token_failed&#x60;, &#x60;x_ads_token_missing&#x60;, &#x60;x_ads_callback_error&#x60;. - Reddit Ads (platform&#x3D;redditads): &#x60;reddit_ads_auth_failed&#x60;, &#x60;reddit_ads_invalid_state&#x60;, &#x60;reddit_ads_access_denied&#x60;, &#x60;reddit_ads_scope_not_granted&#x60;, &#x60;reddit_ads_no_ad_accounts&#x60;, &#x60;reddit_ads_callback_error&#x60;. - Microsoft Ads (platform&#x3D;microsoftads): &#x60;microsoft_ads_auth_failed&#x60;, &#x60;microsoft_ads_invalid_state&#x60;, &#x60;microsoft_ads_access_denied&#x60;, &#x60;microsoft_ads_scope_not_granted&#x60;, &#x60;microsoft_ads_unknown_user&#x60;, &#x60;microsoft_ads_no_ad_accounts&#x60;, &#x60;microsoft_ads_callback_error&#x60;. - Shopify (platform&#x3D;shopify): &#x60;shopify_auth_failed&#x60;, &#x60;shopify_config_error&#x60;, &#x60;shopify_invalid_state&#x60;, &#x60;shopify_invalid_hmac&#x60;, &#x60;shopify_invalid_shop&#x60;, &#x60;shopify_missing_scopes&#x60;, &#x60;shopify_callback_error&#x60;.  Notes:  1. On this endpoint every upstream OAuth error collapses into &#x60;oauth_denied&#x60;, with the provider&#39;s values in the &#x60;platform_error*&#x60; params. The dedicated ads flows differ: they use their own denial slugs, and &#x60;google_ads_auth_failed&#x60; and &#x60;tiktok_ads_auth_failed&#x60; may carry the provider&#39;s raw error string in &#x60;error_message&#x60;. 2. On the tiktok and twitter ads flows &#x60;platform&#x60; carries the ads platform id (&#x60;tiktokads&#x60;, &#x60;xads&#x60;), not the value in the request path. The googleads, redditads, microsoftads and shopify flows report &#x60;googleads&#x60;, &#x60;redditads&#x60;, &#x60;microsoftads&#x60; and &#x60;shopify&#x60;. 3. &#x60;missing_tiktok_permissions&#x60;: the TikTok authorization left out a permission the already-connected account needs, so nothing changed and it keeps working as before. User-fixable: connect again and accept every permission on TikTok&#39;s screen. 4. &#x60;instagram_login_method_mismatch&#x60;: an Instagram Login authorization landed on a profile whose Instagram account is connected through Facebook Login, so nothing changed. To refresh it, connect again with &#x60;loginMethod&#x3D;facebook_login&#x60;. To move it to Instagram Login, disconnect it first.  | [optional] |
+| **scopes** | **String** | Comma-separated permission areas to request instead of the platform&#39;s full permission set.  **Values:** &#x60;posting&#x60;, &#x60;analytics&#x60;, &#x60;comments&#x60;, &#x60;messaging&#x60;, &#x60;ads&#x60;; on google and microsoft, &#x60;email&#x60;, &#x60;calendar&#x60;, &#x60;files&#x60;, &#x60;contacts&#x60;, &#x60;directory&#x60;; on microsoft only, &#x60;shared_mailboxes&#x60;. &#x60;directory&#x60; adds people search (Google: &#x60;directory.readonly&#x60; and &#x60;contacts.other.readonly&#x60;; Microsoft: &#x60;People.Read&#x60; and &#x60;User.ReadBasic.All&#x60;).  &#x60;shared_mailboxes&#x60; (Microsoft only) adds &#x60;Mail.ReadWrite.Shared&#x60; and &#x60;Mail.Send.Shared&#x60;, so the account can add shared mailboxes it has access to with &#x60;POST /v1/email/shared-mailboxes&#x60;. Pass it next to &#x60;email&#x60;. To add it to a connected account, reconnect with &#x60;scopes&#x3D;email,shared_mailboxes&#x60;.  **Default:** omit it (what the dashboard does) to request everything the platform supports. Google and microsoft REQUIRE it (400 &#x60;INVALID_FIELD_VALUE&#x60; when absent) because their consent screens are reviewed per area.  When present, the consent dialog asks only for the scopes behind those areas, plus the scopes every connection needs (identity, token refresh, listing the pages, organizations or channels the user picks from).  - Scopes never asked for are absent from the account&#39;s &#x60;permissions&#x60;. The account keeps the requested areas in &#x60;scopeAreas&#x60;. - The health endpoints judge the account against those areas: an area never asked for reads &#x60;not_requested&#x60; and does not make it unhealthy, so an &#x60;analytics&#x60;-only account reports &#x60;canPost: false&#x60; with &#x60;status: healthy&#x60;. - A &#x60;posting&#x60;-only account cannot read analytics or the inbox until reconnected with more areas. - First comments need &#x60;comments&#x60;: a &#x60;posting&#x60;-only account publishes the post and skips the first comment. - Scopes in none of the areas (X likes, bookmarks and follows, Pinterest ads-only extras) are requested only when the parameter is omitted.  **Supported on** facebook, instagram (both login methods), linkedin, twitter, tiktok, youtube, threads, reddit, pinterest, googlebusiness and slack (via &#x60;GET /v1/connect/slack&#x60;).  **Rejected** with 400 &#x60;INVALID_FIELD_VALUE&#x60; (&#x60;param: scopes&#x60;) on bluesky, telegram, discord, snapchat and whatsapp (their dialog cannot be reduced), and for an empty list or an unknown area.  What each area asks for, per platform (Google scopes shortened to their last path segment):  | Platform | &#x60;posting&#x60; | &#x60;analytics&#x60; | &#x60;comments&#x60; | &#x60;messaging&#x60; | &#x60;ads&#x60; | Always requested | |---|---|---|---|---|---|---| | facebook | &#x60;pages_manage_posts&#x60; | &#x60;read_insights&#x60;, &#x60;pages_read_user_content&#x60; | &#x60;pages_manage_engagement&#x60;, &#x60;pages_read_user_content&#x60; | &#x60;pages_messaging&#x60; | &#x60;ads_management&#x60;, &#x60;ads_read&#x60;, &#x60;leads_retrieval&#x60;, &#x60;pages_manage_ads&#x60;, &#x60;instagram_basic&#x60;, &#x60;business_management&#x60; | &#x60;pages_show_list&#x60;, &#x60;pages_read_engagement&#x60;, &#x60;pages_manage_metadata&#x60; | | instagram (Instagram Login) | &#x60;instagram_business_content_publish&#x60; | &#x60;instagram_business_manage_insights&#x60; | &#x60;instagram_business_manage_comments&#x60; | &#x60;instagram_business_manage_messages&#x60; | none | &#x60;instagram_business_basic&#x60; | | instagram (&#x60;loginMethod&#x3D;facebook_login&#x60;) | &#x60;instagram_content_publish&#x60; | &#x60;instagram_manage_insights&#x60; | &#x60;instagram_manage_comments&#x60; | &#x60;instagram_manage_messages&#x60; | &#x60;ads_management&#x60;, &#x60;ads_read&#x60;, &#x60;leads_retrieval&#x60;, &#x60;pages_manage_ads&#x60; | &#x60;instagram_basic&#x60;, &#x60;pages_show_list&#x60;, &#x60;pages_read_engagement&#x60;, &#x60;business_management&#x60;, &#x60;pages_messaging&#x60;, &#x60;pages_manage_metadata&#x60; | | linkedin | &#x60;w_member_social&#x60;, &#x60;w_organization_social&#x60;, &#x60;r_organization_social&#x60;, &#x60;r_organization_followers&#x60; | &#x60;r_member_postAnalytics&#x60;, &#x60;r_member_profileAnalytics&#x60;, &#x60;rw_organization_admin&#x60;, &#x60;r_organization_social&#x60;, &#x60;r_organization_followers&#x60; | &#x60;w_member_social&#x60;, &#x60;w_member_social_feed&#x60;, &#x60;w_organization_social&#x60;, &#x60;w_organization_social_feed&#x60;, &#x60;r_organization_social&#x60;, &#x60;r_organization_social_feed&#x60; | none | &#x60;r_ads&#x60;, &#x60;rw_ads&#x60;, &#x60;r_ads_reporting&#x60;, &#x60;r_marketing_leadgen_automation&#x60;, &#x60;rw_conversions&#x60; | &#x60;openid&#x60;, &#x60;profile&#x60;, &#x60;email&#x60;, &#x60;r_basicprofile&#x60;, &#x60;rw_organization_admin&#x60; | | twitter | &#x60;tweet.write&#x60;, &#x60;media.write&#x60; | (in the always-requested set) | &#x60;tweet.write&#x60;, &#x60;like.write&#x60;, &#x60;tweet.moderate.write&#x60; | &#x60;dm.read&#x60;, &#x60;dm.write&#x60;, &#x60;media.write&#x60; | none | &#x60;tweet.read&#x60;, &#x60;users.read&#x60;, &#x60;offline.access&#x60; | | tiktok | &#x60;video.publish&#x60;, &#x60;video.upload&#x60; | &#x60;user.info.stats&#x60;, &#x60;user.insights&#x60;, &#x60;video.list&#x60;, &#x60;video.insights&#x60; | &#x60;comment.list&#x60;, &#x60;comment.list.manage&#x60;, &#x60;video.list&#x60; | &#x60;message.list.read&#x60;, &#x60;message.list.send&#x60;, &#x60;message.list.manage&#x60; | none | &#x60;user.info.basic&#x60;, &#x60;user.info.username&#x60;, &#x60;user.info.profile&#x60;, &#x60;user.account.type&#x60;, &#x60;video.list&#x60; | | youtube | &#x60;youtube.upload&#x60; | &#x60;yt-analytics.readonly&#x60; | &#x60;youtube.force-ssl&#x60; | none | none | &#x60;youtube&#x60; | | threads | &#x60;threads_content_publish&#x60;, &#x60;threads_manage_replies&#x60;, &#x60;threads_delete&#x60; | &#x60;threads_manage_insights&#x60; | &#x60;threads_content_publish&#x60;, &#x60;threads_read_replies&#x60;, &#x60;threads_manage_replies&#x60;, &#x60;threads_delete&#x60; | none | none | &#x60;threads_basic&#x60; | | reddit | &#x60;submit&#x60;, &#x60;read&#x60;, &#x60;mysubreddits&#x60;, &#x60;flair&#x60;, &#x60;history&#x60;, &#x60;edit&#x60; | &#x60;read&#x60;, &#x60;history&#x60; | &#x60;read&#x60;, &#x60;history&#x60;, &#x60;edit&#x60;, &#x60;vote&#x60; | &#x60;privatemessages&#x60; | none | &#x60;identity&#x60; | | pinterest | &#x60;boards:write&#x60;, &#x60;pins:read&#x60;, &#x60;pins:write&#x60; | &#x60;pins:read&#x60;, &#x60;user_accounts:read&#x60; | none | none | &#x60;ads:read&#x60;, &#x60;ads:write&#x60;, &#x60;boards:write&#x60;, &#x60;pins:read&#x60;, &#x60;pins:write&#x60; | &#x60;boards:read&#x60;, &#x60;user_accounts:read&#x60; | | googlebusiness | &#x60;business.manage&#x60; | &#x60;business.manage&#x60; | &#x60;business.manage&#x60; | none | none | &#x60;business.manage&#x60;, &#x60;userinfo.profile&#x60;, &#x60;userinfo.email&#x60; | | slack | &#x60;chat:write&#x60;, &#x60;chat:write.public&#x60;, &#x60;chat:write.customize&#x60;, &#x60;files:write&#x60;, &#x60;files:read&#x60; | none | none | &#x60;chat:write&#x60;, &#x60;chat:write.customize&#x60;, &#x60;files:write&#x60;, &#x60;files:read&#x60;, &#x60;channels:history&#x60;, &#x60;groups:history&#x60;, &#x60;im:history&#x60;, &#x60;mpim:history&#x60;, &#x60;im:read&#x60;, &#x60;im:write&#x60;, &#x60;mpim:read&#x60;, &#x60;users:read&#x60;, &#x60;reactions:read&#x60;, &#x60;reactions:write&#x60; | none | &#x60;channels:join&#x60;, &#x60;channels:read&#x60;, &#x60;groups:read&#x60;, &#x60;team:read&#x60; |  Google and Microsoft accounts use the mailbox areas instead (&#x60;scopes&#x60; is required there):  | Platform | &#x60;email&#x60; | &#x60;calendar&#x60; | &#x60;files&#x60; | &#x60;contacts&#x60; | Always requested | |---|---|---|---|---|---| | google | &#x60;gmail.modify&#x60; | &#x60;calendar&#x60; | &#x60;drive.file&#x60; (only files Zernio created or the user picked, see the Files tag) | &#x60;contacts.readonly&#x60; | &#x60;openid&#x60;, &#x60;userinfo.email&#x60;, &#x60;userinfo.profile&#x60; | | microsoft | &#x60;Mail.ReadWrite&#x60;, &#x60;Mail.Send&#x60; | &#x60;Calendars.ReadWrite&#x60; | &#x60;Files.ReadWrite&#x60; | &#x60;Contacts.Read&#x60; | &#x60;openid&#x60;, &#x60;profile&#x60;, &#x60;email&#x60;, &#x60;offline_access&#x60;, &#x60;User.Read&#x60; |  Areas accumulate: reconnecting with more areas widens the grant, and &#x60;GET /v1/accounts/{accountId}/health&#x60; reports the result.  On tiktok, a connect without &#x60;posting&#x60; returns 409 &#x60;INVALID_RESOURCE_STATE&#x60; (&#x60;param: scopes&#x60;) when the profile already holds an account from Zernio&#39;s older TikTok app: that account can only be replaced by a grant that includes posting.  | [optional] |
 | **login_hint** | **String** | google and microsoft only: pre-fills the account picker with this address so the user lands on the right mailbox. | [optional] |
 | **headless** | **Boolean** | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. | [optional][default to false] |
 | **login_method** | **String** | Instagram only: which of the two Instagram connection methods to use. Ignored for every other platform.  - &#x60;instagram_login&#x60; (default when omitted): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required. Exception: if omitted and &#x60;reconnectAccountId&#x60; names an account connected with &#x60;facebook_login&#x60;, the reconnect keeps that method. - &#x60;facebook_login&#x60;: the Facebook Login dialog (\&quot;Instagram API with Facebook Login\&quot;). The user authorizes a Facebook Page with a linked Instagram professional account, and every API call for that account runs through the Page. Use it when the customer manages Instagram through a Page and expects the Facebook consent screen.  With &#x60;facebook_login&#x60; the user picks a Page, so the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;. The default &#x60;instagram_login&#x60; has no selection step and connects directly.  &#x60;facebook_login&#x60; supports &#x60;headless&#x3D;true&#x60; like the other selection platforms. The callback redirects to your &#x60;redirect_url&#x60; with &#x60;profileId&#x60;, &#x60;tempToken&#x60;, &#x60;platform&#x3D;instagram&#x60;, &#x60;step&#x3D;select_account&#x60;, &#x60;userProfile&#x60; and &#x60;connect_token&#x60;.  &#x60;userProfile&#x60; is the Facebook user&#39;s profile, same shape and encoding as the Facebook &#x60;step&#x3D;select_page&#x60; redirect. Pass &#x60;profileId&#x60;, &#x60;tempToken&#x60; and &#x60;connect_token&#x60; into the select-account endpoints to finish.  | [optional][default to &#39;instagram_login&#39;] |
@@ -1682,7 +2997,7 @@ end
 | **brand_name** | **String** | Your product name, for the two branded pages. Trimmed; 1 to 60 characters.  - With &#x60;signup&#x3D;hosted&#x60; (WhatsApp): replaces Zernio in the page title (\&quot;Connect your WhatsApp number to &lt;brandName&gt;\&quot;). - With &#x60;welcome&#x3D;true&#x60;: fills the heading (\&quot;&lt;brandName&gt; wants to connect to your &lt;platform&gt;\&quot;). Without it the screen shows Zernio and the Zernio mark.  Both pages keep a Zernio mark: they are co-branded, not white-label. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; without &#x60;signup&#x3D;hosted&#x60; or &#x60;welcome&#x3D;true&#x60;. Sealed into the page link at issue time, so editing the URL cannot change it.  | [optional] |
 | **primary_color** | **String** | Hex colour (&#x60;#RRGGBB&#x60;) for the primary button on the hosted WhatsApp signup page (&#x60;signup&#x3D;hosted&#x60;) or the welcome screen (&#x60;welcome&#x3D;true&#x60;). Validated server-side; anything else is a 400 &#x60;INVALID_FIELD_VALUE&#x60;. Rejected without one of the two. | [optional] |
 | **welcome** | **Boolean** | Any platform. When &#x60;true&#x60;, &#x60;authUrl&#x60; points to a Zernio-hosted welcome screen showing your brand next to the platform (\&quot;&lt;brandName&gt; wants to connect to your &lt;platform&gt;\&quot;). Its button reads Connecting for about a second, then sends the user to the platform&#39;s authorization screen with no click.  The rest of the flow is unchanged.  - &#x60;brandName&#x60;, &#x60;logoUrl&#x60;, &#x60;primaryColor&#x60; and &#x60;welcomeTheme&#x60; are optional and default to Zernio&#39;s own name, mark and look. - The link is valid for 30 minutes; after that the page asks the user to start again. - The brand also carries to the account and channel pickers Zernio shows after authorization. - With no &#x60;redirect_url&#x60;, the flow ends on a branded Zernio-hosted page saying whether the account connected, instead of the Zernio dashboard. - Cannot be combined with &#x60;headless&#x3D;true&#x60; or &#x60;signup&#x3D;hosted&#x60; (400 &#x60;INVALID_FIELD_VALUE&#x60;). - The platform&#39;s authorization screen still names the Zernio app.  Recommended. When left out, the screen is shown if the workspace saved it as on by default (&#x60;PUT /v1/connect/welcome-screen&#x60;), except with &#x60;headless&#x3D;true&#x60; or &#x60;signup&#x3D;hosted&#x60;. Pass &#x60;false&#x60; to skip it.  Branding you leave out of the call comes from those saved settings, and a &#x60;welcomeTheme&#x60; you send is merged key by key over the saved theme.  | [optional] |
-| **welcome_theme** | **String** | Welcome screen only (&#x60;welcome&#x3D;true&#x60;). A URL-encoded JSON object that restyles and rewords the screen. All keys are optional.  - **Copy**: &#x60;heading&#x60; (up to 120 characters); &#x60;trustLine&#x60;, &#x60;consentLine&#x60; and &#x60;statusLine&#x60; (up to 200 each, &#x60;statusLine&#x60; being the line above the button); &#x60;buttonLabel&#x60; (up to 30, the label of the link the button becomes if the redirect stalls). - **Closing page** (shown when there is no &#x60;redirect_url&#x60;): &#x60;successHeading&#x60; and &#x60;errorHeading&#x60; (up to 120), &#x60;successBody&#x60; and &#x60;errorBody&#x60; (up to 200). All copy may contain the placeholders &#x60;{brand}&#x60; and &#x60;{platform}&#x60;. - **Colors**: &#x60;primaryColor&#x60; (the button), &#x60;accentColor&#x60; (the header gradient, built as a scale of that colour, and the icons), &#x60;pageColor&#x60;, &#x60;cardColor&#x60; and &#x60;textColor&#x60;, all as &#x60;#RRGGBB&#x60;. - **Style**: &#x60;cornerRadius&#x60; as an integer from 0 to 24 (pixels); &#x60;font&#x60; as &#x60;sans&#x60;, &#x60;serif&#x60; or &#x60;mono&#x60;; &#x60;bannerStyle&#x60; as &#x60;halftone&#x60; (default), &#x60;solid&#x60; (a flat tint of &#x60;accentColor&#x60;) or &#x60;plain&#x60; (no banner fill). - **Icons**: &#x60;trustLineIcon&#x60; (default &#x60;shield&#x60;) and &#x60;consentLineIcon&#x60; (default &#x60;link&#x60;), each one of &#x60;shield&#x60;, &#x60;lock&#x60;, &#x60;link&#x60;, &#x60;check&#x60;, &#x60;user&#x60;, &#x60;sparkles&#x60; or &#x60;none&#x60;. - **Visibility**: &#x60;hide&#x60;, an array of any of &#x60;heading&#x60;, &#x60;trustLine&#x60;, &#x60;consentLine&#x60;, &#x60;statusLine&#x60;, &#x60;successBody&#x60; and &#x60;errorBody&#x60;, removes those lines from the screens. - **Links**: &#x60;termsUrl&#x60; and &#x60;privacyUrl&#x60; (https, up to 2048 characters) add small Terms and Privacy links at the bottom of every hosted screen.  A &#x60;primaryColor&#x60; here wins over the &#x60;primaryColor&#x60; parameter. Unknown keys, invalid JSON or an invalid value are a 400 &#x60;INVALID_FIELD_VALUE&#x60;. Rejected when the welcome screen is not shown.  Example: &#x60;{\&quot;heading\&quot;:\&quot;Link your {platform} to {brand}\&quot;,\&quot;cardColor\&quot;:\&quot;#FFF7ED\&quot;,\&quot;cornerRadius\&quot;:12}&#x60;.  | [optional] |
+| **welcome_theme** | **String** | Welcome screen only (&#x60;welcome&#x3D;true&#x60;). A URL-encoded JSON object that restyles and rewords the screen. All keys are optional.  - **Copy**: &#x60;heading&#x60; (up to 120 characters); &#x60;trustLine&#x60;, &#x60;consentLine&#x60; and &#x60;statusLine&#x60; (up to 200 each, &#x60;statusLine&#x60; being the line above the button); &#x60;buttonLabel&#x60; (up to 30, the label of the link the button becomes if the redirect stalls). - **Closing page** (shown when there is no &#x60;redirect_url&#x60;): &#x60;successHeading&#x60; and &#x60;errorHeading&#x60; (up to 120), &#x60;successBody&#x60; and &#x60;errorBody&#x60; (up to 200). All copy may contain the placeholders &#x60;{brand}&#x60; and &#x60;{platform}&#x60;. - **Colors**: &#x60;primaryColor&#x60; (the button), &#x60;accentColor&#x60; (the header gradient, built as a scale of that colour, and the icons), &#x60;pageColor&#x60;, &#x60;cardColor&#x60; and &#x60;textColor&#x60;, all as &#x60;#RRGGBB&#x60;. - **Style**: &#x60;cornerRadius&#x60; as an integer from 0 to 24 (pixels); &#x60;font&#x60; as &#x60;sans&#x60;, &#x60;serif&#x60; or &#x60;mono&#x60;; &#x60;bannerStyle&#x60; as &#x60;waves&#x60; (default, halftone waves in &#x60;accentColor&#x60;), &#x60;solid&#x60; (a flat tint of &#x60;accentColor&#x60;) or &#x60;plain&#x60; (no banner fill); &#x60;halftone&#x60;, the former default, is still accepted and shows as &#x60;waves&#x60;. - **Icons**: &#x60;trustLineIcon&#x60; (default &#x60;shield&#x60;) and &#x60;consentLineIcon&#x60; (default &#x60;user&#x60;), each one of &#x60;shield&#x60;, &#x60;lock&#x60;, &#x60;link&#x60;, &#x60;check&#x60;, &#x60;user&#x60;, &#x60;sparkles&#x60; or &#x60;none&#x60;. - **Visibility**: &#x60;hide&#x60;, an array of any of &#x60;heading&#x60;, &#x60;trustLine&#x60;, &#x60;consentLine&#x60;, &#x60;statusLine&#x60;, &#x60;successBody&#x60; and &#x60;errorBody&#x60;, removes those lines from the screens. - **Links**: &#x60;termsUrl&#x60; and &#x60;privacyUrl&#x60; (https, up to 2048 characters) add small Terms and Privacy links at the bottom of every hosted screen.  A &#x60;primaryColor&#x60; here wins over the &#x60;primaryColor&#x60; parameter. Unknown keys, invalid JSON or an invalid value are a 400 &#x60;INVALID_FIELD_VALUE&#x60;. Rejected when the welcome screen is not shown.  Example: &#x60;{\&quot;heading\&quot;:\&quot;Link your {platform} to {brand}\&quot;,\&quot;cardColor\&quot;:\&quot;#FFF7ED\&quot;,\&quot;cornerRadius\&quot;:12}&#x60;.  | [optional] |
 | **logo_url** | **String** | Welcome screen only (&#x60;welcome&#x3D;true&#x60;): https URL of your logo, shown in a square tile, so use a square image. Without it the tile shows the first letter of &#x60;brandName&#x60;, or the Zernio mark when there is no &#x60;brandName&#x60; either. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; when the welcome screen is not shown. | [optional] |
 | **language** | **String** | Hosted signup page only (&#x60;signup&#x3D;hosted&#x60;, WhatsApp): language of the page and its follow-along guide. Explainer videos stay in English. Default &#x60;en&#x60;. Rejected without &#x60;signup&#x3D;hosted&#x60;. | [optional] |
 | **handoff** | **Boolean** | Let the user finish on their phone. When &#x60;true&#x60;, the response also carries &#x60;handoff&#x60;. Show &#x60;handoff.url&#x60; as a QR code in your app (any QR library); the user scans it and the welcome screen opens on the phone, already carrying this connect.  They log in to the platform there without signing in to anything else. The phone ends on a Zernio result screen telling them to go back to their computer.  - Learn the outcome by polling &#x60;GET /v1/connect/handoffs/{handoffId}&#x60; (every 2 to 5 seconds is fine) or from the &#x60;account.connected&#x60; webhook. - Shows the welcome screen with your branding parameters or saved settings. - Cannot be combined with &#x60;welcome&#x3D;false&#x60;, &#x60;headless&#x3D;true&#x60;, &#x60;signup&#x60;, &#x60;redirect&#x3D;true&#x60; or &#x60;redirect_url&#x60; (400 &#x60;INVALID_FIELD_VALUE&#x60;). - &#x60;handoff.url&#x60; works for 30 minutes. - When the account is re-enabled straight away, the response carries &#x60;account&#x60; instead, as without &#x60;handoff&#x60;.  | [optional][default to false] |
@@ -1756,6 +3071,85 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ConnectWelcomeScreen**](ConnectWelcomeScreen.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_email_connect_url
+
+> <GetEmailConnectUrl200Response> get_email_connect_url(profile_id, opts)
+
+Get a hosted link to connect any mailbox
+
+One link for any address. The page asks for the email first, sends Gmail, Google Workspace, Outlook.com and Microsoft 365 (found by domain or MX) to their OAuth connect, and every other mailbox to IMAP with the provider's app-password steps. Valid for one hour.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | 
+opts = {
+  redirect_url: 'redirect_url_example', # String | Where the page sends the user afterwards, with status, accountId, platform and email (or status=error and error).
+  email: 'email_example', # String | Prefills the address and skips the first screen.
+  name: 'name_example', # String | Display name for sent mail; the page asks for it when absent.
+  reconnect_account_id: 'reconnect_account_id_example' # String | An IMAP, Google or Microsoft account on this profile to reconnect; its accountId stays the same. IMAP asks only for the new password. Google and Microsoft open that provider's sign-in with the address as the hint and the held areas asked again. Other platforms answer 400, unknown ids 404.
+}
+
+begin
+  # Get a hosted link to connect any mailbox
+  result = api_instance.get_email_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_email_connect_url: #{e}"
+end
+```
+
+#### Using the get_email_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetEmailConnectUrl200Response>, Integer, Hash)> get_email_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get a hosted link to connect any mailbox
+  data, status_code, headers = api_instance.get_email_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetEmailConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_email_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** |  |  |
+| **redirect_url** | **String** | Where the page sends the user afterwards, with status, accountId, platform and email (or status&#x3D;error and error). | [optional] |
+| **email** | **String** | Prefills the address and skips the first screen. | [optional] |
+| **name** | **String** | Display name for sent mail; the page asks for it when absent. | [optional] |
+| **reconnect_account_id** | **String** | An IMAP, Google or Microsoft account on this profile to reconnect; its accountId stays the same. IMAP asks only for the new password. Google and Microsoft open that provider&#39;s sign-in with the address as the hint and the held areas asked again. Other platforms answer 400, unknown ids 404. | [optional] |
+
+### Return type
+
+[**GetEmailConnectUrl200Response**](GetEmailConnectUrl200Response.md)
 
 ### Authorization
 
@@ -1917,6 +3311,84 @@ end
 - **Accept**: application/json
 
 
+## get_gohighlevel_connect_url
+
+> <GetGohighlevelConnectUrl200Response> get_gohighlevel_connect_url(profile_id, opts)
+
+Get HighLevel OAuth connect URL
+
+Initiates OAuth (authorization code, no PKCE) for the Zernio HighLevel Marketplace app. Each HighLevel sub-account (location) becomes one connected account with `platform: gohighlevel`. An agency that installs the app across its sub-accounts gets one connected account per installed sub-account.  ### Flow  1. Redirect the user to `authUrl` (HighLevel's install screen). 2. After the install, HighLevel returns the browser to Zernio's callback. 3. Zernio redirects to `redirect_url` (or the dashboard when omitted).  On success the redirect carries `connected=gohighlevel`, `profileId` and `accountId`. On failure it carries `error` (`gohighlevel_access_denied`, `gohighlevel_invalid_state` or `gohighlevel_connection_failed`), `platform=gohighlevel` and `error_message`.  Reconnecting the same sub-account on the same profile updates the stored connection in place and keeps its settings. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+}
+
+begin
+  # Get HighLevel OAuth connect URL
+  result = api_instance.get_gohighlevel_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_gohighlevel_connect_url: #{e}"
+end
+```
+
+#### Using the get_gohighlevel_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetGohighlevelConnectUrl200Response>, Integer, Hash)> get_gohighlevel_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get HighLevel OAuth connect URL
+  data, status_code, headers = api_instance.get_gohighlevel_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetGohighlevelConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_gohighlevel_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+
+### Return type
+
+[**GetGohighlevelConnectUrl200Response**](GetGohighlevelConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_google_analytics_connect_url
 
 > <GetGoogleAnalyticsConnectUrl200Response> get_google_analytics_connect_url(profile_id, opts)
@@ -1945,7 +3417,12 @@ api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
 opts = {
   redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
-  reconnect_account_id: 'reconnect_account_id_example' # String | Zernio account ID of the Google Analytics account being reconnected. Picking a different property then fails instead of adding a second account.
+  reconnect_account_id: 'reconnect_account_id_example', # String | Zernio account ID of the Google Analytics account being reconnected. Picking a different property then fails instead of adding a second account.
+  welcome: true, # Boolean | When `true`, `authUrl` opens on the Zernio-hosted welcome screen with your brand, as on GET /v1/connect/{platform}, naming Google Analytics.  - With no `redirect_url`, the flow ends on the branded result page instead of the Zernio dashboard. - When left out, the screen shows if the workspace saved it as on by default (`PUT /v1/connect/welcome-screen`). Pass `false` to skip it. - Cannot be combined with `headless=true` in `redirect_url` (400 `INVALID_FIELD_VALUE`). 
+  brand_name: 'brand_name_example', # String | Welcome screen only: your product name in its heading. Same rules as on GET /v1/connect/{platform}.
+  logo_url: 'logo_url_example', # String | Welcome screen only: https URL of your square logo. Rejected with 400 `INVALID_FIELD_VALUE` when the welcome screen is not shown.
+  primary_color: 'primary_color_example', # String | Welcome screen only: hex colour (`#RRGGBB`) of its button.
+  welcome_theme: 'welcome_theme_example' # String | Welcome screen only: a URL-encoded JSON object restyling and rewording the welcome screen and the result page, with the keys documented on GET /v1/connect/{platform}. Rejected when the welcome screen is not shown.
 }
 
 begin
@@ -1982,6 +3459,101 @@ end
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
 | **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
 | **reconnect_account_id** | **String** | Zernio account ID of the Google Analytics account being reconnected. Picking a different property then fails instead of adding a second account. | [optional] |
+| **welcome** | **Boolean** | When &#x60;true&#x60;, &#x60;authUrl&#x60; opens on the Zernio-hosted welcome screen with your brand, as on GET /v1/connect/{platform}, naming Google Analytics.  - With no &#x60;redirect_url&#x60;, the flow ends on the branded result page instead of the Zernio dashboard. - When left out, the screen shows if the workspace saved it as on by default (&#x60;PUT /v1/connect/welcome-screen&#x60;). Pass &#x60;false&#x60; to skip it. - Cannot be combined with &#x60;headless&#x3D;true&#x60; in &#x60;redirect_url&#x60; (400 &#x60;INVALID_FIELD_VALUE&#x60;).  | [optional] |
+| **brand_name** | **String** | Welcome screen only: your product name in its heading. Same rules as on GET /v1/connect/{platform}. | [optional] |
+| **logo_url** | **String** | Welcome screen only: https URL of your square logo. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; when the welcome screen is not shown. | [optional] |
+| **primary_color** | **String** | Welcome screen only: hex colour (&#x60;#RRGGBB&#x60;) of its button. | [optional] |
+| **welcome_theme** | **String** | Welcome screen only: a URL-encoded JSON object restyling and rewording the welcome screen and the result page, with the keys documented on GET /v1/connect/{platform}. Rejected when the welcome screen is not shown. | [optional] |
+
+### Return type
+
+[**GetGoogleAnalyticsConnectUrl200Response**](GetGoogleAnalyticsConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_google_search_console_connect_url
+
+> <GetGoogleAnalyticsConnectUrl200Response> get_google_search_console_connect_url(profile_id, opts)
+
+Get Google Search Console OAuth connect URL
+
+Starts OAuth for Google Search Console. Each connected site becomes its own account with platform `googlesearchconsole`; it reads Google Search data and does not post.  Requested scope: `https://www.googleapis.com/auth/webmasters.readonly`.  ### Flow  Redirect the user to `authUrl`.  - **One verified site:** Zernio connects it and redirects to `redirect_url` (or the dashboard) with `connected=googlesearchconsole`, `profileId`, `accountId` and `username` (the site, such as `acme.com`). - **Several sites:** the user first picks one on a Zernio-hosted page, which then redirects the same way.  ### Your own site picker  Add `headless=true` to `redirect_url`. Zernio then redirects there with `step=select_site`, `profileId`, `platform=googlesearchconsole` and a `pendingDataToken` for `GET /v1/connect/googlesearchconsole/sites` and `POST /v1/connect/googlesearchconsole/select-site`.  ### Errors  On failure the redirect carries `error`, `platform=googlesearchconsole` and `error_message`. Errors include:  - `googlesearchconsole_scope_missing`: the user unticked Search Console access. - `googlesearchconsole_no_sites`: the Google account has no verified Search Console site. - `googlesearchconsole_no_refresh_token`: Google returned no refresh token; connect again. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example', # String | Zernio account ID of the Google Search Console account being reconnected. Picking a different site then fails instead of adding a second account.
+  welcome: true, # Boolean | When `true`, `authUrl` opens on the Zernio-hosted welcome screen with your brand, as on GET /v1/connect/{platform}, naming Google Search Console.  - With no `redirect_url`, the flow ends on the branded result page instead of the Zernio dashboard. - When left out, the screen shows if the workspace saved it as on by default (`PUT /v1/connect/welcome-screen`). Pass `false` to skip it. - Cannot be combined with `headless=true` in `redirect_url` (400 `INVALID_FIELD_VALUE`). 
+  brand_name: 'brand_name_example', # String | Welcome screen only: your product name in its heading. Same rules as on GET /v1/connect/{platform}.
+  logo_url: 'logo_url_example', # String | Welcome screen only: https URL of your square logo. Rejected with 400 `INVALID_FIELD_VALUE` when the welcome screen is not shown.
+  primary_color: 'primary_color_example', # String | Welcome screen only: hex colour (`#RRGGBB`) of its button.
+  welcome_theme: 'welcome_theme_example' # String | Welcome screen only: a URL-encoded JSON object restyling and rewording the welcome screen and the result page, with the keys documented on GET /v1/connect/{platform}. Rejected when the welcome screen is not shown.
+}
+
+begin
+  # Get Google Search Console OAuth connect URL
+  result = api_instance.get_google_search_console_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_google_search_console_connect_url: #{e}"
+end
+```
+
+#### Using the get_google_search_console_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetGoogleAnalyticsConnectUrl200Response>, Integer, Hash)> get_google_search_console_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get Google Search Console OAuth connect URL
+  data, status_code, headers = api_instance.get_google_search_console_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetGoogleAnalyticsConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_google_search_console_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | Zernio account ID of the Google Search Console account being reconnected. Picking a different site then fails instead of adding a second account. | [optional] |
+| **welcome** | **Boolean** | When &#x60;true&#x60;, &#x60;authUrl&#x60; opens on the Zernio-hosted welcome screen with your brand, as on GET /v1/connect/{platform}, naming Google Search Console.  - With no &#x60;redirect_url&#x60;, the flow ends on the branded result page instead of the Zernio dashboard. - When left out, the screen shows if the workspace saved it as on by default (&#x60;PUT /v1/connect/welcome-screen&#x60;). Pass &#x60;false&#x60; to skip it. - Cannot be combined with &#x60;headless&#x3D;true&#x60; in &#x60;redirect_url&#x60; (400 &#x60;INVALID_FIELD_VALUE&#x60;).  | [optional] |
+| **brand_name** | **String** | Welcome screen only: your product name in its heading. Same rules as on GET /v1/connect/{platform}. | [optional] |
+| **logo_url** | **String** | Welcome screen only: https URL of your square logo. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; when the welcome screen is not shown. | [optional] |
+| **primary_color** | **String** | Welcome screen only: hex colour (&#x60;#RRGGBB&#x60;) of its button. | [optional] |
+| **welcome_theme** | **String** | Welcome screen only: a URL-encoded JSON object restyling and rewording the welcome screen and the result page, with the keys documented on GET /v1/connect/{platform}. Rejected when the welcome screen is not shown. | [optional] |
 
 ### Return type
 
@@ -2003,7 +3575,7 @@ end
 
 Get HubSpot OAuth connect URL
 
-Initiates OAuth for a HubSpot portal. HubSpot is a connect-only CRM platform: the connected account does not post, read analytics or run ads.  One HubSpot portal can be connected per profile. Connecting a different portal to a profile that already has one redirects with `error=hubspot_profile_has_portal`.  ### Flow  1. Redirect the user to `authUrl`. 2. After authorization, HubSpot returns the browser to Zernio's internal callback. 3. Zernio redirects to `redirect_url` (or the dashboard when omitted).  On success the redirect carries `connected=hubspot`, `profileId`, `accountId` and `username` (the portal domain). On failure it carries `error`, `platform=hubspot` and `error_message`.  Reconnecting the same portal and profile updates the stored connection in place and keeps its settings.  Requested scopes: `oauth`, `crm.objects.contacts.read`, `crm.objects.contacts.write`. 
+Initiates OAuth for a HubSpot portal. HubSpot is a connect-only CRM platform: the connected account does not post, read analytics or run ads.  One HubSpot portal can be connected per profile. Connecting a different portal to a profile that already has one redirects with `error=hubspot_profile_has_portal`.  ### Flow  1. Redirect the user to `authUrl`. 2. After authorization, HubSpot returns the browser to Zernio's internal callback. 3. Zernio redirects to `redirect_url` (or the dashboard when omitted).  On success the redirect carries `connected=hubspot`, `profileId`, `accountId` and `username` (the portal domain). On failure it carries `error`, `platform=hubspot` and `error_message`.  Reconnecting the same portal and profile updates the stored connection in place and keeps its settings.  Requested scopes: `oauth`, `crm.objects.contacts.read`, `crm.objects.contacts.write`. Optional: `crm.objects.deals.read` (deals in ad results), `automation` (the Send WhatsApp template workflow action), `crm.objects.deals.write` and `crm.objects.owners.read` (the CRM API). A portal connected before an optional scope existed reconnects to grant it. 
 
 ### Examples
 
@@ -2211,13 +3783,82 @@ end
 - **Accept**: application/json
 
 
+## get_org_connection
+
+> <CreateGoogleOrgConnection201Response> get_org_connection(org_connection_id)
+
+Get an organization connection
+
+One organization connection with its status and setup instructions.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+org_connection_id = 'org_connection_id_example' # String | 
+
+begin
+  # Get an organization connection
+  result = api_instance.get_org_connection(org_connection_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_org_connection: #{e}"
+end
+```
+
+#### Using the get_org_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateGoogleOrgConnection201Response>, Integer, Hash)> get_org_connection_with_http_info(org_connection_id)
+
+```ruby
+begin
+  # Get an organization connection
+  data, status_code, headers = api_instance.get_org_connection_with_http_info(org_connection_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateGoogleOrgConnection201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_org_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **org_connection_id** | **String** |  |  |
+
+### Return type
+
+[**CreateGoogleOrgConnection201Response**](CreateGoogleOrgConnection201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_page_webhook_subscription
 
 > <GetPageWebhookSubscription200Response> get_page_webhook_subscription(account_id)
 
-Read a Facebook Page's webhook subscription
+Read an account's webhook subscription
 
-Returns the webhook fields Zernio's app is subscribed to on the connected Page, read live from Meta. Use it to confirm `leadgen` is present: a Page missing it keeps delivering every other event while lead ads stop arriving, with nothing to indicate it. 
+Returns the webhook fields Zernio's app is subscribed to on the connected Page, read live from Meta. Use it to confirm `leadgen` is present: a Page missing it keeps delivering every other event while lead ads stop arriving, with nothing to indicate it.  For an Instagram account connected through Instagram Login it returns the subscription record (`subscriptionId`) and the webhook fields Meta did not subscribe (`missingFields`). An Instagram account connected through Facebook Login returns 409: its webhooks ride the Facebook Page subscription. 
 
 ### Examples
 
@@ -2234,7 +3875,7 @@ api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 
 begin
-  # Read a Facebook Page's webhook subscription
+  # Read an account's webhook subscription
   result = api_instance.get_page_webhook_subscription(account_id)
   p result
 rescue Zernio::ApiError => e
@@ -2250,7 +3891,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Read a Facebook Page's webhook subscription
+  # Read an account's webhook subscription
   data, status_code, headers = api_instance.get_page_webhook_subscription_with_http_info(account_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -2286,7 +3927,7 @@ end
 
 Get pending OAuth data
 
-Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL. No authentication required.  ### Scope  This endpoint is used where the selection list is too large to fit in URL params:  - LinkedIn organizations - Google Business Profile locations - Slack channels - Snapchat profiles - Pinterest boards  The redirect carries a `pendingDataToken` instead of the full payload. The response includes the corresponding selection array (e.g. `boards` for Pinterest).  WhatsApp, Facebook and other platforms pass selection state directly via URL query params on the redirect (`profileId`, `tempToken`, `step`), and no pending record is created. So this endpoint will return 404 for those flows. Use the platform-specific selection endpoint instead (e.g. `/v1/connect/whatsapp/select-phone-number`).  ### Token lifetime  Reading the token does not consume it, so this fetch is repeatable until the token expires 1 hour after issuance.  Completing the platform selection deletes the pending record, so the token stops working from then on. 
+Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL. No authentication required.  ### Scope  This endpoint is used where the selection list is too large to fit in URL params:  - LinkedIn organizations - Google Business Profile locations - Slack channels - Snapchat profiles - Pinterest boards  The redirect carries a `pendingDataToken` instead of the full payload. The response includes the corresponding selection array (e.g. `boards` for Pinterest).  For LinkedIn, add `pendingDataOnly=true` to your `redirect_url` to keep `tempToken`, `userProfile` and `organizations` out of the redirect: it then carries only `pendingDataToken`, and this endpoint returns `tempToken`, `refreshToken`, `userProfile` and `organizations` for POST /v1/connect/linkedin/select-organization. Other platforms ignore it.  WhatsApp, Facebook and other platforms pass selection state directly via URL query params on the redirect (`profileId`, `tempToken`, `step`), and no pending record is created. So this endpoint will return 404 for those flows. Use the platform-specific selection endpoint instead (e.g. `/v1/connect/whatsapp/select-phone-number`).  ### Token lifetime  Reading the token does not consume it, so this fetch is repeatable until the token expires 1 hour after issuance.  Completing the platform selection deletes the pending record, so the token stops working from then on. 
 
 ### Examples
 
@@ -2558,6 +4199,86 @@ end
 - **Accept**: application/json
 
 
+## get_salesforce_connect_url
+
+> <GetSalesforceConnectUrl200Response> get_salesforce_connect_url(profile_id, opts)
+
+Get Salesforce OAuth connect URL
+
+Initiates OAuth (authorization code with PKCE) for a Salesforce org. Salesforce is a connect-only CRM platform: inbox contacts are matched to Contacts and Leads, and each day of conversation is logged as a Task.  The org must have the Zernio Salesforce package installed first: it carries the app Salesforce authorizes. Production orgs install it from `https://login.salesforce.com/packaging/installPackage.apexp?p0=04tfj000000llzZAAQ`, sandboxes from the same path on `test.salesforce.com`. Without it the redirect carries `error=salesforce_package_not_installed`.  One Salesforce org can be connected per profile. Connecting a different org to a profile that already has one redirects with `error=salesforce_profile_has_org`.  ### Flow  1. Redirect the user to `authUrl`. 2. After authorization, Salesforce returns the browser to Zernio's internal callback. 3. Zernio redirects to `redirect_url` (or the dashboard when omitted).  On success the redirect carries `connected=salesforce`, `profileId`, `accountId` and `username`. On failure it carries `error`, `platform=salesforce` and `error_message`.  Reconnecting the same org and profile updates the stored connection in place and keeps its settings.  Requested scopes: `api`, `refresh_token`, `id`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  environment: 'production', # String | Sign in at login.salesforce.com (`production`, also Developer Edition orgs) or test.salesforce.com (`sandbox`).
+  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+}
+
+begin
+  # Get Salesforce OAuth connect URL
+  result = api_instance.get_salesforce_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_salesforce_connect_url: #{e}"
+end
+```
+
+#### Using the get_salesforce_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetSalesforceConnectUrl200Response>, Integer, Hash)> get_salesforce_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get Salesforce OAuth connect URL
+  data, status_code, headers = api_instance.get_salesforce_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetSalesforceConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_salesforce_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **environment** | **String** | Sign in at login.salesforce.com (&#x60;production&#x60;, also Developer Edition orgs) or test.salesforce.com (&#x60;sandbox&#x60;). | [optional][default to &#39;production&#39;] |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+
+### Return type
+
+[**GetSalesforceConnectUrl200Response**](GetSalesforceConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_shopify_connect_url
 
 > <GetShopifyConnectUrl200Response> get_shopify_connect_url(profile_id, shop, opts)
@@ -2626,6 +4347,86 @@ end
 ### Authorization
 
 [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_stripe_connect_url
+
+> <GetStripeConnectUrl200Response> get_stripe_connect_url(profile_id, opts)
+
+Get Stripe connect URL
+
+Initiates Stripe Connect OAuth for the customer's own Stripe account. Zernio only reads its payments. Stripe is a connect-only sales source: each paid charge becomes a `Purchase` event in `GET /v1/events` (source `stripe`), and refunds lower or retract it.  One Stripe account can be connected per profile. Connecting a different account to a profile that already has one redirects with `error=stripe_profile_has_account`.  ### Flow  1. Redirect the user to `authUrl`. 2. After authorization, Stripe returns the browser to Zernio's internal callback. 3. Zernio redirects to `redirect_url` (or the dashboard when omitted).  On success the redirect carries `connected=stripe`, `profileId`, `accountId` and `username` (the Stripe account name). On failure it carries `error`, `platform=stripe` and `error_message`.  To match a payment to the ad campaign behind it, set `zrn`, `gclid`, `fbclid` or `utm_*` keys (and optionally `landing_url`) in the metadata of the Checkout Session, PaymentIntent or subscription. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
+opts = {
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example' # String | The Stripe connection being reconnected. The callback refuses to write to any other account.
+}
+
+begin
+  # Get Stripe connect URL
+  result = api_instance.get_stripe_connect_url(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_stripe_connect_url: #{e}"
+end
+```
+
+#### Using the get_stripe_connect_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetStripeConnectUrl200Response>, Integer, Hash)> get_stripe_connect_url_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # Get Stripe connect URL
+  data, status_code, headers = api_instance.get_stripe_connect_url_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetStripeConnectUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_stripe_connect_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
+| **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | The Stripe connection being reconnected. The callback refuses to write to any other account. | [optional] |
+
+### Return type
+
+[**GetStripeConnectUrl200Response**](GetStripeConnectUrl200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -2706,7 +4507,7 @@ end
 
 ## get_telegram_connect_status
 
-> <GetTelegramConnectStatus200Response> get_telegram_connect_status(profile_id)
+> <GetTelegramConnectStatus200Response> get_telegram_connect_status(profile_id, opts)
 
 Generate Telegram code
 
@@ -2725,10 +4526,13 @@ end
 
 api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | The profile ID to connect the Telegram account to
+opts = {
+  purpose: 'notifications' # String | Connect the account for notifications only. Slack and Telegram only: `GET /v1/connect/{platform}` returns 400 for any other platform, and other platforms' own connect endpoints ignore it.  The account is free, receives Zernio notifications, and cannot publish. To publish with it, connect it again without `purpose`. If the chat is already connected for publishing, the bot refuses the code in the private chat and the code stays pending. 
+}
 
 begin
   # Generate Telegram code
-  result = api_instance.get_telegram_connect_status(profile_id)
+  result = api_instance.get_telegram_connect_status(profile_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_telegram_connect_status: #{e}"
@@ -2739,12 +4543,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetTelegramConnectStatus200Response>, Integer, Hash)> get_telegram_connect_status_with_http_info(profile_id)
+> <Array(<GetTelegramConnectStatus200Response>, Integer, Hash)> get_telegram_connect_status_with_http_info(profile_id, opts)
 
 ```ruby
 begin
   # Generate Telegram code
-  data, status_code, headers = api_instance.get_telegram_connect_status_with_http_info(profile_id)
+  data, status_code, headers = api_instance.get_telegram_connect_status_with_http_info(profile_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetTelegramConnectStatus200Response>
@@ -2758,6 +4562,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | The profile ID to connect the Telegram account to |  |
+| **purpose** | **String** | Connect the account for notifications only. Slack and Telegram only: &#x60;GET /v1/connect/{platform}&#x60; returns 400 for any other platform, and other platforms&#39; own connect endpoints ignore it.  The account is free, receives Zernio notifications, and cannot publish. To publish with it, connect it again without &#x60;purpose&#x60;. If the chat is already connected for publishing, the bot refuses the code in the private chat and the code stays pending.  | [optional] |
 
 ### Return type
 
@@ -2844,6 +4649,72 @@ end
 ### Authorization
 
 [connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_wechat_ip_whitelist
+
+> <GetWechatIpWhitelist200Response> get_wechat_ip_whitelist
+
+Get WeChat IP whitelist
+
+The IPs Zernio calls WeChat from. Add all of them to the Official Account's API IP whitelist before calling POST /v1/connect/wechat/credentials.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+
+begin
+  # Get WeChat IP whitelist
+  result = api_instance.get_wechat_ip_whitelist
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_wechat_ip_whitelist: #{e}"
+end
+```
+
+#### Using the get_wechat_ip_whitelist_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWechatIpWhitelist200Response>, Integer, Hash)> get_wechat_ip_whitelist_with_http_info
+
+```ruby
+begin
+  # Get WeChat IP whitelist
+  data, status_code, headers = api_instance.get_wechat_ip_whitelist_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWechatIpWhitelist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_wechat_ip_whitelist_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetWechatIpWhitelist200Response**](GetWechatIpWhitelist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -3365,6 +5236,80 @@ end
 - **Accept**: application/json
 
 
+## list_campaign_manager_profiles
+
+> <ListCampaignManagerProfiles200Response> list_campaign_manager_profiles(pending_data_token)
+
+List Campaign Manager 360 profiles for a pending connect
+
+For headless flows: lists the Campaign Manager 360 user profiles (one per CM360 account) of a pending connect, so you can show your own picker.  - Listing does not consume the token. - A headless token is honored only together with your API key (or connect token) for the same profile. - It expires after one hour. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+pending_data_token = 'pending_data_token_example' # String | Token from the headless redirect.
+
+begin
+  # List Campaign Manager 360 profiles for a pending connect
+  result = api_instance.list_campaign_manager_profiles(pending_data_token)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_campaign_manager_profiles: #{e}"
+end
+```
+
+#### Using the list_campaign_manager_profiles_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCampaignManagerProfiles200Response>, Integer, Hash)> list_campaign_manager_profiles_with_http_info(pending_data_token)
+
+```ruby
+begin
+  # List Campaign Manager 360 profiles for a pending connect
+  data, status_code, headers = api_instance.list_campaign_manager_profiles_with_http_info(pending_data_token)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCampaignManagerProfiles200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_campaign_manager_profiles_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **pending_data_token** | **String** | Token from the headless redirect. |  |
+
+### Return type
+
+[**ListCampaignManagerProfiles200Response**](ListCampaignManagerProfiles200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_facebook_pages
 
 > <ListFacebookPages200Response> list_facebook_pages(opts)
@@ -3523,6 +5468,85 @@ end
 - **Accept**: application/json
 
 
+## list_google_business_categories
+
+> <ListGoogleBusinessCategories200Response> list_google_business_categories(account_id, region_code, language_code, opts)
+
+List Google Business Profile categories
+
+Lists the business categories Google accepts for a region, localized to `languageCode`. Use the returned `name` (e.g. `categories/gcid:afghani_restaurant`) as the primary category when creating or updating a location.  Not location-scoped: works for a Google Business Profile account that has no location yet.  `query` matches only the START of the display name in `languageCode` (`Restaurante` returns `Restaurante afgano`, but `afgano` returns nothing). Results are paginated with `nextPageToken`, 100 per page. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
+region_code = 'ES' # String | CLDR region code the categories are relevant for (e.g. \"US\", \"ES\").
+language_code = 'es' # String | BCP-47 language code the category names are returned in (e.g. \"en\", \"es\").
+opts = {
+  query: 'query_example', # String | Prefix of the localized category display name.
+  page_token: 'page_token_example' # String | Pagination token from a previous response's nextPageToken field.
+}
+
+begin
+  # List Google Business Profile categories
+  result = api_instance.list_google_business_categories(account_id, region_code, language_code, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_google_business_categories: #{e}"
+end
+```
+
+#### Using the list_google_business_categories_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListGoogleBusinessCategories200Response>, Integer, Hash)> list_google_business_categories_with_http_info(account_id, region_code, language_code, opts)
+
+```ruby
+begin
+  # List Google Business Profile categories
+  data, status_code, headers = api_instance.list_google_business_categories_with_http_info(account_id, region_code, language_code, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListGoogleBusinessCategories200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_google_business_categories_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
+| **region_code** | **String** | CLDR region code the categories are relevant for (e.g. \&quot;US\&quot;, \&quot;ES\&quot;). |  |
+| **language_code** | **String** | BCP-47 language code the category names are returned in (e.g. \&quot;en\&quot;, \&quot;es\&quot;). |  |
+| **query** | **String** | Prefix of the localized category display name. | [optional] |
+| **page_token** | **String** | Pagination token from a previous response&#39;s nextPageToken field. | [optional] |
+
+### Return type
+
+[**ListGoogleBusinessCategories200Response**](ListGoogleBusinessCategories200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_google_business_locations
 
 > <ListGoogleBusinessLocations200Response> list_google_business_locations(opts)
@@ -3596,6 +5620,80 @@ end
 ### Return type
 
 [**ListGoogleBusinessLocations200Response**](ListGoogleBusinessLocations200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_google_search_console_sites
+
+> <ListGoogleSearchConsoleSites200Response> list_google_search_console_sites(pending_data_token)
+
+List Search Console sites for a pending connect
+
+For headless flows: lists the verified Search Console sites of a pending connect, so you can show your own picker.  ### Flow  1. The connect started with `redirect_url=...?headless=true`, and the Google account has several verified sites. 2. Zernio redirects to your `redirect_url` with `step=select_site`, `profileId`, `platform=googlesearchconsole` and a `pendingDataToken`. 3. Call this to list the sites and show your own picker. 4. Call `POST /v1/connect/googlesearchconsole/select-site`.  ### Token  - Listing does not consume the token. - A headless token passes through your own URLs, so it is honored only together with your API key (or connect token) for the same profile. - It expires after one hour. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+pending_data_token = 'pending_data_token_example' # String | Token from the headless redirect.
+
+begin
+  # List Search Console sites for a pending connect
+  result = api_instance.list_google_search_console_sites(pending_data_token)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_google_search_console_sites: #{e}"
+end
+```
+
+#### Using the list_google_search_console_sites_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListGoogleSearchConsoleSites200Response>, Integer, Hash)> list_google_search_console_sites_with_http_info(pending_data_token)
+
+```ruby
+begin
+  # List Search Console sites for a pending connect
+  data, status_code, headers = api_instance.list_google_search_console_sites_with_http_info(pending_data_token)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListGoogleSearchConsoleSites200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_google_search_console_sites_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **pending_data_token** | **String** | Token from the headless redirect. |  |
+
+### Return type
+
+[**ListGoogleSearchConsoleSites200Response**](ListGoogleSearchConsoleSites200Response.md)
 
 ### Authorization
 
@@ -3691,7 +5789,7 @@ end
 
 ## list_linked_in_organizations
 
-> <ListLinkedInOrganizations200Response> list_linked_in_organizations(temp_token, org_ids)
+> <ListLinkedInOrganizations200Response> list_linked_in_organizations(org_ids, opts)
 
 List LinkedIn orgs
 
@@ -3709,12 +5807,15 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-temp_token = 'temp_token_example' # String | The temporary LinkedIn access token from the OAuth redirect
 org_ids = '12345678,87654321,11111111' # String | Comma-separated list of organization IDs to fetch details for (max 100)
+opts = {
+  temp_token: 'temp_token_example', # String | The temporary LinkedIn access token from the OAuth redirect. Required unless sent in the X-Temp-Token header.
+  x_temp_token: 'x_temp_token_example' # String | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way.
+}
 
 begin
   # List LinkedIn orgs
-  result = api_instance.list_linked_in_organizations(temp_token, org_ids)
+  result = api_instance.list_linked_in_organizations(org_ids, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_linked_in_organizations: #{e}"
@@ -3725,12 +5826,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListLinkedInOrganizations200Response>, Integer, Hash)> list_linked_in_organizations_with_http_info(temp_token, org_ids)
+> <Array(<ListLinkedInOrganizations200Response>, Integer, Hash)> list_linked_in_organizations_with_http_info(org_ids, opts)
 
 ```ruby
 begin
   # List LinkedIn orgs
-  data, status_code, headers = api_instance.list_linked_in_organizations_with_http_info(temp_token, org_ids)
+  data, status_code, headers = api_instance.list_linked_in_organizations_with_http_info(org_ids, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListLinkedInOrganizations200Response>
@@ -3743,8 +5844,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **temp_token** | **String** | The temporary LinkedIn access token from the OAuth redirect |  |
 | **org_ids** | **String** | Comma-separated list of organization IDs to fetch details for (max 100) |  |
+| **temp_token** | **String** | The temporary LinkedIn access token from the OAuth redirect. Required unless sent in the X-Temp-Token header. | [optional] |
+| **x_temp_token** | **String** | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way. | [optional] |
 
 ### Return type
 
@@ -3822,6 +5924,150 @@ end
 ### Return type
 
 [**ListOAuthApps200Response**](ListOAuthApps200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_org_connection_users
+
+> <ListOrgConnectionUsers200Response> list_org_connection_users(org_connection_id, opts)
+
+List an organization's users
+
+The organization's users, 100 per page, with whether each is allowed and the `accountId` of those already added.  Google needs `adminEmail` on the connection and the directory scope delegated. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+org_connection_id = 'org_connection_id_example' # String | 
+opts = {
+  cursor: 'cursor_example' # String | 
+}
+
+begin
+  # List an organization's users
+  result = api_instance.list_org_connection_users(org_connection_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_org_connection_users: #{e}"
+end
+```
+
+#### Using the list_org_connection_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListOrgConnectionUsers200Response>, Integer, Hash)> list_org_connection_users_with_http_info(org_connection_id, opts)
+
+```ruby
+begin
+  # List an organization's users
+  data, status_code, headers = api_instance.list_org_connection_users_with_http_info(org_connection_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListOrgConnectionUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_org_connection_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **org_connection_id** | **String** |  |  |
+| **cursor** | **String** |  | [optional] |
+
+### Return type
+
+[**ListOrgConnectionUsers200Response**](ListOrgConnectionUsers200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_org_connections
+
+> <ListOrgConnections200Response> list_org_connections(opts)
+
+List organization connections
+
+The Google Workspace and Microsoft 365 organization connections, newest first. Pass `profileId` to list one profile; omit it to list every profile the API key can access (a profile-restricted key or team member only sees its own profiles).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+opts = {
+  profile_id: 'profile_id_example' # String | Limit the list to one profile. Omit to list across every accessible profile.
+}
+
+begin
+  # List organization connections
+  result = api_instance.list_org_connections(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_org_connections: #{e}"
+end
+```
+
+#### Using the list_org_connections_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListOrgConnections200Response>, Integer, Hash)> list_org_connections_with_http_info(opts)
+
+```ruby
+begin
+  # List organization connections
+  data, status_code, headers = api_instance.list_org_connections_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListOrgConnections200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_org_connections_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Limit the list to one profile. Omit to list across every accessible profile. | [optional] |
+
+### Return type
+
+[**ListOrgConnections200Response**](ListOrgConnections200Response.md)
 
 ### Authorization
 
@@ -3931,7 +6177,8 @@ opts = {
   pending_data_token: 'pending_data_token_example', # String | Nonce from the OAuth redirect (first connect).
   account_id: 'account_id_example', # String | Existing active Slack account (yours or a team member's) whose workspace token is reused.
   redirect_url: 'redirect_url_example', # String | Start-OAuth mode only: where to send the user after the connect completes. `redirectUrl` is accepted as an alias.
-  scopes: 'posting' # String | Start-OAuth mode only. Comma-separated permission areas to request instead of the full Slack scope set, same semantics as `scopes` on `GET /v1/connect/{platform}`. Omit it to request everything.  - `posting`: installs the bot with the channel scopes it needs to post. - `messaging`: adds the history, DM and reaction scopes the inbox reads. - `analytics`, `comments`, `ads`: add nothing on Slack. 
+  scopes: 'posting', # String | Start-OAuth mode only. Comma-separated permission areas to request instead of the full Slack scope set, same semantics as `scopes` on `GET /v1/connect/{platform}`. Omit it to request everything.  - `posting`: installs the bot with the channel scopes it needs to post. - `messaging`: adds the history, DM and reaction scopes the inbox reads. - `analytics`, `comments`, `ads`: add nothing on Slack. 
+  purpose: 'notifications' # String | Start-OAuth mode only. Connect the account for notifications only. Slack and Telegram only: `GET /v1/connect/{platform}` returns 400 for any other platform, and other platforms' own connect endpoints ignore it.  The account is free, receives Zernio notifications, and cannot publish. To publish with it, connect it again without `purpose`. Refused with 400 when the channel or chat is already connected for publishing: connect a separate one for notifications.  Adding another channel with `accountId` keeps the notifications-only setting of the account whose workspace token it reuses. 
 }
 
 begin
@@ -3970,6 +6217,7 @@ end
 | **account_id** | **String** | Existing active Slack account (yours or a team member&#39;s) whose workspace token is reused. | [optional] |
 | **redirect_url** | **String** | Start-OAuth mode only: where to send the user after the connect completes. &#x60;redirectUrl&#x60; is accepted as an alias. | [optional] |
 | **scopes** | **String** | Start-OAuth mode only. Comma-separated permission areas to request instead of the full Slack scope set, same semantics as &#x60;scopes&#x60; on &#x60;GET /v1/connect/{platform}&#x60;. Omit it to request everything.  - &#x60;posting&#x60;: installs the bot with the channel scopes it needs to post. - &#x60;messaging&#x60;: adds the history, DM and reaction scopes the inbox reads. - &#x60;analytics&#x60;, &#x60;comments&#x60;, &#x60;ads&#x60;: add nothing on Slack.  | [optional] |
+| **purpose** | **String** | Start-OAuth mode only. Connect the account for notifications only. Slack and Telegram only: &#x60;GET /v1/connect/{platform}&#x60; returns 400 for any other platform, and other platforms&#39; own connect endpoints ignore it.  The account is free, receives Zernio notifications, and cannot publish. To publish with it, connect it again without &#x60;purpose&#x60;. Refused with 400 when the channel or chat is already connected for publishing: connect a separate one for notifications.  Adding another channel with &#x60;accountId&#x60; keeps the notifications-only setting of the account whose workspace token it reuses.  | [optional] |
 
 ### Return type
 
@@ -4060,7 +6308,7 @@ end
 
 ## list_whats_app_phone_numbers
 
-> <ListWhatsAppPhoneNumbers200Response> list_whats_app_phone_numbers(profile_id, temp_token, opts)
+> <ListWhatsAppPhoneNumbers200Response> list_whats_app_phone_numbers(profile_id, opts)
 
 List numbers for selection
 
@@ -4079,14 +6327,16 @@ end
 
 api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | The Zernio profile ID from the headless redirect
-temp_token = 'temp_token_example' # String | The temporary access token from the headless redirect
 opts = {
+  temp_token: 'temp_token_example', # String | The temporary access token from the headless redirect. Required unless sent in the X-Temp-Token header.
+  x_temp_token: 'x_temp_token_example', # String | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way.
+  connect_flow: 'connect_flow_example', # String | Set by the Zernio-hosted picker, whose user token stays in an httpOnly cookie. Integrators send tempToken instead.
   x_connect_token: 'x_connect_token_example' # String | Alternative auth for API users' end customers (used when the bearer token is scoped to a different user)
 }
 
 begin
   # List numbers for selection
-  result = api_instance.list_whats_app_phone_numbers(profile_id, temp_token, opts)
+  result = api_instance.list_whats_app_phone_numbers(profile_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_whats_app_phone_numbers: #{e}"
@@ -4097,12 +6347,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListWhatsAppPhoneNumbers200Response>, Integer, Hash)> list_whats_app_phone_numbers_with_http_info(profile_id, temp_token, opts)
+> <Array(<ListWhatsAppPhoneNumbers200Response>, Integer, Hash)> list_whats_app_phone_numbers_with_http_info(profile_id, opts)
 
 ```ruby
 begin
   # List numbers for selection
-  data, status_code, headers = api_instance.list_whats_app_phone_numbers_with_http_info(profile_id, temp_token, opts)
+  data, status_code, headers = api_instance.list_whats_app_phone_numbers_with_http_info(profile_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListWhatsAppPhoneNumbers200Response>
@@ -4116,7 +6366,9 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | The Zernio profile ID from the headless redirect |  |
-| **temp_token** | **String** | The temporary access token from the headless redirect |  |
+| **temp_token** | **String** | The temporary access token from the headless redirect. Required unless sent in the X-Temp-Token header. | [optional] |
+| **x_temp_token** | **String** | The OAuth user token, in place of the tempToken query parameter. Prefer it: a query string is written to request logs along the way. | [optional] |
+| **connect_flow** | **String** | Set by the Zernio-hosted picker, whose user token stays in an httpOnly cookie. Integrators send tempToken instead. | [optional] |
 | **x_connect_token** | **String** | Alternative auth for API users&#39; end customers (used when the bearer token is scoped to a different user) | [optional] |
 
 ### Return type
@@ -4137,9 +6389,9 @@ end
 
 > <ResyncPageWebhookSubscription200Response> resync_page_webhook_subscription(account_id)
 
-Re-subscribe a Facebook Page to Zernio's webhooks
+Re-subscribe an account to Zernio's webhooks
 
-Re-sends the full field set to Meta and returns the subscription read back afterwards. Meta only honours the field set sent at subscribe time, so a Page connected before a field existed stays without it until this runs. The response reflects what Meta actually granted, not what was requested. 
+Re-sends the full field set to Meta and returns the subscription read back afterwards. Meta only honours the field set sent at subscribe time, so a Page connected before a field existed stays without it until this runs. The response reflects what Meta actually granted, not what was requested.  For an Instagram account connected through Instagram Login, Meta can keep listing a subscription while delivering nothing, and re-sending the fields over it changes nothing. So this call deletes the subscription and creates it again, and `recreated` is true when the record id moved.  Events can be missed during the short window in between, so use it when delivery has stopped, not periodically. An Instagram account connected through Facebook Login returns 409. 
 
 ### Examples
 
@@ -4156,7 +6408,7 @@ api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 
 begin
-  # Re-subscribe a Facebook Page to Zernio's webhooks
+  # Re-subscribe an account to Zernio's webhooks
   result = api_instance.resync_page_webhook_subscription(account_id)
   p result
 rescue Zernio::ApiError => e
@@ -4172,7 +6424,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Re-subscribe a Facebook Page to Zernio's webhooks
+  # Re-subscribe an account to Zernio's webhooks
   data, status_code, headers = api_instance.resync_page_webhook_subscription_with_http_info(account_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -4199,6 +6451,151 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## search_google_business_locations
+
+> <SearchGoogleBusinessLocations200Response> search_google_business_locations(account_id, search_google_business_locations_request)
+
+Search existing Google listings
+
+Searches Google Maps for listings that match a business name or a partial location, so you can check whether the business already exists before creating a new listing.  Not location-scoped: works for a Google Business Profile account that has no location yet.  Send exactly one of `query` (free text) or `location` (a partial location with at least `title`). Google returns at most 10 matches and does not paginate.  `requestAdminRightsUri` is present only when the listing is already claimed; send the business owner there to request admin rights instead of creating a duplicate. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
+search_google_business_locations_request = Zernio::SearchGoogleBusinessLocationsRequest.new # SearchGoogleBusinessLocationsRequest | 
+
+begin
+  # Search existing Google listings
+  result = api_instance.search_google_business_locations(account_id, search_google_business_locations_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->search_google_business_locations: #{e}"
+end
+```
+
+#### Using the search_google_business_locations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchGoogleBusinessLocations200Response>, Integer, Hash)> search_google_business_locations_with_http_info(account_id, search_google_business_locations_request)
+
+```ruby
+begin
+  # Search existing Google listings
+  data, status_code, headers = api_instance.search_google_business_locations_with_http_info(account_id, search_google_business_locations_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchGoogleBusinessLocations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->search_google_business_locations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
+| **search_google_business_locations_request** | [**SearchGoogleBusinessLocationsRequest**](SearchGoogleBusinessLocationsRequest.md) |  |  |
+
+### Return type
+
+[**SearchGoogleBusinessLocations200Response**](SearchGoogleBusinessLocations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## select_campaign_manager_profile
+
+> <SelectCampaignManagerProfile200Response> select_campaign_manager_profile(select_campaign_manager_profile_request)
+
+Connect the chosen Campaign Manager 360 profile
+
+For headless flows. Connects the CM360 user profile the user picked as a `campaignmanager360` account and returns where to send the user next.  Consumes the `pendingDataToken`; a refused or failed attempt leaves it usable for a retry. Send your API key (or connect token) for the same profile with a headless token. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+select_campaign_manager_profile_request = Zernio::SelectCampaignManagerProfileRequest.new({pending_data_token: 'pending_data_token_example', cm_profile_id: '998877'}) # SelectCampaignManagerProfileRequest | 
+
+begin
+  # Connect the chosen Campaign Manager 360 profile
+  result = api_instance.select_campaign_manager_profile(select_campaign_manager_profile_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->select_campaign_manager_profile: #{e}"
+end
+```
+
+#### Using the select_campaign_manager_profile_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SelectCampaignManagerProfile200Response>, Integer, Hash)> select_campaign_manager_profile_with_http_info(select_campaign_manager_profile_request)
+
+```ruby
+begin
+  # Connect the chosen Campaign Manager 360 profile
+  data, status_code, headers = api_instance.select_campaign_manager_profile_with_http_info(select_campaign_manager_profile_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SelectCampaignManagerProfile200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->select_campaign_manager_profile_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **select_campaign_manager_profile_request** | [**SelectCampaignManagerProfileRequest**](SelectCampaignManagerProfileRequest.md) |  |  |
+
+### Return type
+
+[**SelectCampaignManagerProfile200Response**](SelectCampaignManagerProfile200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -4413,6 +6810,80 @@ end
 ### Return type
 
 [**SelectGoogleBusinessLocation200Response**](SelectGoogleBusinessLocation200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## select_google_search_console_site
+
+> <SelectGoogleSearchConsoleSite200Response> select_google_search_console_site(select_google_search_console_site_request)
+
+Connect the chosen Search Console site
+
+For headless flows. Connects the site the user picked as a `googlesearchconsole` account and returns where to send the user next.  - On success: your `redirect_url` with `connected=googlesearchconsole`, `profileId`, `accountId` and `username`. - When the connect was refused (for example a billing block): an `error`.  Consumes the `pendingDataToken`; a refused or failed attempt leaves it usable for a retry.  Send your API key (or connect token) for the same profile with a headless token. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+select_google_search_console_site_request = Zernio::SelectGoogleSearchConsoleSiteRequest.new({pending_data_token: 'pending_data_token_example', site_url: 'sc-domain:acme.com'}) # SelectGoogleSearchConsoleSiteRequest | 
+
+begin
+  # Connect the chosen Search Console site
+  result = api_instance.select_google_search_console_site(select_google_search_console_site_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->select_google_search_console_site: #{e}"
+end
+```
+
+#### Using the select_google_search_console_site_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SelectGoogleSearchConsoleSite200Response>, Integer, Hash)> select_google_search_console_site_with_http_info(select_google_search_console_site_request)
+
+```ruby
+begin
+  # Connect the chosen Search Console site
+  data, status_code, headers = api_instance.select_google_search_console_site_with_http_info(select_google_search_console_site_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SelectGoogleSearchConsoleSite200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->select_google_search_console_site_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **select_google_search_console_site_request** | [**SelectGoogleSearchConsoleSiteRequest**](SelectGoogleSearchConsoleSiteRequest.md) |  |  |
+
+### Return type
+
+[**SelectGoogleSearchConsoleSite200Response**](SelectGoogleSearchConsoleSite200Response.md)
 
 ### Authorization
 
@@ -5275,6 +7746,77 @@ end
 - **Accept**: application/json
 
 
+## update_org_connection
+
+> <CreateGoogleOrgConnection201Response> update_org_connection(org_connection_id, update_org_connection_request)
+
+Update an organization connection
+
+Changes the allowlist or the Google directory admin.  Mailboxes already added that a narrowed allowlist excludes answer `401` `reconnect_required` until it includes them again. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+org_connection_id = 'org_connection_id_example' # String | 
+update_org_connection_request = Zernio::UpdateOrgConnectionRequest.new # UpdateOrgConnectionRequest | 
+
+begin
+  # Update an organization connection
+  result = api_instance.update_org_connection(org_connection_id, update_org_connection_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->update_org_connection: #{e}"
+end
+```
+
+#### Using the update_org_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateGoogleOrgConnection201Response>, Integer, Hash)> update_org_connection_with_http_info(org_connection_id, update_org_connection_request)
+
+```ruby
+begin
+  # Update an organization connection
+  data, status_code, headers = api_instance.update_org_connection_with_http_info(org_connection_id, update_org_connection_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateGoogleOrgConnection201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->update_org_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **org_connection_id** | **String** |  |  |
+| **update_org_connection_request** | [**UpdateOrgConnectionRequest**](UpdateOrgConnectionRequest.md) |  |  |
+
+### Return type
+
+[**CreateGoogleOrgConnection201Response**](CreateGoogleOrgConnection201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_pinterest_boards
 
 > <ConnectBlueskyCredentials200Response> update_pinterest_boards(account_id, update_pinterest_boards_request)
@@ -5477,6 +8019,79 @@ end
 ### Return type
 
 [**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## verify_org_connection
+
+> <CreateGoogleOrgConnection201Response> verify_org_connection(org_connection_id, opts)
+
+Verify an organization connection
+
+Checks the administrator's grant and activates the connection.  Google: the domain's TXT record and a token for `email` with every delegated scope. Microsoft: a tenant token carrying every application permission the areas need.  `409` `org_grant_incomplete` says what is still missing. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+org_connection_id = 'org_connection_id_example' # String | 
+opts = {
+  verify_org_connection_request: Zernio::VerifyOrgConnectionRequest.new # VerifyOrgConnectionRequest | 
+}
+
+begin
+  # Verify an organization connection
+  result = api_instance.verify_org_connection(org_connection_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->verify_org_connection: #{e}"
+end
+```
+
+#### Using the verify_org_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateGoogleOrgConnection201Response>, Integer, Hash)> verify_org_connection_with_http_info(org_connection_id, opts)
+
+```ruby
+begin
+  # Verify an organization connection
+  data, status_code, headers = api_instance.verify_org_connection_with_http_info(org_connection_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateGoogleOrgConnection201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->verify_org_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **org_connection_id** | **String** |  |  |
+| **verify_org_connection_request** | [**VerifyOrgConnectionRequest**](VerifyOrgConnectionRequest.md) |  | [optional] |
+
+### Return type
+
+[**CreateGoogleOrgConnection201Response**](CreateGoogleOrgConnection201Response.md)
 
 ### Authorization
 

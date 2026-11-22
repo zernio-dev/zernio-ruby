@@ -27,6 +27,7 @@ opts = {
   impact: 'none', # String | Only entries with this impact. `action_required` lists the changes an integration may need to act on.
   platform: 'whatsapp', # String | Only entries tagged with this platform or area slug (see `platforms` on the entry). One slug per request.
   before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Only entries published strictly before this instant. Pass the previous page's `nextCursor`.
+  cursor: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Same as `before`, for clients that send `nextCursor` back as `cursor`. `before` wins when both are set.
   limit: 56 # Integer | 
 }
 
@@ -65,6 +66,7 @@ end
 | **impact** | **String** | Only entries with this impact. &#x60;action_required&#x60; lists the changes an integration may need to act on. | [optional] |
 | **platform** | **String** | Only entries tagged with this platform or area slug (see &#x60;platforms&#x60; on the entry). One slug per request. | [optional] |
 | **before** | **Time** | Only entries published strictly before this instant. Pass the previous page&#39;s &#x60;nextCursor&#x60;. | [optional] |
+| **cursor** | **Time** | Same as &#x60;before&#x60;, for clients that send &#x60;nextCursor&#x60; back as &#x60;cursor&#x60;. &#x60;before&#x60; wins when both are set. | [optional] |
 | **limit** | **Integer** |  | [optional][default to 20] |
 
 ### Return type

@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_calendar_event**](CalendarApi.md#create_calendar_event) | **POST** /v1/calendar/events | Create an event |
 | [**delete_calendar_event**](CalendarApi.md#delete_calendar_event) | **DELETE** /v1/calendar/events/{eventId} | Delete an event |
 | [**get_calendar_event**](CalendarApi.md#get_calendar_event) | **GET** /v1/calendar/events/{eventId} | Get an event |
+| [**list_calendar_event_instances**](CalendarApi.md#list_calendar_event_instances) | **GET** /v1/calendar/events/{eventId}/instances | List the occurrences of a recurring event |
 | [**list_calendar_events**](CalendarApi.md#list_calendar_events) | **GET** /v1/calendar/events | List events in a window |
 | [**list_calendars**](CalendarApi.md#list_calendars) | **GET** /v1/calendar/calendars | List calendars |
 | [**rsvp_calendar_event**](CalendarApi.md#rsvp_calendar_event) | **POST** /v1/calendar/events/{eventId}/rsvp | Respond to an invitation |
@@ -90,6 +91,8 @@ end
 
 Busy blocks for one or more accounts
 
+Reads busy time for up to 10 connected accounts, Google and Microsoft mixed, in parallel.  By default a Google account reads every calendar shown in Google Calendar, and a Microsoft account reads the mailbox's schedule. Name calendars with `accounts[].calendarIds`.  Check coworkers who never connected with `accounts[].emails`, read through that account (Google: up to 50 calendars and addresses per account; Microsoft: up to 19 coworkers, work accounts only).  An account that cannot be read gets `busy: null` and an `error`, and the others still answer. When no account can be read, the first error is returned as the response. 
+
 ### Examples
 
 ```ruby
@@ -102,7 +105,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::CalendarApi.new
-calendar_free_busy_request = Zernio::CalendarFreeBusyRequest.new({account_ids: ['account_ids_example'], from: Time.now, to: Time.now}) # CalendarFreeBusyRequest | 
+calendar_free_busy_request = Zernio::CalendarFreeBusyRequest.new({from: Time.now, to: Time.now}) # CalendarFreeBusyRequest | 
 
 begin
   # Busy blocks for one or more accounts
@@ -157,7 +160,7 @@ end
 
 Create an event
 
-Creates a calendar event. Conferencing and recurrence behave differently on Microsoft and Google accounts.  ### Microsoft accounts  - `conferencing: teams` adds a Teams meeting. The created event comes back with `conferencing: null` when the tenant has no Teams (the EEA Business Basic SKUs ship without it). - `google_meet` is rejected with 400 (`param: conferencing`).  ### Google accounts  - `conferencing: google_meet` adds a Meet link. - `teams` is rejected with 400. - `recurrence` accepts any RRULE Google Calendar supports.  ### Recurrence  `recurrence` takes one RRULE line with FREQ, INTERVAL, COUNT, UNTIL, BYDAY and BYSETPOS. Other parts are rejected with 400 (`param: recurrence`). 
+Creates a calendar event. Conferencing and recurrence behave differently on Microsoft and Google accounts.  ### Microsoft accounts  - `conferencing: teams` adds a Teams meeting. The created event comes back with `conferencing: null` when the tenant has no Teams (the EEA Business Basic SKUs ship without it). - `google_meet` is rejected with 400 (`param: conferencing`).  ### Google accounts  - `conferencing: google_meet` adds a Meet link. - `teams` is rejected with 400. - `recurrence` accepts any RRULE Google Calendar supports.  ### Recurrence  `recurrence` takes one RRULE line with FREQ, INTERVAL, COUNT, UNTIL, BYDAY and BYSETPOS. Other parts are rejected with 400 (`param: recurrence`).  ### Reminders  Each `reminders.overrides` entry is `{ method, minutes }`, with `method` `popup` (default) or `email`.  - Google takes up to 5 overrides of either method. - Outlook keeps one popup reminder, the first override. An `email` override answers 400 `reminder_method_unsupported`. 
 
 ### Examples
 
@@ -222,7 +225,7 @@ end
 
 ## delete_calendar_event
 
-> <DeleteCalendarEvent200Response> delete_calendar_event(event_id, account_id, opts)
+> <DeleteEmailDraft200Response> delete_calendar_event(event_id, account_id, opts)
 
 Delete an event
 
@@ -239,9 +242,10 @@ end
 
 api_instance = Zernio::CalendarApi.new
 event_id = 'event_id_example' # String | 
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 opts = {
-  calendar_id: 'calendar_id_example' # String | The calendar holding the event (an id from GET /v1/calendar/calendars). Defaults to the primary calendar.
+  calendar_id: 'calendar_id_example', # String | The calendar holding the event (an id from GET /v1/calendar/calendars). Defaults to the primary calendar.
+  notify_participants: 'all' # String | Who gets the cancellation email. Google only; `external` and `none` answer 400 on a Microsoft account.
 }
 
 begin
@@ -257,7 +261,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteCalendarEvent200Response>, Integer, Hash)> delete_calendar_event_with_http_info(event_id, account_id, opts)
+> <Array(<DeleteEmailDraft200Response>, Integer, Hash)> delete_calendar_event_with_http_info(event_id, account_id, opts)
 
 ```ruby
 begin
@@ -265,7 +269,7 @@ begin
   data, status_code, headers = api_instance.delete_calendar_event_with_http_info(event_id, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <DeleteCalendarEvent200Response>
+  p data # => <DeleteEmailDraft200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling CalendarApi->delete_calendar_event_with_http_info: #{e}"
 end
@@ -276,12 +280,13 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **event_id** | **String** |  |  |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 | **calendar_id** | **String** | The calendar holding the event (an id from GET /v1/calendar/calendars). Defaults to the primary calendar. | [optional] |
+| **notify_participants** | **String** | Who gets the cancellation email. Google only; &#x60;external&#x60; and &#x60;none&#x60; answer 400 on a Microsoft account. | [optional][default to &#39;all&#39;] |
 
 ### Return type
 
-[**DeleteCalendarEvent200Response**](DeleteCalendarEvent200Response.md)
+[**DeleteEmailDraft200Response**](DeleteEmailDraft200Response.md)
 
 ### Authorization
 
@@ -312,7 +317,7 @@ end
 
 api_instance = Zernio::CalendarApi.new
 event_id = 'event_id_example' # String | 
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 opts = {
   calendar_id: 'calendar_id_example', # String | The calendar holding the event (an id from GET /v1/calendar/calendars). Defaults to the primary calendar.
   timezone: 'timezone_example' # String | 
@@ -350,7 +355,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **event_id** | **String** |  |  |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 | **calendar_id** | **String** | The calendar holding the event (an id from GET /v1/calendar/calendars). Defaults to the primary calendar. | [optional] |
 | **timezone** | **String** |  | [optional] |
 
@@ -368,13 +373,13 @@ end
 - **Accept**: application/json
 
 
-## list_calendar_events
+## list_calendar_event_instances
 
-> <ListCalendarEvents200Response> list_calendar_events(account_id, from, to, opts)
+> <ListCalendarEventInstances200Response> list_calendar_event_instances(event_id, account_id, from, to, opts)
 
-List events in a window
+List the occurrences of a recurring event
 
-Recurring series are expanded into their occurrences inside the window by default (`expandRecurring=false` lists the masters instead). `title` and `location` are substring matches applied to the fetched page.
+Lists the occurrences and exceptions of a series between `from` and `to`. Each one has its own `id` to read, update or delete just that occurrence, and `originalStart` for its place in the pattern.
 
 ### Examples
 
@@ -388,7 +393,92 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::CalendarApi.new
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+event_id = 'event_id_example' # String | The series (master) event id.
+account_id = 'account_id_example' # String | 
+from = Time.parse('2013-10-20T19:20:30+01:00') # Time | 
+to = Time.parse('2013-10-20T19:20:30+01:00') # Time | 
+opts = {
+  calendar_id: 'calendar_id_example', # String | The calendar holding the event (an id from GET /v1/calendar/calendars). Defaults to the primary calendar.
+  timezone: 'timezone_example', # String | IANA zone the `start` and `end` offsets are rendered in.
+  cursor: 'cursor_example', # String | 
+  limit: 56 # Integer | 
+}
+
+begin
+  # List the occurrences of a recurring event
+  result = api_instance.list_calendar_event_instances(event_id, account_id, from, to, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CalendarApi->list_calendar_event_instances: #{e}"
+end
+```
+
+#### Using the list_calendar_event_instances_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCalendarEventInstances200Response>, Integer, Hash)> list_calendar_event_instances_with_http_info(event_id, account_id, from, to, opts)
+
+```ruby
+begin
+  # List the occurrences of a recurring event
+  data, status_code, headers = api_instance.list_calendar_event_instances_with_http_info(event_id, account_id, from, to, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCalendarEventInstances200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CalendarApi->list_calendar_event_instances_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **event_id** | **String** | The series (master) event id. |  |
+| **account_id** | **String** |  |  |
+| **from** | **Time** |  |  |
+| **to** | **Time** |  |  |
+| **calendar_id** | **String** | The calendar holding the event (an id from GET /v1/calendar/calendars). Defaults to the primary calendar. | [optional] |
+| **timezone** | **String** | IANA zone the &#x60;start&#x60; and &#x60;end&#x60; offsets are rendered in. | [optional] |
+| **cursor** | **String** |  | [optional] |
+| **limit** | **Integer** |  | [optional][default to 50] |
+
+### Return type
+
+[**ListCalendarEventInstances200Response**](ListCalendarEventInstances200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_calendar_events
+
+> <ListCalendarEvents200Response> list_calendar_events(account_id, from, to, opts)
+
+List events in a window
+
+Recurring series are expanded into their occurrences inside the window by default. `expandRecurring=false` lists the masters instead, including series that started before `from` and still recur in the window.  Events that overlap the window edges are included. `title` and `location` are substring matches applied to the fetched page.  When the provider does not answer, the last list read for the same account and query within the past six hours is returned with `stale: true`, `asOf` and an `X-Zernio-Stale-As-Of` header instead of a 502.  When there is no such list and the window is wider than 31 days, Zernio reads once more with the window cut to one day back and two weeks ahead of now (inside `from` and `to`). It returns that with `partial: true`, `coveredFrom`, `coveredTo` and a `pagination.nextCursor` for the rest.  Send the same request with that `cursor` until `nextCursor` is null. Each call returns a slice of up to 90 days, future first, then the past.  Slices are not sorted against each other, and an event on a slice edge can appear twice, so merge by `id`. The extra fields are absent on a normal read. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CalendarApi.new
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 from = Time.parse('2013-10-20T19:20:30+01:00') # Time | 
 to = Time.parse('2013-10-20T19:20:30+01:00') # Time | 
 opts = {
@@ -398,7 +488,7 @@ opts = {
   show_cancelled: true, # Boolean | 
   expand_recurring: true, # Boolean | 
   ical_uid: 'ical_uid_example', # String | 
-  sort_order: 'asc', # String | 
+  sort_order: 'asc', # String | Order by start time across the whole window. On Google, `desc` reads the window in full, so a window over 2,500 events answers 400; narrow `from` and `to`.
   cursor: 'cursor_example', # String | 
   limit: 56, # Integer | 
   timezone: 'timezone_example' # String | IANA zone the `start` and `end` offsets are rendered in. Default UTC.
@@ -435,7 +525,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 | **from** | **Time** |  |  |
 | **to** | **Time** |  |  |
 | **calendar_id** | **String** | Defaults to the primary calendar. | [optional] |
@@ -444,7 +534,7 @@ end
 | **show_cancelled** | **Boolean** |  | [optional][default to false] |
 | **expand_recurring** | **Boolean** |  | [optional][default to true] |
 | **ical_uid** | **String** |  | [optional] |
-| **sort_order** | **String** |  | [optional][default to &#39;asc&#39;] |
+| **sort_order** | **String** | Order by start time across the whole window. On Google, &#x60;desc&#x60; reads the window in full, so a window over 2,500 events answers 400; narrow &#x60;from&#x60; and &#x60;to&#x60;. | [optional][default to &#39;asc&#39;] |
 | **cursor** | **String** |  | [optional] |
 | **limit** | **Integer** |  | [optional][default to 50] |
 | **timezone** | **String** | IANA zone the &#x60;start&#x60; and &#x60;end&#x60; offsets are rendered in. Default UTC. | [optional] |
@@ -483,7 +573,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::CalendarApi.new
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 
 begin
   # List calendars
@@ -516,7 +606,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 
 ### Return type
 
@@ -538,7 +628,7 @@ end
 
 Respond to an invitation
 
-Accepts, declines or tentatively accepts on behalf of the mailbox and notifies the organizer.
+Accepts, declines or tentatively accepts on behalf of the mailbox and notifies the organizer, unless `sendResponse` is false.
 
 ### Examples
 

@@ -26,7 +26,7 @@
 | **comment_reply_delay_seconds** | **Integer** | Seconds to wait before posting the public comment reply. Send 0 to clear it. The reply never goes out before the DM. | [optional] |
 | **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
 | **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
-| **is_active** | **Boolean** |  | [optional] |
+| **is_active** | **Boolean** | false pauses the automation. true on a paused automation resumes it for comments posted from that moment: comments left while it was paused get no DM. | [optional] |
 | **repeat_policy** | [**CommentAutomationRepeatPolicy**](CommentAutomationRepeatPolicy.md) |  | [optional] |
 | **dedupe_same_text_hours** | **Integer** | Skip the DM when this recipient already received identical DM text (after personalisation) from this account, from any automation, within this many hours. The skip is logged with status skipped. Send null to clear. | [optional] |
 | **public_reply_policy** | **String** | &#39;after_dm&#39; posts commentReply only after a successful DM. &#39;always&#39; posts it whatever the audience rule, dedupe or DM outcome: the moment a comment matches, or after commentReplyDelaySeconds when set (raised to dmDelaySeconds, so it never precedes the DM attempt). | [optional] |

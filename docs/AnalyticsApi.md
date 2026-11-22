@@ -28,21 +28,26 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_linked_in_org_aggregate_analytics**](AnalyticsApi.md#get_linked_in_org_aggregate_analytics) | **GET** /v1/analytics/linkedin/org-aggregate-analytics | Get LinkedIn org analytics |
 | [**get_linked_in_post_analytics**](AnalyticsApi.md#get_linked_in_post_analytics) | **GET** /v1/accounts/{accountId}/linkedin-post-analytics | Get LinkedIn post stats |
 | [**get_linked_in_post_reactions**](AnalyticsApi.md#get_linked_in_post_reactions) | **GET** /v1/accounts/{accountId}/linkedin-post-reactions | Get LinkedIn post reactions |
+| [**get_pinterest_account_insights**](AnalyticsApi.md#get_pinterest_account_insights) | **GET** /v1/analytics/pinterest/account-insights | Get Pinterest account-level insights |
 | [**get_post_authenticity**](AnalyticsApi.md#get_post_authenticity) | **GET** /v1/posts/{postId}/authenticity | Get a post&#39;s authenticity score |
 | [**get_post_samples**](AnalyticsApi.md#get_post_samples) | **GET** /v1/analytics/samples | Get post samples |
 | [**get_post_timeline**](AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline |
 | [**get_posting_frequency**](AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get frequency vs engagement |
 | [**get_tik_tok_account_insights**](AnalyticsApi.md#get_tik_tok_account_insights) | **GET** /v1/analytics/tiktok/account-insights | Get TikTok account-level insights |
+| [**get_tik_tok_demographics**](AnalyticsApi.md#get_tik_tok_demographics) | **GET** /v1/analytics/tiktok/demographics | Get TikTok follower demographics |
 | [**get_tracking_window**](AnalyticsApi.md#get_tracking_window) | **GET** /v1/analytics/tracking/{windowId} | Get a tracking window |
 | [**get_you_tube_channel_insights**](AnalyticsApi.md#get_you_tube_channel_insights) | **GET** /v1/analytics/youtube/channel-insights | Get YouTube channel insights |
 | [**get_you_tube_daily_views**](AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views |
 | [**get_you_tube_demographics**](AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube demographics |
 | [**get_you_tube_video_retention**](AnalyticsApi.md#get_you_tube_video_retention) | **GET** /v1/analytics/youtube/video-retention | Get YouTube video retention curve |
+| [**inspect_google_search_console_url**](AnalyticsApi.md#inspect_google_search_console_url) | **POST** /v1/analytics/googlesearchconsole/url-inspection | Inspect a URL in Google Search Console |
 | [**list_facebook_tagged_posts**](AnalyticsApi.md#list_facebook_tagged_posts) | **GET** /v1/accounts/{accountId}/facebook-tagged-posts | List the posts a Facebook Page is tagged in |
 | [**list_facebook_visitor_posts**](AnalyticsApi.md#list_facebook_visitor_posts) | **GET** /v1/accounts/{accountId}/facebook-visitor-posts | List visitor posts on a Facebook Page |
+| [**list_google_search_console_sitemaps**](AnalyticsApi.md#list_google_search_console_sitemaps) | **GET** /v1/analytics/googlesearchconsole/sitemaps | List Google Search Console sitemaps |
 | [**list_post_authenticity**](AnalyticsApi.md#list_post_authenticity) | **GET** /v1/analytics/authenticity | List authenticity scores |
 | [**list_tracking_windows**](AnalyticsApi.md#list_tracking_windows) | **GET** /v1/analytics/tracking | List tracking windows |
 | [**open_tracking_window**](AnalyticsApi.md#open_tracking_window) | **POST** /v1/analytics/tracking | Open a tracking window |
+| [**query_google_search_console_search_analytics**](AnalyticsApi.md#query_google_search_console_search_analytics) | **POST** /v1/analytics/googlesearchconsole/search-analytics | Query Google Search Console search analytics |
 | [**run_google_analytics_realtime_report**](AnalyticsApi.md#run_google_analytics_realtime_report) | **POST** /v1/analytics/googleanalytics/realtime | Run a Google Analytics (GA4) realtime report |
 | [**run_google_analytics_report**](AnalyticsApi.md#run_google_analytics_report) | **POST** /v1/analytics/googleanalytics/report | Run a Google Analytics (GA4) report |
 | [**sync_external_posts**](AnalyticsApi.md#sync_external_posts) | **POST** /v1/posts/sync-external | Sync an external post |
@@ -123,7 +128,7 @@ end
 
 Get post analytics
 
-Returns analytics for posts. With postId, returns a single post. Without it, returns a paginated list with overview stats.  - Accepts both Zernio Post IDs and External Post IDs (auto-resolved). - fromDate defaults to 90 days ago if omitted, max range 366 days. - Single post lookups may return 202 (sync pending) or 424 (all platforms failed). - For follower stats, use /v1/accounts/follower-stats.  ### LinkedIn personal accounts  Analytics are only available for posts published through Zernio. LinkedIn's API only returns metrics for posts authored by the authenticated user. Organization/company page analytics work for all posts.  ### Facebook Page stories  Stories on a connected Page, published through Zernio or natively, are collected while they are live and returned like any other post (platformPostUrl points to the story). Metrics for a story published through Zernio are available on its Zernio post ID.  Their lifetime metrics refresh about hourly, with a final reading shortly before the story expires at 24 hours. After that the values stay at that last reading.  Mapping:  - impressions = story media views (Meta stopped accepting per-story impressions in October 2026, so impressions equals views) - reach = unique story media viewers - views = story media views - likes = story reactions - comments = story replies - shares = story shares - clicks: always 0, because Meta exposes no link-click metric for stories 
+Returns analytics for posts. With postId, returns a single post. Without it, returns a paginated list with overview stats.  To keep a local copy in sync, do not poll this endpoint per account or per post. Subscribe to the `analytics.synced` webhook and read only what changed from `GET /v1/analytics/delta`.  - Accepts both Zernio Post IDs and External Post IDs (auto-resolved). - fromDate defaults to 90 days ago if omitted, max range 366 days. - Single post lookups may return 202 (sync pending) or 424 (all platforms failed). - For follower stats, use /v1/accounts/follower-stats. - Accounts creators connected to your creator campaigns are left out, here and in every other analytics, follower-stats, account health, inbox and external posts read, unless the request names their profileId or accountId.  ### LinkedIn personal accounts  Analytics are only available for posts published through Zernio. LinkedIn's API only returns metrics for posts authored by the authenticated user. Organization/company page analytics work for all posts.  ### Facebook Page stories  Stories on a connected Page, published through Zernio or natively, are collected while they are live and returned like any other post (platformPostUrl points to the story). Metrics for a story published through Zernio are available on its Zernio post ID.  Their lifetime metrics refresh about hourly, with a final reading shortly before the story expires at 24 hours. After that the values stay at that last reading.  Mapping:  - impressions = story media views (Meta stopped accepting per-story impressions in October 2026, so impressions equals views) - reach = unique story media viewers - views = story media views - likes = story reactions - comments = story replies - shares = story shares - clicks: always 0, because Meta exposes no link-click metric for stories  The newer way to read this is `GET /v1/metrics/posts`: by `postId` or `platformPostId`, or as a list by `accountId` or `profileId`, sorted by date or by a metric. 
 
 ### Examples
 
@@ -149,7 +154,8 @@ opts = {
   page: 56, # Integer | Page number (default 1)
   sort_by: 'date', # String | Sort by date, engagement, or a specific metric. Platform-specific metrics (follows, reposts, reels_skip_rate, ig_reels_*, completion_rate, profile_views, website_clicks) sort a null value as 0.
   order: 'asc', # String | Sort order
-  tags: 'job' # String | Comma-separated tags (at most 20). Lists only posts created through Zernio that carry every listed tag, matched exactly and case-sensitively. Up to 200 published posts can match within the date range; more returns 400 asking to narrow fromDate and toDate. Ignored when postId is set.
+  tags: 'job', # String | Comma-separated tags (at most 20). Lists only posts created through Zernio that carry every listed tag, matched exactly and case-sensitively. Up to 200 published posts can match within the date range; more returns 400 asking to narrow fromDate and toDate. Ignored when postId is set.
+  view: 'full' # String | full returns the listing as before. summary leaves out the accounts list, each platform entry's copy of analytics, the impressionSources, audienceTypes, audienceCountries and retentionCurve maps, and mediaItems (thumbnailUrl stays). Ignored when postId is set.
 }
 
 begin
@@ -195,6 +201,7 @@ end
 | **sort_by** | **String** | Sort by date, engagement, or a specific metric. Platform-specific metrics (follows, reposts, reels_skip_rate, ig_reels_*, completion_rate, profile_views, website_clicks) sort a null value as 0. | [optional][default to &#39;date&#39;] |
 | **order** | **String** | Sort order | [optional][default to &#39;desc&#39;] |
 | **tags** | **String** | Comma-separated tags (at most 20). Lists only posts created through Zernio that carry every listed tag, matched exactly and case-sensitively. Up to 200 published posts can match within the date range; more returns 400 asking to narrow fromDate and toDate. Ignored when postId is set. | [optional] |
+| **view** | **String** | full returns the listing as before. summary leaves out the accounts list, each platform entry&#39;s copy of analytics, the impressionSources, audienceTypes, audienceCountries and retentionCurve maps, and mediaItems (thumbnailUrl stays). Ignored when postId is set. | [optional][default to &#39;full&#39;] |
 
 ### Return type
 
@@ -299,7 +306,7 @@ end
 
 Analytics changed since a cursor
 
-Cursor feed of the analytics snapshots that CHANGED, across every account you can read, in one paginated stream. Built for integrations that would otherwise call `GET /v1/analytics` once per connected account.  Each page carries changes from many accounts at once, so your call count scales with how much actually changed rather than with how many accounts you have.  Measured against a fleet of roughly 1,600 connected accounts: about 1,599 per-account analytics calls an hour became about 205 delta calls an hour, a 7.8x reduction.  ### Bootstrap once, then stay in sync  1. Take the cursor FIRST: call this endpoint with NO `cursor`. It answers with an empty `data` array plus the feed's current position in `nextCursor`. 2. Load your baseline from `GET /v1/analytics`, the historical endpoint. This one is a rolling 7-day change log and cannot replay history. 3. Resume from the cursor you took before the baseline.  Taking the cursor afterwards instead drops every change that lands while the baseline is loading: it is in neither the row you already read nor the feed you resume behind it.  The overlap this order creates is safe. Metrics are absolute values rather than increments, so draining it leaves every post on its newest value.  `nextCursor` is present on every response, empty pages included, so you always have something to advance with.  ### Ordering  Entries come back oldest first, in the order the feed received them. That order is NOT `syncedAt`. `syncedAt` is stamped when an account's sync cycle started, and a slow cycle writes its rows after a faster cycle that started later, so `syncedAt` can go backwards between consecutive entries.  Do not sort, filter or resume on `syncedAt`. The cursor is the only stable position, and it is opaque: pass it back verbatim, and do not parse, construct or compare cursors.  ### `hasMore: false` does not mean the feed ended  This stream has no end and `nextCursor` is never null.  - `hasMore: true`: more changes are already waiting, so call again straight away. - `hasMore: false`: you are caught up. Keep the cursor and poll again on your normal interval.  ### The newest changes settle before they are served  The feed deliberately holds back its last few seconds of writes, so that a row can never become visible behind a cursor you have already advanced past.  A read issued the instant an `analytics.synced` webhook lands will therefore often return an empty page for that account. Do not read an empty page as \"nothing changed\": poll again with the SAME cursor you last used rather than advancing.  ### Repeats inside one instant  A sync cycle occasionally records the same post twice at the same feed position. When that happens the feed delivers one of those rows, not both.  Measured over a day of production traffic, about 1.3% of rows fall in such a group and 99.4% of those groups are identical rows, so this is far more often deduplication than loss.  Metrics are absolute values rather than increments, so a later entry for the same post supersedes an earlier one.  ### Retention is 7 days  Changes older than that leave the feed. A cursor older than 6 days is rejected with a `400` (a day of margin, because expiry is lazy).  Recover the same way you bootstrapped:  1. Take a fresh cursor from a call to this endpoint with no `cursor`. 2. Re-load from `GET /v1/analytics`. 3. Resume from that cursor.  A consumer that polls at least daily never reaches this.  ### Webhook and access  Pairs with the `analytics.synced` webhook, so changes can be read on notification instead of on a timer. That event carries no cursor of its own: keep using the `nextCursor` this endpoint gave you.  Requires the same analytics access as `GET /v1/analytics`, and shares the stricter per-second rate-limit window applied to analytics endpoints. 
+Cursor feed of the analytics snapshots that CHANGED, across every account you can read, in one paginated stream. Built for integrations that would otherwise call `GET /v1/analytics` once per connected account.  Each page carries changes from many accounts at once, so your call count scales with how much actually changed rather than with how many accounts you have.  Measured against a fleet of roughly 1,600 connected accounts: about 1,599 per-account analytics calls an hour became about 205 delta calls an hour, a 7.8x reduction.  ### Bootstrap once, then stay in sync  1. Take the cursor FIRST: call this endpoint with NO `cursor`. It answers with an empty `data` array plus the feed's current position in `nextCursor`. 2. Load your baseline from `GET /v1/analytics`, the historical endpoint. This one is a rolling 7-day change log and cannot replay history. 3. Resume from the cursor you took before the baseline.  Taking the cursor afterwards instead drops every change that lands while the baseline is loading: it is in neither the row you already read nor the feed you resume behind it.  The overlap this order creates is safe. Metrics are absolute values rather than increments, so draining it leaves every post on its newest value.  `nextCursor` is present on every response, empty pages included, so you always have something to advance with.  ### Ordering  Entries come back oldest first, in the order the feed received them. That order is NOT `syncedAt`. `syncedAt` is stamped when an account's sync cycle started, and a slow cycle writes its rows after a faster cycle that started later, so `syncedAt` can go backwards between consecutive entries.  Do not sort, filter or resume on `syncedAt`. The cursor is the only stable position, and it is opaque: pass it back verbatim, and do not parse, construct or compare cursors.  ### `hasMore: false` does not mean the feed ended  This stream has no end and `nextCursor` is never null.  - `hasMore: true`: more changes are already waiting, so call again straight away. - `hasMore: false`: you are caught up. Keep the cursor and poll again on your normal interval.  ### The newest changes settle before they are served  The feed deliberately holds back its last few seconds of writes, so that a row can never become visible behind a cursor you have already advanced past.  A read issued the instant an `analytics.synced` webhook lands will therefore often return an empty page for that account. Do not read an empty page as \"nothing changed\": poll again with the SAME cursor you last used rather than advancing.  ### Repeats inside one instant  A sync cycle occasionally records the same post twice at the same feed position. When that happens the feed delivers one of those rows, not both.  Measured over a day of production traffic, about 1.3% of rows fall in such a group and 99.4% of those groups are identical rows, so this is far more often deduplication than loss.  Metrics are absolute values rather than increments, so a later entry for the same post supersedes an earlier one.  ### Retention is 7 days  Changes older than that leave the feed. A cursor older than 6 days is rejected with a `400` (a day of margin, because expiry is lazy).  Recover the same way you bootstrapped:  1. Take a fresh cursor from a call to this endpoint with no `cursor`. 2. Re-load from `GET /v1/analytics`. 3. Resume from that cursor.  A consumer that polls at least daily never reaches this.  ### Webhook and access  Pairs with the `analytics.synced` webhook, so changes can be read on notification instead of on a timer. That event carries no cursor of its own: keep using the `nextCursor` this endpoint gave you.  Requires the same analytics access as `GET /v1/analytics`, and shares the stricter per-second rate-limit window applied to analytics endpoints.  The newer way to read this is `GET /v1/metrics/posts` with `changedSince`: the same feed and cursors, with the metric names of the catalog. 
 
 ### Examples
 
@@ -376,7 +383,7 @@ end
 
 Get best times to post
 
-Returns the best times to post based on historical engagement data. Groups all published posts by day of week and hour (UTC), calculating average engagement per slot. Use this to auto-schedule posts at optimal times. 
+Returns the best times to post based on historical engagement data. Groups all published posts by day of week and hour (UTC), calculating average engagement per slot. Use this to auto-schedule posts at optimal times.  The newer way to read this is `GET /v1/metrics/posts` with `groupBy=dayOfWeek,hour` and a list scope (`accountId` or `profileId`): one row per UTC weekday and hour, with any of its post metrics. 
 
 ### Examples
 
@@ -453,7 +460,7 @@ end
 
 Get content performance decay
 
-Returns how engagement accumulates over time after a post is published. Each bucket shows what percentage of the post's total engagement had been reached by that time window. Useful for understanding content lifespan (e.g. \"posts reach 78% of total engagement within 24 hours\"). 
+Returns how engagement accumulates over time after a post is published. Each bucket shows what percentage of the post's total engagement had been reached by that time window. Useful for understanding content lifespan (e.g. \"posts reach 78% of total engagement within 24 hours\").  The newer way to read this is `GET /v1/metrics/posts` with `groupBy=postAge` and a list scope (`accountId` or `profileId`): one row per post age with `engagementShareOfFinal`. 
 
 ### Examples
 
@@ -530,7 +537,7 @@ end
 
 Get daily aggregated metrics
 
-Returns daily aggregated analytics metrics and a per-platform breakdown. Each day includes post count, platform distribution, and summed metrics (impressions, reach, likes, comments, shares, saves, clicks, views). Defaults to the last 180 days.  `totals` sums the whole range for the applied filters (pass `accountId` for one account). With attribution \"publish\" they are the lifetime metrics of posts published in the range, with \"received\" the engagement that arrived in the range. 
+Returns daily aggregated analytics metrics and a per-platform breakdown. Each day includes post count, platform distribution, and summed metrics (impressions, reach, likes, comments, shares, saves, clicks, views). Defaults to the last 180 days.  `totals` sums the whole range for the applied filters (pass `accountId` for one account). With attribution \"publish\" they are the lifetime metrics of posts published in the range, with \"received\" the engagement that arrived in the range.  The newer way to read this is `GET /v1/metrics/accounts` with `granularity=day`, grouped by `account`, `platform` or `none`. 
 
 ### Examples
 
@@ -915,7 +922,7 @@ end
 
 Get follower stats
 
-Returns follower count history and growth metrics for connected accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
+Returns follower count history and growth metrics for connected accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day.  ### Limits  - At most 25 accounts per request: up to 25 `accountIds`, or a page of accounts. More than 25 `accountIds` returns 400. - Without `accountIds`, the response is the first page of 25 accounts even when `limit` and `cursor` are omitted. Pass `pagination.nextCursor` back as `cursor` for the next one. - When that default page cuts the list, the response also carries a `warning` and the headers `X-Result-Truncated: true` and `X-Result-Limit: 25`. - At most 1 year between `fromDate` and `toDate`. A longer range is cut to the year before `toDate`: `dateRange.from` shows where the data starts and the response carries a `warning`.  The newer way to read this is `GET /v1/metrics/accounts` with `metrics=followers,followersGrowth` and the granularity you need. 
 
 ### Examples
 
@@ -930,12 +937,12 @@ end
 
 api_instance = Zernio::AnalyticsApi.new
 opts = {
-  account_ids: 'account_ids_example', # String | Comma-separated list of account IDs (optional, defaults to all user's accounts)
+  account_ids: 'account_ids_example', # String | Comma-separated list of up to 25 account IDs. Optional: without it, the response pages through all your accounts.
   profile_id: 'profile_id_example', # String | Filter by profile ID
-  from_date: Date.parse('2013-10-20'), # Date | Start date in YYYY-MM-DD format (defaults to 30 days ago)
+  from_date: Date.parse('2013-10-20'), # Date | Start date in YYYY-MM-DD format (defaults to one year before toDate). An earlier date is moved to one year before toDate.
   to_date: Date.parse('2013-10-20'), # Date | End date in YYYY-MM-DD format (defaults to today)
   granularity: 'daily', # String | Data aggregation level
-  limit: 56, # Integer | Accounts per page, ordered by account id. Send it to page through accounts; the response then carries `pagination.nextCursor`. Without limit or cursor every matching account is returned.
+  limit: 56, # Integer | Accounts per page, ordered by account id; the response carries `pagination.nextCursor`. Without limit or cursor, a request without accountIds still gets a first page of 25.
   cursor: 'cursor_example' # String | Opaque cursor from a previous response's `pagination.nextCursor`; returns the next page of `limit` accounts (25 when limit is omitted). A cursor we cannot parse returns 400.
 }
 
@@ -970,12 +977,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_ids** | **String** | Comma-separated list of account IDs (optional, defaults to all user&#39;s accounts) | [optional] |
+| **account_ids** | **String** | Comma-separated list of up to 25 account IDs. Optional: without it, the response pages through all your accounts. | [optional] |
 | **profile_id** | **String** | Filter by profile ID | [optional] |
-| **from_date** | **Date** | Start date in YYYY-MM-DD format (defaults to 30 days ago) | [optional] |
+| **from_date** | **Date** | Start date in YYYY-MM-DD format (defaults to one year before toDate). An earlier date is moved to one year before toDate. | [optional] |
 | **to_date** | **Date** | End date in YYYY-MM-DD format (defaults to today) | [optional] |
 | **granularity** | **String** | Data aggregation level | [optional][default to &#39;daily&#39;] |
-| **limit** | **Integer** | Accounts per page, ordered by account id. Send it to page through accounts; the response then carries &#x60;pagination.nextCursor&#x60;. Without limit or cursor every matching account is returned. | [optional] |
+| **limit** | **Integer** | Accounts per page, ordered by account id; the response carries &#x60;pagination.nextCursor&#x60;. Without limit or cursor, a request without accountIds still gets a first page of 25. | [optional] |
 | **cursor** | **String** | Opaque cursor from a previous response&#39;s &#x60;pagination.nextCursor&#x60;; returns the next page of &#x60;limit&#x60; accounts (25 when limit is omitted). A cursor we cannot parse returns 400. | [optional] |
 
 ### Return type
@@ -1695,7 +1702,7 @@ end
 
 Get LinkedIn org analytics
 
-Returns aggregate analytics for a LinkedIn organization page. Parallel to /v1/accounts/{id}/linkedin-aggregate-analytics (which handles personal accounts only). Backed by LinkedIn's organizationalEntityShareStatistics, organizationalEntityFollowerStatistics, and organizationPageStatistics endpoints.  Response shape matches /v1/analytics/instagram/account-insights. Max 89 days, defaults to last 30 days.  Scope requirements: r_organization_social, r_organization_followers, and r_organization_admin must all be present on the account. Accounts connected before these scopes were included in the OAuth flow will return 412 with a reauth hint.  Enforced by this endpoint:   - Page-view metrics accept only metricType=total_value (LinkedIn omits per-day     segmentation even when the API is called with DAY granularity, so a time-series     response would be meaningless).   - Date range capped at 89 days.  LinkedIn-side platform limits (not re-enforced here, but worth knowing for larger ranges in a future release):   - Follower stats: rolling 12-month window, end must be no later than 2 days ago.   - Share stats: rolling 12-month window. 
+Returns aggregate analytics for a LinkedIn organization page. Parallel to /v1/accounts/{id}/linkedin-aggregate-analytics (which handles personal accounts only). Backed by LinkedIn's organizationalEntityShareStatistics, organizationalEntityFollowerStatistics, and organizationPageStatistics endpoints.  Response shape matches /v1/analytics/instagram/account-insights. Max 365 days, fromDate no older than 365 days ago, defaults to last 30 days.  Scope requirements: r_organization_social, r_organization_followers, and r_organization_admin must all be present on the account. Accounts connected before these scopes were included in the OAuth flow will return 412 with a reauth hint.  Enforced by this endpoint:   - Page-view metrics accept only metricType=total_value (LinkedIn omits per-day     segmentation even when the API is called with DAY granularity, so a time-series     response would be meaningless).   - Date range capped at 365 days, starting no more than 365 days ago.  LinkedIn keeps about 13 months of follower stats, and they end 2 days before today. 
 
 ### Examples
 
@@ -1920,6 +1927,89 @@ end
 - **Accept**: application/json
 
 
+## get_pinterest_account_insights
+
+> <InstagramAccountInsightsResponse> get_pinterest_account_insights(account_id, opts)
+
+Get Pinterest account-level insights
+
+Returns account-level daily Pinterest metrics, read live from Pinterest's account analytics, plus the follower history from Zernio's daily snapshots.  These are account totals. They include every pin on the account, also pins published long before the account was connected to Zernio, which per-post analytics cannot cover.  - Response shape matches /v1/analytics/instagram/account-insights. - Defaults to the last 30 days. Pinterest serves at most the last 89 days, so a fromDate older than that returns 400. - Pinterest reports the latest 1-2 days as still processing. Those days are left out of values and totals until Pinterest settles them. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Pinterest account.
+opts = {
+  metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"impressions,engagements,follower_count\".  Live from Pinterest, one value per day:   - impressions   - engagements   - saves   - pin_clicks   - outbound_clicks  From Zernio daily snapshots:   - follower_count    (follower count per day; total is the latest)   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas) 
+  from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago. At most 89 days before today.
+  to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
+  since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
+  _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
+  metric_type: 'time_series' # String | \"total_value\" returns one total per metric. \"time_series\" also returns the daily values. 
+}
+
+begin
+  # Get Pinterest account-level insights
+  result = api_instance.get_pinterest_account_insights(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_pinterest_account_insights: #{e}"
+end
+```
+
+#### Using the get_pinterest_account_insights_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<InstagramAccountInsightsResponse>, Integer, Hash)> get_pinterest_account_insights_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get Pinterest account-level insights
+  data, status_code, headers = api_instance.get_pinterest_account_insights_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <InstagramAccountInsightsResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_pinterest_account_insights_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio SocialAccount ID for the Pinterest account. |  |
+| **metrics** | **String** | Comma-separated list. Defaults to \&quot;impressions,engagements,follower_count\&quot;.  Live from Pinterest, one value per day:   - impressions   - engagements   - saves   - pin_clicks   - outbound_clicks  From Zernio daily snapshots:   - follower_count    (follower count per day; total is the latest)   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas)  | [optional] |
+| **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. At most 89 days before today. | [optional] |
+| **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+| **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
+| **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
+| **metric_type** | **String** | \&quot;total_value\&quot; returns one total per metric. \&quot;time_series\&quot; also returns the daily values.  | [optional][default to &#39;total_value&#39;] |
+
+### Return type
+
+[**InstagramAccountInsightsResponse**](InstagramAccountInsightsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_post_authenticity
 
 > <PostAuthenticity> get_post_authenticity(post_id)
@@ -1995,7 +2085,7 @@ end
 
 Get post samples
 
-Returns the raw readings behind a post's numbers, oldest first.  Each sample is one analytics sync: the views and engagement as the platform reported them at `syncedAt`. Zernio only stores what it fetched from the platform, so nothing here was self-reported.  ### Null values  - `shares` and `saves` are null on platforms that do not return that counter, which is different from a real zero. - `watchSeconds` and `completionRate` are null when the platform gives no watch signal. 
+Returns the raw readings behind a post's numbers, oldest first.  Each sample is one analytics sync: the views and engagement as the platform reported them at `syncedAt`. Zernio only stores what it fetched from the platform, so nothing here was self-reported.  ### Null values  - `shares` and `saves` are null on platforms that do not return that counter, which is different from a real zero. - `watchSeconds` and `completionRate` are null when the platform gives no watch signal.  The newer way to read this is `GET /v1/metrics/posts` with `include=samples`, for up to 10 posts in one request. 
 
 ### Examples
 
@@ -2072,7 +2162,7 @@ end
 
 Get post analytics timeline
 
-Returns a daily timeline of analytics metrics for a specific post, showing how impressions, likes, and other metrics evolved day-by-day since publishing. Each row represents one day of data per platform. For multi-platform Zernio posts, returns separate rows for each platform. 
+Returns a daily timeline of analytics metrics for a specific post, showing how impressions, likes, and other metrics evolved day-by-day since publishing. Each row represents one day of data per platform. For multi-platform Zernio posts, returns separate rows for each platform.  The newer way to read this is `GET /v1/metrics/posts` with one `postId` and `granularity=day`. 
 
 ### Examples
 
@@ -2147,7 +2237,7 @@ end
 
 Get frequency vs engagement
 
-Returns the correlation between posting frequency (posts per week) and engagement rate, broken down by platform. Helps find the optimal posting cadence for each platform. Each row represents a specific (platform, posts_per_week) combination with the average engagement rate observed across all weeks matching that frequency. 
+Returns the correlation between posting frequency (posts per week) and engagement rate, broken down by platform. Helps find the optimal posting cadence for each platform. Each row represents a specific (platform, posts_per_week) combination with the average engagement rate observed across all weeks matching that frequency.  The newer way to read this is `GET /v1/metrics/accounts` with `granularity=week`, `groupBy=platform` and `metrics=postCount,engagementRate`. 
 
 ### Examples
 
@@ -2224,7 +2314,7 @@ end
 
 Get TikTok account-level insights
 
-Returns account-level TikTok insights from /v2/user/info/ (live) plus historical time series joined from Zernio's daily snapshotter (AccountStats).  - Response shape matches /v1/analytics/instagram/account-insights. - Max 89 days, defaults to last 30 days. - Requires the user.info.stats scope on the account (412 if missing).  ### Why the scope is narrow  This ACCOUNT-level endpoint intentionally exposes only the four counter metrics below. These account-level figures are not on any public TikTok API, for any account type:  - account-level impressions / reach - follower inflow / outflow breakdown - account-level watch time and audience demographics  TikTok's Research API doesn't expose them either, and is restricted to non-commercial academic use per TikTok's eligibility policy.  ### Per-video metrics  PER-VIDEO is a different story on the Business lane. An account connected through the TikTok for Business app reports these per video on GET /v1/analytics?postId=...:  - profile views, website clicks, follows - full-watched rate, watch time - impression sources, viewer types and viewer countries  They arrive roughly 24-48h after publishing and only for posts active in the last 7 days.  Accounts on the original TikTok integration get the basic counters there (views, likes, comments, shares) and zeros for the rest. They must reconnect through the Business app. 
+Returns account-level TikTok insights: the lifetime profile counters (live, with historical time series joined from Zernio's daily snapshotter) and TikTok's own daily account figures (video views, likes, comments, shares, profile views).  - Response shape matches /v1/analytics/instagram/account-insights. - Max 89 days, defaults to last 30 days. - Requires the user.info.stats scope on the account (412 if missing).  ### Daily account metrics  `video_views`, `likes`, `comments`, `shares` and `profile_views` are TikTok's daily figures for the whole account, read from the TikTok Business Accounts API. They count every video of the account, not only recent ones, so they differ from GET /v1/analytics/daily-metrics, which sums per-post analytics.  - With `metricType=time_series` each day is one entry in `values`. With `total_value` the total is the sum over the range. - The latest day available is yesterday, and TikTok can take 24-48 hours to settle a day. Days after the latest available one are left out of `values`. - They work for Business and personal TikTok accounts connected through Zernio's TikTok connection, with the user.insights scope. - Accounts on the original TikTok integration (or on your own TikTok app) cannot read them: each one is listed in `unavailableMetrics` with reason `unsupported_metric`, and reconnecting through Zernio's TikTok connection enables them. A grant without user.insights lists them with reason `permission_missing`. Either way the other requested metrics are still returned. - They are not in the default metric set: ask for them in `metrics`.  ### What is not exposed  This ACCOUNT-level endpoint does not return:  - account-level impressions / reach - follower inflow / outflow breakdown - account-level watch time  Follower age, gender, country and city are on GET /v1/analytics/tiktok/demographics.  ### Per-video metrics  PER-VIDEO is a different story on the Business lane. An account connected through the TikTok for Business app reports these per video on GET /v1/analytics?postId=...:  - profile views, website clicks, follows - full-watched rate, watch time - impression sources, viewer types and viewer countries  They arrive roughly 24-48h after publishing and only for posts active in the last 7 days.  Accounts on the original TikTok integration get the basic counters there (views, likes, comments, shares) and zeros for the rest. They must reconnect through the Business app. 
 
 ### Examples
 
@@ -2240,12 +2330,12 @@ end
 api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the TikTok account.
 opts = {
-  metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"follower_count,likes_count,video_count,followers_gained,followers_lost\".  Live from /v2/user/info/ (requires user.info.stats scope):   - follower_count  (cumulative; time series joined from AccountStats)   - following_count (cumulative; time series joined from AccountStats.metadata)   - likes_count     (cumulative; time series joined from AccountStats.metadata)   - video_count     (cumulative; time series joined from AccountStats.metadata)  Zernio-synthesized:   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas) 
+  metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"follower_count,likes_count,video_count,followers_gained,followers_lost\".  Live profile counters (requires user.info.stats scope):   - follower_count  (cumulative; time series joined from AccountStats)   - following_count (cumulative; time series joined from AccountStats.metadata)   - likes_count     (cumulative; time series joined from AccountStats.metadata)   - video_count     (cumulative; time series joined from AccountStats.metadata)  Daily account figures from TikTok (requires user.insights scope and an account on Zernio's TikTok connection):   - video_views     (views of all the account's videos that day)   - likes           (likes received that day)   - comments        (comments received that day)   - shares          (shares that day)   - profile_views   (profile views that day)  Zernio-synthesized:   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas) 
   from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
   to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
   since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
   _until: Date.parse('2013-10-20'), # Date | Alias of toDate, kept for existing callers
-  metric_type: 'time_series' # String | \"total_value\" returns the latest cumulative counter value. \"time_series\" returns daily values joined from AccountStats snapshots. 
+  metric_type: 'time_series' # String | \"total_value\" returns the latest value of a cumulative counter, and the sum over the range for a daily account metric. \"time_series\" returns daily values: joined from AccountStats snapshots for the counters, TikTok's own daily figures for the daily account metrics. 
 }
 
 begin
@@ -2280,16 +2370,89 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the TikTok account. |  |
-| **metrics** | **String** | Comma-separated list. Defaults to \&quot;follower_count,likes_count,video_count,followers_gained,followers_lost\&quot;.  Live from /v2/user/info/ (requires user.info.stats scope):   - follower_count  (cumulative; time series joined from AccountStats)   - following_count (cumulative; time series joined from AccountStats.metadata)   - likes_count     (cumulative; time series joined from AccountStats.metadata)   - video_count     (cumulative; time series joined from AccountStats.metadata)  Zernio-synthesized:   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas)  | [optional] |
+| **metrics** | **String** | Comma-separated list. Defaults to \&quot;follower_count,likes_count,video_count,followers_gained,followers_lost\&quot;.  Live profile counters (requires user.info.stats scope):   - follower_count  (cumulative; time series joined from AccountStats)   - following_count (cumulative; time series joined from AccountStats.metadata)   - likes_count     (cumulative; time series joined from AccountStats.metadata)   - video_count     (cumulative; time series joined from AccountStats.metadata)  Daily account figures from TikTok (requires user.insights scope and an account on Zernio&#39;s TikTok connection):   - video_views     (views of all the account&#39;s videos that day)   - likes           (likes received that day)   - comments        (comments received that day)   - shares          (shares that day)   - profile_views   (profile views that day)  Zernio-synthesized:   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas)  | [optional] |
 | **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
 | **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
 | **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
 | **_until** | **Date** | Alias of toDate, kept for existing callers | [optional] |
-| **metric_type** | **String** | \&quot;total_value\&quot; returns the latest cumulative counter value. \&quot;time_series\&quot; returns daily values joined from AccountStats snapshots.  | [optional][default to &#39;total_value&#39;] |
+| **metric_type** | **String** | \&quot;total_value\&quot; returns the latest value of a cumulative counter, and the sum over the range for a daily account metric. \&quot;time_series\&quot; returns daily values: joined from AccountStats snapshots for the counters, TikTok&#39;s own daily figures for the daily account metrics.  | [optional][default to &#39;total_value&#39;] |
 
 ### Return type
 
 [**InstagramAccountInsightsResponse**](InstagramAccountInsightsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_tik_tok_demographics
+
+> <GetTikTokDemographics200Response> get_tik_tok_demographics(account_id, opts)
+
+Get TikTok follower demographics
+
+Returns the share of a TikTok account's followers by age, gender, country and city. Without `breakdown` it returns all four.  - Each value is a share of followers from 0 to 1, and each list is sorted largest first. It is not a follower count. - Age, gender and country lists add up to 1. The city list can add up to less, because TikTok does not place every follower in a listed city. - These are followers of the account, not the viewers of its videos. Viewer countries per video are on GET /v1/analytics?postId=... - TikTok updates this data every 24-48 hours.  ### Requirements  - The account needs at least 100 followers (400 `tiktok_insufficient_followers` otherwise). - The account owner must turn on Analytics in the TikTok app and have published at least one video. Until then an account with enough followers gets empty lists. - Requires the user.insights scope, which an account gets by connecting through the TikTok for Business app (412 `tiktok_insights_scope_missing` otherwise). Accounts on the original TikTok integration must reconnect. - Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the TikTok account.
+opts = {
+  breakdown: 'breakdown_example' # String | Comma-separated list of demographic dimensions: age, gender, country, city. Defaults to all four.
+}
+
+begin
+  # Get TikTok follower demographics
+  result = api_instance.get_tik_tok_demographics(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_tik_tok_demographics: #{e}"
+end
+```
+
+#### Using the get_tik_tok_demographics_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetTikTokDemographics200Response>, Integer, Hash)> get_tik_tok_demographics_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get TikTok follower demographics
+  data, status_code, headers = api_instance.get_tik_tok_demographics_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetTikTokDemographics200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_tik_tok_demographics_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio SocialAccount ID for the TikTok account. |  |
+| **breakdown** | **String** | Comma-separated list of demographic dimensions: age, gender, country, city. Defaults to all four. | [optional] |
+
+### Return type
+
+[**GetTikTokDemographics200Response**](GetTikTokDemographics200Response.md)
 
 ### Authorization
 
@@ -2392,7 +2555,7 @@ end
 api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the YouTube account.
 opts = {
-  metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"views,estimatedMinutesWatched,subscribersGained,subscribersLost\".  Live YouTube Analytics v2 metrics:   - views   - estimatedMinutesWatched   - averageViewDuration          (ratio - weighted mean computed across days)   - subscribersGained   - subscribersLost  Zernio-synthesized from daily follower snapshots (cross-platform parity):   - followers_gained   - followers_lost 
+  metrics: 'metrics_example', # String | Comma-separated list. Defaults to \"views,estimatedMinutesWatched,subscribersGained,subscribersLost\".  Live YouTube Analytics v2 metrics:   - views   - estimatedMinutesWatched   - averageViewDuration          (ratio - weighted mean computed across days)   - subscribersGained   - subscribersLost   - likes   - comments   - shares  Zernio-synthesized from daily follower snapshots (cross-platform parity):   - followers_gained   - followers_lost 
   from_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
   to_date: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today. YouTube Analytics has a 2-3 day delay, so the fetch is internally clamped to 3 days ago; any requested range extending beyond that returns zero values for the tail days. The response's dateRange.until field reflects your requested value. 
   since: Date.parse('2013-10-20'), # Date | Alias of fromDate, kept for existing callers
@@ -2432,7 +2595,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the YouTube account. |  |
-| **metrics** | **String** | Comma-separated list. Defaults to \&quot;views,estimatedMinutesWatched,subscribersGained,subscribersLost\&quot;.  Live YouTube Analytics v2 metrics:   - views   - estimatedMinutesWatched   - averageViewDuration          (ratio - weighted mean computed across days)   - subscribersGained   - subscribersLost  Zernio-synthesized from daily follower snapshots (cross-platform parity):   - followers_gained   - followers_lost  | [optional] |
+| **metrics** | **String** | Comma-separated list. Defaults to \&quot;views,estimatedMinutesWatched,subscribersGained,subscribersLost\&quot;.  Live YouTube Analytics v2 metrics:   - views   - estimatedMinutesWatched   - averageViewDuration          (ratio - weighted mean computed across days)   - subscribersGained   - subscribersLost   - likes   - comments   - shares  Zernio-synthesized from daily follower snapshots (cross-platform parity):   - followers_gained   - followers_lost  | [optional] |
 | **from_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
 | **to_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. YouTube Analytics has a 2-3 day delay, so the fetch is internally clamped to 3 days ago; any requested range extending beyond that returns zero values for the tail days. The response&#39;s dateRange.until field reflects your requested value.  | [optional] |
 | **since** | **Date** | Alias of fromDate, kept for existing callers | [optional] |
@@ -2698,6 +2861,75 @@ end
 - **Accept**: application/json
 
 
+## inspect_google_search_console_url
+
+> <InspectGoogleSearchConsoleUrl200Response> inspect_google_search_console_url(inspect_google_search_console_url_request)
+
+Inspect a URL in Google Search Console
+
+Google's index status for one URL of a connected site: whether it is indexed, its canonical, last crawl, robots and fetch state, mobile usability and rich results. Returns Google's `inspectionResult` as is.  The URL must belong to the connected site (any host under a Domain property, or starting with the URL prefix); any other URL returns 400 before Google is called. Google allows 2,000 inspections a day and 600 a minute per site; results are cached for one hour. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+inspect_google_search_console_url_request = Zernio::InspectGoogleSearchConsoleUrlRequest.new({account_id: 'account_id_example', inspection_url: 'https://acme.com/pricing'}) # InspectGoogleSearchConsoleUrlRequest | 
+
+begin
+  # Inspect a URL in Google Search Console
+  result = api_instance.inspect_google_search_console_url(inspect_google_search_console_url_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->inspect_google_search_console_url: #{e}"
+end
+```
+
+#### Using the inspect_google_search_console_url_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<InspectGoogleSearchConsoleUrl200Response>, Integer, Hash)> inspect_google_search_console_url_with_http_info(inspect_google_search_console_url_request)
+
+```ruby
+begin
+  # Inspect a URL in Google Search Console
+  data, status_code, headers = api_instance.inspect_google_search_console_url_with_http_info(inspect_google_search_console_url_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <InspectGoogleSearchConsoleUrl200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->inspect_google_search_console_url_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **inspect_google_search_console_url_request** | [**InspectGoogleSearchConsoleUrlRequest**](InspectGoogleSearchConsoleUrlRequest.md) |  |  |
+
+### Return type
+
+[**InspectGoogleSearchConsoleUrl200Response**](InspectGoogleSearchConsoleUrl200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## list_facebook_tagged_posts
 
 > <ListFacebookTaggedPosts200Response> list_facebook_tagged_posts(account_id, opts)
@@ -2848,13 +3080,82 @@ end
 - **Accept**: application/json
 
 
+## list_google_search_console_sitemaps
+
+> <ListGoogleSearchConsoleSitemaps200Response> list_google_search_console_sitemaps(account_id)
+
+List Google Search Console sitemaps
+
+The sitemaps submitted for a connected Search Console site, with when Google last read them, their errors and warnings and how many URLs each holds. Cached for 10 minutes. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | Zernio account ID of the Google Search Console connection.
+
+begin
+  # List Google Search Console sitemaps
+  result = api_instance.list_google_search_console_sitemaps(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->list_google_search_console_sitemaps: #{e}"
+end
+```
+
+#### Using the list_google_search_console_sitemaps_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListGoogleSearchConsoleSitemaps200Response>, Integer, Hash)> list_google_search_console_sitemaps_with_http_info(account_id)
+
+```ruby
+begin
+  # List Google Search Console sitemaps
+  data, status_code, headers = api_instance.list_google_search_console_sitemaps_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListGoogleSearchConsoleSitemaps200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->list_google_search_console_sitemaps_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio account ID of the Google Search Console connection. |  |
+
+### Return type
+
+[**ListGoogleSearchConsoleSitemaps200Response**](ListGoogleSearchConsoleSitemaps200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_post_authenticity
 
 > <ListPostAuthenticity200Response> list_post_authenticity(account_id, opts)
 
 List authenticity scores
 
-Lists the stored authenticity scores for one connected account, newest first. Requires the Analytics add-on.  Scores are 0 to 100 and come from Zernio's own model over verified platform samples.  ### Filters  - `minScore` and `maxScore`: find posts that look inflated. - `from` and `to`: bound when the score was computed. 
+Lists the stored authenticity scores for one connected account, newest first. Requires the Analytics add-on.  Scores are 0 to 100 and come from Zernio's own model over verified platform samples.  ### Filters  - `minScore` and `maxScore`: find posts that look inflated. - `from` and `to`: bound when the score was computed.  The newer way to read scores is `GET /v1/metrics/posts` with `metrics=authenticityScore` or `include=authenticity`. This route keeps the score filters (`minScore`, `maxScore`, `from`, `to`). 
 
 ### Examples
 
@@ -3066,6 +3367,75 @@ end
 ### Return type
 
 [**TrackingWindowResponse**](TrackingWindowResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## query_google_search_console_search_analytics
+
+> <QueryGoogleSearchConsoleSearchAnalytics200Response> query_google_search_console_search_analytics(query_google_search_console_search_analytics_request)
+
+Query Google Search Console search analytics
+
+Clicks, impressions, CTR and average position from Google Search for a connected Search Console site, through Google's `searchAnalytics.query`.  Group by any of `date`, `hour`, `query`, `page`, `country`, `device`, `searchAppearance` and `brandedClassification`, and filter with Google's own filter groups. With no dimensions you get one row with the site's totals.  The newer way to read clicks, impressions, ctr and position is `GET /v1/metrics/insights` with a Search Console `accountId`, grouped by any of `query`, `page`, `country` and `device`. This route keeps Google's filters, `type`, `aggregationType`, the `hour` dimension and `dataState`.  ### Branded queries  `brandedClassification` splits searches into `BRANDED` and `NON_BRANDED`. Google has it from February 21, 2026, and only for sites with enough search volume. As a filter it takes `equals` only and cannot be combined with a `query` filter.  ### Dates  Dates are `YYYY-MM-DD` in Pacific time. `toDate` defaults to yesterday and `fromDate` to 27 days before `toDate`, the window every report takes. Unknown fields answer 400. Google keeps 16 months, and the last two or three days are still filling in unless you pass `dataState: all`.  ### Caching and quota  Identical requests on the same site are cached for 10 minutes. Google limits each site to 1,200 queries a minute; past it the request returns 429. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+query_google_search_console_search_analytics_request = Zernio::QueryGoogleSearchConsoleSearchAnalyticsRequest.new({account_id: 'account_id_example'}) # QueryGoogleSearchConsoleSearchAnalyticsRequest | 
+
+begin
+  # Query Google Search Console search analytics
+  result = api_instance.query_google_search_console_search_analytics(query_google_search_console_search_analytics_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->query_google_search_console_search_analytics: #{e}"
+end
+```
+
+#### Using the query_google_search_console_search_analytics_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<QueryGoogleSearchConsoleSearchAnalytics200Response>, Integer, Hash)> query_google_search_console_search_analytics_with_http_info(query_google_search_console_search_analytics_request)
+
+```ruby
+begin
+  # Query Google Search Console search analytics
+  data, status_code, headers = api_instance.query_google_search_console_search_analytics_with_http_info(query_google_search_console_search_analytics_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <QueryGoogleSearchConsoleSearchAnalytics200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->query_google_search_console_search_analytics_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **query_google_search_console_search_analytics_request** | [**QueryGoogleSearchConsoleSearchAnalyticsRequest**](QueryGoogleSearchConsoleSearchAnalyticsRequest.md) |  |  |
+
+### Return type
+
+[**QueryGoogleSearchConsoleSearchAnalytics200Response**](QueryGoogleSearchConsoleSearchAnalytics200Response.md)
 
 ### Authorization
 

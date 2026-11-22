@@ -8,6 +8,7 @@
 | **calendar_id** | **String** | The calendar holding the event (an id from GET /v1/calendar/calendars). Defaults to the primary calendar. | [optional] |
 | **status** | **String** |  |  |
 | **comment** | **String** |  | [optional] |
+| **send_response** | **Boolean** | false records the response without emailing the organizer. | [optional][default to true] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = Zernio::RsvpCalendarEventRequest.new(
   account_id: null,
   calendar_id: null,
   status: null,
-  comment: null
+  comment: null,
+  send_response: null
 )
 ```
 

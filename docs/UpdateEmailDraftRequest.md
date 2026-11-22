@@ -1,0 +1,36 @@
+# Zernio::UpdateEmailDraftRequest
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **to** | [**Array&lt;EmailAddress&gt;**](EmailAddress.md) |  | [optional] |
+| **cc** | [**Array&lt;EmailAddress&gt;**](EmailAddress.md) |  | [optional] |
+| **bcc** | [**Array&lt;EmailAddress&gt;**](EmailAddress.md) |  | [optional] |
+| **reply_to** | [**Array&lt;EmailAddress&gt;**](EmailAddress.md) |  | [optional] |
+| **subject** | **String** |  | [optional] |
+| **text** | **String** |  | [optional] |
+| **html** | **String** | On a draft created with tracking, the new html is instrumented again under the same &#x60;trackingId&#x60;. | [optional] |
+| **attachments** | [**Array&lt;EmailAttachmentInput&gt;**](EmailAttachmentInput.md) |  | [optional] |
+| **signature_id** | **String** | Swaps the Zernio signature block in the new &#x60;html&#x60; or &#x60;text&#x60; for this signature, so switching never stacks two; &#x60;null&#x60; removes it. Needs &#x60;html&#x60; or &#x60;text&#x60; in the same request. | [optional] |
+
+## Example
+
+```ruby
+require 'zernio-sdk'
+
+instance = Zernio::UpdateEmailDraftRequest.new(
+  account_id: null,
+  to: null,
+  cc: null,
+  bcc: null,
+  reply_to: null,
+  subject: null,
+  text: null,
+  html: null,
+  attachments: null,
+  signature_id: null
+)
+```
+

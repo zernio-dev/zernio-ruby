@@ -562,7 +562,7 @@ end
 
 ## delete_business_agent_connector
 
-> <InlineObject> delete_business_agent_connector(account_id, connector_id)
+> <InlineObject1> delete_business_agent_connector(account_id, connector_id)
 
 Delete a connector
 
@@ -594,7 +594,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> delete_business_agent_connector_with_http_info(account_id, connector_id)
+> <Array(<InlineObject1>, Integer, Hash)> delete_business_agent_connector_with_http_info(account_id, connector_id)
 
 ```ruby
 begin
@@ -602,7 +602,7 @@ begin
   data, status_code, headers = api_instance.delete_business_agent_connector_with_http_info(account_id, connector_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->delete_business_agent_connector_with_http_info: #{e}"
 end
@@ -617,7 +617,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 
@@ -631,7 +631,7 @@ end
 
 ## delete_business_agent_connector_tool
 
-> <InlineObject> delete_business_agent_connector_tool(account_id, connector_id, tool_id)
+> <InlineObject1> delete_business_agent_connector_tool(account_id, connector_id, tool_id)
 
 Delete a connector tool
 
@@ -664,7 +664,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> delete_business_agent_connector_tool_with_http_info(account_id, connector_id, tool_id)
+> <Array(<InlineObject1>, Integer, Hash)> delete_business_agent_connector_tool_with_http_info(account_id, connector_id, tool_id)
 
 ```ruby
 begin
@@ -672,7 +672,7 @@ begin
   data, status_code, headers = api_instance.delete_business_agent_connector_tool_with_http_info(account_id, connector_id, tool_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->delete_business_agent_connector_tool_with_http_info: #{e}"
 end
@@ -688,7 +688,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 
@@ -702,7 +702,7 @@ end
 
 ## delete_business_agent_faq
 
-> <InlineObject> delete_business_agent_faq(account_id, faq_id)
+> <InlineObject1> delete_business_agent_faq(account_id, faq_id)
 
 Delete a FAQ
 
@@ -734,7 +734,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> delete_business_agent_faq_with_http_info(account_id, faq_id)
+> <Array(<InlineObject1>, Integer, Hash)> delete_business_agent_faq_with_http_info(account_id, faq_id)
 
 ```ruby
 begin
@@ -742,7 +742,7 @@ begin
   data, status_code, headers = api_instance.delete_business_agent_faq_with_http_info(account_id, faq_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->delete_business_agent_faq_with_http_info: #{e}"
 end
@@ -757,7 +757,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 
@@ -771,7 +771,7 @@ end
 
 ## delete_business_agent_file
 
-> <InlineObject> delete_business_agent_file(account_id, file_id)
+> <InlineObject1> delete_business_agent_file(account_id, file_id)
 
 Delete a knowledge file
 
@@ -803,7 +803,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> delete_business_agent_file_with_http_info(account_id, file_id)
+> <Array(<InlineObject1>, Integer, Hash)> delete_business_agent_file_with_http_info(account_id, file_id)
 
 ```ruby
 begin
@@ -811,7 +811,7 @@ begin
   data, status_code, headers = api_instance.delete_business_agent_file_with_http_info(account_id, file_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->delete_business_agent_file_with_http_info: #{e}"
 end
@@ -826,7 +826,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 
@@ -840,7 +840,7 @@ end
 
 ## delete_business_agent_skill
 
-> <InlineObject> delete_business_agent_skill(account_id, skill_id)
+> <InlineObject1> delete_business_agent_skill(account_id, skill_id)
 
 Delete a skill
 
@@ -872,7 +872,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> delete_business_agent_skill_with_http_info(account_id, skill_id)
+> <Array(<InlineObject1>, Integer, Hash)> delete_business_agent_skill_with_http_info(account_id, skill_id)
 
 ```ruby
 begin
@@ -880,7 +880,7 @@ begin
   data, status_code, headers = api_instance.delete_business_agent_skill_with_http_info(account_id, skill_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->delete_business_agent_skill_with_http_info: #{e}"
 end
@@ -895,7 +895,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 
@@ -909,7 +909,7 @@ end
 
 ## delete_business_agent_ui_skill
 
-> <InlineObject> delete_business_agent_ui_skill(account_id, ui_skill_id)
+> <InlineObject1> delete_business_agent_ui_skill(account_id, ui_skill_id)
 
 Delete a UI skill
 
@@ -941,7 +941,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> delete_business_agent_ui_skill_with_http_info(account_id, ui_skill_id)
+> <Array(<InlineObject1>, Integer, Hash)> delete_business_agent_ui_skill_with_http_info(account_id, ui_skill_id)
 
 ```ruby
 begin
@@ -949,7 +949,7 @@ begin
   data, status_code, headers = api_instance.delete_business_agent_ui_skill_with_http_info(account_id, ui_skill_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->delete_business_agent_ui_skill_with_http_info: #{e}"
 end
@@ -964,7 +964,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 
@@ -978,7 +978,7 @@ end
 
 ## delete_business_agent_website
 
-> <InlineObject> delete_business_agent_website(account_id, website_id)
+> <InlineObject1> delete_business_agent_website(account_id, website_id)
 
 Remove a crawled website
 
@@ -1010,7 +1010,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> delete_business_agent_website_with_http_info(account_id, website_id)
+> <Array(<InlineObject1>, Integer, Hash)> delete_business_agent_website_with_http_info(account_id, website_id)
 
 ```ruby
 begin
@@ -1018,7 +1018,7 @@ begin
   data, status_code, headers = api_instance.delete_business_agent_website_with_http_info(account_id, website_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->delete_business_agent_website_with_http_info: #{e}"
 end
@@ -1033,7 +1033,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 
@@ -2737,7 +2737,7 @@ end
 
 ## remove_business_agent_allowlist_entry
 
-> <InlineObject> remove_business_agent_allowlist_entry(account_id, entry_id)
+> <InlineObject1> remove_business_agent_allowlist_entry(account_id, entry_id)
 
 Remove an allowlisted consumer
 
@@ -2769,7 +2769,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> remove_business_agent_allowlist_entry_with_http_info(account_id, entry_id)
+> <Array(<InlineObject1>, Integer, Hash)> remove_business_agent_allowlist_entry_with_http_info(account_id, entry_id)
 
 ```ruby
 begin
@@ -2777,7 +2777,7 @@ begin
   data, status_code, headers = api_instance.remove_business_agent_allowlist_entry_with_http_info(account_id, entry_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->remove_business_agent_allowlist_entry_with_http_info: #{e}"
 end
@@ -2792,7 +2792,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 
@@ -2948,7 +2948,7 @@ end
 
 ## reset_business_agent_business_information
 
-> <InlineObject> reset_business_agent_business_information(account_id)
+> <InlineObject1> reset_business_agent_business_information(account_id)
 
 Reset business information
 
@@ -2979,7 +2979,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<InlineObject>, Integer, Hash)> reset_business_agent_business_information_with_http_info(account_id)
+> <Array(<InlineObject1>, Integer, Hash)> reset_business_agent_business_information_with_http_info(account_id)
 
 ```ruby
 begin
@@ -2987,7 +2987,7 @@ begin
   data, status_code, headers = api_instance.reset_business_agent_business_information_with_http_info(account_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <InlineObject>
+  p data # => <InlineObject1>
 rescue Zernio::ApiError => e
   puts "Error when calling BusinessAgentApi->reset_business_agent_business_information_with_http_info: #{e}"
 end
@@ -3001,7 +3001,7 @@ end
 
 ### Return type
 
-[**InlineObject**](InlineObject.md)
+[**InlineObject1**](InlineObject1.md)
 
 ### Authorization
 

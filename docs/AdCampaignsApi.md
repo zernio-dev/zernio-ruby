@@ -24,6 +24,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**duplicate_ad**](AdCampaignsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad |
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
 | [**duplicate_ad_set**](AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set |
+| [**edit_campaign_negative_keyword_lists**](AdCampaignsApi.md#edit_campaign_negative_keyword_lists) | **PATCH** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | Attach or detach campaign negative lists |
+| [**edit_campaign_negative_keywords**](AdCampaignsApi.md#edit_campaign_negative_keywords) | **PATCH** /v1/ads/campaigns/{campaignId}/negative-keywords | Add or remove campaign-level negative keywords |
 | [**edit_google_asset_group_assets**](AdCampaignsApi.md#edit_google_asset_group_assets) | **POST** /v1/ads/campaigns/{campaignId}/asset-groups/{assetGroupId}/assets | Link or unlink asset group assets |
 | [**get_ad**](AdCampaignsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
 | [**get_ad_campaign_details**](AdCampaignsApi.md#get_ad_campaign_details) | **GET** /v1/ads/campaigns/{campaignId} | Get live campaign details |
@@ -64,7 +66,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_ad_campaign**](AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign |
 | [**update_ad_campaign_status**](AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign |
 | [**update_ad_group_assets**](AdCampaignsApi.md#update_ad_group_assets) | **PUT** /v1/ads/ad-sets/{adSetId}/assets | Update ad-group assets |
-| [**update_ad_keyword**](AdCampaignsApi.md#update_ad_keyword) | **PATCH** /v1/ads/keywords/{keywordId} | Pause or enable a Search keyword |
+| [**update_ad_keyword**](AdCampaignsApi.md#update_ad_keyword) | **PATCH** /v1/ads/keywords/{keywordId} | Update a Search keyword |
 | [**update_ad_set**](AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set |
 | [**update_ad_set_status**](AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set |
 | [**update_ad_status**](AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
@@ -78,7 +80,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## add_ad_keywords
 
-> <AddAdKeywords201Response> add_ad_keywords(add_ad_keywords_request)
+> <AddAdKeywords201Response> add_ad_keywords(add_ad_keywords_request, opts)
 
 Add Search ad-group keywords
 
@@ -97,10 +99,13 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 add_ad_keywords_request = Zernio::AddAdKeywordsRequest.new({account_id: 'account_id_example', ad_set_id: 'ad_set_id_example', keywords: [Zernio::AddAdKeywordsRequestKeywordsInner.new({text: 'text_example'})]}) # AddAdKeywordsRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Add Search ad-group keywords
-  result = api_instance.add_ad_keywords(add_ad_keywords_request)
+  result = api_instance.add_ad_keywords(add_ad_keywords_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->add_ad_keywords: #{e}"
@@ -111,12 +116,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AddAdKeywords201Response>, Integer, Hash)> add_ad_keywords_with_http_info(add_ad_keywords_request)
+> <Array(<AddAdKeywords201Response>, Integer, Hash)> add_ad_keywords_with_http_info(add_ad_keywords_request, opts)
 
 ```ruby
 begin
   # Add Search ad-group keywords
-  data, status_code, headers = api_instance.add_ad_keywords_with_http_info(add_ad_keywords_request)
+  data, status_code, headers = api_instance.add_ad_keywords_with_http_info(add_ad_keywords_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AddAdKeywords201Response>
@@ -130,6 +135,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **add_ad_keywords_request** | [**AddAdKeywordsRequest**](AddAdKeywordsRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -378,7 +384,7 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 boost_post_request = Zernio::BoostPostRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement'}) # BoostPostRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -413,7 +419,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **boost_post_request** | [**BoostPostRequest**](BoostPostRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -431,7 +437,7 @@ end
 
 ## bulk_update_ad_campaign_status
 
-> <BulkUpdateAdCampaignStatus200Response> bulk_update_ad_campaign_status(bulk_update_ad_campaign_status_request)
+> <BulkUpdateAdCampaignStatus200Response> bulk_update_ad_campaign_status(bulk_update_ad_campaign_status_request, opts)
 
 Pause or resume many campaigns
 
@@ -450,10 +456,13 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 bulk_update_ad_campaign_status_request = Zernio::BulkUpdateAdCampaignStatusRequest.new({status: 'active', campaigns: [Zernio::BulkUpdateAdCampaignStatusRequestCampaignsInner.new({platform_campaign_id: 'platform_campaign_id_example', platform: 'facebook'})]}) # BulkUpdateAdCampaignStatusRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Pause or resume many campaigns
-  result = api_instance.bulk_update_ad_campaign_status(bulk_update_ad_campaign_status_request)
+  result = api_instance.bulk_update_ad_campaign_status(bulk_update_ad_campaign_status_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->bulk_update_ad_campaign_status: #{e}"
@@ -464,12 +473,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BulkUpdateAdCampaignStatus200Response>, Integer, Hash)> bulk_update_ad_campaign_status_with_http_info(bulk_update_ad_campaign_status_request)
+> <Array(<BulkUpdateAdCampaignStatus200Response>, Integer, Hash)> bulk_update_ad_campaign_status_with_http_info(bulk_update_ad_campaign_status_request, opts)
 
 ```ruby
 begin
   # Pause or resume many campaigns
-  data, status_code, headers = api_instance.bulk_update_ad_campaign_status_with_http_info(bulk_update_ad_campaign_status_request)
+  data, status_code, headers = api_instance.bulk_update_ad_campaign_status_with_http_info(bulk_update_ad_campaign_status_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BulkUpdateAdCampaignStatus200Response>
@@ -483,6 +492,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **bulk_update_ad_campaign_status_request** | [**BulkUpdateAdCampaignStatusRequest**](BulkUpdateAdCampaignStatusRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -577,7 +587,7 @@ end
 
 Create a standalone ad group
 
-Creates an empty ad group under an existing campaign, ready for ads to be added later.  The ad group is created WITHOUT an ad (Google Ads compliance row C.190). Ads join it later via `adSetId` on POST /v1/ads/create. Supports Google Ads and Reddit Ads; every other platform returns 501.  **Reddit Ads** (`platform: reddit`)  - `adAccountId` (the Reddit ad account id) is required and must be a selected ad account of the connection (403 otherwise). - When the campaign has no campaign budget, send `budgetAmount` + `budgetType` (a lifetime budget needs `endDate`). - The ad group is optimized for the campaign's objective. `promotedObject.customEventType` is required on a conversions campaign, and the pixel must have received that event, else 422. - It bids with `bidStrategy`/`bidAmount` like POST /v1/ads/create. - Under campaign budget optimization the ad group takes the campaign's bid, goal type, optimization event and pixel, and bid fields return 400. - The ad group must start no earlier than a future campaign start and end no later than the campaign end (400 otherwise). - `targeting` takes the same targeting object as the other ad endpoints (no geo defaults to the US). - A campaign of another ad account returns 404, a Reddit Max campaign 422. - `maxCpc` and `customerId` are Google only (400 on Reddit), and the Reddit fields return 400 on Google.  ### After creation  Created `PAUSED` unless `status: ACTIVE`. The new ad group has no ad yet, so it will not appear in GET /v1/ads/tree (built purely from `ads` rows) until one is added. Use GET /v1/ads/ad-sets to see it in the meantime.  It can be read, edited and deleted through `/v1/ads/ad-sets/{adSetId}` right away (targeting, schedule, name, `status`, `budget` and bid fields). A budget on an ad group that spends its campaign budget returns 422.  **Idempotency:** send an `Idempotency-Key` header to make retries safe. 
+Creates an empty ad group under an existing campaign, ready for ads to be added later.  The ad group is created WITHOUT an ad (Google Ads compliance row C.190). Ads join it later via `adSetId` on POST /v1/ads/create. Supports Google Ads and Reddit Ads; every other platform returns 501.  **Google Ads** (`platform: google`)  - The ad group type follows the campaign: a standard ad group under a Search or Display campaign, a Demand Gen ad group under a Demand Gen campaign. - On a Demand Gen campaign the ad group is always created PAUSED, and `maxCpc` or `status: ACTIVE` returns 400 (Demand Gen bids at the campaign). - `targeting` sets a Demand Gen ad group's locations and languages (`countries`, `regions`, `cities`, `zips`, `metros`, `languages`), created atomically with the ad group. Without it the ad group serves worldwide. - `targeting` returns 400 for any other targeting field, and on campaigns that keep geo on the campaign: Search, Display, and Demand Gen campaigns migrated from Discovery. Edit those with PUT /v1/ads/campaigns/{campaignId}/targeting. - Any other campaign type returns 400 (Performance Max has asset groups instead of ad groups). - A campaign that is not in the ad account, or was removed, returns 404.  **Reddit Ads** (`platform: reddit`)  - `adAccountId` (the Reddit ad account id) is required and must be a selected ad account of the connection (403 otherwise). - When the campaign has no campaign budget, send `budgetAmount` + `budgetType` (a lifetime budget needs `endDate`). - The ad group is optimized for the campaign's objective. `promotedObject.customEventType` is required on a conversions campaign, and the pixel must have received that event, else 422. - It bids with `bidStrategy`/`bidAmount` like POST /v1/ads/create. - Under campaign budget optimization the ad group takes the campaign's bid, goal type, optimization event and pixel, and bid fields return 400. - The ad group must start no earlier than a future campaign start and end no later than the campaign end (400 otherwise). - `targeting` takes the same targeting object as the other ad endpoints (no geo defaults to the US). - A campaign of another ad account returns 404, a Reddit Max campaign 422. - `maxCpc` and `customerId` are Google only (400 on Reddit), and the other Reddit fields return 400 on Google.  ### After creation  Created `PAUSED` unless `status: ACTIVE`. The new ad group has no ad yet, so it will not appear in GET /v1/ads/tree (built purely from `ads` rows) until one is added. Use GET /v1/ads/ad-sets to see it in the meantime.  It can be read, edited and deleted through `/v1/ads/ad-sets/{adSetId}` right away (targeting, schedule, name, `status`, `budget` and bid fields). A budget on an ad group that spends its campaign budget returns 422.  **Idempotency:** send an `Idempotency-Key` header to make retries safe. 
 
 ### Examples
 
@@ -719,7 +729,7 @@ end
 
 Create a Performance Max asset group
 
-Adds an asset group with its assets and optional product targeting to a Performance Max campaign, or just validates it without creating anything.  The group, any new assets, their links and an optional listing-group tree are created in one atomic request, so Google checks the asset minimums (for non-retail campaigns) against the whole set. Created PAUSED unless status is ENABLED. validateOnly: true runs Google's validation without creating anything. 
+Adds an asset group with its assets and optional product targeting to a Performance Max campaign, or just validates it without creating anything.  The group, any new assets, their links and an optional listing-group tree are created in one atomic request, so Google checks the asset minimums (for non-retail campaigns) against the whole set. Created PAUSED unless status is ENABLED. validateOnly: true runs Google's validation without creating anything.  A campaign that is not Performance Max returns 400 on campaignId (add an ad group with POST /v1/ads/ad-sets instead). A missing or removed campaign returns 404. 
 
 ### Examples
 
@@ -859,7 +869,7 @@ end
 
 Create standalone ad
 
-Creates a paid ad with your own creative, building the campaign and ad set it needs or adding it to existing ones.  Works across Meta, Google Ads, Pinterest, TikTok, X, LinkedIn, OpenAI Ads (ChatGPT Ads), Reddit Ads and Microsoft Ads. Per-platform required fields, budget minimums, and video-ad rules are documented on each property below.  ### Request shapes  The body selects one of these mutually exclusive shapes:  - Legacy single-creative shape (all platforms, the default). - Meta-only multi-creative shape via the creatives array: one ad set with N ads sharing budget and targeting. - Attach shape via adSetId: adds one new ad to an existing ad set, inheriting its budget, targeting, and schedule (Meta, Google Ads, TikTok, and LinkedIn).  On LinkedIn, adSetId in the attach shape is the existing Campaign id, and the budget, schedule, targeting and bidding fields must be omitted. `goal` may be omitted too (taken from the Campaign's objective), and the created ad's `targeting` echoes the Campaign's audience.  ### Google Performance Max  Set `campaignType: \"pmax\"` and supply `assetGroup` with text, images by role, business name and finalUrl. This creates a daily budget, PAUSED campaign and asset group atomically.  - `validateOnly: true` validates the complete request with Google without creating or persisting resources. - Read assets with `GET /v1/ads/campaigns/{campaignId}/asset-groups`. - The logo is required; video is optional via `assetGroup.youtubeVideoId`. - Brand guidelines are disabled at creation. - All supplied asset links are validated together against Google's minimum asset requirements. - PMax rejects ACTIVE creation, portfolio bidding, bid caps, legacy creative fields and attach shapes. - Geo and language targeting are supported; omitted geo targets all locations. - PMax does not require top-level goal, headline, body or linkUrl.  Supported bidding:  - Omitted or LOWEST_COST_WITHOUT_CAP: Maximize Conversions. - COST_CAP plus bidAmount: target CPA. - LOWEST_COST_WITH_MIN_ROAS plus roasAverageFloor: Maximize Conversion Value with target ROAS.  ### Google Demand Gen  Set `campaignType: \"demand_gen\"` and supply `demandGen`. One atomic request creates a daily budget, PAUSED campaign, one ad group and one ad. The ad is:  - a multi-asset image ad by default; - a video responsive ad when `demandGen.youtubeVideoIds` is sent; - a carousel ad (2 to 10 cards) when `demandGen.carouselCards` is sent.  Targeting and validation:  - Geo (countries, regions, cities, zips, metros) and languages go on the ad group, as Demand Gen requires. - `demandGen.channels` sets the ad group's channel controls. - `demandGen.audience` builds a Google Audience (user lists, interests, custom audiences, age ranges, genders) attached to the ad group, or `demandGen.audienceId` attaches an existing one. - `validateOnly: true` validates everything with Google without creating resources.  Supported bidding:  - Omitted or LOWEST_COST_WITHOUT_CAP: Maximize Conversions. - COST_CAP plus bidAmount: target CPA. - LOWEST_COST_WITH_MIN_ROAS plus roasAverageFloor: target ROAS. - LOWEST_COST_WITH_BID_CAP plus bidAmount: target CPC.  The created ad carries the native `platformCampaignId`, `platformAdSetId` (ad group) and `platformAdId`. After creation:  - Activate with PUT /v1/ads/campaigns/{campaignId}/status. - Edit budget, bidding and name with the regular campaign endpoints. - Edit creative, channels, audience and ad group targeting with PUT /v1/ads/{adId} (`demandGen`, `targeting`).  To grow an existing Demand Gen campaign, send one of these (neither takes budget, bidding or schedule fields; both support `validateOnly`):  - `existingCampaignId`: adds a PAUSED ad group, with its own geo, languages, channels and audience, plus its ad. - `adSetId`: adds a PAUSED ad to that ad group.  ### Meta creative options  Meta accepts `creativeFeatures` on the single and attach shapes and as defaults for `creatives[]`; an item replaces the whole feature map.  `promotion` is not supported on any shape, and any object is rejected with 400.  Reusing `existingCreativeId` uses the existing creative settings instead of new settings. Requested settings are persisted for lists, exports, and default ad-detail reads.  ### Meta required fields per shape  A missing field is a 400 naming it in `param`.  - Every shape that builds a new ad set (no `adSetId`, `existingCampaignId` or `buyingType: \"RESERVED\"`): `budgetAmount`. `budgetType` defaults to daily, and a lifetime budget without `endDate` ends 7 days after it starts (see `appliedDefaults`). - Single image or video (the default), also with `adSetId`: `headline` (max 255), `body`, `callToAction`, and exactly one of `imageUrl` / `video`. A catalog template creative takes none, and ignores and does not upload any sent. - Single image or video also needs `linkUrl`, unless the goal is `lead_generation` or `page_visits` or `leadGenFormId` is set. - `bodies[]` / `headlines[]` text variations: `body`, one list with 2+ items, `callToAction`, `imageUrl` or `video`, and `linkUrl` unless the goal is `lead_generation` or `leadGenFormId` is set. `headline` is not required. - `placementAssets`: `headline`, `body`, `callToAction`, and `linkUrl` with the same exemptions as the single shape; the media comes from `placementAssets`. - `carouselCards`: `body`, `callToAction`, and `linkUrl` unless the goal is `lead_generation` or `leadGenFormId` is set. `headline` is not required. - `creatives[]`: per entry `headline`, `body`, `callToAction`, `imageUrl` or `video`, and `linkUrl` unless the goal is `lead_generation`. Top-level `body` is not required. - `dynamicCreative`: `imageUrls` or `videoUrls`, `callToActionTypes`, and `linkUrls` unless the goal is `lead_generation`. Top-level `body` is not required. - `existingCreativeId`: no creative fields. - Goal `page_likes`: `body` only. - Goal `lead_generation` always needs `leadGenFormId`, except with `existingCreativeId`.  ### Meta activation  Meta builds the campaign, ad set and ads PAUSED and switches the requested levels to ACTIVE as the last step.  When Meta refuses that switch, or the connection drops, after Zernio's retries, the request still answers 201 and nothing is deleted:  - The refused level and every level below it stay PAUSED. - Levels above it that already went ACTIVE stay ACTIVE. - The ad comes back with `status: paused` and its `configuredStatus` as read back from Meta. - A switch Meta applied although its answer was lost counts as ACTIVE, since Zernio reads the status back first.  `message` says not everything is ACTIVE. `warnings` carries one entry starting with `activation_failed:` that quotes Meta's code, subcode and message, and names what was kept PAUSED and what was switched ACTIVE.  That warning also lists the calls that switch the PAUSED ones on later, in this order, with status `active`:  1. PUT /v1/ads/campaigns/{campaignId}/status 2. PUT /v1/ads/ad-sets/{adSetId}/status 3. PUT /v1/ads/{adId}/status  On the `creatives[]` shape, only the ads Meta refused stay PAUSED when the campaign and ad set went through. A Reach and Frequency ad is created ACTIVE and is never listed as kept PAUSED. With an `Idempotency-Key`, a retry replays this 201.  ### LinkedIn  LinkedIn creates a Single Image or Single Video Ad backed by a Direct Sponsored Content \"dark post\" authored by a Company Page (see `organizationId`).  - Supported goals: engagement, traffic, awareness, and video_views. - Video ads use the `video` field; video_views requires a video. - Traffic ads require `linkUrl`.  ### Reddit Ads  Use the `accountId` of a `redditads` connection and an `adAccountId` like `a2_abc123`. Zernio creates a campaign, an ad group carrying the budget, schedule, targeting and pixel, and an ad running a new promoted post. The post is authored by the ad account's first profile (422 when it has none).  The creative format follows the body:  - `carouselCards`: a carousel. - `video`: a video ad. - `imageUrl`: an image ad. - None of them: a text ad, which cannot link out (`linkUrl` is a 400 there; `body` is required).  Only the legacy single-creative shape is available: `creatives[]`, `adSetId`, `existingCampaignId` and `validateOnly` are refused.  Reddit throttling surfaces as 429 `rate_limited` with `platform: reddit`; retry after a delay. To promote an existing Reddit post, use POST /v1/ads/boost.  ### Microsoft Ads  Use the `accountId` of a `microsoftads` connection and its numeric `adAccountId`. Zernio creates a Search campaign carrying the daily budget and the countries, an ad group carrying the schedule, a responsive search ad and the `keywords`.  - `goal` is `traffic`; `budgetType` must be `daily`. - `headline`, `body` and `linkUrl` are required. `additionalHeadlines` and `additionalDescriptions` complete the ad to 3 to 15 headlines (30 characters) and 2 to 4 descriptions (90 characters); missing ones are filled from `name` and the link's host. - `countries` (or `targeting.countries`) is required; no other targeting field applies. - Bid fields, `negativeKeywords`, `campaignNegativeKeywords`, sitelinks, callouts, structured snippets, `businessName`, `longHeadline` and a `campaignType` other than `search` return 422.  Without `status`, every level is switched on and the campaign spends once Microsoft approves the ad: send `status: PAUSED` to create it paused. A failed step deletes the campaign the call created.  ### Idempotency  This endpoint is not idempotent at the platform level: a blind retry creates a second campaign/ad set/ad. Send an `Idempotency-Key` header to make retries safe.  - The first request with a given key creates the ad and we store the response. - A retry with the same key replays that exact response (with `Idempotent-Replayed: true`) instead of creating duplicates. - Reusing a key with a different body returns 422. - A key whose first request is still in flight returns 409 (retry after a short backoff). - If the first request is cut off mid-create (for example by a function timeout), its key can stay in progress and keep returning 409 until it expires. Use a new key to retry sooner, after checking whether the ad was created. - Keys are scoped to your credential and expire after 24h. 
+Creates a paid ad with your own creative, building the campaign and ad set it needs or adding it to existing ones.  Works across Meta, Google Ads, Pinterest, TikTok, X, LinkedIn, OpenAI Ads (ChatGPT Ads), Reddit Ads and Microsoft Ads. Per-platform required fields, budget minimums, and video-ad rules are documented on each property below.  ### Request shapes  The body selects one of these mutually exclusive shapes:  - Legacy single-creative shape (all platforms, the default). - Meta-only multi-creative shape via the creatives array: one ad set with N ads sharing budget and targeting. - Attach shape via adSetId: adds one new ad to an existing ad set, inheriting its budget, targeting, and schedule (Meta, Google Ads, TikTok, and LinkedIn).  On LinkedIn, adSetId in the attach shape is the existing Campaign id, and the budget, schedule, targeting and bidding fields must be omitted. `goal` may be omitted too (taken from the Campaign's objective), and the created ad's `targeting` echoes the Campaign's audience.  ### Google Performance Max  Set `campaignType: \"pmax\"` and supply `assetGroup` with text, images by role, business name and finalUrl. This creates a daily budget, PAUSED campaign and asset group atomically.  - `validateOnly: true` validates the complete request with Google without creating or persisting resources. - Read assets with `GET /v1/ads/campaigns/{campaignId}/asset-groups`. - The logo is required; video is optional via `assetGroup.youtubeVideoId`. - Brand guidelines are disabled at creation. - All supplied asset links are validated together against Google's minimum asset requirements. - PMax rejects ACTIVE creation, portfolio bidding, bid caps, legacy creative fields and attach shapes. - Geo and language targeting are supported; omitted geo targets all locations. - PMax does not require top-level goal, headline, body or linkUrl. - `merchantCenter` links the campaign to a Merchant Center feed and adds one all-products listing group to the asset group. Google rejects the whole create (nothing is created) when the ad account is not linked to that Merchant Center.  Supported bidding:  - Omitted or LOWEST_COST_WITHOUT_CAP: Maximize Conversions. - COST_CAP plus bidAmount: target CPA. - LOWEST_COST_WITH_MIN_ROAS plus roasAverageFloor: Maximize Conversion Value with target ROAS.  ### Google Demand Gen  Set `campaignType: \"demand_gen\"` and supply `demandGen`. One atomic request creates a daily budget, PAUSED campaign, one ad group and one ad. The ad is:  - a multi-asset image ad by default; - a video responsive ad when `demandGen.youtubeVideoIds` is sent; - a carousel ad (2 to 10 cards) when `demandGen.carouselCards` is sent.  Targeting and validation:  - Geo (countries, regions, cities, zips, metros) and languages go on the ad group, as Demand Gen requires. - `demandGen.channels` sets the ad group's channel controls. - `demandGen.audience` builds a Google Audience (user lists, interests, custom audiences, age ranges, genders) attached to the ad group, or `demandGen.audienceId` attaches an existing one. - `validateOnly: true` validates everything with Google without creating resources.  Supported bidding:  - Omitted or LOWEST_COST_WITHOUT_CAP: Maximize Conversions. - COST_CAP plus bidAmount: target CPA. - LOWEST_COST_WITH_MIN_ROAS plus roasAverageFloor: target ROAS. - LOWEST_COST_WITH_BID_CAP plus bidAmount: target CPC.  The created ad carries the native `platformCampaignId`, `platformAdSetId` (ad group) and `platformAdId`. After creation:  - Activate with PUT /v1/ads/campaigns/{campaignId}/status. - Edit budget, bidding and name with the regular campaign endpoints. - Edit creative, channels, audience and ad group targeting with PUT /v1/ads/{adId} (`demandGen`, `targeting`).  To grow an existing Demand Gen campaign, send one of these (neither takes budget, bidding or schedule fields; both support `validateOnly`):  - `existingCampaignId`: adds a PAUSED ad group, with its own geo, languages, channels and audience, plus its ad. - `adSetId`: adds a PAUSED ad to that ad group.  ### Meta creative options  Meta accepts `creativeFeatures` on the single and attach shapes and as defaults for `creatives[]`; an item replaces the whole feature map.  `promotion` is not supported on any shape, and any object is rejected with 400.  Reusing `existingCreativeId` uses the existing creative settings instead of new settings. Requested settings are persisted for lists, exports, and default ad-detail reads.  ### Meta required fields per shape  A missing field is a 400 naming it in `param`.  - Every shape that builds a new ad set (no `adSetId`, `existingCampaignId` or `buyingType: \"RESERVED\"`): `budgetAmount`. `budgetType` defaults to daily, and a lifetime budget without `endDate` ends 7 days after it starts (see `appliedDefaults`). - Single image or video (the default), also with `adSetId`: `headline` (max 255), `body`, `callToAction`, and exactly one of `imageUrl` / `video`. A catalog template creative takes none, and ignores and does not upload any sent. - Single image or video also needs `linkUrl`, unless the goal is `lead_generation` or `page_visits` or `leadGenFormId` is set. - `bodies[]` / `headlines[]` text variations: `body`, one list with 2+ items, `callToAction`, `imageUrl` or `video`, and `linkUrl` unless the goal is `lead_generation` or `leadGenFormId` is set. `headline` is not required. - `placementAssets`: `headline`, `body`, `callToAction`, and `linkUrl` with the same exemptions as the single shape; the media comes from `placementAssets`. - `carouselCards`, also with `adSetId`: `body`, `callToAction`, and `linkUrl` unless the goal is `lead_generation` or `leadGenFormId` is set. `headline` is not required. Each card takes `imageUrl` or `video`. - `creatives[]`: per entry `headline`, `body`, `callToAction`, `imageUrl` or `video`, and `linkUrl` unless the goal is `lead_generation`. Top-level `body` is not required. - `dynamicCreative`: `imageUrls` or `videoUrls`, `callToActionTypes`, and `linkUrls` unless the goal is `lead_generation`. Top-level `body` is not required. - `existingCreativeId`: no creative fields. - Goal `page_likes`: `body` only. - Goal `lead_generation` always needs `leadGenFormId`, except with `existingCreativeId`.  ### Meta activation  Meta builds the campaign, ad set and ads PAUSED and switches the requested levels to ACTIVE as the last step.  When Meta refuses that switch, or the connection drops, after Zernio's retries, the request still answers 201 and nothing is deleted:  - The refused level and every level below it stay PAUSED. - Levels above it that already went ACTIVE stay ACTIVE. - The ad comes back with `status: paused` and its `configuredStatus` as read back from Meta. - A switch Meta applied although its answer was lost counts as ACTIVE, since Zernio reads the status back first.  `message` says not everything is ACTIVE. `warnings` carries one entry starting with `activation_failed:` that quotes Meta's code, subcode and message, and names what was kept PAUSED and what was switched ACTIVE.  That warning also lists the calls that switch the PAUSED ones on later, in this order, with status `active`:  1. PUT /v1/ads/campaigns/{campaignId}/status 2. PUT /v1/ads/ad-sets/{adSetId}/status 3. PUT /v1/ads/{adId}/status  On the `creatives[]` shape, only the ads Meta refused stay PAUSED when the campaign and ad set went through. A Reach and Frequency ad is created ACTIVE and is never listed as kept PAUSED. With an `Idempotency-Key`, a retry replays this 201.  ### LinkedIn  LinkedIn creates a Single Image or Single Video Ad backed by a Direct Sponsored Content \"dark post\" authored by a Company Page (see `organizationId`).  - Supported goals: engagement, traffic, awareness, and video_views. - Video ads use the `video` field; video_views requires a video. - Traffic ads require `linkUrl`.  ### Reddit Ads  Use the `accountId` of a `redditads` connection and an `adAccountId` like `a2_abc123`. Zernio creates a campaign, an ad group carrying the budget, schedule, targeting and pixel, and an ad running a new promoted post. The post is authored by the ad account's first profile (422 when it has none).  The creative format follows the body:  - `carouselCards`: a carousel. - `video`: a video ad. - `imageUrl`: an image ad. - None of them: a text ad, which cannot link out (`linkUrl` is a 400 there; `body` is required).  `creatives[]` and `validateOnly` are refused. `adSetId` adds the ad, in any of these formats, to an existing ad group, and `existingCampaignId` creates a new ad group in an existing campaign.  Reddit throttling surfaces as 429 `rate_limited` with `platform: reddit`; retry after a delay. To promote an existing Reddit post, use POST /v1/ads/boost.  ### Microsoft Ads  Use the `accountId` of a `microsoftads` connection and its numeric `adAccountId`. Zernio creates a Search campaign carrying the daily budget and the countries, an ad group carrying the schedule, a responsive search ad and the `keywords`.  - `goal` is `traffic`; `budgetType` must be `daily`. - `headline`, `body` and `linkUrl` are required. `additionalHeadlines` and `additionalDescriptions` complete the ad to 3 to 15 headlines (30 characters) and 2 to 4 descriptions (90 characters); missing ones are filled from `name` and the link's host. - `countries` (or `targeting.countries`) is required; no other targeting field applies. - Bid fields, `negativeKeywords`, `campaignNegativeKeywords`, sitelinks, callouts, structured snippets, `businessName`, `longHeadline` and a `campaignType` other than `search` return 422.  Without `status`, every level is switched on and the campaign spends once Microsoft approves the ad: send `status: PAUSED` to create it paused. A failed step deletes the campaign the call created.  ### Idempotency  This endpoint is not idempotent at the platform level: a blind retry creates a second campaign/ad set/ad. Send an `Idempotency-Key` header to make retries safe.  - The first request with a given key creates the ad and we store the response. - A retry with the same key replays that exact response (with `Idempotent-Replayed: true`) instead of creating duplicates. - Reusing a key with a different body returns 422. - A key whose first request is still in flight returns 409 (retry after a short backoff). - If the first request is cut off mid-create (for example by a function timeout), its key can stay in progress and keep returning 409 until it expires. Use a new key to retry sooner, after checking whether the ad was created. - Keys are scoped to your credential and expire after 24h. 
 
 ### Examples
 
@@ -875,7 +885,7 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 create_standalone_ad_request = Zernio::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example'}) # CreateStandaloneAdRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -910,7 +920,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_standalone_ad_request** | [**CreateStandaloneAdRequest**](CreateStandaloneAdRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -1279,7 +1289,7 @@ end
 
 Duplicate an ad
 
-Copies a single Meta ad, optionally into another ad set, created paused so you can review it before launch.  It duplicates the ad via Meta's native `POST /{ad-id}/copies`. The copy is created paused.  - `adSetId` retargets the copy into another ad set; omitted = the source's own ad set. - Accepts the Zernio ad id or the platform ad id. - Sync discovery is triggered automatically (`syncAfter: false` to skip).  ### Creative settings  Creative settings returned by Meta, including explicit promotion metadata and creativeFeatures, are preserved when the native copy requires a creative rebuild. Metadata Meta does not return cannot be recovered.  ### Fallback rebuild  When Meta refuses the native copy with its capability error (code 3), which happens for some creatives built by other tools, the ad is rebuilt instead:  1. A new creative from the source's returned spec. 2. A new ad in the target ad set, carrying the source name, status option, rename options and tracking specs. 
+Copies a single Meta ad, optionally into another ad set, created paused so you can review it before launch.  It duplicates the ad via Meta's native `POST /{ad-id}/copies`. The copy is created paused.  - `adSetId` retargets the copy into another ad set; omitted = the source's own ad set. - Accepts the Zernio ad id or the platform ad id. - A sync discovery starts automatically and runs after the response (`syncAfter: false` to skip). The copy is readable through Zernio once it finishes, usually within a few minutes. Until then, calls that take a copied id return 404, so retry them.  ### Creative settings  Creative settings returned by Meta, including explicit promotion metadata and creativeFeatures, are preserved when the native copy requires a creative rebuild. Metadata Meta does not return cannot be recovered.  ### Fallback rebuild  When Meta refuses the native copy with its capability error (code 3), which happens for some creatives built by other tools, the ad is rebuilt instead:  1. A new creative from the source's returned spec. 2. A new ad in the target ad set, carrying the source name, status option, rename options and tracking specs. 
 
 ### Examples
 
@@ -1354,7 +1364,7 @@ end
 
 Duplicate a campaign
 
-Copies a campaign with its ad sets, ads, creatives and targeting, created paused so you can review it before launch.  Ad sets, ads, creatives, and targeting are copied by default (`deepCopy: true`). The copy is created paused so callers can review before launching.  ### Per-platform implementation  - **Meta** copies one level at a time with Meta's `/copies` endpoint. See below. - **TikTok** has no native copy primitive. See below. - **LinkedIn** has no native copy primitive. See below. - Other platforms return 501 Not Implemented.  ### Meta  Zernio copies the campaign, then each of its ad sets (DELETED and ARCHIVED ones are skipped), then each ad of every ad set. So a campaign of any size copies: Meta refuses a single deep copy of 3 or more objects.  - `statusOption` applies at every level. - If any child copy fails, the partial copy is deleted and the request fails with Meta's error, so a retry starts clean. - Each copied object takes a few seconds, so a large campaign takes minutes to answer.  ### TikTok  Zernio walks the source graph (`/v2/campaign/get/`, `/v2/adgroup/get/`, `/v2/ad/get/`) and recreates each entity via the corresponding `/create/` endpoints. It carries over budget / targeting / bid_type / bid_price / deep_bid_type / creative fields. Spark Ad linkage (`tiktok_item_id`) is preserved.  ### LinkedIn  Zernio walks the source CampaignGroup → Campaigns → Creatives and recreates each entity. It carries over these fields, plus every Creative's `content` object verbatim:  - `type` / `costType` / `unitCost` / `optimizationTargetType` - `creativeSelection` / `objectiveType` / `format` - `dailyBudget` / `totalBudget` / `targetingCriteria` / `runSchedule`  `statusOption: INHERITED_FROM_SOURCE` is evaluated **per entity**: any Group / Campaign / Creative whose source is `ACTIVE` gets its clone activated too.  Duplicating an ACTIVE campaign with `INHERITED_FROM_SOURCE` starts a second front of spend the moment the clone activates. The safe default is `PAUSED`.  ### Sync  The new hierarchy is asynchronous to materialize in our DB, and we trigger sync discovery automatically. Set `syncAfter: false` to skip and poll `/v1/ads/tree` on your own cadence. 
+Copies a campaign with its ad sets, ads, creatives and targeting, created paused so you can review it before launch.  Ad sets, ads, creatives, and targeting are copied by default (`deepCopy: true`). The copy is created paused so callers can review before launching.  ### Per-platform implementation  - **Meta** copies one level at a time with Meta's `/copies` endpoint. See below. - **TikTok** has no native copy primitive. See below. - **LinkedIn** has no native copy primitive. See below. - **Google** copies Performance Max campaigns in one atomic request. See below. - Other platforms return 501 Not Implemented.  ### Meta  Zernio copies the campaign, then each of its ad sets (DELETED and ARCHIVED ones are skipped), then each ad of every ad set. So a campaign of any size copies: Meta refuses a single deep copy of 3 or more objects.  - `statusOption` applies at every level. - If any child copy fails, the partial copy is deleted and the request fails with Meta's error, so a retry starts clean. - Each copied object takes a few seconds, so a large campaign takes minutes to answer.  ### TikTok  Zernio walks the source graph (`/v2/campaign/get/`, `/v2/adgroup/get/`, `/v2/ad/get/`) and recreates each entity via the corresponding `/create/` endpoints. It carries over budget / targeting / bid_type / bid_price / deep_bid_type / creative fields. Spark Ad linkage (`tiktok_item_id`) is preserved.  ### LinkedIn  Zernio walks the source CampaignGroup → Campaigns → Creatives and recreates each entity. It carries over these fields, plus every Creative's `content` object verbatim:  - `type` / `costType` / `unitCost` / `optimizationTargetType` - `creativeSelection` / `objectiveType` / `format` - `dailyBudget` / `totalBudget` / `targetingCriteria` / `runSchedule`  `statusOption: INHERITED_FROM_SOURCE` is evaluated **per entity**: any Group / Campaign / Creative whose source is `ACTIVE` gets its clone activated too.  Duplicating an ACTIVE campaign with `INHERITED_FROM_SOURCE` starts a second front of spend the moment the clone activates. The safe default is `PAUSED`.  ### Google  Performance Max campaigns only; any other Google campaign type returns 501 naming its channel. Zernio reads the campaign and recreates it in one atomic Google request, so a copy either exists whole or not at all.  - The copy is always created paused. `statusOption` other than `PAUSED` and `deepCopy: false` return 400. - The name is `renamePrefix` + the source name + `renameSuffix`. With neither sent, the suffix defaults to ` (Copy)`. `NO_RENAME` returns 400 because Google campaign names are unique per account. Asset groups are renamed only under `DEEP_RENAME`. - `startTime` and `endTime` are whole days in the customer's timezone. Without `startTime` the copy starts when created. Without `endTime` the source's end date is kept. - Copied budget: a shared budget is reused, so the copy shares its spend; a daily budget is recreated. - Copied bidding: a portfolio strategy, Maximize conversions with its target CPA, or Maximize conversion value with its target ROAS. - Copied campaign settings: Merchant Center feed and vehicle listings, location, language, proximity and ad schedule criteria, negative keywords, negative keyword lists, sitelinks and other campaign assets, tracking template and URL parameters, geo target type and automated asset settings. - Copied asset groups: every asset group with its assets, listing tree, search themes and audience signals. - Assets Google created automatically are not copied; Google regenerates them. - Anything else returns 422 naming each setting that cannot be copied, and nothing is created: other bidding strategies or budget types, other campaign criteria or shared set types, brand guidelines, conversion goals set on the campaign, audiences scoped to an asset group, and listing trees that are not Shopping trees. - `adSetIdMap` and `adIdMap` both map each source asset group id to its copy.  ### Sync  The copy exists on the platform when this call returns. The new hierarchy reaches our DB through a sync discovery that starts automatically and runs after the response, usually within a few minutes.  Poll `/v1/ads/tree` until it appears; until then, calls that take a copied id return 404, so retry them. Set `syncAfter: false` to skip the sync; the copy then appears on a later scheduled sync. 
 
 ### Examples
 
@@ -1429,7 +1439,7 @@ end
 
 Duplicate an ad set
 
-Copies an ad set, optionally with its ads and into another campaign, created paused so you can review it before launch.  The copy is created paused so callers can review before launching. `campaignId` retargets the copy into another campaign; omitted = the source's own campaign.  **Meta:** ads and creatives are included by default (`deepCopy: true`).  - The ad set is copied with Meta's `/copies` endpoint, then each of its ads (DELETED and ARCHIVED ones are skipped) into the new ad set. - So an ad set with any number of ads copies: Meta refuses a single deep copy of 3 or more objects. - `statusOption` applies to the ad set and every ad. - If an ad copy fails, the partial ad set copy is deleted and the request fails with Meta's error. - Sync discovery is triggered automatically (`syncAfter: false` to skip).  TikTok: the ad group is read and recreated under the campaign with its targeting, bidding, budget and schedule (start reset to now); `deepCopy: true` recreates its ads too (default false). `startTime`, `endTime` and `renameStrategy` are ignored and `statusOption` must be PAUSED or absent. The copy appears on the next discovery sync. 
+Copies an ad set, optionally with its ads and into another campaign, created paused so you can review it before launch.  The copy is created paused so callers can review before launching. `campaignId` retargets the copy into another campaign; omitted = the source's own campaign.  **Meta:** ads and creatives are included by default (`deepCopy: true`).  - The ad set is copied with Meta's `/copies` endpoint, then each of its ads (DELETED and ARCHIVED ones are skipped) into the new ad set. - So an ad set with any number of ads copies: Meta refuses a single deep copy of 3 or more objects. - `statusOption` applies to the ad set and every ad. - If an ad copy fails, the partial ad set copy is deleted and the request fails with Meta's error. - A sync discovery starts automatically and runs after the response (`syncAfter: false` to skip). The copy is readable through Zernio once it finishes, usually within a few minutes. Until then, calls that take a copied id return 404, so retry them. - `websiteOnly: true` rebuilds each ad (new creative on `/adcreatives`, new ad) instead of copying it, so the creative carries `applink_treatment: web_only`.  TikTok: the ad group is read and recreated under the campaign with its targeting, bidding, budget and schedule (start reset to now); `deepCopy: true` recreates its ads too (default false). `startTime`, `endTime` and `renameStrategy` are ignored and `statusOption` must be PAUSED or absent. The copy appears on the next discovery sync. 
 
 ### Examples
 
@@ -1487,6 +1497,156 @@ end
 ### Return type
 
 [**DuplicateAdSet200Response**](DuplicateAdSet200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## edit_campaign_negative_keyword_lists
+
+> <ReplaceAdNegativeKeywordListKeywords200Response> edit_campaign_negative_keyword_lists(campaign_id, edit_campaign_negative_keyword_lists_request, opts)
+
+Attach or detach campaign negative lists
+
+Attaches and detaches single shared negative keyword lists on a Google campaign without resending the full set. The lists and their keywords are not changed.  - `remove` wins over `add` for the same list. - A list already attached is not attached twice; a list not attached is skipped on remove. - Every list in `add` must belong to the campaign customer and have type NEGATIVE_KEYWORDS. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | 
+edit_campaign_negative_keyword_lists_request = Zernio::EditCampaignNegativeKeywordListsRequest.new # EditCampaignNegativeKeywordListsRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Attach or detach campaign negative lists
+  result = api_instance.edit_campaign_negative_keyword_lists(campaign_id, edit_campaign_negative_keyword_lists_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->edit_campaign_negative_keyword_lists: #{e}"
+end
+```
+
+#### Using the edit_campaign_negative_keyword_lists_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ReplaceAdNegativeKeywordListKeywords200Response>, Integer, Hash)> edit_campaign_negative_keyword_lists_with_http_info(campaign_id, edit_campaign_negative_keyword_lists_request, opts)
+
+```ruby
+begin
+  # Attach or detach campaign negative lists
+  data, status_code, headers = api_instance.edit_campaign_negative_keyword_lists_with_http_info(campaign_id, edit_campaign_negative_keyword_lists_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ReplaceAdNegativeKeywordListKeywords200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->edit_campaign_negative_keyword_lists_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** |  |  |
+| **edit_campaign_negative_keyword_lists_request** | [**EditCampaignNegativeKeywordListsRequest**](EditCampaignNegativeKeywordListsRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**ReplaceAdNegativeKeywordListKeywords200Response**](ReplaceAdNegativeKeywordListKeywords200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## edit_campaign_negative_keywords
+
+> <EditCampaignNegativeKeywords200Response> edit_campaign_negative_keywords(campaign_id, edit_campaign_negative_keywords_request, opts)
+
+Add or remove campaign-level negative keywords
+
+Adds and removes single campaign-level negative keywords on a Google campaign without resending the full set.  - `remove` matches by text (any case) and match type, and wins over `add` for the same keyword. - Keywords already on the campaign are not added twice; keywords not on it are skipped on remove. - Changes go to Google in `create`/`remove` mutates of up to 5,000 operations, like the full replace.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not `platform` was sent. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Platform campaign ID
+edit_campaign_negative_keywords_request = Zernio::EditCampaignNegativeKeywordsRequest.new # EditCampaignNegativeKeywordsRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
+
+begin
+  # Add or remove campaign-level negative keywords
+  result = api_instance.edit_campaign_negative_keywords(campaign_id, edit_campaign_negative_keywords_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->edit_campaign_negative_keywords: #{e}"
+end
+```
+
+#### Using the edit_campaign_negative_keywords_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<EditCampaignNegativeKeywords200Response>, Integer, Hash)> edit_campaign_negative_keywords_with_http_info(campaign_id, edit_campaign_negative_keywords_request, opts)
+
+```ruby
+begin
+  # Add or remove campaign-level negative keywords
+  data, status_code, headers = api_instance.edit_campaign_negative_keywords_with_http_info(campaign_id, edit_campaign_negative_keywords_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <EditCampaignNegativeKeywords200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->edit_campaign_negative_keywords_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Platform campaign ID |  |
+| **edit_campaign_negative_keywords_request** | [**EditCampaignNegativeKeywordsRequest**](EditCampaignNegativeKeywordsRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
+
+### Return type
+
+[**EditCampaignNegativeKeywords200Response**](EditCampaignNegativeKeywords200Response.md)
 
 ### Authorization
 
@@ -1577,7 +1737,7 @@ end
 
 Get ad details
 
-Shows one ad with its creative, targeting, status and performance metrics.  ### Google Search ads  Google Search ads include current creative.headlines, creative.descriptions and creative.finalUrls, preserving pinnedField. Top-level cachedAt and stale report cache freshness. Google mutations invalidate this read.  RSA enrichment requires a stored advertisingChannelType of SEARCH. Ads with an unknown or other channel return their stored details without a Google read. If RSA enrichment fails, the stored ad is returned with HTTP 200 and without cache metadata.  ### Accepted ad ids  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad:  - the Zernio internal `_id` (24-char hex) - Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`) - the creative's `effective_object_story_id` (`{pageId}_{postId}` shape, Facebook side) - the creative's `effective_instagram_media_id` (Instagram side) - an Instagram media id an ad comment arrived on (`comment.platformPostId` of a `comment.received` carrying `comment.ad.id`), including the extra media Meta creates for placement variants  Any of these resolve to the same ad, so the caller doesn't need a translation step.  `creative.creativeFeatures` holds the stored requested settings, which do not confirm platform application.  ### Facebook ad dark posts  Meta gives an ad with per-placement assets one extra unpublished post per placement, and comments land on it. Meta exposes no link from that post to its ad.  - When exactly one ad on the Page, created before the dark post, carries the same copy as the post, the dark post id resolves to that ad. - Otherwise, when the id is a dark post Zernio has seen comments on and its Page is connected, the response is `ad: null` plus `darkPost`. It carries the Meta Ads account and the ad accounts running ads for that Page.  Read its comments with GET /v1/ads/{adId}/comments using the same id.  ### Status freshness  `status`, `configuredStatus`, `platformStatus`, `platformAdSetStatus` and `platformCampaignStatus` are the values Zernio last stored.  Background sync refreshes them, typically within 15 to 60 minutes (Google up to about 3 hours), and ended or long-paused objects may be refreshed less often.  Zernio's own status writes re-read the switches they change. A change made in the platform's own ads manager therefore shows up here only after the next sync.  Controllers that act on a switch should pass `live=true`. It reads the switches from the platform now, stores them, and returns `statusReadAt` (null when the read failed and the stored values were returned).  With `live=true` these are read live:  - the ad's own switch (`configuredStatus`) - its delivery status (`status`, `platformStatus`) - its ad set and campaign switches (`platformAdSetStatus`, `platformCampaignStatus`) - on TikTok, the creative TikTok holds now: `creative.body` (ad text), `creative.callToAction`, `creative.linkUrl` (landing page), `creative.videoId`, `creative.adFormat`, `creative.identityId`, `creative.identityType`, `creative.identityAuthorizedBcId` and, on a Spark ad, `creative.tiktokItemId`.  The TikTok creative comes from the same TikTok call as the switches. It replaces the stored values in the response only and is never stored. A key TikTok leaves empty keeps its stored value.  ### Meta ads that are not synced yet  Pass `accountId` with a Meta `platformAdId` to read an ad Zernio has not synced (for example one created in Ads Manager on an ad account reached only through a Facebook connection).  The ad is read live from Meta and mapped exactly like a synced row: name, `status`, `platformStatus`, `configuredStatus`, `platformAdSetId`, `platformCampaignId`, campaign and ad set names, budgets, and `creative` with its `id`, body, link, image and video.  It comes back with `synced: false`, no `id` (it has no Zernio row) and `statusReadAt` set to the time of the read. Synced ads answer `synced: true`.  Only a numeric id takes this path, so dark post ids (`{pageId}_{postId}`) keep the dark post lookup above. 
+Shows one ad with its creative, targeting, status and performance metrics.  ### Google Search ads  Google Search ads include current creative.headlines, creative.descriptions, creative.finalUrls and, when set, creative.path1 and creative.path2, preserving pinnedField. Top-level cachedAt and stale report cache freshness. Google mutations invalidate this read.  RSA enrichment requires a stored advertisingChannelType of SEARCH. Ads with an unknown or other channel return their stored details without a Google read. If RSA enrichment fails, the stored ad is returned with HTTP 200 and without cache metadata.  ### Accepted ad ids  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad:  - the Zernio internal `_id` (24-char hex) - Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`) - the creative's `effective_object_story_id` (`{pageId}_{postId}` shape, Facebook side) - the creative's `effective_instagram_media_id` (Instagram side) - an Instagram media id an ad comment arrived on (`comment.platformPostId` of a `comment.received` carrying `comment.ad.id`), including the extra media Meta creates for placement variants  Any of these resolve to the same ad, so the caller doesn't need a translation step.  `creative.creativeFeatures` holds the stored requested settings, which do not confirm platform application.  ### Facebook ad dark posts  Meta gives an ad with per-placement assets one extra unpublished post per placement, and comments land on it. Meta exposes no link from that post to its ad.  - When exactly one ad on the Page, created before the dark post, carries the same copy as the post, the dark post id resolves to that ad. - Otherwise, when the id is a dark post Zernio has seen comments on and its Page is connected, the response is `ad: null` plus `darkPost`. It carries the Meta Ads account and the ad accounts running ads for that Page.  Read its comments with GET /v1/ads/{adId}/comments using the same id.  ### Status freshness  `status`, `configuredStatus`, `platformStatus`, `platformAdSetStatus` and `platformCampaignStatus` are the values Zernio last stored.  Background sync refreshes them, typically within 15 to 60 minutes (Google up to about 3 hours), and ended or long-paused objects may be refreshed less often.  Zernio's own status writes re-read the switches they change. A change made in the platform's own ads manager therefore shows up here only after the next sync.  Controllers that act on a switch should pass `live=true`. It reads the switches from the platform now, stores them, and returns `statusReadAt` (null when the read failed and the stored values were returned).  With `live=true` these are read live:  - the ad's own switch (`configuredStatus`) - its delivery status (`status`, `platformStatus`) - its ad set and campaign switches (`platformAdSetStatus`, `platformCampaignStatus`) - on TikTok, the creative TikTok holds now: `creative.body` (ad text), `creative.callToAction`, `creative.linkUrl` (landing page), `creative.videoId`, `creative.adFormat`, `creative.identityId`, `creative.identityType`, `creative.identityAuthorizedBcId` and, on a Spark ad, `creative.tiktokItemId`.  The TikTok creative comes from the same TikTok call as the switches. It replaces the stored values in the response only and is never stored. A key TikTok leaves empty keeps its stored value.  ### Meta ads that are not synced yet  Pass `accountId` with a Meta `platformAdId` to read an ad Zernio has not synced (for example one created in Ads Manager on an ad account reached only through a Facebook connection).  The ad is read live from Meta and mapped exactly like a synced row: name, `status`, `platformStatus`, `configuredStatus`, `platformAdSetId`, `platformCampaignId`, campaign and ad set names, budgets, and `creative` with its `id`, body, link, image and video.  It comes back with `synced: false`, no `id` (it has no Zernio row) and `statusReadAt` set to the time of the read. Synced ads answer `synced: true`.  Only a numeric id takes this path, so dark post ids (`{pageId}_{postId}`) keep the dark post lookup above. 
 
 ### Examples
 
@@ -1727,7 +1887,7 @@ end
 
 Read the platform's review verdict for an ad
 
-Shows whether the platform approved an ad, where it may not deliver, and every rejection reason, without re-enabling a paused ad.  It reads the ad's review verdict from the platform now, including every rejection reason with TikTok's suggestion and the piece of content it refers to. It is read-only, so it works on a paused ad without re-enabling it.  Supported on TikTok, Google and Meta. Other platforms return 501.  ### Google  Reads `ad_group_ad.policy_summary` live. `approvalStatus` and `reviewStatus` are Google's verbatim:  - `approvalStatus`: APPROVED, APPROVED_LIMITED, AREA_OF_INTEREST_ONLY, DISAPPROVED, UNKNOWN. - `reviewStatus`: REVIEW_IN_PROGRESS, REVIEWED, UNDER_APPEAL, ELIGIBLE_MAY_SERVE. - `approved`: true for the three approved statuses, false for DISAPPROVED, null otherwise.  `policyTopics` carries every policy topic entry with its `type` (PROHIBITED, LIMITED, ...) and Google's `evidences` and `constraints` verbatim. Each PROHIBITED topic is also listed in `rejections` (reason = the topic).  The `forbidden*` arrays are TikTok-only and always empty on Google.  ### Meta (Facebook and Instagram ads)  Reads the Ad's `ad_review_feedback`, `effective_status` and `issues_info` live.  - `reviewStatus`: Meta's `effective_status` verbatim (ACTIVE, PAUSED, PENDING_REVIEW, DISAPPROVED, PREAPPROVED, WITH_ISSUES, IN_PROCESS, ...). - `approved`: true for ACTIVE and PREAPPROVED, false for DISAPPROVED, null otherwise. - `reviewFeedback`: Meta's feedback verbatim, as `global` (reason -> explanation) and `placementSpecific` (placement -> reason -> explanation). - `issues`: Meta's `issues_info` verbatim.  Each global reason is listed in `rejections`, and so is each placement-specific reason, with that placement in its `forbiddenPlacements`. The review's `forbiddenPlacements` lists every placement with feedback.  `forbiddenAges`, `forbiddenLocations` and `forbiddenOperatingSystems` are always empty on Meta.  When Meta returns no feedback (usually an ad in review or approved everywhere), the status comes back with empty `rejections` and empty `reviewFeedback` maps. An ACTIVE ad rejected on one placement still carries that placement's feedback.  The `effective_status` read is also stored on the ad, so `GET /v1/ads/{adId}` returns it next. A deleted ad answers 404.  ### Meta ads that are not synced yet  Pass `accountId` with a Meta platform ad id that is not in Zernio's store to read its review live through that connection. The response then has `adId: null`, `synced: false`, and nothing is stored. Synced ads answer `synced: true`.  ### TikTok  TikTok uses `/ad/review_info/`. Use it alongside the ad's `platformStatus`:  - `AD_STATUS_AUDIT`: the ad is in review (maps to `status: pending_review`). - `AD_STATUS_AD_PRE_ONLINE`: it passed and is about to deliver (also maps to `status: pending_review`). - `AD_STATUS_AUDIT_DENY`: maps to `rejected`. 
+Shows whether the platform approved an ad, where it may not deliver, and every rejection reason, without re-enabling a paused ad.  It reads the ad's review verdict from the platform now, including every rejection reason with TikTok's suggestion and the piece of content it refers to. It is read-only, so it works on a paused ad without re-enabling it.  Supported on TikTok, Google and Meta. Other platforms return 501.  ### Google  Reads `ad_group_ad.policy_summary` live. `approvalStatus` and `reviewStatus` are Google's verbatim:  - `approvalStatus`: APPROVED, APPROVED_LIMITED, AREA_OF_INTEREST_ONLY, DISAPPROVED, UNKNOWN. - `reviewStatus`: REVIEW_IN_PROGRESS, REVIEWED, UNDER_APPEAL, ELIGIBLE_MAY_SERVE. - `approved`: true for the three approved statuses, false for DISAPPROVED, null otherwise.  `policyTopics` carries every policy topic entry with its `type` (PROHIBITED, LIMITED, ...) and Google's `evidences` and `constraints` verbatim. Each PROHIBITED topic is also listed in `rejections` (reason = the topic).  The `forbidden*` arrays are TikTok-only and always empty on Google.  ### Google Performance Max  A Performance Max \"ad\" is an asset group, which has no `policy_summary` of its own. Google reports the group's review through `asset_group.primary_status` and `primary_status_reasons`, and reviews each linked asset separately (`asset_group_asset.policy_summary`). The response maps both onto the same fields as other Google ads:  - `approvalStatus`: DISAPPROVED when the reasons include ASSET_GROUP_DISAPPROVED, UNDER_REVIEW for ASSET_GROUP_UNDER_REVIEW or a PENDING group, APPROVED_LIMITED for ASSET_GROUP_LIMITED or a LIMITED group, APPROVED for an ELIGIBLE group, null otherwise (for example a group that is not serving only because its campaign is paused or ended). - `reviewStatus`: REVIEW_IN_PROGRESS while the group or any linked asset is still in review, otherwise the least settled asset review status (UNDER_APPEAL, ELIGIBLE_MAY_SERVE, REVIEWED). - `policyTopics`: the policy topic entries of every linked asset. Each PROHIBITED topic is also listed in `rejections`. A disapproved group whose assets name no PROHIBITED topic gets one rejection with reason ASSET_GROUP_DISAPPROVED. - `assetGroup`: the group's `primaryStatus` and `primaryStatusReasons` verbatim, and each linked asset's own `approvalStatus`, `reviewStatus` and `policyTopics`. Removed asset links are left out.  ### Meta (Facebook and Instagram ads)  Reads the Ad's `ad_review_feedback`, `effective_status` and `issues_info` live.  - `reviewStatus`: Meta's `effective_status` verbatim (ACTIVE, PAUSED, PENDING_REVIEW, DISAPPROVED, PREAPPROVED, WITH_ISSUES, IN_PROCESS, ...). - `approved`: true for ACTIVE and PREAPPROVED, false for DISAPPROVED, null otherwise. - `reviewFeedback`: Meta's feedback verbatim, as `global` (reason -> explanation) and `placementSpecific` (placement -> reason -> explanation). - `issues`: Meta's `issues_info` verbatim.  Each global reason is listed in `rejections`, and so is each placement-specific reason, with that placement in its `forbiddenPlacements`. The review's `forbiddenPlacements` lists every placement with feedback.  `forbiddenAges`, `forbiddenLocations` and `forbiddenOperatingSystems` are always empty on Meta.  When Meta returns no feedback (usually an ad in review or approved everywhere), the status comes back with empty `rejections` and empty `reviewFeedback` maps. An ACTIVE ad rejected on one placement still carries that placement's feedback.  The `effective_status` read is also stored on the ad, so `GET /v1/ads/{adId}` returns it next. A deleted ad answers 404.  ### Meta ads that are not synced yet  Pass `accountId` with a Meta platform ad id that is not in Zernio's store to read its review live through that connection. The response then has `adId: null`, `synced: false`, and nothing is stored. Synced ads answer `synced: true`.  ### TikTok  TikTok uses `/ad/review_info/`. Use it alongside the ad's `platformStatus`:  - `AD_STATUS_AUDIT`: the ad is in review (maps to `status: pending_review`). - `AD_STATUS_AD_PRE_ONLINE`: it passed and is about to deliver (also maps to `status: pending_review`). - `AD_STATUS_AUDIT_DENY`: maps to `rejected`. 
 
 ### Examples
 
@@ -1948,7 +2108,7 @@ end
 
 Get campaign tree
 
-Shows your campaigns with their ad sets and ads nested inside, with spend and results rolled up at every level.  ### How it aggregates  Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels.  - Pagination is at the campaign level. - Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. - If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max.  ### History  When an ad account connects, Zernio imports its last 90 days of metrics, so the metrics hold no data for days before that.  When `accountId` or `adAccountId` resolves to a Meta ad account, a range reaching further back answers `202` with `backfillPending: true` and the covered part.  The older days (up to 730 days back) are imported in the background; repeat the request until it returns 200. A request scoped to no Meta account never returns `202`.  ### Daily breakdown  Pass `timeIncrement=1` to also get a daily breakdown: each node gains a `daily[]` array of per-day metrics (same fields as the aggregated `metrics`) in the same call.  Use `dailyLevel` (`campaign` default, or `adset` / `ad`) to choose which levels carry the series. This replaces calling the tree once per day for per-campaign daily trends.  ### Deleted objects stay in the tree  Deleting an ad or a campaign is a soft delete: the Ad documents move to `status: cancelled` and are kept indefinitely. Their historical spend still counts toward the metrics of any date range they fall in. There is no pruning job and no retention window.  Filter on `status` if your view should hide them, but do that after reading the totals, not before. 
+Shows your campaigns with their ad sets and ads nested inside, with spend and results rolled up at every level.  ### How it aggregates  Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels.  - Pagination is at the campaign level. - Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. - If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max.  ### History  When an ad account connects, Zernio imports its last 90 days of metrics, so the metrics hold no data for days before that.  When `accountId` or `adAccountId` resolves to a Meta ad account, a range reaching further back answers `202` with `backfillPending: true` and the covered part.  The older days (up to 730 days back) are imported in the background; repeat the request until it returns 200. A request scoped to no Meta account never returns `202`.  ### Daily breakdown  Pass `timeIncrement=1` to also get a daily breakdown: each node gains a `daily[]` array of per-day metrics (same fields as the aggregated `metrics`) in the same call.  Use `dailyLevel` (`campaign` default, or `adset` / `ad`) to choose which levels carry the series. This replaces calling the tree once per day for per-campaign daily trends.  ### Deleted objects stay in the tree  Deleting an ad or a campaign is a soft delete: the Ad documents move to `status: cancelled` and are kept indefinitely. Their historical spend still counts toward the metrics of any date range they fall in. There is no pruning job and no retention window.  Pass `status=not_deleted` if your view should hide them, but do that after reading the totals, not before. 
 
 ### Examples
 
@@ -1967,7 +2127,7 @@ opts = {
   limit: 56, # Integer | Campaigns per page
   source: 'zernio', # String | `all` (default) returns both Zernio-created ads and those discovered from the platform's ad manager. Matches the web UI's default view. Pass `zernio` to restrict to isExternal=false only. Status is NOT filtered by default; use the `status` param for that.
   platform: 'facebook', # String | 
-  status: Zernio::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
+  status: 'active', # String | Filter by derived campaign status (post-aggregation). `not_deleted` keeps every status except `cancelled`.
   ad_account_id: 'ad_account_id_example', # String | One or more platform ad account IDs to scope the tree to (agency profiles connect a whole Business Manager, but a team usually cares about a subset).  - Comma-separate for multiple (`?adAccountId=act_1,act_2,act_3`); a single value keeps its old shape. - Max 50 accounts per request. - The plural aliases `adAccountIds` and `platformAdAccountIds` are rejected with a 400, so they cannot silently return the unfiltered fleet.
   page_id: 'page_id_example', # String | Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page: campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page's ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns.
   account_id: 'account_id_example', # String | Account ID
@@ -1983,7 +2143,9 @@ opts = {
   time_increment: 1, # Integer | Set to `1` to also return a daily breakdown (mirrors Meta Insights' `time_increment=1`). Only `1` (daily) is supported. See `dailyLevel` to control which levels carry it.  Each node gains a `daily[]` array of per-day metrics (same fields as the aggregated `metrics`) next to the range total, so you get per-entity daily trends in ONE call instead of one tree call per day.  The daily series covers the same date range and source data as `metrics`, except `reach` on Meta and TikTok: the range total is the platform's de-duplicated value, so daily reach does not sum to it.
   daily_level: 'campaign', # String | Which tree levels get the `daily[]` series when `timeIncrement=1`. Ignored when `timeIncrement` is unset.  - `campaign` (default): on campaign nodes only. The common per-campaign-trend case, and the smallest payload. - `adset`: on ad sets too. - `ad`: on every ad in `ads[]` as well. Heaviest (a long range × up to 100 ads per ad set); scope with `campaignId` to keep responses small.
   compare: 'previous', # String | Set to `previous` to also read the period of the same length that ends the day before `fromDate`. Every campaign, ad set and ad gains `previousMetrics` (same fields as `metrics`) and the response gains `previousRange`, so a table can show the change against the previous period in one call.
-  results: true # Boolean | Set to `true` to add your own results (see [Campaign results](/guides/campaign-results)): every campaign gains `results`, the values you sent for the range plus each formula they allow, and the response gains `resultMetrics` to label them.
+  results: true, # Boolean | Set to `true` to add your own results (see [Campaign results](/guides/campaign-results)): every campaign gains `results`, the values you sent for the range plus each formula they allow, and the response gains `resultMetrics` to label them.
+  model: 'last_click', # String | With `results=true`: the attribution model your stored sales and leads count under in `results`. Uploaded values are the same under every model.
+  depth: 'campaign' # String | How deep the tree goes. Metrics always roll up over every ad, whatever the depth.  - `ad` (default): campaigns, their ad sets and each ad set's ads. - `adset`: campaigns and ad sets; every `ads[]` is empty and `adCount` still counts the ads. - `campaign`: campaigns only; every `adSets[]` is empty and `adSetCount` / `adCount` still count them.
 }
 
 begin
@@ -2021,7 +2183,7 @@ end
 | **limit** | **Integer** | Campaigns per page | [optional][default to 20] |
 | **source** | **String** | &#x60;all&#x60; (default) returns both Zernio-created ads and those discovered from the platform&#39;s ad manager. Matches the web UI&#39;s default view. Pass &#x60;zernio&#x60; to restrict to isExternal&#x3D;false only. Status is NOT filtered by default; use the &#x60;status&#x60; param for that. | [optional][default to &#39;all&#39;] |
 | **platform** | **String** |  | [optional] |
-| **status** | [**AdStatus**](.md) | Filter by derived campaign status (post-aggregation) | [optional] |
+| **status** | **String** | Filter by derived campaign status (post-aggregation). &#x60;not_deleted&#x60; keeps every status except &#x60;cancelled&#x60;. | [optional] |
 | **ad_account_id** | **String** | One or more platform ad account IDs to scope the tree to (agency profiles connect a whole Business Manager, but a team usually cares about a subset).  - Comma-separate for multiple (&#x60;?adAccountId&#x3D;act_1,act_2,act_3&#x60;); a single value keeps its old shape. - Max 50 accounts per request. - The plural aliases &#x60;adAccountIds&#x60; and &#x60;platformAdAccountIds&#x60; are rejected with a 400, so they cannot silently return the unfiltered fleet. | [optional] |
 | **page_id** | **String** | Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page: campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns. | [optional] |
 | **account_id** | **String** | Account ID | [optional] |
@@ -2038,6 +2200,8 @@ end
 | **daily_level** | **String** | Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. Ignored when &#x60;timeIncrement&#x60; is unset.  - &#x60;campaign&#x60; (default): on campaign nodes only. The common per-campaign-trend case, and the smallest payload. - &#x60;adset&#x60;: on ad sets too. - &#x60;ad&#x60;: on every ad in &#x60;ads[]&#x60; as well. Heaviest (a long range × up to 100 ads per ad set); scope with &#x60;campaignId&#x60; to keep responses small. | [optional][default to &#39;campaign&#39;] |
 | **compare** | **String** | Set to &#x60;previous&#x60; to also read the period of the same length that ends the day before &#x60;fromDate&#x60;. Every campaign, ad set and ad gains &#x60;previousMetrics&#x60; (same fields as &#x60;metrics&#x60;) and the response gains &#x60;previousRange&#x60;, so a table can show the change against the previous period in one call. | [optional] |
 | **results** | **Boolean** | Set to &#x60;true&#x60; to add your own results (see [Campaign results](/guides/campaign-results)): every campaign gains &#x60;results&#x60;, the values you sent for the range plus each formula they allow, and the response gains &#x60;resultMetrics&#x60; to label them. | [optional] |
+| **model** | **String** | With &#x60;results&#x3D;true&#x60;: the attribution model your stored sales and leads count under in &#x60;results&#x60;. Uploaded values are the same under every model. | [optional][default to &#39;last_click&#39;] |
+| **depth** | **String** | How deep the tree goes. Metrics always roll up over every ad, whatever the depth.  - &#x60;ad&#x60; (default): campaigns, their ad sets and each ad set&#39;s ads. - &#x60;adset&#x60;: campaigns and ad sets; every &#x60;ads[]&#x60; is empty and &#x60;adCount&#x60; still counts the ads. - &#x60;campaign&#x60;: campaigns only; every &#x60;adSets[]&#x60; is empty and &#x60;adSetCount&#x60; / &#x60;adCount&#x60; still count them. | [optional][default to &#39;ad&#39;] |
 
 ### Return type
 
@@ -2059,7 +2223,7 @@ end
 
 Get daily account metrics
 
-Returns an ads account's spend, results and other metrics day by day, ready for a daily performance chart.  The result is a single time series of daily aggregate metrics across all ads in a SocialAccount: one row per calendar day and currency in the requested range (one row per day unless the account's ad accounts bill in different currencies).  Use this for dashboards that draw a daily-spend or daily-conversions chart, instead of calling `/v1/ads/tree` once per day.  ### Parameters  - `accountId` is required. The lookup is sibling-expanded, so passing the `metaads` ID also includes ads under the linked `facebook` / `instagram` posting account (and vice-versa), the same convention as `/v1/ads/tree` and `/v1/ads`. - Date range defaults to the last 90 days. Capped at 730 days. - With adAccountId set to a Google customer id this is the customer-level performance report (clicks, cost, impressions, conversions, all conversions per day).  ### History  When an ad account connects, Zernio imports its last 90 days of metrics, so `rows` hold no data for days before that.  When `accountId` or `adAccountId` resolves to a Meta ad account, a range reaching further back answers `202` with `backfillPending: true` and the covered part. The older days (up to 730 days back) are imported in the background; repeat the request until it returns 200.  Other platforms never return `202`. 
+Returns an ads account's spend, results and other metrics day by day, ready for a daily performance chart.  The result is a single time series of daily aggregate metrics across all ads in a SocialAccount: one row per calendar day and currency in the requested range (one row per day unless the account's ad accounts bill in different currencies).  Use this for dashboards that draw a daily-spend or daily-conversions chart, instead of calling `/v1/ads/tree` once per day.  ### Parameters  - `accountId` is required. The lookup is sibling-expanded, so passing the `metaads` ID also includes ads under the linked `facebook` / `instagram` posting account (and vice-versa), the same convention as `/v1/ads/tree` and `/v1/ads`. - Without `adAccountId` the timeline sums only the ad accounts the connection reaches: its `scopedAdAccountIds` when it selects some, every reachable one otherwise. - Date range defaults to the last 90 days. Capped at 730 days. - With adAccountId set to a Google customer id this is the customer-level performance report (clicks, cost, impressions, conversions, all conversions per day).  ### History  When an ad account connects, Zernio imports its last 90 days of metrics, so `rows` hold no data for days before that.  When `accountId` or `adAccountId` resolves to a Meta ad account, a range reaching further back answers `202` with `backfillPending: true` and the covered part. The older days (up to 730 days back) are imported in the background; repeat the request until it returns 200.  Other platforms never return `202`. 
 
 ### Examples
 
@@ -2602,7 +2766,7 @@ opts = {
   limit: 56, # Integer | 
   source: 'zernio', # String | `all` (default) returns both Zernio-created ads and those discovered from the platform's ad manager. Matches the web UI's default view. Pass `zernio` to restrict to isExternal=false only. Status is NOT filtered by default; use the `status` param for that.
   platform: 'facebook', # String | 
-  status: Zernio::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
+  status: 'active', # String | Filter by derived campaign status (post-aggregation). `not_deleted` keeps every status except `cancelled`.
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (e.g. act_123 for Meta)
   campaign_id: 'campaign_id_example', # String | Platform campaign ID (the `platformCampaignId` on each returned campaign). Returns only that campaign, or an empty list when it is not visible to the caller. Mirrors the same filter on /v1/ads and /v1/ads/tree.
   page_id: 'page_id_example', # String | Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree.
@@ -2651,7 +2815,7 @@ end
 | **limit** | **Integer** |  | [optional][default to 20] |
 | **source** | **String** | &#x60;all&#x60; (default) returns both Zernio-created ads and those discovered from the platform&#39;s ad manager. Matches the web UI&#39;s default view. Pass &#x60;zernio&#x60; to restrict to isExternal&#x3D;false only. Status is NOT filtered by default; use the &#x60;status&#x60; param for that. | [optional][default to &#39;all&#39;] |
 | **platform** | **String** |  | [optional] |
-| **status** | [**AdStatus**](.md) | Filter by derived campaign status (post-aggregation) | [optional] |
+| **status** | **String** | Filter by derived campaign status (post-aggregation). &#x60;not_deleted&#x60; keeps every status except &#x60;cancelled&#x60;. | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (e.g. act_123 for Meta) | [optional] |
 | **campaign_id** | **String** | Platform campaign ID (the &#x60;platformCampaignId&#x60; on each returned campaign). Returns only that campaign, or an empty list when it is not visible to the caller. Mirrors the same filter on /v1/ads and /v1/ads/tree. | [optional] |
 | **page_id** | **String** | Meta only: Facebook Page ID. Campaigns have no Page of their own, so this keeps campaigns having at least one ad backed by this Page, with adCount and metrics computed over those ads only. Mirrors the same filter on /v1/ads and /v1/ads/tree. | [optional] |
@@ -2874,7 +3038,8 @@ opts = {
   status: Zernio::AdStatus::ACTIVE, # AdStatus | Filter by the ad set's stored `status`, the value each row returns. A live read does not change it. Rows whose `status` is null match no filter.
   page: 56, # Integer | 
   limit: 56, # Integer | 
-  live: true # Boolean | Read the on/off switches live from the platform instead of returning synced values. See \"Status freshness\" in the operation description.  - The fresh values are stored (later reads return them too), and the response carries `statusReadAt`, the time of the read. - At most 20 platform objects are read per request. - Where a read fails (credentials, platform error, no reader on that platform), stored values come back with `statusReadAt: null`.  **On GET /v1/ads/{adId} for a TikTok ad** the creative is read live too: ad text, call to action, landing page, video, format and identity, returned over the stored creative and never stored. See \"Status freshness\" in GET /v1/ads/{adId}.  **On X** the budget is read live too:  - GET /v1/ads/{adId}: `budget`, `adSetBudget`, `campaignBudget` and `budgetLevel` are the line item and campaign budgets X holds now (stored like the switches). - Ad set and campaign listings: `budget` is what that line item or campaign holds now (returned, not stored). A row whose budget the other level holds keeps its synced `budget`. 
+  live: true, # Boolean | Read the on/off switches live from the platform instead of returning synced values. See \"Status freshness\" in the operation description.  - The fresh values are stored (later reads return them too), and the response carries `statusReadAt`, the time of the read. - At most 20 platform objects are read per request. - Where a read fails (credentials, platform error, no reader on that platform), stored values come back with `statusReadAt: null`.  **On GET /v1/ads/{adId} for a TikTok ad** the creative is read live too: ad text, call to action, landing page, video, format and identity, returned over the stored creative and never stored. See \"Status freshness\" in GET /v1/ads/{adId}.  **On X** the budget is read live too:  - GET /v1/ads/{adId}: `budget`, `adSetBudget`, `campaignBudget` and `budgetLevel` are the line item and campaign budgets X holds now (stored like the switches). - Ad set and campaign listings: `budget` is what that line item or campaign holds now (returned, not stored). A row whose budget the other level holds keeps its synced `budget`. 
+  view: 'full' # String | `full` returns every field. `summary` leaves `targeting` out of each ad set, which is most of a row's size; read one ad set's targeting with `adSetId` and `view=full`.
 }
 
 begin
@@ -2917,6 +3082,7 @@ end
 | **page** | **Integer** |  | [optional][default to 1] |
 | **limit** | **Integer** |  | [optional][default to 500] |
 | **live** | **Boolean** | Read the on/off switches live from the platform instead of returning synced values. See \&quot;Status freshness\&quot; in the operation description.  - The fresh values are stored (later reads return them too), and the response carries &#x60;statusReadAt&#x60;, the time of the read. - At most 20 platform objects are read per request. - Where a read fails (credentials, platform error, no reader on that platform), stored values come back with &#x60;statusReadAt: null&#x60;.  **On GET /v1/ads/{adId} for a TikTok ad** the creative is read live too: ad text, call to action, landing page, video, format and identity, returned over the stored creative and never stored. See \&quot;Status freshness\&quot; in GET /v1/ads/{adId}.  **On X** the budget is read live too:  - GET /v1/ads/{adId}: &#x60;budget&#x60;, &#x60;adSetBudget&#x60;, &#x60;campaignBudget&#x60; and &#x60;budgetLevel&#x60; are the line item and campaign budgets X holds now (stored like the switches). - Ad set and campaign listings: &#x60;budget&#x60; is what that line item or campaign holds now (returned, not stored). A row whose budget the other level holds keeps its synced &#x60;budget&#x60;.  | [optional][default to false] |
+| **view** | **String** | &#x60;full&#x60; returns every field. &#x60;summary&#x60; leaves &#x60;targeting&#x60; out of each ad set, which is most of a row&#39;s size; read one ad set&#39;s targeting with &#x60;adSetId&#x60; and &#x60;view&#x3D;full&#x60;. | [optional][default to &#39;full&#39;] |
 
 ### Return type
 
@@ -2968,7 +3134,8 @@ opts = {
   effective_object_story_id: 'effective_object_story_id_example', # String | Facebook `{pageId}_{postId}` of the post the ad's engagement lives on (Meta `effective_object_story_id`). Use to map a Business-Manager-visible post back to the Zernio ad.
   effective_instagram_media_id: 'effective_instagram_media_id_example', # String | Instagram media ID of the boosted post (Meta `effective_instagram_media_id`). Use to map a Business-Manager-visible IG post back to the Zernio ad.
   from_date: Date.parse('2013-10-20'), # Date | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
-  to_date: Date.parse('2013-10-20') # Date | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+  to_date: Date.parse('2013-10-20'), # Date | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+  view: 'full' # String | `full` (default) returns every field. `summary` is about 80% smaller per ad and keeps only:  - `_id`, `name`, `platform`, `status`, `platformStatus`, `servingStatuses` (left out when empty), `configuredStatus`, `reviewStatus`, `rejectionReason`, `goal`. - The platform ids, `accountId`, `profileId`, `campaignName`, `adSetName`, `budget`, `currency`, `isExternal`, `creativeType`, `platformCreatedAt`, `createdAt`. - `postId` as the post id, not the expanded post. - `creative` with only `headline`, `body` (cut to 200 characters), `linkUrl`, `callToAction` and `effectiveObjectStoryId`. - `metrics` without `costPerAction` and without any metric that is 0: an absent metric means 0.  Read one ad with `platformAdId` and `view=full` for the rest.
 }
 
 begin
@@ -3018,6 +3185,7 @@ end
 | **effective_instagram_media_id** | **String** | Instagram media ID of the boosted post (Meta &#x60;effective_instagram_media_id&#x60;). Use to map a Business-Manager-visible IG post back to the Zernio ad. | [optional] |
 | **from_date** | **Date** | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
 | **to_date** | **Date** | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range. | [optional] |
+| **view** | **String** | &#x60;full&#x60; (default) returns every field. &#x60;summary&#x60; is about 80% smaller per ad and keeps only:  - &#x60;_id&#x60;, &#x60;name&#x60;, &#x60;platform&#x60;, &#x60;status&#x60;, &#x60;platformStatus&#x60;, &#x60;servingStatuses&#x60; (left out when empty), &#x60;configuredStatus&#x60;, &#x60;reviewStatus&#x60;, &#x60;rejectionReason&#x60;, &#x60;goal&#x60;. - The platform ids, &#x60;accountId&#x60;, &#x60;profileId&#x60;, &#x60;campaignName&#x60;, &#x60;adSetName&#x60;, &#x60;budget&#x60;, &#x60;currency&#x60;, &#x60;isExternal&#x60;, &#x60;creativeType&#x60;, &#x60;platformCreatedAt&#x60;, &#x60;createdAt&#x60;. - &#x60;postId&#x60; as the post id, not the expanded post. - &#x60;creative&#x60; with only &#x60;headline&#x60;, &#x60;body&#x60; (cut to 200 characters), &#x60;linkUrl&#x60;, &#x60;callToAction&#x60; and &#x60;effectiveObjectStoryId&#x60;. - &#x60;metrics&#x60; without &#x60;costPerAction&#x60; and without any metric that is 0: an absent metric means 0.  Read one ad with &#x60;platformAdId&#x60; and &#x60;view&#x3D;full&#x60; for the rest. | [optional][default to &#39;full&#39;] |
 
 ### Return type
 
@@ -3114,7 +3282,7 @@ end
 
 Rank ads by performance
 
-Returns an ads account's ads ranked by spend, impressions, clicks, results or ROAS over a date range, each with its creative (type, thumbnail, headline, body, link) and campaign.  Use it to see which creatives perform best. `accountId` is sibling-expanded like `/v1/ads/timeline`.  Money is ranked by its raw amount, so pass `adAccountId` when the connection's ad accounts bill in different currencies.  A Meta range older than the imported history answers `202` with `backfillPending: true` and the covered part; repeat the request until it returns 200. 
+Returns an ads account's ads ranked by spend, impressions, clicks, results or ROAS over a date range, each with its creative (type, thumbnail, headline, body, link) and campaign.  Use it to see which creatives perform best, and from `frequency` which ones the same people keep seeing. `accountId` is sibling-expanded like `/v1/ads/timeline`.  Money is ranked by its raw amount, so pass `adAccountId` when the connection's ad accounts bill in different currencies.  A Meta range older than the imported history answers `202` with `backfillPending: true` and the covered part; repeat the request until it returns 200. 
 
 ### Examples
 
@@ -3499,7 +3667,7 @@ end
 
 List Performance Max asset groups
 
-Lists a Performance Max campaign's asset groups with their linked text, image and YouTube assets.  campaignId is the platform campaign id returned by creation or the campaign list. The campaign must be visible to the caller.  ### Caching  Uses a 10-minute cache, with the last successful response served as stale when Google quota is exhausted.  ### What is left out  - Removed groups and asset links are excluded. - Campaign-level brand assets on campaigns with brand guidelines enabled are not included. 
+Lists a Performance Max campaign's asset groups with their linked text, image and YouTube assets.  Each asset carries Google's policy review of it in that group (`policySummary`), and each group its `primaryStatus` and `primaryStatusReasons`, so a disapproved asset or group shows here without a separate call. `GET /v1/ads/{adId}/review` reads the same verdict live for one asset group.  campaignId is the platform campaign id returned by creation or the campaign list. The campaign must be visible to the caller.  ### Caching  Uses a 10-minute cache, with the last successful response served as stale when Google quota is exhausted.  ### What is left out  - Removed groups and asset links are excluded. - Campaign-level brand assets on campaigns with brand guidelines enabled are not included. 
 
 ### Examples
 
@@ -3878,7 +4046,7 @@ end
 
 ## remove_ad_keyword
 
-> <RemoveAdKeyword200Response> remove_ad_keyword(keyword_id)
+> <RemoveAdKeyword200Response> remove_ad_keyword(keyword_id, opts)
 
 Remove a Search keyword
 
@@ -3897,10 +4065,13 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 keyword_id = 'keyword_id_example' # String | Zernio keyword ID (`id`), or Google's native `{adSetId}~{platformCriterionId}` (the tail of `resourceName`, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group.
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Remove a Search keyword
-  result = api_instance.remove_ad_keyword(keyword_id)
+  result = api_instance.remove_ad_keyword(keyword_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->remove_ad_keyword: #{e}"
@@ -3911,12 +4082,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RemoveAdKeyword200Response>, Integer, Hash)> remove_ad_keyword_with_http_info(keyword_id)
+> <Array(<RemoveAdKeyword200Response>, Integer, Hash)> remove_ad_keyword_with_http_info(keyword_id, opts)
 
 ```ruby
 begin
   # Remove a Search keyword
-  data, status_code, headers = api_instance.remove_ad_keyword_with_http_info(keyword_id)
+  data, status_code, headers = api_instance.remove_ad_keyword_with_http_info(keyword_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveAdKeyword200Response>
@@ -3930,6 +4101,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **keyword_id** | **String** | Zernio keyword ID (&#x60;id&#x60;), or Google&#39;s native &#x60;{adSetId}~{platformCriterionId}&#x60; (the tail of &#x60;resourceName&#x60;, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group. |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4103,7 +4275,7 @@ end
 
 ## replace_campaign_negative_keyword_lists
 
-> <ReplaceAdNegativeKeywordListKeywords200Response> replace_campaign_negative_keyword_lists(campaign_id, replace_campaign_negative_keyword_lists_request)
+> <ReplaceAdNegativeKeywordListKeywords200Response> replace_campaign_negative_keyword_lists(campaign_id, replace_campaign_negative_keyword_lists_request, opts)
 
 Replace campaign negative lists
 
@@ -4123,10 +4295,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | 
 replace_campaign_negative_keyword_lists_request = Zernio::ReplaceCampaignNegativeKeywordListsRequest.new({list_ids: ['list_ids_example']}) # ReplaceCampaignNegativeKeywordListsRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Replace campaign negative lists
-  result = api_instance.replace_campaign_negative_keyword_lists(campaign_id, replace_campaign_negative_keyword_lists_request)
+  result = api_instance.replace_campaign_negative_keyword_lists(campaign_id, replace_campaign_negative_keyword_lists_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->replace_campaign_negative_keyword_lists: #{e}"
@@ -4137,12 +4312,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ReplaceAdNegativeKeywordListKeywords200Response>, Integer, Hash)> replace_campaign_negative_keyword_lists_with_http_info(campaign_id, replace_campaign_negative_keyword_lists_request)
+> <Array(<ReplaceAdNegativeKeywordListKeywords200Response>, Integer, Hash)> replace_campaign_negative_keyword_lists_with_http_info(campaign_id, replace_campaign_negative_keyword_lists_request, opts)
 
 ```ruby
 begin
   # Replace campaign negative lists
-  data, status_code, headers = api_instance.replace_campaign_negative_keyword_lists_with_http_info(campaign_id, replace_campaign_negative_keyword_lists_request)
+  data, status_code, headers = api_instance.replace_campaign_negative_keyword_lists_with_http_info(campaign_id, replace_campaign_negative_keyword_lists_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReplaceAdNegativeKeywordListKeywords200Response>
@@ -4157,6 +4332,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** |  |  |
 | **replace_campaign_negative_keyword_lists_request** | [**ReplaceCampaignNegativeKeywordListsRequest**](ReplaceCampaignNegativeKeywordListsRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4174,11 +4350,11 @@ end
 
 ## replace_campaign_negative_keywords
 
-> <ReplaceCampaignNegativeKeywords200Response> replace_campaign_negative_keywords(campaign_id, replace_campaign_negative_keywords_request)
+> <ReplaceCampaignNegativeKeywords200Response> replace_campaign_negative_keywords(campaign_id, replace_campaign_negative_keywords_request, opts)
 
 Replace campaign-level negative keywords
 
-Replaces a Google campaign's full list of campaign-level negative keywords, or clears it.  Replaces the FULL set of campaign-level negative keywords (C.270): the desired list is diffed against what Google already has, and the difference is applied as one `create`/`remove` mutate. Send an empty array to clear every campaign negative.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not `platform` was sent. 
+Replaces a Google campaign's full list of campaign-level negative keywords, or clears it.  Replaces the FULL set of campaign-level negative keywords (C.270). The desired list is diffed against what Google already has, and the difference is applied in `create`/`remove` mutates of up to 5,000 operations.  - Creates run first, so a failed batch leaves extra negatives rather than missing ones. - When the old and new sets together would pass Google's 10,000 cap, removes run first. - Send the same request again to finish a failed replace. - Send an empty array to clear every campaign negative.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not `platform` was sent. 
 
 ### Examples
 
@@ -4194,10 +4370,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Platform campaign ID
 replace_campaign_negative_keywords_request = Zernio::ReplaceCampaignNegativeKeywordsRequest.new({keywords: [Zernio::KeywordEntryOneOf.new({text: 'text_example'})]}) # ReplaceCampaignNegativeKeywordsRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Replace campaign-level negative keywords
-  result = api_instance.replace_campaign_negative_keywords(campaign_id, replace_campaign_negative_keywords_request)
+  result = api_instance.replace_campaign_negative_keywords(campaign_id, replace_campaign_negative_keywords_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->replace_campaign_negative_keywords: #{e}"
@@ -4208,12 +4387,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ReplaceCampaignNegativeKeywords200Response>, Integer, Hash)> replace_campaign_negative_keywords_with_http_info(campaign_id, replace_campaign_negative_keywords_request)
+> <Array(<ReplaceCampaignNegativeKeywords200Response>, Integer, Hash)> replace_campaign_negative_keywords_with_http_info(campaign_id, replace_campaign_negative_keywords_request, opts)
 
 ```ruby
 begin
   # Replace campaign-level negative keywords
-  data, status_code, headers = api_instance.replace_campaign_negative_keywords_with_http_info(campaign_id, replace_campaign_negative_keywords_request)
+  data, status_code, headers = api_instance.replace_campaign_negative_keywords_with_http_info(campaign_id, replace_campaign_negative_keywords_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReplaceCampaignNegativeKeywords200Response>
@@ -4228,6 +4407,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Platform campaign ID |  |
 | **replace_campaign_negative_keywords_request** | [**ReplaceCampaignNegativeKeywordsRequest**](ReplaceCampaignNegativeKeywordsRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4318,11 +4498,11 @@ end
 
 ## update_ad
 
-> <UpdateAd200Response> update_ad(ad_id, update_ad_request)
+> <UpdateAd200Response> update_ad(ad_id, update_ad_request, opts)
 
 Update ad
 
-Changes an ad's status, budget, targeting or creative and applies the change on the platform.  Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  ### Per-platform support  - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, `name` (renames the ad), targeting (via `/v2/adgroup/update/`), and creative (via `/v2/ad/update/` patch-style: `headline` is ignored, `body` becomes `ad_text`). - **Google**: see the Google sections below. - **LinkedIn**: status, budget, targeting and creative (details below). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending `targeting` or `creative` returns 501 with code `feature_not_available`. OpenAI Ads budget is the campaign's spend cap, daily or lifetime (see `budget.type` below). - **Reddit Ads**: status, budget, `name` (renames the ad) and targeting (details below).  ### Google  Supported: status, budget, and these targeting edits:  - KEYWORD edits via `targeting.keywords` / `targeting.negativeKeywords` - DEVICE bid adjustments via `targeting.devices` - LOCATION edits via `targeting.locations` (or the equivalent top-level `targeting.countries` / `regions` / `cities` / `zips` / `metros`) - LANGUAGE edits via `targeting.languages`  Each list you send becomes the FULL new set of its kind: criteria not in the list are removed. Devices are the exception: Google cannot remove them, so they are switched off with a bid modifier of 0 instead. A kind left out is untouched.  Any other `targeting` field returns 400: Google cannot mutate it post-create without recreating the campaign.  Creative edits are dispatched on the ad's `advertisingChannelType`. Every supported field replaces a whole set; a field you omit is preserved.  - **Search**: top-level `headlines`, `descriptions` and `finalUrls`. Use 3-15 headlines (1-30 characters) and 2-4 descriptions (1-90 characters). Omit an asset to remove it; omit pinnedField on an included asset to unpin it. Updates do not pad or truncate text. The legacy creative fields remain unsupported. - **Display**: top-level `headlines` (1-5, no pinnedField, display ads have no pinned positions), `descriptions` (1-5) and `finalUrls`, plus `creative.longHeadline`, `creative.businessName`, `creative.imageUrl` (the landscape marketing image) and `creative.squareImageUrl`. - **Performance Max**: top-level `assetGroup`, which swaps asset roles on the ad's asset group. The other creative fields return 422 for this channel, and `assetGroup` returns 422 on any other channel. - **Demand Gen**: top-level `demandGen` (see GoogleDemandGenUpdate): creative, channel and audience changes in one atomic Google request. The other creative fields return 422 for this channel.  For Display, each image URL is uploaded as a new Google asset and the ad is pointed at it.  Google assets are immutable, so the previous asset stays in the account's asset library. A new landscape image also updates `creative.assetResourceName` to the new asset, and each replaced image updates its own role in `creative.assets`.  For Demand Gen, `targeting` takes locations, languages, `locationTargetingType` and `devices`. Locations and languages are written to the ad's ad group, which Demand Gen requires, so they apply to every ad in that ad group. Campaigns migrated from Discovery that still target on the campaign keep being written there.  ### LinkedIn  - **Status and budget**: supported. - **Targeting**: countries or regions, excludedLocations (countries), the B2B facets, and audience segments. Applied to the LinkedIn Campaign via PARTIAL_UPDATE, and REPLACES the campaign's entire targetingCriteria, not a merge. - **Creative**: uploads new media, creates a replacement inline creative on the same campaign, and removes the old one (it is deleted, the ad's `platformAdId` and `creative.creativeId` move to the new creative, and the new creative keeps the old one's held-off state: `DRAFT` stays `DRAFT`). - **Name**: updating `name` returns 400 (LinkedIn does not support renaming an ad).  ### Reddit Ads  - `budget` goes to the ad's ad group, or to its campaign when the ad group spends a campaign budget. It keeps its daily or lifetime type (422 to switch). - `targeting` REPLACES the ad group's whole targeting (geo, communities, conversation keywords, interests, audiences, languages, gender), so it applies to every ad in the ad group. - `creative` returns 501: a Reddit ad runs a post, so create a new ad with the new creative instead.  ### Google location and language replacement  Locations, languages and devices are campaign-level criteria on Google, so these edits apply to every ad group and ad in the ad's campaign. Send the complete list you want to keep.  Zernio diffs it against the campaign's live criteria and sends the removes and the creates in ONE `googleAds:mutate`, so the campaign is never left with a half-applied set. Criteria already in the list keep their criterion ID and history. Excluded (negative) locations are left untouched.  - An empty location list returns 400. A Google campaign with no location criteria targets every country, which is never what \"remove my locations\" means, so omit the field instead. - Send either `targeting.locations` or the top-level geo fields, not both: mixing them returns 400.  ### Google radius targeting  `customLocations` is editable and is replaced the same way, but as its OWN set. Google models a place (LOCATION) and a point plus radius (PROXIMITY) as different criterion types, so the two are independent:  - Sending `customLocations` replaces every radius and leaves the cities and countries alone. - Sending places replaces those and leaves the radius alone. - Send `customLocations: []` to drop radius targeting entirely.  A circle you re-send unchanged keeps its criterion ID rather than being removed and recreated.  ### Google keyword replacement  These edits affect the ad's entire ad group, including sibling ads. Positive (`targeting.keywords`) and negative (`targeting.negativeKeywords`) sets are independent: omit a field to leave that set unchanged, or send `[]` to remove every keyword of that kind.  Zernio compares each supplied set with Google's live criteria by case-insensitive keyword text and match type. Text comparison does not trim whitespace.  A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally.  A bare string or an object without `matchType` means `broad`, not the existing criterion's match type. For example, resending an existing `{ \"text\": \"plumber\", \"matchType\": \"exact\" }` preserves it; sending `\"plumber\"` instead removes that EXACT criterion and requests a BROAD one.  Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria's bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  ### Other keyword endpoints  - To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). - Use `PATCH /v1/ads/keywords/{keywordId}` to pause/enable one keyword. - Use `DELETE /v1/ads/keywords/{keywordId}` to remove it. 
+Changes an ad's status, budget, targeting or creative and applies the change on the platform.  Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  ### Per-platform support  - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, `name` (renames the ad), targeting (via `/v2/adgroup/update/`), and creative (via `/v2/ad/update/` patch-style: `headline` is ignored, `body` becomes `ad_text`). - **Google**: see the Google sections below. - **LinkedIn**: status, budget, targeting and creative (details below). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending `targeting` or `creative` returns 501 with code `feature_not_available`. OpenAI Ads budget is the campaign's spend cap, daily or lifetime (see `budget.type` below). - **Reddit Ads**: status, budget, `name` (renames the ad) and targeting (details below).  ### Google  Supported: status, budget, and these targeting edits:  - KEYWORD edits via `targeting.keywords` / `targeting.negativeKeywords` - DEVICE bid adjustments via `targeting.devices` - LOCATION edits via `targeting.locations` (or the equivalent top-level `targeting.countries` / `regions` / `cities` / `zips` / `metros`) - LANGUAGE edits via `targeting.languages`  Each list you send becomes the FULL new set of its kind: criteria not in the list are removed. Devices are the exception: Google cannot remove them, so they are switched off with a bid modifier of 0 instead. A kind left out is untouched.  Any other `targeting` field returns 400: Google cannot mutate it post-create without recreating the campaign.  Creative edits are dispatched on the ad's `advertisingChannelType`. Every supported field replaces a whole set; a field you omit is preserved.  - **Search**: top-level `headlines`, `descriptions`, `finalUrls`, `path1` and `path2`. Use 3-15 headlines (1-30 characters) and 2-4 descriptions (1-90 characters). Omit an asset to remove it; omit pinnedField on an included asset to unpin it. Updates do not pad or truncate text. The legacy creative fields remain unsupported. - **Display**: top-level `headlines` (1-5, no pinnedField, display ads have no pinned positions), `descriptions` (1-5) and `finalUrls`, plus `creative.longHeadline`, `creative.businessName`, `creative.imageUrl` (the landscape marketing image) and `creative.squareImageUrl`. - **Performance Max**: top-level `assetGroup`, which swaps asset roles on the ad's asset group. The other creative fields return 422 for this channel, and `assetGroup` returns 422 on any other channel. - **Demand Gen**: top-level `demandGen` (see GoogleDemandGenUpdate): creative, channel and audience changes in one atomic Google request. The other creative fields return 422 for this channel.  For Display, each image URL is uploaded as a new Google asset and the ad is pointed at it.  Google assets are immutable, so the previous asset stays in the account's asset library. A new landscape image also updates `creative.assetResourceName` to the new asset, and each replaced image updates its own role in `creative.assets`.  For Demand Gen, `targeting` takes locations, languages, `locationTargetingType` and `devices`. Locations and languages are written to the ad's ad group, which Demand Gen requires, so they apply to every ad in that ad group. Campaigns migrated from Discovery that still target on the campaign keep being written there.  ### LinkedIn  - **Status and budget**: supported. - **Targeting**: countries or regions, excludedLocations (countries), the B2B facets, and audience segments. Applied to the LinkedIn Campaign via PARTIAL_UPDATE, and REPLACES the campaign's entire targetingCriteria, not a merge. - **Creative**: uploads new media, creates a replacement inline creative on the same campaign, and removes the old one (it is deleted, the ad's `platformAdId` and `creative.creativeId` move to the new creative, and the new creative keeps the old one's held-off state: `DRAFT` stays `DRAFT`). - **Name**: updating `name` returns 400 (LinkedIn does not support renaming an ad).  ### Reddit Ads  - `budget` goes to the ad's ad group, or to its campaign when the ad group spends a campaign budget. It keeps its daily or lifetime type (422 to switch). - `targeting` REPLACES the ad group's whole targeting (geo, communities, conversation keywords, interests, audiences, languages, gender), so it applies to every ad in the ad group. - `creative` returns 501: a Reddit ad runs a post, so create a new ad with the new creative instead.  ### Google location and language replacement  Locations, languages and devices are campaign-level criteria on Google, so these edits apply to every ad group and ad in the ad's campaign. Send the complete list you want to keep.  Zernio diffs it against the campaign's live criteria and sends the removes and the creates in ONE `googleAds:mutate`, so the campaign is never left with a half-applied set. Criteria already in the list keep their criterion ID and history. Excluded (negative) locations are left untouched.  - An empty location list returns 400. A Google campaign with no location criteria targets every country, which is never what \"remove my locations\" means, so omit the field instead. - Send either `targeting.locations` or the top-level geo fields, not both: mixing them returns 400.  ### Google radius targeting  `customLocations` is editable and is replaced the same way, but as its OWN set. Google models a place (LOCATION) and a point plus radius (PROXIMITY) as different criterion types, so the two are independent:  - Sending `customLocations` replaces every radius and leaves the cities and countries alone. - Sending places replaces those and leaves the radius alone. - Send `customLocations: []` to drop radius targeting entirely.  A circle you re-send unchanged keeps its criterion ID rather than being removed and recreated.  ### Google keyword replacement  These edits affect the ad's entire ad group, including sibling ads. Positive (`targeting.keywords`) and negative (`targeting.negativeKeywords`) sets are independent: omit a field to leave that set unchanged, or send `[]` to remove every keyword of that kind.  Zernio compares each supplied set with Google's live criteria by case-insensitive keyword text and match type. Text comparison does not trim whitespace.  A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally.  A bare string or an object without `matchType` means `broad`, not the existing criterion's match type. For example, resending an existing `{ \"text\": \"plumber\", \"matchType\": \"exact\" }` preserves it; sending `\"plumber\"` instead removes that EXACT criterion and requests a BROAD one.  Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria's bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  ### Other keyword endpoints  - To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). - Use `PATCH /v1/ads/keywords/{keywordId}` to pause/enable one keyword. - Use `DELETE /v1/ads/keywords/{keywordId}` to remove it. 
 
 ### Examples
 
@@ -4338,10 +4518,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 ad_id = 'ad_id_example' # String | 
 update_ad_request = Zernio::UpdateAdRequest.new # UpdateAdRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Update ad
-  result = api_instance.update_ad(ad_id, update_ad_request)
+  result = api_instance.update_ad(ad_id, update_ad_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad: #{e}"
@@ -4352,12 +4535,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAd200Response>, Integer, Hash)> update_ad_with_http_info(ad_id, update_ad_request)
+> <Array(<UpdateAd200Response>, Integer, Hash)> update_ad_with_http_info(ad_id, update_ad_request, opts)
 
 ```ruby
 begin
   # Update ad
-  data, status_code, headers = api_instance.update_ad_with_http_info(ad_id, update_ad_request)
+  data, status_code, headers = api_instance.update_ad_with_http_info(ad_id, update_ad_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAd200Response>
@@ -4372,6 +4555,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** |  |  |
 | **update_ad_request** | [**UpdateAdRequest**](UpdateAdRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4389,7 +4573,7 @@ end
 
 ## update_ad_campaign
 
-> <UpdateAdCampaign200Response> update_ad_campaign(campaign_id, update_ad_campaign_request)
+> <UpdateAdCampaign200Response> update_ad_campaign(campaign_id, update_ad_campaign_request, opts)
 
 Update a campaign
 
@@ -4409,10 +4593,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Platform campaign ID
 update_ad_campaign_request = Zernio::UpdateAdCampaignRequest.new({platform: 'facebook'}) # UpdateAdCampaignRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Update a campaign
-  result = api_instance.update_ad_campaign(campaign_id, update_ad_campaign_request)
+  result = api_instance.update_ad_campaign(campaign_id, update_ad_campaign_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_campaign: #{e}"
@@ -4423,12 +4610,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdCampaign200Response>, Integer, Hash)> update_ad_campaign_with_http_info(campaign_id, update_ad_campaign_request)
+> <Array(<UpdateAdCampaign200Response>, Integer, Hash)> update_ad_campaign_with_http_info(campaign_id, update_ad_campaign_request, opts)
 
 ```ruby
 begin
   # Update a campaign
-  data, status_code, headers = api_instance.update_ad_campaign_with_http_info(campaign_id, update_ad_campaign_request)
+  data, status_code, headers = api_instance.update_ad_campaign_with_http_info(campaign_id, update_ad_campaign_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdCampaign200Response>
@@ -4443,6 +4630,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Platform campaign ID |  |
 | **update_ad_campaign_request** | [**UpdateAdCampaignRequest**](UpdateAdCampaignRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4460,11 +4648,11 @@ end
 
 ## update_ad_campaign_status
 
-> <UpdateAdCampaignStatus200Response> update_ad_campaign_status(campaign_id, update_ad_campaign_status_request)
+> <UpdateAdCampaignStatus200Response> update_ad_campaign_status(campaign_id, update_ad_campaign_status_request, opts)
 
 Pause or resume a campaign
 
-Pauses or resumes a campaign, leaving the on/off switches of its ad sets and ads as they are.  It writes the campaign's own on/off switch and nothing else, on every platform: Meta, TikTok, Google, LinkedIn campaign group, Pinterest, X, ChatGPT (OpenAI).  Its ad sets and ads keep their own switches:  - Pausing stops their delivery through the campaign. - Resuming lets each of them deliver again only if its own switch is on.  An ad set or ad you paused individually stays paused. Resume it with PUT /v1/ads/ad-sets/{adSetId}/status or PUT /v1/ads/{adId}/status. See the Status model in the Ad Campaigns tag.  ### Live read, then write  The campaign's switch is read from the platform first.  - **Already in the requested state:** nothing is written (`updated: 0`, `skipped: 1`, with the reason). - **Otherwise:** the switch is written (`updated: 1`), read back and stored. The delivery status of the ads under it (up to 20) is re-read and stored, so an immediate GET returns what the platform now reports.  When the campaign delivers in the requested state but some of its ads are stored in the other state, those ads are re-read and stored (up to 20, at most once every 10 minutes per campaign).  An example is ads switched on in the platform's own UI and still stored `paused`.  A stored switch never skips a write, and when the platform cannot be read the write always goes out.  On Meta the check reads the campaign's own `status`, so a delivery status such as `IN_PROCESS` or `WITH_ISSUES` does not force a write. 
+Pauses or resumes a campaign, leaving the on/off switches of its ad sets and ads as they are.  It writes the campaign's own on/off switch and nothing else, on every platform: Meta, TikTok, Google, LinkedIn campaign group, Pinterest, X, ChatGPT (OpenAI).  Its ad sets and ads keep their own switches:  - Pausing stops their delivery through the campaign. - Resuming lets each of them deliver again only if its own switch is on.  An ad set or ad you paused individually stays paused. Resume it with PUT /v1/ads/ad-sets/{adSetId}/status or PUT /v1/ads/{adId}/status. See the Status model in the Ad Campaigns tag.  ### Live read, then write  The campaign's switch is read from the platform first.  - **Already in the requested state:** nothing is written (`updated: 0`, `skipped: 1`, with the reason). - **Otherwise:** the switch is written (`updated: 1`), read back and stored. The delivery status of the ads under it (up to 20) is re-read and stored, so an immediate GET returns what the platform now reports.  When the campaign delivers in the requested state but some of its ads are stored in the other state, those ads are re-read and stored (up to 20, at most once every 10 minutes per campaign).  An example is ads switched on in the platform's own UI and still stored `paused`.  A stored switch never skips a write, and when the platform cannot be read the write always goes out.  On Meta the check reads the campaign's own `status`, so a delivery status such as `IN_PROCESS` or `WITH_ISSUES` does not force a write.  ### Retrying  Retrying the same request is safe: when the first call already switched the campaign, the live read answers `skipped: 1` and nothing is written twice. A call that timed out on your side may still have completed, so retry it instead of assuming it failed.  These errors fail the same way on every retry until something changes:  - `401` `reconnect_required`: the platform no longer accepts the connection's token (on Meta, code 190: expired, revoked, password changed or security checkpoint). Reconnect the account, then retry. - `422` `ad_account_unusable`: the ad account's status does not allow edits. Resolve it in the platform, then retry. - `400` `platform_api_error` saying the campaign was deleted or archived (Meta subcodes 1487566 and 3858863): there is nothing left to switch.  A Meta code 190 with subcode 464 means Meta considers the Facebook user unconfirmed. It answers `400` `platform_api_error` and retrying does not clear it: the user must log in to facebook.com and complete what Meta asks (usually confirming their email or phone), then retry. 
 
 ### Examples
 
@@ -4480,10 +4668,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Platform campaign ID
 update_ad_campaign_status_request = Zernio::UpdateAdCampaignStatusRequest.new({status: 'active', platform: 'facebook'}) # UpdateAdCampaignStatusRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Pause or resume a campaign
-  result = api_instance.update_ad_campaign_status(campaign_id, update_ad_campaign_status_request)
+  result = api_instance.update_ad_campaign_status(campaign_id, update_ad_campaign_status_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_campaign_status: #{e}"
@@ -4494,12 +4685,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdCampaignStatus200Response>, Integer, Hash)> update_ad_campaign_status_with_http_info(campaign_id, update_ad_campaign_status_request)
+> <Array(<UpdateAdCampaignStatus200Response>, Integer, Hash)> update_ad_campaign_status_with_http_info(campaign_id, update_ad_campaign_status_request, opts)
 
 ```ruby
 begin
   # Pause or resume a campaign
-  data, status_code, headers = api_instance.update_ad_campaign_status_with_http_info(campaign_id, update_ad_campaign_status_request)
+  data, status_code, headers = api_instance.update_ad_campaign_status_with_http_info(campaign_id, update_ad_campaign_status_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdCampaignStatus200Response>
@@ -4514,6 +4705,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Platform campaign ID |  |
 | **update_ad_campaign_status_request** | [**UpdateAdCampaignStatusRequest**](UpdateAdCampaignStatusRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4602,11 +4794,11 @@ end
 
 ## update_ad_keyword
 
-> <UpdateAdKeyword200Response> update_ad_keyword(keyword_id, update_ad_keyword_request)
+> <UpdateAdKeyword200Response> update_ad_keyword(keyword_id, update_ad_keyword_request, opts)
 
-Pause or enable a Search keyword
+Update a Search keyword
 
-Pauses or re-enables a single Google Search keyword.  Changes `ad_group_criterion.status` for one keyword criterion (M.140). Negative keywords have no status on Google and cannot be paused or enabled. 
+Pauses, re-enables or sets the bid of a single Google Search keyword. Send `status`, `cpcBid` or both.  Changes `ad_group_criterion.status` (M.140) and `ad_group_criterion.cpc_bid_micros` for one keyword criterion.  `cpcBid` is in the ad account currency and takes effect only under Manual CPC bidding. A keyword with no bid of its own reads back `cpcBid: null` and uses its ad group bid.  Negative keywords have no status or bid on Google and cannot be paused, enabled or given a bid. 
 
 ### Examples
 
@@ -4621,11 +4813,14 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 keyword_id = 'keyword_id_example' # String | Zernio keyword ID (`id`), or Google's native `{adSetId}~{platformCriterionId}` (the tail of `resourceName`, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group.
-update_ad_keyword_request = Zernio::UpdateAdKeywordRequest.new({status: 'active'}) # UpdateAdKeywordRequest | 
+update_ad_keyword_request = Zernio::UpdateAdKeywordRequest.new # UpdateAdKeywordRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
-  # Pause or enable a Search keyword
-  result = api_instance.update_ad_keyword(keyword_id, update_ad_keyword_request)
+  # Update a Search keyword
+  result = api_instance.update_ad_keyword(keyword_id, update_ad_keyword_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_keyword: #{e}"
@@ -4636,12 +4831,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdKeyword200Response>, Integer, Hash)> update_ad_keyword_with_http_info(keyword_id, update_ad_keyword_request)
+> <Array(<UpdateAdKeyword200Response>, Integer, Hash)> update_ad_keyword_with_http_info(keyword_id, update_ad_keyword_request, opts)
 
 ```ruby
 begin
-  # Pause or enable a Search keyword
-  data, status_code, headers = api_instance.update_ad_keyword_with_http_info(keyword_id, update_ad_keyword_request)
+  # Update a Search keyword
+  data, status_code, headers = api_instance.update_ad_keyword_with_http_info(keyword_id, update_ad_keyword_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdKeyword200Response>
@@ -4656,6 +4851,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **keyword_id** | **String** | Zernio keyword ID (&#x60;id&#x60;), or Google&#39;s native &#x60;{adSetId}~{platformCriterionId}&#x60; (the tail of &#x60;resourceName&#x60;, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group. |  |
 | **update_ad_keyword_request** | [**UpdateAdKeywordRequest**](UpdateAdKeywordRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4673,11 +4869,11 @@ end
 
 ## update_ad_set
 
-> <UpdateAdSet200Response> update_ad_set(ad_set_id, update_ad_set_request)
+> <UpdateAdSet200Response> update_ad_set(ad_set_id, update_ad_set_request, opts)
 
 Update an ad set
 
-Changes an ad set's settings, such as its budget, bid strategy, status or delivery options. At least one updatable field is required.  Use it for:  - ABO budget updates. - Ad-set-scoped pause/resume. - Bid-strategy edits. - Meta value-rule-set attach/detach. - Meta beneficiary and payer: `dsaBeneficiary` / `dsaPayor` for the EU, `regionalRegulatedCategories` / `regionalRegulationIdentities` for the regional regimes. - Meta-only post-launch delivery settings via `platformSpecificData`.  ### Value rule sets (Meta only)  See `/v1/ads/value-rule-sets`.  - ATTACH or REPLACE: send `valueRuleSetId`. Attachment is driven by the id's presence, so `valueRulesApplied: true` is optional. Sending a different id replaces the previous association; there is no separate replace call. - DETACH: send `valueRulesApplied: false` and OMIT `valueRuleSetId`. - Sending `valueRulesApplied: false` TOGETHER with `valueRuleSetId` returns 400 `mutually_exclusive_fields`. - Eligibility: only ad sets on `LOWEST_COST_WITHOUT_CAP` or `COST_CAP`. Meta rejects the rest server-side. - Read back with `GET /v1/ads/ad-sets/{adSetId}?fields=value_rule_set_id`. Meta does not document `value_rules_applied` as a readable ad-set field, so the boolean cannot be read back.  The `mutually_exclusive_fields` error is deliberate. Meta attaches the rule set whenever `value_rule_set_id` is present, even with `value_rules_applied` false, so echoing stored state while asking to detach would silently keep the bid adjustments live.  ### Bid strategy compatibility (per Meta's spec)  - `LOWEST_COST_WITHOUT_CAP`: no `bidAmount`, no `roasAverageFloor`. - `LOWEST_COST_WITH_BID_CAP` / `COST_CAP`: `bidAmount` REQUIRED (whole currency units). - `LOWEST_COST_WITH_MIN_ROAS`: `roasAverageFloor` REQUIRED (decimal multiplier, e.g. 2.0 = 2.0x ROAS).  Meta only: send `bidAmount` WITHOUT `bidStrategy` to change the cap amount on an ad set whose strategy (its own, or the campaign's under CBO) is COST_CAP / LOWEST_COST_WITH_BID_CAP, leaving the strategy untouched.  Send `roasAverageFloor` WITHOUT `bidStrategy` the same way to change the floor of a LOWEST_COST_WITH_MIN_ROAS ad set. Either field against an incompatible current strategy is a 400.  Meta CBO (the campaign holds the budget): the campaign also holds the bid strategy, so only `bidAmount` or `roasAverageFloor` is written on the ad set. A `bidStrategy` equal to the campaign's is accepted; a different one is a 409 (change it with PUT /v1/ads/campaigns/{campaignId}).  ### Delivery settings and budget  Delivery settings are validated by Meta against the campaign objective. Incompatible combinations (e.g. a billingEvent the optimization goal doesn't allow) surface as 400s from Meta.  When updating `budget` on an ad set whose campaign holds the budget (CBO), the response is 409 with code `invalid_field_value`. Send it to PUT /v1/ads/campaigns/{campaignId} instead.  ### Status  `status` behaves exactly as PUT /v1/ads/ad-sets/{adSetId}/status describes. Only the ad set's own switch is written and its ads keep theirs. `statusUpdated` / `statusSkipped` report whether that switch was written or a live read showed it already in place.  ### Placements and targeting (Meta only)  `placements` and `targeting` take the same shapes as POST /v1/ads/create. Meta replaces an ad set's targeting wholesale, so Zernio reads the live targeting first, changes only what the request names and writes the merged spec back.  Custom audiences, geo, age, interest groups and `targeting_automation` you do not send are kept.  - `placements` replaces the whole placement set. - `placements: null` returns the ad set to automatic placements. - Omitting it leaves placements as they are.  Other platforms return 400 for either field before anything in the request is written (use PUT /v1/ads/{adId} with `targeting` where that platform supports it).  The live read and the `incomeTier` lookup run before any other field is written, so a 502 or 422 from them leaves the ad set unchanged.  ### Reddit Ads: budget, name and bidding  - `budget` changes the ad group's amount. An ad group that spends its campaign budget returns 422 (update the campaign instead). - Reddit cannot switch a published budget between daily and lifetime, so `budget.type` must match the current one (422 otherwise). - `name` renames the ad group.  `bidStrategy` maps to the ad group's `bid_strategy`:  - LOWEST_COST_WITHOUT_CAP: automatic bidding (BIDLESS). - LOWEST_COST_WITH_BID_CAP: MANUAL_BIDDING with `bidAmount` as the bid. - COST_CAP: MAXIMIZE_VOLUME with `bidAmount` as the cap. - LOWEST_COST_WITH_MIN_ROAS: returns 422.  ### Reddit Ads: targeting and schedule  `targeting` (same shape as on create; `placements` is a 400) and `startDate` / `endDate` change the ad group with one PATCH to Reddit. Read the current values with GET /v1/ads/ad-sets/{adSetId}/targeting.  Zernio reads the live ad group first and replaces only the targeting groups the request names:  - The included locations (`countries`, `regions`, `metros`, `cities`, `zips`) are one list on Reddit, so sending any of them replaces all included locations. - Devices, platforms, carriers and automated expansion set in Reddit Ads Manager are kept.  The schedule is checked against the campaign before anything in the request is written. Each of these returns 400 naming `startDate` or `endDate`:  - The ad group starts before a campaign that starts in the future. - The ad group ends after the campaign's end. - Under campaign budget optimization, it must end by the campaign end (and has no end date when the campaign has none).  Zernio never resends the PATCH on its own, so after a 5xx read the ad group back before retrying. 
+Changes an ad set's settings, such as its budget, bid strategy, status or delivery options. At least one updatable field is required.  Use it for:  - ABO budget updates. - Ad-set-scoped pause/resume. - Bid-strategy edits. - Meta value-rule-set attach/detach. - Meta beneficiary and payer: `dsaBeneficiary` / `dsaPayor` for the EU, `regionalRegulatedCategories` / `regionalRegulationIdentities` for the regional regimes. - Meta-only post-launch delivery settings via `platformSpecificData`.  ### Value rule sets (Meta only)  See `/v1/ads/value-rule-sets`.  - ATTACH or REPLACE: send `valueRuleSetId`. Attachment is driven by the id's presence, so `valueRulesApplied: true` is optional. Sending a different id replaces the previous association; there is no separate replace call. - DETACH: send `valueRulesApplied: false` and OMIT `valueRuleSetId`. - Sending `valueRulesApplied: false` TOGETHER with `valueRuleSetId` returns 400 `mutually_exclusive_fields`. - Eligibility: only ad sets on `LOWEST_COST_WITHOUT_CAP` or `COST_CAP`. Meta rejects the rest server-side. - Read back with `GET /v1/ads/ad-sets/{adSetId}?fields=value_rule_set_id`. Meta does not document `value_rules_applied` as a readable ad-set field, so the boolean cannot be read back.  The `mutually_exclusive_fields` error is deliberate. Meta attaches the rule set whenever `value_rule_set_id` is present, even with `value_rules_applied` false, so echoing stored state while asking to detach would silently keep the bid adjustments live.  ### Bid strategy compatibility (per Meta's spec)  - `LOWEST_COST_WITHOUT_CAP`: no `bidAmount`, no `roasAverageFloor`. - `LOWEST_COST_WITH_BID_CAP` / `COST_CAP`: `bidAmount` REQUIRED (whole currency units). - `LOWEST_COST_WITH_MIN_ROAS`: `roasAverageFloor` REQUIRED (decimal multiplier, e.g. 2.0 = 2.0x ROAS).  Meta only: send `bidAmount` WITHOUT `bidStrategy` to change the cap amount on an ad set whose strategy (its own, or the campaign's under CBO) is COST_CAP / LOWEST_COST_WITH_BID_CAP, leaving the strategy untouched.  Send `roasAverageFloor` WITHOUT `bidStrategy` the same way to change the floor of a LOWEST_COST_WITH_MIN_ROAS ad set. Either field against an incompatible current strategy is a 400.  Meta CBO (the campaign holds the budget): the campaign also holds the bid strategy, so only `bidAmount` or `roasAverageFloor` is written on the ad set. A `bidStrategy` equal to the campaign's is accepted; a different one is a 409 (change it with PUT /v1/ads/campaigns/{campaignId}).  ### Delivery settings and budget  Delivery settings are validated by Meta against the campaign objective. Incompatible combinations (e.g. a billingEvent the optimization goal doesn't allow) surface as 400s from Meta.  When updating `budget` on an ad set whose campaign holds the budget (CBO), the response is 409 with code `invalid_field_value`. Send it to PUT /v1/ads/campaigns/{campaignId} instead.  ### Status  `status` behaves exactly as PUT /v1/ads/ad-sets/{adSetId}/status describes. Only the ad set's own switch is written and its ads keep theirs. `statusUpdated` / `statusSkipped` report whether that switch was written or a live read showed it already in place.  ### Placements and targeting (Meta only)  `placements` and `targeting` take the same shapes as POST /v1/ads/create. Meta replaces an ad set's targeting wholesale, so Zernio reads the live targeting first, changes only what the request names and writes the merged spec back.  Custom audiences, geo, age, interest groups and `targeting_automation` you do not send are kept.  Locations are replaced as a set: sending any location field (countries, countryGroups, regions, cities, zips, metros, customLocations, places, neighborhoods) replaces every included location on the ad set, because Meta ORs them together. Resend the ones to keep. Meta's `location_types` and other geo settings Zernio does not model are always kept.  - `placements` replaces the whole placement set. - `placements: null` returns the ad set to automatic placements. - Omitting it leaves placements as they are.  Other platforms return 400 for either field before anything in the request is written (use PUT /v1/ads/{adId} with `targeting` where that platform supports it).  The live read and the `incomeTier` lookup run before any other field is written, so a 502 or 422 from them leaves the ad set unchanged.  ### Reddit Ads: budget, name and bidding  - `budget` changes the ad group's amount. An ad group that spends its campaign budget returns 422 (update the campaign instead). - Reddit cannot switch a published budget between daily and lifetime, so `budget.type` must match the current one (422 otherwise). - `name` renames the ad group.  `bidStrategy` maps to the ad group's `bid_strategy`:  - LOWEST_COST_WITHOUT_CAP: automatic bidding (BIDLESS). - LOWEST_COST_WITH_BID_CAP: MANUAL_BIDDING with `bidAmount` as the bid. - COST_CAP: MAXIMIZE_VOLUME with `bidAmount` as the cap. - LOWEST_COST_WITH_MIN_ROAS: returns 422.  ### Reddit Ads: targeting and schedule  `targeting` (same shape as on create; `placements` is a 400) and `startDate` / `endDate` change the ad group with one PATCH to Reddit. Read the current values with GET /v1/ads/ad-sets/{adSetId}/targeting.  Zernio reads the live ad group first and replaces only the targeting groups the request names:  - The included locations (`countries`, `regions`, `metros`, `cities`, `zips`) are one list on Reddit, so sending any of them replaces all included locations. - Devices, platforms, carriers and automated expansion set in Reddit Ads Manager are kept.  The schedule is checked against the campaign before anything in the request is written. Each of these returns 400 naming `startDate` or `endDate`:  - The ad group starts before a campaign that starts in the future. - The ad group ends after the campaign's end. - Under campaign budget optimization, it must end by the campaign end (and has no end date when the campaign has none).  Zernio never resends the PATCH on its own, so after a 5xx read the ad group back before retrying. 
 
 ### Examples
 
@@ -4693,10 +4889,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Platform ad set ID
 update_ad_set_request = Zernio::UpdateAdSetRequest.new({platform: 'facebook'}) # UpdateAdSetRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Update an ad set
-  result = api_instance.update_ad_set(ad_set_id, update_ad_set_request)
+  result = api_instance.update_ad_set(ad_set_id, update_ad_set_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_set: #{e}"
@@ -4707,12 +4906,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdSet200Response>, Integer, Hash)> update_ad_set_with_http_info(ad_set_id, update_ad_set_request)
+> <Array(<UpdateAdSet200Response>, Integer, Hash)> update_ad_set_with_http_info(ad_set_id, update_ad_set_request, opts)
 
 ```ruby
 begin
   # Update an ad set
-  data, status_code, headers = api_instance.update_ad_set_with_http_info(ad_set_id, update_ad_set_request)
+  data, status_code, headers = api_instance.update_ad_set_with_http_info(ad_set_id, update_ad_set_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdSet200Response>
@@ -4727,6 +4926,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **ad_set_id** | **String** | Platform ad set ID |  |
 | **update_ad_set_request** | [**UpdateAdSetRequest**](UpdateAdSetRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4744,11 +4944,11 @@ end
 
 ## update_ad_set_status
 
-> <UpdateAdSetStatus200Response> update_ad_set_status(ad_set_id, update_ad_campaign_status_request)
+> <UpdateAdSetStatus200Response> update_ad_set_status(ad_set_id, update_ad_campaign_status_request, opts)
 
 Pause or resume a single ad set
 
-Pauses or resumes one ad set without touching its campaign, its sibling ad sets or the switches of its ads.  It is a thin wrapper over PUT /v1/ads/ad-sets/{adSetId} for callers that only want the status toggle and prefer a symmetric URL to /v1/ads/campaigns/{campaignId}/status.  ### What is written  It writes the ad set's own on/off switch and nothing else, on every platform:  - Meta: `configured_status` - TikTok: ad group `operation_status` - Google: ad group status - LinkedIn: campaign - Pinterest: ad group - X: line item - ChatGPT (OpenAI): ad group - Reddit: ad group `configured_status`  Its ads keep their own switches: an ad you paused individually stays paused when the ad set resumes.  The campaign above is not touched either, so an ad set resumed under a paused campaign reads `status: paused` until the campaign is resumed too. See the Status model in the Ad Campaigns tag.  ### Live read, then write  The ad set's switch is read from the platform first.  - When that live read shows it already in the requested state, nothing is written (`updated: 0`, `skipped: 1`, with the reason). - In that case, when the ad set delivers in that state but some of its ads are stored in the other state, those ads (up to 20, at most once every 10 minutes per ad set) are re-read and stored. - Otherwise the switch is written (`updated: 1`), read back and stored. The delivery status of its ads (up to 20) is re-read and stored, so an immediate GET returns what the platform now reports.  A stored switch never skips a write, and when the platform cannot be read the write always goes out.  On Meta and Reddit the check reads the ad set's own switch (`status` / `configured_status`). So a repeated request skips even while `platformAdSetStatus` reads `CAMPAIGN_PAUSED`, `WITH_ISSUES` or `IN_PROCESS`. 
+Pauses or resumes one ad set without touching its campaign, its sibling ad sets or the switches of its ads.  It is a thin wrapper over PUT /v1/ads/ad-sets/{adSetId} for callers that only want the status toggle and prefer a symmetric URL to /v1/ads/campaigns/{campaignId}/status.  ### What is written  It writes the ad set's own on/off switch and nothing else, on every platform:  - Meta: `configured_status` - TikTok: ad group `operation_status` - Google: ad group status - LinkedIn: campaign - Pinterest: ad group - X: line item - ChatGPT (OpenAI): ad group - Reddit: ad group `configured_status`  Its ads keep their own switches: an ad you paused individually stays paused when the ad set resumes.  The campaign above is not touched either, so an ad set resumed under a paused campaign reads `status: paused` until the campaign is resumed too. See the Status model in the Ad Campaigns tag.  ### Live read, then write  The ad set's switch is read from the platform first.  - When that live read shows it already in the requested state, nothing is written (`updated: 0`, `skipped: 1`, with the reason). - In that case, when the ad set delivers in that state but some of its ads are stored in the other state, those ads (up to 20, at most once every 10 minutes per ad set) are re-read and stored. - Otherwise the switch is written (`updated: 1`), read back and stored. The delivery status of its ads (up to 20) is re-read and stored, so an immediate GET returns what the platform now reports.  A stored switch never skips a write, and when the platform cannot be read the write always goes out.  On Meta the check reads the ad set's own switch (`status`). So a repeated request skips even while `platformAdSetStatus` reads `CAMPAIGN_PAUSED`, `WITH_ISSUES` or `IN_PROCESS`. On Reddit `platformAdSetStatus` is the ad group's own switch (`configured_status`), so a skipped request returns it as already in the requested state. 
 
 ### Examples
 
@@ -4764,10 +4964,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Platform ad set ID
 update_ad_campaign_status_request = Zernio::UpdateAdCampaignStatusRequest.new({status: 'active', platform: 'facebook'}) # UpdateAdCampaignStatusRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Pause or resume a single ad set
-  result = api_instance.update_ad_set_status(ad_set_id, update_ad_campaign_status_request)
+  result = api_instance.update_ad_set_status(ad_set_id, update_ad_campaign_status_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_set_status: #{e}"
@@ -4778,12 +4981,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdSetStatus200Response>, Integer, Hash)> update_ad_set_status_with_http_info(ad_set_id, update_ad_campaign_status_request)
+> <Array(<UpdateAdSetStatus200Response>, Integer, Hash)> update_ad_set_status_with_http_info(ad_set_id, update_ad_campaign_status_request, opts)
 
 ```ruby
 begin
   # Pause or resume a single ad set
-  data, status_code, headers = api_instance.update_ad_set_status_with_http_info(ad_set_id, update_ad_campaign_status_request)
+  data, status_code, headers = api_instance.update_ad_set_status_with_http_info(ad_set_id, update_ad_campaign_status_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdSetStatus200Response>
@@ -4798,6 +5001,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **ad_set_id** | **String** | Platform ad set ID |  |
 | **update_ad_campaign_status_request** | [**UpdateAdCampaignStatusRequest**](UpdateAdCampaignStatusRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -4815,7 +5019,7 @@ end
 
 ## update_ad_status
 
-> <UpdateAdStatus200Response> update_ad_status(ad_id, update_ad_keyword_request)
+> <UpdateAdStatus200Response> update_ad_status(ad_id, update_ad_status_request, opts)
 
 Pause or resume a single ad
 
@@ -4834,11 +5038,14 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 ad_id = 'ad_id_example' # String | Zernio `_id` (hex), Meta `platformAdId` (numeric), or one of the creative's effective story/media IDs.
-update_ad_keyword_request = Zernio::UpdateAdKeywordRequest.new({status: 'active'}) # UpdateAdKeywordRequest | 
+update_ad_status_request = Zernio::UpdateAdStatusRequest.new({status: 'active'}) # UpdateAdStatusRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
+}
 
 begin
   # Pause or resume a single ad
-  result = api_instance.update_ad_status(ad_id, update_ad_keyword_request)
+  result = api_instance.update_ad_status(ad_id, update_ad_status_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_status: #{e}"
@@ -4849,12 +5056,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdStatus200Response>, Integer, Hash)> update_ad_status_with_http_info(ad_id, update_ad_keyword_request)
+> <Array(<UpdateAdStatus200Response>, Integer, Hash)> update_ad_status_with_http_info(ad_id, update_ad_status_request, opts)
 
 ```ruby
 begin
   # Pause or resume a single ad
-  data, status_code, headers = api_instance.update_ad_status_with_http_info(ad_id, update_ad_keyword_request)
+  data, status_code, headers = api_instance.update_ad_status_with_http_info(ad_id, update_ad_status_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdStatus200Response>
@@ -4868,7 +5075,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** | Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. |  |
-| **update_ad_keyword_request** | [**UpdateAdKeywordRequest**](UpdateAdKeywordRequest.md) |  |  |
+| **update_ad_status_request** | [**UpdateAdStatusRequest**](UpdateAdStatusRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 

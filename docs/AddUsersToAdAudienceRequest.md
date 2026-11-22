@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **users** | [**Array&lt;AddUsersToAdAudienceRequestUsersInner&gt;**](AddUsersToAdAudienceRequestUsersInner.md) |  |  |
+| **users** | [**Array&lt;AudienceUploadUser&gt;**](AudienceUploadUser.md) |  |  |
 
 ## Example
 

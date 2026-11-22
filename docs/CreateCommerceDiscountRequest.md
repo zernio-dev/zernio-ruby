@@ -20,6 +20,7 @@
 | **ends_at** | **Time** |  | [optional] |
 | **product_ids** | **Array&lt;String&gt;** |  | [optional] |
 | **collection_ids** | **Array&lt;String&gt;** |  | [optional] |
+| **customer_ids** | **Array&lt;String&gt;** | Only these customers can use the code (&#x60;customer.id&#x60; on an order, or &#x60;id&#x60; from the customers endpoints). Code discounts on Shopify only; WooCommerce answers 400. | [optional] |
 
 ## Example
 
@@ -42,7 +43,8 @@ instance = Zernio::CreateCommerceDiscountRequest.new(
   starts_at: null,
   ends_at: null,
   product_ids: null,
-  collection_ids: null
+  collection_ids: null,
+  customer_ids: null
 )
 ```
 

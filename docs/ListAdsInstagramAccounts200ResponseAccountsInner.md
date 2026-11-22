@@ -8,7 +8,7 @@
 | **username** | **String** | Instagram username; empty when Meta does not expose it. |  |
 | **profile_picture_url** | **String** | Profile picture URL when available. | [optional] |
 | **is_page_backed** | **Boolean** | Whether this is a Page-backed Instagram identity. |  |
-| **source** | **String** | Discovery source; Page linkage also uses page_backed. |  |
+| **source** | **String** | Discovery source; Page linkage also uses page_backed. business_partner is a partner asset shared with the ad account&#39;s business; promote_pages is linked to a Page the ad account promotes. |  |
 
 ## Example
 

@@ -14,9 +14,12 @@ require 'zernio-sdk'
 Zernio::CreatorCampaignEconomics.openapi_one_of
 # =>
 # [
+#   :'CreatorCampaignEconomicsAdPerformance',
+#   :'CreatorCampaignEconomicsCommission',
 #   :'CreatorCampaignEconomicsCpm',
 #   :'CreatorCampaignEconomicsPerPost',
-#   :'CreatorCampaignEconomicsPool'
+#   :'CreatorCampaignEconomicsPool',
+#   :'CreatorCampaignEconomicsRetainer'
 # ]
 ```
 
@@ -45,9 +48,12 @@ require 'zernio-sdk'
 Zernio::CreatorCampaignEconomics.openapi_discriminator_mapping
 # =>
 # {
+#   :'ad_performance' => :'CreatorCampaignEconomicsAdPerformance',
+#   :'commission' => :'CreatorCampaignEconomicsCommission',
 #   :'cpm' => :'CreatorCampaignEconomicsCpm',
 #   :'per_post' => :'CreatorCampaignEconomicsPerPost',
-#   :'pool' => :'CreatorCampaignEconomicsPool'
+#   :'pool' => :'CreatorCampaignEconomicsPool',
+#   :'retainer' => :'CreatorCampaignEconomicsRetainer'
 # }
 ```
 
@@ -61,7 +67,7 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 require 'zernio-sdk'
 
 Zernio::CreatorCampaignEconomics.build(data)
-# => #<CreatorCampaignEconomicsCpm:0x00007fdd4aab02a0>
+# => #<CreatorCampaignEconomicsAdPerformance:0x00007fdd4aab02a0>
 
 Zernio::CreatorCampaignEconomics.build(data_that_doesnt_match)
 # => nil
@@ -75,8 +81,11 @@ Zernio::CreatorCampaignEconomics.build(data_that_doesnt_match)
 
 #### Return type
 
+- `CreatorCampaignEconomicsAdPerformance`
+- `CreatorCampaignEconomicsCommission`
 - `CreatorCampaignEconomicsCpm`
 - `CreatorCampaignEconomicsPerPost`
 - `CreatorCampaignEconomicsPool`
+- `CreatorCampaignEconomicsRetainer`
 - `nil` (if no type matches)
 

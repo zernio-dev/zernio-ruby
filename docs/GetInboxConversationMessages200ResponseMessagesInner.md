@@ -9,6 +9,7 @@
 | **account_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **message** | **String** |  | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content, so the content fields of this row are null. Identifiers and metadata stay. | [optional] |
 | **sender_id** | **String** |  | [optional] |
 | **sender_name** | **String** |  | [optional] |
 | **sender_verified_type** | **String** | X verified badge type. Only present for X messages. | [optional] |
@@ -45,6 +46,7 @@ instance = Zernio::GetInboxConversationMessages200ResponseMessagesInner.new(
   account_id: null,
   platform: null,
   message: null,
+  content_not_retained: null,
   sender_id: null,
   sender_name: null,
   sender_verified_type: null,

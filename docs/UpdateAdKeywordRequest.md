@@ -4,7 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **status** | **String** |  |  |
+| **status** | **String** |  | [optional] |
+| **cpc_bid** | **Float** | Max CPC bid for this keyword, in the ad account currency. Takes effect only under Manual CPC bidding. | [optional] |
 
 ## Example
 
@@ -12,7 +13,8 @@
 require 'zernio-sdk'
 
 instance = Zernio::UpdateAdKeywordRequest.new(
-  status: null
+  status: null,
+  cpc_bid: null
 )
 ```
 

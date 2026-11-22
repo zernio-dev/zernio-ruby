@@ -684,7 +684,8 @@ end
 api_instance = Zernio::PhoneNumbersApi.new
 country = 'country_example' # String | 
 opts = {
-  number_type: 'local' # String | Requirements and reuse eligibility are per (country, type). Omitted = the country's default type. Pass the same value on the POST.
+  number_type: 'local', # String | Requirements and reuse eligibility are per (country, type). Omitted = the country's default type. Pass the same value on the POST.
+  profile_id: 'profile_id_example' # String | Profile the order is for. When given, `reusable.options` only lists verifications held by numbers on this profile. A key or team member limited to some profiles must pass it to get any options.
 }
 
 begin
@@ -720,6 +721,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **country** | **String** |  |  |
 | **number_type** | **String** | Requirements and reuse eligibility are per (country, type). Omitted &#x3D; the country&#39;s default type. Pass the same value on the POST. | [optional] |
+| **profile_id** | **String** | Profile the order is for. When given, &#x60;reusable.options&#x60; only lists verifications held by numbers on this profile. A key or team member limited to some profiles must pass it to get any options. | [optional] |
 
 ### Return type
 
@@ -1494,7 +1496,7 @@ end
 
 Reply to the regulatory reviewer
 
-Post a free-text reply (with optional file attachments) to the reviewer on a number awaiting remediation. Use it for asks the structured form can't express (e.g. \"is this personal or business?\").  Requires text or at least one attachment. Attachments are stored by us and their links are added to the reviewer's comment thread (the carrier's number order takes no loose files).  ### What happens next  - A reply to a comment-style ask moves the number back to \"in review\". - A reply on a formal decline is supplementary, and you must still resubmit the fix. 
+Post a free-text reply (with optional file attachments) to the reviewer on a number awaiting remediation. Use it for asks the structured form can't express (e.g. \"is this personal or business?\").  Requires text or at least one attachment. Attachments are stored by us and their links are added to the reviewer's comment thread (the carrier's number order takes no loose files).  ### What happens next  - A text reply to a comment-style ask moves the number back to \"in review\". A reply with only files keeps the ask open, so send the fix through the structured form or add a written answer. - A reply on a formal decline is supplementary, and you must still resubmit the fix. 
 
 ### Examples
 

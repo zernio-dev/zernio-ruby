@@ -172,7 +172,7 @@ end
 
 api_instance = Zernio::FilesApi.new
 file_id = 'file_id_example' # String | 
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 
 begin
   # Download a file
@@ -206,7 +206,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **String** |  |  |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 
 ### Return type
 
@@ -243,7 +243,7 @@ end
 
 api_instance = Zernio::FilesApi.new
 file_id = 'file_id_example' # String | 
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 
 begin
   # Get a file or folder
@@ -277,7 +277,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **String** |  |  |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 
 ### Return type
 
@@ -314,7 +314,7 @@ end
 
 api_instance = Zernio::FilesApi.new
 file_id = 'file_id_example' # String | 
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 
 begin
   # Get an anyone-with-the-link share link
@@ -348,7 +348,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **String** |  |  |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 
 ### Return type
 
@@ -384,7 +384,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::FilesApi.new
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 opts = {
   folder_id: 'folder_id_example', # String | Provider folder id; omit for the root.
   q: 'q_example', # String | Name search.
@@ -423,7 +423,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 | **folder_id** | **String** | Provider folder id; omit for the root. | [optional] |
 | **q** | **String** | Name search. | [optional] |
 | **cursor** | **String** |  | [optional] |
@@ -464,7 +464,7 @@ end
 
 api_instance = Zernio::FilesApi.new
 file_id = 'file_id_example' # String | 
-account_id = 'account_id_example' # String | The connected Google or Microsoft account.
+account_id = 'account_id_example' # String | The connected Google, Microsoft or IMAP account.
 
 begin
   # Move a file to the trash
@@ -498,7 +498,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **String** |  |  |
-| **account_id** | **String** | The connected Google or Microsoft account. |  |
+| **account_id** | **String** | The connected Google, Microsoft or IMAP account. |  |
 
 ### Return type
 

@@ -11,8 +11,9 @@
 | **forbidden_locations** | **Array&lt;String&gt;** |  | [optional] |
 | **forbidden_operating_systems** | **Array&lt;String&gt;** |  | [optional] |
 | **rejections** | [**Array&lt;GetAdReview200ResponseReviewRejectionsInner&gt;**](GetAdReview200ResponseReviewRejectionsInner.md) | One entry per rejected piece of content (TikTok &#x60;reject_info&#x60;). Empty when the ad was approved. | [optional] |
-| **approval_status** | **String** | Google only. ad_group_ad.policy_summary.approval_status, verbatim. | [optional] |
-| **policy_topics** | [**Array&lt;GetAdReview200ResponseReviewPolicyTopicsInner&gt;**](GetAdReview200ResponseReviewPolicyTopicsInner.md) | Google only. ad_group_ad.policy_summary.policy_topic_entries. | [optional] |
+| **approval_status** | **String** | Google only. ad_group_ad.policy_summary.approval_status, verbatim. Performance Max: derived from the asset group&#39;s primary status (see the description). | [optional] |
+| **policy_topics** | [**Array&lt;GooglePolicyTopicEntry&gt;**](GooglePolicyTopicEntry.md) | Google only. ad_group_ad.policy_summary.policy_topic_entries. Performance Max: the entries of every linked asset. | [optional] |
+| **asset_group** | [**GetAdReview200ResponseReviewAssetGroup**](GetAdReview200ResponseReviewAssetGroup.md) |  | [optional] |
 | **review_feedback** | [**GetAdReview200ResponseReviewReviewFeedback**](GetAdReview200ResponseReviewReviewFeedback.md) |  | [optional] |
 | **issues** | **Array&lt;Object&gt;** | Meta only. The Ad&#39;s &#x60;issues_info&#x60; objects (&#x60;error_code&#x60;, &#x60;error_message&#x60;, &#x60;error_summary&#x60;, &#x60;error_type&#x60;, &#x60;level&#x60;), verbatim. | [optional] |
 | **read_at** | **Time** | When the verdict was read from the platform. | [optional] |
@@ -32,6 +33,7 @@ instance = Zernio::GetAdReview200ResponseReview.new(
   rejections: null,
   approval_status: null,
   policy_topics: null,
+  asset_group: null,
   review_feedback: null,
   issues: null,
   read_at: null

@@ -6,6 +6,8 @@
 | ---- | ---- | ----------- | ----- |
 | **spend** | **Float** | In the ad&#39;s currency. | [optional] |
 | **impressions** | **Integer** |  | [optional] |
+| **reach** | **Integer** | People who saw the ad. De-duplicated over the range on Meta and TikTok when the platform returns it; elsewhere the sum of each day&#39;s reach, which counts a person once per day. | [optional] |
+| **frequency** | **Float** | Average times each person saw the ad: &#x60;impressions / reach&#x60;. 0 when the platform reports no reach. | [optional] |
 | **clicks** | **Integer** |  | [optional] |
 | **ctr** | **Float** | Percent. | [optional] |
 | **conversions** | **Float** | Results over the range (see AdMetrics.conversions). | [optional] |
@@ -22,6 +24,8 @@ require 'zernio-sdk'
 instance = Zernio::AdsPerformanceResponseAdsInnerMetrics.new(
   spend: null,
   impressions: null,
+  reach: null,
+  frequency: null,
   clicks: null,
   ctr: null,
   conversions: null,

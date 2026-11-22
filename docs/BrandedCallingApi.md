@@ -187,7 +187,7 @@ end
 api_instance = Zernio::BrandedCallingApi.new
 create_branded_calling_enterprise_request = Zernio::CreateBrandedCallingEnterpriseRequest.new({legal_name: 'legal_name_example', doing_business_as: 'doing_business_as_example', organization_type: 'commercial', organization_legal_type: 'corporation', country_code: 'country_code_example', jurisdiction_of_incorporation: 'jurisdiction_of_incorporation_example', website: 'website_example', fein: 'fein_example', industry: 'industry_example', number_of_employees: '1-10', organization_contact: Zernio::BrandedCallingContact.new({first_name: 'first_name_example', last_name: 'last_name_example', email: 'email_example', phone_number: 'phone_number_example'}), billing_contact: Zernio::BrandedCallingContact.new({first_name: 'first_name_example', last_name: 'last_name_example', email: 'email_example', phone_number: 'phone_number_example'}), physical_address: Zernio::BrandedCallingAddress.new({street_address: 'street_address_example', city: 'city_example', administrative_area: 'administrative_area_example', postal_code: 'postal_code_example', country: 'country_example'}), billing_address: Zernio::BrandedCallingAddress.new({street_address: 'street_address_example', city: 'city_example', administrative_area: 'administrative_area_example', postal_code: 'postal_code_example', country: 'country_example'})}) # CreateBrandedCallingEnterpriseRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -222,7 +222,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_branded_calling_enterprise_request** | [**CreateBrandedCallingEnterpriseRequest**](CreateBrandedCallingEnterpriseRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -260,7 +260,7 @@ end
 api_instance = Zernio::BrandedCallingApi.new
 create_branded_calling_identity_request = Zernio::CreateBrandedCallingIdentityRequest.new({enterprise_id: 'enterprise_id_example', display_name: 'display_name_example', call_reasons: ['call_reasons_example'], authorizer: Zernio::CreateBrandedCallingIdentityRequestAuthorizer.new({name: 'name_example', email: 'email_example'}), references: Zernio::BrandedCallingReferences.new({business: [Zernio::BrandedCallingReference.new({full_name: 'full_name_example', phone_number: 'phone_number_example', email: 'email_example', timezone: 'timezone_example'})], financial: Zernio::BrandedCallingReference.new({full_name: 'full_name_example', phone_number: 'phone_number_example', email: 'email_example', timezone: 'timezone_example'})})}) # CreateBrandedCallingIdentityRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -295,7 +295,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_branded_calling_identity_request** | [**CreateBrandedCallingIdentityRequest**](CreateBrandedCallingIdentityRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -1061,7 +1061,7 @@ end
 
 Create a caller identity share link
 
-Creates a single-use link (valid 7 days) where the end business fills in the caller identity itself, with no Zernio login. It covers display name, logo, call reasons, the authorizer and the three references.  What it submits lands under your team as `requested`, the same review as an API submission, and `branded_calling.identity.status_updated` fires.  ### Scoping the link  - `identityId`: complete an identity that is `requested` or `changes_requested`. - `enterpriseId`: a new identity for a registered business. - Neither: the business registers itself and its first identity.  The person opening the link can forward a fresh one to someone else, which retires theirs. 
+Creates a single-use link (valid 7 days) where the end business fills in the caller identity itself, with no Zernio login. It covers display name, logo, call reasons, the authorizer and the three references.  What it submits lands under your team as `requested`, the same review as an API submission, and `branded_calling.identity.status_updated` fires.  ### Scoping the link  - `identityId`: complete an identity that is `requested` or `changes_requested`. - `enterpriseId`: a new identity for a registered business. - Neither: the business registers itself and its first identity.  On balance billing, a link that creates an identity needs its first month in the balance first (402 otherwise).  The person opening the link can forward a fresh one to someone else, which retires theirs. 
 
 ### Examples
 

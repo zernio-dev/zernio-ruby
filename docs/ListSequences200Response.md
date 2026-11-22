@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
 | **sequences** | [**Array&lt;ListSequences200ResponseSequencesInner&gt;**](ListSequences200ResponseSequencesInner.md) |  | [optional] |
-| **pagination** | [**ListContacts200ResponsePagination**](ListContacts200ResponsePagination.md) |  | [optional] |
+| **pagination** | [**ListWorkspaces200ResponsePagination**](ListWorkspaces200ResponsePagination.md) |  | [optional] |
 
 ## Example
 

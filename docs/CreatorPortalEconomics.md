@@ -15,8 +15,10 @@ Zernio::CreatorPortalEconomics.openapi_one_of
 # =>
 # [
 #   :'CPM',
+#   :'CreatorPortalEconomicsOneOf',
 #   :'PerPost',
-#   :'Pool'
+#   :'Pool',
+#   :'Retainer'
 # ]
 ```
 
@@ -45,7 +47,9 @@ Zernio::CreatorPortalEconomics.build(data_that_doesnt_match)
 #### Return type
 
 - `CPM`
+- `CreatorPortalEconomicsOneOf`
 - `PerPost`
 - `Pool`
+- `Retainer`
 - `nil` (if no type matches)
 

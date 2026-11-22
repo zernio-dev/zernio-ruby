@@ -12,6 +12,7 @@
 | **key** | **String** | Returned only once, on creation | [optional] |
 | **scope** | **String** | &#39;full&#39; grants access to all profiles, &#39;profiles&#39; restricts to specific profiles | [optional][default to &#39;full&#39;] |
 | **profile_ids** | [**Array&lt;ApiKeyProfileIdsInner&gt;**](ApiKeyProfileIdsInner.md) | Profiles this key can access (populated with name and color). Only present when scope is &#39;profiles&#39;. | [optional] |
+| **deleted_profile_count** | **Integer** | Listed keys only. How many of the profiles this key is limited to were deleted: they are left out of profileIds but still limit the key, so a key with scope &#39;profiles&#39; and an empty profileIds reaches no profile. | [optional] |
 | **permission** | **String** | &#39;read-write&#39; allows all operations, &#39;read&#39; restricts to GET requests only | [optional][default to &#39;read-write&#39;] |
 | **disabled_resource_groups** | **Array&lt;String&gt;** | Resource groups this key can NOT access (opt-out denylist). Absent or empty means legacy full access. Each operation&#39;s group is published as x-resource-group.  A key with any group disabled is a restricted key (zrk_ prefix) and can never manage API keys, invites, or member identity.  With &#39;messages&#39; disabled, the key cannot read or send direct messages through any API surface. It also cannot create or edit a webhook subscription broader than itself: no subscribing to, test-firing, redelivering, or reading delivery logs for message events.  Subscriptions created earlier, from the dashboard, or with a full-access key keep delivering whatever their own &#x60;disabledResourceGroups&#x60; allows. To restrict an existing integration end to end, restrict the subscription too.  OAuth connector tokens (AI assistants and MCP clients) resolve against the same registry, but their groups are not settable yet: treat an authorized connector as full access.  | [optional] |
 | **created_by** | [**ApiKeyCreatedBy**](ApiKeyCreatedBy.md) |  | [optional] |
@@ -30,6 +31,7 @@ instance = Zernio::ApiKey.new(
   key: null,
   scope: null,
   profile_ids: null,
+  deleted_profile_count: null,
   permission: null,
   disabled_resource_groups: null,
   created_by: null

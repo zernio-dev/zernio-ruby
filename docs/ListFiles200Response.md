@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **data** | [**Array&lt;FileItem&gt;**](FileItem.md) |  | [optional] |
-| **pagination** | [**ListFiles200ResponsePagination**](ListFiles200ResponsePagination.md) |  | [optional] |
+| **pagination** | [**ListCalendarEventInstances200ResponsePagination**](ListCalendarEventInstances200ResponsePagination.md) |  | [optional] |
 
 ## Example
 

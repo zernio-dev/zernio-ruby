@@ -8,6 +8,7 @@
 | **late_post_id** | **String** | Original Zernio post ID if scheduled via Zernio | [optional] |
 | **status** | **String** | Overall post status. \&quot;partial\&quot; when some platforms published and others failed.  While any platform is still pending or processing, the post&#39;s own status is returned instead (usually scheduled or publishing), even if another platform already published.  A post with no published or failed platform (for example every platform cancelled) returns its own status with syncStatus unavailable and no platformAnalytics. | [optional] |
 | **content** | **String** |  | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content, so the content fields of this row are null. Identifiers and metadata stay. | [optional] |
 | **scheduled_for** | **Time** |  | [optional] |
 | **published_at** | **Time** |  | [optional] |
 | **analytics** | [**PostAnalytics**](PostAnalytics.md) |  | [optional] |
@@ -24,6 +25,7 @@
 | **is_ai_generated** | **Boolean** | Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it. | [optional] |
 | **is_shared_to_feed** | **Boolean** | Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it. | [optional] |
 | **media_audio_type** | **String** | Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it. | [optional] |
+| **upcoming_start_at** | **Time** | YouTube only. Start time of an upcoming Premiere or scheduled live stream. Absent once it airs. While it is present, publishedAt is the upload time; after it airs, publishedAt is the time it actually started. | [optional] |
 
 ## Example
 
@@ -35,6 +37,7 @@ instance = Zernio::AnalyticsSinglePostResponse.new(
   late_post_id: null,
   status: null,
   content: null,
+  content_not_retained: null,
   scheduled_for: null,
   published_at: null,
   analytics: null,
@@ -50,7 +53,8 @@ instance = Zernio::AnalyticsSinglePostResponse.new(
   media_product_type: null,
   is_ai_generated: null,
   is_shared_to_feed: null,
-  media_audio_type: null
+  media_audio_type: null,
+  upcoming_start_at: null
 )
 ```
 

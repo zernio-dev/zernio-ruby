@@ -9,7 +9,7 @@
 | **platform** | **String** |  |  |
 | **username** | **String** |  |  |
 | **display_name** | **String** |  | [optional] |
-| **oauth_app_id** | **String** | The OAuth app the account connected through. |  |
+| **oauth_app_id** | **String** | The OAuth app the account connected through; null on Zernio&#39;s app. |  |
 | **missing_scope_areas** | **Array&lt;String&gt;** | Every area now missing. Enable the permission on your app (or have the user grant it), then reconnect the account. |  |
 | **reason** | **String** | The platform error that revealed it. |  |
 

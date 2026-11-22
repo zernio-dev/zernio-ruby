@@ -11,6 +11,7 @@
 | **platform** | **String** |  | [optional] |
 | **status** | **String** |  | [optional] |
 | **participant_name** | **String** |  | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content, so the content fields of this row are null. Identifiers and metadata stay. | [optional] |
 | **participant_id** | **String** |  | [optional] |
 | **participant_verified_type** | **String** | X verified badge type. Only present for X conversations. | [optional] |
 | **business_scoped_user_id** | **String** | WhatsApp only. Meta business-scoped user ID (BSUID), the stable identity anchor; present when Meta has sent it for this participant. | [optional] |
@@ -36,6 +37,7 @@ instance = Zernio::GetInboxConversation200ResponseData.new(
   platform: null,
   status: null,
   participant_name: null,
+  content_not_retained: null,
   participant_id: null,
   participant_verified_type: null,
   business_scoped_user_id: null,

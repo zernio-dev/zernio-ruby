@@ -13,9 +13,9 @@
 | **url** | **String** | Destination URL the webhook was delivered to | [optional] |
 | **status** | **String** | Delivery outcome | [optional] |
 | **status_code** | **Integer** | HTTP status code returned by the destination endpoint | [optional] |
-| **request_payload** | **Hash&lt;String, Object&gt;** | The JSON payload sent to the destination endpoint | [optional] |
-| **response_body** | **String** | Response body returned by the destination endpoint | [optional] |
-| **error_message** | **String** | Error message when delivery failed | [optional] |
+| **request_payload** | **Hash&lt;String, Object&gt;** | The JSON payload sent to the destination endpoint. Empty when the team does not retain content. | [optional] |
+| **response_body** | **String** | Response body returned by the destination endpoint. Empty when the team does not retain content. | [optional] |
+| **error_message** | **String** | Error message when delivery failed. When the team does not retain content it only holds &#x60;Detail not retained (&lt;category&gt;)&#x60;. | [optional] |
 | **attempt_number** | **Integer** | Delivery attempt number (increments on retries) | [optional] |
 | **response_time** | **Integer** | Time taken by the destination endpoint to respond, in milliseconds | [optional] |
 | **created_at** | **Time** | Timestamp the delivery was attempted | [optional] |

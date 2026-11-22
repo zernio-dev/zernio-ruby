@@ -17,6 +17,7 @@
 | **minimum** | [**CommerceDiscountMinimum**](CommerceDiscountMinimum.md) |  | [optional] |
 | **usage_limit** | **Integer** |  | [optional] |
 | **once_per_customer** | **Boolean** |  | [optional] |
+| **limited_to_customers** | **Boolean** | True when only the customers chosen at creation (customerIds) can use the code. | [optional] |
 | **usage_count** | **Integer** |  | [optional] |
 | **starts_at** | **Time** |  | [optional] |
 | **ends_at** | **Time** |  | [optional] |
@@ -44,6 +45,7 @@ instance = Zernio::CommerceDiscount.new(
   minimum: null,
   usage_limit: null,
   once_per_customer: null,
+  limited_to_customers: null,
   usage_count: null,
   starts_at: null,
   ends_at: null,

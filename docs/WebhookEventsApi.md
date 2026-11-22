@@ -10,16 +10,35 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_connected**](WebhookEventsApi.md#on_account_connected) | **POST** /account.connected | Account connected event |
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
 | [**on_account_permissions_changed**](WebhookEventsApi.md#on_account_permissions_changed) | **POST** /account.permissions_changed | Account permissions changed event |
+| [**on_account_privacy_request**](WebhookEventsApi.md#on_account_privacy_request) | **POST** /account.privacy_request | Store privacy request |
 | [**on_account_rate_limited**](WebhookEventsApi.md#on_account_rate_limited) | **POST** /account.rate_limited | Mailbox sending cooldown started |
+| [**on_account_recovered**](WebhookEventsApi.md#on_account_recovered) | **POST** /account.recovered | Account publishing again |
+| [**on_account_restricted**](WebhookEventsApi.md#on_account_restricted) | **POST** /account.restricted | Account restricted from publishing |
 | [**on_ad_account_status_changed**](WebhookEventsApi.md#on_ad_account_status_changed) | **POST** /ad_account.status_changed | Ad account status changed event |
+| [**on_ad_created**](WebhookEventsApi.md#on_ad_created) | **POST** /ad.created | Ad created event |
 | [**on_ad_delivery_issue**](WebhookEventsApi.md#on_ad_delivery_issue) | **POST** /ad.delivery_issue | Ad delivery issue event |
 | [**on_ad_review_approved**](WebhookEventsApi.md#on_ad_review_approved) | **POST** /ad.review.approved | Ad review approved event |
 | [**on_ad_review_rejected**](WebhookEventsApi.md#on_ad_review_rejected) | **POST** /ad.review.rejected | Ad review rejected event |
 | [**on_ad_rule_triggered**](WebhookEventsApi.md#on_ad_rule_triggered) | **POST** /ad_rule.triggered | Ad rule triggered event |
+| [**on_ad_set_created**](WebhookEventsApi.md#on_ad_set_created) | **POST** /ad_set.created | Ad set created event |
+| [**on_ad_set_updated**](WebhookEventsApi.md#on_ad_set_updated) | **POST** /ad_set.updated | Ad set updated event |
 | [**on_ad_status_changed**](WebhookEventsApi.md#on_ad_status_changed) | **POST** /ad.status_changed | Ad status changed event |
+| [**on_ad_updated**](WebhookEventsApi.md#on_ad_updated) | **POST** /ad.updated | Ad updated event |
 | [**on_ad_video_processed**](WebhookEventsApi.md#on_ad_video_processed) | **POST** /ad.video.processed | Ad video processed event |
 | [**on_analytics_synced**](WebhookEventsApi.md#on_analytics_synced) | **POST** /analytics.synced | Analytics synced event |
 | [**on_api_changelog_published**](WebhookEventsApi.md#on_api_changelog_published) | **POST** /api.changelog.published | API changelog entry published event |
+| [**on_automation_action_applied**](WebhookEventsApi.md#on_automation_action_applied) | **POST** /automation.action.applied | Automation action applied event |
+| [**on_automation_action_failed**](WebhookEventsApi.md#on_automation_action_failed) | **POST** /automation.action.failed | Automation action failed event |
+| [**on_automation_action_unknown**](WebhookEventsApi.md#on_automation_action_unknown) | **POST** /automation.action.unknown | Automation action unknown event |
+| [**on_automation_alert_escalated**](WebhookEventsApi.md#on_automation_alert_escalated) | **POST** /automation.alert.escalated | Automation alert escalated event |
+| [**on_automation_alert_opened**](WebhookEventsApi.md#on_automation_alert_opened) | **POST** /automation.alert.opened | Automation alert opened event |
+| [**on_automation_alert_resolved**](WebhookEventsApi.md#on_automation_alert_resolved) | **POST** /automation.alert.resolved | Automation alert resolved event |
+| [**on_automation_check_completed**](WebhookEventsApi.md#on_automation_check_completed) | **POST** /automation.check.completed | Automation check completed event |
+| [**on_balance_charged**](WebhookEventsApi.md#on_balance_charged) | **POST** /balance.charged | Balance charged event |
+| [**on_balance_empty**](WebhookEventsApi.md#on_balance_empty) | **POST** /balance.empty | Balance empty event |
+| [**on_balance_low**](WebhookEventsApi.md#on_balance_low) | **POST** /balance.low | Balance low event |
+| [**on_billing_publishing_blocked**](WebhookEventsApi.md#on_billing_publishing_blocked) | **POST** /billing.publishing_blocked | Publishing paused for a failed payment |
+| [**on_billing_publishing_unblocked**](WebhookEventsApi.md#on_billing_publishing_unblocked) | **POST** /billing.publishing_unblocked | Publishing resumed after payment |
 | [**on_branded_calling_identity_action_required**](WebhookEventsApi.md#on_branded_calling_identity_action_required) | **POST** /branded_calling.identity.action_required | Caller identity action required event |
 | [**on_branded_calling_identity_status_updated**](WebhookEventsApi.md#on_branded_calling_identity_status_updated) | **POST** /branded_calling.identity.status_updated | Caller identity status updated event |
 | [**on_branded_calling_number_status_updated**](WebhookEventsApi.md#on_branded_calling_number_status_updated) | **POST** /branded_calling.number.status_updated | Branded number status updated event |
@@ -30,18 +49,34 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_call_failed**](WebhookEventsApi.md#on_call_failed) | **POST** /call.failed | Call failed event |
 | [**on_call_permission_request**](WebhookEventsApi.md#on_call_permission_request) | **POST** /call.permission_request | Call permission request reply event |
 | [**on_call_received**](WebhookEventsApi.md#on_call_received) | **POST** /call.received | Call received event |
+| [**on_call_recording_ready**](WebhookEventsApi.md#on_call_recording_ready) | **POST** /call.recording_ready | Call recording ready event |
+| [**on_call_transcript_segment**](WebhookEventsApi.md#on_call_transcript_segment) | **POST** /call.transcript_segment | Call transcript segment event |
 | [**on_campaign_budget_depleted**](WebhookEventsApi.md#on_campaign_budget_depleted) | **POST** /campaign.budget.depleted | Campaign budget depleted event |
+| [**on_campaign_created**](WebhookEventsApi.md#on_campaign_created) | **POST** /campaign.created | Campaign created event |
+| [**on_campaign_draft_approved**](WebhookEventsApi.md#on_campaign_draft_approved) | **POST** /campaign_draft.approved | Campaign draft approved event |
+| [**on_campaign_draft_rejected**](WebhookEventsApi.md#on_campaign_draft_rejected) | **POST** /campaign_draft.rejected | Campaign draft rejected event |
+| [**on_campaign_draft_revision_requested**](WebhookEventsApi.md#on_campaign_draft_revision_requested) | **POST** /campaign_draft.revision_requested | Campaign draft revision requested event |
+| [**on_campaign_draft_submitted**](WebhookEventsApi.md#on_campaign_draft_submitted) | **POST** /campaign_draft.submitted | Campaign draft submitted event |
+| [**on_campaign_participant_approved**](WebhookEventsApi.md#on_campaign_participant_approved) | **POST** /campaign_participant.approved | Campaign participant approved event |
+| [**on_campaign_participant_denied**](WebhookEventsApi.md#on_campaign_participant_denied) | **POST** /campaign_participant.denied | Campaign participant denied event |
 | [**on_campaign_participant_joined**](WebhookEventsApi.md#on_campaign_participant_joined) | **POST** /campaign_participant.joined | Campaign participant joined event |
+| [**on_campaign_participant_pending**](WebhookEventsApi.md#on_campaign_participant_pending) | **POST** /campaign_participant.pending | Campaign participant pending event |
 | [**on_campaign_participant_removed**](WebhookEventsApi.md#on_campaign_participant_removed) | **POST** /campaign_participant.removed | Campaign participant removed event |
 | [**on_campaign_participant_suspended**](WebhookEventsApi.md#on_campaign_participant_suspended) | **POST** /campaign_participant.suspended | Campaign participant suspended event |
 | [**on_campaign_payout_failed**](WebhookEventsApi.md#on_campaign_payout_failed) | **POST** /campaign_payout.failed | Campaign payout failed event |
 | [**on_campaign_payout_payable**](WebhookEventsApi.md#on_campaign_payout_payable) | **POST** /campaign_payout.payable | Campaign payout payable event |
 | [**on_campaign_payout_settled**](WebhookEventsApi.md#on_campaign_payout_settled) | **POST** /campaign_payout.settled | Campaign payout settled event |
+| [**on_campaign_sample_approved**](WebhookEventsApi.md#on_campaign_sample_approved) | **POST** /campaign_sample.approved | Campaign sample approved event |
+| [**on_campaign_sample_declined**](WebhookEventsApi.md#on_campaign_sample_declined) | **POST** /campaign_sample.declined | Campaign sample declined event |
+| [**on_campaign_sample_requested**](WebhookEventsApi.md#on_campaign_sample_requested) | **POST** /campaign_sample.requested | Campaign sample requested event |
+| [**on_campaign_sample_shipped**](WebhookEventsApi.md#on_campaign_sample_shipped) | **POST** /campaign_sample.shipped | Campaign sample shipped event |
+| [**on_campaign_status_changed**](WebhookEventsApi.md#on_campaign_status_changed) | **POST** /campaign.status_changed | Campaign status changed event |
 | [**on_campaign_submission_approved**](WebhookEventsApi.md#on_campaign_submission_approved) | **POST** /campaign_submission.approved | Campaign submission approved event |
 | [**on_campaign_submission_flagged**](WebhookEventsApi.md#on_campaign_submission_flagged) | **POST** /campaign_submission.flagged | Campaign submission flagged event |
 | [**on_campaign_submission_pending_review**](WebhookEventsApi.md#on_campaign_submission_pending_review) | **POST** /campaign_submission.pending_review | Campaign submission pending review event |
 | [**on_campaign_submission_received**](WebhookEventsApi.md#on_campaign_submission_received) | **POST** /campaign_submission.received | Campaign submission received event |
 | [**on_campaign_submission_rejected**](WebhookEventsApi.md#on_campaign_submission_rejected) | **POST** /campaign_submission.rejected | Campaign submission rejected event |
+| [**on_campaign_updated**](WebhookEventsApi.md#on_campaign_updated) | **POST** /campaign.updated | Campaign updated event |
 | [**on_comment_received**](WebhookEventsApi.md#on_comment_received) | **POST** /comment.received | Comment received event |
 | [**on_commerce_order_created**](WebhookEventsApi.md#on_commerce_order_created) | **POST** /commerce.order.created | Commerce order created event |
 | [**on_commerce_order_refunded**](WebhookEventsApi.md#on_commerce_order_refunded) | **POST** /commerce.order.refunded | Commerce order refunded event |
@@ -56,13 +91,23 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_contact_updated**](WebhookEventsApi.md#on_contact_updated) | **POST** /contact.updated | Contact updated |
 | [**on_conversation_control_changed**](WebhookEventsApi.md#on_conversation_control_changed) | **POST** /conversation.control_changed | Conversation control changed event |
 | [**on_conversation_started**](WebhookEventsApi.md#on_conversation_started) | **POST** /conversation.started | Conversation started event |
+| [**on_conversion_received**](WebhookEventsApi.md#on_conversion_received) | **POST** /conversion.received | Conversion received event |
 | [**on_creator_campaign_budget_exhausted**](WebhookEventsApi.md#on_creator_campaign_budget_exhausted) | **POST** /creator_campaign.budget_exhausted | Creator campaign budget exhausted event |
 | [**on_creator_campaign_closed**](WebhookEventsApi.md#on_creator_campaign_closed) | **POST** /creator_campaign.closed | Creator campaign closed event |
+| [**on_email_bounced**](WebhookEventsApi.md#on_email_bounced) | **POST** /email.bounced | Email bounced |
+| [**on_email_deleted**](WebhookEventsApi.md#on_email_deleted) | **POST** /email.deleted | Email deleted |
+| [**on_email_link_clicked**](WebhookEventsApi.md#on_email_link_clicked) | **POST** /email.link_clicked | Email link clicked |
+| [**on_email_opened**](WebhookEventsApi.md#on_email_opened) | **POST** /email.opened | Email opened |
+| [**on_email_send_failed**](WebhookEventsApi.md#on_email_send_failed) | **POST** /email.send_failed | Scheduled email failed |
+| [**on_email_sent**](WebhookEventsApi.md#on_email_sent) | **POST** /email.sent | Email sent |
+| [**on_email_thread_replied**](WebhookEventsApi.md#on_email_thread_replied) | **POST** /email.thread_replied | Email thread replied |
+| [**on_email_updated**](WebhookEventsApi.md#on_email_updated) | **POST** /email.updated | Email updated |
 | [**on_file_created**](WebhookEventsApi.md#on_file_created) | **POST** /file.created | File created |
 | [**on_file_deleted**](WebhookEventsApi.md#on_file_deleted) | **POST** /file.deleted | File deleted |
 | [**on_file_picked**](WebhookEventsApi.md#on_file_picked) | **POST** /file.picked | Files picked |
 | [**on_file_updated**](WebhookEventsApi.md#on_file_updated) | **POST** /file.updated | File updated |
 | [**on_lead_received**](WebhookEventsApi.md#on_lead_received) | **POST** /lead.received | Lead received event |
+| [**on_mention_received**](WebhookEventsApi.md#on_mention_received) | **POST** /mention.received | Mention received event |
 | [**on_message_deleted**](WebhookEventsApi.md#on_message_deleted) | **POST** /message.deleted | Message deleted event |
 | [**on_message_delivered**](WebhookEventsApi.md#on_message_delivered) | **POST** /message.delivered | Message delivered event |
 | [**on_message_edited**](WebhookEventsApi.md#on_message_edited) | **POST** /message.edited | Message edited event |
@@ -71,6 +116,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_message_read**](WebhookEventsApi.md#on_message_read) | **POST** /message.read | Message read event |
 | [**on_message_received**](WebhookEventsApi.md#on_message_received) | **POST** /message.received | Message received event |
 | [**on_message_sent**](WebhookEventsApi.md#on_message_sent) | **POST** /message.sent | Message sent event |
+| [**on_notification_sent**](WebhookEventsApi.md#on_notification_sent) | **POST** /notification.sent | Notification sent event |
 | [**on_phone_number_stock_available**](WebhookEventsApi.md#on_phone_number_stock_available) | **POST** /phone_number.stock_available | Phone-number stock available event |
 | [**on_post_authenticity_changed**](WebhookEventsApi.md#on_post_authenticity_changed) | **POST** /post.authenticity_changed | Post authenticity changed event |
 | [**on_post_cancelled**](WebhookEventsApi.md#on_post_cancelled) | **POST** /post.cancelled | Post cancelled event |
@@ -100,6 +146,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_sms_registration_status_updated**](WebhookEventsApi.md#on_sms_registration_status_updated) | **POST** /sms.registration.status_updated | SMS registration status updated event |
 | [**on_support_run_completed**](WebhookEventsApi.md#on_support_run_completed) | **POST** /support.run.completed | Support Assistant finished event |
 | [**on_support_run_failed**](WebhookEventsApi.md#on_support_run_failed) | **POST** /support.run.failed | Support Assistant failed event |
+| [**on_tracking_site_ready**](WebhookEventsApi.md#on_tracking_site_ready) | **POST** /tracking_site.ready | Tracking site ready event |
 | [**on_verification_approved**](WebhookEventsApi.md#on_verification_approved) | **POST** /verification.approved | Verification approved event |
 | [**on_verification_failed**](WebhookEventsApi.md#on_verification_failed) | **POST** /verification.failed | Verification failed event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
@@ -130,7 +177,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Ads initial sync completed event
 
-Fired once per ads-enabled account when the initial sync (ad-account discovery + 90-day historical ad backfill) completes. The `sync` block reports whether the backfill succeeded and how many ads were synced. 
+The initial sync, ad-account discovery plus a 90-day ad backfill, completed for an ads-enabled account.  ### When it fires  Fires once per ads-enabled account. `sync` reports whether the backfill succeeded fully or partially, and how many ads were synced versus failed.  ### Scoped connects  When scoping was applied at connect time, `account.platformAdAccountId` echoes the chosen ad account when the scope is exactly one. `account.platformAdAccountIds` lists every `act_*` synced.  ### On failure  When `sync.status` is `\"failure\"`, the payload adds `sync.error` (raw platform error, about 2 KB), `sync.errorCode` and `sync.errorSubcode` when parseable, and `sync.errorCategory`.  ### Error categories  `sync.errorCategory` is `token_invalid`, `permission_denied`, `no_ad_accounts`, `rate_limited`, `discovery_failed` or `unknown`. New values may be added; existing ones are stable.  ### Retrying  Reconnecting re-queues the backfill and the event fires again. It fixes `token_invalid`, `permission_denied` and `rate_limited`; `no_ad_accounts` needs an ad account on the grant first.  ### When a retry is skipped  Zernio skips the re-queue only when a backfill already completed with at least one ad, or one started less than 20 minutes ago. 
 
 ### Examples
 
@@ -198,7 +245,7 @@ nil (empty response body)
 
 Ads sync failed event
 
-Fired once per ad account when its ads stop syncing (no successful sync for 24 hours, or every live ad at the retry cap). Checked hourly. Metrics for the ad account are stale until `account.ads.sync_recovered` fires for it. 
+An ad account's ads stopped syncing: no success for 24 hours, or every live ad at the retry cap.  ### When it fires  An hourly check covers every ad account with live ads on a connected account, on any ads platform. Fires once per ad account until `account.ads.sync_recovered`.  ### Stale metrics  Metrics for the ad account are stale in between. Use this signal to flag the numbers in your UI rather than to poll.  ### Payload notes  `adAccount.platformAdAccountId` names the ad account (`act_*` on Meta). `account.accountId` names its connection, so one connection with several ad accounts reports each separately.  ### Sync fields  `sync.lastSuccessfulSyncAt` is the last good sync and `sync.failureCount` the consecutive failed attempts.  ### Error categories  Branch on `sync.errorCategory`: `ad_account_not_listed` (access removed or platform change; check permissions, reconnect), `sync_error` (see `sync.error`) or `stale` (no error recorded; retries usually clear it). New values may be added.  ### When it does not fire  A disconnected connection gets `account.disconnected` instead, and no recovery event follows. An ad account that never synced successfully, or whose last good sync is over 3 days old, is not announced. 
 
 ### Examples
 
@@ -266,7 +313,7 @@ nil (empty response body)
 
 Ads sync recovered event
 
-Fired once when an ad account previously reported by `account.ads.sync_failed` syncs successfully again. Checked hourly. 
+An ad account previously reported by `account.ads.sync_failed` synced successfully again.  ### When it fires  Fires once when a sync succeeds again, found by an hourly check.  ### Payload notes  `sync.failingSince` is the last successful sync before the failure started. 
 
 ### Examples
 
@@ -334,7 +381,7 @@ nil (empty response body)
 
 Account connected event
 
-Fired when a account is successfully connected.
+An account was connected to a profile, through OAuth or credentials.  ### Repeat events  Reconnecting an account you already hold fires it again with the same `accountId`, since the connect flow upserts per profile and platform. Key your upsert on `accountId`. 
 
 ### Examples
 
@@ -402,7 +449,7 @@ nil (empty response body)
 
 Account disconnected event
 
-Fired when a connected account becomes disconnected.
+A connected account stopped working or was removed.  ### Intentional  Removed on purpose, such as `DELETE /v1/accounts/{id}` or a switch to the Free plan. Kept 1 hour (`gracePeriodEndsAt`), then deleted with no further event. Reconnecting within the hour restores the same `accountId`.  ### Unintentional  The connection broke (token expired or revoked, access lost). The account stays inactive until reconnected, keeping its `accountId`. Removing it instead sends a second event with `intentional`.  ### Immediate paths  An API removal emits at once with `disconnectionType: \"intentional\"`. A phone-side WhatsApp disconnect emits within seconds of Meta's notification, with `unintentional`.  ### WhatsApp reason  `reason` carries Meta's explanation. Deliberate: `BUSINESS_DOWNGRADE`, `CHANGE_NUMBER`, `USER_RE_REGISTERED`. Idle number dropped by Meta: `PRIMARY_INACTIVITY` after about 14 days, `COMPANION_INACTIVITY` after about 30.  ### Expired or revoked grants  A publish or analytics sync getting a definitive auth error deactivates the account. Publish tries a token refresh first, so the event means the refresh failed too. `reason` carries the platform's message.  ### Reconnection flags  A dead token on an ads or blog call flags the account, and the posting account sharing its token (`needsReconnection: true`). Each flagged account emits once; a later deactivation emits again, then not until reconnected.  ### Lead forms while disconnected  While a Facebook Page is flagged or deactivated, `GET /v1/ads/lead-forms/{formId}/leads` answers `409` with `code: \"account_disconnected\"`.  ### Reconciliation  Anything else (a number deleted in WhatsApp Manager, a channel Meta silently stops serving) is caught by periodic reconciliation, not a notification. It lags minutes to about a day.  ### Do not rely on its absence  Meta's notifications are best-effort. For WhatsApp, poll `GET /v1/whatsapp/number-info` or account health, which runs a live Meta link probe.  ### Subscribing  A webhook only receives the events it lists, so add `account.disconnected` explicitly. 
 
 ### Examples
 
@@ -470,7 +517,7 @@ nil (empty response body)
 
 Account permissions changed event
 
-Fired when a publish on an account connected through your own OAuth app fails for a missing permission. The account stays connected; only the missing area stops working until the permission is granted and the account reconnected.
+A publish on an account connected through your own OAuth app failed for a missing permission.  ### Behaviour  The account stays connected and its token still works. `account.missingScopeAreas` accumulates the affected areas, today `posting`. Each area sends one event, however many posts fail afterwards.  ### When it does not fire  Accounts not connected through your own OAuth app. 
 
 ### Examples
 
@@ -532,13 +579,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_account_privacy_request
+
+> on_account_privacy_request(webhook_payload_account_privacy_request)
+
+Store privacy request
+
+A Shopify merchant asked to export or erase customer data, or the shop's data after uninstalling the app. Shopify sends these to the installed app, which is Zernio's, so we pass them on to you.  ### What to do  `privacyRequest.type` says which request it is. Export or erase your own copy of the data. Zernio handles its own copy.  ### Who receives it  A customer request goes to every account connected to the shop when it arrives. `shop_redact` arrives 48 hours after the uninstall, when the account is already disconnected, and goes to the accounts that were connected to the shop. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_account_privacy_request =  # WebhookPayloadAccountPrivacyRequest | 
+
+begin
+  # Store privacy request
+  api_instance.on_account_privacy_request(webhook_payload_account_privacy_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_privacy_request: #{e}"
+end
+```
+
+#### Using the on_account_privacy_request_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_account_privacy_request_with_http_info(webhook_payload_account_privacy_request)
+
+```ruby
+begin
+  # Store privacy request
+  data, status_code, headers = api_instance.on_account_privacy_request_with_http_info(webhook_payload_account_privacy_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_privacy_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_account_privacy_request** | [**WebhookPayloadAccountPrivacyRequest**](WebhookPayloadAccountPrivacyRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_account_rate_limited
 
 > on_account_rate_limited(webhook_payload_account_rate_limited)
 
 Mailbox sending cooldown started
 
-Fired when a Google or Microsoft mailbox enters a sending cooldown (same body to more than 50 recipients in an hour, or a later trigger). Sends answer 429 until `account.resetsAt`.
+A Google or Microsoft mailbox was paused after sending one body to over 50 recipients in an hour.  ### Payload notes  `account.reason` says why and `account.resetsAt` says when sending resumes. Sends answer 429 until then. A later trigger can also start a cooldown. 
 
 ### Examples
 
@@ -600,13 +715,149 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_account_recovered
+
+> on_account_recovered(webhook_payload_account_recovered)
+
+Account publishing again
+
+A publish succeeded on an account that `account.restricted` reported, so the restriction is lifted and publish-now posts to it are accepted again. A reconnect also lifts it; that sends `account.connected` instead. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_account_recovered =  # WebhookPayloadAccountRecovered | 
+
+begin
+  # Account publishing again
+  api_instance.on_account_recovered(webhook_payload_account_recovered)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_recovered: #{e}"
+end
+```
+
+#### Using the on_account_recovered_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_account_recovered_with_http_info(webhook_payload_account_recovered)
+
+```ruby
+begin
+  # Account publishing again
+  data, status_code, headers = api_instance.on_account_recovered_with_http_info(webhook_payload_account_recovered)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_recovered_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_account_recovered** | [**WebhookPayloadAccountRecovered**](WebhookPayloadAccountRecovered.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_account_restricted
+
+> on_account_restricted(webhook_payload_account_restricted)
+
+Account restricted from publishing
+
+A social account failed its last three publishes with the same account-level error: the platform suspended or banned it, restricted or locked it, asks for an identity or security check, or stopped accepting its login.  ### When it fires  Once per restriction, on the third identical failure in a row. Further failures do not fire it again.  ### What changes  `POST /v1/posts` with `publishNow` (or a time already past) to this account answers 422 `account_restricted`, because it would fail the same way. Scheduled posts are still accepted.  Fix the account on the platform, then reconnect it to lift the check at once; otherwise the next successful publish lifts it (`account.recovered`). 24 hours after the last failure one publish-now is let through again. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_account_restricted =  # WebhookPayloadAccountRestricted | 
+
+begin
+  # Account restricted from publishing
+  api_instance.on_account_restricted(webhook_payload_account_restricted)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_restricted: #{e}"
+end
+```
+
+#### Using the on_account_restricted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_account_restricted_with_http_info(webhook_payload_account_restricted)
+
+```ruby
+begin
+  # Account restricted from publishing
+  data, status_code, headers = api_instance.on_account_restricted_with_http_info(webhook_payload_account_restricted)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_account_restricted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_account_restricted** | [**WebhookPayloadAccountRestricted**](WebhookPayloadAccountRestricted.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_ad_account_status_changed
 
 > on_ad_account_status_changed(webhook_payload_ad_account_status_changed)
 
 Ad account status changed event
 
-Fired when an ad account Zernio already tracked changes status (Meta, Google, TikTok, X). See `WebhookPayloadAdAccountStatusChanged` for when it fires and when it does not. 
+An ad account Zernio already tracked became `active`, `restricted`, `disabled` or `closed`.  ### When it fires  Fires when ad account discovery sees a tracked ad account change status, at most once per account per 24 hours. Covers Meta, Google, TikTok and X.  ### Status values  `restricted` needs something settled first (unpaid Meta balance, risk review, TikTok limit or pending verification, X review). `disabled` means the platform disabled or rejected it; `closed` means closed or pending closure.  ### Payload notes  `status.current` and `status.previous` use one vocabulary on every network. `status.raw` is the platform's own value, for example Meta's `account_status` code `2`.  ### When it does not fire  An account seen for the first time, an account Zernio has not seen in the last 48 hours, or a platform status Zernio does not recognize. 
 
 ### Examples
 
@@ -668,13 +919,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_ad_created
+
+> on_ad_created(webhook_payload_ad_created)
+
+Ad created event
+
+An ad was created through Zernio (`source: \"zernio\"`) or detected by the sync (`source: \"platform\"`).  ### When it fires  Fires once the ad's campaign and ad set are recorded. A detected ad arrives up to one sync interval late; Meta ads entering review usually arrive within minutes.  ### When it does not fire  History loaded when an account connects, and ads created more than 7 days ago, are never announced. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_ad_created =  # WebhookPayloadAdCreated | 
+
+begin
+  # Ad created event
+  api_instance.on_ad_created(webhook_payload_ad_created)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_created: #{e}"
+end
+```
+
+#### Using the on_ad_created_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_ad_created_with_http_info(webhook_payload_ad_created)
+
+```ruby
+begin
+  # Ad created event
+  data, status_code, headers = api_instance.on_ad_created_with_http_info(webhook_payload_ad_created)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_created_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_ad_created** | [**WebhookPayloadAdCreated**](WebhookPayloadAdCreated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_ad_delivery_issue
 
 > on_ad_delivery_issue(webhook_payload_ad_delivery_issue)
 
 Ad delivery issue event
 
-Fired when an ad Zernio already tracked stops delivering for a platform reason (Meta, TikTok, LinkedIn). See `WebhookPayloadAdDeliveryIssue` for when it fires and when it does not. 
+An ad Zernio already tracked moved into the platform's error state and stopped delivering.  ### What triggers it  Meta `WITH_ISSUES` (payment, policy or account problems), TikTok account punishment or missing balance, or any platform status Zernio does not recognize yet (check `issue.raw`).  ### When it fires  Fires at most once per ad per 24 hours. Ads seen for the first time by a sync never fire it.  ### Payload notes  `issue.raw` is the platform's status string. On Meta, `issue.reasons` carries Meta's messages for the campaign; other networks send none, so it is empty.  ### Platform notes  On Meta the same problem can also arrive as `ad.status_changed` with `WITH_ISSUES`, straight from Meta's webhook and usually sooner. Pick one of the two to act on. 
 
 ### Examples
 
@@ -742,7 +1061,7 @@ nil (empty response body)
 
 Ad review approved event
 
-Fired when an ad Zernio already tracked passes platform review, or a rejection is overturned on appeal. Every ad network. See `WebhookPayloadAdReview` for when it fires and when it does not. 
+An ad Zernio already tracked passed platform review, or a rejected ad was approved on appeal.  ### When it fires  Fires within one sync cycle of the platform's decision, not instantly; on Meta the review poll usually reports sooner. Each outcome is delivered at most once per ad per 24 hours.  ### When it does not fire  Ads seen for the first time by a sync never fire it, including history loaded at connect. On Google, TikTok and Reddit an ad that leaves review while paused sends no `approved`. On Meta it does when the ad was paused before review ended.  ### Platform notes  Covers every ad network Zernio syncs, with one payload shape. On X, Pinterest and LinkedIn the review is read apart from delivery status, so an ad leaving review while paused still sends `approved`.  ### Payload notes  `review.raw` is the platform's own status string. `adObject.adId` is the Zernio ad id, ready for `GET /v1/ads/{adId}`. Deduplicate on the event `id`. 
 
 ### Examples
 
@@ -810,7 +1129,7 @@ nil (empty response body)
 
 Ad review rejected event
 
-Fired when the platform rejects an ad Zernio already tracked. Every ad network. See `WebhookPayloadAdReview` for when it fires and when it does not. 
+The platform rejected an ad Zernio already tracked; `review.reasons` carries its reason when it gives one.  ### When it fires  Fires within one sync cycle of the platform's decision, not instantly; on Meta the review poll usually reports sooner. Each outcome is delivered at most once per ad per 24 hours.  ### When it does not fire  Ads seen for the first time by a sync never fire it, including history loaded at connect.  ### Platform notes  Covers every ad network Zernio syncs. Pinterest, LinkedIn and Reddit send their own reasons, X sends none, and most other networks return a generic message.  ### Payload notes  `review.raw` is the platform's own status string. Show `review.reasons` rather than branching on it. `adObject.adId` is the Zernio ad id. Deduplicate on the event `id`. 
 
 ### Examples
 
@@ -878,7 +1197,7 @@ nil (empty response body)
 
 Ad rule triggered event
 
-Fired when a scheduled ad rule run finds campaigns or ad sets meeting every condition, once per object per cooldown. See `WebhookPayloadAdRuleTriggered` for when it fires and when it does not. 
+A scheduled run of an ad rule with a `notify` action found campaigns, ad sets, ads, Google keywords or Google search terms meeting every condition.  ### When it fires  Each object is announced at most once per rule cooldown. A run where every object is still in cooldown sends nothing.  ### Failed actions  An object whose action `failed` gets no cooldown, so the next run retries it and reports it again.  ### Payload notes  `objects` lists only the objects the run acted on. `objects[].conditions` repeats every condition of the rule with `actual`, the value the object reached.  ### Actions  `objects[].actions` says what the rule did: `done`, `skipped` (with a `reason` such as `already_paused` or `at_limit`) or `failed`. On `adjust_budget` it carries `previousDailyBudget` and `newDailyBudget`; empty on a notify-only rule.  ### Run context  `run.today` and `run.timezone` give the ad account's calendar date the windows used. `run.timezoneAssumed` is `true` when UTC was assumed. `run.currency` is the currency of money metrics, or `null` when unknown. 
 
 ### Examples
 
@@ -940,13 +1259,149 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_ad_set_created
+
+> on_ad_set_created(webhook_payload_ad_set_created)
+
+Ad set created event
+
+An ad set was created through Zernio (`source: \"zernio\"`) or detected by the sync (`source: \"platform\"`).  ### When it fires  Fires once the ad set row is recorded, so `GET /v1/ads/ad-sets/{adSetId}` finds it. A detected ad set arrives up to one sync interval late.  ### Payload notes  `adObject.campaign` is the campaign the ad set belongs to, or null when the platform has none.  ### When it does not fire  History loaded when an account connects, and ad sets created more than 7 days ago, are never announced. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_ad_set_created =  # WebhookPayloadAdSetCreated | 
+
+begin
+  # Ad set created event
+  api_instance.on_ad_set_created(webhook_payload_ad_set_created)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_set_created: #{e}"
+end
+```
+
+#### Using the on_ad_set_created_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_ad_set_created_with_http_info(webhook_payload_ad_set_created)
+
+```ruby
+begin
+  # Ad set created event
+  data, status_code, headers = api_instance.on_ad_set_created_with_http_info(webhook_payload_ad_set_created)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_set_created_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_ad_set_created** | [**WebhookPayloadAdSetCreated**](WebhookPayloadAdSetCreated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_ad_set_updated
+
+> on_ad_set_updated(webhook_payload_ad_set_updated)
+
+Ad set updated event
+
+An ad set was edited through Zernio (`source: \"zernio\"`), or outside Zernio and detected by the sync (`source: \"platform\"`).  ### When it fires  Fires after the platform and Zernio both accepted the edit. Outside edits arrive up to one sync interval late, and only to the user whose sync saw them.  ### Deduplication  Events are not deduplicated, so every edit is announced. Use the event `id` to drop repeats.  ### Payload notes  `changes` lists the edited fields: `name`, `status` (the ad set's own on/off switch), `budget`, `bid`, `schedule`, `targeting` or `settings`. Ignore unknown values. It never carries old or new values, so read the ad set.  ### What the sync detects  From the sync, `changes` covers only `name` and `status`. Status is not detected on Reddit.  ### When it does not fire  History loaded when an account connects is never announced. Budget and targeting edits made through `PUT /v1/ads/{adId}` arrive as `ad.updated`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_ad_set_updated =  # WebhookPayloadAdSetUpdated | 
+
+begin
+  # Ad set updated event
+  api_instance.on_ad_set_updated(webhook_payload_ad_set_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_set_updated: #{e}"
+end
+```
+
+#### Using the on_ad_set_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_ad_set_updated_with_http_info(webhook_payload_ad_set_updated)
+
+```ruby
+begin
+  # Ad set updated event
+  data, status_code, headers = api_instance.on_ad_set_updated_with_http_info(webhook_payload_ad_set_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_set_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_ad_set_updated** | [**WebhookPayloadAdSetUpdated**](WebhookPayloadAdSetUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_ad_status_changed
 
 > on_ad_status_changed(webhook_payload_ad_status_changed)
 
 Ad status changed event
 
-Fired when a campaign, ad set, or ad on a connected ad platform changes status. Currently emitted only for Meta (`metaads`).  It subscribes to two Meta `ad_account` webhook fields:  - `in_process_ad_objects`: the ad object finished processing and exited the `IN_PROCESS` state. `status.raw` carries Meta's `status_name` (e.g. `ACTIVE`, `PAUSED`, `ARCHIVED`, `DELETED`). - `with_issues_ad_objects`: the ad object entered the `WITH_ISSUES` state. `status.raw` is `WITH_ISSUES` and the `error` block is populated from Meta's `error_code` / `error_summary` / `error_message`.  `adObject.level` mirrors Meta's `level` and is one of `CAMPAIGN`, `AD_SET`, or `AD`. Creative-level events are not forwarded.  Branch on `status.raw` to handle each transition. Use `error.code` (when present) as the stable discriminator, since `error.summary` and `error.message` are localized to the ad-account owner's Meta locale.  The `error` block is optional:  - It is present on most `WITH_ISSUES` events but can be absent (Meta does not always include diagnostics). - It is never present on any other status. - Always null-check `error` before reading `error.code`.  **Fan-out:** matching is keyed on `adObject.platformAdAccountId`. When multiple connected Zernio `metaads` accounts are linked to the same Meta ad account, each receives its own delivery. 
+A campaign, ad set or ad on a connected Meta ad account (`metaads`) changed status.  ### Sources  Two Meta `ad_account` fields feed it: `in_process_ad_objects` (finished processing, `status.raw` is Meta's `status_name`) and `with_issues_ad_objects` (`status.raw` is `WITH_ISSUES`, `error` filled from Meta).  ### Payload notes  `adObject.level` is `CAMPAIGN`, `AD_SET` or `AD`; creative-level events are not forwarded. Branch on `status.raw`. Use `error.code` as the stable discriminator, since `error.summary` and `error.message` are localized to the owner's Meta locale.  ### The error block  `error` is present on most `WITH_ISSUES` events but can be absent, and never appears on any other status. Null-check it before reading `error.code`.  ### Fan-out  Matching is keyed on `adObject.platformAdAccountId`. When several connected `metaads` accounts point at the same Meta ad account, each receives its own delivery. 
 
 ### Examples
 
@@ -1008,13 +1463,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_ad_updated
+
+> on_ad_updated(webhook_payload_ad_updated)
+
+Ad updated event
+
+An ad was edited through Zernio (`source: \"zernio\"`), or outside Zernio and detected by the sync (`source: \"platform\"`).  ### When it fires  Fires once, to the owner of the edited ad. Outside edits arrive up to one sync interval late. Every edit is announced, so use the event `id` to drop repeats.  ### Payload notes  `changes` lists the edited fields: `name`, `status` (the ad's own on/off switch), `budget`, `targeting` or `creative`. Ignore unknown values; new ones can be added.  ### Reading the change  The event never carries old or new values, so read the ad. `platformId` can change when a LinkedIn creative is replaced, while `adId` stays stable.  ### When it does not fire  From the sync, `changes` covers only `name` and `status`. Budget, bid, schedule and targeting edits made outside Zernio, tracking tag edits and history loaded at connect are not announced. Ad rule changes arrive as `ad_rule.triggered`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_ad_updated =  # WebhookPayloadAdUpdated | 
+
+begin
+  # Ad updated event
+  api_instance.on_ad_updated(webhook_payload_ad_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_updated: #{e}"
+end
+```
+
+#### Using the on_ad_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_ad_updated_with_http_info(webhook_payload_ad_updated)
+
+```ruby
+begin
+  # Ad updated event
+  data, status_code, headers = api_instance.on_ad_updated_with_http_info(webhook_payload_ad_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_ad_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_ad_updated** | [**WebhookPayloadAdUpdated**](WebhookPayloadAdUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_ad_video_processed
 
 > on_ad_video_processed(webhook_payload_ad_video_processed)
 
 Ad video processed event
 
-Fired once per `POST /v1/ads/videos` call made with `async: true`, when Meta finishes processing the uploaded video. `video.status` is `ready` (reference it as `video.id` on the create endpoints) or `error` (Meta could not process it; `video.error` carries the reason).  Zernio watches the video for up to about 13 minutes after the upload request. A video still processing after that sends no event, so keep `GET /v1/ads/videos/{videoId}` as the source of truth for long videos. 
+Meta finished processing a video uploaded with `async: true` on `POST /v1/ads/videos`.  ### Payload notes  `video.status` is `ready` (reference it as `video.id` on the create endpoints) or `error`, with `video.error` carrying the reason.  ### When it fires  Fires once per upload, when the video leaves `processing`. Zernio polls every 10 seconds for about 13 minutes; after that no event is sent, so read `GET /v1/ads/videos/{videoId}` for long videos. 
 
 ### Examples
 
@@ -1082,7 +1605,7 @@ nil (empty response body)
 
 Analytics synced event
 
-Fired once per connected account each time its analytics sync cycle completes successfully. Poll-driven (roughly hourly per account), not real-time, and never fired for a skipped or failed cycle.  A trigger, not a transport: the payload carries no metrics and no cursor. On receipt, call `GET /v1/analytics/delta` with your own last `nextCursor` to read every post whose analytics changed, across every account, in one paginated stream instead of polling analytics once per account.  The feed holds back its most recent few seconds of writes, so a read issued the instant this event lands often returns an empty page for that account. Poll again with the same cursor rather than reading an empty page as \"nothing changed\".  High volume (roughly one delivery per connected account per hour). Subscribe to it on a dedicated webhook endpoint: a subscription's consecutive-failure count is shared across all of its events, so an outage while this event is flowing can suppress the low-volume publishing events on the same subscription. 
+One connected account's analytics sync cycle completed successfully.  ### Payload notes  It is a trigger: no metrics and no cursor. On receipt, call `GET /v1/analytics/delta` with your own last `nextCursor` to read what changed across every account.  ### When it fires  Per account, per successful sync cycle, roughly hourly. It does not fire for a failed or skipped cycle, an inactive or disconnected account, or a platform without analytics sync.  ### Empty page  The feed is a materialized view, so an immediate read can return an empty `data` array. Re-poll with the same cursor. Advancing on an empty page can lose changes permanently.  ### Use a dedicated endpoint  Volume is about one event per account per hour. The consecutive-failure count is shared by every event on an endpoint, so an outage here can disable it and silence events like `post.published`. 
 
 ### Examples
 
@@ -1150,7 +1673,7 @@ nil (empty response body)
 
 API changelog entry published event
 
-Fired when an entry is published to the API changelog (https://docs.zernio.com/changelog), which happens when a change to this OpenAPI spec goes live.  The event belongs to no profile or account. Every active subscription that opted in receives it; scoped subscriptions (`profileIds` / `accountIds`) do not.  - `entry.changes` is the deterministic diff of the spec (operations and schemas added, removed and modified). - `entry.impact` says whether an existing integration must act (`action_required`), only gained something (`additive`) or nothing changed beyond descriptions (`none`). - `entry.message` is the written announcement.  Act on `impact` and `changes`; read `message` for the why. Entries are listed by `GET /v1/changelog`. 
+An entry was published to the API changelog when a change to the OpenAPI spec went live.  ### Who receives it  It belongs to no profile or account. Every active endpoint subscribed to it receives it; endpoints scoped with `profileIds` or `accountIds` do not. One subscription per integration is enough.  ### Payload notes  `entry.type`, `entry.message` (the announcement), `entry.url`, `entry.specVersion`, `entry.impact` (`action_required`, `additive` or `none`) and `entry.changes` (the spec diff as data).  ### How to act  Automate on `impact`, `changes` and `type`; read `message` for the reason. `GET /v1/changelog` lists entries newest first, to back-fill after downtime. 
 
 ### Examples
 
@@ -1212,13 +1735,829 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_automation_action_applied
+
+> on_automation_action_applied(webhook_payload_automation_action)
+
+Automation action applied event
+
+An automation changed something, such as an ad set paused or a budget raised.  ### Payload notes  `previous` and `target` carry the value before and the value set. Each action sends one event; dedupe on `id`, which stays the same if the event is sent again. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_automation_action =  # WebhookPayloadAutomationAction | 
+
+begin
+  # Automation action applied event
+  api_instance.on_automation_action_applied(webhook_payload_automation_action)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_action_applied: #{e}"
+end
+```
+
+#### Using the on_automation_action_applied_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_automation_action_applied_with_http_info(webhook_payload_automation_action)
+
+```ruby
+begin
+  # Automation action applied event
+  data, status_code, headers = api_instance.on_automation_action_applied_with_http_info(webhook_payload_automation_action)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_action_applied_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_automation_action** | [**WebhookPayloadAutomationAction**](WebhookPayloadAutomationAction.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_automation_action_failed
+
+> on_automation_action_failed(webhook_payload_automation_action)
+
+Automation action failed event
+
+An automation change failed or was refused; `reason` says why.  ### Skipped changes  A change refused before any platform call has `status: skipped`, for example no live ads or a budget at its limit. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_automation_action =  # WebhookPayloadAutomationAction | 
+
+begin
+  # Automation action failed event
+  api_instance.on_automation_action_failed(webhook_payload_automation_action)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_action_failed: #{e}"
+end
+```
+
+#### Using the on_automation_action_failed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_automation_action_failed_with_http_info(webhook_payload_automation_action)
+
+```ruby
+begin
+  # Automation action failed event
+  data, status_code, headers = api_instance.on_automation_action_failed_with_http_info(webhook_payload_automation_action)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_action_failed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_automation_action** | [**WebhookPayloadAutomationAction**](WebhookPayloadAutomationAction.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_automation_action_unknown
+
+> on_automation_action_unknown(webhook_payload_automation_action)
+
+Automation action unknown event
+
+The platform did not answer, so it is unknown whether the automation's change happened.  ### What happens next  The next check reads the object back and sends `applied` or `failed`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_automation_action =  # WebhookPayloadAutomationAction | 
+
+begin
+  # Automation action unknown event
+  api_instance.on_automation_action_unknown(webhook_payload_automation_action)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_action_unknown: #{e}"
+end
+```
+
+#### Using the on_automation_action_unknown_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_automation_action_unknown_with_http_info(webhook_payload_automation_action)
+
+```ruby
+begin
+  # Automation action unknown event
+  data, status_code, headers = api_instance.on_automation_action_unknown_with_http_info(webhook_payload_automation_action)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_action_unknown_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_automation_action** | [**WebhookPayloadAutomationAction**](WebhookPayloadAutomationAction.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_automation_alert_escalated
+
+> on_automation_alert_escalated(webhook_payload_automation_alert)
+
+Automation alert escalated event
+
+An open alert's `critical` conditions held.  ### When it fires  Sent once per episode. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_automation_alert =  # WebhookPayloadAutomationAlert | 
+
+begin
+  # Automation alert escalated event
+  api_instance.on_automation_alert_escalated(webhook_payload_automation_alert)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_alert_escalated: #{e}"
+end
+```
+
+#### Using the on_automation_alert_escalated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_automation_alert_escalated_with_http_info(webhook_payload_automation_alert)
+
+```ruby
+begin
+  # Automation alert escalated event
+  data, status_code, headers = api_instance.on_automation_alert_escalated_with_http_info(webhook_payload_automation_alert)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_alert_escalated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_automation_alert** | [**WebhookPayloadAutomationAlert**](WebhookPayloadAutomationAlert.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_automation_alert_opened
+
+> on_automation_alert_opened(webhook_payload_automation_alert)
+
+Automation alert opened event
+
+An object matched the rule's conditions for `confirmChecks` runs in a row and its action was recorded.  ### When it fires  Sent once per episode. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_automation_alert =  # WebhookPayloadAutomationAlert | 
+
+begin
+  # Automation alert opened event
+  api_instance.on_automation_alert_opened(webhook_payload_automation_alert)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_alert_opened: #{e}"
+end
+```
+
+#### Using the on_automation_alert_opened_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_automation_alert_opened_with_http_info(webhook_payload_automation_alert)
+
+```ruby
+begin
+  # Automation alert opened event
+  data, status_code, headers = api_instance.on_automation_alert_opened_with_http_info(webhook_payload_automation_alert)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_alert_opened_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_automation_alert** | [**WebhookPayloadAutomationAlert**](WebhookPayloadAutomationAlert.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_automation_alert_resolved
+
+> on_automation_alert_resolved(webhook_payload_automation_alert)
+
+Automation alert resolved event
+
+An open alert ended; `reason` says which way.  ### Reasons  Its conditions cleared, a pause or reactivation applied, the rule changed, or nothing checked the object for 7 days. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_automation_alert =  # WebhookPayloadAutomationAlert | 
+
+begin
+  # Automation alert resolved event
+  api_instance.on_automation_alert_resolved(webhook_payload_automation_alert)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_alert_resolved: #{e}"
+end
+```
+
+#### Using the on_automation_alert_resolved_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_automation_alert_resolved_with_http_info(webhook_payload_automation_alert)
+
+```ruby
+begin
+  # Automation alert resolved event
+  data, status_code, headers = api_instance.on_automation_alert_resolved_with_http_info(webhook_payload_automation_alert)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_alert_resolved_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_automation_alert** | [**WebhookPayloadAutomationAlert**](WebhookPayloadAutomationAlert.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_automation_check_completed
+
+> on_automation_check_completed(webhook_payload_automation_check_completed)
+
+Automation check completed event
+
+One scheduled check of an automation finished, including checks where nothing matched.  ### Payload notes  `automation.kind` names the product: `ad_rule` today, more as other automations move onto the same engine. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_automation_check_completed =  # WebhookPayloadAutomationCheckCompleted | 
+
+begin
+  # Automation check completed event
+  api_instance.on_automation_check_completed(webhook_payload_automation_check_completed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_check_completed: #{e}"
+end
+```
+
+#### Using the on_automation_check_completed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_automation_check_completed_with_http_info(webhook_payload_automation_check_completed)
+
+```ruby
+begin
+  # Automation check completed event
+  data, status_code, headers = api_instance.on_automation_check_completed_with_http_info(webhook_payload_automation_check_completed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_automation_check_completed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_automation_check_completed** | [**WebhookPayloadAutomationCheckCompleted**](WebhookPayloadAutomationCheckCompleted.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_balance_charged
+
+> on_balance_charged(webhook_payload_balance_charged)
+
+Balance charged event
+
+Balance billing only. Funds were added to the balance by card: by someone (`trigger: manual`) or by the auto top-up rule (`trigger: auto_top_up`).  ### When it fires  Once per card payment into the balance, when it is credited. Stripe emails the billing owner its receipt for the charge.  ### Payload notes  `topup.amountCents` was added to the balance; the card was charged `topup.chargedCents`, which is that plus `topup.taxCents` (VAT, 0 when none applies). The invoice and receipt are at `GET /v1/balance/top-ups/{topupId}/invoice` and `/receipt`.  ### Who receives it  The billing owner's endpoints, like `balance.low`. Restricted keys need the `money` resource group. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_balance_charged =  # WebhookPayloadBalanceCharged | 
+
+begin
+  # Balance charged event
+  api_instance.on_balance_charged(webhook_payload_balance_charged)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_balance_charged: #{e}"
+end
+```
+
+#### Using the on_balance_charged_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_balance_charged_with_http_info(webhook_payload_balance_charged)
+
+```ruby
+begin
+  # Balance charged event
+  data, status_code, headers = api_instance.on_balance_charged_with_http_info(webhook_payload_balance_charged)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_balance_charged_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_balance_charged** | [**WebhookPayloadBalanceCharged**](WebhookPayloadBalanceCharged.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_balance_empty
+
+> on_balance_empty(webhook_payload_balance_empty)
+
+Balance empty event
+
+Balance billing only. The balance reached $0 and no auto top-up covered it (auto top-up off, the card declined, or the monthly limit reached), so new pay-per-use (SMS, calls, numbers, X and the rest) answers 402 with `code` until the balance is funded.  ### When it fires  Once per time the balance runs out, within about a minute of the usage that emptied it. Funding the balance and running out again fires it again.  ### Who receives it  The billing owner's endpoints, like `balance.low`. Restricted keys need the `money` resource group.  ### How to act  Send the user to `fundingUrl`, or, for `usage_limit_reached`, raise `monthlyLimitCents` with `PATCH /v1/balance/auto-recharge`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_balance_empty =  # WebhookPayloadBalanceEmpty | 
+
+begin
+  # Balance empty event
+  api_instance.on_balance_empty(webhook_payload_balance_empty)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_balance_empty: #{e}"
+end
+```
+
+#### Using the on_balance_empty_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_balance_empty_with_http_info(webhook_payload_balance_empty)
+
+```ruby
+begin
+  # Balance empty event
+  data, status_code, headers = api_instance.on_balance_empty_with_http_info(webhook_payload_balance_empty)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_balance_empty_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_balance_empty** | [**WebhookPayloadBalanceEmpty**](WebhookPayloadBalanceEmpty.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_balance_low
+
+> on_balance_low(webhook_payload_balance_low)
+
+Balance low event
+
+Balance billing only. The balance dropped below the low-balance alert set on auto top-up (`alertBelowCents` on `GET /v1/balance/auto-recharge`).  ### When it fires  Once per drop below the threshold; a balance back at or above it re-arms the next one. It does not fire when an auto top-up is already covering the drop, and never when no alert is set.  ### Who receives it  It belongs to the billing owner, not to a profile or account: endpoints scoped with `profileIds` or `accountIds` do not receive it. Restricted keys need the `money` resource group.  ### How to act  Send the user to `fundingUrl` (Billing with the Add funds drawer open), or add funds through the API. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_balance_low =  # WebhookPayloadBalanceLow | 
+
+begin
+  # Balance low event
+  api_instance.on_balance_low(webhook_payload_balance_low)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_balance_low: #{e}"
+end
+```
+
+#### Using the on_balance_low_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_balance_low_with_http_info(webhook_payload_balance_low)
+
+```ruby
+begin
+  # Balance low event
+  data, status_code, headers = api_instance.on_balance_low_with_http_info(webhook_payload_balance_low)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_balance_low_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_balance_low** | [**WebhookPayloadBalanceLow**](WebhookPayloadBalanceLow.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_billing_publishing_blocked
+
+> on_billing_publishing_blocked(webhook_payload_billing_publishing_blocked)
+
+Publishing paused for a failed payment
+
+A failed payment paused the billing owner's account. Until it is paid, every API call answers 402 `PAYMENT_REQUIRED`.  ### Scheduled posts during the pause  Posts that come due are held, not failed: `platforms[].status` stays `pending` and `errorMessage` says the post waits for the payment. No platform is called.  - Paid within 24 hours of a post's scheduled time: the post publishes within minutes of `billing.publishing_unblocked`. - Not paid by then: the post fails with \"Publishing blocked: payment failed\" and `post.failed` (or `post.partial`) fires as usual. Retry it once paid. - A Terms of Service hold is not a billing pause: its posts fail at once, as before.  ### When it fires  Once per pause. `billing.reason` says why: the card was declined (`payment_failed`), there is no card (`no_payment_method`), or the billing address was refused (`invalid_billing_address`). Pay or replace the card at `billingUrl`.  ### Who receives it  The billing owner's endpoints. Restricted keys need the `money` resource group. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_billing_publishing_blocked =  # WebhookPayloadBillingPublishingBlocked | 
+
+begin
+  # Publishing paused for a failed payment
+  api_instance.on_billing_publishing_blocked(webhook_payload_billing_publishing_blocked)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_billing_publishing_blocked: #{e}"
+end
+```
+
+#### Using the on_billing_publishing_blocked_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_billing_publishing_blocked_with_http_info(webhook_payload_billing_publishing_blocked)
+
+```ruby
+begin
+  # Publishing paused for a failed payment
+  data, status_code, headers = api_instance.on_billing_publishing_blocked_with_http_info(webhook_payload_billing_publishing_blocked)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_billing_publishing_blocked_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_billing_publishing_blocked** | [**WebhookPayloadBillingPublishingBlocked**](WebhookPayloadBillingPublishingBlocked.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_billing_publishing_unblocked
+
+> on_billing_publishing_unblocked(webhook_payload_billing_publishing_unblocked)
+
+Publishing resumed after payment
+
+The account paused by `billing.publishing_blocked` was paid: the API accepts calls again and scheduled posts publish.  Posts held during the pause publish within minutes, unless their scheduled time is more than 24 hours past: those fail with \"Publishing blocked: payment failed\" instead of going out late. Posts that failed stay failed; retry them with `POST /v1/posts/{postId}/retry`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_billing_publishing_unblocked =  # WebhookPayloadBillingPublishingUnblocked | 
+
+begin
+  # Publishing resumed after payment
+  api_instance.on_billing_publishing_unblocked(webhook_payload_billing_publishing_unblocked)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_billing_publishing_unblocked: #{e}"
+end
+```
+
+#### Using the on_billing_publishing_unblocked_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_billing_publishing_unblocked_with_http_info(webhook_payload_billing_publishing_unblocked)
+
+```ruby
+begin
+  # Publishing resumed after payment
+  data, status_code, headers = api_instance.on_billing_publishing_unblocked_with_http_info(webhook_payload_billing_publishing_unblocked)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_billing_publishing_unblocked_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_billing_publishing_unblocked** | [**WebhookPayloadBillingPublishingUnblocked**](WebhookPayloadBillingPublishingUnblocked.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_branded_calling_identity_action_required
 
 > on_branded_calling_identity_action_required(on_branded_calling_identity_action_required_request)
 
 Caller identity action required event
 
-Fired when a caller identity waits on you. `reason` says what:  - `changes_requested`: answer the review with PATCH. - `email_code`: the authorizer got a 6-digit code from the carrier. Confirm it with the verify-email endpoint. - `rejected`: the carrier rejected it. Fix and PATCH. - `infringement_claim`: a third party disputes the name or logo. Reply to our email with evidence. - `expired`: resubmit. 
+A Branded Calling caller identity is waiting on you; `reason` says what.  ### When it fires  Every `action_required` is paired with a `status_updated`.  ### Reasons  - `changes_requested`: answer the review with `PATCH`. - `email_code`: confirm the code the carrier emailed the authorizer. - `rejected`: fix and `PATCH`. - `expired`: resubmit.  ### Infringement claim  `infringement_claim`: a third party filed a trademark or impersonation claim and the carrier suspended the identity. Calls show a plain number and the monthly fee pauses until it is resolved.  Reply to our email with evidence that the name and logo are yours. If the claim is upheld, the identity is rejected for good. 
 
 ### Examples
 
@@ -1286,7 +2625,7 @@ nil (empty response body)
 
 Caller identity status updated event
 
-Fired on every status change of a Branded Calling caller identity:  - `requested`: a new submission or resubmit, in our review. - `changes_requested`: we need answers, see `branded_calling.identity.action_required`. - `rejected`: by our review or by the carrier. `reason` says why. - `pending_email_verification`: filed with the carrier; the authorizer enters the emailed code. - `in_review`: carrier vetting. - `verified`: live for a year, attach numbers. - `suspended`: an infringement claim is open. - `expired`. - `permanently_rejected`. 
+A Branded Calling caller identity changed status.  ### When it fires  Fires once per transition of the identity's `status`, the value `GET /v1/branded-calling/identities/{id}` returns. Never on a re-check that found nothing new.  ### Statuses  `requested`, `changes_requested`, `rejected` (`reason` says why), `pending_email_verification`, `in_review`, `verified` (live for a year, attach numbers), `suspended` (infringement claim open), `expired`, `permanently_rejected`. 
 
 ### Examples
 
@@ -1354,7 +2693,7 @@ nil (empty response body)
 
 Branded number status updated event
 
-Fired when a number attached to a caller identity changes vetting status: `in_review`, `verified` (calls from it now show the identity), `unsuccessful` (refused; detach and re-add to retry), `suspended`, `expired` or `permanently_rejected` (can never be branded again). 
+A number attached to a Branded Calling identity changed vetting status.  ### When it fires  Only starts once the identity is `verified` and you attached numbers. A batch is vetted as a unit; each number reports its own status.  ### Statuses  `submitted`, `in_review`, `verified` (calls from it show the identity), `unsuccessful` (refused; detach and re-add to retry), `suspended`, `expired`, `permanently_rejected` (can never be branded again). 
 
 ### Examples
 
@@ -1422,7 +2761,7 @@ nil (empty response body)
 
 Calendar event created
 
-A new event appeared on a connected Microsoft calendar (push, seconds after the change).
+An event was added to a watched calendar of a connected mailbox, by the user, an invitation or the API. Google watches every calendar the user shows (up to 25), Outlook the default calendar; `calendarId` names it.  ### Platform notes  On Microsoft the change is pushed seconds after it happens. 
 
 ### Examples
 
@@ -1490,6 +2829,8 @@ nil (empty response body)
 
 Calendar event deleted
 
+An event was deleted from a watched calendar.  ### Platform notes  On Google, a cancelled event counts as deleted. 
+
 ### Examples
 
 ```ruby
@@ -1555,6 +2896,8 @@ nil (empty response body)
 > on_calendar_event_updated(webhook_payload_calendar_event)
 
 Calendar event updated
+
+An event on a watched calendar changed: its time, details or participants' answers. 
 
 ### Examples
 
@@ -1622,7 +2965,7 @@ nil (empty response body)
 
 Call ended event
 
-Fired on call hangup with the duration and a zero-markup billing breakdown (Meta cost, Telnyx cost, recording surcharge, total). Costs are pass-through; no margin is applied. 
+A phone or WhatsApp call ended; carries duration, end reason and a zero-markup cost breakdown.  ### Payload notes  `durationSeconds`; `endReason` is `hangup`, `no_answer`, `rejected` or `error`; `call.billing` holds Meta cost, Telnyx cost, recording surcharge and total. Costs are pass-through, with no margin.  ### When it fires  Unanswered, busy and rejected calls end here too. Branch on `endReason`; `call.failed` is for hard errors.  ### Recordings  With recording enabled, the payload carries `recordingUrl`, a signed URL expiring at `recordingExpiresAt`. Fetch a fresh one with `GET /v1/calls/{id}/recording` and `call.id`.  ### Missed-call follow-up  Check for `endReason: \"no_answer\"`, then text the caller over the linked `conversationId`. 
 
 ### Examples
 
@@ -1690,7 +3033,7 @@ nil (empty response body)
 
 Call failed event
 
-Fired when a call setup or in-progress call fails (Meta rejected the connect, Telnyx returned an error, etc.). Payload carries the upstream error code and message. 
+A call failed with a hard error before or during bridging, for example the destination rejected the SIP INVITE.  ### Payload notes  Carries the upstream error `code` and `message`, for example when Meta rejected the connect or Telnyx returned an error. 
 
 ### Examples
 
@@ -1758,7 +3101,7 @@ nil (empty response body)
 
 Call permission request reply event
 
-Fired when a consumer replies to a `call_permission_request` interactive message (or its marketing-template variant). Carries the response (`accept` / `reject`), whether the grant is permanent, and the expiration timestamp when it is temporary. 
+A WhatsApp user accepted or rejected your call-permission request.  ### When it fires  Independent of any call: it reports a reply to a permission prompt. Meta permits a business-initiated call only after the consumer taps Allow, and the accept can land days before the call.  ### Payload notes  `response` is `accept` or `reject`. Also carries the user's number, whether the grant is permanent, and the expiry when it is not. 
 
 ### Examples
 
@@ -1826,7 +3169,7 @@ nil (empty response body)
 
 Call received event
 
-Fired when a WhatsApp Business Call connects. For inbound (UIC) calls the event fires at the moment our Telnyx trunk bridges the consumer leg to the customer&apos;s forward-to destination; for outbound (BIC) calls it fires immediately after Meta accepts the connect. Branch on `call.direction` to distinguish. 
+An inbound phone or WhatsApp call reached your number, or an outbound WhatsApp call was placed.  ### When it fires  Fires at ring time, before anyone answers; an unanswered call still emits it, then `call.ended` with `endReason: \"no_answer\"`. Outbound WhatsApp calls fire at origination with `direction: \"outbound\"`. Outbound phone calls never emit it.  ### Payload notes  Carries the Zernio call id, the caller and business numbers, the destination snapshot (`forwardTo`), and `contactId` and `conversationId` to message the caller with the regular send endpoints. 
 
 ### Examples
 
@@ -1888,13 +3231,149 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_call_recording_ready
+
+> on_call_recording_ready(webhook_payload_call_recording_ready)
+
+Call recording ready event
+
+A call recording is ready to download.  ### When it fires  Only for teams with zero content retention, on calls with recording on, and only while a webhook listens to it. Zernio keeps no recording for these teams, and the copy behind the link expires after about 3 days. Download the file before `recording.expiresAt`.  ### Payload notes  `call.isVoicemail` tells a voicemail from a recorded call. If the recording could not be copied, no event fires and `call.ended` lists it in `callErrors`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_call_recording_ready =  # WebhookPayloadCallRecordingReady | 
+
+begin
+  # Call recording ready event
+  api_instance.on_call_recording_ready(webhook_payload_call_recording_ready)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_recording_ready: #{e}"
+end
+```
+
+#### Using the on_call_recording_ready_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_call_recording_ready_with_http_info(webhook_payload_call_recording_ready)
+
+```ruby
+begin
+  # Call recording ready event
+  data, status_code, headers = api_instance.on_call_recording_ready_with_http_info(webhook_payload_call_recording_ready)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_recording_ready_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_call_recording_ready** | [**WebhookPayloadCallRecordingReady**](WebhookPayloadCallRecordingReady.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_call_transcript_segment
+
+> on_call_transcript_segment(webhook_payload_call_transcript_segment)
+
+Call transcript segment event
+
+One final segment of a live call transcript.  ### When it fires  Only for teams with zero content retention, on calls with transcription on: once per final segment, while the call is live. Zernio stores no transcript for these teams, so it cannot be fetched later. Store each segment when it arrives.  ### Payload notes  `segment.text` is the final text, `segment.confidence` the recognition confidence and `segment.at` when it was transcribed. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_call_transcript_segment =  # WebhookPayloadCallTranscriptSegment | 
+
+begin
+  # Call transcript segment event
+  api_instance.on_call_transcript_segment(webhook_payload_call_transcript_segment)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_transcript_segment: #{e}"
+end
+```
+
+#### Using the on_call_transcript_segment_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_call_transcript_segment_with_http_info(webhook_payload_call_transcript_segment)
+
+```ruby
+begin
+  # Call transcript segment event
+  data, status_code, headers = api_instance.on_call_transcript_segment_with_http_info(webhook_payload_call_transcript_segment)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_transcript_segment_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_call_transcript_segment** | [**WebhookPayloadCallTranscriptSegment**](WebhookPayloadCallTranscriptSegment.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_campaign_budget_depleted
 
 > on_campaign_budget_depleted(webhook_payload_campaign_budget_depleted)
 
 Campaign budget depleted event
 
-Fired when a campaign Zernio already tracked runs out of budget (TikTok). See `WebhookPayloadCampaignBudgetDepleted` for when it fires and when it does not. 
+A campaign Zernio already tracked ran out of budget. TikTok only.  ### When it fires  Fires once per campaign when its budget runs out, at most once per 6 hours, so a daily budget that runs out again the next day is announced again.  ### When it does not fire  Ads seen for the first time by a sync never fire it.  ### Platform notes  Only TikTok reports this on the ad. Meta and Google keep such ads `ACTIVE`, so they never fire it. 
 
 ### Examples
 
@@ -1956,13 +3435,489 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_campaign_created
+
+> on_campaign_created(webhook_payload_campaign_created)
+
+Campaign created event
+
+A campaign was created through Zernio (`source: \"zernio\"`) or detected by the sync (`source: \"platform\"`).  ### When it fires  Fires once the campaign row is recorded. A detected campaign arrives up to one sync interval late.  ### When it does not fire  History loaded when an account connects, and campaigns created more than 7 days ago, are never announced. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_created =  # WebhookPayloadCampaignCreated | 
+
+begin
+  # Campaign created event
+  api_instance.on_campaign_created(webhook_payload_campaign_created)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_created: #{e}"
+end
+```
+
+#### Using the on_campaign_created_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_created_with_http_info(webhook_payload_campaign_created)
+
+```ruby
+begin
+  # Campaign created event
+  data, status_code, headers = api_instance.on_campaign_created_with_http_info(webhook_payload_campaign_created)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_created_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_created** | [**WebhookPayloadCampaignCreated**](WebhookPayloadCampaignCreated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_draft_approved
+
+> on_campaign_draft_approved(webhook_payload_campaign_draft)
+
+Campaign draft approved event
+
+You approved a draft version.  ### Effect  The creator can now publish it and submit the post with its `draftId`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_draft =  # WebhookPayloadCampaignDraft | 
+
+begin
+  # Campaign draft approved event
+  api_instance.on_campaign_draft_approved(webhook_payload_campaign_draft)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_draft_approved: #{e}"
+end
+```
+
+#### Using the on_campaign_draft_approved_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_draft_approved_with_http_info(webhook_payload_campaign_draft)
+
+```ruby
+begin
+  # Campaign draft approved event
+  data, status_code, headers = api_instance.on_campaign_draft_approved_with_http_info(webhook_payload_campaign_draft)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_draft_approved_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_draft** | [**WebhookPayloadCampaignDraft**](WebhookPayloadCampaignDraft.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_draft_rejected
+
+> on_campaign_draft_rejected(webhook_payload_campaign_draft)
+
+Campaign draft rejected event
+
+You rejected a draft version.  ### Effect  It can never back a post, and it gets no new version. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_draft =  # WebhookPayloadCampaignDraft | 
+
+begin
+  # Campaign draft rejected event
+  api_instance.on_campaign_draft_rejected(webhook_payload_campaign_draft)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_draft_rejected: #{e}"
+end
+```
+
+#### Using the on_campaign_draft_rejected_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_draft_rejected_with_http_info(webhook_payload_campaign_draft)
+
+```ruby
+begin
+  # Campaign draft rejected event
+  data, status_code, headers = api_instance.on_campaign_draft_rejected_with_http_info(webhook_payload_campaign_draft)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_draft_rejected_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_draft** | [**WebhookPayloadCampaignDraft**](WebhookPayloadCampaignDraft.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_draft_revision_requested
+
+> on_campaign_draft_revision_requested(webhook_payload_campaign_draft)
+
+Campaign draft revision requested event
+
+You asked for changes to a draft version.  ### Comments  `draft.comments` lists your notes, each with `atMs` for the moment of the video it points at, or null for a general note. The creator can upload one new version of it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_draft =  # WebhookPayloadCampaignDraft | 
+
+begin
+  # Campaign draft revision requested event
+  api_instance.on_campaign_draft_revision_requested(webhook_payload_campaign_draft)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_draft_revision_requested: #{e}"
+end
+```
+
+#### Using the on_campaign_draft_revision_requested_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_draft_revision_requested_with_http_info(webhook_payload_campaign_draft)
+
+```ruby
+begin
+  # Campaign draft revision requested event
+  data, status_code, headers = api_instance.on_campaign_draft_revision_requested_with_http_info(webhook_payload_campaign_draft)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_draft_revision_requested_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_draft** | [**WebhookPayloadCampaignDraft**](WebhookPayloadCampaignDraft.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_draft_submitted
+
+> on_campaign_draft_submitted(webhook_payload_campaign_draft)
+
+Campaign draft submitted event
+
+A creator uploaded a draft, or a new version of one, on a campaign with `requireDraftApproval`.  ### Versions  `draft.version` is 1 for a new draft, higher for a new version answering your requested changes, and `draft.revisionOf` names the version it answers. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_draft =  # WebhookPayloadCampaignDraft | 
+
+begin
+  # Campaign draft submitted event
+  api_instance.on_campaign_draft_submitted(webhook_payload_campaign_draft)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_draft_submitted: #{e}"
+end
+```
+
+#### Using the on_campaign_draft_submitted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_draft_submitted_with_http_info(webhook_payload_campaign_draft)
+
+```ruby
+begin
+  # Campaign draft submitted event
+  data, status_code, headers = api_instance.on_campaign_draft_submitted_with_http_info(webhook_payload_campaign_draft)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_draft_submitted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_draft** | [**WebhookPayloadCampaignDraft**](WebhookPayloadCampaignDraft.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_participant_approved
+
+> on_campaign_participant_approved(webhook_payload_campaign_participant)
+
+Campaign participant approved event
+
+You accepted a creator who asked to join.  ### Effect  They are now `active` and `participant.joinedAt` is set. This event replaces `campaign_participant.joined` for them, so it fires instead of it, never with it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_participant =  # WebhookPayloadCampaignParticipant | 
+
+begin
+  # Campaign participant approved event
+  api_instance.on_campaign_participant_approved(webhook_payload_campaign_participant)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_participant_approved: #{e}"
+end
+```
+
+#### Using the on_campaign_participant_approved_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_participant_approved_with_http_info(webhook_payload_campaign_participant)
+
+```ruby
+begin
+  # Campaign participant approved event
+  data, status_code, headers = api_instance.on_campaign_participant_approved_with_http_info(webhook_payload_campaign_participant)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_participant_approved_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_participant** | [**WebhookPayloadCampaignParticipant**](WebhookPayloadCampaignParticipant.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_participant_denied
+
+> on_campaign_participant_denied(webhook_payload_campaign_participant)
+
+Campaign participant denied event
+
+You turned down a creator who asked to join.  ### Effect  They cannot submit anything to this campaign. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_participant =  # WebhookPayloadCampaignParticipant | 
+
+begin
+  # Campaign participant denied event
+  api_instance.on_campaign_participant_denied(webhook_payload_campaign_participant)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_participant_denied: #{e}"
+end
+```
+
+#### Using the on_campaign_participant_denied_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_participant_denied_with_http_info(webhook_payload_campaign_participant)
+
+```ruby
+begin
+  # Campaign participant denied event
+  data, status_code, headers = api_instance.on_campaign_participant_denied_with_http_info(webhook_payload_campaign_participant)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_participant_denied_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_participant** | [**WebhookPayloadCampaignParticipant**](WebhookPayloadCampaignParticipant.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_campaign_participant_joined
 
 > on_campaign_participant_joined(webhook_payload_campaign_participant)
 
 Campaign participant joined event
 
-Fired once when a creator joins a campaign, from their invite link or the open link.
+A creator joined a campaign from their invite link or the open link.  ### When it fires  It fires once per participant, and `participant.joinedAt` says when. 
 
 ### Examples
 
@@ -2024,13 +3979,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_campaign_participant_pending
+
+> on_campaign_participant_pending(webhook_payload_campaign_participant)
+
+Campaign participant pending event
+
+A creator asked to join a campaign that reviews creators.  ### When it fires  A creator joined from the open link of a campaign whose `joinApproval` is `manual`. They wait as `pending` until you approve or deny them, and they do not take a place under `maxParticipants` while they wait. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_participant =  # WebhookPayloadCampaignParticipant | 
+
+begin
+  # Campaign participant pending event
+  api_instance.on_campaign_participant_pending(webhook_payload_campaign_participant)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_participant_pending: #{e}"
+end
+```
+
+#### Using the on_campaign_participant_pending_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_participant_pending_with_http_info(webhook_payload_campaign_participant)
+
+```ruby
+begin
+  # Campaign participant pending event
+  data, status_code, headers = api_instance.on_campaign_participant_pending_with_http_info(webhook_payload_campaign_participant)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_participant_pending_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_participant** | [**WebhookPayloadCampaignParticipant**](WebhookPayloadCampaignParticipant.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_campaign_participant_removed
 
 > on_campaign_participant_removed(webhook_payload_campaign_participant)
 
 Campaign participant removed event
 
-Fired when an operator removes a participant.
+You removed a participant from the campaign.  ### When it does not fire  Removing a participant twice fires the event once. 
 
 ### Examples
 
@@ -2098,7 +4121,7 @@ nil (empty response body)
 
 Campaign participant suspended event
 
-Fired when an operator suspends a participant.
+You suspended a participant.  ### Effect  They can no longer connect accounts or submit posts to this campaign. Posts they already submitted keep earning until you reject them. 
 
 ### Examples
 
@@ -2166,7 +4189,7 @@ nil (empty response body)
 
 Campaign payout failed event
 
-Fired when a treasury payout to a participant is refused, cannot be confirmed, or is reversed. The amount returns to payable, minus anything a rejection claws back.
+A payout through Zernio did not reach the creator.  ### When it fires  Stripe refused it, it stayed unconfirmed for 24 hours, or it was reversed. The amount is payable again, minus anything a rejection claws back. 
 
 ### Examples
 
@@ -2234,7 +4257,7 @@ nil (empty response body)
 
 Campaign payout payable event
 
-Fired when a participant's held earnings mature and become payable.
+A participant's held earnings matured and became payable.  ### Payload notes  `payout.payableCents` is the participant's whole payable balance, the amount to pay when you pay from your own rails. 
 
 ### Examples
 
@@ -2302,7 +4325,7 @@ nil (empty response body)
 
 Campaign payout settled event
 
-Fired when a settlement to a participant is recorded.
+A payout to a participant was recorded.  ### Payload notes  `payout.settlement` holds the amount and the reference. `recorded` is true when the money moved outside Zernio. 
 
 ### Examples
 
@@ -2364,13 +4387,353 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_campaign_sample_approved
+
+> on_campaign_sample_approved(webhook_payload_campaign_sample)
+
+Campaign sample approved event
+
+You approved a sample request.  ### Discount code  `sample.discountCode` is the single-use, 100% off code created in your store for that product. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_sample =  # WebhookPayloadCampaignSample | 
+
+begin
+  # Campaign sample approved event
+  api_instance.on_campaign_sample_approved(webhook_payload_campaign_sample)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_sample_approved: #{e}"
+end
+```
+
+#### Using the on_campaign_sample_approved_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_sample_approved_with_http_info(webhook_payload_campaign_sample)
+
+```ruby
+begin
+  # Campaign sample approved event
+  data, status_code, headers = api_instance.on_campaign_sample_approved_with_http_info(webhook_payload_campaign_sample)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_sample_approved_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_sample** | [**WebhookPayloadCampaignSample**](WebhookPayloadCampaignSample.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_sample_declined
+
+> on_campaign_sample_declined(webhook_payload_campaign_sample)
+
+Campaign sample declined event
+
+You declined a sample request.  ### Effect  `sample.declineReason` says why. The creator can ask for the same product again. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_sample =  # WebhookPayloadCampaignSample | 
+
+begin
+  # Campaign sample declined event
+  api_instance.on_campaign_sample_declined(webhook_payload_campaign_sample)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_sample_declined: #{e}"
+end
+```
+
+#### Using the on_campaign_sample_declined_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_sample_declined_with_http_info(webhook_payload_campaign_sample)
+
+```ruby
+begin
+  # Campaign sample declined event
+  data, status_code, headers = api_instance.on_campaign_sample_declined_with_http_info(webhook_payload_campaign_sample)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_sample_declined_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_sample** | [**WebhookPayloadCampaignSample**](WebhookPayloadCampaignSample.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_sample_requested
+
+> on_campaign_sample_requested(webhook_payload_campaign_sample)
+
+Campaign sample requested event
+
+A creator asked for one of the campaign's `sampleProducts`, with a shipping address. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_sample =  # WebhookPayloadCampaignSample | 
+
+begin
+  # Campaign sample requested event
+  api_instance.on_campaign_sample_requested(webhook_payload_campaign_sample)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_sample_requested: #{e}"
+end
+```
+
+#### Using the on_campaign_sample_requested_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_sample_requested_with_http_info(webhook_payload_campaign_sample)
+
+```ruby
+begin
+  # Campaign sample requested event
+  data, status_code, headers = api_instance.on_campaign_sample_requested_with_http_info(webhook_payload_campaign_sample)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_sample_requested_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_sample** | [**WebhookPayloadCampaignSample**](WebhookPayloadCampaignSample.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_sample_shipped
+
+> on_campaign_sample_shipped(webhook_payload_campaign_sample)
+
+Campaign sample shipped event
+
+You marked an approved sample as shipped.  ### Tracking  `sample.trackingUrl` is set when you gave one. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_sample =  # WebhookPayloadCampaignSample | 
+
+begin
+  # Campaign sample shipped event
+  api_instance.on_campaign_sample_shipped(webhook_payload_campaign_sample)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_sample_shipped: #{e}"
+end
+```
+
+#### Using the on_campaign_sample_shipped_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_sample_shipped_with_http_info(webhook_payload_campaign_sample)
+
+```ruby
+begin
+  # Campaign sample shipped event
+  data, status_code, headers = api_instance.on_campaign_sample_shipped_with_http_info(webhook_payload_campaign_sample)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_sample_shipped_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_sample** | [**WebhookPayloadCampaignSample**](WebhookPayloadCampaignSample.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_campaign_status_changed
+
+> on_campaign_status_changed(webhook_payload_campaign_status_changed)
+
+Campaign status changed event
+
+A campaign Zernio already tracked changed its platform status or, on Google, the reasons behind it.  ### When it fires  Fires when the ads sync reads a tracked campaign with a different status than it stored, up to one sync interval late. Covers every ad network.  ### Status values  On Google, `status` is the campaign's `primary_status` (`ELIGIBLE`, `LIMITED`, `NOT_ELIGIBLE`, `PAUSED`, ...) and `reasons` its sorted `primary_status_reasons`, so a campaign turning budget limited fires. Elsewhere `status` is the campaign's own platform status (Meta `effective_status`) and `reasons` is empty.  ### When it does not fire  A campaign seen for the first time, or the same change from the same previous status again within an hour (a retried sync). A change made through Zernio, such as a pause, fires on the next sync, once the sync reads it from the platform. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_status_changed =  # WebhookPayloadCampaignStatusChanged | 
+
+begin
+  # Campaign status changed event
+  api_instance.on_campaign_status_changed(webhook_payload_campaign_status_changed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_status_changed: #{e}"
+end
+```
+
+#### Using the on_campaign_status_changed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_status_changed_with_http_info(webhook_payload_campaign_status_changed)
+
+```ruby
+begin
+  # Campaign status changed event
+  data, status_code, headers = api_instance.on_campaign_status_changed_with_http_info(webhook_payload_campaign_status_changed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_status_changed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_status_changed** | [**WebhookPayloadCampaignStatusChanged**](WebhookPayloadCampaignStatusChanged.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_campaign_submission_approved
 
 > on_campaign_submission_approved(webhook_payload_campaign_submission)
 
 Campaign submission approved event
 
-Fired when an operator approves a submission.
+You approved a submission.  ### Earnings  What the submission earned so far moves to owed with the campaign hold. Later earnings post straight to owed. 
 
 ### Examples
 
@@ -2438,7 +4801,7 @@ nil (empty response body)
 
 Campaign submission flagged event
 
-Fired when a submission gains a fraud flag it did not carry before, at submission or on a later sync.
+A submission gained a fraud flag it did not carry before, at submission or on a later sync.  ### Flags  Flags include `duplicate_post`, `view_spike`, `low_authenticity` and `x_read_cap` (the campaign's X read budget is spent). `submission.flags` lists every flag it carries. Zernio never rejects on its own; the decision is yours. 
 
 ### Examples
 
@@ -2506,7 +4869,7 @@ nil (empty response body)
 
 Campaign submission pending review event
 
-Fired when a submission becomes ready for review: a CPM submission reached minViewsToEarn or a pool submission minViewsToQualify; per-post submissions on the first accrual pass after submission.
+A submission is ready for your review.  ### When it fires  A CPM submission reached `minViewsToEarn`, a pool submission reached `minViewsToQualify`, and per post submissions arrive here after their first accrual. 
 
 ### Examples
 
@@ -2574,7 +4937,7 @@ nil (empty response body)
 
 Campaign submission received event
 
-Fired when a creator submits a post to a campaign and its tracking window opens.
+A creator submitted a post to a campaign, Zernio opened its tracking window and took the first view sample. 
 
 ### Examples
 
@@ -2642,7 +5005,7 @@ nil (empty response body)
 
 Campaign submission rejected event
 
-Fired when an operator rejects a submission.
+You rejected a submission and its tracking window was cancelled.  ### Earnings  Its unsettled earnings go back to the campaign budget. 
 
 ### Examples
 
@@ -2704,13 +5067,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_campaign_updated
+
+> on_campaign_updated(webhook_payload_campaign_updated)
+
+Campaign updated event
+
+A campaign was edited through Zernio (`source: \"zernio\"`), or outside Zernio and detected by the sync (`source: \"platform\"`).  ### When it fires  Fires after the platform and Zernio both accepted the edit. Outside edits arrive up to one sync interval late, and only to the user whose sync saw them.  ### Deduplication  Events are not deduplicated, so every edit is announced. Use the event `id` to drop repeats.  ### Payload notes  `changes` lists the edited fields: `name`, `status` (the campaign's own on/off switch), `budget`, `bid` or `settings`. Ignore unknown values. It never carries old or new values, so read the campaign.  ### What the sync detects  From the sync, `changes` covers only `name`, `status` and `schedule`. Schedule is detected only on Google, LinkedIn, Pinterest and OpenAI Ads.  ### When it does not fire  Budget edits made outside Zernio and history loaded at connect are not announced. Ad set edits arrive as `ad_set.updated`. Ad rule changes arrive as `ad_rule.triggered`.  ### Google sub-resources  Edits to ad schedule, targeting, negative keywords, conversion goals, assets, asset groups and listing group filters are not announced. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_campaign_updated =  # WebhookPayloadCampaignUpdated | 
+
+begin
+  # Campaign updated event
+  api_instance.on_campaign_updated(webhook_payload_campaign_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_updated: #{e}"
+end
+```
+
+#### Using the on_campaign_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_campaign_updated_with_http_info(webhook_payload_campaign_updated)
+
+```ruby
+begin
+  # Campaign updated event
+  data, status_code, headers = api_instance.on_campaign_updated_with_http_info(webhook_payload_campaign_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_campaign_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_campaign_updated** | [**WebhookPayloadCampaignUpdated**](WebhookPayloadCampaignUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_comment_received
 
 > on_comment_received(webhook_payload_comment)
 
 Comment received event
 
-Fired when a new comment is received on a tracked post.  - Delivered for Instagram, Facebook, Threads, YouTube, LinkedIn, Bluesky, Reddit and TikTok. - X/Twitter does NOT fire this event. - Instagram, Facebook and TikTok arrive in real time from the platform's own webhook. The rest are poll-driven, so delivery is not instant. - TikTok needs an account connected through the TikTok for Business app. 
+A new comment arrived on a tracked post.  ### Platform notes  Delivered for Instagram, Facebook, Threads, YouTube, LinkedIn, Bluesky, Reddit and TikTok. X/Twitter does not fire it. TikTok needs an account connected through the TikTok for Business app.  ### Delivery timing  Instagram, Facebook, Threads and TikTok arrive in real time from the platform's webhook. The rest are poll-driven, so delivery is not instant.  ### Live comments  On Instagram, `comment.isLive: true` marks a comment made during a live broadcast. The key is absent on every other comment.  ### Ads  `comment.ad` is present only on comments made on paid content, so `if (comment.ad)` filters ad-driven comments.  ### Ad fields  Instagram carries `ad.id` and `ad.title`. Facebook carries `ad.promotionStatus`: `active` for boosted organic posts, `ineligible` for dark post creatives.  ### Instagram author profile  Comments may carry `comment.author.instagramProfile` (`isFollower`, `isFollowing`, `followerCount`, `isVerified`). An absent object means unknown, never \"not a follower\".  ### Why the profile is often absent  Meta reveals the follow relationship only for people who have messaged the account, and commenting does not grant that consent. The object is absent for most first-time commenters. 
 
 ### Examples
 
@@ -2778,7 +5209,7 @@ nil (empty response body)
 
 Commerce order created event
 
-Fired when an order is placed on a connected store. The payload carries identifiers only; read the order with `GET /v1/commerce/orders/{orderId}?accountId=...`. Fired once per Zernio account connected to the store. 
+An order was placed in the store.  ### Payload notes  `resource.status` is its normalized state at that moment. Read the order with `GET /v1/commerce/orders/{orderId}?accountId=...`. Fires once per Zernio account. 
 
 ### Examples
 
@@ -2846,7 +5277,7 @@ nil (empty response body)
 
 Commerce order refunded event
 
-Fired when a refund is issued on an order of a connected store. A commerce.order.updated usually follows for the same change. The payload carries identifiers only; read the order with `GET /v1/commerce/orders/{orderId}?accountId=...`. Fired once per Zernio account connected to the store. 
+A refund was issued on an order.  ### Payload notes  `resource.id` is the order id, not the refund id. `resource.status` and `resource.platformStatus` are `null`. A `commerce.order.updated` usually follows for the same change. 
 
 ### Examples
 
@@ -2914,7 +5345,7 @@ nil (empty response body)
 
 Commerce order updated event
 
-Fired when an order on a connected store changes: payment, fulfilment, cancellation, edits, and refunds too. The payload carries identifiers only; read the order with `GET /v1/commerce/orders/{orderId}?accountId=...`. Fired once per Zernio account connected to the store. 
+An order changed in the store, such as payment, fulfilment, cancellation or edits.  ### Payload notes  `resource.status` is the new state. Refunds also fire it. Fires once per Zernio account connected to the store. 
 
 ### Examples
 
@@ -2982,7 +5413,7 @@ nil (empty response body)
 
 Commerce product created event
 
-Fired when a product is created on a connected store. The payload carries identifiers only; read the product with `GET /v1/commerce/products/{productId}?accountId=...`. Fired once per Zernio account connected to the store. 
+A product was created in a connected Shopify store or WooCommerce site.  ### Payload notes  `resource.id` is the store's product id. Read the product with `GET /v1/commerce/products/{productId}?accountId=...`. Fires once per Zernio account connected to the store. 
 
 ### Examples
 
@@ -3050,7 +5481,7 @@ nil (empty response body)
 
 Commerce product deleted event
 
-Fired when a product is deleted from a connected store. `status` and `platformStatus` are null. The payload carries identifiers only; read the product with `GET /v1/commerce/products/{productId}?accountId=...`. Fired once per Zernio account connected to the store. 
+A product was deleted in the store.  ### Payload notes  `resource.status` and `resource.platformStatus` are `null`. Fires once per Zernio account connected to the store. 
 
 ### Examples
 
@@ -3118,7 +5549,7 @@ nil (empty response body)
 
 Commerce product updated event
 
-Fired when a product on a connected store changes: its fields, status, variants or prices. The payload carries identifiers only; read the product with `GET /v1/commerce/products/{productId}?accountId=...`. Fired once per Zernio account connected to the store. 
+A product changed in the store, or WooCommerce restored it from the trash.  ### Payload notes  Fields, status, variants or prices changed; read the product for what. There is no restored event. Fires once per Zernio account connected to the store. 
 
 ### Examples
 
@@ -3186,7 +5617,7 @@ nil (empty response body)
 
 Contact deleted
 
-The provider contact was deleted; its email channel is removed, the contact row stays when other channels remain.
+A contact was deleted in Google Contacts or Outlook.  ### Effect  Zernio removes its email channels for that account; the contact stays when other channels remain. It arrives up to 15 minutes after the change, from the sync. 
 
 ### Examples
 
@@ -3254,7 +5685,7 @@ nil (empty response body)
 
 Contact field changed event
 
-Fired once per custom field whose value a write changed, with the previous and new value.
+A contact custom field changed value; `field` is the field slug.  ### When it fires  Once per custom field whose value a write changed. Writing the current value fires nothing.  ### Payload notes  `previousValue` is `null` when the field was not set. `value` is `null` when it was removed. 
 
 ### Examples
 
@@ -3322,7 +5753,7 @@ nil (empty response body)
 
 Contact tag added event
 
-Fired once per tag a write actually added to a contact, whether the API, a workflow add_tag node or a comment-automation click made it.
+A tag was added to a contact by the API, a workflow `add_tag` node or a comment-automation click.  ### When it fires  Once per tag a write actually added. Re-adding a tag the contact already has fires nothing.  ### When it does not fire  Creating a contact with tags fires nothing. Only changes to an existing contact do. 
 
 ### Examples
 
@@ -3390,7 +5821,7 @@ nil (empty response body)
 
 Contact tag removed event
 
-Fired once per tag a write actually removed from a contact.
+A tag was removed from a contact.  ### When it fires  Once per tag a write actually removed. 
 
 ### Examples
 
@@ -3458,7 +5889,7 @@ nil (empty response body)
 
 Contact updated
 
-A provider contacts sync created or changed a contact.
+A contact sync added or changed a contact; `contact.id` is the Zernio contact id.  ### When it fires  It fires from the sync of a Google Contacts or Outlook account, which runs every 15 minutes, so up to 15 minutes after the change. It also fires when a WhatsApp coexistence address book adds or renames a contact. 
 
 ### Examples
 
@@ -3526,7 +5957,7 @@ nil (empty response body)
 
 Conversation control changed event
 
-Fired on Meta's handover protocol (`messaging_handovers`), when control of a conversation thread changes.  WhatsApp: control moves between Meta Business Agent and your app, or the agent is first seen answering a thread. While `control.owner` is `ai_agent`:  - Inbound messages arrive on `message.received` with `metadata.standby: true`. - The agent's replies arrive on `message.sent` with `source: meta_business_agent`. - Sending any message takes control back.  Facebook and Instagram: another app passed you the thread (`owner: app`), or took or received it (`owner: other`, with `ownerAppId`). While you are not the owner:  - Inbound messages arrive with `metadata.standby: true`. - No automation runs. - Sends fail with `not_thread_owner`.  Change control with `POST /v1/inbox/conversations/{conversationId}/thread-control`. `take` and `request` answer 400 `platform_not_supported` on Instagram Login connections. 
+Control of a conversation moved: Meta Business Agent on WhatsApp, or Meta's conversation routing on Facebook and Instagram (`messaging_handovers`). On Instagram, Conversation Routing replaced the Handover Protocol in October 2025 and kept its thread-control events.  ### Owner values  `control.owner` is `ai_agent` (Meta Business Agent, WhatsApp), `app` (you) or `other` (a WhatsApp partner app, or a receiver such as Page Inbox on Messenger and Instagram).  ### Control fields  `control.previousOwner` is `null` when no handover touched the thread. `control.ownerAppId` is the new owner's Meta app id when named (Page Inbox is `263902037430900`). `control.metadata` is the transferring app's note, verbatim.  ### WhatsApp  Meta Business Agent took the conversation, handed it to you, or another partner app took it. While `ai_agent` owns it, its replies arrive on `message.sent` with `source: \"meta_business_agent\"`.  ### Taking control on WhatsApp  Sending any message through the inbox takes control back. To hand it to the agent without sending, call `POST /v1/inbox/conversations/{conversationId}/thread-control` with `action: \"release\"`.  ### Facebook and Instagram  Meta sent Zernio a `pass_thread_control` (another app passed the thread to you) or `take_thread_control` (another app took it from you) event. It fires once per change of the stored owner.  It does not fire on `release` or when two other apps move a thread between them (Meta sends nothing), nor for your own thread-control calls (their response carries the new owner).  While you are not the owner, sends answer `409` `not_thread_owner`.  ### Taking control on Facebook and Instagram  Call `POST /v1/inbox/conversations/{conversationId}/thread-control` with `action: \"take\"`, or `\"request\"` to ask the owner to pass it. Both answer 400 `platform_not_supported` on Instagram Login connections.  Meta accepts `take` only when the account has a default app set in conversation routing and the business has allowed Zernio to take control of conversations; otherwise it answers code 27.  ### When it does not fire  A repeat report of the same owner fires nothing. A `request` changes nothing until the owner passes the thread.  ### Standby messages  While another app owns the conversation, inbound messages arrive on `message.received` with `metadata.standby: true`. 
 
 ### Examples
 
@@ -3594,7 +6025,7 @@ nil (empty response body)
 
 Conversation started event
 
-Fired once when a new conversation begins between one of your connected accounts and a contact, in either direction. Works across every DM platform (Instagram, Messenger/Facebook, Telegram, WhatsApp, X, Reddit, Bluesky, TikTok). Naturally deduped: a given conversation only fires this event the very first time it appears. 
+A new conversation began between a connected account and a contact, in either direction, on any DM platform.  ### When it fires  Once per conversation, the first time it appears. Covers Instagram, Messenger, WhatsApp, Telegram, X, Reddit, Bluesky, TikTok, SMS, RCS, iMessage, Slack, LINE, WeChat and email.  ### When it does not fire  DM history replayed when an Instagram or Facebook account connects never fires it. 
 
 ### Examples
 
@@ -3656,13 +6087,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_conversion_received
+
+> on_conversion_received(webhook_payload_conversion)
+
+Conversion received event
+
+Zernio stored an event: one sent to `POST /v1/events` or `POST /v1/ads/conversions`, or one a connected source sent for you (a lead form lead, a store order, a HubSpot deal, a Salesforce Opportunity).  It fires again when a newer version of the same event is stored, such as an order that changed.  `conversion` has the fields of `GET /v1/events/{eventId}`, plus `source`, `campaign` (the campaign the event counts for, or null) and `campaignMatch` (why there is none). Personal data is never sent: `hasEmail`, `hasPhone` and `hasExternalId` only say what the event carried.  ### Deduplication  The event `id` follows the stored event and its version, so a resend of the same version carries the same `id`. Deduplicate on it.  ### Not sent for  Test events (they are never stored), corrections made with `PATCH` or `DELETE /v1/events/{eventId}`, and the hourly re-match that ties an earlier event to its campaign. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_conversion =  # WebhookPayloadConversion | 
+
+begin
+  # Conversion received event
+  api_instance.on_conversion_received(webhook_payload_conversion)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_conversion_received: #{e}"
+end
+```
+
+#### Using the on_conversion_received_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_conversion_received_with_http_info(webhook_payload_conversion)
+
+```ruby
+begin
+  # Conversion received event
+  data, status_code, headers = api_instance.on_conversion_received_with_http_info(webhook_payload_conversion)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_conversion_received_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_conversion** | [**WebhookPayloadConversion**](WebhookPayloadConversion.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_creator_campaign_budget_exhausted
 
 > on_creator_campaign_budget_exhausted(webhook_payload_creator_campaign)
 
 Creator campaign budget exhausted event
 
-Fired once when a campaign's earnings reach its budget.
+A campaign's earnings reached its budget.  ### When it fires  Nothing more accrues until budget is freed. It fires once per campaign. 
 
 ### Examples
 
@@ -3730,7 +6229,7 @@ nil (empty response body)
 
 Creator campaign closed event
 
-Fired once when a campaign closes; a pool campaign is split among participants at this moment.
+A campaign closed, either because you closed it or because `endsAt` passed.  ### When it fires  After `endsAt`, the campaign closes once every tracking window had its final read. A pool campaign is split among participants at this moment. 
 
 ### Examples
 
@@ -3792,13 +6291,557 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_email_bounced
+
+> on_email_bounced(webhook_payload_email_bounced)
+
+Email bounced
+
+A delivery failure report for mail the mailbox sent arrived: the receiving server refused it for a recipient. Fires for every send from the mailbox, once per failed recipient. Delayed-delivery warnings and out-of-office replies do not fire it.  Act on `recommendedAction`: `remove` means the address does not take mail. Refusals on the sending side (`auth_failure`, `blocklisted`, `spam_blocked`, `policy_blocked`) never say `remove`. The report also arrives as `message.received`, and it does not count as a reply for `email.thread_replied`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_email_bounced =  # WebhookPayloadEmailBounced | 
+
+begin
+  # Email bounced
+  api_instance.on_email_bounced(webhook_payload_email_bounced)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_bounced: #{e}"
+end
+```
+
+#### Using the on_email_bounced_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_email_bounced_with_http_info(webhook_payload_email_bounced)
+
+```ruby
+begin
+  # Email bounced
+  data, status_code, headers = api_instance.on_email_bounced_with_http_info(webhook_payload_email_bounced)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_bounced_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_email_bounced** | [**WebhookPayloadEmailBounced**](WebhookPayloadEmailBounced.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_email_deleted
+
+> on_email_deleted(webhook_payload_email_deleted)
+
+Email deleted
+
+A message was deleted from the mailbox for good. Moving it to Trash is `email.updated` with `folder: \"trash\"`. IMAP mailboxes do not send it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_email_deleted =  # WebhookPayloadEmailDeleted | 
+
+begin
+  # Email deleted
+  api_instance.on_email_deleted(webhook_payload_email_deleted)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_deleted: #{e}"
+end
+```
+
+#### Using the on_email_deleted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_email_deleted_with_http_info(webhook_payload_email_deleted)
+
+```ruby
+begin
+  # Email deleted
+  data, status_code, headers = api_instance.on_email_deleted_with_http_info(webhook_payload_email_deleted)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_deleted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_email_deleted** | [**WebhookPayloadEmailDeleted**](WebhookPayloadEmailDeleted.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_email_link_clicked
+
+> on_email_link_clicked(webhook_payload_email_link_clicked)
+
+Email link clicked
+
+A recipient followed a link of a message sent with `trackLinks: true`. Every http(s) link in the html was rewritten to a Zernio redirect that records the click and sends the reader on to `click.url`.  Security scanners in corporate mail gateways sometimes follow links on delivery, which reports as a click. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_email_link_clicked =  # WebhookPayloadEmailLinkClicked | 
+
+begin
+  # Email link clicked
+  api_instance.on_email_link_clicked(webhook_payload_email_link_clicked)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_link_clicked: #{e}"
+end
+```
+
+#### Using the on_email_link_clicked_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_email_link_clicked_with_http_info(webhook_payload_email_link_clicked)
+
+```ruby
+begin
+  # Email link clicked
+  data, status_code, headers = api_instance.on_email_link_clicked_with_http_info(webhook_payload_email_link_clicked)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_link_clicked_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_email_link_clicked** | [**WebhookPayloadEmailLinkClicked**](WebhookPayloadEmailLinkClicked.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_email_opened
+
+> on_email_opened(webhook_payload_email_opened)
+
+Email opened
+
+A mail client loaded the open pixel of a message sent with `trackOpens: true`.  Opens are a signal, not proof of reading:  - Gmail and Apple Mail fetch images through their own proxies, some as soon as the mail arrives. - Clients that block images never report an open. - The sender viewing the message in their own Sent folder counts too.  Repeat fetches within 10 seconds raise `count` without firing again. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_email_opened =  # WebhookPayloadEmailOpened | 
+
+begin
+  # Email opened
+  api_instance.on_email_opened(webhook_payload_email_opened)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_opened: #{e}"
+end
+```
+
+#### Using the on_email_opened_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_email_opened_with_http_info(webhook_payload_email_opened)
+
+```ruby
+begin
+  # Email opened
+  data, status_code, headers = api_instance.on_email_opened_with_http_info(webhook_payload_email_opened)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_opened_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_email_opened** | [**WebhookPayloadEmailOpened**](WebhookPayloadEmailOpened.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_email_send_failed
+
+> on_email_send_failed(webhook_payload_email_send_failed)
+
+Scheduled email failed
+
+A send scheduled with `scheduledFor` could not leave at its time. Nothing reached the recipients. `error` says why, for example the mailbox was disconnected, the daily send cap was reached or the provider refused the mail. The send stays listed with `status: failed`; schedule it again to retry. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_email_send_failed =  # WebhookPayloadEmailSendFailed | 
+
+begin
+  # Scheduled email failed
+  api_instance.on_email_send_failed(webhook_payload_email_send_failed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_send_failed: #{e}"
+end
+```
+
+#### Using the on_email_send_failed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_email_send_failed_with_http_info(webhook_payload_email_send_failed)
+
+```ruby
+begin
+  # Scheduled email failed
+  data, status_code, headers = api_instance.on_email_send_failed_with_http_info(webhook_payload_email_send_failed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_send_failed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_email_send_failed** | [**WebhookPayloadEmailSendFailed**](WebhookPayloadEmailSendFailed.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_email_sent
+
+> on_email_sent(webhook_payload_email_sent)
+
+Email sent
+
+A mail left through the email API. Exactly one event per mail, whichever path sent it: `source` is `send`, `reply`, `forward`, `draft` or `scheduled`. A scheduled draft carries both `scheduleId` and `draftId`.  Use it to record sends in your own system with the `metadata` you passed. The sent copy also arrives as `message.sent` in the inbox. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_email_sent =  # WebhookPayloadEmailSent | 
+
+begin
+  # Email sent
+  api_instance.on_email_sent(webhook_payload_email_sent)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_sent: #{e}"
+end
+```
+
+#### Using the on_email_sent_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_email_sent_with_http_info(webhook_payload_email_sent)
+
+```ruby
+begin
+  # Email sent
+  data, status_code, headers = api_instance.on_email_sent_with_http_info(webhook_payload_email_sent)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_sent_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_email_sent** | [**WebhookPayloadEmailSent**](WebhookPayloadEmailSent.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_email_thread_replied
+
+> on_email_thread_replied(webhook_payload_email_thread_replied)
+
+Email thread replied
+
+Mail from someone other than the mailbox arrived in the thread of a message sent with `trackReplies: true`. Works on text and html sends. Auto-replies count as replies; bounce reports do not and fire `email.bounced` instead.  `reply.clean.text` is the reply without the quoted history, so an agent can act on it without reading the message. The reply also arrives as `message.received` with its full content. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_email_thread_replied =  # WebhookPayloadEmailThreadReplied | 
+
+begin
+  # Email thread replied
+  api_instance.on_email_thread_replied(webhook_payload_email_thread_replied)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_thread_replied: #{e}"
+end
+```
+
+#### Using the on_email_thread_replied_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_email_thread_replied_with_http_info(webhook_payload_email_thread_replied)
+
+```ruby
+begin
+  # Email thread replied
+  data, status_code, headers = api_instance.on_email_thread_replied_with_http_info(webhook_payload_email_thread_replied)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_thread_replied_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_email_thread_replied** | [**WebhookPayloadEmailThreadReplied**](WebhookPayloadEmailThreadReplied.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_email_updated
+
+> on_email_updated(webhook_payload_email_updated)
+
+Email updated
+
+A message in the mailbox changed: it was read or marked unread, starred or flagged, labelled or categorized, archived, trashed or moved. Covers the Inbox, and Sent on Gmail. A change can arrive more than once; key on `email.messageId`.  Gmail reports exactly what changed in `changes`. Outlook reports the message as it is now, with `changes: null`. A message deleted for good fires `email.deleted` instead. IMAP mailboxes do not send it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_email_updated =  # WebhookPayloadEmailUpdated | 
+
+begin
+  # Email updated
+  api_instance.on_email_updated(webhook_payload_email_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_updated: #{e}"
+end
+```
+
+#### Using the on_email_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_email_updated_with_http_info(webhook_payload_email_updated)
+
+```ruby
+begin
+  # Email updated
+  data, status_code, headers = api_instance.on_email_updated_with_http_info(webhook_payload_email_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_email_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_email_updated** | [**WebhookPayloadEmailUpdated**](WebhookPayloadEmailUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_file_created
 
 > on_file_created(webhook_payload_file)
 
 File created
 
-A file or folder appeared in a connected Drive or OneDrive (push, seconds after the change).
+A file the account can reach was created in Google Drive or OneDrive.  ### Platform notes  A folder counts as a file. The event is pushed seconds after the change. 
 
 ### Examples
 
@@ -3866,7 +6909,7 @@ nil (empty response body)
 
 File deleted
 
-The item was trashed or removed on the provider.
+A file the account could reach was deleted or moved to the trash. 
 
 ### Examples
 
@@ -3934,7 +6977,7 @@ nil (empty response body)
 
 Files picked
 
-The user finished a hosted picker session (`POST /v1/files/picker-sessions`) and picked at least one file. The app can now open those files. Not sent on cancel.
+The user picked files in a picker session; `picker.files` lists each one's `id`, `name`, `mimeType` and `kind`.  ### When it fires  It fires when the user finishes a hosted picker session (`POST /v1/files/picker-sessions`) and picks at least one file. Not sent on cancel. The files are readable from then on. 
 
 ### Examples
 
@@ -4002,6 +7045,8 @@ nil (empty response body)
 
 File updated
 
+A file the account can reach was changed, renamed or moved. 
+
 ### Examples
 
 ```ruby
@@ -4068,7 +7113,7 @@ nil (empty response body)
 
 Lead received event
 
-Fired when a new lead is submitted against a Meta Lead Gen (Instant) Form and ingested via the Page `leadgen` webhook. `lead.fields` is the question-key to answer map; `lead.formId` / `lead.adId` give provenance. Requires the Ads add-on. 
+A new lead was submitted against a Meta Lead Gen (Instant) form or a TikTok Instant Form (both pushed by the network), or a Google Ads or LinkedIn lead form (read every 15 minutes). `lead.platform` names the network.  Leads older than 7 days when Zernio first reads them are stored without this event.  ### Payload notes  `lead.fields` maps question key to answer; multiple-choice values are the option key (for example `k1`), not the display label.  ### Provenance  `lead.formId`, `lead.adId` and `lead.campaignId` give provenance. `lead.adId` is null for organic or test leads.  ### Consents  `lead.consents` lists the answer to every custom disclaimer checkbox, for example `{ \"checkboxKey\": \"call_consent\", \"isChecked\": true }`. Route call and SMS consent into your CRM from it. Empty when the form has no checkboxes.  ### Checkbox keys  When no key was set on the checkbox, Meta derives `checkboxKey` from its text, so match on the full key. `GET /v1/ads/leads` and `GET /v1/ads/lead-forms/{formId}/leads` return the same array.  ### Deduplication  Deduplicate on `lead.leadgenId` (Meta's lead id) or the event `id`.  ### Routing  `account.profileId` names the Zernio profile of the Facebook account that received the lead, for multi-tenant routing. Always present, `null` only when no profile is on record.  ### Requires ads enabled  Needs ads enabled on the team. Zernio asks for `leads_retrieval` at Facebook consent only then; without it Meta refuses the Page's `leadgen` subscription. Accounts connected earlier need a reconnect.  ### Lost subscription  A Page can lose its `leadgen` subscription while other events keep arriving. `leadgen: false` (with a `warning`) on the Page's webhook subscription means leads are not reaching Zernio; re-subscribe the Page. 
 
 ### Examples
 
@@ -4130,13 +7175,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_mention_received
+
+> on_mention_received(webhook_payload_mention)
+
+Mention received event
+
+A connected Instagram, Facebook or LinkedIn account was mentioned in a post, caption or comment.  ### When it fires  Once per mention, the first time Zernio sees it. Delivery is at most once: reconcile with `GET /v1/inbox/mentions`.  - Instagram and Facebook arrive in real time from the platform's webhook. - LinkedIn arrives from its webhook or from polling, so delivery can take minutes. A newly connected account can receive mentions from the last 48 hours once.  ### Payload notes  Carries the same fields as `GET /v1/inbox/mentions`. Fields a platform does not provide are null. A LinkedIn mention found by polling for a team that does not retain content has no author, and an Instagram mention has no content if the live read fails. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_mention =  # WebhookPayloadMention | 
+
+begin
+  # Mention received event
+  api_instance.on_mention_received(webhook_payload_mention)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_mention_received: #{e}"
+end
+```
+
+#### Using the on_mention_received_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_mention_received_with_http_info(webhook_payload_mention)
+
+```ruby
+begin
+  # Mention received event
+  data, status_code, headers = api_instance.on_mention_received_with_http_info(webhook_payload_mention)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_mention_received_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_mention** | [**WebhookPayloadMention**](WebhookPayloadMention.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_message_deleted
 
 > on_message_deleted(webhook_payload_message_deleted)
 
 Message deleted event
 
-Fired when a sender deletes (unsends) a message.  - Instagram: incoming unsend. - WhatsApp, outgoing: a message the business deleted (via the Cloud API, or from the WhatsApp Business app on a Coexistence number). - WhatsApp, incoming: a message the customer deleted.  Read `message.direction` to tell the two directions apart.  The payload retains the pre-delete text and attachments so API consumers can access the original content for moderation or compliance. The Zernio dashboard UI hides it. 
+A sender deleted (unsent) a message on Instagram or WhatsApp.  ### Platform notes  Instagram reports incoming unsends. WhatsApp reports both directions, including business deletions through the Cloud API or a Coexistence app. `message.direction` tells them apart.  ### Payload notes  The payload keeps the pre-delete `text` and `attachments` for moderation, compliance or archival. The Zernio dashboard does not show this content. 
 
 ### Examples
 
@@ -4204,7 +7317,7 @@ nil (empty response body)
 
 Message delivered event
 
-Fired when an outgoing message is delivered to the recipient. Supported on WhatsApp and Facebook Messenger. On WhatsApp, `pricing` and `billingConversation` carry Meta's billing context for the message (also on `message.sent`, `message.read` and `message.failed`). 
+An outgoing message was delivered to the recipient on WhatsApp, Facebook Messenger, SMS, RCS or iMessage.  ### Platform notes  On WhatsApp, `pricing` and `billingConversation` carry Meta's billing context for the message. 
 
 ### Examples
 
@@ -4272,7 +7385,7 @@ nil (empty response body)
 
 Message edited event
 
-Fired when a sender edits a previously-sent message. Supported on Instagram, Facebook Messenger, Telegram, and WhatsApp. The payload includes the full editHistory so consumers can show prior versions. 
+A sender edited a previously sent message on Instagram, Facebook Messenger, Telegram or WhatsApp.  ### Payload notes  `editHistory` holds every prior version, oldest first. `message.text` is the latest version. 
 
 ### Examples
 
@@ -4340,7 +7453,7 @@ nil (empty response body)
 
 Message delivery failed event
 
-Fired when an outgoing message fails to deliver. Currently only emitted for WhatsApp (other platforms don't expose per-message failure via webhook). The payload error object contains code, title, and message from the platform. 
+An outgoing message failed to deliver on WhatsApp, SMS, RCS or iMessage.  ### Payload notes  `error` carries `code`, `title` and `message` from the platform, for example `131026` for an unreachable WhatsApp recipient. On SMS it carries the carrier's error code. 
 
 ### Examples
 
@@ -4408,7 +7521,7 @@ nil (empty response body)
 
 Message played event
 
-Fires the first time the recipient plays a voice message you sent on WhatsApp.
+A WhatsApp recipient played a voice message you sent, reported the first time they play it. 
 
 ### Examples
 
@@ -4476,7 +7589,7 @@ nil (empty response body)
 
 Message read event
 
-Fired when an outgoing message is read by the recipient. Supported on WhatsApp, Facebook Messenger, Instagram, and RCS. 
+An outgoing message was read by the recipient on WhatsApp, Facebook Messenger, Instagram or RCS. 
 
 ### Examples
 
@@ -4544,7 +7657,7 @@ nil (empty response body)
 
 Message received event
 
-Fired when a new inbox message is received.
+A new message arrived in the inbox; `message.text`, `message.attachments[]` and `message.sender` describe it.  ### Standby  While another app owns the conversation it carries `metadata.standby: true`. Zernio runs no workflow or keyword automation on it. A bot must skip standby messages, or on WhatsApp it takes the conversation from the agent.  ### Interactive replies  Button and list taps, flow responses and orders arrive under `metadata` (`interactiveType`, `interactiveId`, `flowResponseData`, `order`). Only a referral that arrives without a message becomes `referral.received`.  ### Platform notes  New email from Google, Microsoft and IMAP mailboxes arrives as this event. 
 
 ### Examples
 
@@ -4612,7 +7725,7 @@ nil (empty response body)
 
 Message sent event
 
-Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers.  Sends that carry platform-specific context deliver it under `metadata`. A quote-reply sent through the API arrives with `metadata.quotedMessageId`, so mirroring CRMs can thread it without a lookup.  Which surfaces carry that reference is documented on `WebhookPayloadMessageSent.metadata.quotedMessageId`. A quote-reply sent from the WhatsApp Business or Instagram app is not one of them. 
+A message was sent through the API, the dashboard, or the WhatsApp Business app on Coexistence numbers.  ### Sender  `message.sentVia` is one of `human`, `api`, `broadcast`, `sequence`, `workflow`, `comment_automation` or `bulk-api`. It is `null` for sends from the platform's own app and for older messages; treat `null` as unknown, never as human.  ### Attribution keys  `automationId`, `workflowId`, `executionId`, `broadcastId` and `sequenceId` are always present. Each is `null` unless that kind of sender produced the message.  ### Quote replies  A quote-reply sent through the API carries `metadata.quotedMessageId`. One sent from the WhatsApp Business or Instagram app does not.  ### Platform notes  On Instagram and Facebook the attribution can be missing when Meta's echo of a send reaches Zernio before the send is recorded. On WhatsApp, Meta Business Agent replies carry `source: \"meta_business_agent\"`. 
 
 ### Examples
 
@@ -4674,13 +7787,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_notification_sent
+
+> on_notification_sent(webhook_payload_notification_sent)
+
+Notification sent event
+
+Built for agents. One event for every notification we would email the account owner: a scheduled post failed to publish (`type: post_failed`), a connected account was disconnected (`type: account_disconnected`), or a removed team member's recently used API key was handed to the owner (`type: api_key_handed_over`).  It carries the email's `subject` and `text`, references to the post or account, and the `actions` that resolve it, so an agent subscribes to one event and handles every notification the same way.  ### Agents or state sync  Subscribe to `notification.sent` when an agent or automation reads the alert and acts on it. Subscribe to `post.platform.failed`, `post.failed`, `post.partial` and `account.disconnected` when your system keeps post and account state in sync: they carry the structured post or account and fire on every state change.  ### When it fires  Once for each such notification, in near real time, regardless of the user's email toggles, and even when the owner has no email address or the email is held back by the sender's limits. It fires alongside `post.failed` and `account.disconnected`, which stay as they are.  The user's notification channel (Slack or Telegram) follows the email toggles, so it only receives the alerts whose toggle is on. The exception is `api_key_handed_over` (category `securityAlerts`), which has no toggle and is always delivered.  - `post_failed`: once the failure is final (a permanent error, or a temporary one on its last retry), once per publish attempt that failed, for scheduled posts only (not \"post now\"). `refs.platforms` lists every platform that failed in that attempt. - `account_disconnected`: every time an account is disconnected, never for creator-profile accounts. `reason` says why. - `api_key_handed_over`: once per API key, when a departing team member's key used in the last 7 days moves to the workspace owner. It stops working within 24 hours: create a new key and switch to it. `refs.apiKey` carries the key id, preview and expiry. - `whatsapp_inbound_lost`: once each time Meta stops delivering a WhatsApp number's incoming messages to Zernio. The number can still send. Reconnect it from the same profile.  ### Payload notes  `text` is the email body without the greeting. When your content retention is set to keep no content, the post text is replaced by `Content not retained` and each platform error by a generic description of its category.  ### How to act  Each entry of `actions` is a public API call with the ids already in the path: `retry_post` (`retryPost`, `POST /v1/posts/{postId}/retry`), `reconnect_account` (`getConnectUrl`, `GET /v1/connect/{platform}`) and `check_account` (`getAccountHealth`, `GET /v1/accounts/{accountId}/health`).  ### Who receives it  Endpoints subscribed to `notification.sent`. Scoped endpoints receive it for their profiles and accounts. Restricted keys need the `publishing` resource group. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_notification_sent =  # WebhookPayloadNotificationSent | 
+
+begin
+  # Notification sent event
+  api_instance.on_notification_sent(webhook_payload_notification_sent)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_notification_sent: #{e}"
+end
+```
+
+#### Using the on_notification_sent_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_notification_sent_with_http_info(webhook_payload_notification_sent)
+
+```ruby
+begin
+  # Notification sent event
+  data, status_code, headers = api_instance.on_notification_sent_with_http_info(webhook_payload_notification_sent)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_notification_sent_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_notification_sent** | [**WebhookPayloadNotificationSent**](WebhookPayloadNotificationSent.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_phone_number_stock_available
 
 > on_phone_number_stock_available(webhook_payload_phone_number_stock_available)
 
 Phone-number stock available event
 
-Fired by the stock sweep (every 6h) the first time a country you watch via POST /v1/phone-numbers/stock-watches has deliverable numbers again. The watch is consumed, so the event fires once per watch; the stock counts are a snapshot and numbers are sold first come, first served. Buy with POST /v1/phone-numbers/purchase. 
+A country you watch has deliverable phone numbers again; fires once per watch.  ### When it fires  Fired by the 6-hourly stock sweep, before you own a number in that country. The watch (`POST /v1/phone-numbers/stock-watches`) is then consumed.  ### Payload notes  `stock.country` is the watched country. `stock.types[]` lists each number type in stock with its `availableCount` at sweep time. Numbers are first come, first served; buy with `POST /v1/phone-numbers/purchase`. 
 
 ### Examples
 
@@ -4748,7 +7929,7 @@ nil (empty response body)
 
 Post authenticity changed event
 
-Fired when a tracked post's authenticity score crosses 40 in either direction. Carries the new and previous score, confidence and reasons. A first score never fires it. 
+A tracked post's authenticity score crossed 40, in either direction.  ### When it fires  Only while the tracking window is open. A post's first score never fires it.  ### Payload notes  Carries `score`, `previousScore`, `confidence` and `reasons`. 
 
 ### Examples
 
@@ -4816,7 +7997,7 @@ nil (empty response body)
 
 Post cancelled event
 
-Fired when a scheduled post is cancelled because its account was disconnected and nothing published. Not sent when a post is deleted.
+A scheduled post was cancelled because its account was disconnected, and nothing published.  ### When it fires  A multi-platform post fires it only once every platform entry is cancelled. If a platform already published, the rollup is `post.partial` instead.  ### When it does not fire  `DELETE /v1/posts/{postId}` removes the post without sending this event. 
 
 ### Examples
 
@@ -4884,7 +8065,7 @@ nil (empty response body)
 
 External post created event
 
-Fired when Zernio's background sync detects a natively-authored post (created outside Zernio, e.g. a Google Business Profile localPost made in the Google UI) for the first time. Poll-driven (~hourly), not real-time. `post.source` is always \"external\". 
+A post authored natively on the platform, outside Zernio, was detected for the first time.  ### When it fires  Detected by a background sync roughly hourly, not in real time. Example: a Google Business Profile post created in the Google interface.  ### Payload notes  `post.source` is always `\"external\"` and `post.id` is the platform-native post id.  ### First sync backfill  On a freshly connected account, every existing native post fires it once. Treat it as an idempotent upsert keyed on `post.id`. 
 
 ### Examples
 
@@ -4952,7 +8133,7 @@ nil (empty response body)
 
 External post deleted event
 
-Fired when a tracked native post is detected as removed from the platform.  - `post.deletedAt` carries the detection time. - Coverage is bounded to the most recent posts the platform listing returns. - Detection diffs against the posts a prior sync already indexed. An account with no indexed post can never emit this event, no matter how the subscription is configured. 
+A tracked native post was removed from the platform.  ### Payload notes  `post.deletedAt` is the detection time.  ### Detection limits  Coverage is bounded to the most recent posts the platform listing returns, so very old deletions may go undetected.  ### When it does not fire  Detection diffs against posts a prior sync already indexed. An account with no indexed post never emits it. 
 
 ### Examples
 
@@ -5020,7 +8201,7 @@ nil (empty response body)
 
 External post updated event
 
-Fired when a tracked native post's text or media changed on the platform. Detected by comparing text/media structure and, where available, the platform's own edit timestamp; a media-URL-only refresh does not fire this. 
+A tracked native post's text or media changed on the platform.  ### How edits are detected  Zernio compares text and media structure and, where available, the platform's own edit timestamp. A media-URL-only refresh (rotated CDN URLs) does not fire it. 
 
 ### Examples
 
@@ -5088,7 +8269,7 @@ nil (empty response body)
 
 Post failed event
 
-Fired when a post fails to publish on all target platforms.
+A post failed on every target platform.  ### When it fires  Once per publishing job, after every platform target ends. Exactly one of `post.published`, `post.partial` or `post.failed` fires.  A TikTok target TikTok is still processing (status `uploading`) holds it for up to 48 hours. Meanwhile `post.platform.published` and `post.platform.failed` report the other targets.  ### Payload notes  Each `platforms[]` entry carries `error`, `errorCategory` and `errorSource`, the same taxonomy as `platforms[]` on Get post. Branch on `errorCategory`, not on the message text. 
 
 ### Examples
 
@@ -5156,7 +8337,7 @@ nil (empty response body)
 
 Post partial event
 
-Fired when a post publishes on some platforms and fails on others.
+A post published on some platforms and failed on others.  ### When it fires  Once per publishing job, after every platform target ends. Exactly one of `post.published`, `post.partial` or `post.failed` fires.  A TikTok target TikTok is still processing (status `uploading`) holds it for up to 48 hours. Meanwhile `post.platform.published` and `post.platform.failed` report the other targets.  It can follow a `post.failed` for the same post when TikTok later reports a failed TikTok target as published.  ### Payload notes  Read `platforms[].status` to tell them apart. Failed entries carry `error`, `errorCategory` and `errorSource`. 
 
 ### Examples
 
@@ -5224,7 +8405,7 @@ nil (empty response body)
 
 Post platform deleted event
 
-Fired when Zernio's background sync detects that a platform target published through Zernio was later deleted on the platform (e.g. the user deleted the Instagram post natively).  - Detection is poll-driven (~hourly), not real-time, and fires once per platform target. - `platform.deletedAt` carries the detection time. - Detection is listing-based: a false positive self-heals in Zernio's data when the post reappears, but the event is not retracted. - Coverage is bounded to the posts the platform listing returns. - Detection diffs against the posts a prior sync already indexed. An account with no indexed post can never emit this event, no matter how the subscription is configured. 
+A published platform target was deleted on the platform.  ### When it fires  Detected by a background sync roughly hourly, once per platform target. Platforms push no deletion notice, so it can trail the rollup by days.  ### Payload notes  `platform.status` is `deleted`. `platform.deletedAt` is the detection time, not the moment of deletion.  ### Detection limits  Detection is listing-based: coverage is bounded to the posts the listing returns, and rare false positives happen. The event is not retracted when the post reappears. Re-check before deleting.  ### When it does not fire  Detection diffs against posts a prior sync already indexed. An account with no indexed post never emits it. 
 
 ### Examples
 
@@ -5292,7 +8473,7 @@ nil (empty response body)
 
 Post platform failed event
 
-Fired once per platform target inside a post when that platform fails permanently.  - Temporary/retryable failures do NOT fire this event, so retry loops stay quiet. - The envelope event (`post.failed` / `post.partial`) fires separately, AFTER all platforms have terminated. - It can fire for a target that already emitted `post.platform.published`, if background reconciliation later finds the publish never actually completed. 
+One platform target failed permanently.  ### When it fires  Only on permanent failure; retryable errors stay silent. The rollup (`post.failed` or `post.partial`) fires separately once every platform ends.  ### After a publish  It can fire for a target that already emitted `post.platform.published`, if background reconciliation finds the publish never completed.  ### Payload notes  `platform.error` carries the platform's message. `platform.errorCategory` and `platform.errorSource` classify it, so a reconnect (`auth_expired`) separates from a content fix (`user_content`). 
 
 ### Examples
 
@@ -5360,7 +8541,7 @@ nil (empty response body)
 
 Post platform published event
 
-Fired once per platform target inside a post, as soon as that platform finishes publishing successfully.  It does NOT wait for the post-level rollup, so incremental UIs get notified immediately, even while other platforms on the same post are still processing.  - The envelope event (`post.published` / `post.partial`) fires separately, AFTER all platforms have terminated. - If a target later fails background reconciliation (e.g. a Facebook video Meta accepted but never actually published), `post.platform.failed` fires for the same target afterward. 
+One platform target finished publishing, without waiting for the other targets.  ### When it fires  Once per platform target, as soon as it finishes. A cross-post to 2 accounts on the same platform produces 2 events. Use `post.published` for the post-level rollup.  ### Payload notes  `platform` carries the platform post id and URL. `account` identifies the connected account.  ### TikTok targets still processing  TikTok can keep processing a post for up to 48 hours (entry status `uploading`). That target fires when TikTok finishes. The other targets fire as they finish, and the post rollup waits for TikTok.  ### Later reconciliation  If a target later fails background reconciliation, `post.platform.failed` fires for the same target afterward.  A failed TikTok target that TikTok later reports as published fires `post.platform.published` afterward, and the rollup fires again. 
 
 ### Examples
 
@@ -5428,7 +8609,7 @@ nil (empty response body)
 
 Post published event
 
-Fired when a post is successfully published.
+Every platform target of a post published.  ### When it fires  Once per publishing job, after every platform target ends. Exactly one of `post.published`, `post.partial` or `post.failed` fires.  A TikTok target TikTok is still processing (status `uploading`) holds it for up to 48 hours. Meanwhile `post.platform.published` and `post.platform.failed` report the other targets.  It can follow a `post.partial` or `post.failed` for the same post when TikTok later reports a failed TikTok target as published.  ### Payload notes  Each `platforms[]` entry carries the `platformPostId` and `publishedUrl`. 
 
 ### Examples
 
@@ -5496,7 +8677,7 @@ nil (empty response body)
 
 Post recycled event
 
-Fired when a post is recycled (cloned and re-scheduled for publishing). The new clone also fires a post.scheduled event.
+A recycling schedule cloned a published post for republishing.  ### Payload notes  `post.id` is the new clone's id. The clone emits its own `post.scheduled`. 
 
 ### Examples
 
@@ -5564,7 +8745,7 @@ nil (empty response body)
 
 Post scheduled event
 
-Fired whenever a post enters the scheduled state: created with a schedule, added to a queue, a draft promoted to scheduled or queued, a failed or partial post retried, or a recycled clone created. Not fired when an already-scheduled post is edited or rescheduled.
+A post entered the scheduled state.  ### When it fires  Created with a schedule (with `publishNow`, accepted and queued), promoted from draft, added to a queue, retried after failing, or created as a recycled clone.  ### Approval and repeats  A post saved with `requiresApproval: true` fires it on approval, not at creation. One post can emit it more than once.  ### When it does not fire  Editing or moving an already-scheduled post to another time does not fire it. 
 
 ### Examples
 
@@ -5632,7 +8813,7 @@ nil (empty response body)
 
 TikTok post URL resolved event
 
-Fired when an already-published TikTok platform entry gets its public URL backfilled.  TikTok exposes the numeric video id asynchronously (often minutes after PUBLISH_COMPLETE), so the terminal events can carry an empty `publishedUrl` for TikTok. This event delivers `platform.publishedUrl` and the resolved `platform.platformPostId` once available.  - Fires at most once per platform target. - Never fires for drafts or private posts (no public URL exists). - The payload shape is identical to `post.platform.published`. 
+A published TikTok post's public URL became available.  ### When it fires  TikTok exposes the video id asynchronously, often minutes after upload, so `post.published` can carry an empty `publishedUrl`. Fires at most once per platform target. For a draft, it fires when the creator posts the draft publicly from the TikTok app.  ### Payload notes  Delivers `platform.publishedUrl` and the resolved `platform.platformPostId`. Same shape as `post.platform.published`.  ### When it does not fire  Private posts, which have no public URL, and drafts the creator never posts. 
 
 ### Examples
 
@@ -5700,7 +8881,7 @@ nil (empty response body)
 
 Post tracking completed event
 
-Fired once when a post's tracking window ends and its final analytics read has run. `final` carries the closing metrics, or null when none could be read, and `window.completionReason` is `final_read`, `unreachable` or `post_deleted`. 
+A post's tracking window ended and its final analytics read finished.  ### When it fires  Once per window. A cancelled window never fires it.  ### Payload notes  `final` holds the closing metrics, or is null when no sample could be read. When the post was deleted, it is the last sample held, if any.  ### Completion reasons  `window.completionReason` is `final_read` (the read succeeded), `unreachable` (the sync failed or no sample exists) or `post_deleted` (the post is gone). 
 
 ### Examples
 
@@ -5768,7 +8949,7 @@ nil (empty response body)
 
 RCS agent status updated event
 
-Fired on every customer-visible status change of an RCS agent:  - `changes_requested`: we need changes before filing. `reason` is our note. - `brand_vetting`. - `agent_review`. - `testing`: add test phones, then send the launch filing. With a `reason`, the launch filing bounced. - `launch_review`. - `launching`. - `live`: the agent can message any RCS-capable phone. - `rejected`: `reason` says why. - `deactivated`. 
+An RCS agent moved into a new customer-visible status; `status` is the new one.  ### Statuses  `changes_requested` (note in `reason`), `brand_vetting`, `agent_review`, `testing`, `launch_review`, `launching`, `live`, `rejected` (`reason` says why), `deactivated`. In `testing`, add test phones, then file the launch; a `reason` means it bounced.  ### When it fires  Fires once per move into a status. `requested` sends nothing. Overlapping status checks never send the same status twice in a row.  ### Payload notes  `agent.profileId` is the owning profile. `agent.accountId` is `null` when the agent has no linked account. 
 
 ### Examples
 
@@ -5836,7 +9017,7 @@ nil (empty response body)
 
 Reaction received event
 
-Fired when a participant adds or removes an emoji reaction on a message. Requires the Inbox add-on.  Supported on WhatsApp, Telegram, Slack, Instagram, Facebook Messenger and TikTok. It is distinct from message.received, so a reaction (e.g. a thumbs-up) is not mistaken for an inbound message.  - `reaction.action` is `added` or `removed`. - On WhatsApp and Meta removals, the platform does not report which emoji was removed, so `reaction.emoji` may be an empty string. - On TikTok, a like or emoji reaction on a DM arrives only as this event (never as an empty message.received), with `reaction.platformMessageId` set to the TikTok id of the liked message. - Instagram and Facebook accounts connected before reactions shipped only emit this event after their webhook subscription is refreshed. Reconnect the account if reactions never arrive. 
+A participant added or removed an emoji reaction on a message on Instagram, Facebook, WhatsApp, Telegram, Slack or TikTok.  ### Payload notes  Sent as its own event, never as `message.received`. `reaction.action` is `added` or `removed`. `reaction.platformMessageId` is always present; `reaction.messageId` is the Zernio id when resolvable.  ### Removals  On WhatsApp, Instagram and Facebook removals, `reaction.emoji` is an empty string because the platform does not say which emoji went away. Match on `platformMessageId` to clear a mirrored reaction.  ### TikTok  A like or emoji reaction on a DM arrives only as this event, never as an empty `message.received`. `platformMessageId` is the TikTok id of the liked message. AI emoji reactions can have an empty `emoji`.  ### Telegram  The bot must be an administrator in the chat. Telegram does not send reactions in private chats to bots.  ### Accounts connected before August 2026  Instagram and Facebook accounts connected before August 2026 do not receive this event until their webhook subscription is refreshed. Reconnect them, or re-subscribe a Facebook Page without a reconnect. 
 
 ### Examples
 
@@ -5904,7 +9085,7 @@ nil (empty response body)
 
 Referral received event
 
-Fired when someone opens an EXISTING Instagram or Messenger thread through an attributable entry point, which Meta delivers as a standalone referral with no message attached. Requires the Inbox add-on.  Entry points:  - An ig.me / m.me link with a `ref` parameter. - (Messenger) A returning Click-to-Message ad click.  A referral that rides an inbound message (first message of a thread, icebreaker taps, returning ad clicks on Instagram) arrives on `message.received` under `metadata.referral` instead. The two never fire for the same click.  The first referral captured on a conversation is also persisted on it (see `metadata` on `GET /v1/inbox/conversations`). 
+Someone opened an existing Instagram or Messenger thread through an ig.me or m.me `ref` link or returning ad click.  ### Payload notes  Meta's referral object is forwarded verbatim: `ref` and `source` for links, `ad_id` and `ads_context_data` for ad clicks.  ### When it does not fire  A referral that rides an inbound message arrives on `message.received` under `metadata.referral` instead. The two never fire for the same click.  ### Stored referral  The first referral captured on a conversation is also persisted on it (`metadata` on `GET /v1/inbox/conversations`). 
 
 ### Examples
 
@@ -5972,7 +9153,7 @@ nil (empty response body)
 
 Review deleted event
 
-Google Business Profile stopped returning this review, for example after Google's spam filter removed it. Detected by polling, it usually fires 6 to 12 hours after the review disappears.  - Opt-in: only locations covered by a webhook subscribed to review.deleted or review.restored are checked. - If the review comes back, review.restored fires. A review Google hides and later restores produces review.deleted and then review.restored. - A review.updated can arrive for a review reported by review.deleted. The next check restores it. - It may arrive for a review id you never received review.new for. Ignore ids you do not know. 
+Google Business Profile stopped returning a review, for example after its spam filter removed it.  ### When it fires  Zernio detects it by polling, so it usually fires 6 to 12 hours after the review disappears. Only locations covered by a webhook subscribed to `review.deleted` or `review.restored` are checked.  ### Restores  If the review comes back, `review.restored` fires, so a hidden then restored review produces `review.deleted` then `review.restored`. A `review.updated` can arrive for a deleted review; the next check restores it.  ### Payload notes  `review.id` is the full review name, the same value `review.new` sent. It may arrive for a review id you never received `review.new` for, so ignore ids you do not know. 
 
 ### Examples
 
@@ -6040,7 +9221,7 @@ nil (empty response body)
 
 Review new event
 
-Fired when a new review is posted on a connected account. Currently supported for Google Business Profile (real-time via Pub/Sub). Requires the Inbox add-on. 
+A new review was posted on a connected Google Business Profile account, in real time through Pub/Sub. 
 
 ### Examples
 
@@ -6108,7 +9289,7 @@ nil (empty response body)
 
 Review restored event
 
-A review reported by review.deleted is returned by Google again. Same payload as review.new. Requires the Inbox add-on. 
+Google returned a review previously reported by `review.deleted`; the payload has the same shape as `review.new`.  ### When it fires  It may reach a webhook that subscribed after the deletion, so ignore ids you do not know. 
 
 ### Examples
 
@@ -6176,7 +9357,7 @@ nil (empty response body)
 
 Review updated event
 
-Fired when a Google Business Profile reviewer edits their review text or rating, or when a reply is posted through POST /v1/inbox/reviews/{reviewId}/reply. A reply written directly in Google's own interface does NOT fire this event, because Google emits no notification for it. Payload shape matches review.new. Requires the Inbox add-on. 
+A Google Business Profile review changed: the reviewer edited it, or its reply was added, edited or removed.  ### Reply through the API  A reply sent through the Zernio API fires the event immediately. The periodic check then reports it again with the full review payload, so expect a second delivery.  ### Replies written in Google  Google sends no notification for replies written in its interface. The periodic check detects them, usually within 6 hours for reviews updated in the last 30 days, about 7 days for older.  ### Checks  Only teams with a webhook subscribed to `review.updated` are checked. A removed reply, through the API or in Google, fires from the periodic check with `review.hasReply` set to `false`.  ### Payload notes  Same shape as `review.new`. When a reply is present, `review.hasReply` is `true` and `review.reply` is populated. 
 
 ### Examples
 
@@ -6244,7 +9425,7 @@ nil (empty response body)
 
 Sequence enrolled event
 
-Fired when a contact is enrolled in a sequence.
+A contact was enrolled in a sequence, through the API or a workflow `enroll_sequence` node. 
 
 ### Examples
 
@@ -6312,7 +9493,7 @@ nil (empty response body)
 
 Sequence exited event
 
-Fired when a contact leaves a sequence, finished or not; exitReason says why.
+A contact left a sequence; `exitReason` says why.  ### Exit reasons  - `completed`: the last step was sent. - `replied` - `manual`: unenrolled through the API. - `failed`: the step kept failing to send. - `unsubscribed` 
 
 ### Examples
 
@@ -6380,7 +9561,7 @@ nil (empty response body)
 
 SMS registration action required event
 
-Fired when an SMS registration starts waiting on its owner. `reason` says why:  - `changes_requested`: we need answers to some points, before submission or to fix a carrier rejection. `message` is the request; answer with POST /v1/sms/registrations/{id}/respond. - `otp_required`: a sole-proprietor brand needs the code texted to its mobile. Submit it with POST /v1/sms/registrations/{id}/verify-otp. - `carrier_info_required`: the toll-free carrier asked for more information. The request expires after 7 days.  A carrier rejection alone does not fire it: we handle the fix, see `sms.registration.status_updated`.  It fires once per new request (not on follow-up messages) and once per OTP or carrier request. 
+An SMS registration is waiting on its owner; `reason` says why.  ### Reasons  - `changes_requested`: answer `message` via `POST /v1/sms/registrations/{id}/respond`. - `otp_required`: submit the texted code via `POST /v1/sms/registrations/{id}/verify-otp`; no `message`. - `carrier_info_required`: expires after 7 days.  ### When it fires  Fires once per new request and once per OTP or carrier request, not on follow-up messages. A carrier rejection alone does not fire it. 
 
 ### Examples
 
@@ -6448,7 +9629,7 @@ nil (empty response body)
 
 SMS registration status updated event
 
-Fired on every status change of an SMS registration:  - `changes_requested`: we need answers, see `sms.registration.action_required`. - `requested`: a new submission or resubmit, or your answers are back in our review. - `pending`: with the carriers, including after we fixed and resent a rejection. - `approved`: live, attach numbers and send. - `rejected`: the carriers declined it. `reason` is their words and we handle the fix. - `deactivated`. 
+An SMS registration changed status; `status` is the new one.  ### Statuses  - `changes_requested`: answers needed. - `requested`: submitted, resubmitted, or your answers are back in review. - `pending`: with the carriers. - `approved`: live, attach numbers. - `rejected`: `reason` is the carriers' words. - `deactivated`  ### Rejections  A carrier rejection needs nothing from you. Zernio handles the fix and resends it, so the status returns to `pending`. 
 
 ### Examples
 
@@ -6516,7 +9697,7 @@ nil (empty response body)
 
 Support Assistant finished event
 
-Fired when the Support Assistant finishes a question. run.status is completed, or needs_human when the assistant handed the question to a person. The run object matches GET /v1/support/runs/{runId}.
+A support run finished with an answer, or handed the question to a person.  ### Payload notes  `run.status` is `completed`, or `needs_human` when Ana handed the question to a person. `run.answer` holds the answer; `run.stopReason` says why it stopped (`answered` or `human_review`, among others). 
 
 ### Examples
 
@@ -6584,7 +9765,7 @@ nil (empty response body)
 
 Support Assistant failed event
 
-Fired when a Support Assistant question fails or expires. Failed runs are not billed.
+A support run failed or expired, and is not billed.  ### Payload notes  `run.status` is `failed` and `run.answer` is `null`. `run.stopReason` is `expired` when the run never finished. `run.costUsd` is 0. 
 
 ### Examples
 
@@ -6646,13 +9827,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_tracking_site_ready
+
+> on_tracking_site_ready(webhook_payload_tracking_site)
+
+Tracking site ready event
+
+A tracked website's tag is confirmed on it, so its `setup.status` turned `ready`.  ### When it fires  Once the store app or Tag Manager install put the tag on the site, or, for a pasted line (or a Webflow site waiting on its next publish), with the site's first visit that is not a bot. A visit after that fires nothing.  `trackingSite` is the site as `GET /v1/tracking-sites/{siteId}` returns it, without `proxy.secret`.  ### Deduplication  The event `id` follows the site and the moment its tag was confirmed. Deduplicate on it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_tracking_site =  # WebhookPayloadTrackingSite | 
+
+begin
+  # Tracking site ready event
+  api_instance.on_tracking_site_ready(webhook_payload_tracking_site)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_tracking_site_ready: #{e}"
+end
+```
+
+#### Using the on_tracking_site_ready_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_tracking_site_ready_with_http_info(webhook_payload_tracking_site)
+
+```ruby
+begin
+  # Tracking site ready event
+  data, status_code, headers = api_instance.on_tracking_site_ready_with_http_info(webhook_payload_tracking_site)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_tracking_site_ready_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_tracking_site** | [**WebhookPayloadTrackingSite**](WebhookPayloadTrackingSite.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_verification_approved
 
 > on_verification_approved(on_verification_approved_request)
 
 Verification approved event
 
-Fired when a managed-OTP verification is approved (the user submitted the correct code to POST /v1/verify/verifications/{verificationId}/check). 
+The recipient submitted the right verification code.  ### Payload notes  Carries `verification.verificationId`, `verification.channel` (`sms`) and `verification.to`. 
 
 ### Examples
 
@@ -6720,7 +9969,7 @@ nil (empty response body)
 
 Verification failed event
 
-Fired when a managed-OTP verification is exhausted (the maximum number of wrong code attempts was reached). 
+A verification ran out of attempts without a correct code.  ### Payload notes  `reason` is `max_attempts_reached`. Carries the same `verification` fields as `verification.approved`. 
 
 ### Examples
 
@@ -6788,7 +10037,7 @@ nil (empty response body)
 
 Webhook test event
 
-Fired when sending a test webhook to verify the endpoint configuration.
+Zernio sent a test event to an endpoint.  ### When it fires  Sent when you call Test webhook or press test in the dashboard, whatever events the endpoint subscribes to. Sent once, synchronously, and never retried. 
 
 ### Examples
 
@@ -6856,7 +10105,7 @@ nil (empty response body)
 
 WhatsApp account alert received
 
-Fired for each Meta `account_alerts` notification on a connected WhatsApp Business Account. 
+Meta sent an account alert for a connected WhatsApp Business Account.  ### Payload notes  Forwards Meta's `account_alerts` as is. `alert.severity` is `CRITICAL`, `WARNING` or `INFORMATIONAL`; `alert.type` is Meta's alert type; `alert.description` is the text.  ### Who receives it  An alert about one number goes to that number's account. A business-level alert goes to every connected number on the WABA. 
 
 ### Examples
 
@@ -6924,7 +10173,7 @@ nil (empty response body)
 
 WhatsApp display-name review outcome event
 
-Fired when Meta finishes reviewing a WhatsApp Business display-name change. Forwarded from Meta's `phone_number_name_update` webhook field on the WhatsApp Business Account.  - It fires only on a review outcome: `name.status` APPROVED, DECLINED, or PENDING_REVIEW. - A name applied without review reports `name_status: AVAILABLE_WITHOUT_REVIEW` on the phone node instead, and produces no event here. - `decision` REJECTED maps to DECLINED and DEFERRED maps to PENDING_REVIEW, matching the `name_status` vocabulary returned by `GET /v1/whatsapp/number-info`.  Delivery is at-least-once; dedupe on `(account.accountId, name.status, name.requestedName)`. 
+Meta finished reviewing a WhatsApp display-name change on a connected number.  ### When it fires  Fires only on a review outcome, forwarded from Meta's `phone_number_name_update` field. A name applied without review (`AVAILABLE_WITHOUT_REVIEW`) produces no event.  ### Payload notes  Branch on `name.status` (`APPROVED`, `DECLINED`, `PENDING_REVIEW`). Meta's `REJECTED` maps to `DECLINED` and `DEFERRED` to `PENDING_REVIEW`, because the review is still open. `name.requestedName` and `name.rejectionReason` are Meta's values or null.  ### Delivery  Delivery is at-least-once; dedupe on `(account.accountId, name.status, name.requestedName)`. 
 
 ### Examples
 
@@ -6992,7 +10241,7 @@ nil (empty response body)
 
 WhatsApp quality rating or messaging limit changed
 
-Fired when a connected WhatsApp number's quality rating or messaging limit tier changes. Delivery is at-least-once; dedupe on the event `id`. 
+A connected number's quality rating or messaging limit tier changed.  ### When it fires  Fires only when the rating or tier differs from the value Zernio held. A tier change Meta applies to the whole business portfolio fires once per connected number.  ### Payload notes  `quality.source` says which Meta signal reported it. Compare `quality.previousQualityRating` with `quality.qualityRating`, and the previous and current messaging limit tier. `quality.qualityRating` is Meta's live value (`GREEN`, `YELLOW`, `RED`).  ### Delivery  Delivery is at-least-once; dedupe on the event `id`. 
 
 ### Examples
 
@@ -7060,7 +10309,7 @@ nil (empty response body)
 
 WhatsApp Business Account restricted or reinstated
 
-Fired when Meta restricts, disables, deletes or reinstates the WhatsApp Business Account, once per connected number on it. 
+Meta restricted, disabled, deleted or reinstated a connected WhatsApp Business Account, or flagged a violation on it.  ### When it fires  Mirrors Meta's `account_update` events. They apply to the whole WhatsApp Business Account, so every connected number on it receives one event.  ### Payload notes  Branch on `status.status` (`restricted` or `active`) and `status.metaEvent`. `status.restrictions` lists what Meta restricted (for example `RESTRICTED_BIZ_INITIATED_MESSAGING`) and when each lifts. The same status is on the account as `platformStatus`. 
 
 ### Examples
 
@@ -7128,7 +10377,7 @@ nil (empty response body)
 
 WhatsApp automatic event detected
 
-Fired when Meta's automatic event identification detects a lead or purchase in a Click-to-WhatsApp conversation. The identification is opt-in during Embedded Signup and not available for EU/UK/JP businesses.  - Branch on `eventName` (`LeadSubmitted` | `Purchase`). - It carries the `ctwa_clid`.  Meta omits that clid on a minority of referrals on any number (coexistence or not, most often WhatsApp Status placements). When it does, this event can supply it and Zernio writes it back onto the conversation, so POST /v1/whatsapp/conversions becomes usable for the thread. 
+Meta's automatic event identification detected a lead or purchase in a Click-to-WhatsApp conversation.  ### Payload notes  Branch on `eventName` (`LeadSubmitted` or `Purchase`). `Purchase` may carry the detected amount in `customData` (`currency`, `value`). It carries the `ctwaClid`.  ### Conversions API match key  Meta omits the clid on a minority of referrals, most often WhatsApp Status placements; this event can supply it. Zernio writes it onto the conversation, so `POST /v1/whatsapp/conversions` becomes usable for it.  ### Availability  Detection is not available for EU, UK and JP businesses. Elsewhere the owner opts in during Embedded Signup. An endpoint subscribed on a number whose owner did not opt in receives nothing. 
 
 ### Examples
 
@@ -7196,7 +10445,7 @@ nil (empty response body)
 
 WhatsApp contact identity changed event
 
-Fired when a WhatsApp user changes phone number or Meta regenerates their business-scoped user id (BSUID). Carries the previous and current identifiers so you can re-key records stored against the old phone number or BSUID. Delivery is at-least-once; dedupe on the event `id`. 
+A WhatsApp user changed phone number or Meta regenerated their business-scoped user id (BSUID).  ### When it fires  Fires when Meta reports the user under a new phone number (`reason: \"user_changed_number\"`) or a new BSUID (`user_changed_user_id`, `user_identity_changed` or `user_id_update`).  ### Payload notes  `previous` and `current` carry the phone number, BSUID, parent BSUID and username. Use them to re-key records stored against the old value.  ### Already applied  Zernio has already moved the inbox conversation and the contact when the event arrives. `conversationId` and `contactId` point at them, or are null when there was none.  ### Delivery  Delivery is at-least-once; dedupe on the event `id`. 
 
 ### Examples
 
@@ -7264,7 +10513,7 @@ nil (empty response body)
 
 WhatsApp number action required event
 
-Fired when the regulator asks for more information on an already-placed regulated number order.  The number stays pending (nothing was rejected). The customer can provide the missing information from the dashboard, or via the remediation endpoint.  - `reason` carries the regulator's request verbatim when available. - `requirements` lists every requirement on the order with the reviewer's current verdict. The `declined` ones are what to fix, keyed by the same `requirementId` the remediation endpoint uses. - Verdicts only change when a reviewer acts, so they describe the review at `reviewedAt`, the time of the reviewer's last comment. 
+The regulator asked for more information on a placed number order; nothing was rejected.  ### When it fires  The order stays pending, and the number stays `pending_regulatory`, until you provide the information. The status does not change.  ### Payload notes  `reason` carries the regulator's request verbatim when available. `requirements` lists every requirement with the reviewer's current verdict; the `declined` ones are what to fix, keyed by `requirementId`. Verdicts describe the review at `reviewedAt`.  ### How to resolve  Provide the missing details from the dashboard's phone-numbers page, or re-submit the fields through the remediation endpoint. The review resumes automatically. 
 
 ### Examples
 
@@ -7332,7 +10581,7 @@ nil (empty response body)
 
 WhatsApp number activated event
 
-Fired when a purchased WhatsApp number becomes active and usable. Both the synchronous (Tier 1/2) path and the asynchronous regulated (Tier 3/4) path land here. Lets integrators react without polling GET /v1/phone-numbers. 
+A number you provisioned through Zernio finished setup and is ready to connect.  ### When it fires  Regulated (non-US) numbers can take 1 to 3 business days after the order is approved. In instant-provisioning countries this is the first event, with no review states before it. 
 
 ### Examples
 
@@ -7400,7 +10649,7 @@ nil (empty response body)
 
 WhatsApp number declined event
 
-Fired when a regulated (Tier 3/4) number order is declined or fails review. The number is never billed. `reason` carries the reviewer's rejection reason when available. 
+A regulated number order was declined in regulatory review and no number was activated.  ### Payload notes  `reason` carries the reviewer's rejection reason when available. You are never billed for a declined number.  ### Remediation  Resubmit corrected details and the number returns to `pending_regulatory`. It is the same number, with no new billing. 
 
 ### Examples
 
@@ -7468,7 +10717,7 @@ nil (empty response body)
 
 WhatsApp number KYC submitted event
 
-Fired when an end customer completes a hosted KYC share link (POST /v1/phone-numbers/kyc/share). The number enters review (pending_regulatory) under your account; `whatsapp.number.activated` or `whatsapp.number.declined` follows once the provider rules on it. 
+An end customer completed a hosted KYC share link and the number entered regulatory review.  ### When it fires  Fires only for hosted share links (`POST /v1/phone-numbers/kyc/share`). When you submit KYC over the API, no event fires.  ### What follows  The number is `pending_regulatory` under your account. `whatsapp.number.activated` or `whatsapp.number.declined` follows once the provider rules on it. Update your own UI from this event instead of polling. 
 
 ### Examples
 
@@ -7536,7 +10785,7 @@ nil (empty response body)
 
 WhatsApp number reactivated event
 
-Fired when a suspended number is reactivated (e.g. the payment recovered) and is usable again. 
+A suspended number was reactivated, for example after the payment recovered, and is usable again. 
 
 ### Examples
 
@@ -7604,7 +10853,7 @@ nil (empty response body)
 
 WhatsApp number released event
 
-Fired when a number is released and is no longer usable (by the user, a billing cleanup, or an admin). Terminal. `reason` carries the cause (e.g. `user_requested`, `cleanup_suspended`). 
+A number was released and is no longer usable.  ### Payload notes  Released by you, a billing cleanup or an admin. `reason` is a value such as `user_requested` or `cleanup_suspended`. This is the only terminal status. 
 
 ### Examples
 
@@ -7672,7 +10921,7 @@ nil (empty response body)
 
 WhatsApp number suspended event
 
-Fired when an active number is suspended (e.g. a failed payment). The number stops working until the issue is resolved, after which a `whatsapp.number.reactivated` event is sent. `reason` carries the cause (e.g. `payment_failed`, `subscription_ended`). 
+An active number was suspended, for example after a failed payment.  ### Payload notes  `reason` is a value such as `payment_failed` or `subscription_ended`. The number stops working until the issue is resolved, then `whatsapp.number.reactivated` follows.  ### When it does not recover  A suspension left unresolved ends in release. 
 
 ### Examples
 
@@ -7740,7 +10989,7 @@ nil (empty response body)
 
 WhatsApp number verification-required event
 
-Fired when a regulated number has an out-of-band identity-verification step (e.g. Onfido). `verificationUrl` is the link to forward to the number's end user; the order completes once they pass. 
+A regulated number requires the end user to complete an identity check.  ### Payload notes  `verificationUrl` is a one-time link to forward to the person whose ID is on file, for example for Australian mobile numbers. The order completes once they pass. The number stays `pending_regulatory`. 
 
 ### Examples
 
@@ -7808,7 +11057,7 @@ nil (empty response body)
 
 WhatsApp template category updated event
 
-Fired when Meta reclassifies a WhatsApp Business template's category after approval.  It is forwarded from Meta's `template_category_update` webhook field on the WhatsApp Business Account. Category drives Meta's per-conversation tariff and whether the template is subject to the recipient's marketing opt-out.  - `template.changeType` is `scheduled` (24h advance notice) or `applied`. - `template.category` is always the category right now. 
+Meta reclassified a WhatsApp template's category, first as a 24-hour advance notice and again when applied.  ### When it fires  Sent with `template.changeType: \"scheduled\"` for Meta's 24-hour advance notice, and again with `\"applied\"` when the change takes effect.  ### Payload notes  `template.category` is always the category right now. Meta clears a custom delivery window when it recategorises a template, so read `message_send_ttl_seconds` back after an `applied` change.  ### Platform notes  Forwarded from Meta's `template_category_update` field. The category decides Meta's per-delivery rate and the delivery window the template can carry. 
 
 ### Examples
 
@@ -7876,7 +11125,7 @@ nil (empty response body)
 
 WhatsApp template status updated event
 
-Fired when Meta finishes (re)reviewing a WhatsApp Business template attached to a connected WABA. Forwarded from Meta's `message_template_status_update` webhook field on the WhatsApp Business Account. Consumers branch on `template.status` (APPROVED, REJECTED, PENDING, PAUSED, DISABLED, IN_APPEAL, PENDING_DELETION). Meta does not include the previous status or the template's category in this event. 
+Meta finished reviewing or re-reviewing a WhatsApp Business template on a connected WABA.  ### Payload notes  Branch on `template.status` (`APPROVED`, `REJECTED`, `PENDING`, `PAUSED`, `DISABLED`, `IN_APPEAL`, `PENDING_DELETION`). `template.reason` is Meta's free-form reason or `\"NONE\"`.  ### Platform notes  Forwarded from Meta's `message_template_status_update` field. Meta includes neither the previous status nor the template's category. 
 
 ### Examples
 
@@ -7944,7 +11193,7 @@ nil (empty response body)
 
 Workflow run completed event
 
-Fired when a workflow run ends; execution.status is completed, or exited for a run ended on purpose before its last node.
+A workflow run ended, with `execution.status` `completed`, or `exited` when it ended on purpose before its last node.  ### Exits  An exit is a handoff, or a button that switched the contact to another workflow. 
 
 ### Examples
 
@@ -8012,7 +11261,7 @@ nil (empty response body)
 
 Workflow run failed event
 
-Fired when a workflow run fails; error says which node failed and why.
+A workflow run failed; `error` names the node that failed and why. 
 
 ### Examples
 
@@ -8080,7 +11329,7 @@ nil (empty response body)
 
 Workflow run started event
 
-Fired when a workflow run starts for a conversation.
+A workflow run started for a conversation; `trigger.type` is the trigger node's type.  ### Payload notes  `trigger.text` is the inbound message that started the run, when there was one. 
 
 ### Examples
 

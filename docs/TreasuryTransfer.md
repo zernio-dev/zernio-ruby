@@ -9,8 +9,8 @@
 | **payee_name** | **String** | The payee&#39;s name when Zernio knows it, for example a creator&#39;s display name in one of your creator campaigns; null otherwise | [optional] |
 | **destination_type** | **String** |  | [optional] |
 | **amount_cents** | **Integer** | Amount the payee receives, in full | [optional] |
-| **fee_cents** | **Integer** | Zernio fee added on top, 4% with a 50 cent minimum | [optional] |
-| **total_cents** | **Integer** | Amount debited from your balance: amountCents plus feeCents | [optional] |
+| **fee_cents** | **Integer** | Zernio fee added on top: 4%, 50 cents minimum per payout. | [optional] |
+| **total_cents** | **Integer** | amountCents plus feeCents, both paid by the payout batch card charge | [optional] |
 | **currency** | **String** |  | [optional] |
 | **reference** | [**TreasuryTransferReference**](TreasuryTransferReference.md) |  | [optional] |
 | **status** | **String** |  | [optional] |

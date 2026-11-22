@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Connected ads account ID (metaads, googleads, linkedinads, tiktokads, openaiads, pinterestads or redditads). |  |
-| **destination_id** | **String** | Platform destination, as listed by GET /v1/accounts/{accountId}/conversion-destinations. |  |
+| **destination_id** | **String** | Platform destination, as listed by GET /v1/ads/conversions/destinations. |  |
 
 ## Example
 

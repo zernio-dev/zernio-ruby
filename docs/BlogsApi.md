@@ -93,7 +93,7 @@ end
 
 Create a blog article
 
-Creates an article on the blog. Supported on Shopify (`shopify`), WordPress (`wordpress`), Wix (`wix`) and Webflow (`webflow`).  ### Publishing behavior  - WordPress, Wix and Webflow default to a draft when both publishing fields are omitted. - `isPublished: false` keeps the article as a draft and takes priority over a future `publishDate`. - A future `publishDate` schedules publication natively on the platform. The platform publishes it at that time with no Zernio queue involved. - `isPublished: true` publishes immediately when there is no future `publishDate`. - WordPress native scheduling depends on the site's scheduler/WP-Cron.  ### SEO  `seo.title` / `seo.description` map to:  - Shopify: the global `title_tag` and `description_tag` metafields (the fields Shopify themes read for the page title and meta description). - Wix: the post's SEO title and meta description.  WordPress and Webflow reject `seo`; SEO plugin and custom-field writes are not supported.  ### Webflow  Webflow has no scheduling API: a future `publishDate` returns 400 unless `isPublished: false` keeps a draft.  Fields map to the collection's own fields by type and slug:  - The body goes to its rich text field. - `excerpt` goes to a summary field. - `image` goes to an image field. - `tags` and `author` go to tag and author reference fields.  Sending a field the collection does not have returns 400, as does a collection that requires a field the Blogs API cannot fill.  ### Wix  Wix stores rich content. `bodyHtml` is converted on write (each top-level HTML element must fit 30,000 characters), and images in the body are imported into the site's Media Manager.  ### Idempotency  Send an Idempotency-Key header to make retries safe. A retry with the same key and body replays the original 201 instead of creating a second article. A retry while the first request is still running returns 409; retry after a short backoff. 
+Creates an article on the blog. Supported on Shopify (`shopify`), WordPress (`wordpress`), Wix (`wix`) and Webflow (`webflow`).  ### Publishing behavior  - WordPress, Wix and Webflow default to a draft when both publishing fields are omitted. - `isPublished: false` keeps the article as a draft and takes priority over a future `publishDate`. - A future `publishDate` schedules publication natively on the platform. The platform publishes it at that time with no Zernio queue involved. - `isPublished: true` publishes immediately when there is no future `publishDate`. - WordPress native scheduling depends on the site's scheduler/WP-Cron.  ### SEO  `seo.title` / `seo.description` map to:  - Shopify: the global `title_tag` and `description_tag` metafields (the fields Shopify themes read for the page title and meta description). - Wix: the post's SEO title and meta description.  WordPress and Webflow reject `seo`; SEO plugin and custom-field writes are not supported.  ### Webflow  Webflow has no scheduling API: a future `publishDate` returns 400 unless `isPublished: false` keeps a draft.  Fields map to the collection's own fields by type and slug:  - The body goes to its rich text field. - `excerpt` goes to a summary field. - `image` goes to an image field. - `tags` and `author` go to tag and author reference fields.  Sending a field the collection does not have returns 400, as does a collection that requires a field the Blogs API cannot fill.  ### Wix  Wix stores rich content. `bodyHtml` is converted on write (each top-level HTML element must fit 30,000 characters), and images in the body are imported into the site's Media Manager. On Wix, `<figure>` width (px or %) and float, and `<figcaption>`, are kept.  ### Idempotency  Send an Idempotency-Key header to make retries safe. A retry with the same key and body replays the original 201 instead of creating a second article. A retry while the first request is still running returns 409; retry after a short backoff.  If the platform could not be reached during the write, the 502 says the write may have completed and is stored for the key: a retry with the same key replays it. Check the blog for the article, then retry with a new key. 
 
 ### Examples
 
@@ -111,7 +111,7 @@ account_id = 'account_id_example' # String | Connected Shopify, WordPress, Wix o
 blog_id = 'blog_id_example' # String | Platform-native blog/site id returned by the list operation.
 create_blog_article_request = Zernio::CreateBlogArticleRequest.new({title: 'title_example'}) # CreateBlogArticleRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours. 
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
@@ -148,7 +148,7 @@ end
 | **account_id** | **String** | Connected Shopify, WordPress, Wix or Webflow account id. |  |
 | **blog_id** | **String** | Platform-native blog/site id returned by the list operation. |  |
 | **create_blog_article_request** | [**CreateBlogArticleRequest**](CreateBlogArticleRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
 
@@ -456,7 +456,7 @@ end
 
 List blog articles
 
-Lists the articles of a blog. Supported on Shopify (`shopify`), WordPress (`wordpress`), Wix (`wix`) and Webflow (`webflow`).  ### Pagination  Cursor-paginated: pass `limit` (1-50, default 20) and the `cursor` from a previous response's `nextCursor`. `nextCursor` is null when there are no more pages. Treat cursors as opaque and pass them unchanged.  ### Platform differences  - WordPress and Wix results include `status`, and include `publishDate` only for scheduled (`future`) posts. - Wix lists return `bodyHtml: null`; get the article for its body. - Webflow results report `status` as `publish` or `draft` only. 
+Lists the articles of a blog. Supported on Shopify (`shopify`), WordPress (`wordpress`), Wix (`wix`) and Webflow (`webflow`).  ### Pagination  Cursor-paginated: pass `limit` (1-50, default 20) and the `cursor` from a previous response's `nextCursor`. `nextCursor` is null when there are no more pages. Treat cursors as opaque and pass them unchanged.  ### Find an article by handle  Pass `handle` to get that one article in any status (published, draft or scheduled), or an empty list. WordPress and Webflow only.  Use it after a `502` on create to see whether the article exists.  ### Platform differences  - WordPress and Wix results include `status`, and include `publishDate` only for scheduled (`future`) posts. - Wix lists return `bodyHtml: null`; get the article for its body. - Webflow results report `status` as `publish` or `draft` only. 
 
 ### Examples
 
@@ -474,7 +474,8 @@ account_id = 'account_id_example' # String | Connected Shopify, WordPress, Wix o
 blog_id = 'blog_id_example' # String | Platform-native blog/site id returned by the list operation.
 opts = {
   limit: 56, # Integer | Page size (1-50).
-  cursor: 'cursor_example' # String | Opaque cursor from a previous response. Omit for the first page.
+  cursor: 'cursor_example', # String | Opaque cursor from a previous response. Omit for the first page.
+  handle: 'handle_example' # String | Only the article with this handle, in any status. WordPress and Webflow only.
 }
 
 begin
@@ -512,6 +513,7 @@ end
 | **blog_id** | **String** | Platform-native blog/site id returned by the list operation. |  |
 | **limit** | **Integer** | Page size (1-50). | [optional][default to 20] |
 | **cursor** | **String** | Opaque cursor from a previous response. Omit for the first page. | [optional] |
+| **handle** | **String** | Only the article with this handle, in any status. WordPress and Webflow only. | [optional] |
 
 ### Return type
 

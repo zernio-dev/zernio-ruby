@@ -7,6 +7,7 @@
 | **enabled** | **Boolean** |  | [optional] |
 | **phone_number** | **String** |  | [optional] |
 | **pstn_forward_to** | **String** |  | [optional] |
+| **ring_in_browser** | **Boolean** |  | [optional] |
 | **recording_enabled** | **Boolean** |  | [optional] |
 | **transcription_enabled** | **Boolean** |  | [optional] |
 | **transcription_language** | **String** |  | [optional] |
@@ -30,6 +31,7 @@ instance = Zernio::EnableVoiceOnNumber200Response.new(
   enabled: null,
   phone_number: null,
   pstn_forward_to: null,
+  ring_in_browser: null,
   recording_enabled: null,
   transcription_enabled: null,
   transcription_language: null,

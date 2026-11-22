@@ -12,6 +12,8 @@
 | **from** | **String** | Consumer wa_id / E.164 | [optional] |
 | **to** | **String** | Business number (E.164) | [optional] |
 | **forward_to** | **String** | Destination snapshot at routing time | [optional] |
+| **telnyx_call_control_id** | **String** | Carrier call_control_id of this call leg. Equals start.call_control_id of the media stream a wss:// forwardTo receives. | [optional] |
+| **telnyx_call_session_id** | **String** | Carrier call_session_id of this call. Equals start.call_session_id of the media stream a wss:// forwardTo receives. | [optional] |
 | **contact_id** | **String** |  | [optional] |
 | **conversation_id** | **String** |  | [optional] |
 | **started_at** | **Time** |  | [optional] |
@@ -30,6 +32,8 @@ instance = Zernio::WebhookPayloadCallReceivedCall.new(
   from: null,
   to: null,
   forward_to: null,
+  telnyx_call_control_id: null,
+  telnyx_call_session_id: null,
   contact_id: null,
   conversation_id: null,
   started_at: null

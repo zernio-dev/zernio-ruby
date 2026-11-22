@@ -8,6 +8,7 @@
 | **phone_number** | **String** |  | [optional] |
 | **country** | **String** |  | [optional] |
 | **profile_id** | **String** |  | [optional] |
+| **purchase_intent_id** | **String** | Echo of the purchaseIntentId the number was bought or KYC-submitted with. Absent when none was sent. | [optional] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = Zernio::OnWhatsAppNumberDeclinedRequestNumber.new(
   id: null,
   phone_number: null,
   country: null,
-  profile_id: null
+  profile_id: null,
+  purchase_intent_id: null
 )
 ```
 

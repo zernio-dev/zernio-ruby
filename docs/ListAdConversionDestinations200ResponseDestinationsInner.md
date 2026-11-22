@@ -1,0 +1,28 @@
+# Zernio::ListAdConversionDestinations200ResponseDestinationsInner
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Destination identifier. Meta: pixel ID. Google: conversion action resource name. LinkedIn: numeric conversion rule ID. OpenAI Ads: pixel wire id. Reddit: pixel id (&#x60;a2_...&#x60;). Microsoft Advertising: &#x60;accounts/{id}/conversionGoals/{id}&#x60; or &#x60;accounts/{id}/uetTags/{id}&#x60;. X Ads: pixel event id (&#x60;tw-...&#x60;). Snapchat: Snap Pixel ID (a UUID). Taboola: numeric Account ID.  | [optional] |
+| **name** | **String** |  | [optional] |
+| **type** | **String** | Present when the platform locks event type to the destination (Google conversion actions, LinkedIn conversion rules).  | [optional] |
+| **status** | **String** |  | [optional] |
+| **ad_account_id** | **String** | Set by adapters whose destinations are scoped to a specific ad account (LinkedIn, Reddit). On LinkedIn, pass it back on subsequent CRUD calls.  | [optional] |
+| **conversion_events** | [**Array&lt;ListAdConversionDestinations200ResponseDestinationsInnerConversionEventsInner&gt;**](ListAdConversionDestinations200ResponseDestinationsInnerConversionEventsInner.md) | OpenAI Ads only: the conversion event settings wired to this pixel. Pass one&#39;s &#x60;id&#x60;, &#x60;eventType&#x60; or &#x60;name&#x60; as &#x60;promotedObject.customEventType&#x60; on a &#x60;goal: conversions&#x60; create (POST /v1/ads/create or POST /v1/ads/campaigns) to optimize for it. Without it, the account&#39;s most recently created &#x60;optimizable&#x60; event is used; when none is, the create returns 400.  | [optional] |
+
+## Example
+
+```ruby
+require 'zernio-sdk'
+
+instance = Zernio::ListAdConversionDestinations200ResponseDestinationsInner.new(
+  id: null,
+  name: null,
+  type: null,
+  status: null,
+  ad_account_id: null,
+  conversion_events: null
+)
+```
+

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **standby** | **Boolean** | true when this inbound arrived on Meta&#39;s standby path because another app owned the conversation: Meta Business Agent on WhatsApp, or another handover receiver (such as Page Inbox) on Facebook and Instagram. That app answers it; Zernio only observes and no automation runs. See conversation.control_changed.  To take control back:  - WhatsApp: sending a reply takes control back. - Facebook, and Instagram accounts connected through a Facebook Page: take control first with POST /v1/inbox/conversations/{conversationId}/thread-control. - Instagram Login connections: cannot take or request control; wait for the owner to pass it.  | [optional] |
+| **standby** | **Boolean** | true when this inbound arrived on Meta&#39;s standby path because another app owned the conversation: Meta Business Agent on WhatsApp, or another handover receiver (such as Page Inbox) on Facebook and Instagram. That app answers it; Zernio only observes and no automation runs. See conversation.control_changed.  To take control back:  - WhatsApp: sending a reply takes control back. - Facebook, and Instagram accounts connected through a Facebook Page: a send tries take_thread_control once and resends. Meta allows the take only when the account has a default app set in conversation routing and has allowed Zernio to take control of conversations. - Instagram Login connections: cannot take or request control; wait for the owner to pass it.  | [optional] |
 | **quoted_message_id** | **String** | Raw platform envelope id (WhatsApp &#x60;context.id&#x60;; Instagram and Facebook Messenger &#x60;reply_to.mid&#x60;) of the message this one is a quote-reply to, forwarded verbatim. It may not equal the stored id of that message (see &#x60;quotedMessage.platformMessageId&#x60;). On outgoing messages the same field appears on &#x60;message.sent&#x60;, but only on some surfaces: see WebhookPayloadMessageSent.metadata.quotedMessageId.  | [optional] |
 | **quoted_message** | [**WebhookPayloadMessageMetadataQuotedMessage**](WebhookPayloadMessageMetadataQuotedMessage.md) |  | [optional] |
 | **quick_reply_payload** | **String** | Payload from a quick reply tap (Facebook/Instagram Messenger). | [optional] |
@@ -31,6 +31,12 @@
 | **unsupported** | [**WebhookPayloadMessageMetadataUnsupported**](WebhookPayloadMessageMetadataUnsupported.md) |  | [optional] |
 | **no_renderable_content** | **Boolean** | Instagram / Facebook Messenger only. Set when the message carries nothing an integrator can render: a &#x60;template&#x60; attachment with no text and no parseable content, or Meta&#39;s own &#x60;is_unsupported&#x60; flag.  Sibling of &#x60;unsupported&#x60; above (WhatsApp only, carries Meta&#39;s error code/title/details and unsupported type); this field has no error envelope, only the boolean.  Absence means \&quot;not flagged\&quot;, never \&quot;checked and renderable\&quot;.  | [optional] |
 | **tiktok_message_type** | **String** | TikTok only. The message type as TikTok reports it, forwarded verbatim (for example image, video, sticker, share_post, emoji, reaction, template).  Present on every TikTok DM that is not plain text. Those arrive with text empty and, for image, video, share_post, sticker and emoji, an attachment:  - share_post: type share, with the embed url and payload.videoId. - sticker/emoji: type sticker, url signed and expiring.  | [optional] |
+| **channel** | **String** | iMessage only. Delivery channel the message arrived on (imessage, sms, rcs or whatsapp). | [optional] |
+| **message_type** | **String** | iMessage only. Provider message type (for example text, audio, sticker). | [optional] |
+| **thread_id** | **String** | iMessage only. Id of the reply thread the message belongs to. | [optional] |
+| **language_code** | **String** | iMessage only. Language detected by the provider. | [optional] |
+| **transcript** | **String** | iMessage only. Provider transcription of a voice message. | [optional] |
+| **markdown_text** | **String** | iMessage only. Rich-text markup rendered to markdown; &#x60;text&#x60; stays plain. | [optional] |
 
 ## Example
 
@@ -64,7 +70,13 @@ instance = Zernio::WebhookPayloadMessageMetadata.new(
   ad: null,
   unsupported: null,
   no_renderable_content: null,
-  tiktok_message_type: null
+  tiktok_message_type: null,
+  channel: null,
+  message_type: null,
+  thread_id: null,
+  language_code: null,
+  transcript: null,
+  markdown_text: null
 )
 ```
 

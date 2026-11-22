@@ -12,6 +12,7 @@
 | **flow_token** | **String** |  | [optional] |
 | **data** | **Object** | Submitted field values (flow_token removed) | [optional] |
 | **raw** | **String** | Raw response_json string | [optional] |
+| **content_not_retained** | **Boolean** | True when this team does not retain content, so the content fields of this row are null. Identifiers and metadata stay. | [optional] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = Zernio::ListWhatsAppFlowResponses200ResponseResponsesInner.new(
   conversation_id: null,
   flow_token: null,
   data: null,
-  raw: null
+  raw: null,
+  content_not_retained: null
 )
 ```
 

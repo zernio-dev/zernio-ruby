@@ -1,0 +1,28 @@
+# Zernio::CreateAdCustomConversionRequest
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The connected ads account (SocialAccount ID). |  |
+| **ad_account_id** | **String** | Platform ad account id (Meta act_&lt;n&gt;, Google customer id, LinkedIn account id, ...). |  |
+| **name** | **String** | Also the reuse key, together with pixelId. |  |
+| **pixel_id** | **String** | Meta pixel id (event_source_id). From GET /v1/accounts/{accountId}/tracking-tags. |  |
+| **custom_event_type** | **String** | Meta custom_event_type, e.g. LEAD, PURCHASE, OTHER. |  |
+| **rule** | **Object** | Meta conversion rule, forwarded verbatim. |  |
+
+## Example
+
+```ruby
+require 'zernio-sdk'
+
+instance = Zernio::CreateAdCustomConversionRequest.new(
+  account_id: null,
+  ad_account_id: null,
+  name: null,
+  pixel_id: null,
+  custom_event_type: null,
+  rule: null
+)
+```
+

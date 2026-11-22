@@ -9,6 +9,7 @@
 | **invited_profile_ids** | **Array&lt;String&gt;** |  | [optional] |
 | **disabled_resource_groups** | **Array&lt;String&gt;** |  | [optional] |
 | **expires_at** | **Time** |  | [optional] |
+| **created_at** | **Time** |  | [optional] |
 | **invite_url** | **String** |  | [optional] |
 
 ## Example
@@ -22,6 +23,7 @@ instance = Zernio::CreateInviteToken201Response.new(
   invited_profile_ids: null,
   disabled_resource_groups: null,
   expires_at: null,
+  created_at: null,
   invite_url: null
 )
 ```

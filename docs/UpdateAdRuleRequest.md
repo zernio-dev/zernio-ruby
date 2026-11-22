@@ -7,8 +7,11 @@
 | **name** | **String** |  | [optional] |
 | **level** | [**AdRuleLevel**](AdRuleLevel.md) |  | [optional] |
 | **campaign_ids** | **Array&lt;String&gt;** |  | [optional] |
+| **filters** | [**Array&lt;AdRuleFiltersInner&gt;**](AdRuleFiltersInner.md) | Narrows the objects the rule checks. Every filter must hold. A campaign rule reads &#x60;name&#x60;, &#x60;campaign_id&#x60;, &#x60;goal&#x60;, &#x60;days_live&#x60;, &#x60;days_since_change&#x60;, &#x60;budget_level&#x60; and &#x60;channel_type&#x60;; an ad set rule all but &#x60;days_since_change&#x60;, plus &#x60;campaign_name&#x60; and &#x60;adset_id&#x60;; an ad rule also &#x60;adset_name&#x60; and &#x60;ad_id&#x60;.  A keyword rule reads &#x60;name&#x60; (the keyword text), &#x60;campaign_name&#x60;, &#x60;adset_name&#x60;, &#x60;campaign_id&#x60;, &#x60;adset_id&#x60;, &#x60;match_type&#x60; and &#x60;blocked_by_negative&#x60;. A search term rule reads those (&#x60;name&#x60; is the term) plus &#x60;search_term_status&#x60;.  | [optional] |
+| **groups** | [**Array&lt;AdRuleGroupsInner&gt;**](AdRuleGroupsInner.md) | Null removes the groups; each campaign is then judged on its own. | [optional] |
+| **lifecycle** | [**AdRuleLifecycle**](AdRuleLifecycle.md) |  | [optional] |
 | **conditions** | [**AdRuleConditions**](AdRuleConditions.md) |  | [optional] |
-| **actions** | [**Array&lt;AdRuleAction&gt;**](AdRuleAction.md) | Each type at most once, and at most one of &#x60;pause&#x60;, &#x60;activate&#x60; and &#x60;adjust_budget&#x60;. | [optional] |
+| **actions** | [**Array&lt;AdRuleAction&gt;**](AdRuleAction.md) | Each type at most once, and at most one of &#x60;pause&#x60;, &#x60;activate&#x60;, &#x60;adjust_budget&#x60;, &#x60;adjust_bid&#x60;, &#x60;adjust_target&#x60;, &#x60;reallocate_budget&#x60;, &#x60;duplicate&#x60; and &#x60;edit_name&#x60;. | [optional] |
 | **schedule** | [**AdRuleSchedule**](AdRuleSchedule.md) |  | [optional] |
 | **cooldown_minutes** | **Integer** |  | [optional] |
 | **enabled** | **Boolean** |  | [optional] |
@@ -22,6 +25,9 @@ instance = Zernio::UpdateAdRuleRequest.new(
   name: null,
   level: null,
   campaign_ids: null,
+  filters: null,
+  groups: [{name&#x3D;MBA, filters&#x3D;[{field&#x3D;name, op&#x3D;contains, value&#x3D;MBA}]}, {name&#x3D;Account total, filters&#x3D;[]}],
+  lifecycle: null,
   conditions: null,
   actions: null,
   schedule: null,

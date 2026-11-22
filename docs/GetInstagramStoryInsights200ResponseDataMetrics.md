@@ -17,6 +17,7 @@
 | **follows** | **Integer** |  |  |
 | **reposts** | **Integer** |  |  |
 | **total_interactions** | **Integer** |  |  |
+| **link_clicks** | **Integer** | Taps on links in the story (the link sticker). Facebook Login accounts only; always 0 for Instagram Login accounts. Taps on other stickers (mentions, hashtags, locations) are not reported by Meta. |  |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = Zernio::GetInstagramStoryInsights200ResponseDataMetrics.new(
   profile_visits: null,
   follows: null,
   reposts: null,
-  total_interactions: null
+  total_interactions: null,
+  link_clicks: null
 )
 ```
 

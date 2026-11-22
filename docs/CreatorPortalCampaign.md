@@ -21,6 +21,10 @@
 | **hold_days** | **Integer** | Days approved earnings stay owed before they become payable. |  |
 | **tracking_days** | **Integer** | Days each submitted post is tracked for views. |  |
 | **max_accounts_per_participant** | **Integer** | How many connected accounts can submit posts. Null means no limit. |  |
+| **join_approval** | **String** | manual: a creator who joins through the open link waits &#x60;pending&#x60; until the campaign team accepts them. |  |
+| **require_draft_approval** | **Boolean** | The creator uploads a draft for review first, and submits the live post for an approved draft. |  |
+| **sample_products** | [**Array&lt;CreatorCampaignSampleProduct&gt;**](CreatorCampaignSampleProduct.md) | Products the creator can ask a free sample of; empty when the campaign offers none. |  |
+| **sample_content_due_days** | **Integer** | Days after a sample is approved by which a post is expected. |  |
 
 ## Example
 
@@ -44,7 +48,11 @@ instance = Zernio::CreatorPortalCampaign.new(
   max_post_age_minutes: null,
   hold_days: null,
   tracking_days: null,
-  max_accounts_per_participant: null
+  max_accounts_per_participant: null,
+  join_approval: null,
+  require_draft_approval: null,
+  sample_products: null,
+  sample_content_due_days: null
 )
 ```
 

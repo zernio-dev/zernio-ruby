@@ -1,18 +1,49 @@
 # Zernio::AdRuleConditions
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **all** | [**Array&lt;AdRuleCondition&gt;**](AdRuleCondition.md) |  |  |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::AdRuleConditions.new(
-  all: null
-)
+Zernio::AdRuleConditions.openapi_one_of
+# =>
+# [
+#   :'AdRuleConditionsOneOf',
+#   :'AdRuleConditionsOneOf1'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::AdRuleConditions.build(data)
+# => #<AdRuleConditionsOneOf:0x00007fdd4aab02a0>
+
+Zernio::AdRuleConditions.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `AdRuleConditionsOneOf`
+- `AdRuleConditionsOneOf1`
+- `nil` (if no type matches)
 
