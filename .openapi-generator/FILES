@@ -752,7 +752,9 @@ docs/ConversationAdAttribution.md
 docs/ConversionAction.md
 docs/ConversionActionTagSnippetsInner.md
 docs/ConversionAuditAnswer.md
+docs/ConversionAuditAnswerNetworksInner.md
 docs/ConversionAuditAnswerPublicReport.md
+docs/ConversionAuditAnswerTopFixesInner.md
 docs/ConversionAuditApi.md
 docs/ConversionAuditMonitor.md
 docs/ConversionAuditMonitorAnswer.md
@@ -5010,7 +5012,9 @@ lib/zernio-sdk/models/conversation_ad_attribution.rb
 lib/zernio-sdk/models/conversion_action.rb
 lib/zernio-sdk/models/conversion_action_tag_snippets_inner.rb
 lib/zernio-sdk/models/conversion_audit_answer.rb
+lib/zernio-sdk/models/conversion_audit_answer_networks_inner.rb
 lib/zernio-sdk/models/conversion_audit_answer_public_report.rb
+lib/zernio-sdk/models/conversion_audit_answer_top_fixes_inner.rb
 lib/zernio-sdk/models/conversion_audit_monitor.rb
 lib/zernio-sdk/models/conversion_audit_monitor_answer.rb
 lib/zernio-sdk/models/conversion_audit_monitor_score_history_inner.rb
@@ -9199,8 +9203,10 @@ spec/models/content_retention_response_spec.rb
 spec/models/conversation_ad_attribution_spec.rb
 spec/models/conversion_action_spec.rb
 spec/models/conversion_action_tag_snippets_inner_spec.rb
+spec/models/conversion_audit_answer_networks_inner_spec.rb
 spec/models/conversion_audit_answer_public_report_spec.rb
 spec/models/conversion_audit_answer_spec.rb
+spec/models/conversion_audit_answer_top_fixes_inner_spec.rb
 spec/models/conversion_audit_monitor_answer_spec.rb
 spec/models/conversion_audit_monitor_score_history_inner_spec.rb
 spec/models/conversion_audit_monitor_spec.rb

@@ -17,6 +17,12 @@ module Zernio
   class ConversionAuditAnswer < ApiModelBase
     attr_accessor :report
 
+    # Each ad network with its final setup and leak, computed exactly as the public report page shows them, best setup first.
+    attr_accessor :networks
+
+    # The few fixes that matter most, in the order the public report page lists them.
+    attr_accessor :top_fixes
+
     # A prompt to paste into a coding agent. It lists the report's findings, then connecting Zernio, sending conversions server-side and verifying them.
     attr_accessor :fix_prompt
 
@@ -26,6 +32,8 @@ module Zernio
     def self.attribute_map
       {
         :'report' => :'report',
+        :'networks' => :'networks',
+        :'top_fixes' => :'topFixes',
         :'fix_prompt' => :'fixPrompt',
         :'public_report' => :'publicReport'
       }
@@ -45,6 +53,8 @@ module Zernio
     def self.openapi_types
       {
         :'report' => :'ConversionAuditReport',
+        :'networks' => :'Array<ConversionAuditAnswerNetworksInner>',
+        :'top_fixes' => :'Array<ConversionAuditAnswerTopFixesInner>',
         :'fix_prompt' => :'String',
         :'public_report' => :'ConversionAuditAnswerPublicReport'
       }
@@ -79,6 +89,22 @@ module Zernio
         self.report = nil
       end
 
+      if attributes.key?(:'networks')
+        if (value = attributes[:'networks']).is_a?(Array)
+          self.networks = value
+        end
+      else
+        self.networks = nil
+      end
+
+      if attributes.key?(:'top_fixes')
+        if (value = attributes[:'top_fixes']).is_a?(Array)
+          self.top_fixes = value
+        end
+      else
+        self.top_fixes = nil
+      end
+
       if attributes.key?(:'fix_prompt')
         self.fix_prompt = attributes[:'fix_prompt']
       else
@@ -101,6 +127,18 @@ module Zernio
         invalid_properties.push('invalid value for "report", report cannot be nil.')
       end
 
+      if @networks.nil?
+        invalid_properties.push('invalid value for "networks", networks cannot be nil.')
+      end
+
+      if @top_fixes.nil?
+        invalid_properties.push('invalid value for "top_fixes", top_fixes cannot be nil.')
+      end
+
+      if @top_fixes.length > 3
+        invalid_properties.push('invalid value for "top_fixes", number of items must be less than or equal to 3.')
+      end
+
       if @fix_prompt.nil?
         invalid_properties.push('invalid value for "fix_prompt", fix_prompt cannot be nil.')
       end
@@ -113,6 +151,9 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @report.nil?
+      return false if @networks.nil?
+      return false if @top_fixes.nil?
+      return false if @top_fixes.length > 3
       return false if @fix_prompt.nil?
       true
     end
@@ -125,6 +166,30 @@ module Zernio
       end
 
       @report = report
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] networks Value to be assigned
+    def networks=(networks)
+      if networks.nil?
+        fail ArgumentError, 'networks cannot be nil'
+      end
+
+      @networks = networks
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] top_fixes Value to be assigned
+    def top_fixes=(top_fixes)
+      if top_fixes.nil?
+        fail ArgumentError, 'top_fixes cannot be nil'
+      end
+
+      if top_fixes.length > 3
+        fail ArgumentError, 'invalid value for "top_fixes", number of items must be less than or equal to 3.'
+      end
+
+      @top_fixes = top_fixes
     end
 
     # Custom attribute writer method with validation
@@ -143,6 +208,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           report == o.report &&
+          networks == o.networks &&
+          top_fixes == o.top_fixes &&
           fix_prompt == o.fix_prompt &&
           public_report == o.public_report
     end
@@ -156,7 +223,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [report, fix_prompt, public_report].hash
+      [report, networks, top_fixes, fix_prompt, public_report].hash
     end
 
     # Builds the object from hash

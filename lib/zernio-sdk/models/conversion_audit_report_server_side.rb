@@ -21,6 +21,9 @@ module Zernio
 
     attr_accessor :note
 
+    # The server-side path that collects on the site's own domain, when the scan saw one.
+    attr_accessor :first_party_collection
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -48,7 +51,8 @@ module Zernio
       {
         :'status' => :'status',
         :'signals' => :'signals',
-        :'note' => :'note'
+        :'note' => :'note',
+        :'first_party_collection' => :'firstPartyCollection'
       }
     end
 
@@ -67,7 +71,8 @@ module Zernio
       {
         :'status' => :'String',
         :'signals' => :'Array<ConversionAuditReportServerSideSignalsInner>',
-        :'note' => :'String'
+        :'note' => :'String',
+        :'first_party_collection' => :'String'
       }
     end
 
@@ -111,6 +116,10 @@ module Zernio
         self.note = attributes[:'note']
       else
         self.note = nil
+      end
+
+      if attributes.key?(:'first_party_collection')
+        self.first_party_collection = attributes[:'first_party_collection']
       end
     end
 
@@ -183,7 +192,8 @@ module Zernio
       self.class == o.class &&
           status == o.status &&
           signals == o.signals &&
-          note == o.note
+          note == o.note &&
+          first_party_collection == o.first_party_collection
     end
 
     # @see the `==` method
@@ -195,7 +205,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, signals, note].hash
+      [status, signals, note, first_party_collection].hash
     end
 
     # Builds the object from hash

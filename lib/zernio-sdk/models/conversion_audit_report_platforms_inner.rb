@@ -30,6 +30,9 @@ module Zernio
     # The only server path seen is the Zernio site tag relay; `serverSideVerified` says whether its delivery to this platform is proven.
     attr_accessor :relayed_by
 
+    # On a scan that read the page source only: the pixel comes from the Zernio site tag's settings, which load it after consent, not from the page. Its ids are not reported.
+    attr_accessor :loaded_by
+
     # The Zernio site tag on the page belongs to an account whose destination for this platform accepted the site's events in the last 7 days.
     attr_accessor :server_side_verified
 
@@ -87,6 +90,7 @@ module Zernio
         :'browser_pixel' => :'browserPixel',
         :'server_side' => :'serverSide',
         :'relayed_by' => :'relayedBy',
+        :'loaded_by' => :'loadedBy',
         :'server_side_verified' => :'serverSideVerified',
         :'server_tool' => :'serverTool',
         :'status' => :'status',
@@ -117,6 +121,7 @@ module Zernio
         :'browser_pixel' => :'Boolean',
         :'server_side' => :'Boolean',
         :'relayed_by' => :'String',
+        :'loaded_by' => :'String',
         :'server_side_verified' => :'Boolean',
         :'server_tool' => :'String',
         :'status' => :'String',
@@ -177,6 +182,10 @@ module Zernio
 
       if attributes.key?(:'relayed_by')
         self.relayed_by = attributes[:'relayed_by']
+      end
+
+      if attributes.key?(:'loaded_by')
+        self.loaded_by = attributes[:'loaded_by']
       end
 
       if attributes.key?(:'server_side_verified')
@@ -274,6 +283,8 @@ module Zernio
       return false if @server_side.nil?
       relayed_by_validator = EnumAttributeValidator.new('String', ["zernio-tag"])
       return false unless relayed_by_validator.valid?(@relayed_by)
+      loaded_by_validator = EnumAttributeValidator.new('String', ["zernio-tag"])
+      return false unless loaded_by_validator.valid?(@loaded_by)
       return false if @status.nil?
       status_validator = EnumAttributeValidator.new('String', ["good", "warn", "missing", "not-firing", "configured"])
       return false unless status_validator.valid?(@status)
@@ -335,6 +346,16 @@ module Zernio
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] loaded_by Object to be assigned
+    def loaded_by=(loaded_by)
+      validator = EnumAttributeValidator.new('String', ["zernio-tag"])
+      unless validator.valid?(loaded_by)
+        fail ArgumentError, "invalid value for \"loaded_by\", must be one of #{validator.allowable_values}."
+      end
+      @loaded_by = loaded_by
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
       validator = EnumAttributeValidator.new('String', ["good", "warn", "missing", "not-firing", "configured"])
@@ -384,6 +405,7 @@ module Zernio
           browser_pixel == o.browser_pixel &&
           server_side == o.server_side &&
           relayed_by == o.relayed_by &&
+          loaded_by == o.loaded_by &&
           server_side_verified == o.server_side_verified &&
           server_tool == o.server_tool &&
           status == o.status &&
@@ -404,7 +426,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [key, name, browser_pixel, server_side, relayed_by, server_side_verified, server_tool, status, estimated_loss_browser_only, note, ids, events, fix_steps, fired].hash
+      [key, name, browser_pixel, server_side, relayed_by, loaded_by, server_side_verified, server_tool, status, estimated_loss_browser_only, note, ids, events, fix_steps, fired].hash
     end
 
     # Builds the object from hash
