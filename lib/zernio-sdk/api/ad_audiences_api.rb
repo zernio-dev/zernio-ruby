@@ -320,7 +320,7 @@ module Zernio
       if @api_client.config.client_side_validation && ad_account_id.nil?
         fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdAudiencesApi.list_ad_audiences"
       end
-      allowable_values = ["facebook", "instagram", "googleads", "tiktok", "tiktokads", "pinterest", "linkedin", "linkedinads", "twitter", "xads", "redditads"]
+      allowable_values = ["facebook", "instagram", "googleads", "tiktok", "tiktokads", "pinterest", "linkedin", "linkedinads", "twitter", "xads", "redditads", "snapchatads"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end

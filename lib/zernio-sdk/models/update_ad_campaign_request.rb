@@ -258,7 +258,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit", "microsoft", "amazon", "tradedesk"])
+      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit", "microsoft", "amazon", "tradedesk", "snapchat"])
       return false unless platform_validator.valid?(@platform)
       return false if !@portfolio_bid_strategy_id.nil? && @portfolio_bid_strategy_id !~ Regexp.new(/^\d+$/)
       return false if !@shared_budget_id.nil? && @shared_budget_id !~ Regexp.new(/^\d+$/)
@@ -269,7 +269,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit", "microsoft", "amazon", "tradedesk"])
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit", "microsoft", "amazon", "tradedesk", "snapchat"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio SocialAccount id owning the Google Ads or Reddit Ads connection. |  |
-| **platform** | **String** | \&quot;google\&quot; and \&quot;reddit\&quot; are implemented; every other value returns 501. |  |
+| **platform** | **String** | \&quot;google\&quot;, \&quot;reddit\&quot; and \&quot;snapchat\&quot; are implemented; every other value returns 501. |  |
 | **campaign_id** | **String** | Platform campaign ID the ad group is created under (numeric on Google). |  |
 | **name** | **String** |  |  |
 | **status** | **String** |  | [optional][default to &#39;PAUSED&#39;] |

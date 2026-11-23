@@ -18,7 +18,7 @@ module Zernio
     # Zernio SocialAccount id owning the Google Ads or Reddit Ads connection.
     attr_accessor :account_id
 
-    # \"google\" and \"reddit\" are implemented; every other value returns 501.
+    # \"google\", \"reddit\" and \"snapchat\" are implemented; every other value returns 501.
     attr_accessor :platform
 
     # Platform campaign ID the ad group is created under (numeric on Google).
@@ -280,7 +280,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit"])
+      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit", "snapchat"])
       return false unless platform_validator.valid?(@platform)
       return false if @campaign_id.nil?
       return false if @name.nil?
@@ -308,7 +308,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit"])
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit", "snapchat"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
