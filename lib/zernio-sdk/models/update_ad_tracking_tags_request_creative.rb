@@ -28,6 +28,9 @@ module Zernio
 
     attr_accessor :video_url
 
+    # The Get Directions button location, required to rebuild a `GET_DIRECTIONS` image creative (400 without it). Only with `callToAction: GET_DIRECTIONS`.
+    attr_accessor :call_to_action_link
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -36,7 +39,8 @@ module Zernio
         :'call_to_action' => :'callToAction',
         :'link_url' => :'linkUrl',
         :'image_url' => :'imageUrl',
-        :'video_url' => :'videoUrl'
+        :'video_url' => :'videoUrl',
+        :'call_to_action_link' => :'callToActionLink'
       }
     end
 
@@ -58,7 +62,8 @@ module Zernio
         :'call_to_action' => :'String',
         :'link_url' => :'String',
         :'image_url' => :'String',
-        :'video_url' => :'String'
+        :'video_url' => :'String',
+        :'call_to_action_link' => :'String'
       }
     end
 
@@ -116,6 +121,10 @@ module Zernio
 
       if attributes.key?(:'video_url')
         self.video_url = attributes[:'video_url']
+      end
+
+      if attributes.key?(:'call_to_action_link')
+        self.call_to_action_link = attributes[:'call_to_action_link']
       end
     end
 
@@ -219,7 +228,8 @@ module Zernio
           call_to_action == o.call_to_action &&
           link_url == o.link_url &&
           image_url == o.image_url &&
-          video_url == o.video_url
+          video_url == o.video_url &&
+          call_to_action_link == o.call_to_action_link
     end
 
     # @see the `==` method
@@ -231,7 +241,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headline, body, call_to_action, link_url, image_url, video_url].hash
+      [headline, body, call_to_action, link_url, image_url, video_url, call_to_action_link].hash
     end
 
     # Builds the object from hash

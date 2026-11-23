@@ -72,6 +72,9 @@ module Zernio
     # Meta only. The display link shown on link (image) ads, Meta link_data.caption. Returns 422 on video creatives and on asset feeds without a link.
     attr_accessor :caption
 
+    # Meta only. The map location the `GET_DIRECTIONS` button opens, while the ad link stays as it is. Send it with `callToAction: GET_DIRECTIONS`.  - 400 with any other `callToAction`, with a value that is not an `fbgeo://` location, and on other networks. - 422 on video ads (their only link is the button, so change `linkUrl`), on lead ads, and on asset feed creatives that list their calls to action in the feed. - Required with `callToAction: GET_DIRECTIONS` on a full image creative (headline, body, callToAction, linkUrl, imageUrl), and on a partial edit of an image ad whose button has no location yet. Without it the request is a 400, and no other field of it reaches Meta. 
+    attr_accessor :call_to_action_link
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -116,7 +119,8 @@ module Zernio
         :'video_id' => :'videoId',
         :'existing_creative_id' => :'existingCreativeId',
         :'lead_gen_form_id' => :'leadGenFormId',
-        :'caption' => :'caption'
+        :'caption' => :'caption',
+        :'call_to_action_link' => :'callToActionLink'
       }
     end
 
@@ -152,7 +156,8 @@ module Zernio
         :'video_id' => :'String',
         :'existing_creative_id' => :'String',
         :'lead_gen_form_id' => :'String',
-        :'caption' => :'String'
+        :'caption' => :'String',
+        :'call_to_action_link' => :'String'
       }
     end
 
@@ -265,6 +270,10 @@ module Zernio
 
       if attributes.key?(:'caption')
         self.caption = attributes[:'caption']
+      end
+
+      if attributes.key?(:'call_to_action_link')
+        self.call_to_action_link = attributes[:'call_to_action_link']
       end
     end
 
@@ -518,7 +527,8 @@ module Zernio
           video_id == o.video_id &&
           existing_creative_id == o.existing_creative_id &&
           lead_gen_form_id == o.lead_gen_form_id &&
-          caption == o.caption
+          caption == o.caption &&
+          call_to_action_link == o.call_to_action_link
     end
 
     # @see the `==` method
@@ -530,7 +540,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [promotion, creative_features, catalog_format, headline, long_headline, business_name, square_image_url, body, bodies, headlines, description, descriptions, call_to_action, link_url, image_url, video_url, video_id, existing_creative_id, lead_gen_form_id, caption].hash
+      [promotion, creative_features, catalog_format, headline, long_headline, business_name, square_image_url, body, bodies, headlines, description, descriptions, call_to_action, link_url, image_url, video_url, video_id, existing_creative_id, lead_gen_form_id, caption, call_to_action_link].hash
     end
 
     # Builds the object from hash
