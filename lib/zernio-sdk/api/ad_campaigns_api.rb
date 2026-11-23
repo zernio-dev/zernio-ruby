@@ -2282,6 +2282,7 @@ module Zernio
     # @option opts [Date] :from_date Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range.
     # @option opts [String] :platform Restrict to one platform.
+    # @option opts [String] :breakdown Set to &#x60;adAccount&#x60; to keep one row per day and platform ad account, each carrying its &#x60;adAccountId&#x60;, instead of one row per day and currency. Two connections that reach the same ad account both return it: add their timelines per &#x60;adAccountId&#x60; to count it once.
     # @option opts [String] :compare Set to &#x60;previous&#x60; to also return &#x60;previousRows&#x60; for the period of the same length that ends the day before &#x60;fromDate&#x60;, with that period as &#x60;previousRange&#x60;. Needs a &#x60;fromDate&#x60; (sent or defaulted); &#x60;toDate&#x60; alone answers 400.
     # @return [AdsTimelineResponse]
     def get_ads_timeline(account_id, opts = {})
@@ -2297,6 +2298,7 @@ module Zernio
     # @option opts [Date] :from_date Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range.
     # @option opts [String] :platform Restrict to one platform.
+    # @option opts [String] :breakdown Set to &#x60;adAccount&#x60; to keep one row per day and platform ad account, each carrying its &#x60;adAccountId&#x60;, instead of one row per day and currency. Two connections that reach the same ad account both return it: add their timelines per &#x60;adAccountId&#x60; to count it once.
     # @option opts [String] :compare Set to &#x60;previous&#x60; to also return &#x60;previousRows&#x60; for the period of the same length that ends the day before &#x60;fromDate&#x60;, with that period as &#x60;previousRange&#x60;. Needs a &#x60;fromDate&#x60; (sent or defaulted); &#x60;toDate&#x60; alone answers 400.
     # @return [Array<(AdsTimelineResponse, Integer, Hash)>] AdsTimelineResponse data, response status code and response headers
     def get_ads_timeline_with_http_info(account_id, opts = {})
@@ -2310,6 +2312,10 @@ module Zernio
       allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai", "reddit", "microsoft", "amazon"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["adAccount"]
+      if @api_client.config.client_side_validation && opts[:'breakdown'] && !allowable_values.include?(opts[:'breakdown'])
+        fail ArgumentError, "invalid value for \"breakdown\", must be one of #{allowable_values}"
       end
       allowable_values = ["previous"]
       if @api_client.config.client_side_validation && opts[:'compare'] && !allowable_values.include?(opts[:'compare'])
@@ -2325,6 +2331,7 @@ module Zernio
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'breakdown'] = opts[:'breakdown'] if !opts[:'breakdown'].nil?
       query_params[:'compare'] = opts[:'compare'] if !opts[:'compare'].nil?
 
       # header parameters

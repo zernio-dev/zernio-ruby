@@ -20,6 +20,9 @@ module Zernio
     # ISO 4217 currency of every money field in this row (spend, cpc, cpm, costPerConversion, purchaseValue, actionValues). Null when the currency of the row's ad accounts is unknown. Added 2026-10-23.  An account whose ad accounts bill in different currencies gets one row per currency for that day, never a sum across currencies.
     attr_accessor :currency
 
+    # Only with `breakdown=adAccount`. The platform ad account of this row (e.g. Meta `act_…`); null for rows ingested before 2026-05-13. Added 2026-11-23.
+    attr_accessor :ad_account_id
+
     # Native currency units (matches /ads/tree convention), in `currency`.
     attr_accessor :spend
 
@@ -69,6 +72,7 @@ module Zernio
       {
         :'date' => :'date',
         :'currency' => :'currency',
+        :'ad_account_id' => :'adAccountId',
         :'spend' => :'spend',
         :'impressions' => :'impressions',
         :'reach' => :'reach',
@@ -103,6 +107,7 @@ module Zernio
       {
         :'date' => :'Date',
         :'currency' => :'String',
+        :'ad_account_id' => :'String',
         :'spend' => :'Float',
         :'impressions' => :'Integer',
         :'reach' => :'Integer',
@@ -126,6 +131,7 @@ module Zernio
     def self.openapi_nullable
       Set.new([
         :'currency',
+        :'ad_account_id',
       ])
     end
 
@@ -151,6 +157,10 @@ module Zernio
 
       if attributes.key?(:'currency')
         self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
       end
 
       if attributes.key?(:'spend')
@@ -246,6 +256,7 @@ module Zernio
       self.class == o.class &&
           date == o.date &&
           currency == o.currency &&
+          ad_account_id == o.ad_account_id &&
           spend == o.spend &&
           impressions == o.impressions &&
           reach == o.reach &&
@@ -273,7 +284,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, currency, spend, impressions, reach, clicks, engagement, ctr, cpc, cpm, conversions, all_conversions, conversions_by_type, cost_per_conversion, actions, action_values, purchase_value, roas].hash
+      [date, currency, ad_account_id, spend, impressions, reach, clicks, engagement, ctr, cpc, cpm, conversions, all_conversions, conversions_by_type, cost_per_conversion, actions, action_values, purchase_value, roas].hash
     end
 
     # Builds the object from hash

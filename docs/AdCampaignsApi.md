@@ -2243,6 +2243,7 @@ opts = {
   from_date: Date.parse('2013-10-20'), # Date | Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago.
   to_date: Date.parse('2013-10-20'), # Date | Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   platform: 'facebook', # String | Restrict to one platform.
+  breakdown: 'adAccount', # String | Set to `adAccount` to keep one row per day and platform ad account, each carrying its `adAccountId`, instead of one row per day and currency. Two connections that reach the same ad account both return it: add their timelines per `adAccountId` to count it once.
   compare: 'previous' # String | Set to `previous` to also return `previousRows` for the period of the same length that ends the day before `fromDate`, with that period as `previousRange`. Needs a `fromDate` (sent or defaulted); `toDate` alone answers 400.
 }
 
@@ -2282,6 +2283,7 @@ end
 | **from_date** | **Date** | Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
 | **to_date** | **Date** | Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range. | [optional] |
 | **platform** | **String** | Restrict to one platform. | [optional] |
+| **breakdown** | **String** | Set to &#x60;adAccount&#x60; to keep one row per day and platform ad account, each carrying its &#x60;adAccountId&#x60;, instead of one row per day and currency. Two connections that reach the same ad account both return it: add their timelines per &#x60;adAccountId&#x60; to count it once. | [optional] |
 | **compare** | **String** | Set to &#x60;previous&#x60; to also return &#x60;previousRows&#x60; for the period of the same length that ends the day before &#x60;fromDate&#x60;, with that period as &#x60;previousRange&#x60;. Needs a &#x60;fromDate&#x60; (sent or defaulted); &#x60;toDate&#x60; alone answers 400. | [optional] |
 
 ### Return type
