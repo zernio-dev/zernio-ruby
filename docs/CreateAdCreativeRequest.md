@@ -11,6 +11,7 @@
 | **description** | **String** | Link description below the headline; omitted &#x3D; Meta scrapes the destination&#39;s OG description. | [optional] |
 | **call_to_action** | **String** | CTA type (same whitelist as POST /v1/ads/create). | [optional][default to &#39;LEARN_MORE&#39;] |
 | **link_url** | **String** |  |  |
+| **call_to_action_link** | **String** | The map location a &#x60;GET_DIRECTIONS&#x60; button opens, while &#x60;linkUrl&#x60; stays the creative&#39;s website link. Requires &#x60;callToAction: GET_DIRECTIONS&#x60; and an image creative (&#x60;imageUrl&#x60; or &#x60;imageHash&#x60;), 400 otherwise; a &#x60;GET_DIRECTIONS&#x60; image creative without it is a 400 too. | [optional] |
 | **image_url** | **String** | Publicly reachable image; uploaded to the account&#39;s library server-side. | [optional] |
 | **image_hash** | **String** | Existing library image hash (POST /v1/ads/images or GET /v1/ads/images). | [optional] |
 | **carousel_cards** | [**Array&lt;CreateAdCreativeRequestCarouselCardsInner&gt;**](CreateAdCreativeRequestCarouselCardsInner.md) |  | [optional] |
@@ -35,6 +36,7 @@ instance = Zernio::CreateAdCreativeRequest.new(
   description: null,
   call_to_action: null,
   link_url: null,
+  call_to_action_link: fbgeo://48.8632965, 2.3587139, &quot;Shop name, Paris&quot;,
   image_url: null,
   image_hash: null,
   carousel_cards: null,
