@@ -757,6 +757,8 @@ docs/ConnectLineCredentials200ResponseWebhook.md
 docs/ConnectLineCredentialsRequest.md
 docs/ConnectOpenAIAdsCredentials200Response.md
 docs/ConnectOpenAIAdsCredentialsRequest.md
+docs/ConnectOutbrainAdsCredentials200Response.md
+docs/ConnectOutbrainAdsCredentialsRequest.md
 docs/ConnectShopifyWithToken200Response.md
 docs/ConnectShopifyWithToken200ResponseAccount.md
 docs/ConnectShopifyWithTokenRequest.md
@@ -5082,6 +5084,8 @@ lib/zernio-sdk/models/connect_line_credentials200_response_webhook.rb
 lib/zernio-sdk/models/connect_line_credentials_request.rb
 lib/zernio-sdk/models/connect_open_ai_ads_credentials200_response.rb
 lib/zernio-sdk/models/connect_open_ai_ads_credentials_request.rb
+lib/zernio-sdk/models/connect_outbrain_ads_credentials200_response.rb
+lib/zernio-sdk/models/connect_outbrain_ads_credentials_request.rb
 lib/zernio-sdk/models/connect_shopify_with_token200_response.rb
 lib/zernio-sdk/models/connect_shopify_with_token200_response_account.rb
 lib/zernio-sdk/models/connect_shopify_with_token_request.rb
@@ -9336,6 +9340,8 @@ spec/models/connect_line_credentials200_response_webhook_spec.rb
 spec/models/connect_line_credentials_request_spec.rb
 spec/models/connect_open_ai_ads_credentials200_response_spec.rb
 spec/models/connect_open_ai_ads_credentials_request_spec.rb
+spec/models/connect_outbrain_ads_credentials200_response_spec.rb
+spec/models/connect_outbrain_ads_credentials_request_spec.rb
 spec/models/connect_shopify_with_token200_response_account_spec.rb
 spec/models/connect_shopify_with_token200_response_spec.rb
 spec/models/connect_shopify_with_token_request_spec.rb

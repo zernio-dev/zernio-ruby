@@ -20,6 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_klaviyo_credentials**](ConnectApi.md#connect_klaviyo_credentials) | **POST** /v1/connect/klaviyo/credentials | Connect a Klaviyo account |
 | [**connect_line_credentials**](ConnectApi.md#connect_line_credentials) | **POST** /v1/connect/line/credentials | Connect LINE Official Account |
 | [**connect_open_ai_ads_credentials**](ConnectApi.md#connect_open_ai_ads_credentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account |
+| [**connect_outbrain_ads_credentials**](ConnectApi.md#connect_outbrain_ads_credentials) | **POST** /v1/connect/outbrain-ads/credentials | Connect an Outbrain marketer |
 | [**connect_shopify_with_token**](ConnectApi.md#connect_shopify_with_token) | **POST** /v1/connect/shopify/token | Connect a Shopify store with a custom-app Admin token |
 | [**connect_slack_channel**](ConnectApi.md#connect_slack_channel) | **POST** /v1/connect/slack | Connect a Slack channel |
 | [**connect_snapchat_ads_credentials**](ConnectApi.md#connect_snapchat_ads_credentials) | **POST** /v1/connect/snapchat-ads/credentials | Connect a Snapchat Ads pixel |
@@ -1253,6 +1254,75 @@ end
 ### Return type
 
 [**ConnectOpenAIAdsCredentials200Response**](ConnectOpenAIAdsCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_outbrain_ads_credentials
+
+> <ConnectOutbrainAdsCredentials200Response> connect_outbrain_ads_credentials(connect_outbrain_ads_credentials_request)
+
+Connect an Outbrain marketer
+
+Connect an Outbrain marketer by its marketer id from Outbrain Amplify. Outbrain's server-to-server pixel takes no credential, so nothing secret is stored and nothing is checked with Outbrain.  The account then receives the conversion events you forward to it (`POST /v1/events`, forwarding rules). Each event needs the Outbrain click ID (`clickIds.ob_click_id`), which the campaign's Track box passes with `ob_click_id={{ob_click_id}}`.  Outbrain counts an event only when its name equals the name of an Event-Based Conversion in Amplify, case included. Rename events in the forwarding rule when they differ.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_outbrain_ads_credentials_request = Zernio::ConnectOutbrainAdsCredentialsRequest.new({outbrain_marketer_id: 'outbrain_marketer_id_example', profile_id: 'profile_id_example'}) # ConnectOutbrainAdsCredentialsRequest | 
+
+begin
+  # Connect an Outbrain marketer
+  result = api_instance.connect_outbrain_ads_credentials(connect_outbrain_ads_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_outbrain_ads_credentials: #{e}"
+end
+```
+
+#### Using the connect_outbrain_ads_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectOutbrainAdsCredentials200Response>, Integer, Hash)> connect_outbrain_ads_credentials_with_http_info(connect_outbrain_ads_credentials_request)
+
+```ruby
+begin
+  # Connect an Outbrain marketer
+  data, status_code, headers = api_instance.connect_outbrain_ads_credentials_with_http_info(connect_outbrain_ads_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectOutbrainAdsCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_outbrain_ads_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_outbrain_ads_credentials_request** | [**ConnectOutbrainAdsCredentialsRequest**](ConnectOutbrainAdsCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectOutbrainAdsCredentials200Response**](ConnectOutbrainAdsCredentials200Response.md)
 
 ### Authorization
 
