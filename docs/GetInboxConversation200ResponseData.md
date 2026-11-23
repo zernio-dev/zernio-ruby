@@ -19,7 +19,7 @@
 | **last_message** | **String** |  | [optional] |
 | **last_message_at** | **Time** |  | [optional] |
 | **updated_time** | **Time** |  | [optional] |
-| **participants** | [**Array&lt;UpdateFacebookPage200ResponseSelectedPage&gt;**](UpdateFacebookPage200ResponseSelectedPage.md) |  | [optional] |
+| **participants** | [**Array&lt;ConnectTradeDeskAdsPartner200ResponseAdvertisersInner&gt;**](ConnectTradeDeskAdsPartner200ResponseAdvertisersInner.md) |  | [optional] |
 | **instagram_profile** | [**ListInboxConversations200ResponseDataInnerInstagramProfile**](ListInboxConversations200ResponseDataInnerInstagramProfile.md) |  | [optional] |
 | **metadata** | [**InboxConversationAdMetadata**](InboxConversationAdMetadata.md) |  | [optional] |
 | **ad_attribution** | [**ConversationAdAttribution**](ConversationAdAttribution.md) |  | [optional] |

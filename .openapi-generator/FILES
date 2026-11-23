@@ -751,6 +751,9 @@ docs/ConnectTaboolaAdsCredentials200Response.md
 docs/ConnectTaboolaAdsCredentialsRequest.md
 docs/ConnectTradeDeskAdsCredentials200Response.md
 docs/ConnectTradeDeskAdsCredentialsRequest.md
+docs/ConnectTradeDeskAdsPartner200Response.md
+docs/ConnectTradeDeskAdsPartner200ResponseAdvertisersInner.md
+docs/ConnectTradeDeskAdsPartnerRequest.md
 docs/ConnectWebflowWithSiteToken200Response.md
 docs/ConnectWebflowWithSiteToken200ResponseAccount.md
 docs/ConnectWebflowWithSiteTokenRequest.md
@@ -3652,7 +3655,6 @@ docs/UpdateEmailDraftRequest.md
 docs/UpdateEmailSignatureRequest.md
 docs/UpdateEmailThread200Response.md
 docs/UpdateFacebookPage200Response.md
-docs/UpdateFacebookPage200ResponseSelectedPage.md
 docs/UpdateFacebookPageInfoRequest.md
 docs/UpdateFacebookPageRequest.md
 docs/UpdateFileRequest.md
@@ -5047,6 +5049,9 @@ lib/zernio-sdk/models/connect_taboola_ads_credentials200_response.rb
 lib/zernio-sdk/models/connect_taboola_ads_credentials_request.rb
 lib/zernio-sdk/models/connect_trade_desk_ads_credentials200_response.rb
 lib/zernio-sdk/models/connect_trade_desk_ads_credentials_request.rb
+lib/zernio-sdk/models/connect_trade_desk_ads_partner200_response.rb
+lib/zernio-sdk/models/connect_trade_desk_ads_partner200_response_advertisers_inner.rb
+lib/zernio-sdk/models/connect_trade_desk_ads_partner_request.rb
 lib/zernio-sdk/models/connect_webflow_with_site_token200_response.rb
 lib/zernio-sdk/models/connect_webflow_with_site_token200_response_account.rb
 lib/zernio-sdk/models/connect_webflow_with_site_token_request.rb
@@ -7898,7 +7903,6 @@ lib/zernio-sdk/models/update_email_draft_request.rb
 lib/zernio-sdk/models/update_email_signature_request.rb
 lib/zernio-sdk/models/update_email_thread200_response.rb
 lib/zernio-sdk/models/update_facebook_page200_response.rb
-lib/zernio-sdk/models/update_facebook_page200_response_selected_page.rb
 lib/zernio-sdk/models/update_facebook_page_info_request.rb
 lib/zernio-sdk/models/update_facebook_page_request.rb
 lib/zernio-sdk/models/update_file_request.rb
@@ -9272,6 +9276,9 @@ spec/models/connect_taboola_ads_credentials200_response_spec.rb
 spec/models/connect_taboola_ads_credentials_request_spec.rb
 spec/models/connect_trade_desk_ads_credentials200_response_spec.rb
 spec/models/connect_trade_desk_ads_credentials_request_spec.rb
+spec/models/connect_trade_desk_ads_partner200_response_advertisers_inner_spec.rb
+spec/models/connect_trade_desk_ads_partner200_response_spec.rb
+spec/models/connect_trade_desk_ads_partner_request_spec.rb
 spec/models/connect_webflow_with_site_token200_response_account_spec.rb
 spec/models/connect_webflow_with_site_token200_response_spec.rb
 spec/models/connect_webflow_with_site_token_request_spec.rb
@@ -12122,7 +12129,6 @@ spec/models/update_discord_settings_request_spec.rb
 spec/models/update_email_draft_request_spec.rb
 spec/models/update_email_signature_request_spec.rb
 spec/models/update_email_thread200_response_spec.rb
-spec/models/update_facebook_page200_response_selected_page_spec.rb
 spec/models/update_facebook_page200_response_spec.rb
 spec/models/update_facebook_page_info_request_spec.rb
 spec/models/update_facebook_page_request_spec.rb

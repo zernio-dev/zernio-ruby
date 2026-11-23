@@ -1,4 +1,4 @@
-# Zernio::UpdateFacebookPage200ResponseSelectedPage
+# Zernio::ConnectTradeDeskAdsPartner200ResponseAdvertisersInner
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::UpdateFacebookPage200ResponseSelectedPage.new(
+instance = Zernio::ConnectTradeDeskAdsPartner200ResponseAdvertisersInner.new(
   id: null,
   name: null
 )

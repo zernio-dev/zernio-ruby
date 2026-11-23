@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **ready** | **Boolean** | True when POST should be able to install. | [optional] |
 | **reason** | **String** | A TrackingTagInstallBlockedReason when an install would be blocked, else null. | [optional] |
-| **sidebars** | [**Array&lt;UpdateFacebookPage200ResponseSelectedPage&gt;**](UpdateFacebookPage200ResponseSelectedPage.md) | Active widget areas of the theme. | [optional] |
+| **sidebars** | [**Array&lt;ConnectTradeDeskAdsPartner200ResponseAdvertisersInner&gt;**](ConnectTradeDeskAdsPartner200ResponseAdvertisersInner.md) | Active widget areas of the theme. | [optional] |
 
 ## Example
 

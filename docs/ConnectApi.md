@@ -25,6 +25,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_snapchat_ads_credentials**](ConnectApi.md#connect_snapchat_ads_credentials) | **POST** /v1/connect/snapchat-ads/credentials | Connect a Snapchat Ads pixel |
 | [**connect_taboola_ads_credentials**](ConnectApi.md#connect_taboola_ads_credentials) | **POST** /v1/connect/taboola-ads/credentials | Connect a Taboola account |
 | [**connect_trade_desk_ads_credentials**](ConnectApi.md#connect_trade_desk_ads_credentials) | **POST** /v1/connect/tradedesk-ads/credentials | Connect a Trade Desk tracking tag |
+| [**connect_trade_desk_ads_partner**](ConnectApi.md#connect_trade_desk_ads_partner) | **POST** /v1/connect/tradedesk-ads/partner | Connect a Trade Desk partner for ads management |
 | [**connect_webflow_with_site_token**](ConnectApi.md#connect_webflow_with_site_token) | **POST** /v1/connect/webflow/token | Connect Webflow with a site API token |
 | [**connect_wechat_credentials**](ConnectApi.md#connect_wechat_credentials) | **POST** /v1/connect/wechat/credentials | Connect WeChat Official Account |
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
@@ -1596,6 +1597,75 @@ end
 ### Return type
 
 [**ConnectTradeDeskAdsCredentials200Response**](ConnectTradeDeskAdsCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_trade_desk_ads_partner
+
+> <ConnectTradeDeskAdsPartner200Response> connect_trade_desk_ads_partner(connect_trade_desk_ads_partner_request)
+
+Connect a Trade Desk partner for ads management
+
+Connects a Trade Desk partner with an API token for ads management. Sending conversions to a tracking tag is a separate connection: `POST /v1/connect/tradedesk-ads/credentials`.  Connects a Trade Desk partner with an API token. The Trade Desk has no OAuth: your Trade Desk account manager enables API access for your user, who then creates a token in the Partner Portal under Manage API Tokens.  Zernio lists the partner's advertisers with the token before saving anything. Each advertiser becomes an ad account of the connection (`GET /v1/ads/accounts`), and `adAccountIds` keeps only some of them. The token is stored encrypted and never returned.  Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_trade_desk_ads_partner_request = Zernio::ConnectTradeDeskAdsPartnerRequest.new({partner_id: 'partner_id_example', api_token: 'api_token_example', profile_id: 'profile_id_example'}) # ConnectTradeDeskAdsPartnerRequest | 
+
+begin
+  # Connect a Trade Desk partner for ads management
+  result = api_instance.connect_trade_desk_ads_partner(connect_trade_desk_ads_partner_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_trade_desk_ads_partner: #{e}"
+end
+```
+
+#### Using the connect_trade_desk_ads_partner_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectTradeDeskAdsPartner200Response>, Integer, Hash)> connect_trade_desk_ads_partner_with_http_info(connect_trade_desk_ads_partner_request)
+
+```ruby
+begin
+  # Connect a Trade Desk partner for ads management
+  data, status_code, headers = api_instance.connect_trade_desk_ads_partner_with_http_info(connect_trade_desk_ads_partner_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectTradeDeskAdsPartner200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_trade_desk_ads_partner_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_trade_desk_ads_partner_request** | [**ConnectTradeDeskAdsPartnerRequest**](ConnectTradeDeskAdsPartnerRequest.md) |  |  |
+
+### Return type
+
+[**ConnectTradeDeskAdsPartner200Response**](ConnectTradeDeskAdsPartner200Response.md)
 
 ### Authorization
 

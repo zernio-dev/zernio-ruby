@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **message** | **String** |  | [optional] |
-| **selected_page** | [**UpdateFacebookPage200ResponseSelectedPage**](UpdateFacebookPage200ResponseSelectedPage.md) |  | [optional] |
+| **selected_page** | [**ConnectTradeDeskAdsPartner200ResponseAdvertisersInner**](ConnectTradeDeskAdsPartner200ResponseAdvertisersInner.md) |  | [optional] |
 
 ## Example
 
