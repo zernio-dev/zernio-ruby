@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_account_metrics**](MetricsApi.md#get_account_metrics) | **GET** /v1/metrics/accounts | Read follower and post totals per account, platform or scope over time |
 | [**get_ad_account_metrics**](MetricsApi.md#get_ad_account_metrics) | **GET** /v1/metrics/ad-accounts | Read the uploaded results summed across ad accounts |
 | [**get_ad_metrics**](MetricsApi.md#get_ad_metrics) | **GET** /v1/metrics/ads | Read ad metrics by id, or one ad day by day with breakdowns |
+| [**get_ad_set_metrics**](MetricsApi.md#get_ad_set_metrics) | **GET** /v1/metrics/ad-sets | Read the delivery metrics of ad sets over a window |
 | [**get_campaign_metrics**](MetricsApi.md#get_campaign_metrics) | **GET** /v1/metrics/campaigns | Read the delivery metrics or the uploaded results of each campaign over a window |
 | [**get_inbox_metrics**](MetricsApi.md#get_inbox_metrics) | **GET** /v1/metrics/inbox | Read message volume and response times |
 | [**get_insight_metrics**](MetricsApi.md#get_insight_metrics) | **GET** /v1/metrics/insights | Read live account or post insights from the platform |
@@ -254,6 +255,91 @@ end
 ### Return type
 
 [**AdMetricsResponse**](AdMetricsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_set_metrics
+
+> <AdSetMetricsResponse> get_ad_set_metrics(from_date, to_date, metrics, opts)
+
+Read the delivery metrics of ad sets over a window
+
+Sums the delivery metrics of every ad of each ad set from the stored daily rows, over `fromDate` to `toDate` (both required, at most 400 days). Send the ad sets by id with `adSetId` (up to 100), or one `campaignId` for its ad sets, paged with `cursor`.  Each ad set comes with its `campaignId` and the `currency` of its ad account, and `granularity=day` adds one point per day. A query reads at most 9,200 ad set days (100 ad sets for 92 days, 23 for 400) and answers 422 `query_too_large` beyond that.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MetricsApi.new
+from_date = Date.parse('2013-10-20') # Date | First day, inclusive.
+to_date = Date.parse('2013-10-20') # Date | Last day, inclusive. The range is at most 400 days.
+metrics = 'metrics_example' # String | Comma-separated delivery metrics, as GET /v1/metrics/catalog?entity=ad-sets lists them (spend, impressions, reach, clicks, ctr, cpc, cpm, conversions, roas...).
+opts = {
+  limit: 56, # Integer | With campaignId, ad sets per page, 50 by default, 100 at most.
+  cursor: 'cursor_example', # String | With campaignId, pagination.nextCursor of the previous page, sent with the same query.
+  ad_set_id: 'ad_set_id_example', # String | Comma-separated platform ad set ids, up to 100. Send adSetId or campaignId.
+  campaign_id: 'campaign_id_example', # String | One platform campaign id, for its ad sets. Send adSetId or campaignId.
+  granularity: 'total' # String | day adds one point per day to each ad set.
+}
+
+begin
+  # Read the delivery metrics of ad sets over a window
+  result = api_instance.get_ad_set_metrics(from_date, to_date, metrics, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MetricsApi->get_ad_set_metrics: #{e}"
+end
+```
+
+#### Using the get_ad_set_metrics_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AdSetMetricsResponse>, Integer, Hash)> get_ad_set_metrics_with_http_info(from_date, to_date, metrics, opts)
+
+```ruby
+begin
+  # Read the delivery metrics of ad sets over a window
+  data, status_code, headers = api_instance.get_ad_set_metrics_with_http_info(from_date, to_date, metrics, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AdSetMetricsResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling MetricsApi->get_ad_set_metrics_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **from_date** | **Date** | First day, inclusive. |  |
+| **to_date** | **Date** | Last day, inclusive. The range is at most 400 days. |  |
+| **metrics** | **String** | Comma-separated delivery metrics, as GET /v1/metrics/catalog?entity&#x3D;ad-sets lists them (spend, impressions, reach, clicks, ctr, cpc, cpm, conversions, roas...). |  |
+| **limit** | **Integer** | With campaignId, ad sets per page, 50 by default, 100 at most. | [optional][default to 50] |
+| **cursor** | **String** | With campaignId, pagination.nextCursor of the previous page, sent with the same query. | [optional] |
+| **ad_set_id** | **String** | Comma-separated platform ad set ids, up to 100. Send adSetId or campaignId. | [optional] |
+| **campaign_id** | **String** | One platform campaign id, for its ad sets. Send adSetId or campaignId. | [optional] |
+| **granularity** | **String** | day adds one point per day to each ad set. | [optional][default to &#39;total&#39;] |
+
+### Return type
+
+[**AdSetMetricsResponse**](AdSetMetricsResponse.md)
 
 ### Authorization
 

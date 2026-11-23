@@ -124,6 +124,9 @@ docs/AdRuleScheduleTimesInner.md
 docs/AdRulesApi.md
 docs/AdSchedule.md
 docs/AdScheduleWindow.md
+docs/AdSetMetricRow.md
+docs/AdSetMetricsResponse.md
+docs/AdSetMetricsResponseMeta.md
 docs/AdStatus.md
 docs/AdTargetingApi.md
 docs/AdTracking.md
@@ -4447,6 +4450,9 @@ lib/zernio-sdk/models/ad_rule_schedule_quiet_hours.rb
 lib/zernio-sdk/models/ad_rule_schedule_times_inner.rb
 lib/zernio-sdk/models/ad_schedule.rb
 lib/zernio-sdk/models/ad_schedule_window.rb
+lib/zernio-sdk/models/ad_set_metric_row.rb
+lib/zernio-sdk/models/ad_set_metrics_response.rb
+lib/zernio-sdk/models/ad_set_metrics_response_meta.rb
 lib/zernio-sdk/models/ad_status.rb
 lib/zernio-sdk/models/ad_tracking.rb
 lib/zernio-sdk/models/ad_tree_ad_set.rb
@@ -8682,6 +8688,9 @@ spec/models/ad_rule_schedule_times_inner_spec.rb
 spec/models/ad_rule_spec.rb
 spec/models/ad_schedule_spec.rb
 spec/models/ad_schedule_window_spec.rb
+spec/models/ad_set_metric_row_spec.rb
+spec/models/ad_set_metrics_response_meta_spec.rb
+spec/models/ad_set_metrics_response_spec.rb
 spec/models/ad_spec.rb
 spec/models/ad_status_spec.rb
 spec/models/ad_tracking_spec.rb
