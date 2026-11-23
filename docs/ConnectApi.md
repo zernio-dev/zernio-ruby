@@ -3410,7 +3410,8 @@ end
 api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
 opts = {
-  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example' # String | The GoHighLevel location connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same location.
 }
 
 begin
@@ -3446,6 +3447,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
 | **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | The GoHighLevel location connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same location. | [optional] |
 
 ### Return type
 
@@ -3668,7 +3670,8 @@ end
 api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
 opts = {
-  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example' # String | The HubSpot portal connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same portal.
 }
 
 begin
@@ -3704,6 +3707,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
 | **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | The HubSpot portal connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same portal. | [optional] |
 
 ### Return type
 
@@ -4299,7 +4303,8 @@ api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
 opts = {
   environment: 'production', # String | Sign in at login.salesforce.com (`production`, also Developer Edition orgs) or test.salesforce.com (`sandbox`).
-  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example' # String | The Salesforce org connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same org.
 }
 
 begin
@@ -4336,6 +4341,7 @@ end
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
 | **environment** | **String** | Sign in at login.salesforce.com (&#x60;production&#x60;, also Developer Edition orgs) or test.salesforce.com (&#x60;sandbox&#x60;). | [optional][default to &#39;production&#39;] |
 | **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | The Salesforce org connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same org. | [optional] |
 
 ### Return type
 
@@ -4677,7 +4683,8 @@ end
 api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
 opts = {
-  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example' # String | The Webflow site connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same site.
 }
 
 begin
@@ -4713,6 +4720,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
 | **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | The Webflow site connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same site. | [optional] |
 
 ### Return type
 
@@ -4892,7 +4900,8 @@ end
 api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
 opts = {
-  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example' # String | The Wix site connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same site.
 }
 
 begin
@@ -4928,6 +4937,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
 | **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | The Wix site connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same site. | [optional] |
 
 ### Return type
 
@@ -4970,7 +4980,8 @@ end
 api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
 opts = {
-  redirect_url: 'redirect_url_example' # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as `myapp://callback`; relative and unsafe URLs return 400.
+  reconnect_account_id: 'reconnect_account_id_example' # String | The WordPress site connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same site.
 }
 
 begin
@@ -5006,6 +5017,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
 | **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme such as &#x60;myapp://callback&#x60;; relative and unsafe URLs return 400. | [optional] |
+| **reconnect_account_id** | **String** | The WordPress site connection being reconnected. In a workspace with no billing set up, the connect is allowed only when it returns to that same site. | [optional] |
 
 ### Return type
 
