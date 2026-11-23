@@ -2676,7 +2676,7 @@ end
 
 Get Amazon Ads OAuth connect URL
 
-Starts Login with Amazon for Amazon Ads (scope `advertising::campaign_management`). The Amazon login becomes an account with platform `amazonads`; every advertiser profile it reaches, in the NA, EU and FE regions, is a conversions destination (`GET /v1/ads/conversions/destinations`).  Errors on the redirect: `amazonads_no_profiles` (the login reaches no advertiser), `amazonads_no_refresh_token`. 
+Starts Login with Amazon for Amazon Ads (scope `advertising::campaign_management`). The Amazon login becomes an account with platform `amazonads`.  Every seller and vendor advertiser profile it reaches, in the NA, EU and FE regions, is an ad account (`GET /v1/ads/accounts`) and a conversions destination (`GET /v1/ads/conversions/destinations`).  Pass `region` so the user signs in on their own region's Amazon consent page; the connection still reaches the profiles of every region.  Errors on the redirect: `amazonads_no_profiles` (the login reaches no advertiser), `amazonads_no_refresh_token`. 
 
 ### Examples
 
@@ -2698,7 +2698,8 @@ api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles).
 opts = {
   redirect_url: 'redirect_url_example', # String | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme.
-  reconnect_account_id: 'reconnect_account_id_example' # String | Zernio account ID of the Amazon Ads account being reconnected.
+  reconnect_account_id: 'reconnect_account_id_example', # String | Zernio account ID of the Amazon Ads account being reconnected.
+  region: 'NA' # String | Amazon region whose consent page the user signs in on: NA (amazon.com), EU (Europe, Middle East, India) or FE (Japan, Australia, Singapore).
 }
 
 begin
@@ -2735,6 +2736,7 @@ end
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). |  |
 | **redirect_url** | **String** | Custom redirect after connection. Must be an absolute http(s) URL or custom app scheme. | [optional] |
 | **reconnect_account_id** | **String** | Zernio account ID of the Amazon Ads account being reconnected. | [optional] |
+| **region** | **String** | Amazon region whose consent page the user signs in on: NA (amazon.com), EU (Europe, Middle East, India) or FE (Japan, Australia, Singapore). | [optional][default to &#39;NA&#39;] |
 
 ### Return type
 
