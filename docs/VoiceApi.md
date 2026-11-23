@@ -372,11 +372,11 @@ This endpoint does not need any parameter.
 
 ## delete_sip_trunk
 
-> <DeleteSmsSenderId200Response> delete_sip_trunk(id)
+> <DeleteSipTrunk200Response> delete_sip_trunk(id)
 
 Delete a SIP trunk
 
-Tears down the trunk and its carrier-side objects. Refused while any number is still attached: detach them first. 
+Detaches every number still attached to the trunk (their inbound calls go back to Zernio calling), then tears down the trunk and its carrier-side objects. Its credentials stop working immediately. 
 
 ### Examples
 
@@ -405,7 +405,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteSmsSenderId200Response>, Integer, Hash)> delete_sip_trunk_with_http_info(id)
+> <Array(<DeleteSipTrunk200Response>, Integer, Hash)> delete_sip_trunk_with_http_info(id)
 
 ```ruby
 begin
@@ -413,7 +413,7 @@ begin
   data, status_code, headers = api_instance.delete_sip_trunk_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <DeleteSmsSenderId200Response>
+  p data # => <DeleteSipTrunk200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling VoiceApi->delete_sip_trunk_with_http_info: #{e}"
 end
@@ -427,7 +427,7 @@ end
 
 ### Return type
 
-[**DeleteSmsSenderId200Response**](DeleteSmsSenderId200Response.md)
+[**DeleteSipTrunk200Response**](DeleteSipTrunk200Response.md)
 
 ### Authorization
 
