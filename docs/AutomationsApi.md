@@ -16,6 +16,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_automation_approval**](AutomationsApi.md#get_automation_approval) | **GET** /v1/automations/{automationId}/approvals/{approvalId} | Get an approval request |
 | [**get_automation_catalog**](AutomationsApi.md#get_automation_catalog) | **GET** /v1/automations/catalog | Get the automations catalog |
 | [**get_automation_controls**](AutomationsApi.md#get_automation_controls) | **GET** /v1/automations/controls | Get automation controls |
+| [**get_automation_run**](AutomationsApi.md#get_automation_run) | **GET** /v1/automations/{automationId}/runs/{runId} | Get one run of an automation |
 | [**get_automation_template**](AutomationsApi.md#get_automation_template) | **GET** /v1/automations/templates/{templateId} | Get an automation template |
 | [**get_shared_automation_template**](AutomationsApi.md#get_shared_automation_template) | **GET** /v1/automations/templates/shared/{shareToken} | Get a shared automation template |
 | [**get_zernio_automation_template**](AutomationsApi.md#get_zernio_automation_template) | **GET** /v1/automations/templates/zernio/{templateId} | Get a Zernio automation template |
@@ -25,6 +26,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_automation_actions**](AutomationsApi.md#list_automation_actions) | **GET** /v1/automations/actions | List automation actions |
 | [**list_automation_approvals**](AutomationsApi.md#list_automation_approvals) | **GET** /v1/automations/{automationId}/approvals | List an automation&#39;s approval requests |
 | [**list_automation_checks**](AutomationsApi.md#list_automation_checks) | **GET** /v1/automations/{automationId}/checks | List an automation&#39;s checks |
+| [**list_automation_runs**](AutomationsApi.md#list_automation_runs) | **GET** /v1/automations/{automationId}/runs | List an automation&#39;s runs |
 | [**list_automation_templates**](AutomationsApi.md#list_automation_templates) | **GET** /v1/automations/templates | List automation templates |
 | [**list_automations**](AutomationsApi.md#list_automations) | **GET** /v1/automations | List automations |
 | [**pause_automation**](AutomationsApi.md#pause_automation) | **POST** /v1/automations/{automationId}/pause | Turn an automation off |
@@ -882,6 +884,77 @@ This endpoint does not need any parameter.
 - **Accept**: application/json
 
 
+## get_automation_run
+
+> <GetAutomationRun200Response> get_automation_run(automation_id, run_id)
+
+Get one run of an automation
+
+The run with each step it took, where its store keeps them: a flow run's nodes, a comment to DM log's DM and public reply, an ad rule, event or scheduled check's actions. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AutomationsApi.new
+automation_id = 'automation_id_example' # String | 
+run_id = 'run_id_example' # String | 
+
+begin
+  # Get one run of an automation
+  result = api_instance.get_automation_run(automation_id, run_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AutomationsApi->get_automation_run: #{e}"
+end
+```
+
+#### Using the get_automation_run_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAutomationRun200Response>, Integer, Hash)> get_automation_run_with_http_info(automation_id, run_id)
+
+```ruby
+begin
+  # Get one run of an automation
+  data, status_code, headers = api_instance.get_automation_run_with_http_info(automation_id, run_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAutomationRun200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AutomationsApi->get_automation_run_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **automation_id** | **String** |  |  |
+| **run_id** | **String** |  |  |
+
+### Return type
+
+[**GetAutomationRun200Response**](GetAutomationRun200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_automation_template
 
 > <CreateAutomationTemplate201Response> get_automation_template(template_id)
@@ -1536,6 +1609,85 @@ end
 ### Return type
 
 [**ListAutomationChecks200Response**](ListAutomationChecks200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_automation_runs
+
+> <ListAutomationRuns200Response> list_automation_runs(automation_id, opts)
+
+List an automation's runs
+
+Every run of any kind of automation, newest first, in one shape. Flows read both their run stores, comment to DM reads its engine runs and its older trigger logs, and ad rules, event and scheduled automations list their checks that acted or tried to (`/checks` lists every check). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AutomationsApi.new
+automation_id = 'automation_id_example' # String | 
+opts = {
+  status: 'live', # String | 
+  since: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Only runs started at or after this time.
+  limit: 56, # Integer | 
+  cursor: 'cursor_example' # String | `nextCursor` from the previous page.
+}
+
+begin
+  # List an automation's runs
+  result = api_instance.list_automation_runs(automation_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AutomationsApi->list_automation_runs: #{e}"
+end
+```
+
+#### Using the list_automation_runs_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAutomationRuns200Response>, Integer, Hash)> list_automation_runs_with_http_info(automation_id, opts)
+
+```ruby
+begin
+  # List an automation's runs
+  data, status_code, headers = api_instance.list_automation_runs_with_http_info(automation_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAutomationRuns200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AutomationsApi->list_automation_runs_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **automation_id** | **String** |  |  |
+| **status** | **String** |  | [optional] |
+| **since** | **Time** | Only runs started at or after this time. | [optional] |
+| **limit** | **Integer** |  | [optional][default to 20] |
+| **cursor** | **String** | &#x60;nextCursor&#x60; from the previous page. | [optional] |
+
+### Return type
+
+[**ListAutomationRuns200Response**](ListAutomationRuns200Response.md)
 
 ### Authorization
 
