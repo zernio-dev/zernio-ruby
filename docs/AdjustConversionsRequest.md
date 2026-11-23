@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | SocialAccount ID. Must be a &#x60;googleads&#x60; account. |  |
-| **destination_id** | **String** | Conversion action resource name, e.g. &#x60;customers/1234567890/conversionActions/987654321&#x60;. |  |
+| **account_id** | **String** | SocialAccount ID. Must be a &#x60;googleads&#x60; or &#x60;impact&#x60; account. |  |
+| **destination_id** | **String** | Conversion action resource name on Google, e.g. &#x60;customers/1234567890/conversionActions/987654321&#x60;; &#x60;&lt;program id&gt;:&lt;event type id&gt;&#x60; on Impact. |  |
 | **adjustments** | [**Array&lt;AdjustConversionsRequestAdjustmentsInner&gt;**](AdjustConversionsRequestAdjustmentsInner.md) |  |  |
 
 ## Example
