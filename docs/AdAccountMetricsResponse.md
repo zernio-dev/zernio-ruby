@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **results** | **Hash&lt;String, Float&gt;** | Each uploaded result metric summed over the range, by metric key. |  |
-| **meta** | [**CampaignMetricsResponseMeta**](CampaignMetricsResponseMeta.md) |  |  |
+| **meta** | [**AdAccountMetricsResponseMeta**](AdAccountMetricsResponseMeta.md) |  |  |
 
 ## Example
 

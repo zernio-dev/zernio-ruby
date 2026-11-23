@@ -7,7 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_account_metrics**](MetricsApi.md#get_account_metrics) | **GET** /v1/metrics/accounts | Read follower and post totals per account, platform or scope over time |
 | [**get_ad_account_metrics**](MetricsApi.md#get_ad_account_metrics) | **GET** /v1/metrics/ad-accounts | Read the uploaded results summed across ad accounts |
 | [**get_ad_metrics**](MetricsApi.md#get_ad_metrics) | **GET** /v1/metrics/ads | Read ad metrics by id, or one ad day by day with breakdowns |
-| [**get_campaign_metrics**](MetricsApi.md#get_campaign_metrics) | **GET** /v1/metrics/campaigns | Read the uploaded results of each campaign over a window |
+| [**get_campaign_metrics**](MetricsApi.md#get_campaign_metrics) | **GET** /v1/metrics/campaigns | Read the delivery metrics or the uploaded results of each campaign over a window |
 | [**get_inbox_metrics**](MetricsApi.md#get_inbox_metrics) | **GET** /v1/metrics/inbox | Read message volume and response times |
 | [**get_insight_metrics**](MetricsApi.md#get_insight_metrics) | **GET** /v1/metrics/insights | Read live account or post insights from the platform |
 | [**get_metrics_catalog**](MetricsApi.md#get_metrics_catalog) | **GET** /v1/metrics/catalog | List the metrics, groupings and limits of each metrics endpoint |
@@ -269,9 +269,9 @@ end
 
 > <CampaignMetricsResponse> get_campaign_metrics(from_date, to_date, opts)
 
-Read the uploaded results of each campaign over a window
+Read the delivery metrics or the uploaded results of each campaign over a window
 
-Sums, per campaign, each result metric you uploaded (one key per metric, as `GET /v1/ads/campaign-results/metrics` lists them), with `cac_percent`, `cost_per_sale`, `cost_per_qualified_lead`, `lead_to_sale` and `qualified_rate` next to them, over `fromDate` to `toDate` (both required, at most 400 days).  Filter with `campaignId` (platform campaign ids); pages with `cursor`.
+Without `metrics`, sums per campaign each result metric you uploaded (one key per metric, as `GET /v1/ads/campaign-results/metrics` lists them), with `cac_percent`, `cost_per_sale`, `cost_per_qualified_lead`, `lead_to_sale` and `qualified_rate` next to them, over `fromDate` to `toDate` (both required, at most 400 days). Filter with `campaignId` (platform campaign ids); pages with `cursor`.  With `metrics` (for example `metrics=spend,impressions,clicks,ctr`), sums the delivery metrics of every ad of each campaign in `campaignId` (required, up to 100) from the stored daily rows. Every campaign comes on one page with its `currency`, and `granularity=day` adds one point per day.  A query reads at most 9,200 campaign days (100 campaigns for 92 days, 23 for 400) and answers 422 `query_too_large` beyond that. Breakdowns stay live in the platform queries, such as `POST /v1/metrics/platform-queries/meta-ads`.
 
 ### Examples
 
@@ -290,11 +290,13 @@ to_date = Date.parse('2013-10-20') # Date | Last day, inclusive. The range is at
 opts = {
   limit: 56, # Integer | Rows per page, 50 by default, 100 at most.
   cursor: 'cursor_example', # String | pagination.nextCursor of the previous page, sent with the same query.
-  campaign_id: 'campaign_id_example' # String | Comma-separated platform campaign ids.
+  campaign_id: 'campaign_id_example', # String | Comma-separated platform campaign ids. Required with metrics, up to 100.
+  metrics: 'metrics_example', # String | Comma-separated delivery metrics, as GET /v1/metrics/catalog?entity=campaigns lists them (spend, impressions, reach, clicks, ctr, cpc, cpm, conversions, roas, actions, funnel, video counts...).
+  granularity: 'total' # String | day adds one point per day to each campaign. Needs metrics.
 }
 
 begin
-  # Read the uploaded results of each campaign over a window
+  # Read the delivery metrics or the uploaded results of each campaign over a window
   result = api_instance.get_campaign_metrics(from_date, to_date, opts)
   p result
 rescue Zernio::ApiError => e
@@ -310,7 +312,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Read the uploaded results of each campaign over a window
+  # Read the delivery metrics or the uploaded results of each campaign over a window
   data, status_code, headers = api_instance.get_campaign_metrics_with_http_info(from_date, to_date, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -328,7 +330,9 @@ end
 | **to_date** | **Date** | Last day, inclusive. The range is at most 400 days. |  |
 | **limit** | **Integer** | Rows per page, 50 by default, 100 at most. | [optional][default to 50] |
 | **cursor** | **String** | pagination.nextCursor of the previous page, sent with the same query. | [optional] |
-| **campaign_id** | **String** | Comma-separated platform campaign ids. | [optional] |
+| **campaign_id** | **String** | Comma-separated platform campaign ids. Required with metrics, up to 100. | [optional] |
+| **metrics** | **String** | Comma-separated delivery metrics, as GET /v1/metrics/catalog?entity&#x3D;campaigns lists them (spend, impressions, reach, clicks, ctr, cpc, cpm, conversions, roas, actions, funnel, video counts...). | [optional] |
+| **granularity** | **String** | day adds one point per day to each campaign. Needs metrics. | [optional][default to &#39;total&#39;] |
 
 ### Return type
 
