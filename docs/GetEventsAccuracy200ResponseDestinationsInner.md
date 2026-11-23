@@ -20,6 +20,7 @@
 | **deliveries** | [**GetEventsAccuracy200ResponseDestinationsInnerDeliveries**](GetEventsAccuracy200ResponseDestinationsInnerDeliveries.md) |  | [optional] |
 | **match** | [**GetEventsAccuracy200ResponseDestinationsInnerMatch**](GetEventsAccuracy200ResponseDestinationsInnerMatch.md) |  | [optional] |
 | **match_rate** | **Float** | &#x60;match.identified / match.events&#x60;. &#x60;null&#x60; with nothing sent. | [optional] |
+| **failure_reasons** | [**Array&lt;GetEventsAccuracy200ResponseDestinationsInnerFailureReasonsInner&gt;**](GetEventsAccuracy200ResponseDestinationsInnerFailureReasonsInner.md) | Why the destination refused events in the period, by refusal code, most events first (at most 5). Empty when it refused none. | [optional] |
 
 ## Example
 
@@ -42,7 +43,8 @@ instance = Zernio::GetEventsAccuracy200ResponseDestinationsInner.new(
   accuracy: null,
   deliveries: null,
   match: null,
-  match_rate: null
+  match_rate: null,
+  failure_reasons: null
 )
 ```
 

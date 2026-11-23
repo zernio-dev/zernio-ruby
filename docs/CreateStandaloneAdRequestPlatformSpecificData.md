@@ -15,6 +15,7 @@ Zernio::CreateStandaloneAdRequestPlatformSpecificData.openapi_one_of
 # =>
 # [
 #   :'AmazonAdsPlatformData',
+#   :'AppLovinAdsPlatformData',
 #   :'LinkedInAdsPlatformData',
 #   :'MetaAdsPlatformData'
 # ]
@@ -45,6 +46,7 @@ Zernio::CreateStandaloneAdRequestPlatformSpecificData.build(data_that_doesnt_mat
 #### Return type
 
 - `AmazonAdsPlatformData`
+- `AppLovinAdsPlatformData`
 - `LinkedInAdsPlatformData`
 - `MetaAdsPlatformData`
 - `nil` (if no type matches)
