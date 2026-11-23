@@ -7,7 +7,7 @@
 | **name** | **String** |  |  |
 | **status** | **String** | Only a sequence or a flow can be a draft. |  |
 | **trigger** | [**AutomationEventTrigger**](AutomationEventTrigger.md) |  |  |
-| **steps** | [**Array&lt;AutomationNotifyStep&gt;**](AutomationNotifyStep.md) | May be empty: an automation with no steps only records each event it matches as a check with outcome &#x60;triggered&#x60; and no action. &#x60;limits.cooldown&#x60; and &#x60;limits.maxChangesPerDay&#x60; count actions, so they do nothing for it. |  |
+| **steps** | [**Array&lt;EventAutomationDefinitionStepsInner&gt;**](EventAutomationDefinitionStepsInner.md) | May be empty: an automation with no steps only records each event it matches as a check with outcome &#x60;triggered&#x60; and no action. &#x60;limits.cooldown&#x60; and &#x60;limits.maxChangesPerDay&#x60; count actions, so they do nothing for it. |  |
 | **limits** | [**AutomationEventLimits**](AutomationEventLimits.md) |  | [optional] |
 | **id** | **String** |  |  |
 | **kind** | **String** |  |  |

@@ -15,7 +15,7 @@
 | **every** | **Array&lt;String&gt;** |  | [optional] |
 | **times** | **Object** | Ad rule trigger only: the weekly set times it takes. | [optional] |
 | **filter_operators** | **Array&lt;String&gt;** |  | [optional] |
-| **steps** | **Array&lt;String&gt;** |  | [optional] |
+| **steps** | **Array&lt;String&gt;** | The step types the trigger takes. For an event, only those its subject can reach. | [optional] |
 | **boost** | **Object** | Scheduled trigger only: the platforms, goals, most days and most boosts a day of &#x60;ads.boost_post&#x60;. | [optional] |
 | **limits** | **Array&lt;String&gt;** |  | [optional] |
 

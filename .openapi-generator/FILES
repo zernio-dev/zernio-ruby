@@ -337,6 +337,12 @@ docs/AutomationCheck.md
 docs/AutomationConditionResult.md
 docs/AutomationControls.md
 docs/AutomationDefinition.md
+docs/AutomationEventActionStep.md
+docs/AutomationEventActionStepOneOf.md
+docs/AutomationEventActionStepOneOf1.md
+docs/AutomationEventActionStepOneOf2.md
+docs/AutomationEventActionStepOneOf3.md
+docs/AutomationEventActionStepOneOf4.md
 docs/AutomationEventLimits.md
 docs/AutomationEventTrigger.md
 docs/AutomationFactCondition.md
@@ -1434,6 +1440,7 @@ docs/EstimateAdReachRequest.md
 docs/EventAutomationCheck.md
 docs/EventAutomationCheckSubject.md
 docs/EventAutomationDefinition.md
+docs/EventAutomationDefinitionStepsInner.md
 docs/EventConsent.md
 docs/EventCorrection.md
 docs/EventDestination.md
@@ -4678,6 +4685,12 @@ lib/zernio-sdk/models/automation_check.rb
 lib/zernio-sdk/models/automation_condition_result.rb
 lib/zernio-sdk/models/automation_controls.rb
 lib/zernio-sdk/models/automation_definition.rb
+lib/zernio-sdk/models/automation_event_action_step.rb
+lib/zernio-sdk/models/automation_event_action_step_one_of.rb
+lib/zernio-sdk/models/automation_event_action_step_one_of1.rb
+lib/zernio-sdk/models/automation_event_action_step_one_of2.rb
+lib/zernio-sdk/models/automation_event_action_step_one_of3.rb
+lib/zernio-sdk/models/automation_event_action_step_one_of4.rb
 lib/zernio-sdk/models/automation_event_limits.rb
 lib/zernio-sdk/models/automation_event_trigger.rb
 lib/zernio-sdk/models/automation_fact_condition.rb
@@ -5752,6 +5765,7 @@ lib/zernio-sdk/models/estimate_ad_reach_request.rb
 lib/zernio-sdk/models/event_automation_check.rb
 lib/zernio-sdk/models/event_automation_check_subject.rb
 lib/zernio-sdk/models/event_automation_definition.rb
+lib/zernio-sdk/models/event_automation_definition_steps_inner.rb
 lib/zernio-sdk/models/event_consent.rb
 lib/zernio-sdk/models/event_correction.rb
 lib/zernio-sdk/models/event_destination.rb
@@ -8933,6 +8947,12 @@ spec/models/automation_check_spec.rb
 spec/models/automation_condition_result_spec.rb
 spec/models/automation_controls_spec.rb
 spec/models/automation_definition_spec.rb
+spec/models/automation_event_action_step_one_of1_spec.rb
+spec/models/automation_event_action_step_one_of2_spec.rb
+spec/models/automation_event_action_step_one_of3_spec.rb
+spec/models/automation_event_action_step_one_of4_spec.rb
+spec/models/automation_event_action_step_one_of_spec.rb
+spec/models/automation_event_action_step_spec.rb
 spec/models/automation_event_limits_spec.rb
 spec/models/automation_event_trigger_spec.rb
 spec/models/automation_fact_condition_one_of1_spec.rb
@@ -10008,6 +10028,7 @@ spec/models/estimate_ad_reach_request_spec.rb
 spec/models/event_automation_check_spec.rb
 spec/models/event_automation_check_subject_spec.rb
 spec/models/event_automation_definition_spec.rb
+spec/models/event_automation_definition_steps_inner_spec.rb
 spec/models/event_consent_spec.rb
 spec/models/event_correction_spec.rb
 spec/models/event_destination_spec.rb

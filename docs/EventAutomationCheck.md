@@ -14,7 +14,7 @@
 | **subject** | [**EventAutomationCheckSubject**](EventAutomationCheckSubject.md) |  |  |
 | **facts** | **Hash&lt;String, Object&gt;** | The event&#39;s facts as the trigger read them, keyed by fact name. Recorded only for an automation with no steps (one that only records each event).  Null for an automation with steps, whose filter results show the facts it compared, and on checks recorded before facts were kept. Content facts are null for a team that keeps no content. |  |
 | **filter** | [**Array&lt;AutomationFactResult&gt;**](AutomationFactResult.md) |  |  |
-| **actions** | [**Array&lt;AutomationRunResult&gt;**](AutomationRunResult.md) |  |  |
+| **actions** | [**Array&lt;AutomationRunResult&gt;**](AutomationRunResult.md) | One per step, in order, with what it did. A step refused for good, such as a closed WhatsApp window, is &#x60;skipped&#x60; with its reason. |  |
 | **error** | **String** |  |  |
 
 ## Example
