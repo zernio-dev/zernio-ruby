@@ -12,6 +12,7 @@
 | **to_date** | **String** |  |  |
 | **missing_ids** | **Array&lt;String&gt;** | Ids asked that match no published post the caller can read. |  |
 | **total** | **Integer** |  |  |
+| **sync_requested_account_ids** | **Array&lt;String&gt;** | On a list of posts: the accounts this read queued for a fresh sync, because they were never synced or their stored numbers are over 90 minutes old. The answer holds the stored numbers; the synced ones arrive within minutes. | [optional] |
 | **metrics_sample** | [**PostMetricsResponseMetaAllOfMetricsSample**](PostMetricsResponseMetaAllOfMetricsSample.md) |  | [optional] |
 
 ## Example
@@ -28,6 +29,7 @@ instance = Zernio::PostMetricsResponseMeta.new(
   to_date: null,
   missing_ids: null,
   total: null,
+  sync_requested_account_ids: null,
   metrics_sample: null
 )
 ```
