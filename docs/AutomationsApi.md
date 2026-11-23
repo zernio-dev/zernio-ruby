@@ -18,6 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_automation_controls**](AutomationsApi.md#get_automation_controls) | **GET** /v1/automations/controls | Get automation controls |
 | [**get_automation_run**](AutomationsApi.md#get_automation_run) | **GET** /v1/automations/{automationId}/runs/{runId} | Get one run of an automation |
 | [**get_automation_template**](AutomationsApi.md#get_automation_template) | **GET** /v1/automations/templates/{templateId} | Get an automation template |
+| [**get_automation_test_sample**](AutomationsApi.md#get_automation_test_sample) | **GET** /v1/automations/{automationId}/test/sample | Get a sample test body for an automation |
 | [**get_shared_automation_template**](AutomationsApi.md#get_shared_automation_template) | **GET** /v1/automations/templates/shared/{shareToken} | Get a shared automation template |
 | [**get_zernio_automation_template**](AutomationsApi.md#get_zernio_automation_template) | **GET** /v1/automations/templates/zernio/{templateId} | Get a Zernio automation template |
 | [**install_automation_template**](AutomationsApi.md#install_automation_template) | **POST** /v1/automations/templates/{templateId}/install | Install an automation template |
@@ -34,6 +35,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**preview_automation_draft**](AutomationsApi.md#preview_automation_draft) | **POST** /v1/automations/preview | Preview an unsaved automation |
 | [**reject_automation_approval**](AutomationsApi.md#reject_automation_approval) | **POST** /v1/automations/{automationId}/approvals/{approvalId}/reject | Reject an approval request |
 | [**take_over_automation**](AutomationsApi.md#take_over_automation) | **POST** /v1/automations/{automationId}/take-over | Take over an automation |
+| [**test_automation**](AutomationsApi.md#test_automation) | **POST** /v1/automations/{automationId}/test | Test an automation on a sample event |
 | [**update_automation**](AutomationsApi.md#update_automation) | **PATCH** /v1/automations/{automationId} | Edit an automation |
 | [**update_automation_ad_account_controls**](AutomationsApi.md#update_automation_ad_account_controls) | **PATCH** /v1/automations/controls/ad-accounts | Update one ad account&#39;s controls |
 | [**update_automation_controls**](AutomationsApi.md#update_automation_controls) | **PATCH** /v1/automations/controls | Turn every ad automation off or on |
@@ -1013,6 +1015,75 @@ end
 ### Return type
 
 [**CreateAutomationTemplate201Response**](CreateAutomationTemplate201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_automation_test_sample
+
+> <GetAutomationTestSample200Response> get_automation_test_sample(automation_id)
+
+Get a sample test body for an automation
+
+A body `POST /v1/automations/{automationId}/test` accepts for this automation: a comment with its first keyword, an inbound event its flow's trigger takes, its event's webhook payload with sample values, or the contact a sequence enrolled last. Kinds that read live data instead take no event. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AutomationsApi.new
+automation_id = 'automation_id_example' # String | 
+
+begin
+  # Get a sample test body for an automation
+  result = api_instance.get_automation_test_sample(automation_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AutomationsApi->get_automation_test_sample: #{e}"
+end
+```
+
+#### Using the get_automation_test_sample_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAutomationTestSample200Response>, Integer, Hash)> get_automation_test_sample_with_http_info(automation_id)
+
+```ruby
+begin
+  # Get a sample test body for an automation
+  data, status_code, headers = api_instance.get_automation_test_sample_with_http_info(automation_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAutomationTestSample200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AutomationsApi->get_automation_test_sample_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **automation_id** | **String** |  |  |
+
+### Return type
+
+[**GetAutomationTestSample200Response**](GetAutomationTestSample200Response.md)
 
 ### Authorization
 
@@ -2207,6 +2278,79 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## test_automation
+
+> <TestAutomation200Response> test_automation(automation_id, opts)
+
+Test an automation on a sample event
+
+Runs one sample through the automation's own decision code and says whether it would run, what it matched and the steps it would take. Nothing is claimed, sent or written, whatever the automation does.  What each kind reads:  - Comment to DM: a comment (`event.text`, `event.platformPostId`). - Flow: an inbound event (`event.trigger`, `event.text`, `event.firstMessage`). - Event automation: the event's webhook payload, or the sample payload when `event` is left out. - Ad rule: the ad account as it is now, like a preview. `subjectId` narrows to one object. - Scheduled automation: the posts it would check now, and its next check. `subjectId` narrows to one post. - Sequence: the contact in `subjectId`.  A paused or draft automation is tested as if it were live, and answers `wouldRun: false` with its status as `reason`. Cooldowns, daily caps and a conversation's live run read history and are left out. `GET /v1/automations/{automationId}/test/sample` returns a body to start from. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AutomationsApi.new
+automation_id = 'automation_id_example' # String | 
+opts = {
+  test_automation_request: Zernio::TestAutomationRequest.new # TestAutomationRequest | 
+}
+
+begin
+  # Test an automation on a sample event
+  result = api_instance.test_automation(automation_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AutomationsApi->test_automation: #{e}"
+end
+```
+
+#### Using the test_automation_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<TestAutomation200Response>, Integer, Hash)> test_automation_with_http_info(automation_id, opts)
+
+```ruby
+begin
+  # Test an automation on a sample event
+  data, status_code, headers = api_instance.test_automation_with_http_info(automation_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <TestAutomation200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AutomationsApi->test_automation_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **automation_id** | **String** |  |  |
+| **test_automation_request** | [**TestAutomationRequest**](TestAutomationRequest.md) |  | [optional] |
+
+### Return type
+
+[**TestAutomation200Response**](TestAutomation200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

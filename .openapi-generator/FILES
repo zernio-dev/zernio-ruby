@@ -411,6 +411,9 @@ docs/AutomationTemplatePublisher.md
 docs/AutomationTemplateShare.md
 docs/AutomationTemplateTargetResult.md
 docs/AutomationTemplateTargetResultError.md
+docs/AutomationTestDecision.md
+docs/AutomationTestDecisionMatchedInner.md
+docs/AutomationTestDecisionPlannedStepsInner.md
 docs/AutomationTrigger.md
 docs/AutomationsApi.md
 docs/BalanceRequiredError.md
@@ -1608,6 +1611,8 @@ docs/GetAutomationCatalog200ResponseTriggersInner.md
 docs/GetAutomationCatalog200ResponseTriggersInnerFactsInner.md
 docs/GetAutomationControls200Response.md
 docs/GetAutomationRun200Response.md
+docs/GetAutomationTestSample200Response.md
+docs/GetAutomationTestSample200ResponseSample.md
 docs/GetBalance200Response.md
 docs/GetBalance200ResponseHeld.md
 docs/GetBalance200ResponsePayoutLocksInner.md
@@ -3442,6 +3447,8 @@ docs/TargetingSpecCustomLocationsInner.md
 docs/TargetingSpecExcludedLocations.md
 docs/TargetingSpecExcludedLocationsCitiesInner.md
 docs/TelegramPlatformData.md
+docs/TestAutomation200Response.md
+docs/TestAutomationRequest.md
 docs/TestWebhookRequest.md
 docs/ThreadsPlatformData.md
 docs/TikTokAdsPlatformQueryBody.md
@@ -4743,6 +4750,9 @@ lib/zernio-sdk/models/automation_template_publisher.rb
 lib/zernio-sdk/models/automation_template_share.rb
 lib/zernio-sdk/models/automation_template_target_result.rb
 lib/zernio-sdk/models/automation_template_target_result_error.rb
+lib/zernio-sdk/models/automation_test_decision.rb
+lib/zernio-sdk/models/automation_test_decision_matched_inner.rb
+lib/zernio-sdk/models/automation_test_decision_planned_steps_inner.rb
 lib/zernio-sdk/models/automation_trigger.rb
 lib/zernio-sdk/models/balance_required_error.rb
 lib/zernio-sdk/models/batch_ad_catalog_products202_response.rb
@@ -5907,6 +5917,8 @@ lib/zernio-sdk/models/get_automation_catalog200_response_triggers_inner.rb
 lib/zernio-sdk/models/get_automation_catalog200_response_triggers_inner_facts_inner.rb
 lib/zernio-sdk/models/get_automation_controls200_response.rb
 lib/zernio-sdk/models/get_automation_run200_response.rb
+lib/zernio-sdk/models/get_automation_test_sample200_response.rb
+lib/zernio-sdk/models/get_automation_test_sample200_response_sample.rb
 lib/zernio-sdk/models/get_balance200_response.rb
 lib/zernio-sdk/models/get_balance200_response_held.rb
 lib/zernio-sdk/models/get_balance200_response_payout_locks_inner.rb
@@ -7714,6 +7726,8 @@ lib/zernio-sdk/models/targeting_spec_custom_locations_inner.rb
 lib/zernio-sdk/models/targeting_spec_excluded_locations.rb
 lib/zernio-sdk/models/targeting_spec_excluded_locations_cities_inner.rb
 lib/zernio-sdk/models/telegram_platform_data.rb
+lib/zernio-sdk/models/test_automation200_response.rb
+lib/zernio-sdk/models/test_automation_request.rb
 lib/zernio-sdk/models/test_webhook_request.rb
 lib/zernio-sdk/models/threads_platform_data.rb
 lib/zernio-sdk/models/tik_tok_ads_platform_query_body.rb
@@ -8990,6 +9004,9 @@ spec/models/automation_template_share_spec.rb
 spec/models/automation_template_spec.rb
 spec/models/automation_template_target_result_error_spec.rb
 spec/models/automation_template_target_result_spec.rb
+spec/models/automation_test_decision_matched_inner_spec.rb
+spec/models/automation_test_decision_planned_steps_inner_spec.rb
+spec/models/automation_test_decision_spec.rb
 spec/models/automation_trigger_spec.rb
 spec/models/balance_required_error_spec.rb
 spec/models/batch_ad_catalog_products202_response_spec.rb
@@ -10154,6 +10171,8 @@ spec/models/get_automation_catalog200_response_triggers_inner_facts_inner_spec.r
 spec/models/get_automation_catalog200_response_triggers_inner_spec.rb
 spec/models/get_automation_controls200_response_spec.rb
 spec/models/get_automation_run200_response_spec.rb
+spec/models/get_automation_test_sample200_response_sample_spec.rb
+spec/models/get_automation_test_sample200_response_spec.rb
 spec/models/get_balance200_response_held_spec.rb
 spec/models/get_balance200_response_payout_locks_inner_spec.rb
 spec/models/get_balance200_response_pending_releases_inner_spec.rb
@@ -11961,6 +11980,8 @@ spec/models/targeting_spec_excluded_locations_cities_inner_spec.rb
 spec/models/targeting_spec_excluded_locations_spec.rb
 spec/models/targeting_spec_spec.rb
 spec/models/telegram_platform_data_spec.rb
+spec/models/test_automation200_response_spec.rb
+spec/models/test_automation_request_spec.rb
 spec/models/test_webhook_request_spec.rb
 spec/models/threads_platform_data_spec.rb
 spec/models/tik_tok_ads_platform_query_body_spec.rb
