@@ -109,7 +109,7 @@ opts = {
   sort_by: 'date', # String | rating puts reviews without a star rating last in both orders.
   sort_order: 'asc', # String | 
   limit: 56, # Integer | 
-  cursor: 'cursor_example', # String | 
+  cursor: 'cursor_example', # String | Pass back pagination.nextCursor of the previous page unchanged, with the same sortBy and sortOrder.
   account_id: 'account_id_example' # String | One account id, or several comma-separated.
 }
 
@@ -152,7 +152,7 @@ end
 | **sort_by** | **String** | rating puts reviews without a star rating last in both orders. | [optional][default to &#39;date&#39;] |
 | **sort_order** | **String** |  | [optional][default to &#39;desc&#39;] |
 | **limit** | **Integer** |  | [optional][default to 25] |
-| **cursor** | **String** |  | [optional] |
+| **cursor** | **String** | Pass back pagination.nextCursor of the previous page unchanged, with the same sortBy and sortOrder. | [optional] |
 | **account_id** | **String** | One account id, or several comma-separated. | [optional] |
 
 ### Return type
