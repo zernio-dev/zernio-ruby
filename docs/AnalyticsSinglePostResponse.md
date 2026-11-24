@@ -18,6 +18,7 @@
 | **is_external** | **Boolean** |  | [optional] |
 | **sync_status** | **String** | Overall sync state across all platforms | [optional] |
 | **message** | **String** | Human-readable status message for pending, partial, or failed states | [optional] |
+| **analytics_off** | [**Array&lt;AnalyticsOffAccount&gt;**](AnalyticsOffAccount.md) | The X accounts of this post whose analytics sync does not run: synced numbers stay as of the last read, and a pending X entry stays pending. Absent when there are none. | [optional] |
 | **thumbnail_url** | **String** | Cover image URL. A Facebook, Instagram or TikTok cover whose signed CDN link is still valid is served as that link, which expires (Meta &#x60;oe&#x3D;&#x60;, TikTok &#x60;x-expires&#x3D;&#x60;): download the image rather than storing the link.  Once the link expires, Zernio re-reads the cover from the platform and serves it from Zernio storage, a URL that does not expire.  Null while that re-read is pending (read again shortly) or when the platform no longer returns the post, never an expired link. | [optional] |
 | **media_type** | **String** |  | [optional] |
 | **media_items** | [**Array&lt;AnalyticsSinglePostResponseMediaItemsInner&gt;**](AnalyticsSinglePostResponseMediaItemsInner.md) | All media items for this post. Carousel posts have one entry per slide.  - Facebook and Instagram images and video covers whose Meta CDN links expired are re-read and served from Zernio storage (non-expiring). - Facebook and Instagram video file URLs, and LinkedIn media URLs, stay the platform&#39;s signed links and are refreshed on read once they lapse. - A &#x60;url&#x60; or &#x60;thumbnail&#x60; whose platform link expired and could not be re-read yet is null, never the expired link.  | [optional] |
@@ -47,6 +48,7 @@ instance = Zernio::AnalyticsSinglePostResponse.new(
   is_external: null,
   sync_status: null,
   message: null,
+  analytics_off: null,
   thumbnail_url: null,
   media_type: null,
   media_items: null,
