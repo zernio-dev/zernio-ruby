@@ -10,6 +10,7 @@
 | **last_active_on** | **Date** | The last day in the past 7 with a hit. &#x60;null&#x60; when none. | [optional] |
 | **event_names_last_week** | **Array&lt;String&gt;** | Each event name people (not bots) sent the site in the last 7 days, sorted. Names the site sends that are neither standard nor in its &#x60;customEvents&#x60; are left out. | [optional] |
 | **totals** | [**GetEventsOverview200ResponseSitesInnerTotals**](GetEventsOverview200ResponseSitesInnerTotals.md) |  | [optional] |
+| **sends_nowhere** | **Boolean** | Whether no forwarding rule of the profile to an ad platform uses the site (its own events, or server events its visits complete) and its tag fires no ad pixel in the browser. | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::GetEventsOverview200ResponseSitesInner.new(
   hits_today: null,
   last_active_on: null,
   event_names_last_week: null,
-  totals: null
+  totals: null,
+  sends_nowhere: null
 )
 ```
 

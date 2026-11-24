@@ -31,6 +31,9 @@ module Zernio
 
     attr_accessor :totals
 
+    # Whether no forwarding rule of the profile to an ad platform uses the site (its own events, or server events its visits complete) and its tag fires no ad pixel in the browser.
+    attr_accessor :sends_nowhere
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -39,7 +42,8 @@ module Zernio
         :'hits_today' => :'hitsToday',
         :'last_active_on' => :'lastActiveOn',
         :'event_names_last_week' => :'eventNamesLastWeek',
-        :'totals' => :'totals'
+        :'totals' => :'totals',
+        :'sends_nowhere' => :'sendsNowhere'
       }
     end
 
@@ -61,7 +65,8 @@ module Zernio
         :'hits_today' => :'Integer',
         :'last_active_on' => :'Date',
         :'event_names_last_week' => :'Array<String>',
-        :'totals' => :'GetEventsOverview200ResponseSitesInnerTotals'
+        :'totals' => :'GetEventsOverview200ResponseSitesInnerTotals',
+        :'sends_nowhere' => :'Boolean'
       }
     end
 
@@ -113,6 +118,10 @@ module Zernio
       if attributes.key?(:'totals')
         self.totals = attributes[:'totals']
       end
+
+      if attributes.key?(:'sends_nowhere')
+        self.sends_nowhere = attributes[:'sends_nowhere']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -140,7 +149,8 @@ module Zernio
           hits_today == o.hits_today &&
           last_active_on == o.last_active_on &&
           event_names_last_week == o.event_names_last_week &&
-          totals == o.totals
+          totals == o.totals &&
+          sends_nowhere == o.sends_nowhere
     end
 
     # @see the `==` method
@@ -152,7 +162,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [site_id, profile_id, hits_today, last_active_on, event_names_last_week, totals].hash
+      [site_id, profile_id, hits_today, last_active_on, event_names_last_week, totals, sends_nowhere].hash
     end
 
     # Builds the object from hash

@@ -31,6 +31,12 @@ module Zernio
     # Purchases with ad consent for which no browser pixel fired, so only the server reported them.
     attr_accessor :recovered
 
+    # Leads recorded on the site without bots.
+    attr_accessor :leads
+
+    # Checkouts started on the site without bots.
+    attr_accessor :checkouts
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +44,9 @@ module Zernio
         :'bots' => :'bots',
         :'consented' => :'consented',
         :'purchases' => :'purchases',
-        :'recovered' => :'recovered'
+        :'recovered' => :'recovered',
+        :'leads' => :'leads',
+        :'checkouts' => :'checkouts'
       }
     end
 
@@ -59,7 +67,9 @@ module Zernio
         :'bots' => :'Integer',
         :'consented' => :'Integer',
         :'purchases' => :'Integer',
-        :'recovered' => :'Integer'
+        :'recovered' => :'Integer',
+        :'leads' => :'Integer',
+        :'checkouts' => :'Integer'
       }
     end
 
@@ -104,6 +114,14 @@ module Zernio
       if attributes.key?(:'recovered')
         self.recovered = attributes[:'recovered']
       end
+
+      if attributes.key?(:'leads')
+        self.leads = attributes[:'leads']
+      end
+
+      if attributes.key?(:'checkouts')
+        self.checkouts = attributes[:'checkouts']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -130,7 +148,9 @@ module Zernio
           bots == o.bots &&
           consented == o.consented &&
           purchases == o.purchases &&
-          recovered == o.recovered
+          recovered == o.recovered &&
+          leads == o.leads &&
+          checkouts == o.checkouts
     end
 
     # @see the `==` method
@@ -142,7 +162,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [visits, bots, consented, purchases, recovered].hash
+      [visits, bots, consented, purchases, recovered, leads, checkouts].hash
     end
 
     # Builds the object from hash
