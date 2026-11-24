@@ -34,6 +34,12 @@ module Zernio
     # LinkedIn first-party ad tracking click ID. Captured by parsing `li_fat_id` from landing-page URLs after the advertiser enables enhanced conversion tracking on the LinkedIn Insight Tag. Sent to LinkedIn as the LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID userId. Opaque token, not hashed. 
     attr_accessor :li_fat_id
 
+    # TikTok click ID (the `ttclid` URL param TikTok adds to ad clicks). Sent to TikTok pixel destinations as `user.ttclid`, not hashed.
+    attr_accessor :ttclid
+
+    # TikTok Pixel browser id (the `_ttp` cookie). Sent to TikTok pixel destinations as `user.ttp`, not hashed. Offline Event Sets match on email and phone only.
+    attr_accessor :ttp
+
     # Pinterest click ID (the `epik` URL param or `_epik` cookie). Sent to Pinterest as `click_id`, not hashed.
     attr_accessor :epik
 
@@ -97,6 +103,8 @@ module Zernio
         :'gbraid' => :'gbraid',
         :'wbraid' => :'wbraid',
         :'li_fat_id' => :'li_fat_id',
+        :'ttclid' => :'ttclid',
+        :'ttp' => :'ttp',
         :'epik' => :'epik',
         :'rdt_cid' => :'rdt_cid',
         :'rdt_uuid' => :'rdt_uuid',
@@ -137,6 +145,8 @@ module Zernio
         :'gbraid' => :'String',
         :'wbraid' => :'String',
         :'li_fat_id' => :'String',
+        :'ttclid' => :'String',
+        :'ttp' => :'String',
         :'epik' => :'String',
         :'rdt_cid' => :'String',
         :'rdt_uuid' => :'String',
@@ -202,6 +212,14 @@ module Zernio
 
       if attributes.key?(:'li_fat_id')
         self.li_fat_id = attributes[:'li_fat_id']
+      end
+
+      if attributes.key?(:'ttclid')
+        self.ttclid = attributes[:'ttclid']
+      end
+
+      if attributes.key?(:'ttp')
+        self.ttp = attributes[:'ttp']
       end
 
       if attributes.key?(:'epik')
@@ -303,6 +321,8 @@ module Zernio
           gbraid == o.gbraid &&
           wbraid == o.wbraid &&
           li_fat_id == o.li_fat_id &&
+          ttclid == o.ttclid &&
+          ttp == o.ttp &&
           epik == o.epik &&
           rdt_cid == o.rdt_cid &&
           rdt_uuid == o.rdt_uuid &&
@@ -332,7 +352,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [fbc, fbp, gclid, gbraid, wbraid, li_fat_id, epik, rdt_cid, rdt_uuid, aleid, alart, axwrt, twclid, msclkid, sccid, scid, tblci, ob_click_id, irclickid, awc, dclid, tdid, uid2, uid2_token].hash
+      [fbc, fbp, gclid, gbraid, wbraid, li_fat_id, ttclid, ttp, epik, rdt_cid, rdt_uuid, aleid, alart, axwrt, twclid, msclkid, sccid, scid, tblci, ob_click_id, irclickid, awc, dclid, tdid, uid2, uid2_token].hash
     end
 
     # Builds the object from hash
