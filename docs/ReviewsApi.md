@@ -86,7 +86,7 @@ end
 
 List reviews
 
-Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile.  Each account's reviews are read from the platform page by page within a 20-second budget per request, so very large accounts can come back truncated. Each account's listing is cached for up to 60 seconds. 
+Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile.  Each account's reviews are read from the platform page by page within a 20-second budget per request, so very large accounts can come back truncated; those accounts are listed in meta.truncatedAccounts. Each account's listing is cached for up to 60 seconds. 
 
 ### Examples
 
@@ -110,7 +110,7 @@ opts = {
   sort_order: 'asc', # String | 
   limit: 56, # Integer | 
   cursor: 'cursor_example', # String | 
-  account_id: 'account_id_example' # String | Filter by specific account ID
+  account_id: 'account_id_example' # String | One account id, or several comma-separated.
 }
 
 begin
@@ -153,7 +153,7 @@ end
 | **sort_order** | **String** |  | [optional][default to &#39;desc&#39;] |
 | **limit** | **Integer** |  | [optional][default to 25] |
 | **cursor** | **String** |  | [optional] |
-| **account_id** | **String** | Filter by specific account ID | [optional] |
+| **account_id** | **String** | One account id, or several comma-separated. | [optional] |
 
 ### Return type
 
