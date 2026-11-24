@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **stage** | **Boolean** | Send true to stage this change instead of applying it. Nothing is written to the ad network; the response is &#x60;202&#x60; with the staged change and its diff. Apply it with POST /v1/ads/changes/{changeId}/confirm. Meta and Google only; cannot be combined with &#x60;validateOnly&#x60; or &#x60;dryRun&#x60;. | [optional] |
 | **platform** | **String** |  |  |
 | **budget** | [**UpdateAdSetRequestBudget**](UpdateAdSetRequestBudget.md) |  | [optional] |
 | **status** | **String** | Writes the ad set&#39;s own on/off switch (Meta: &#x60;configured_status&#x60;; X: the line item&#39;s &#x60;entity_status&#x60; ACTIVE / PAUSED), whatever delivery status its ads report. Omit if not toggling delivery state. | [optional] |
@@ -30,6 +31,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::UpdateAdSetRequest.new(
+  stage: null,
   platform: null,
   budget: null,
   status: null,
