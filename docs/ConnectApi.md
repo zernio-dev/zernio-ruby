@@ -33,6 +33,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_whats_app_embedded_signup**](ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup |
 | [**connect_whop_ads_credentials**](ConnectApi.md#connect_whop_ads_credentials) | **POST** /v1/connect/whop-ads/credentials | Connect a Whop account |
 | [**connect_word_press_with_application_password**](ConnectApi.md#connect_word_press_with_application_password) | **POST** /v1/connect/wordpress/token | Connect self-hosted WordPress with an application password |
+| [**create_connect_custom_domain**](ConnectApi.md#create_connect_custom_domain) | **POST** /v1/connect/custom-domains | Add a custom domain |
 | [**create_google_business_location**](ConnectApi.md#create_google_business_location) | **POST** /v1/accounts/{accountId}/gmb-locations | Create Google Business Profile location |
 | [**create_google_org_connection**](ConnectApi.md#create_google_org_connection) | **POST** /v1/connect/google/org | Start a Google Workspace organization connection |
 | [**create_microsoft_org_connection**](ConnectApi.md#create_microsoft_org_connection) | **POST** /v1/connect/microsoft/org | Start a Microsoft 365 organization connection |
@@ -40,10 +41,12 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
 | [**create_platform_invite**](ConnectApi.md#create_platform_invite) | **POST** /v1/platform-invites | Create a connect link |
 | [**create_youtube_playlist**](ConnectApi.md#create_youtube_playlist) | **POST** /v1/accounts/{accountId}/youtube-playlists | Create YouTube playlist |
+| [**delete_connect_custom_domain**](ConnectApi.md#delete_connect_custom_domain) | **DELETE** /v1/connect/custom-domains/{domainId} | Remove a custom domain |
 | [**delete_o_auth_app**](ConnectApi.md#delete_o_auth_app) | **DELETE** /v1/connect/oauth-apps/{appId} | Remove an OAuth app |
 | [**delete_org_connection**](ConnectApi.md#delete_org_connection) | **DELETE** /v1/org-connections/{orgConnectionId} | Delete an organization connection |
 | [**get_amazon_ads_connect_url**](ConnectApi.md#get_amazon_ads_connect_url) | **GET** /v1/connect/amazonads | Get Amazon Ads OAuth connect URL |
 | [**get_campaign_manager_connect_url**](ConnectApi.md#get_campaign_manager_connect_url) | **GET** /v1/connect/campaignmanager360 | Get Campaign Manager 360 OAuth connect URL |
+| [**get_connect_custom_domain**](ConnectApi.md#get_connect_custom_domain) | **GET** /v1/connect/custom-domains/{domainId} | Get a custom domain |
 | [**get_connect_handoff**](ConnectApi.md#get_connect_handoff) | **GET** /v1/connect/handoffs/{handoffId} | Get a phone handoff |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**get_connect_welcome_screen**](ConnectApi.md#get_connect_welcome_screen) | **GET** /v1/connect/welcome-screen | Get the saved welcome screen |
@@ -77,6 +80,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**handle_o_auth_callback**](ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback |
 | [**initiate_telegram_connect**](ConnectApi.md#initiate_telegram_connect) | **POST** /v1/connect/telegram | Connect Telegram directly |
 | [**list_campaign_manager_profiles**](ConnectApi.md#list_campaign_manager_profiles) | **GET** /v1/connect/campaignmanager360/profiles | List Campaign Manager 360 profiles for a pending connect |
+| [**list_connect_custom_domains**](ConnectApi.md#list_connect_custom_domains) | **GET** /v1/connect/custom-domains | List the workspace&#39;s custom domains |
 | [**list_facebook_pages**](ConnectApi.md#list_facebook_pages) | **GET** /v1/connect/facebook/select-page | List Facebook pages |
 | [**list_google_analytics_properties**](ConnectApi.md#list_google_analytics_properties) | **GET** /v1/connect/googleanalytics/properties | List Google Analytics properties for a pending connect |
 | [**list_google_business_categories**](ConnectApi.md#list_google_business_categories) | **GET** /v1/accounts/{accountId}/gmb-categories | List Google Business Profile categories |
@@ -105,6 +109,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**set_reddit_post_flair**](ConnectApi.md#set_reddit_post_flair) | **POST** /v1/accounts/{accountId}/reddit-flairs | Set Reddit post flair |
 | [**start_microsoft_admin_consent**](ConnectApi.md#start_microsoft_admin_consent) | **GET** /v1/connect/microsoft/admin-consent | Admin-consent link for a Microsoft tenant |
 | [**test_o_auth_app**](ConnectApi.md#test_o_auth_app) | **POST** /v1/connect/oauth-apps/{appId}/test | Check an OAuth app&#39;s keys |
+| [**update_connect_custom_domain**](ConnectApi.md#update_connect_custom_domain) | **PATCH** /v1/connect/custom-domains/{domainId} | Turn a custom domain on or off for connect |
 | [**update_connect_welcome_screen**](ConnectApi.md#update_connect_welcome_screen) | **PUT** /v1/connect/welcome-screen | Save the welcome screen |
 | [**update_facebook_page**](ConnectApi.md#update_facebook_page) | **PUT** /v1/accounts/{accountId}/facebook-page | Update Facebook page |
 | [**update_gmb_location**](ConnectApi.md#update_gmb_location) | **PUT** /v1/accounts/{accountId}/gmb-locations | Update Google Business Profile location |
@@ -114,6 +119,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_pinterest_boards**](ConnectApi.md#update_pinterest_boards) | **PUT** /v1/accounts/{accountId}/pinterest-boards | Set default Pinterest board |
 | [**update_reddit_subreddits**](ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit |
 | [**update_youtube_default_playlist**](ConnectApi.md#update_youtube_default_playlist) | **PUT** /v1/accounts/{accountId}/youtube-playlists | Set default YouTube playlist |
+| [**verify_connect_custom_domain**](ConnectApi.md#verify_connect_custom_domain) | **POST** /v1/connect/custom-domains/{domainId}/verify | Check a custom domain&#39;s DNS records now |
 | [**verify_org_connection**](ConnectApi.md#verify_org_connection) | **POST** /v1/org-connections/{orgConnectionId}/verify | Verify an organization connection |
 | [**vote_reddit_thing**](ConnectApi.md#vote_reddit_thing) | **POST** /v1/accounts/{accountId}/reddit-vote | Vote on a Reddit post or comment |
 
@@ -2175,6 +2181,75 @@ end
 - **Accept**: application/json
 
 
+## create_connect_custom_domain
+
+> <CreateConnectCustomDomain201Response> create_connect_custom_domain(create_connect_custom_domain_request)
+
+Add a custom domain
+
+Adds a subdomain you control. The answer lists the two DNS records to add at your DNS provider: a CNAME that points the subdomain at Zernio and a TXT record that proves it is yours.  Nothing is registered until the TXT record is found; then the certificate is issued and `status` turns `active`, usually within minutes.  Connect links only move to the domain once it is active and `connectEnabled` is true. Requires the workspace settings permission (owner or admin).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+create_connect_custom_domain_request = Zernio::CreateConnectCustomDomainRequest.new({hostname: 'connect.yourbrand.com'}) # CreateConnectCustomDomainRequest | 
+
+begin
+  # Add a custom domain
+  result = api_instance.create_connect_custom_domain(create_connect_custom_domain_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_connect_custom_domain: #{e}"
+end
+```
+
+#### Using the create_connect_custom_domain_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateConnectCustomDomain201Response>, Integer, Hash)> create_connect_custom_domain_with_http_info(create_connect_custom_domain_request)
+
+```ruby
+begin
+  # Add a custom domain
+  data, status_code, headers = api_instance.create_connect_custom_domain_with_http_info(create_connect_custom_domain_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateConnectCustomDomain201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_connect_custom_domain_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_connect_custom_domain_request** | [**CreateConnectCustomDomainRequest**](CreateConnectCustomDomainRequest.md) |  |  |
+
+### Return type
+
+[**CreateConnectCustomDomain201Response**](CreateConnectCustomDomain201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## create_google_business_location
 
 > <CreateGoogleBusinessLocation200Response> create_google_business_location(account_id, create_google_business_location_request, opts)
@@ -2668,6 +2743,74 @@ end
 - **Accept**: application/json
 
 
+## delete_connect_custom_domain
+
+> delete_connect_custom_domain(domain_id)
+
+Remove a custom domain
+
+Removes the domain and its certificate. New connect links open on zernio.com again and links already sent on the domain stop working; you can then delete both DNS records. Requires the workspace settings permission (owner or admin).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+domain_id = 'domain_id_example' # String | The custom domain's id.
+
+begin
+  # Remove a custom domain
+  api_instance.delete_connect_custom_domain(domain_id)
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->delete_connect_custom_domain: #{e}"
+end
+```
+
+#### Using the delete_connect_custom_domain_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> delete_connect_custom_domain_with_http_info(domain_id)
+
+```ruby
+begin
+  # Remove a custom domain
+  data, status_code, headers = api_instance.delete_connect_custom_domain_with_http_info(domain_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->delete_connect_custom_domain_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **domain_id** | **String** | The custom domain&#39;s id. |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## delete_o_auth_app
 
 > <DeleteOAuthApp200Response> delete_o_auth_app(app_id, opts)
@@ -2965,6 +3108,75 @@ end
 ### Authorization
 
 [connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_connect_custom_domain
+
+> <CreateConnectCustomDomain201Response> get_connect_custom_domain(domain_id)
+
+Get a custom domain
+
+The custom domain with its status and DNS records.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+domain_id = 'domain_id_example' # String | The custom domain's id.
+
+begin
+  # Get a custom domain
+  result = api_instance.get_connect_custom_domain(domain_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_connect_custom_domain: #{e}"
+end
+```
+
+#### Using the get_connect_custom_domain_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateConnectCustomDomain201Response>, Integer, Hash)> get_connect_custom_domain_with_http_info(domain_id)
+
+```ruby
+begin
+  # Get a custom domain
+  data, status_code, headers = api_instance.get_connect_custom_domain_with_http_info(domain_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateConnectCustomDomain201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_connect_custom_domain_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **domain_id** | **String** | The custom domain&#39;s id. |  |
+
+### Return type
+
+[**CreateConnectCustomDomain201Response**](CreateConnectCustomDomain201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -5464,6 +5676,72 @@ end
 - **Accept**: application/json
 
 
+## list_connect_custom_domains
+
+> <ListConnectCustomDomains200Response> list_connect_custom_domains
+
+List the workspace's custom domains
+
+The custom domains of the workspace the request acts in. A custom domain puts the hosted connect screens (the welcome screen and the result screen) on your own subdomain, such as `connect.yourbrand.com`, instead of zernio.com.  A workspace has at most one today; the list leaves room for more. Guide: [Use your own domain for connect](https://docs.zernio.com/guides/custom-domains).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+
+begin
+  # List the workspace's custom domains
+  result = api_instance.list_connect_custom_domains
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_connect_custom_domains: #{e}"
+end
+```
+
+#### Using the list_connect_custom_domains_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListConnectCustomDomains200Response>, Integer, Hash)> list_connect_custom_domains_with_http_info
+
+```ruby
+begin
+  # List the workspace's custom domains
+  data, status_code, headers = api_instance.list_connect_custom_domains_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListConnectCustomDomains200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_connect_custom_domains_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListConnectCustomDomains200Response**](ListConnectCustomDomains200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_facebook_pages
 
 > <ListFacebookPages200Response> list_facebook_pages(opts)
@@ -7547,6 +7825,77 @@ end
 - **Accept**: application/json
 
 
+## update_connect_custom_domain
+
+> <CreateConnectCustomDomain201Response> update_connect_custom_domain(domain_id, update_connect_custom_domain_request)
+
+Turn a custom domain on or off for connect
+
+With `connectEnabled` true, new connect links open on the domain once it is active; with false they open on zernio.com again. Links already sent keep working. Requires the workspace settings permission (owner or admin).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+domain_id = 'domain_id_example' # String | The custom domain's id.
+update_connect_custom_domain_request = Zernio::UpdateConnectCustomDomainRequest.new({connect_enabled: false}) # UpdateConnectCustomDomainRequest | 
+
+begin
+  # Turn a custom domain on or off for connect
+  result = api_instance.update_connect_custom_domain(domain_id, update_connect_custom_domain_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->update_connect_custom_domain: #{e}"
+end
+```
+
+#### Using the update_connect_custom_domain_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateConnectCustomDomain201Response>, Integer, Hash)> update_connect_custom_domain_with_http_info(domain_id, update_connect_custom_domain_request)
+
+```ruby
+begin
+  # Turn a custom domain on or off for connect
+  data, status_code, headers = api_instance.update_connect_custom_domain_with_http_info(domain_id, update_connect_custom_domain_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateConnectCustomDomain201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->update_connect_custom_domain_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **domain_id** | **String** | The custom domain&#39;s id. |  |
+| **update_connect_custom_domain_request** | [**UpdateConnectCustomDomainRequest**](UpdateConnectCustomDomainRequest.md) |  |  |
+
+### Return type
+
+[**CreateConnectCustomDomain201Response**](CreateConnectCustomDomain201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_connect_welcome_screen
 
 > <ConnectWelcomeScreen> update_connect_welcome_screen(update_connect_welcome_screen_request)
@@ -8181,6 +8530,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## verify_connect_custom_domain
+
+> <CreateConnectCustomDomain201Response> verify_connect_custom_domain(domain_id)
+
+Check a custom domain's DNS records now
+
+Looks for the DNS records right away instead of waiting for the hourly check, and asks the certificate authority to validate again. Calls within 30 seconds of the last check answer that check.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+domain_id = 'domain_id_example' # String | The custom domain's id.
+
+begin
+  # Check a custom domain's DNS records now
+  result = api_instance.verify_connect_custom_domain(domain_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->verify_connect_custom_domain: #{e}"
+end
+```
+
+#### Using the verify_connect_custom_domain_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateConnectCustomDomain201Response>, Integer, Hash)> verify_connect_custom_domain_with_http_info(domain_id)
+
+```ruby
+begin
+  # Check a custom domain's DNS records now
+  data, status_code, headers = api_instance.verify_connect_custom_domain_with_http_info(domain_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateConnectCustomDomain201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->verify_connect_custom_domain_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **domain_id** | **String** | The custom domain&#39;s id. |  |
+
+### Return type
+
+[**CreateConnectCustomDomain201Response**](CreateConnectCustomDomain201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

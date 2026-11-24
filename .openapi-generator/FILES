@@ -753,6 +753,8 @@ docs/ConnectAwinCredentials200Response.md
 docs/ConnectAwinCredentialsRequest.md
 docs/ConnectBlueskyCredentials200Response.md
 docs/ConnectBlueskyCredentialsRequest.md
+docs/ConnectCustomDomain.md
+docs/ConnectCustomDomainRecordsInner.md
 docs/ConnectDiscordChannelRequest.md
 docs/ConnectHandoff.md
 docs/ConnectHandoffAccountsInner.md
@@ -966,6 +968,8 @@ docs/CreateCommerceRedirectRequest.md
 docs/CreateCommerceRefund200Response.md
 docs/CreateCommerceRefund201Response.md
 docs/CreateCommerceRefundRequest.md
+docs/CreateConnectCustomDomain201Response.md
+docs/CreateConnectCustomDomainRequest.md
 docs/CreateContact200Response.md
 docs/CreateContact200ResponseChannel.md
 docs/CreateContact200ResponseContact.md
@@ -2485,6 +2489,7 @@ docs/ListCommercePriceLists200Response.md
 docs/ListCommerceProductMetafields200Response.md
 docs/ListCommerceProducts200Response.md
 docs/ListCommerceRedirects200Response.md
+docs/ListConnectCustomDomains200Response.md
 docs/ListConnectedApps200Response.md
 docs/ListContactGroups200Response.md
 docs/ListContactGroups200ResponseDataInner.md
@@ -3684,6 +3689,7 @@ docs/UpdateCommerceProductPricesRequestVariantsInner.md
 docs/UpdateCommerceProductPricesRequestVariantsInnerPrice.md
 docs/UpdateCommerceProductRequest.md
 docs/UpdateCommerceRedirectRequest.md
+docs/UpdateConnectCustomDomainRequest.md
 docs/UpdateConnectWelcomeScreenRequest.md
 docs/UpdateContact200Response.md
 docs/UpdateContact200ResponseContact.md
@@ -5104,6 +5110,8 @@ lib/zernio-sdk/models/connect_awin_credentials200_response.rb
 lib/zernio-sdk/models/connect_awin_credentials_request.rb
 lib/zernio-sdk/models/connect_bluesky_credentials200_response.rb
 lib/zernio-sdk/models/connect_bluesky_credentials_request.rb
+lib/zernio-sdk/models/connect_custom_domain.rb
+lib/zernio-sdk/models/connect_custom_domain_records_inner.rb
 lib/zernio-sdk/models/connect_discord_channel_request.rb
 lib/zernio-sdk/models/connect_handoff.rb
 lib/zernio-sdk/models/connect_handoff_accounts_inner.rb
@@ -5313,6 +5321,8 @@ lib/zernio-sdk/models/create_commerce_redirect_request.rb
 lib/zernio-sdk/models/create_commerce_refund200_response.rb
 lib/zernio-sdk/models/create_commerce_refund201_response.rb
 lib/zernio-sdk/models/create_commerce_refund_request.rb
+lib/zernio-sdk/models/create_connect_custom_domain201_response.rb
+lib/zernio-sdk/models/create_connect_custom_domain_request.rb
 lib/zernio-sdk/models/create_contact200_response.rb
 lib/zernio-sdk/models/create_contact200_response_channel.rb
 lib/zernio-sdk/models/create_contact200_response_contact.rb
@@ -6810,6 +6820,7 @@ lib/zernio-sdk/models/list_commerce_price_lists200_response.rb
 lib/zernio-sdk/models/list_commerce_product_metafields200_response.rb
 lib/zernio-sdk/models/list_commerce_products200_response.rb
 lib/zernio-sdk/models/list_commerce_redirects200_response.rb
+lib/zernio-sdk/models/list_connect_custom_domains200_response.rb
 lib/zernio-sdk/models/list_connected_apps200_response.rb
 lib/zernio-sdk/models/list_contact_groups200_response.rb
 lib/zernio-sdk/models/list_contact_groups200_response_data_inner.rb
@@ -7985,6 +7996,7 @@ lib/zernio-sdk/models/update_commerce_product_prices_request_variants_inner.rb
 lib/zernio-sdk/models/update_commerce_product_prices_request_variants_inner_price.rb
 lib/zernio-sdk/models/update_commerce_product_request.rb
 lib/zernio-sdk/models/update_commerce_redirect_request.rb
+lib/zernio-sdk/models/update_connect_custom_domain_request.rb
 lib/zernio-sdk/models/update_connect_welcome_screen_request.rb
 lib/zernio-sdk/models/update_contact200_response.rb
 lib/zernio-sdk/models/update_contact200_response_contact.rb
@@ -9384,6 +9396,8 @@ spec/models/connect_awin_credentials200_response_spec.rb
 spec/models/connect_awin_credentials_request_spec.rb
 spec/models/connect_bluesky_credentials200_response_spec.rb
 spec/models/connect_bluesky_credentials_request_spec.rb
+spec/models/connect_custom_domain_records_inner_spec.rb
+spec/models/connect_custom_domain_spec.rb
 spec/models/connect_discord_channel_request_spec.rb
 spec/models/connect_handoff_accounts_inner_spec.rb
 spec/models/connect_handoff_error_spec.rb
@@ -9593,6 +9607,8 @@ spec/models/create_commerce_redirect_request_spec.rb
 spec/models/create_commerce_refund200_response_spec.rb
 spec/models/create_commerce_refund201_response_spec.rb
 spec/models/create_commerce_refund_request_spec.rb
+spec/models/create_connect_custom_domain201_response_spec.rb
+spec/models/create_connect_custom_domain_request_spec.rb
 spec/models/create_contact200_response_channel_spec.rb
 spec/models/create_contact200_response_contact_spec.rb
 spec/models/create_contact200_response_spec.rb
@@ -11090,6 +11106,7 @@ spec/models/list_commerce_price_lists200_response_spec.rb
 spec/models/list_commerce_product_metafields200_response_spec.rb
 spec/models/list_commerce_products200_response_spec.rb
 spec/models/list_commerce_redirects200_response_spec.rb
+spec/models/list_connect_custom_domains200_response_spec.rb
 spec/models/list_connected_apps200_response_spec.rb
 spec/models/list_contact_groups200_response_data_inner_spec.rb
 spec/models/list_contact_groups200_response_meta_spec.rb
@@ -12265,6 +12282,7 @@ spec/models/update_commerce_product_prices_request_variants_inner_price_spec.rb
 spec/models/update_commerce_product_prices_request_variants_inner_spec.rb
 spec/models/update_commerce_product_request_spec.rb
 spec/models/update_commerce_redirect_request_spec.rb
+spec/models/update_connect_custom_domain_request_spec.rb
 spec/models/update_connect_welcome_screen_request_spec.rb
 spec/models/update_contact200_response_contact_spec.rb
 spec/models/update_contact200_response_spec.rb
