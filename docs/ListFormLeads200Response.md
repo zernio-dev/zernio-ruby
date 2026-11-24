@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **status** | **String** |  | [optional] |
 | **leads** | [**Array&lt;ListFormLeads200ResponseLeadsInner&gt;**](ListFormLeads200ResponseLeadsInner.md) |  | [optional] |
-| **pagination** | [**SearchTweets200ResponsePagination**](SearchTweets200ResponsePagination.md) |  | [optional] |
+| **pagination** | [**ListFormLeads200ResponsePagination**](ListFormLeads200ResponsePagination.md) |  | [optional] |
 | **meta** | [**ListFormLeads200ResponseMeta**](ListFormLeads200ResponseMeta.md) |  | [optional] |
 
 ## Example

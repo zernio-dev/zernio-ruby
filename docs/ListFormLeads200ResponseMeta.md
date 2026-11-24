@@ -7,8 +7,8 @@
 | **platform** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **form_id** | **String** |  | [optional] |
-| **source** | **String** | persisted: leads stored from the webhook and the reconcile pass. live: read from Meta because none are stored for this form yet. | [optional] |
-| **last_checked_at** | **Time** | When Zernio last read this form&#39;s leads from Meta. For persisted leads, the last reconcile pass for the Page (null before the first one). For live reads, when the cached Graph read was made. | [optional] |
+| **source** | **String** | persisted: leads stored from the webhook and the recovery pass. live: read from Meta because none are stored for this form yet, or because content is not retained. | [optional] |
+| **last_checked_at** | **Time** | For persisted leads, when the recovery pass last finished for the Page (null before the first one). It does not prove every lead is stored. For live reads, when Meta was read. | [optional] |
 | **last_updated** | **Time** |  | [optional] |
 
 ## Example
