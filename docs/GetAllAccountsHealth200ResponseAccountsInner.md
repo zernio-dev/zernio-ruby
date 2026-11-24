@@ -24,6 +24,7 @@
 | **unhealthy_since** | **Time** | When the earliest current stored cause was recorded (the start of the outage); for an intentional disconnect, when it was disconnected. Null when the connection is healthy, including when the account is unhealthy for another reason (analytics, messaging restriction, missing analytics scopes), or when the time is unknown. | [optional] |
 | **analytics_sync** | [**GetAllAccountsHealth200ResponseAccountsInnerAnalyticsSync**](GetAllAccountsHealth200ResponseAccountsInnerAnalyticsSync.md) |  | [optional] |
 | **inbound_activity** | [**InboundActivity**](InboundActivity.md) |  | [optional] |
+| **coexistence_history_sync** | [**CoexistenceHistorySync**](CoexistenceHistorySync.md) |  | [optional] |
 | **publishing_restriction** | [**GetAllAccountsHealth200ResponseAccountsInnerPublishingRestriction**](GetAllAccountsHealth200ResponseAccountsInnerPublishingRestriction.md) |  | [optional] |
 | **messaging_restriction** | [**GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction**](GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction.md) |  | [optional] |
 
@@ -53,6 +54,7 @@ instance = Zernio::GetAllAccountsHealth200ResponseAccountsInner.new(
   unhealthy_since: null,
   analytics_sync: null,
   inbound_activity: null,
+  coexistence_history_sync: null,
   publishing_restriction: null,
   messaging_restriction: null
 )
