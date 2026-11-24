@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **event_index** | **Integer** | Index into the events sent to this destination. | [optional] |
+| **event_index** | **Integer** | Position of the event in the request&#39;s &#x60;events&#x60; array, counted from 0, also when repeats or events this destination does not take were left out. | [optional] |
 | **event_id** | **String** |  | [optional] |
 | **message** | **String** |  | [optional] |
 | **code** | [**SendConversions200ResponseFailuresInnerCode**](SendConversions200ResponseFailuresInnerCode.md) |  | [optional] |
