@@ -14,6 +14,7 @@
 | **period** | [**UsageMeteringPeriod**](UsageMeteringPeriod.md) |  | [optional] |
 | **tax** | [**UsageMeteringTax**](UsageMeteringTax.md) |  | [optional] |
 | **attribution** | [**UsageMeteringAttribution**](UsageMeteringAttribution.md) |  | [optional] |
+| **incomplete** | **Boolean** | Check it before rebilling. Present and true when a read behind the split failed: a group&#39;s spend can then be lower than the real one (it is &#x60;unattributed&#x60; in a full breakdown, missing from a view of some profiles or accounts). Retry in a minute. | [optional] |
 | **scope** | [**UsageMeteringScope**](UsageMeteringScope.md) |  | [optional] |
 
 ## Example
@@ -32,6 +33,7 @@ instance = Zernio::UsageMetering.new(
   period: null,
   tax: null,
   attribution: null,
+  incomplete: null,
   scope: null
 )
 ```
