@@ -1474,6 +1474,7 @@ docs/FileItem.md
 docs/FilePickerSession.md
 docs/FileShareLink.md
 docs/FilesApi.md
+docs/Fixed.md
 docs/FlowAutomationDefinition.md
 docs/FlowAutomationDefinitionGraph.md
 docs/FlowAutomationDefinitionTrigger.md
@@ -1490,6 +1491,7 @@ docs/FoodMenuLabel.md
 docs/FoodMenuSection.md
 docs/ForwardEmailRequest.md
 docs/ForwardingRule.md
+docs/ForwardingRuleEventValue.md
 docs/ForwardingRuleValueCondition.md
 docs/ForwardingRuleValueOverride.md
 docs/FreeBusyError.md
@@ -2857,6 +2859,7 @@ docs/OrderImessageSenderRequestContact.md
 docs/OrgConnection.md
 docs/OrgConnectionSetup.md
 docs/OrgConnectionSetupDnsRecord.md
+docs/Original.md
 docs/OwnedPhoneNumber.md
 docs/OwnedPhoneNumberFeatures.md
 docs/OwnedPhoneNumberProfileId.md
@@ -2868,6 +2871,7 @@ docs/PayoutBatchItem.md
 docs/PayoutBatchItemCreator.md
 docs/Pending.md
 docs/PerPost.md
+docs/Percent.md
 docs/PhoneNumberStockWatch.md
 docs/PhoneNumbersApi.md
 docs/PinDiscordMessage200Response.md
@@ -5798,6 +5802,7 @@ lib/zernio-sdk/models/fetch_google_business_verification_options_request.rb
 lib/zernio-sdk/models/file_item.rb
 lib/zernio-sdk/models/file_picker_session.rb
 lib/zernio-sdk/models/file_share_link.rb
+lib/zernio-sdk/models/fixed.rb
 lib/zernio-sdk/models/flow_automation_definition.rb
 lib/zernio-sdk/models/flow_automation_definition_graph.rb
 lib/zernio-sdk/models/flow_automation_definition_trigger.rb
@@ -5814,6 +5819,7 @@ lib/zernio-sdk/models/food_menu_label.rb
 lib/zernio-sdk/models/food_menu_section.rb
 lib/zernio-sdk/models/forward_email_request.rb
 lib/zernio-sdk/models/forwarding_rule.rb
+lib/zernio-sdk/models/forwarding_rule_event_value.rb
 lib/zernio-sdk/models/forwarding_rule_value_condition.rb
 lib/zernio-sdk/models/forwarding_rule_value_override.rb
 lib/zernio-sdk/models/free_busy_error.rb
@@ -7160,6 +7166,7 @@ lib/zernio-sdk/models/order_imessage_sender_request_contact.rb
 lib/zernio-sdk/models/org_connection.rb
 lib/zernio-sdk/models/org_connection_setup.rb
 lib/zernio-sdk/models/org_connection_setup_dns_record.rb
+lib/zernio-sdk/models/original.rb
 lib/zernio-sdk/models/owned_phone_number.rb
 lib/zernio-sdk/models/owned_phone_number_features.rb
 lib/zernio-sdk/models/owned_phone_number_profile_id.rb
@@ -7171,6 +7178,7 @@ lib/zernio-sdk/models/payout_batch_item.rb
 lib/zernio-sdk/models/payout_batch_item_creator.rb
 lib/zernio-sdk/models/pending.rb
 lib/zernio-sdk/models/per_post.rb
+lib/zernio-sdk/models/percent.rb
 lib/zernio-sdk/models/phone_number_stock_watch.rb
 lib/zernio-sdk/models/pin_discord_message200_response.rb
 lib/zernio-sdk/models/pin_inbox_comment200_response.rb
@@ -10062,6 +10070,7 @@ spec/models/fetch_google_business_verification_options_request_spec.rb
 spec/models/file_item_spec.rb
 spec/models/file_picker_session_spec.rb
 spec/models/file_share_link_spec.rb
+spec/models/fixed_spec.rb
 spec/models/flow_automation_definition_graph_spec.rb
 spec/models/flow_automation_definition_spec.rb
 spec/models/flow_automation_definition_trigger_spec.rb
@@ -10077,6 +10086,7 @@ spec/models/food_menu_label_spec.rb
 spec/models/food_menu_section_spec.rb
 spec/models/food_menu_spec.rb
 spec/models/forward_email_request_spec.rb
+spec/models/forwarding_rule_event_value_spec.rb
 spec/models/forwarding_rule_spec.rb
 spec/models/forwarding_rule_value_condition_spec.rb
 spec/models/forwarding_rule_value_override_spec.rb
@@ -11424,6 +11434,7 @@ spec/models/order_imessage_sender_request_spec.rb
 spec/models/org_connection_setup_dns_record_spec.rb
 spec/models/org_connection_setup_spec.rb
 spec/models/org_connection_spec.rb
+spec/models/original_spec.rb
 spec/models/owned_phone_number_features_spec.rb
 spec/models/owned_phone_number_profile_id_one_of_spec.rb
 spec/models/owned_phone_number_profile_id_spec.rb
@@ -11435,6 +11446,7 @@ spec/models/payout_batch_item_spec.rb
 spec/models/payout_batch_spec.rb
 spec/models/pending_spec.rb
 spec/models/per_post_spec.rb
+spec/models/percent_spec.rb
 spec/models/phone_number_stock_watch_spec.rb
 spec/models/pin_discord_message200_response_spec.rb
 spec/models/pin_inbox_comment200_response_spec.rb
