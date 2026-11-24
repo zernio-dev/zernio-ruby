@@ -10,6 +10,7 @@
 | **email** | **String** | Email of the credential&#39;s owner. | [optional] |
 | **auth_type** | **String** |  | [optional] |
 | **scope** | **String** | Granted OAuth scopes, space-separated. Null for API keys. | [optional] |
+| **audience** | **String** | Resource the OAuth token was issued for (RFC 8707), for example https://mcp.zernio.com/mcp. Null for API keys and for tokens issued without one. | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::VerifyCredential200Response.new(
   name: null,
   email: null,
   auth_type: null,
-  scope: null
+  scope: null,
+  audience: null
 )
 ```
 
