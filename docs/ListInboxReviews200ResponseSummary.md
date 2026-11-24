@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **total_reviews** | **Integer** |  | [optional] |
-| **average_rating** | **Float** |  | [optional] |
+| **total_reviews** | **Integer** | Includes reviews without a star rating. | [optional] |
+| **average_rating** | **Float** | Mean star rating rounded to one decimal, leaving out reviews without a star rating. Null when none has one. | [optional] |
 
 ## Example
 

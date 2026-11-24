@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  | [optional] |
-| **text** | **String** |  | [optional] |
-| **created** | **Time** |  | [optional] |
+| **id** | **String** | Reply id. On Google Business Profile it is the review id. | [optional] |
+| **text** | **String** | Reply text. | [optional] |
+| **created** | **Time** | When the reply was written (on Google Business Profile, last updated). | [optional] |
 
 ## Example
 

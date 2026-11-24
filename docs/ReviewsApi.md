@@ -103,10 +103,10 @@ api_instance = Zernio::ReviewsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | 
   platform: 'facebook', # String | 
-  min_rating: 56, # Integer | 
-  max_rating: 56, # Integer | 
+  min_rating: 56, # Integer | Reviews without a star rating (Facebook recommendations) never match.
+  max_rating: 56, # Integer | Reviews without a star rating (Facebook recommendations) never match.
   has_reply: true, # Boolean | Filter by reply status
-  sort_by: 'date', # String | 
+  sort_by: 'date', # String | rating puts reviews without a star rating last in both orders.
   sort_order: 'asc', # String | 
   limit: 56, # Integer | 
   cursor: 'cursor_example', # String | 
@@ -146,10 +146,10 @@ end
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
-| **min_rating** | **Integer** |  | [optional] |
-| **max_rating** | **Integer** |  | [optional] |
+| **min_rating** | **Integer** | Reviews without a star rating (Facebook recommendations) never match. | [optional] |
+| **max_rating** | **Integer** | Reviews without a star rating (Facebook recommendations) never match. | [optional] |
 | **has_reply** | **Boolean** | Filter by reply status | [optional] |
-| **sort_by** | **String** |  | [optional][default to &#39;date&#39;] |
+| **sort_by** | **String** | rating puts reviews without a star rating last in both orders. | [optional][default to &#39;date&#39;] |
 | **sort_order** | **String** |  | [optional][default to &#39;desc&#39;] |
 | **limit** | **Integer** |  | [optional][default to 25] |
 | **cursor** | **String** |  | [optional] |
