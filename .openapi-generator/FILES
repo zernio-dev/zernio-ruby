@@ -2354,6 +2354,7 @@ docs/ListAdCatalogProductSets200Response.md
 docs/ListAdCatalogProductSets200ResponseProductSetsInner.md
 docs/ListAdCatalogProducts200Response.md
 docs/ListAdCatalogs200Response.md
+docs/ListAdChanges200Response.md
 docs/ListAdConversionAssociations200Response.md
 docs/ListAdConversionAssociations200ResponseAssociationsInner.md
 docs/ListAdConversionDestinations200Response.md
@@ -3403,6 +3404,7 @@ docs/SocialAccountProfileId.md
 docs/StagedAdChange.md
 docs/StagedAdChangeDiffInner.md
 docs/StagedAdChangeError.md
+docs/StagedAdChangeSummary.md
 docs/StartBusinessAgentEvalRun202Response.md
 docs/StartBusinessAgentEvalRunRequest.md
 docs/StartCreatorConnect200Response.md
@@ -6674,6 +6676,7 @@ lib/zernio-sdk/models/list_ad_catalog_product_sets200_response.rb
 lib/zernio-sdk/models/list_ad_catalog_product_sets200_response_product_sets_inner.rb
 lib/zernio-sdk/models/list_ad_catalog_products200_response.rb
 lib/zernio-sdk/models/list_ad_catalogs200_response.rb
+lib/zernio-sdk/models/list_ad_changes200_response.rb
 lib/zernio-sdk/models/list_ad_conversion_associations200_response.rb
 lib/zernio-sdk/models/list_ad_conversion_associations200_response_associations_inner.rb
 lib/zernio-sdk/models/list_ad_conversion_destinations200_response.rb
@@ -7704,6 +7707,7 @@ lib/zernio-sdk/models/social_account_profile_id.rb
 lib/zernio-sdk/models/staged_ad_change.rb
 lib/zernio-sdk/models/staged_ad_change_diff_inner.rb
 lib/zernio-sdk/models/staged_ad_change_error.rb
+lib/zernio-sdk/models/staged_ad_change_summary.rb
 lib/zernio-sdk/models/start_business_agent_eval_run202_response.rb
 lib/zernio-sdk/models/start_business_agent_eval_run_request.rb
 lib/zernio-sdk/models/start_creator_connect200_response.rb
@@ -10949,6 +10953,7 @@ spec/models/list_ad_catalog_product_sets200_response_product_sets_inner_spec.rb
 spec/models/list_ad_catalog_product_sets200_response_spec.rb
 spec/models/list_ad_catalog_products200_response_spec.rb
 spec/models/list_ad_catalogs200_response_spec.rb
+spec/models/list_ad_changes200_response_spec.rb
 spec/models/list_ad_conversion_associations200_response_associations_inner_spec.rb
 spec/models/list_ad_conversion_associations200_response_spec.rb
 spec/models/list_ad_conversion_destinations200_response_destinations_inner_conversion_events_inner_spec.rb
@@ -11979,6 +11984,7 @@ spec/models/social_account_spec.rb
 spec/models/staged_ad_change_diff_inner_spec.rb
 spec/models/staged_ad_change_error_spec.rb
 spec/models/staged_ad_change_spec.rb
+spec/models/staged_ad_change_summary_spec.rb
 spec/models/start_business_agent_eval_run202_response_spec.rb
 spec/models/start_business_agent_eval_run_request_spec.rb
 spec/models/start_creator_connect200_response_spec.rb

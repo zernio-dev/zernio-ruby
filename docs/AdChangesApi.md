@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**confirm_ad_change**](AdChangesApi.md#confirm_ad_change) | **POST** /v1/ads/changes/{changeId}/confirm | Confirm a staged ad change |
 | [**discard_ad_change**](AdChangesApi.md#discard_ad_change) | **DELETE** /v1/ads/changes/{changeId} | Discard a staged ad change |
 | [**get_ad_change**](AdChangesApi.md#get_ad_change) | **GET** /v1/ads/changes/{changeId} | Get a staged ad change |
+| [**list_ad_changes**](AdChangesApi.md#list_ad_changes) | **GET** /v1/ads/changes | List staged ad changes |
 
 
 ## confirm_ad_change
@@ -204,6 +205,79 @@ end
 ### Return type
 
 [**GetAdChange200Response**](GetAdChange200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_changes
+
+> <ListAdChanges200Response> list_ad_changes(opts)
+
+List staged ad changes
+
+Lists the ad changes waiting to be confirmed or discarded, newest first. A confirmed or failed change is not listed; read it by id.  Each item is a summary without the diff. Read one change to get its before/after values. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdChangesApi.new
+opts = {
+  limit: 56, # Integer | How many changes to return.
+  cursor: 'cursor_example' # String | The `nextCursor` of the previous page, unchanged.
+}
+
+begin
+  # List staged ad changes
+  result = api_instance.list_ad_changes(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdChangesApi->list_ad_changes: #{e}"
+end
+```
+
+#### Using the list_ad_changes_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdChanges200Response>, Integer, Hash)> list_ad_changes_with_http_info(opts)
+
+```ruby
+begin
+  # List staged ad changes
+  data, status_code, headers = api_instance.list_ad_changes_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdChanges200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdChangesApi->list_ad_changes_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **limit** | **Integer** | How many changes to return. | [optional][default to 50] |
+| **cursor** | **String** | The &#x60;nextCursor&#x60; of the previous page, unchanged. | [optional] |
+
+### Return type
+
+[**ListAdChanges200Response**](ListAdChanges200Response.md)
 
 ### Authorization
 
