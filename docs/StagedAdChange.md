@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | The change id, used in /v1/ads/changes/{changeId}. |  |
-| **type** | **String** | Which write was staged: a status route, the update route of a campaign, an ad set or an ad, or one of the create routes (POST /v1/ads/create, POST /v1/ads/campaigns, POST /v1/ads/ad-sets). |  |
+| **type** | **String** | Which write was staged: a status route, the update route of a campaign, an ad set or an ad, the campaign targeting route, or one of the create routes (POST /v1/ads/create, POST /v1/ads/campaigns, POST /v1/ads/ad-sets). |  |
 | **platform** | **String** | The ad platform of the object, as the write route names it. |  |
 | **account_id** | **String** | The connected account the write goes through. |  |
 | **ad_account_id** | **String** | The ad account id on the platform. |  |
