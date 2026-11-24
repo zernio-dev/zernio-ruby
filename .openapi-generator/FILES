@@ -1518,6 +1518,7 @@ docs/GenerateKeywordIdeasRequest.md
 docs/GeoRestriction.md
 docs/GetAccount200Response.md
 docs/GetAccountHealth200Response.md
+docs/GetAccountHealth200ResponseCoexistenceHistorySync.md
 docs/GetAccountHealth200ResponseLineWebhook.md
 docs/GetAccountHealth200ResponseMailbox.md
 docs/GetAccountHealth200ResponseMessagingRestriction.md
@@ -5833,6 +5834,7 @@ lib/zernio-sdk/models/generate_keyword_ideas_request.rb
 lib/zernio-sdk/models/geo_restriction.rb
 lib/zernio-sdk/models/get_account200_response.rb
 lib/zernio-sdk/models/get_account_health200_response.rb
+lib/zernio-sdk/models/get_account_health200_response_coexistence_history_sync.rb
 lib/zernio-sdk/models/get_account_health200_response_line_webhook.rb
 lib/zernio-sdk/models/get_account_health200_response_mailbox.rb
 lib/zernio-sdk/models/get_account_health200_response_messaging_restriction.rb
@@ -10095,6 +10097,7 @@ spec/models/generate_keyword_ideas200_response_spec.rb
 spec/models/generate_keyword_ideas_request_spec.rb
 spec/models/geo_restriction_spec.rb
 spec/models/get_account200_response_spec.rb
+spec/models/get_account_health200_response_coexistence_history_sync_spec.rb
 spec/models/get_account_health200_response_line_webhook_spec.rb
 spec/models/get_account_health200_response_mailbox_spec.rb
 spec/models/get_account_health200_response_messaging_restriction_spec.rb

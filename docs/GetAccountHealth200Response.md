@@ -26,6 +26,7 @@
 | **inbound_activity** | [**InboundActivity**](InboundActivity.md) |  | [optional] |
 | **publishing_restriction** | [**GetAllAccountsHealth200ResponseAccountsInnerPublishingRestriction**](GetAllAccountsHealth200ResponseAccountsInnerPublishingRestriction.md) |  | [optional] |
 | **messaging_restriction** | [**GetAccountHealth200ResponseMessagingRestriction**](GetAccountHealth200ResponseMessagingRestriction.md) |  | [optional] |
+| **coexistence_history_sync** | [**GetAccountHealth200ResponseCoexistenceHistorySync**](GetAccountHealth200ResponseCoexistenceHistorySync.md) |  | [optional] |
 | **platform_connection** | [**GetAccountHealth200ResponsePlatformConnection**](GetAccountHealth200ResponsePlatformConnection.md) |  | [optional] |
 | **line_webhook** | [**GetAccountHealth200ResponseLineWebhook**](GetAccountHealth200ResponseLineWebhook.md) |  | [optional] |
 
@@ -57,6 +58,7 @@ instance = Zernio::GetAccountHealth200Response.new(
   inbound_activity: null,
   publishing_restriction: null,
   messaging_restriction: null,
+  coexistence_history_sync: null,
   platform_connection: null,
   line_webhook: null
 )
