@@ -9221,7 +9221,7 @@ nil (empty response body)
 
 Review new event
 
-A new review was posted on a connected Google Business Profile account, in real time through Pub/Sub. 
+A new review was posted on a connected Google Business Profile account (in real time through Pub/Sub) or Facebook Page (from the Page ratings webhook). 
 
 ### Examples
 
