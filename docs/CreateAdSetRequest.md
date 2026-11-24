@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **stage** | **Boolean** | Send true to stage this create instead of sending it. Nothing is created on the ad network; the response is &#x60;202&#x60; with the staged change. Create it with POST /v1/ads/changes/{changeId}/confirm. Google only: &#x60;platform: reddit&#x60; or &#x60;snapchat&#x60; returns 400 &#x60;staging_not_supported&#x60;. | [optional] |
 | **account_id** | **String** | Zernio SocialAccount id owning the Google Ads or Reddit Ads connection. |  |
 | **platform** | **String** | \&quot;google\&quot;, \&quot;reddit\&quot; and \&quot;snapchat\&quot; are implemented; every other value returns 501. |  |
 | **campaign_id** | **String** | Platform campaign ID the ad group is created under (numeric on Google). |  |
@@ -28,6 +29,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::CreateAdSetRequest.new(
+  stage: null,
   account_id: null,
   platform: null,
   campaign_id: null,
