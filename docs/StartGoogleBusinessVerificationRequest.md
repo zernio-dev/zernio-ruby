@@ -8,7 +8,7 @@
 | **language_code** | **String** |  | [optional] |
 | **phone_number** | **String** | For PHONE_CALL / SMS. | [optional] |
 | **email_address** | **String** | For EMAIL. | [optional] |
-| **mailer_contact** | **Object** | For ADDRESS (postcard) verification. | [optional] |
+| **mailer_contact** | [**StartGoogleBusinessVerificationRequestMailerContact**](StartGoogleBusinessVerificationRequestMailerContact.md) |  | [optional] |
 | **context** | **Object** | ServiceBusinessContext (e.g. service address). Required for service-area businesses. | [optional] |
 
 ## Example
