@@ -939,7 +939,7 @@ end
 
 api_instance = Zernio::AdAccountsApi.new
 ad_id = 'ad_id_example' # String | Internal Zernio ad ID or indexed platform ad ID.
-comment_id = 'comment_id_example' # String | TikTok comment ID from the ad comment listing.
+comment_id = 'comment_id_example' # String | TikTok comment ID from the ad comment listing. A Meta comment ID (post_comment) answers 501 with the inbox comment endpoints to use.
 opts = {
   since: Date.parse('2013-10-20'), # Date | Start date of the comment lookup window. Defaults to 30 days before until.
   _until: Date.parse('2013-10-20') # Date | End date of the comment lookup window. Defaults to today in UTC.
@@ -977,7 +977,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** | Internal Zernio ad ID or indexed platform ad ID. |  |
-| **comment_id** | **String** | TikTok comment ID from the ad comment listing. |  |
+| **comment_id** | **String** | TikTok comment ID from the ad comment listing. A Meta comment ID (post_comment) answers 501 with the inbox comment endpoints to use. |  |
 | **since** | **Date** | Start date of the comment lookup window. Defaults to 30 days before until. | [optional] |
 | **_until** | **Date** | End date of the comment lookup window. Defaults to today in UTC. | [optional] |
 
@@ -2228,7 +2228,7 @@ end
 
 api_instance = Zernio::AdAccountsApi.new
 ad_id = 'ad_id_example' # String | Internal Zernio ad ID or indexed platform ad ID.
-comment_id = 'comment_id_example' # String | TikTok comment ID from the ad comment listing.
+comment_id = 'comment_id_example' # String | TikTok comment ID from the ad comment listing. A Meta comment ID (post_comment) answers 501 with the inbox comment endpoints to use.
 hide_ad_comment_request = Zernio::HideAdCommentRequest.new({hidden: false}) # HideAdCommentRequest | 
 opts = {
   since: Date.parse('2013-10-20'), # Date | Start date of the comment lookup window. Defaults to 30 days before until.
@@ -2267,7 +2267,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** | Internal Zernio ad ID or indexed platform ad ID. |  |
-| **comment_id** | **String** | TikTok comment ID from the ad comment listing. |  |
+| **comment_id** | **String** | TikTok comment ID from the ad comment listing. A Meta comment ID (post_comment) answers 501 with the inbox comment endpoints to use. |  |
 | **hide_ad_comment_request** | [**HideAdCommentRequest**](HideAdCommentRequest.md) |  |  |
 | **since** | **Date** | Start date of the comment lookup window. Defaults to 30 days before until. | [optional] |
 | **_until** | **Date** | End date of the comment lookup window. Defaults to today in UTC. | [optional] |
@@ -4545,7 +4545,7 @@ end
 
 api_instance = Zernio::AdAccountsApi.new
 ad_id = 'ad_id_example' # String | Internal Zernio ad ID or indexed platform ad ID.
-comment_id = 'comment_id_example' # String | TikTok comment ID from the ad comment listing.
+comment_id = 'comment_id_example' # String | TikTok comment ID from the ad comment listing. A Meta comment ID (post_comment) answers 501 with the inbox comment endpoints to use.
 reply_to_ad_comment_request = Zernio::ReplyToAdCommentRequest.new({text: 'text_example'}) # ReplyToAdCommentRequest | 
 opts = {
   since: Date.parse('2013-10-20'), # Date | Start date of the comment lookup window. Defaults to 30 days before until.
@@ -4584,7 +4584,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** | Internal Zernio ad ID or indexed platform ad ID. |  |
-| **comment_id** | **String** | TikTok comment ID from the ad comment listing. |  |
+| **comment_id** | **String** | TikTok comment ID from the ad comment listing. A Meta comment ID (post_comment) answers 501 with the inbox comment endpoints to use. |  |
 | **reply_to_ad_comment_request** | [**ReplyToAdCommentRequest**](ReplyToAdCommentRequest.md) |  |  |
 | **since** | **Date** | Start date of the comment lookup window. Defaults to 30 days before until. | [optional] |
 | **_until** | **Date** | End date of the comment lookup window. Defaults to today in UTC. | [optional] |
