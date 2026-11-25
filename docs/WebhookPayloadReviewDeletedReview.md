@@ -4,11 +4,11 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Full review name, matching review.id on the review.new event (\&quot;accounts/123/locations/456/reviews/789\&quot;). |  |
+| **id** | **String** | Google: full review name. Facebook: the review id from review.new. |  |
 | **platform** | **String** |  |  |
 | **rating** | **Integer** | Star rating the reviewer gave. Null when it was never recorded. |  |
-| **created_at** | **Time** | When the reviewer posted the review. Null when it was never recorded. |  |
-| **last_seen_at** | **Time** | Last time Zernio saw Google return this review. |  |
+| **created_at** | **Time** | When the reviewer posted the review. Null when it was never recorded. Always null on Facebook. |  |
+| **last_seen_at** | **Time** | Last time Zernio saw Google return this review. On Facebook, when Meta&#39;s removal notice arrived. |  |
 
 ## Example
 
