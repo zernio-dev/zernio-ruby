@@ -1,4 +1,4 @@
-# Zernio::BusinessAgentConnectorAllOfConnectionStatus
+# Zernio::BusinessAgentConnectorConnectionStatus
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::BusinessAgentConnectorAllOfConnectionStatus.new(
+instance = Zernio::BusinessAgentConnectorConnectionStatus.new(
   status: null,
   error_message: null
 )

@@ -4,18 +4,18 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | Unique per number. |  |
-| **description** | **String** | Tell the agent what the service provides. | [optional] |
-| **base_url** | **String** | Public HTTPS URL reachable from Meta. |  |
+| **id** | **String** |  |  |
+| **name** | **String** |  |  |
+| **description** | **String** |  | [optional] |
+| **base_url** | **String** |  |  |
 | **connector_protocol** | **String** |  | [optional] |
 | **auth_type** | **String** |  |  |
-| **auth_config** | [**BusinessAgentConnectorInputAuthConfig**](BusinessAgentConnectorInputAuthConfig.md) |  | [optional] |
-| **user_auth_injection_config** | [**BusinessAgentConnectorInputUserAuthInjectionConfig**](BusinessAgentConnectorInputUserAuthInjectionConfig.md) |  | [optional] |
+| **auth_config** | **Hash&lt;String, Object&gt;** | What Meta stores for the connector&#39;s auth (for example oauth2_client_credentials with token_url and client_id), without secret values. | [optional] |
+| **user_auth_injection_config** | [**BusinessAgentConnectorUserAuthInjectionConfig**](BusinessAgentConnectorUserAuthInjectionConfig.md) |  | [optional] |
 | **requires_certificate** | **Boolean** |  | [optional] |
-| **id** | **String** |  |  |
 | **mcp_tool_sync** | **Hash&lt;String, Object&gt;** |  | [optional] |
-| **mtls_config** | **Hash&lt;String, Object&gt;** |  | [optional] |
-| **connection_status** | [**BusinessAgentConnectorAllOfConnectionStatus**](BusinessAgentConnectorAllOfConnectionStatus.md) |  | [optional] |
+| **mtls_config** | **Hash&lt;String, Object&gt;** | Certificate details, without client_key or private_key. | [optional] |
+| **connection_status** | [**BusinessAgentConnectorConnectionStatus**](BusinessAgentConnectorConnectionStatus.md) |  | [optional] |
 
 ## Example
 
@@ -23,6 +23,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::BusinessAgentConnector.new(
+  id: null,
   name: null,
   description: null,
   base_url: null,
@@ -31,7 +32,6 @@ instance = Zernio::BusinessAgentConnector.new(
   auth_config: null,
   user_auth_injection_config: null,
   requires_certificate: null,
-  id: null,
   mcp_tool_sync: null,
   mtls_config: null,
   connection_status: null
