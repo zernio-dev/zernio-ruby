@@ -261,11 +261,11 @@ end
 
 ## backtest_automation_draft
 
-> <AutomationBacktest> backtest_automation_draft(automation_definition, opts)
+> <AutomationBacktest> backtest_automation_draft(create_automation_request, opts)
 
 Backtest an unsaved automation
 
-Replays an automation over past days on stored daily metrics, without saving it or changing anything. It refuses what saving would refuse.  Each day lists what it would have done. Its own changes carry into later days, but the metrics stay what really happened. `notes` says what the replay could not know.  Only ad automations can be backtested, on at most 5,000 ads. 
+Replays an automation over past days on stored daily metrics, without saving it or changing anything. It refuses what saving would refuse.  Each day lists what it would have done. Its own changes carry into later days, but the metrics stay what really happened. `notes` says what the replay could not know.  Only ad automations can be backtested, on at most 5,000 ads.  The draft can instead be sent as `name` and an automation `graph` (`AutomationGraph`), replayed exactly as its own shape would be. A comment to DM or flow graph is refused (`not_supported`). 
 
 ### Examples
 
@@ -279,14 +279,14 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AutomationsApi.new
-automation_definition = Zernio::AdRuleAutomationDefinition.new({name: 'name_example', trigger: Zernio::AutomationScheduleTrigger.new({type: 'schedule'}), subjects: Zernio::AutomationSubjects.new({each: 'campaign', ad_accounts: [Zernio::AutomationSubjectsAdAccountsInner.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example'})]}), conditions: Zernio::AdRuleConditionsOneOf.new({all: [Zernio::AdRuleCondition.new({metric: 'spend', window: 'today', op: '>', value: 3.56})]}), steps: [Zernio::AutomationApprovalStep.new({type: 'approval.request', to: ['to_example'], expires_in: '1d'})]}) # AutomationDefinition | 
+create_automation_request = Zernio::AdRuleAutomationDefinition.new({name: 'name_example', trigger: Zernio::AutomationScheduleTrigger.new({type: 'schedule'}), subjects: Zernio::AutomationSubjects.new({each: 'campaign', ad_accounts: [Zernio::AutomationSubjectsAdAccountsInner.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example'})]}), conditions: Zernio::AdRuleConditionsOneOf.new({all: [Zernio::AdRuleCondition.new({metric: 'spend', window: 'today', op: '>', value: 3.56})]}), steps: [Zernio::AutomationApprovalStep.new({type: 'approval.request', to: ['to_example'], expires_in: '1d'})]}) # CreateAutomationRequest | 
 opts = {
   days: 56 # Integer | How many whole days before today to replay. Today is not replayed.
 }
 
 begin
   # Backtest an unsaved automation
-  result = api_instance.backtest_automation_draft(automation_definition, opts)
+  result = api_instance.backtest_automation_draft(create_automation_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AutomationsApi->backtest_automation_draft: #{e}"
@@ -297,12 +297,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AutomationBacktest>, Integer, Hash)> backtest_automation_draft_with_http_info(automation_definition, opts)
+> <Array(<AutomationBacktest>, Integer, Hash)> backtest_automation_draft_with_http_info(create_automation_request, opts)
 
 ```ruby
 begin
   # Backtest an unsaved automation
-  data, status_code, headers = api_instance.backtest_automation_draft_with_http_info(automation_definition, opts)
+  data, status_code, headers = api_instance.backtest_automation_draft_with_http_info(create_automation_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AutomationBacktest>
@@ -315,7 +315,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **automation_definition** | [**AutomationDefinition**](AutomationDefinition.md) |  |  |
+| **create_automation_request** | [**CreateAutomationRequest**](CreateAutomationRequest.md) |  |  |
 | **days** | **Integer** | How many whole days before today to replay. Today is not replayed. | [optional][default to 30] |
 
 ### Return type
@@ -2066,11 +2066,11 @@ end
 
 ## preview_automation_draft
 
-> <AutomationPreview> preview_automation_draft(automation_definition, opts)
+> <AutomationPreview> preview_automation_draft(create_automation_request, opts)
 
 Preview an unsaved automation
 
-Shows what an ad rule would do if it ran now, without saving it or changing anything: every object it checks, each condition with its actual value, and the steps a match would run. It refuses what saving would refuse.  Event and scheduled automations cannot be previewed yet (400, `not_supported`). 
+Shows what an ad rule would do if it ran now, without saving it or changing anything: every object it checks, each condition with its actual value, and the steps a match would run. It refuses what saving would refuse.  Event and scheduled automations cannot be previewed yet (400, `not_supported`).  The draft can instead be sent as `name` and an automation `graph` (`AutomationGraph`), previewed exactly as its own shape would be. A comment to DM or flow graph is refused (`not_supported`). 
 
 ### Examples
 
@@ -2084,14 +2084,14 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AutomationsApi.new
-automation_definition = Zernio::AdRuleAutomationDefinition.new({name: 'name_example', trigger: Zernio::AutomationScheduleTrigger.new({type: 'schedule'}), subjects: Zernio::AutomationSubjects.new({each: 'campaign', ad_accounts: [Zernio::AutomationSubjectsAdAccountsInner.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example'})]}), conditions: Zernio::AdRuleConditionsOneOf.new({all: [Zernio::AdRuleCondition.new({metric: 'spend', window: 'today', op: '>', value: 3.56})]}), steps: [Zernio::AutomationApprovalStep.new({type: 'approval.request', to: ['to_example'], expires_in: '1d'})]}) # AutomationDefinition | 
+create_automation_request = Zernio::AdRuleAutomationDefinition.new({name: 'name_example', trigger: Zernio::AutomationScheduleTrigger.new({type: 'schedule'}), subjects: Zernio::AutomationSubjects.new({each: 'campaign', ad_accounts: [Zernio::AutomationSubjectsAdAccountsInner.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example'})]}), conditions: Zernio::AdRuleConditionsOneOf.new({all: [Zernio::AdRuleCondition.new({metric: 'spend', window: 'today', op: '>', value: 3.56})]}), steps: [Zernio::AutomationApprovalStep.new({type: 'approval.request', to: ['to_example'], expires_in: '1d'})]}) # CreateAutomationRequest | 
 opts = {
   limit: 56 # Integer | How many subjects to list, matches first. `evaluated` and `matched` always count them all.
 }
 
 begin
   # Preview an unsaved automation
-  result = api_instance.preview_automation_draft(automation_definition, opts)
+  result = api_instance.preview_automation_draft(create_automation_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AutomationsApi->preview_automation_draft: #{e}"
@@ -2102,12 +2102,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AutomationPreview>, Integer, Hash)> preview_automation_draft_with_http_info(automation_definition, opts)
+> <Array(<AutomationPreview>, Integer, Hash)> preview_automation_draft_with_http_info(create_automation_request, opts)
 
 ```ruby
 begin
   # Preview an unsaved automation
-  data, status_code, headers = api_instance.preview_automation_draft_with_http_info(automation_definition, opts)
+  data, status_code, headers = api_instance.preview_automation_draft_with_http_info(create_automation_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AutomationPreview>
@@ -2120,7 +2120,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **automation_definition** | [**AutomationDefinition**](AutomationDefinition.md) |  |  |
+| **create_automation_request** | [**CreateAutomationRequest**](CreateAutomationRequest.md) |  |  |
 | **limit** | **Integer** | How many subjects to list, matches first. &#x60;evaluated&#x60; and &#x60;matched&#x60; always count them all. | [optional][default to 100] |
 
 ### Return type
