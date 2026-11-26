@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :platform
 
-    # Send true to stage this change instead of applying it. Nothing is written to the ad network; the response is `202` with the staged change and its diff. Apply it with POST /v1/ads/changes/{changeId}/confirm. Meta and Google only; cannot be combined with `validateOnly` or `dryRun`.
+    # Send true to stage this change instead of applying it. Nothing is written to the ad network; the response is `202` with the staged change and its diff. Apply it with POST /v1/ads/changes/{changeId}/confirm. Meta, Google, TikTok, X, Snapchat and Reddit; cannot be combined with `validateOnly` or `dryRun`.
     attr_accessor :stage
 
     class EnumAttributeValidator
