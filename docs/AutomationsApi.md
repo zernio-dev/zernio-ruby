@@ -334,11 +334,11 @@ end
 
 ## create_automation
 
-> <CreateAutomation201Response> create_automation(automation_definition, opts)
+> <CreateAutomation201Response> create_automation(create_automation_request, opts)
 
 Create an automation
 
-Creates an automation. Its trigger picks the kind:  - **Ad rule**: a `schedule` over campaigns, ad sets, ads, Google keywords or Google search terms, with metric `conditions` and ad `steps`. It stays paused unless `status` is `active`; preview it first with `POST /v1/automations/preview`. - **Event**: a Zernio event in `trigger.type`, such as `post.failed`, with notify steps. It is on unless `status` is `paused`. - **Scheduled**: a `schedule` over a profile's posts, with notify steps and an optional boost. It is on unless `status` is `paused`. - **Sequence**: an `enrollment` trigger on one messaging account, with message steps sent over time. It is on unless `status` is `draft`. It needs what `/v1/sequences` needs: the inbox add-on and a key with the `messages` group. - **Comment to DM**: a comment door in `trigger.type`, such as `comment.keyword`, with a `graph` of the shapes `/v1/comment-automations` holds. It is on unless `status` is `paused`, and needs what `/v1/comment-automations` needs. A post that already has an active automation is a 409. - **Flow** (`kind` is `workflow`): a flow trigger such as `inbound_message` (or a `graph` whose trigger node names it) on one account, with the builder's `graph`. It is a draft unless `status` is `active`, which needs a complete graph; `paused` is refused. It needs the inbox add-on and a full-access key.  Everything an automation cannot hold is refused at once: the 400 lists every problem with its JSON path in `details.problems`. 
+Creates an automation. Its trigger picks the kind:  - **Ad rule**: a `schedule` over campaigns, ad sets, ads, Google keywords or Google search terms, with metric `conditions` and ad `steps`. It stays paused unless `status` is `active`; preview it first with `POST /v1/automations/preview`. - **Event**: a Zernio event in `trigger.type`, such as `post.failed`, with notify steps. It is on unless `status` is `paused`. - **Scheduled**: a `schedule` over a profile's posts, with notify steps and an optional boost. It is on unless `status` is `paused`. - **Sequence**: an `enrollment` trigger on one messaging account, with message steps sent over time. It is on unless `status` is `draft`. It needs what `/v1/sequences` needs: the inbox add-on and a key with the `messages` group. - **Comment to DM**: a comment door in `trigger.type`, such as `comment.keyword`, with a `graph` of the shapes `/v1/comment-automations` holds. It is on unless `status` is `paused`, and needs what `/v1/comment-automations` needs. A post that already has an active automation is a 409. - **Flow** (`kind` is `workflow`): a flow trigger such as `inbound_message` (or a `graph` whose trigger node names it) on one account, with the builder's `graph`. It is a draft unless `status` is `active`, which needs a complete graph; `paused` is refused. It needs the inbox add-on and a full-access key.  An ad rule, event, scheduled automation or sequence can instead be sent as `name`, `status` and an automation `graph` (`AutomationGraph`, the one its response carries). The graph's trigger picks the kind, and it is saved exactly as its own shape would be.  A comment to DM or flow sent as an automation graph is refused (`not_supported`).  Everything an automation cannot hold is refused at once: the 400 lists every problem with its JSON path in `details.problems`. 
 
 ### Examples
 
@@ -352,14 +352,14 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AutomationsApi.new
-automation_definition = Zernio::AdRuleAutomationDefinition.new({name: 'name_example', trigger: Zernio::AutomationScheduleTrigger.new({type: 'schedule'}), subjects: Zernio::AutomationSubjects.new({each: 'campaign', ad_accounts: [Zernio::AutomationSubjectsAdAccountsInner.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example'})]}), conditions: Zernio::AdRuleConditionsOneOf.new({all: [Zernio::AdRuleCondition.new({metric: 'spend', window: 'today', op: '>', value: 3.56})]}), steps: [Zernio::AutomationApprovalStep.new({type: 'approval.request', to: ['to_example'], expires_in: '1d'})]}) # AutomationDefinition | 
+create_automation_request = Zernio::AdRuleAutomationDefinition.new({name: 'name_example', trigger: Zernio::AutomationScheduleTrigger.new({type: 'schedule'}), subjects: Zernio::AutomationSubjects.new({each: 'campaign', ad_accounts: [Zernio::AutomationSubjectsAdAccountsInner.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example'})]}), conditions: Zernio::AdRuleConditionsOneOf.new({all: [Zernio::AdRuleCondition.new({metric: 'spend', window: 'today', op: '>', value: 3.56})]}), steps: [Zernio::AutomationApprovalStep.new({type: 'approval.request', to: ['to_example'], expires_in: '1d'})]}) # CreateAutomationRequest | 
 opts = {
   idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
   # Create an automation
-  result = api_instance.create_automation(automation_definition, opts)
+  result = api_instance.create_automation(create_automation_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AutomationsApi->create_automation: #{e}"
@@ -370,12 +370,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateAutomation201Response>, Integer, Hash)> create_automation_with_http_info(automation_definition, opts)
+> <Array(<CreateAutomation201Response>, Integer, Hash)> create_automation_with_http_info(create_automation_request, opts)
 
 ```ruby
 begin
   # Create an automation
-  data, status_code, headers = api_instance.create_automation_with_http_info(automation_definition, opts)
+  data, status_code, headers = api_instance.create_automation_with_http_info(create_automation_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateAutomation201Response>
@@ -388,7 +388,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **automation_definition** | [**AutomationDefinition**](AutomationDefinition.md) |  |  |
+| **create_automation_request** | [**CreateAutomationRequest**](CreateAutomationRequest.md) |  |  |
 | **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type

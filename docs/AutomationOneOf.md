@@ -20,6 +20,7 @@
 | **created_at** | **Time** |  |  |
 | **updated_at** | **Time** |  |  |
 | **template** | [**AutomationRecordTemplate**](AutomationRecordTemplate.md) |  | [optional] |
+| **graph** | [**AutomationGraph**](AutomationGraph.md) |  | [optional] |
 
 ## Example
 
@@ -42,7 +43,8 @@ instance = Zernio::AutomationOneOf.new(
   next_check_at: null,
   created_at: null,
   updated_at: null,
-  template: null
+  template: null,
+  graph: null
 )
 ```
 

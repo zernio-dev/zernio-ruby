@@ -18,6 +18,7 @@
 | **created_at** | **Time** |  |  |
 | **updated_at** | **Time** |  |  |
 | **template** | [**AutomationRecordTemplate**](AutomationRecordTemplate.md) |  | [optional] |
+| **graph** | [**AutomationGraph**](AutomationGraph.md) |  | [optional] |
 | **platform** | **String** | The account&#39;s platform. On &#x60;whatsapp&#x60; every step sends a template. |  |
 | **enrollments** | [**AutomationOneOf3AllOfEnrollments**](AutomationOneOf3AllOfEnrollments.md) |  |  |
 
@@ -41,6 +42,7 @@ instance = Zernio::AutomationOneOf3.new(
   created_at: null,
   updated_at: null,
   template: null,
+  graph: null,
   platform: null,
   enrollments: null
 )

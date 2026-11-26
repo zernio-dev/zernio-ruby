@@ -354,6 +354,12 @@ docs/AutomationFactConditionOneOf1.md
 docs/AutomationFactConditionOneOf2.md
 docs/AutomationFactConditionOneOfValue.md
 docs/AutomationFactResult.md
+docs/AutomationGraph.md
+docs/AutomationGraphEdgesInner.md
+docs/AutomationGraphLimits.md
+docs/AutomationGraphNodesInner.md
+docs/AutomationGraphNodesInnerPosition.md
+docs/AutomationGraphTriggersInner.md
 docs/AutomationLimits.md
 docs/AutomationNotifyStep.md
 docs/AutomationNotifyStepToInner.md
@@ -893,6 +899,7 @@ docs/CreateAdSetRequestPromotedObject.md
 docs/CreateApiKey201Response.md
 docs/CreateApiKeyRequest.md
 docs/CreateAutomation201Response.md
+docs/CreateAutomationRequest.md
 docs/CreateAutomationTemplate201Response.md
 docs/CreateAutomationTemplateRequest.md
 docs/CreateBidStrategy201Response.md
@@ -2172,6 +2179,7 @@ docs/GrantBusinessPartner200ResponsePartner.md
 docs/GrantBusinessPartner201Response.md
 docs/GrantBusinessPartner201ResponsePartner.md
 docs/GrantBusinessPartnerRequest.md
+docs/GraphAutomationDefinition.md
 docs/GscDimensionFilter.md
 docs/GscDimensionFilterList.md
 docs/HandleOAuthCallbackRequest.md
@@ -4729,6 +4737,12 @@ lib/zernio-sdk/models/automation_fact_condition_one_of1.rb
 lib/zernio-sdk/models/automation_fact_condition_one_of2.rb
 lib/zernio-sdk/models/automation_fact_condition_one_of_value.rb
 lib/zernio-sdk/models/automation_fact_result.rb
+lib/zernio-sdk/models/automation_graph.rb
+lib/zernio-sdk/models/automation_graph_edges_inner.rb
+lib/zernio-sdk/models/automation_graph_limits.rb
+lib/zernio-sdk/models/automation_graph_nodes_inner.rb
+lib/zernio-sdk/models/automation_graph_nodes_inner_position.rb
+lib/zernio-sdk/models/automation_graph_triggers_inner.rb
 lib/zernio-sdk/models/automation_limits.rb
 lib/zernio-sdk/models/automation_notify_step.rb
 lib/zernio-sdk/models/automation_notify_step_to_inner.rb
@@ -5250,6 +5264,7 @@ lib/zernio-sdk/models/create_ad_set_request_promoted_object.rb
 lib/zernio-sdk/models/create_api_key201_response.rb
 lib/zernio-sdk/models/create_api_key_request.rb
 lib/zernio-sdk/models/create_automation201_response.rb
+lib/zernio-sdk/models/create_automation_request.rb
 lib/zernio-sdk/models/create_automation_template201_response.rb
 lib/zernio-sdk/models/create_automation_template_request.rb
 lib/zernio-sdk/models/create_bid_strategy201_response.rb
@@ -6514,6 +6529,7 @@ lib/zernio-sdk/models/grant_business_partner200_response_partner.rb
 lib/zernio-sdk/models/grant_business_partner201_response.rb
 lib/zernio-sdk/models/grant_business_partner201_response_partner.rb
 lib/zernio-sdk/models/grant_business_partner_request.rb
+lib/zernio-sdk/models/graph_automation_definition.rb
 lib/zernio-sdk/models/gsc_dimension_filter.rb
 lib/zernio-sdk/models/gsc_dimension_filter_list.rb
 lib/zernio-sdk/models/handle_o_auth_callback_request.rb
@@ -9018,6 +9034,12 @@ spec/models/automation_fact_condition_one_of_spec.rb
 spec/models/automation_fact_condition_one_of_value_spec.rb
 spec/models/automation_fact_condition_spec.rb
 spec/models/automation_fact_result_spec.rb
+spec/models/automation_graph_edges_inner_spec.rb
+spec/models/automation_graph_limits_spec.rb
+spec/models/automation_graph_nodes_inner_position_spec.rb
+spec/models/automation_graph_nodes_inner_spec.rb
+spec/models/automation_graph_spec.rb
+spec/models/automation_graph_triggers_inner_spec.rb
 spec/models/automation_limits_spec.rb
 spec/models/automation_notify_step_spec.rb
 spec/models/automation_notify_step_to_inner_spec.rb
@@ -9540,6 +9562,7 @@ spec/models/create_ad_set_request_spec.rb
 spec/models/create_api_key201_response_spec.rb
 spec/models/create_api_key_request_spec.rb
 spec/models/create_automation201_response_spec.rb
+spec/models/create_automation_request_spec.rb
 spec/models/create_automation_template201_response_spec.rb
 spec/models/create_automation_template_request_spec.rb
 spec/models/create_bid_strategy201_response_spec.rb
@@ -10804,6 +10827,7 @@ spec/models/grant_business_partner200_response_spec.rb
 spec/models/grant_business_partner201_response_partner_spec.rb
 spec/models/grant_business_partner201_response_spec.rb
 spec/models/grant_business_partner_request_spec.rb
+spec/models/graph_automation_definition_spec.rb
 spec/models/gsc_dimension_filter_list_spec.rb
 spec/models/gsc_dimension_filter_spec.rb
 spec/models/handle_o_auth_callback_request_spec.rb
