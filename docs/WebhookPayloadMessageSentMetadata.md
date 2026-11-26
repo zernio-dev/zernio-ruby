@@ -8,6 +8,7 @@
 | **template_language** | **String** | WhatsApp template sends only. Language code of the approved template that was sent. | [optional] |
 | **template_header** | [**WebhookPayloadMessageSentMetadataTemplateHeader**](WebhookPayloadMessageSentMetadataTemplateHeader.md) |  | [optional] |
 | **template_footer** | **String** | WhatsApp template sends only. Footer text of the template. Absent when the template has no footer, and on bulk, broadcast and automation sends. | [optional] |
+| **template_buttons** | [**Array&lt;WebhookPayloadMessageSentMetadataTemplateButtonsInner&gt;**](WebhookPayloadMessageSentMetadataTemplateButtonsInner.md) | WhatsApp template sends only. The approved buttons as the recipient saw them, with a dynamic URL filled with the value the send gave. Never carries a coupon code, OTP or flow value.  Absent when the template has no top-level buttons (carousel card buttons are not included), and on bulk, broadcast and automation sends.  | [optional] |
 | **unsupported** | [**WebhookPayloadMessageSentMetadataUnsupported**](WebhookPayloadMessageSentMetadataUnsupported.md) |  | [optional] |
 | **meta_interactive** | **Hash&lt;String, Object&gt;** | Instagram/Facebook only. The buttons, quickReplies and/or template this outgoing message carried, as sent (tracked urls included when link tracking wrapped a button). Absent when the send carried none. | [optional] |
 | **location** | [**WebhookPayloadMessageSentMetadataLocation**](WebhookPayloadMessageSentMetadataLocation.md) |  | [optional] |
@@ -26,6 +27,7 @@ instance = Zernio::WebhookPayloadMessageSentMetadata.new(
   template_language: null,
   template_header: null,
   template_footer: null,
+  template_buttons: null,
   unsupported: null,
   meta_interactive: null,
   location: null,
