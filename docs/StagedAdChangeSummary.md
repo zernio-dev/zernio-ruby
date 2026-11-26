@@ -5,7 +5,11 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | The change id, used in /v1/ads/changes/{changeId}. |  |
-| **type** | **String** | Which write was staged. |  |
+| **type** | **String** | Which write was staged. &#x60;operation&#x60; is a write staged as its request, named by &#x60;request&#x60;. |  |
+| **request** | [**StagedAdChangeSummaryRequest**](StagedAdChangeSummaryRequest.md) |  | [optional] |
+| **status** | **String** | The status the list was asked for. |  |
+| **stale** | **Boolean** | Present and true on a staged change whose object was edited on the ad network after staging. Refresh it with PATCH /v1/ads/changes/{changeId}. | [optional] |
+| **error** | [**StagedAdChangeSummaryError**](StagedAdChangeSummaryError.md) |  | [optional] |
 | **platform** | **String** | The ad platform of the object, as the write route names it. |  |
 | **account_id** | **String** | The connected account the write goes through. |  |
 | **ad_account_id** | **String** | The ad account id on the platform. |  |
@@ -23,6 +27,10 @@ require 'zernio-sdk'
 instance = Zernio::StagedAdChangeSummary.new(
   id: null,
   type: null,
+  request: null,
+  status: null,
+  stale: null,
+  error: null,
   platform: facebook,
   account_id: null,
   ad_account_id: null,

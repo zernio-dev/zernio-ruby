@@ -3421,7 +3421,10 @@ docs/SocialAccountProfileId.md
 docs/StagedAdChange.md
 docs/StagedAdChangeDiffInner.md
 docs/StagedAdChangeError.md
+docs/StagedAdChangeRequest.md
 docs/StagedAdChangeSummary.md
+docs/StagedAdChangeSummaryError.md
+docs/StagedAdChangeSummaryRequest.md
 docs/StartBusinessAgentEvalRun202Response.md
 docs/StartBusinessAgentEvalRunRequest.md
 docs/StartCreatorConnect200Response.md
@@ -7747,7 +7750,10 @@ lib/zernio-sdk/models/social_account_profile_id.rb
 lib/zernio-sdk/models/staged_ad_change.rb
 lib/zernio-sdk/models/staged_ad_change_diff_inner.rb
 lib/zernio-sdk/models/staged_ad_change_error.rb
+lib/zernio-sdk/models/staged_ad_change_request.rb
 lib/zernio-sdk/models/staged_ad_change_summary.rb
+lib/zernio-sdk/models/staged_ad_change_summary_error.rb
+lib/zernio-sdk/models/staged_ad_change_summary_request.rb
 lib/zernio-sdk/models/start_business_agent_eval_run202_response.rb
 lib/zernio-sdk/models/start_business_agent_eval_run_request.rb
 lib/zernio-sdk/models/start_creator_connect200_response.rb
@@ -12046,7 +12052,10 @@ spec/models/social_account_profile_id_spec.rb
 spec/models/social_account_spec.rb
 spec/models/staged_ad_change_diff_inner_spec.rb
 spec/models/staged_ad_change_error_spec.rb
+spec/models/staged_ad_change_request_spec.rb
 spec/models/staged_ad_change_spec.rb
+spec/models/staged_ad_change_summary_error_spec.rb
+spec/models/staged_ad_change_summary_request_spec.rb
 spec/models/staged_ad_change_summary_spec.rb
 spec/models/start_business_agent_eval_run202_response_spec.rb
 spec/models/start_business_agent_eval_run_request_spec.rb
