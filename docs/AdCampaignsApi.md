@@ -4946,7 +4946,7 @@ end
 
 ## update_ad_set_status
 
-> <UpdateAdSetStatus200Response> update_ad_set_status(ad_set_id, update_ad_campaign_status_request, opts)
+> <UpdateAdSetStatus200Response> update_ad_set_status(ad_set_id, update_ad_set_status_request, opts)
 
 Pause or resume a single ad set
 
@@ -4965,14 +4965,14 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Platform ad set ID
-update_ad_campaign_status_request = Zernio::UpdateAdCampaignStatusRequest.new({status: 'active', platform: 'facebook'}) # UpdateAdCampaignStatusRequest | 
+update_ad_set_status_request = Zernio::UpdateAdSetStatusRequest.new({status: 'active', platform: 'facebook'}) # UpdateAdSetStatusRequest | 
 opts = {
   idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
 begin
   # Pause or resume a single ad set
-  result = api_instance.update_ad_set_status(ad_set_id, update_ad_campaign_status_request, opts)
+  result = api_instance.update_ad_set_status(ad_set_id, update_ad_set_status_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_set_status: #{e}"
@@ -4983,12 +4983,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdSetStatus200Response>, Integer, Hash)> update_ad_set_status_with_http_info(ad_set_id, update_ad_campaign_status_request, opts)
+> <Array(<UpdateAdSetStatus200Response>, Integer, Hash)> update_ad_set_status_with_http_info(ad_set_id, update_ad_set_status_request, opts)
 
 ```ruby
 begin
   # Pause or resume a single ad set
-  data, status_code, headers = api_instance.update_ad_set_status_with_http_info(ad_set_id, update_ad_campaign_status_request, opts)
+  data, status_code, headers = api_instance.update_ad_set_status_with_http_info(ad_set_id, update_ad_set_status_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdSetStatus200Response>
@@ -5002,7 +5002,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_set_id** | **String** | Platform ad set ID |  |
-| **update_ad_campaign_status_request** | [**UpdateAdCampaignStatusRequest**](UpdateAdCampaignStatusRequest.md) |  |  |
+| **update_ad_set_status_request** | [**UpdateAdSetStatusRequest**](UpdateAdSetStatusRequest.md) |  |  |
 | **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
