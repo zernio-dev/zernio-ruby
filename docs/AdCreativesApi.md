@@ -26,7 +26,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## create_ad_creative
 
-> <CreateAdCreative201Response> create_ad_creative(create_ad_creative_request)
+> <AdWriteValidation> create_ad_creative(create_ad_creative_request)
 
 Create a standalone creative
 
@@ -59,7 +59,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateAdCreative201Response>, Integer, Hash)> create_ad_creative_with_http_info(create_ad_creative_request)
+> <Array(<AdWriteValidation>, Integer, Hash)> create_ad_creative_with_http_info(create_ad_creative_request)
 
 ```ruby
 begin
@@ -67,7 +67,7 @@ begin
   data, status_code, headers = api_instance.create_ad_creative_with_http_info(create_ad_creative_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateAdCreative201Response>
+  p data # => <AdWriteValidation>
 rescue Zernio::ApiError => e
   puts "Error when calling AdCreativesApi->create_ad_creative_with_http_info: #{e}"
 end
@@ -81,7 +81,7 @@ end
 
 ### Return type
 
-[**CreateAdCreative201Response**](CreateAdCreative201Response.md)
+[**AdWriteValidation**](AdWriteValidation.md)
 
 ### Authorization
 

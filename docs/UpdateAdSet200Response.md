@@ -4,6 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **validate_only** | **Boolean** | Present and true when the request was sent with validateOnly: nothing was changed. The other fields of a real update are then absent. | [optional] |
+| **results** | [**Array&lt;AdWriteValidationResult&gt;**](AdWriteValidationResult.md) | validateOnly only: one entry, the object Meta validated. | [optional] |
+| **message** | **String** | validateOnly only: what was validated. | [optional] |
 | **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
 | **budget_level** | **String** |  | [optional] |
 | **status** | **String** | As in PUT /v1/ads/ad-sets/{adSetId}/status: delivery derived from the switches read back. | [optional] |
@@ -27,6 +30,9 @@
 require 'zernio-sdk'
 
 instance = Zernio::UpdateAdSet200Response.new(
+  validate_only: null,
+  results: null,
+  message: null,
   budget: null,
   budget_level: null,
   status: null,
