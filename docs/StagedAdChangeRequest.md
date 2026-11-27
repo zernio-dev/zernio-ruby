@@ -8,7 +8,7 @@
 | **method** | **String** |  |  |
 | **path** | **String** | The path of the write, for example /v1/ads/keywords. |  |
 | **params** | **Hash&lt;String, String&gt;** | The path values of the staged request, by the names in &#x60;path&#x60;. | [optional] |
-| **query** | **Hash&lt;String, String&gt;** | The query values of the staged request, without &#x60;stage&#x60;. | [optional] |
+| **query** | [**Hash&lt;String, StagedAdChangeRequestQueryValue&gt;**](StagedAdChangeRequestQueryValue.md) | The query values of the staged request, without &#x60;stage&#x60;. A key that was sent more than once holds every value, in the order sent. | [optional] |
 
 ## Example
 
