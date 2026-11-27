@@ -11,6 +11,7 @@
 | **audience_expansion_enabled** | **Boolean** | Enable LinkedIn audience expansion. Defaults to false. | [optional] |
 | **offsite_delivery_enabled** | **Boolean** | Deliver on the LinkedIn Audience Network. Defaults to false. | [optional] |
 | **connected_television_only** | **Boolean** | Restrict delivery to Connected TV inventory. | [optional] |
+| **image_link_format** | **String** | LinkedIn shape of an &#x60;imageUrl&#x60; with &#x60;linkUrl&#x60; ad on POST /v1/ads/create.  - &#x60;article&#x60; (default): an article link ad (&#x60;content.article&#x60;, image as the thumbnail). - &#x60;single_image&#x60;: a Single Image Ad (the image as the post media, &#x60;linkUrl&#x60; as the landing page, &#x60;callToAction&#x60; as the button).  &#x60;single_image&#x60; works only with &#x60;imageUrl&#x60;, returns 400 with &#x60;longHeadline&#x60; (LinkedIn does not show it on this format), and is rejected on boost.  | [optional][default to &#39;article&#39;] |
 | **carousel** | [**LinkedInAdsPlatformDataCarousel**](LinkedInAdsPlatformDataCarousel.md) |  | [optional] |
 | **document** | [**LinkedInAdsPlatformDataDocument**](LinkedInAdsPlatformDataDocument.md) |  | [optional] |
 | **spotlight** | [**LinkedInAdsPlatformDataSpotlight**](LinkedInAdsPlatformDataSpotlight.md) |  | [optional] |
@@ -34,6 +35,7 @@ instance = Zernio::LinkedInAdsPlatformData.new(
   audience_expansion_enabled: null,
   offsite_delivery_enabled: null,
   connected_television_only: null,
+  image_link_format: null,
   carousel: null,
   document: null,
   spotlight: null,
