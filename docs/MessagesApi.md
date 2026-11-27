@@ -17,6 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_inbox_conversation_messages**](MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages |
 | [**get_inbox_unread_count**](MessagesApi.md#get_inbox_unread_count) | **GET** /v1/inbox/unread-count | Count unread conversations |
 | [**get_message_attachment**](MessagesApi.md#get_message_attachment) | **GET** /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index} | Resolve message attachment |
+| [**get_messenger_contact**](MessagesApi.md#get_messenger_contact) | **GET** /v1/inbox/conversations/{conversationId}/messenger-contact | Get a Messenger contact&#39;s language, time zone and gender |
 | [**list_conversation_labels**](MessagesApi.md#list_conversation_labels) | **GET** /v1/inbox/conversations/{conversationId}/labels | List the labels on a conversation |
 | [**list_inbox_conversations**](MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations |
 | [**list_inbox_labels**](MessagesApi.md#list_inbox_labels) | **GET** /v1/inbox/labels | List the Page&#39;s conversation labels |
@@ -967,6 +968,77 @@ end
 ### Return type
 
 [**GetMessageAttachment200Response**](GetMessageAttachment200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_messenger_contact
+
+> <GetMessengerContact200Response> get_messenger_contact(conversation_id, account_id)
+
+Get a Messenger contact's language, time zone and gender
+
+Reads the language, time zone and gender of the person in a Facebook Messenger conversation, live from Meta with the Page token.  Available on Facebook Page conversations only. Instagram and every other platform answer 400 `platform_not_supported`.  Meta shares each field only when the person made it available, so any field can be `null`. A null field is not an error. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | The conversation ID
+account_id = 'account_id_example' # String | The Facebook social account ID
+
+begin
+  # Get a Messenger contact's language, time zone and gender
+  result = api_instance.get_messenger_contact(conversation_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->get_messenger_contact: #{e}"
+end
+```
+
+#### Using the get_messenger_contact_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetMessengerContact200Response>, Integer, Hash)> get_messenger_contact_with_http_info(conversation_id, account_id)
+
+```ruby
+begin
+  # Get a Messenger contact's language, time zone and gender
+  data, status_code, headers = api_instance.get_messenger_contact_with_http_info(conversation_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetMessengerContact200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->get_messenger_contact_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | The conversation ID |  |
+| **account_id** | **String** | The Facebook social account ID |  |
+
+### Return type
+
+[**GetMessengerContact200Response**](GetMessengerContact200Response.md)
 
 ### Authorization
 
