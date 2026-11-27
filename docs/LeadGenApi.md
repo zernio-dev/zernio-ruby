@@ -19,7 +19,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## archive_lead_form
 
-> <ArchiveLeadForm200Response> archive_lead_form(form_id, account_id)
+> <ArchiveLeadForm200Response> archive_lead_form(form_id, account_id, opts)
 
 Archive a lead form
 
@@ -39,10 +39,13 @@ end
 api_instance = Zernio::LeadGenApi.new
 form_id = 'form_id_example' # String | Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
 account_id = 'account_id_example' # String | Connected Meta ads, facebook, instagram or linkedin ads account id (selects the platform).  - A Meta ads connection resolves its Page through the Facebook account linked to the same profile. - An Instagram account uses the Page its ads run under: its own linked Page, else the Facebook or business-login Meta ads account on the same profile.
+opts = {
+  stage: true # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
+}
 
 begin
   # Archive a lead form
-  result = api_instance.archive_lead_form(form_id, account_id)
+  result = api_instance.archive_lead_form(form_id, account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling LeadGenApi->archive_lead_form: #{e}"
@@ -53,12 +56,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ArchiveLeadForm200Response>, Integer, Hash)> archive_lead_form_with_http_info(form_id, account_id)
+> <Array(<ArchiveLeadForm200Response>, Integer, Hash)> archive_lead_form_with_http_info(form_id, account_id, opts)
 
 ```ruby
 begin
   # Archive a lead form
-  data, status_code, headers = api_instance.archive_lead_form_with_http_info(form_id, account_id)
+  data, status_code, headers = api_instance.archive_lead_form_with_http_info(form_id, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ArchiveLeadForm200Response>
@@ -73,6 +76,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **form_id** | **String** | Numeric form id (Meta leadgen_form id or LinkedIn leadForm id). |  |
 | **account_id** | **String** | Connected Meta ads, facebook, instagram or linkedin ads account id (selects the platform).  - A Meta ads connection resolves its Page through the Facebook account linked to the same profile. - An Instagram account uses the Page its ads run under: its own linked Page, else the Facebook or business-login Meta ads account on the same profile. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 
 ### Return type
 

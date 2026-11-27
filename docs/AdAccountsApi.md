@@ -1018,6 +1018,7 @@ api_instance = Zernio::AdAccountsApi.new
 list_id = 'list_id_example' # String | 
 account_id = 'account_id_example' # String | 
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   idempotency_key: 'idempotency_key_example', # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
   ad_account_id: 'ad_account_id_example', # String | 
   customer_id: 'customer_id_example', # String | 
@@ -1057,6 +1058,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **list_id** | **String** |  |  |
 | **account_id** | **String** |  |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 | **ad_account_id** | **String** |  | [optional] |
 | **customer_id** | **String** |  | [optional] |
@@ -1078,7 +1080,7 @@ end
 
 ## delete_value_rule_set
 
-> <DeleteValueRuleSet200Response> delete_value_rule_set(value_rule_set_id, account_id)
+> <DeleteValueRuleSet200Response> delete_value_rule_set(value_rule_set_id, account_id, opts)
 
 Delete a value rule set
 
@@ -1098,10 +1100,13 @@ end
 api_instance = Zernio::AdAccountsApi.new
 value_rule_set_id = 'value_rule_set_id_example' # String | Platform value rule set id.
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+opts = {
+  stage: true # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
+}
 
 begin
   # Delete a value rule set
-  result = api_instance.delete_value_rule_set(value_rule_set_id, account_id)
+  result = api_instance.delete_value_rule_set(value_rule_set_id, account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->delete_value_rule_set: #{e}"
@@ -1112,12 +1117,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteValueRuleSet200Response>, Integer, Hash)> delete_value_rule_set_with_http_info(value_rule_set_id, account_id)
+> <Array(<DeleteValueRuleSet200Response>, Integer, Hash)> delete_value_rule_set_with_http_info(value_rule_set_id, account_id, opts)
 
 ```ruby
 begin
   # Delete a value rule set
-  data, status_code, headers = api_instance.delete_value_rule_set_with_http_info(value_rule_set_id, account_id)
+  data, status_code, headers = api_instance.delete_value_rule_set_with_http_info(value_rule_set_id, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteValueRuleSet200Response>
@@ -1132,6 +1137,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **value_rule_set_id** | **String** | Platform value rule set id. |  |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 
 ### Return type
 
@@ -1170,6 +1176,7 @@ api_instance = Zernio::AdAccountsApi.new
 label_id = 'label_id_example' # String | Google label id
 account_id = 'account_id_example' # String | Zernio Google Ads connection id.
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
   customer_id: 'customer_id_example', # String | Alias of adAccountId, kept for existing callers
   campaign_ids: ['inner_example'], # Array<String> | Google campaign ids. Repeat the parameter or pass a comma-separated list.
@@ -1211,6 +1218,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **label_id** | **String** | Google label id |  |
 | **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
 | **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 | **campaign_ids** | [**Array&lt;String&gt;**](String.md) | Google campaign ids. Repeat the parameter or pass a comma-separated list. | [optional] |
@@ -4018,6 +4026,7 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Zernio Google Ads connection id.
 asset_id = 'asset_id_example' # String | Numeric Google Ads asset id.
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
   customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
 }
@@ -4055,6 +4064,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio Google Ads connection id. |  |
 | **asset_id** | **String** | Numeric Google Ads asset id. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
 | **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
@@ -4095,6 +4105,7 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Zernio Google Ads connection id.
 asset_id = 'asset_id_example' # String | Numeric Google Ads asset id.
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
   customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
 }
@@ -4132,6 +4143,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio Google Ads connection id. |  |
 | **asset_id** | **String** | Numeric Google Ads asset id. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
 | **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
@@ -4172,6 +4184,7 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Zernio Google Ads connection id.
 asset_id = 'asset_id_example' # String | Numeric Google Ads asset id.
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
   customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
 }
@@ -4209,6 +4222,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio Google Ads connection id. |  |
 | **asset_id** | **String** | Numeric Google Ads asset id. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
 | **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
@@ -4228,7 +4242,7 @@ end
 
 ## remove_ad_account_user
 
-> <RemoveAdAccountUser200Response> remove_ad_account_user(account_id, ad_account_id, user_id)
+> <RemoveAdAccountUser200Response> remove_ad_account_user(account_id, ad_account_id, user_id, opts)
 
 Remove a user from an ad account
 
@@ -4249,10 +4263,13 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount id used to resolve the Meta token.
 ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
 user_id = 'user_id_example' # String | Business-scoped user id.
+opts = {
+  stage: true # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
+}
 
 begin
   # Remove a user from an ad account
-  result = api_instance.remove_ad_account_user(account_id, ad_account_id, user_id)
+  result = api_instance.remove_ad_account_user(account_id, ad_account_id, user_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->remove_ad_account_user: #{e}"
@@ -4263,12 +4280,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RemoveAdAccountUser200Response>, Integer, Hash)> remove_ad_account_user_with_http_info(account_id, ad_account_id, user_id)
+> <Array(<RemoveAdAccountUser200Response>, Integer, Hash)> remove_ad_account_user_with_http_info(account_id, ad_account_id, user_id, opts)
 
 ```ruby
 begin
   # Remove a user from an ad account
-  data, status_code, headers = api_instance.remove_ad_account_user_with_http_info(account_id, ad_account_id, user_id)
+  data, status_code, headers = api_instance.remove_ad_account_user_with_http_info(account_id, ad_account_id, user_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveAdAccountUser200Response>
@@ -4284,6 +4301,7 @@ end
 | **account_id** | **String** | Zernio SocialAccount id used to resolve the Meta token. |  |
 | **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
 | **user_id** | **String** | Business-scoped user id. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 
 ### Return type
 
@@ -4322,6 +4340,7 @@ api_instance = Zernio::AdAccountsApi.new
 label_id = 'label_id_example' # String | Google label id
 account_id = 'account_id_example' # String | Zernio SocialAccount id (Google Ads)
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   ad_account_id: 'ad_account_id_example', # String | Google customer id. Required when the connection has multiple customers.
   customer_id: 'customer_id_example' # String | Alias of adAccountId
 }
@@ -4359,6 +4378,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **label_id** | **String** | Google label id |  |
 | **account_id** | **String** | Zernio SocialAccount id (Google Ads) |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **ad_account_id** | **String** | Google customer id. Required when the connection has multiple customers. | [optional] |
 | **customer_id** | **String** | Alias of adAccountId | [optional] |
 
@@ -4378,7 +4398,7 @@ end
 
 ## remove_page_user
 
-> <RemovePageUser200Response> remove_page_user(account_id, page_id, user_id)
+> <RemovePageUser200Response> remove_page_user(account_id, page_id, user_id, opts)
 
 Remove a user from a Page
 
@@ -4399,10 +4419,13 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount id used to resolve the Meta token.
 page_id = 'page_id_example' # String | Facebook Page id.
 user_id = 'user_id_example' # String | Business-scoped user id.
+opts = {
+  stage: true # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
+}
 
 begin
   # Remove a user from a Page
-  result = api_instance.remove_page_user(account_id, page_id, user_id)
+  result = api_instance.remove_page_user(account_id, page_id, user_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->remove_page_user: #{e}"
@@ -4413,12 +4436,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RemovePageUser200Response>, Integer, Hash)> remove_page_user_with_http_info(account_id, page_id, user_id)
+> <Array(<RemovePageUser200Response>, Integer, Hash)> remove_page_user_with_http_info(account_id, page_id, user_id, opts)
 
 ```ruby
 begin
   # Remove a user from a Page
-  data, status_code, headers = api_instance.remove_page_user_with_http_info(account_id, page_id, user_id)
+  data, status_code, headers = api_instance.remove_page_user_with_http_info(account_id, page_id, user_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemovePageUser200Response>
@@ -4434,6 +4457,7 @@ end
 | **account_id** | **String** | Zernio SocialAccount id used to resolve the Meta token. |  |
 | **page_id** | **String** | Facebook Page id. |  |
 | **user_id** | **String** | Business-scoped user id. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 
 ### Return type
 
@@ -4605,7 +4629,7 @@ end
 
 ## revoke_ad_account_user_invitation
 
-> <RevokeAdAccountUserInvitation200Response> revoke_ad_account_user_invitation(account_id, ad_account_id, invitation_id)
+> <RevokeAdAccountUserInvitation200Response> revoke_ad_account_user_invitation(account_id, ad_account_id, invitation_id, opts)
 
 Revoke a user access invitation
 
@@ -4626,10 +4650,13 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Google ads SocialAccount id.
 ad_account_id = 'ad_account_id_example' # String | Google Ads customer id, digits only.
 invitation_id = 'invitation_id_example' # String | Numeric invitation id from GET /v1/ads/accounts/user-invitations.
+opts = {
+  stage: true # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
+}
 
 begin
   # Revoke a user access invitation
-  result = api_instance.revoke_ad_account_user_invitation(account_id, ad_account_id, invitation_id)
+  result = api_instance.revoke_ad_account_user_invitation(account_id, ad_account_id, invitation_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->revoke_ad_account_user_invitation: #{e}"
@@ -4640,12 +4667,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RevokeAdAccountUserInvitation200Response>, Integer, Hash)> revoke_ad_account_user_invitation_with_http_info(account_id, ad_account_id, invitation_id)
+> <Array(<RevokeAdAccountUserInvitation200Response>, Integer, Hash)> revoke_ad_account_user_invitation_with_http_info(account_id, ad_account_id, invitation_id, opts)
 
 ```ruby
 begin
   # Revoke a user access invitation
-  data, status_code, headers = api_instance.revoke_ad_account_user_invitation_with_http_info(account_id, ad_account_id, invitation_id)
+  data, status_code, headers = api_instance.revoke_ad_account_user_invitation_with_http_info(account_id, ad_account_id, invitation_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RevokeAdAccountUserInvitation200Response>
@@ -4661,6 +4688,7 @@ end
 | **account_id** | **String** | Google ads SocialAccount id. |  |
 | **ad_account_id** | **String** | Google Ads customer id, digits only. |  |
 | **invitation_id** | **String** | Numeric invitation id from GET /v1/ads/accounts/user-invitations. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 
 ### Return type
 
@@ -5309,7 +5337,7 @@ end
 
 ## withdraw_ad_account_user_invitation_approval
 
-> <WithdrawAdAccountUserInvitationApproval200Response> withdraw_ad_account_user_invitation_approval(account_id, ad_account_id, multi_party_auth_review_id)
+> <WithdrawAdAccountUserInvitationApproval200Response> withdraw_ad_account_user_invitation_approval(account_id, ad_account_id, multi_party_auth_review_id, opts)
 
 Withdraw an invitation awaiting multi-party approval
 
@@ -5330,10 +5358,13 @@ api_instance = Zernio::AdAccountsApi.new
 account_id = 'account_id_example' # String | Google ads SocialAccount id.
 ad_account_id = 'ad_account_id_example' # String | Google Ads customer id, digits only.
 multi_party_auth_review_id = 'multi_party_auth_review_id_example' # String | Numeric review id from POST /v1/ads/accounts/user-invitations or GET /v1/ads/accounts/user-invitations/pending-approvals.
+opts = {
+  stage: true # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
+}
 
 begin
   # Withdraw an invitation awaiting multi-party approval
-  result = api_instance.withdraw_ad_account_user_invitation_approval(account_id, ad_account_id, multi_party_auth_review_id)
+  result = api_instance.withdraw_ad_account_user_invitation_approval(account_id, ad_account_id, multi_party_auth_review_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->withdraw_ad_account_user_invitation_approval: #{e}"
@@ -5344,12 +5375,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<WithdrawAdAccountUserInvitationApproval200Response>, Integer, Hash)> withdraw_ad_account_user_invitation_approval_with_http_info(account_id, ad_account_id, multi_party_auth_review_id)
+> <Array(<WithdrawAdAccountUserInvitationApproval200Response>, Integer, Hash)> withdraw_ad_account_user_invitation_approval_with_http_info(account_id, ad_account_id, multi_party_auth_review_id, opts)
 
 ```ruby
 begin
   # Withdraw an invitation awaiting multi-party approval
-  data, status_code, headers = api_instance.withdraw_ad_account_user_invitation_approval_with_http_info(account_id, ad_account_id, multi_party_auth_review_id)
+  data, status_code, headers = api_instance.withdraw_ad_account_user_invitation_approval_with_http_info(account_id, ad_account_id, multi_party_auth_review_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <WithdrawAdAccountUserInvitationApproval200Response>
@@ -5365,6 +5396,7 @@ end
 | **account_id** | **String** | Google ads SocialAccount id. |  |
 | **ad_account_id** | **String** | Google Ads customer id, digits only. |  |
 | **multi_party_auth_review_id** | **String** | Numeric review id from POST /v1/ads/accounts/user-invitations or GET /v1/ads/accounts/user-invitations/pending-approvals. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 
 ### Return type
 

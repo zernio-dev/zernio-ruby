@@ -938,7 +938,7 @@ end
 
 ## delete_ad
 
-> <DeleteAccountGroup200Response> delete_ad(ad_id)
+> <DeleteAccountGroup200Response> delete_ad(ad_id, opts)
 
 Cancel an ad
 
@@ -957,10 +957,13 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 ad_id = 'ad_id_example' # String | 
+opts = {
+  stage: true # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
+}
 
 begin
   # Cancel an ad
-  result = api_instance.delete_ad(ad_id)
+  result = api_instance.delete_ad(ad_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->delete_ad: #{e}"
@@ -971,12 +974,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteAccountGroup200Response>, Integer, Hash)> delete_ad_with_http_info(ad_id)
+> <Array(<DeleteAccountGroup200Response>, Integer, Hash)> delete_ad_with_http_info(ad_id, opts)
 
 ```ruby
 begin
   # Cancel an ad
-  data, status_code, headers = api_instance.delete_ad_with_http_info(ad_id)
+  data, status_code, headers = api_instance.delete_ad_with_http_info(ad_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAccountGroup200Response>
@@ -990,6 +993,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** |  |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 
 ### Return type
 
@@ -1078,7 +1082,7 @@ end
 
 ## delete_ad_set
 
-> <DeleteAdSet200Response> delete_ad_set(ad_set_id)
+> <DeleteAdSet200Response> delete_ad_set(ad_set_id, opts)
 
 Delete an ad set
 
@@ -1097,10 +1101,13 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Platform ad set ID
+opts = {
+  stage: true # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
+}
 
 begin
   # Delete an ad set
-  result = api_instance.delete_ad_set(ad_set_id)
+  result = api_instance.delete_ad_set(ad_set_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->delete_ad_set: #{e}"
@@ -1111,12 +1118,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteAdSet200Response>, Integer, Hash)> delete_ad_set_with_http_info(ad_set_id)
+> <Array(<DeleteAdSet200Response>, Integer, Hash)> delete_ad_set_with_http_info(ad_set_id, opts)
 
 ```ruby
 begin
   # Delete an ad set
-  data, status_code, headers = api_instance.delete_ad_set_with_http_info(ad_set_id)
+  data, status_code, headers = api_instance.delete_ad_set_with_http_info(ad_set_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAdSet200Response>
@@ -1130,6 +1137,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_set_id** | **String** | Platform ad set ID |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 
 ### Return type
 
@@ -3990,6 +3998,7 @@ account_id = 'account_id_example' # String | Zernio Google Ads connection id.
 asset_resource_names = ['inner_example'] # Array<String> | Asset resource names, retained for compatibility. Repeat the parameter or pass a comma-separated list.
 ad_group_asset_resource_names = ['inner_example'] # Array<String> | ad_group_asset resource names to remove, e.g. customers/1234567890/adGroupAssets/456~123~CALLOUT. Repeat the parameter or pass a comma-separated list.
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
   customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
 }
@@ -4029,6 +4038,7 @@ end
 | **account_id** | **String** | Zernio Google Ads connection id. |  |
 | **asset_resource_names** | [**Array&lt;String&gt;**](String.md) | Asset resource names, retained for compatibility. Repeat the parameter or pass a comma-separated list. |  |
 | **ad_group_asset_resource_names** | [**Array&lt;String&gt;**](String.md) | ad_group_asset resource names to remove, e.g. customers/1234567890/adGroupAssets/456~123~CALLOUT. Repeat the parameter or pass a comma-separated list. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
 | **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
@@ -4068,6 +4078,7 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 keyword_id = 'keyword_id_example' # String | Zernio keyword ID (`id`), or Google's native `{adSetId}~{platformCriterionId}` (the tail of `resourceName`, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group.
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago. 
 }
 
@@ -4103,6 +4114,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **keyword_id** | **String** | Zernio keyword ID (&#x60;id&#x60;), or Google&#39;s native &#x60;{adSetId}~{platformCriterionId}&#x60; (the tail of &#x60;resourceName&#x60;, e.g. 1234567890~987654321). A bare criterion id is rejected because it is only unique within its ad group. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe.  - Same key + same body: replays the original response. - Same key + different body: 422. - Key still processing: 409.  A request cut off mid-handler (e.g. by a function timeout) can leave its key in progress, answering 409 until the key expires after 24 hours.  On the Ads create, boost and duplicate endpoints, a same-body retry runs again once the cut-off request started more than 15 minutes ago.  | [optional] |
 
 ### Return type
@@ -4144,6 +4156,7 @@ account_id = 'account_id_example' # String | Zernio Google Ads connection id.
 asset_resource_names = ['inner_example'] # Array<String> | Asset resource names, retained for compatibility. Repeat the parameter or pass a comma-separated list.
 campaign_asset_resource_names = ['inner_example'] # Array<String> | campaign_asset resource names to remove, e.g. customers/1234567890/campaignAssets/456~123~CALLOUT. Repeat the parameter or pass a comma-separated list.
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers.
   customer_id: 'customer_id_example' # String | Alias of adAccountId, kept for existing callers
 }
@@ -4183,6 +4196,7 @@ end
 | **account_id** | **String** | Zernio Google Ads connection id. |  |
 | **asset_resource_names** | [**Array&lt;String&gt;**](String.md) | Asset resource names, retained for compatibility. Repeat the parameter or pass a comma-separated list. |  |
 | **campaign_asset_resource_names** | [**Array&lt;String&gt;**](String.md) | campaign_asset resource names to remove, e.g. customers/1234567890/campaignAssets/456~123~CALLOUT. Repeat the parameter or pass a comma-separated list. |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (Google customer ID, digits only). Required when the connection has multiple customers. | [optional] |
 | **customer_id** | **String** | Alias of adAccountId, kept for existing callers | [optional] |
 
@@ -4223,6 +4237,7 @@ api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | 
 asset_group_id = 'asset_group_id_example' # String | 
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   validate_only: true # Boolean | 
 }
 
@@ -4259,6 +4274,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** |  |  |
 | **asset_group_id** | **String** |  |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **validate_only** | **Boolean** |  | [optional][default to false] |
 
 ### Return type

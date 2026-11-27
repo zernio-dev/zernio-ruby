@@ -3146,6 +3146,7 @@ docs/RespondToSmsRegistrationReview200Response.md
 docs/RespondToSmsRegistrationReviewRequest.md
 docs/RespondToSmsRegistrationReviewRequestAnswersInner.md
 docs/ResponseTimeBucket.md
+docs/RestageAdChangeRequest.md
 docs/RestateEvent200Response.md
 docs/RestateEventRequest.md
 docs/RestoreWorkflowVersion200Response.md
@@ -3425,6 +3426,7 @@ docs/SocialAccountProfileId.md
 docs/StagedAdChange.md
 docs/StagedAdChangeDiffInner.md
 docs/StagedAdChangeError.md
+docs/StagedAdChangeLeftBehindInner.md
 docs/StagedAdChangeRequest.md
 docs/StagedAdChangeRequestQueryValue.md
 docs/StagedAdChangeSummary.md
@@ -7485,6 +7487,7 @@ lib/zernio-sdk/models/respond_to_sms_registration_review200_response.rb
 lib/zernio-sdk/models/respond_to_sms_registration_review_request.rb
 lib/zernio-sdk/models/respond_to_sms_registration_review_request_answers_inner.rb
 lib/zernio-sdk/models/response_time_bucket.rb
+lib/zernio-sdk/models/restage_ad_change_request.rb
 lib/zernio-sdk/models/restate_event200_response.rb
 lib/zernio-sdk/models/restate_event_request.rb
 lib/zernio-sdk/models/restore_workflow_version200_response.rb
@@ -7760,6 +7763,7 @@ lib/zernio-sdk/models/social_account_profile_id.rb
 lib/zernio-sdk/models/staged_ad_change.rb
 lib/zernio-sdk/models/staged_ad_change_diff_inner.rb
 lib/zernio-sdk/models/staged_ad_change_error.rb
+lib/zernio-sdk/models/staged_ad_change_left_behind_inner.rb
 lib/zernio-sdk/models/staged_ad_change_request.rb
 lib/zernio-sdk/models/staged_ad_change_request_query_value.rb
 lib/zernio-sdk/models/staged_ad_change_summary.rb
@@ -11794,6 +11798,7 @@ spec/models/respond_to_sms_registration_review200_response_spec.rb
 spec/models/respond_to_sms_registration_review_request_answers_inner_spec.rb
 spec/models/respond_to_sms_registration_review_request_spec.rb
 spec/models/response_time_bucket_spec.rb
+spec/models/restage_ad_change_request_spec.rb
 spec/models/restate_event200_response_spec.rb
 spec/models/restate_event_request_spec.rb
 spec/models/restore_workflow_version200_response_spec.rb
@@ -12068,6 +12073,7 @@ spec/models/social_account_profile_id_spec.rb
 spec/models/social_account_spec.rb
 spec/models/staged_ad_change_diff_inner_spec.rb
 spec/models/staged_ad_change_error_spec.rb
+spec/models/staged_ad_change_left_behind_inner_spec.rb
 spec/models/staged_ad_change_request_query_value_spec.rb
 spec/models/staged_ad_change_request_spec.rb
 spec/models/staged_ad_change_spec.rb

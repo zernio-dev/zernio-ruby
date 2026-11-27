@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. Cannot be combined with &#x60;validateOnly&#x60;. | [optional] |
 | **platform** | **String** |  |  |
 | **campaign_id** | **String** | Destination platform campaign id (defaults to the source&#39;s campaign) | [optional] |
 | **deep_copy** | **Boolean** | Copy child ads + creatives | [optional][default to true] |
@@ -22,6 +23,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::DuplicateAdSetRequest.new(
+  stage: null,
   platform: null,
   campaign_id: null,
   deep_copy: null,

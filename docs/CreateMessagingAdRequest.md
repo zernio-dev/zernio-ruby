@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. Cannot be combined with &#x60;validateOnly&#x60;. | [optional] |
 | **retry_on_server_error** | **Boolean** | When Meta answers a create with a 5xx and reading the parent back by name finds no such object, Zernio sends the create again (at most 3 POSTs per object, never for an object created ACTIVE) and reports it in &#x60;recoveredWrites&#x60;.  &#x60;false&#x60; never sends it again: the request fails with 502 and &#x60;details.unconfirmedWrite&#x60;, so you can check the parent yourself. One object found by name is still reused.  | [optional][default to true] |
 | **creative_features** | **Hash&lt;String, String&gt;** | Meta enhancement settings for single or attached ads, and defaults for creatives[]. An item replaces the entire map, including with an empty object. | [optional] |
 | **tracking** | [**AdTracking**](AdTracking.md) |  | [optional] |
@@ -91,6 +92,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::CreateMessagingAdRequest.new(
+  stage: null,
   retry_on_server_error: null,
   creative_features: {auto_promotion_tag&#x3D;OPT_IN},
   tracking: null,

@@ -3359,6 +3359,7 @@ api_instance = Zernio::ConversionsApi.new
 goal_id = 'goal_id_example' # String | Google custom conversion goal id
 account_id = 'account_id_example' # String | Zernio SocialAccount id (Google Ads)
 opts = {
+  stage: true, # Boolean | Send true to store this write as a staged change instead of applying it. The response is `202` with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later.
   ad_account_id: 'ad_account_id_example', # String | Google customer id. Required when the connection has multiple customers.
   customer_id: 'customer_id_example' # String | Alias of adAccountId
 }
@@ -3396,6 +3397,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **goal_id** | **String** | Google custom conversion goal id |  |
 | **account_id** | **String** | Zernio SocialAccount id (Google Ads) |  |
+| **stage** | **Boolean** | Send true to store this write as a staged change instead of applying it. The response is &#x60;202&#x60; with the change, and POST /v1/ads/changes/{changeId}/confirm applies it later. | [optional] |
 | **ad_account_id** | **String** | Google customer id. Required when the connection has multiple customers. | [optional] |
 | **customer_id** | **String** | Alias of adAccountId | [optional] |
 

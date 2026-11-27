@@ -303,11 +303,11 @@ end
 
 ## restage_ad_change
 
-> <GetAdChange200Response> restage_ad_change(change_id)
+> <GetAdChange200Response> restage_ad_change(change_id, opts)
 
 Stage a failed ad change again
 
-Makes a new staged change from a change that failed at confirm. Nothing is written to the ad network.  The new change holds the same request. It is checked for the calling user, and an edit is read against the current values of its object. The failed change stays readable until it is deleted.  A failed create cannot be staged again (`409`): it may have made part of its objects on the ad network, which its `error.details` lists. Stage a new create instead. This covers every change with `creates: true`.  Also refused with `409`: a change that failed as `change_outcome_unknown`, and a change whose kept uploads were deleted or moved to an earlier restage. 
+Makes a new staged change from a change that failed at confirm. Nothing is written to the ad network.  The new change holds the same request. It is checked for the calling user, and an edit is read against the current values of its object. The failed change stays readable until it is deleted, with `restaged: true`.  ### A change that may have made objects  The new change sends the same request again at confirm. A failed create may have made part of its objects on the ad network, and they would be made a second time.  Such a change answers `409` with `param: \"acknowledge\"`. `details.leftBehind` lists the objects the failure left, and `details.outcomeUnknown` is true when nothing tells what was made. Send `acknowledge: true` to stage it again anyway.  A failed create that left nothing behind is staged again without it.  ### Refused  A change that did not fail, a failed change that was already staged again, and a change whose kept uploads were deleted or moved to an earlier restage answer `409`. 
 
 ### Examples
 
@@ -322,10 +322,13 @@ end
 
 api_instance = Zernio::AdChangesApi.new
 change_id = 'change_id_example' # String | The id of the failed change.
+opts = {
+  restage_ad_change_request: Zernio::RestageAdChangeRequest.new # RestageAdChangeRequest | 
+}
 
 begin
   # Stage a failed ad change again
-  result = api_instance.restage_ad_change(change_id)
+  result = api_instance.restage_ad_change(change_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdChangesApi->restage_ad_change: #{e}"
@@ -336,12 +339,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetAdChange200Response>, Integer, Hash)> restage_ad_change_with_http_info(change_id)
+> <Array(<GetAdChange200Response>, Integer, Hash)> restage_ad_change_with_http_info(change_id, opts)
 
 ```ruby
 begin
   # Stage a failed ad change again
-  data, status_code, headers = api_instance.restage_ad_change_with_http_info(change_id)
+  data, status_code, headers = api_instance.restage_ad_change_with_http_info(change_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetAdChange200Response>
@@ -355,6 +358,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **change_id** | **String** | The id of the failed change. |  |
+| **restage_ad_change_request** | [**RestageAdChangeRequest**](RestageAdChangeRequest.md) |  | [optional] |
 
 ### Return type
 
@@ -366,7 +370,7 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -376,7 +380,7 @@ end
 
 Edit or refresh a staged ad change
 
-Replaces the request body of a staged change, or reads its object again when no body is sent. The change keeps its id. Nothing is written to the ad network.  ### Edit  Send the new body: the same kind of body as the route the change was staged on, without `stage`. It passes the checks of staging again for the calling user. The object is read again, so the diff and the changed-since check start from its current values.  A change of type `operation` stores a whole request and cannot be edited in place (`409`): discard it and stage the request again.  ### Refresh  Send no body. The object is read again with the body the change already holds. Use it on a change that reads `stale: true` after a confirm answered `409` `change_target_changed`: once refreshed it can be confirmed. 
+Replaces the request body of a staged change, or reads its object again when no body is sent. The change keeps its id. Nothing is written to the ad network.  ### Edit  Send the new body: the same kind of body as the route the change was staged on, without `stage`. It passes the checks of staging again for the calling user. The object is read again, so the diff and the changed-since check start from its current values.  A change of type `operation` stores a whole request. Its new body goes through the route of that write, which checks it as a new staged request. The path and the query stay as they were staged.  Such an edit answers what that route answers when it refuses the body, and the change stays as it was. A request without a body has nothing to edit (`409`).  ### Refresh  Send no body. The object is read again with the body the change already holds. Use it on a change that reads `stale: true` after a confirm answered `409` `change_target_changed`: once refreshed it can be confirmed. 
 
 ### Examples
 
