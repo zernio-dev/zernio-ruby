@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **posts_found** | **Integer** | Posts returned by the platform listing during the on-demand sync | [optional] |
-| **posts_synced** | **Integer** | Posts inserted or updated in Zernio | [optional] |
+| **posts_synced** | **Integer** | Stored records this call wrote: new posts and posts whose metadata changed. On LinkedIn personal profiles and the X fallback sync, posts whose metrics were refreshed are counted too. | [optional] |
 | **skipped** | **Boolean** | True when the account was synced within the debounce window and no live fetch ran. | [optional] |
 
 ## Example
