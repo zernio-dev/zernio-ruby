@@ -15,6 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**edit_inbox_message**](MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message |
 | [**get_inbox_conversation**](MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation |
 | [**get_inbox_conversation_messages**](MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages |
+| [**get_inbox_unread_count**](MessagesApi.md#get_inbox_unread_count) | **GET** /v1/inbox/unread-count | Count unread conversations |
 | [**get_message_attachment**](MessagesApi.md#get_message_attachment) | **GET** /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index} | Resolve message attachment |
 | [**list_conversation_labels**](MessagesApi.md#list_conversation_labels) | **GET** /v1/inbox/conversations/{conversationId}/labels | List the labels on a conversation |
 | [**list_inbox_conversations**](MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations |
@@ -821,6 +822,83 @@ end
 - **Accept**: application/json
 
 
+## get_inbox_unread_count
+
+> <GetInboxUnreadCount200Response> get_inbox_unread_count(opts)
+
+Count unread conversations
+
+Count the conversations holding at least one unread incoming message, across the connected messaging accounts. Use it for an unread badge instead of paging GET /v1/inbox/conversations?unread=true, which lists the same conversations.  Read state is kept by Zernio, not by the platform. An incoming message stays unread until its conversation is marked read, in one of two ways:  - POST /v1/inbox/conversations/{conversationId}/read. - On Telegram, Slack, SMS, RCS, iMessage, email and TikTok, reading its messages with GET /v1/inbox/conversations/{conversationId}/messages.  Messages you send never count, and replayed Meta history is stored as already read.  - The count stops at 1000. `capped: true` means there are at least that many. - Read from a replica, so it can trail a conversation you just marked read by about a second. - On Bluesky and Reddit, a listed thread whose messages Zernio has not pulled yet has no local read state and is not counted. - In the shared WhatsApp and iMessage sandboxes, only your own test conversations count. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+opts = {
+  profile_id: 'profile_id_example', # String | Count only accounts in this profile
+  platform: 'facebook', # String | Count only accounts on this platform
+  account_id: 'account_id_example', # String | Count only this account
+  status: 'active' # String | Count only conversations with this status. Both are counted when omitted, as GET /v1/inbox/conversations lists both.
+}
+
+begin
+  # Count unread conversations
+  result = api_instance.get_inbox_unread_count(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->get_inbox_unread_count: #{e}"
+end
+```
+
+#### Using the get_inbox_unread_count_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetInboxUnreadCount200Response>, Integer, Hash)> get_inbox_unread_count_with_http_info(opts)
+
+```ruby
+begin
+  # Count unread conversations
+  data, status_code, headers = api_instance.get_inbox_unread_count_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetInboxUnreadCount200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->get_inbox_unread_count_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Count only accounts in this profile | [optional] |
+| **platform** | **String** | Count only accounts on this platform | [optional] |
+| **account_id** | **String** | Count only this account | [optional] |
+| **status** | **String** | Count only conversations with this status. Both are counted when omitted, as GET /v1/inbox/conversations lists both. | [optional] |
+
+### Return type
+
+[**GetInboxUnreadCount200Response**](GetInboxUnreadCount200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_message_attachment
 
 > <GetMessageAttachment200Response> get_message_attachment(conversation_id, message_id, index, account_id, opts)
@@ -1001,7 +1079,8 @@ opts = {
   limit: 56, # Integer | Maximum number of conversations to return; values above 100 are served as 100.
   cursor: 'cursor_example', # String | Pagination cursor for next page
   account_id: 'account_id_example', # String | Filter by specific account ID
-  tags: 'tags_example' # String | Comma-separated contact tags. Returns only conversations whose contact has any of them. Cannot be combined with folder=requests.
+  tags: 'tags_example', # String | Comma-separated contact tags. Returns only conversations whose contact has any of them. Cannot be combined with folder=requests.
+  unread: true # Boolean | `true` returns only conversations holding at least one unread incoming message.  Read state is kept by Zernio, not by the platform. An incoming message stays unread until its conversation is marked read, in one of two ways:  - POST /v1/inbox/conversations/{conversationId}/read. - On Telegram, Slack, SMS, RCS, iMessage, email and TikTok, reading its messages with GET /v1/inbox/conversations/{conversationId}/messages.  Messages you send never count, and replayed Meta history is stored as already read.  - On Bluesky and Reddit, a listed thread whose messages Zernio has not pulled yet (it pulls them when the thread is opened or when background polling reaches it) has no local read state and is not returned. - Cannot be combined with `folder=requests` or `updatedSince`.  To render a badge without paging, use GET /v1/inbox/unread-count. 
 }
 
 begin
@@ -1045,6 +1124,7 @@ end
 | **cursor** | **String** | Pagination cursor for next page | [optional] |
 | **account_id** | **String** | Filter by specific account ID | [optional] |
 | **tags** | **String** | Comma-separated contact tags. Returns only conversations whose contact has any of them. Cannot be combined with folder&#x3D;requests. | [optional] |
+| **unread** | **Boolean** | &#x60;true&#x60; returns only conversations holding at least one unread incoming message.  Read state is kept by Zernio, not by the platform. An incoming message stays unread until its conversation is marked read, in one of two ways:  - POST /v1/inbox/conversations/{conversationId}/read. - On Telegram, Slack, SMS, RCS, iMessage, email and TikTok, reading its messages with GET /v1/inbox/conversations/{conversationId}/messages.  Messages you send never count, and replayed Meta history is stored as already read.  - On Bluesky and Reddit, a listed thread whose messages Zernio has not pulled yet (it pulls them when the thread is opened or when background polling reaches it) has no local read state and is not returned. - Cannot be combined with &#x60;folder&#x3D;requests&#x60; or &#x60;updatedSince&#x60;.  To render a badge without paging, use GET /v1/inbox/unread-count.  | [optional] |
 
 ### Return type
 

@@ -1852,6 +1852,9 @@ docs/GetInboxSourceBreakdown200ResponseSourcesInner.md
 docs/GetInboxSourceBreakdown200ResponseSourcesInnerByPlatformInner.md
 docs/GetInboxTopAccounts200Response.md
 docs/GetInboxTopAccounts200ResponseAccountsInner.md
+docs/GetInboxUnreadCount200Response.md
+docs/GetInboxUnreadCount200ResponseData.md
+docs/GetInboxUnreadCount200ResponseMeta.md
 docs/GetInboxVolume200Response.md
 docs/GetInboxVolume200ResponseByPlatformInner.md
 docs/GetInboxVolume200ResponseSummary.md
@@ -6215,6 +6218,9 @@ lib/zernio-sdk/models/get_inbox_source_breakdown200_response_sources_inner.rb
 lib/zernio-sdk/models/get_inbox_source_breakdown200_response_sources_inner_by_platform_inner.rb
 lib/zernio-sdk/models/get_inbox_top_accounts200_response.rb
 lib/zernio-sdk/models/get_inbox_top_accounts200_response_accounts_inner.rb
+lib/zernio-sdk/models/get_inbox_unread_count200_response.rb
+lib/zernio-sdk/models/get_inbox_unread_count200_response_data.rb
+lib/zernio-sdk/models/get_inbox_unread_count200_response_meta.rb
 lib/zernio-sdk/models/get_inbox_volume200_response.rb
 lib/zernio-sdk/models/get_inbox_volume200_response_by_platform_inner.rb
 lib/zernio-sdk/models/get_inbox_volume200_response_summary.rb
@@ -10526,6 +10532,9 @@ spec/models/get_inbox_source_breakdown200_response_sources_inner_spec.rb
 spec/models/get_inbox_source_breakdown200_response_spec.rb
 spec/models/get_inbox_top_accounts200_response_accounts_inner_spec.rb
 spec/models/get_inbox_top_accounts200_response_spec.rb
+spec/models/get_inbox_unread_count200_response_data_spec.rb
+spec/models/get_inbox_unread_count200_response_meta_spec.rb
+spec/models/get_inbox_unread_count200_response_spec.rb
 spec/models/get_inbox_volume200_response_by_platform_inner_spec.rb
 spec/models/get_inbox_volume200_response_spec.rb
 spec/models/get_inbox_volume200_response_summary_spec.rb
