@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **name** | **String** |  |  |
-| **description** | **String** | Sequences. | [optional] |
+| **description** | **String** | Sequences and flows. | [optional] |
 | **status** | **String** |  | [optional] |
 | **graph** | [**AutomationGraph**](AutomationGraph.md) |  |  |
 

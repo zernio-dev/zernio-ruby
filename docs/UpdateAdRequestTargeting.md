@@ -13,7 +13,7 @@
 | **locations** | [**UpdateAdRequestTargetingLocations**](UpdateAdRequestTargetingLocations.md) |  | [optional] |
 | **languages** | **Array&lt;String&gt;** | Google only. The FULL new language set for the campaign, as Google language codes (ISO 639-1, plus variants such as &#x60;zh_CN&#x60;). An unknown code returns 400. | [optional] |
 | **interests** | [**Array&lt;UpdateAdRequestTargetingInterestsInner&gt;**](UpdateAdRequestTargetingInterestsInner.md) | Interest objects from /v1/ads/interests. Each must include id and name. | [optional] |
-| **advantage_audience** | **Integer** | Meta only. Omit to preserve the existing setting on update. 0 &#x3D; disabled, 1 &#x3D; enabled. | [optional] |
+| **advantage_audience** | [**UpdateAdRequestTargetingAdvantageAudience**](UpdateAdRequestTargetingAdvantageAudience.md) |  | [optional] |
 
 ## Example
 

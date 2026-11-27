@@ -15,7 +15,7 @@
 | **metros** | [**Array&lt;UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInnerOneOf&gt;**](UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInnerOneOf.md) | DMA / metro-area targeting. &#x60;key&#x60; is the platform&#39;s metro ID (e.g. Meta &#x60;DMA:807&#x60;). | [optional] |
 | **custom_locations** | [**Array&lt;BoostPostRequestTargetingCustomLocationsInner&gt;**](BoostPostRequestTargetingCustomLocationsInner.md) | Point-radius (lat/lng) targeting (Meta custom_locations). No geo &#x60;key&#x60; lookup needed. | [optional] |
 | **interests** | [**Array&lt;UpdateAdRequestTargetingInterestsInner&gt;**](UpdateAdRequestTargetingInterestsInner.md) | Interest objects from /v1/ads/interests. Each must include id and name. | [optional] |
-| **advantage_audience** | **Integer** | Meta only. 0 &#x3D; disabled (default), 1 &#x3D; enabled. | [optional] |
+| **advantage_audience** | [**BoostPostRequestTargetingAdvantageAudience**](BoostPostRequestTargetingAdvantageAudience.md) |  | [optional] |
 
 ## Example
 

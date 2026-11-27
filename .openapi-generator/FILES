@@ -473,6 +473,7 @@ docs/BoostPostRequestSchedule.md
 docs/BoostPostRequestSmartTargeting.md
 docs/BoostPostRequestSparkPostsInner.md
 docs/BoostPostRequestTargeting.md
+docs/BoostPostRequestTargetingAdvantageAudience.md
 docs/BoostPostRequestTargetingCitiesInner.md
 docs/BoostPostRequestTargetingCustomLocationsInner.md
 docs/BoostPostRequestTracking.md
@@ -1148,6 +1149,7 @@ docs/CreateStandaloneAd201ResponseOneOf1.md
 docs/CreateStandaloneAdRequest.md
 docs/CreateStandaloneAdRequestAdditionalDescriptionsInner.md
 docs/CreateStandaloneAdRequestAdditionalHeadlinesInner.md
+docs/CreateStandaloneAdRequestAdvantageAudience.md
 docs/CreateStandaloneAdRequestBehaviorsInner.md
 docs/CreateStandaloneAdRequestBrandIdentity.md
 docs/CreateStandaloneAdRequestCarouselCardsInner.md
@@ -1277,6 +1279,7 @@ docs/CrmNativePropertiesValue.md
 docs/CrmOwner.md
 docs/CrosspostDiscordMessage200Response.md
 docs/CtwaAdRequestBody.md
+docs/CtwaAdRequestBodyAdvantageAudience.md
 docs/CtwaAdRequestBodyCitiesInner.md
 docs/CtwaAdRequestBodyCreativesInner.md
 docs/CtwaAdRequestBodyCreativesInnerVideo.md
@@ -3616,6 +3619,7 @@ docs/UpdateAdRequest.md
 docs/UpdateAdRequestBudget.md
 docs/UpdateAdRequestCreative.md
 docs/UpdateAdRequestTargeting.md
+docs/UpdateAdRequestTargetingAdvantageAudience.md
 docs/UpdateAdRequestTargetingDevicesInner.md
 docs/UpdateAdRequestTargetingDevicesInnerOneOf.md
 docs/UpdateAdRequestTargetingInterestsInner.md
@@ -4859,6 +4863,7 @@ lib/zernio-sdk/models/boost_post_request_schedule.rb
 lib/zernio-sdk/models/boost_post_request_smart_targeting.rb
 lib/zernio-sdk/models/boost_post_request_spark_posts_inner.rb
 lib/zernio-sdk/models/boost_post_request_targeting.rb
+lib/zernio-sdk/models/boost_post_request_targeting_advantage_audience.rb
 lib/zernio-sdk/models/boost_post_request_targeting_cities_inner.rb
 lib/zernio-sdk/models/boost_post_request_targeting_custom_locations_inner.rb
 lib/zernio-sdk/models/boost_post_request_tracking.rb
@@ -5518,6 +5523,7 @@ lib/zernio-sdk/models/create_standalone_ad201_response_one_of1.rb
 lib/zernio-sdk/models/create_standalone_ad_request.rb
 lib/zernio-sdk/models/create_standalone_ad_request_additional_descriptions_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_additional_headlines_inner.rb
+lib/zernio-sdk/models/create_standalone_ad_request_advantage_audience.rb
 lib/zernio-sdk/models/create_standalone_ad_request_behaviors_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_brand_identity.rb
 lib/zernio-sdk/models/create_standalone_ad_request_carousel_cards_inner.rb
@@ -5645,6 +5651,7 @@ lib/zernio-sdk/models/crm_native_properties_value.rb
 lib/zernio-sdk/models/crm_owner.rb
 lib/zernio-sdk/models/crosspost_discord_message200_response.rb
 lib/zernio-sdk/models/ctwa_ad_request_body.rb
+lib/zernio-sdk/models/ctwa_ad_request_body_advantage_audience.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_cities_inner.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_creatives_inner.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_creatives_inner_video.rb
@@ -7940,6 +7947,7 @@ lib/zernio-sdk/models/update_ad_request.rb
 lib/zernio-sdk/models/update_ad_request_budget.rb
 lib/zernio-sdk/models/update_ad_request_creative.rb
 lib/zernio-sdk/models/update_ad_request_targeting.rb
+lib/zernio-sdk/models/update_ad_request_targeting_advantage_audience.rb
 lib/zernio-sdk/models/update_ad_request_targeting_devices_inner.rb
 lib/zernio-sdk/models/update_ad_request_targeting_devices_inner_one_of.rb
 lib/zernio-sdk/models/update_ad_request_targeting_interests_inner.rb
@@ -9161,6 +9169,7 @@ spec/models/boost_post_request_schedule_spec.rb
 spec/models/boost_post_request_smart_targeting_spec.rb
 spec/models/boost_post_request_spark_posts_inner_spec.rb
 spec/models/boost_post_request_spec.rb
+spec/models/boost_post_request_targeting_advantage_audience_spec.rb
 spec/models/boost_post_request_targeting_cities_inner_spec.rb
 spec/models/boost_post_request_targeting_custom_locations_inner_spec.rb
 spec/models/boost_post_request_targeting_spec.rb
@@ -9820,6 +9829,7 @@ spec/models/create_standalone_ad201_response_one_of_spec.rb
 spec/models/create_standalone_ad201_response_spec.rb
 spec/models/create_standalone_ad_request_additional_descriptions_inner_spec.rb
 spec/models/create_standalone_ad_request_additional_headlines_inner_spec.rb
+spec/models/create_standalone_ad_request_advantage_audience_spec.rb
 spec/models/create_standalone_ad_request_behaviors_inner_spec.rb
 spec/models/create_standalone_ad_request_brand_identity_spec.rb
 spec/models/create_standalone_ad_request_carousel_cards_inner_spec.rb
@@ -9947,6 +9957,7 @@ spec/models/crm_deal_spec.rb
 spec/models/crm_native_properties_value_spec.rb
 spec/models/crm_owner_spec.rb
 spec/models/crosspost_discord_message200_response_spec.rb
+spec/models/ctwa_ad_request_body_advantage_audience_spec.rb
 spec/models/ctwa_ad_request_body_cities_inner_spec.rb
 spec/models/ctwa_ad_request_body_creatives_inner_spec.rb
 spec/models/ctwa_ad_request_body_creatives_inner_video_spec.rb
@@ -12242,6 +12253,7 @@ spec/models/update_ad_negative_keyword_list_request_spec.rb
 spec/models/update_ad_request_budget_spec.rb
 spec/models/update_ad_request_creative_spec.rb
 spec/models/update_ad_request_spec.rb
+spec/models/update_ad_request_targeting_advantage_audience_spec.rb
 spec/models/update_ad_request_targeting_devices_inner_one_of_spec.rb
 spec/models/update_ad_request_targeting_devices_inner_spec.rb
 spec/models/update_ad_request_targeting_interests_inner_spec.rb
