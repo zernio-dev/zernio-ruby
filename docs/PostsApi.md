@@ -13,6 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**pin_post**](PostsApi.md#pin_post) | **POST** /v1/posts/{postId}/pin | Pin post |
 | [**retry_post**](PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post |
 | [**review_post**](PostsApi.md#review_post) | **POST** /v1/posts/{postId}/review | Approve or reject a post |
+| [**set_post_comments_enabled**](PostsApi.md#set_post_comments_enabled) | **POST** /v1/posts/{postId}/comments-enabled | Turn comments on or off |
 | [**unpin_post**](PostsApi.md#unpin_post) | **POST** /v1/posts/{postId}/unpin | Unpin post |
 | [**unpublish_post**](PostsApi.md#unpublish_post) | **POST** /v1/posts/{postId}/unpublish | Unpublish post |
 | [**update_post**](PostsApi.md#update_post) | **PUT** /v1/posts/{postId} | Update post |
@@ -693,6 +694,77 @@ end
 ### Return type
 
 [**PostGetResponse**](PostGetResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## set_post_comments_enabled
+
+> <SetPostCommentsEnabledResponse> set_post_comments_enabled(post_id, set_post_comments_enabled_request)
+
+Turn comments on or off
+
+Turns comments on or off on a published Instagram post, Reel or carousel, after publishing. Works for accounts connected through Instagram Login and through Facebook Login.  Only Instagram posts are supported; any other platform answers 400 `platform_not_supported`. To turn comments off at publish time instead, send `commentsEnabled: false` in the Instagram platform options when creating the post. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PostsApi.new
+post_id = 'post_id_example' # String | 
+set_post_comments_enabled_request = Zernio::SetPostCommentsEnabledRequest.new({platform: 'instagram', enabled: false}) # SetPostCommentsEnabledRequest | 
+
+begin
+  # Turn comments on or off
+  result = api_instance.set_post_comments_enabled(post_id, set_post_comments_enabled_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PostsApi->set_post_comments_enabled: #{e}"
+end
+```
+
+#### Using the set_post_comments_enabled_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SetPostCommentsEnabledResponse>, Integer, Hash)> set_post_comments_enabled_with_http_info(post_id, set_post_comments_enabled_request)
+
+```ruby
+begin
+  # Turn comments on or off
+  data, status_code, headers = api_instance.set_post_comments_enabled_with_http_info(post_id, set_post_comments_enabled_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SetPostCommentsEnabledResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling PostsApi->set_post_comments_enabled_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **set_post_comments_enabled_request** | [**SetPostCommentsEnabledRequest**](SetPostCommentsEnabledRequest.md) |  |  |
+
+### Return type
+
+[**SetPostCommentsEnabledResponse**](SetPostCommentsEnabledResponse.md)
 
 ### Authorization
 
