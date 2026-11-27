@@ -189,6 +189,7 @@ docs/AddUsersToAdAudienceRequest.md
 docs/AddWhatsAppGroupParticipantsRequest.md
 docs/AdjustConversions200Response.md
 docs/AdjustConversions200ResponseFailuresInner.md
+docs/AdjustConversions200ResponseFailuresInnerCode.md
 docs/AdjustConversionsRequest.md
 docs/AdjustConversionsRequestAdjustmentsInner.md
 docs/AdjustConversionsRequestAdjustmentsInnerUser.md
@@ -4589,6 +4590,7 @@ lib/zernio-sdk/models/add_users_to_ad_audience_request.rb
 lib/zernio-sdk/models/add_whats_app_group_participants_request.rb
 lib/zernio-sdk/models/adjust_conversions200_response.rb
 lib/zernio-sdk/models/adjust_conversions200_response_failures_inner.rb
+lib/zernio-sdk/models/adjust_conversions200_response_failures_inner_code.rb
 lib/zernio-sdk/models/adjust_conversions_request.rb
 lib/zernio-sdk/models/adjust_conversions_request_adjustments_inner.rb
 lib/zernio-sdk/models/adjust_conversions_request_adjustments_inner_user.rb
@@ -8901,6 +8903,7 @@ spec/models/add_tracking_tag_shared_account_request_spec.rb
 spec/models/add_users_to_ad_audience200_response_spec.rb
 spec/models/add_users_to_ad_audience_request_spec.rb
 spec/models/add_whats_app_group_participants_request_spec.rb
+spec/models/adjust_conversions200_response_failures_inner_code_spec.rb
 spec/models/adjust_conversions200_response_failures_inner_spec.rb
 spec/models/adjust_conversions200_response_spec.rb
 spec/models/adjust_conversions_request_adjustments_inner_spec.rb
