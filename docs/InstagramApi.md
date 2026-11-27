@@ -15,6 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_instagram_stories**](InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories |
 | [**list_instagram_tagged_media**](InstagramApi.md#list_instagram_tagged_media) | **GET** /v1/accounts/{accountId}/instagram/tags | List the posts an Instagram account is tagged in |
 | [**search_instagram_audio**](InstagramApi.md#search_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio | Search Instagram audio |
+| [**search_instagram_hashtag**](InstagramApi.md#search_instagram_hashtag) | **GET** /v1/accounts/{accountId}/instagram/hashtag-search | Search public Instagram media by hashtag |
 
 
 ## get_instagram_audio
@@ -799,6 +800,81 @@ end
 ### Return type
 
 [**SearchInstagramAudio200Response**](SearchInstagramAudio200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## search_instagram_hashtag
+
+> <InstagramHashtagResearch> search_instagram_hashtag(account_id, hashtag, opts)
+
+Search public Instagram media by hashtag
+
+Resolves a hashtag to its Instagram hashtag ID, then returns the top and the recent public media carrying it, read through one of your connected Instagram accounts. Useful for trend, content and competitor research.  Requires an Instagram account connected via **Facebook Login**. Meta serves hashtag search on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (`instagram_hashtag_search_requires_facebook_login`) and must be reconnected choosing the Facebook option.  **Weekly limit:** Meta lets one Instagram account search at most 30 unique hashtags in a rolling 7 days.  - Searching a hashtag again inside the window does not count twice. - `recentlySearchedCount` shows how much of the budget is used. - Past the limit the request answers 429   `instagram_hashtag_search_limit_reached` until older searches leave   the window. - Another connected account has its own budget.  `recentMedia` only holds media published in the last 24 hours. Meta returns no media for hashtags it considers sensitive or offensive, and never returns the author's username. Media URLs are temporary. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of a connected Instagram account (Facebook Login).
+hashtag = 'interiordesign' # String | One hashtag: letters, digits or \"_\", with or without the leading #. Case-insensitive.
+opts = {
+  limit: 56 # Integer | How many media to return in each of topMedia and recentMedia.
+}
+
+begin
+  # Search public Instagram media by hashtag
+  result = api_instance.search_instagram_hashtag(account_id, hashtag, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->search_instagram_hashtag: #{e}"
+end
+```
+
+#### Using the search_instagram_hashtag_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<InstagramHashtagResearch>, Integer, Hash)> search_instagram_hashtag_with_http_info(account_id, hashtag, opts)
+
+```ruby
+begin
+  # Search public Instagram media by hashtag
+  data, status_code, headers = api_instance.search_instagram_hashtag_with_http_info(account_id, hashtag, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <InstagramHashtagResearch>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->search_instagram_hashtag_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Instagram account (Facebook Login). |  |
+| **hashtag** | **String** | One hashtag: letters, digits or \&quot;_\&quot;, with or without the leading #. Case-insensitive. |  |
+| **limit** | **Integer** | How many media to return in each of topMedia and recentMedia. | [optional][default to 24] |
+
+### Return type
+
+[**InstagramHashtagResearch**](InstagramHashtagResearch.md)
 
 ### Authorization
 

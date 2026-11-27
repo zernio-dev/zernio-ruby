@@ -2278,6 +2278,9 @@ docs/InstagramBusinessDiscoveryMediaInnerChildrenInner.md
 docs/InstagramBusinessDiscoveryProfile.md
 docs/InstagramDemographicsResponse.md
 docs/InstagramDemographicsResponseDemographicsValueInner.md
+docs/InstagramHashtagMedia.md
+docs/InstagramHashtagResearch.md
+docs/InstagramHashtagResearchHashtag.md
 docs/InstagramLiveMedia.md
 docs/InstagramMediaCollaborator.md
 docs/InstagramMentionedComment.md
@@ -6644,6 +6647,9 @@ lib/zernio-sdk/models/instagram_business_discovery_media_inner_children_inner.rb
 lib/zernio-sdk/models/instagram_business_discovery_profile.rb
 lib/zernio-sdk/models/instagram_demographics_response.rb
 lib/zernio-sdk/models/instagram_demographics_response_demographics_value_inner.rb
+lib/zernio-sdk/models/instagram_hashtag_media.rb
+lib/zernio-sdk/models/instagram_hashtag_research.rb
+lib/zernio-sdk/models/instagram_hashtag_research_hashtag.rb
 lib/zernio-sdk/models/instagram_live_media.rb
 lib/zernio-sdk/models/instagram_media_collaborator.rb
 lib/zernio-sdk/models/instagram_mentioned_comment.rb
@@ -10961,6 +10967,9 @@ spec/models/instagram_business_discovery_profile_spec.rb
 spec/models/instagram_business_discovery_spec.rb
 spec/models/instagram_demographics_response_demographics_value_inner_spec.rb
 spec/models/instagram_demographics_response_spec.rb
+spec/models/instagram_hashtag_media_spec.rb
+spec/models/instagram_hashtag_research_hashtag_spec.rb
+spec/models/instagram_hashtag_research_spec.rb
 spec/models/instagram_live_media_spec.rb
 spec/models/instagram_media_collaborator_spec.rb
 spec/models/instagram_mentioned_comment_media_spec.rb
