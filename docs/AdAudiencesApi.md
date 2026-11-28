@@ -8,7 +8,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_ad_audience**](AdAudiencesApi.md#create_ad_audience) | **POST** /v1/ads/audiences | Create custom audience |
 | [**delete_ad_audience**](AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience |
 | [**get_ad_audience**](AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details |
+| [**get_meta_saved_audience**](AdAudiencesApi.md#get_meta_saved_audience) | **GET** /v1/ads/saved-audiences/{savedAudienceId} | Read a Meta saved audience |
 | [**list_ad_audiences**](AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences |
+| [**list_meta_saved_audiences**](AdAudiencesApi.md#list_meta_saved_audiences) | **GET** /v1/ads/saved-audiences | List Meta saved audiences |
 | [**remove_users_from_ad_audience**](AdAudiencesApi.md#remove_users_from_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId}/users | Remove users from audience |
 | [**replace_ad_audience_companies**](AdAudiencesApi.md#replace_ad_audience_companies) | **POST** /v1/ads/audiences/{audienceId}/companies | Replace audience companies |
 | [**update_ad_audience**](AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience |
@@ -296,6 +298,79 @@ end
 - **Accept**: application/json
 
 
+## get_meta_saved_audience
+
+> <GetMetaSavedAudience200Response> get_meta_saved_audience(saved_audience_id, account_id, ad_account_id)
+
+Read a Meta saved audience
+
+Reads one saved audience of a Meta ad account, including the targeting spec it holds.  Meta's SavedAudience node does not say which ad account owns it, so the audience is looked up in the named ad account's `GET /act_X/saved_audiences` (up to 1,000 saved audiences). An id that is not on that ad account answers 404.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAudiencesApi.new
+saved_audience_id = 'saved_audience_id_example' # String | Meta saved audience id.
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>) that holds the saved audience.
+
+begin
+  # Read a Meta saved audience
+  result = api_instance.get_meta_saved_audience(saved_audience_id, account_id, ad_account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->get_meta_saved_audience: #{e}"
+end
+```
+
+#### Using the get_meta_saved_audience_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetMetaSavedAudience200Response>, Integer, Hash)> get_meta_saved_audience_with_http_info(saved_audience_id, account_id, ad_account_id)
+
+```ruby
+begin
+  # Read a Meta saved audience
+  data, status_code, headers = api_instance.get_meta_saved_audience_with_http_info(saved_audience_id, account_id, ad_account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetMetaSavedAudience200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->get_meta_saved_audience_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **saved_audience_id** | **String** | Meta saved audience id. |  |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;) that holds the saved audience. |  |
+
+### Return type
+
+[**GetMetaSavedAudience200Response**](GetMetaSavedAudience200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_ad_audiences
 
 > <ListAdAudiences200Response> list_ad_audiences(account_id, ad_account_id, opts)
@@ -362,6 +437,83 @@ end
 ### Return type
 
 [**ListAdAudiences200Response**](ListAdAudiences200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_meta_saved_audiences
+
+> <ListMetaSavedAudiences200Response> list_meta_saved_audiences(account_id, ad_account_id, opts)
+
+List Meta saved audiences
+
+Lists the saved audiences of a Meta ad account, read live from Meta (`GET /act_X/saved_audiences`).  These are Meta's own saved audiences, the ones made in Ads Manager, not the Zernio `saved_targeting` audiences of `/v1/ads/audiences`. Meta's Marketing API exposes saved audiences read-only: they are created, edited and deleted in Ads Manager.  To target an ad set at a saved audience, send its `targeting` as `rawTargeting` on `POST /v1/ads/create`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAudiencesApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # List Meta saved audiences
+  result = api_instance.list_meta_saved_audiences(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->list_meta_saved_audiences: #{e}"
+end
+```
+
+#### Using the list_meta_saved_audiences_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListMetaSavedAudiences200Response>, Integer, Hash)> list_meta_saved_audiences_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # List Meta saved audiences
+  data, status_code, headers = api_instance.list_meta_saved_audiences_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListMetaSavedAudiences200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->list_meta_saved_audiences_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**ListMetaSavedAudiences200Response**](ListMetaSavedAudiences200Response.md)
 
 ### Authorization
 

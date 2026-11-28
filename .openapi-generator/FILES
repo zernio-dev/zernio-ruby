@@ -1923,6 +1923,7 @@ docs/GetMessengerGetStarted200ResponseData.md
 docs/GetMessengerGreeting200Response.md
 docs/GetMessengerIceBreakers200Response.md
 docs/GetMessengerMenu200Response.md
+docs/GetMetaSavedAudience200Response.md
 docs/GetPageWebhookSubscription200Response.md
 docs/GetPayoutBatch200Response.md
 docs/GetPendingOAuthData200Response.md
@@ -2647,6 +2648,8 @@ docs/ListLogs200ResponseLogsInner.md
 docs/ListLogs200ResponsePagination.md
 docs/ListMetaBusinessUsers200Response.md
 docs/ListMetaBusinesses200Response.md
+docs/ListMetaSavedAudiences200Response.md
+docs/ListMetaSavedAudiences200ResponsePaging.md
 docs/ListOAuthApps200Response.md
 docs/ListOAuthApps200ResponsePagination.md
 docs/ListOrgConnectionUsers200Response.md
@@ -2833,6 +2836,7 @@ docs/MetaProductFeed.md
 docs/MetaProductFeedSchedule.md
 docs/MetaProductSet.md
 docs/MetaRecoveredWritesInner.md
+docs/MetaSavedAudience.md
 docs/MetricDefinition.md
 docs/MetricEntity.md
 docs/MetricEntityAttributionsInner.md
@@ -6304,6 +6308,7 @@ lib/zernio-sdk/models/get_messenger_get_started200_response_data.rb
 lib/zernio-sdk/models/get_messenger_greeting200_response.rb
 lib/zernio-sdk/models/get_messenger_ice_breakers200_response.rb
 lib/zernio-sdk/models/get_messenger_menu200_response.rb
+lib/zernio-sdk/models/get_meta_saved_audience200_response.rb
 lib/zernio-sdk/models/get_page_webhook_subscription200_response.rb
 lib/zernio-sdk/models/get_payout_batch200_response.rb
 lib/zernio-sdk/models/get_pending_o_auth_data200_response.rb
@@ -7021,6 +7026,8 @@ lib/zernio-sdk/models/list_logs200_response_logs_inner.rb
 lib/zernio-sdk/models/list_logs200_response_pagination.rb
 lib/zernio-sdk/models/list_meta_business_users200_response.rb
 lib/zernio-sdk/models/list_meta_businesses200_response.rb
+lib/zernio-sdk/models/list_meta_saved_audiences200_response.rb
+lib/zernio-sdk/models/list_meta_saved_audiences200_response_paging.rb
 lib/zernio-sdk/models/list_o_auth_apps200_response.rb
 lib/zernio-sdk/models/list_o_auth_apps200_response_pagination.rb
 lib/zernio-sdk/models/list_org_connection_users200_response.rb
@@ -7202,6 +7209,7 @@ lib/zernio-sdk/models/meta_product_feed.rb
 lib/zernio-sdk/models/meta_product_feed_schedule.rb
 lib/zernio-sdk/models/meta_product_set.rb
 lib/zernio-sdk/models/meta_recovered_writes_inner.rb
+lib/zernio-sdk/models/meta_saved_audience.rb
 lib/zernio-sdk/models/metric_definition.rb
 lib/zernio-sdk/models/metric_entity.rb
 lib/zernio-sdk/models/metric_entity_attributions_inner.rb
@@ -10633,6 +10641,7 @@ spec/models/get_messenger_get_started200_response_spec.rb
 spec/models/get_messenger_greeting200_response_spec.rb
 spec/models/get_messenger_ice_breakers200_response_spec.rb
 spec/models/get_messenger_menu200_response_spec.rb
+spec/models/get_meta_saved_audience200_response_spec.rb
 spec/models/get_page_webhook_subscription200_response_spec.rb
 spec/models/get_payout_batch200_response_spec.rb
 spec/models/get_pending_o_auth_data200_response_organizations_inner_spec.rb
@@ -11350,6 +11359,8 @@ spec/models/list_logs200_response_pagination_spec.rb
 spec/models/list_logs200_response_spec.rb
 spec/models/list_meta_business_users200_response_spec.rb
 spec/models/list_meta_businesses200_response_spec.rb
+spec/models/list_meta_saved_audiences200_response_paging_spec.rb
+spec/models/list_meta_saved_audiences200_response_spec.rb
 spec/models/list_o_auth_apps200_response_pagination_spec.rb
 spec/models/list_o_auth_apps200_response_spec.rb
 spec/models/list_org_connection_users200_response_data_inner_spec.rb
@@ -11531,6 +11542,7 @@ spec/models/meta_product_feed_schedule_spec.rb
 spec/models/meta_product_feed_spec.rb
 spec/models/meta_product_set_spec.rb
 spec/models/meta_recovered_writes_inner_spec.rb
+spec/models/meta_saved_audience_spec.rb
 spec/models/metric_definition_spec.rb
 spec/models/metric_entity_attributions_inner_spec.rb
 spec/models/metric_entity_group_by_inner_spec.rb
