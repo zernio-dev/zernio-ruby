@@ -451,6 +451,7 @@ docs/BillingSnapshotLegacyLimits.md
 docs/BillingSnapshotPeriod.md
 docs/BillingSnapshotPlan.md
 docs/BillingSnapshotStatus.md
+docs/BlockFacebookUser200Response.md
 docs/BlockWhatsAppUsers200Response.md
 docs/BlockWhatsAppUsers200ResponseBlockedInner.md
 docs/BlockWhatsAppUsers200ResponseFailedInner.md
@@ -1471,6 +1472,8 @@ docs/ExternalPostMediaItem.md
 docs/ExternalPostSummary.md
 docs/ExternalPostSummaryAnalytics.md
 docs/ExternalPostWebhookPost.md
+docs/FacebookBlockedUser.md
+docs/FacebookBlockedUserRef.md
 docs/FacebookOrInstagramPost.md
 docs/FacebookPageInfo.md
 docs/FacebookPlatformData.md
@@ -2550,6 +2553,7 @@ docs/ListEventNames200ResponseNamesInner.md
 docs/ListEvents200Response.md
 docs/ListEvents200ResponseEventsInner.md
 docs/ListEvents200ResponseEventsInnerAllOfDeliveriesInner.md
+docs/ListFacebookBlockedUsers200Response.md
 docs/ListFacebookPages200Response.md
 docs/ListFacebookPages200ResponsePagesInner.md
 docs/ListFacebookTaggedPosts200Response.md
@@ -3576,6 +3580,7 @@ docs/TwitterPlatformData.md
 docs/TwitterPlatformDataPoll.md
 docs/TwitterPlatformDataSensitiveMedia.md
 docs/TwitterPlatformDataThreadItemsInner.md
+docs/UnblockFacebookUser200Response.md
 docs/UnblockWhatsAppUsers200Response.md
 docs/UnblockWhatsAppUsersRequest.md
 docs/UndoAdRuleActivity200Response.md
@@ -4859,6 +4864,7 @@ lib/zernio-sdk/models/billing_snapshot_legacy_limits.rb
 lib/zernio-sdk/models/billing_snapshot_period.rb
 lib/zernio-sdk/models/billing_snapshot_plan.rb
 lib/zernio-sdk/models/billing_snapshot_status.rb
+lib/zernio-sdk/models/block_facebook_user200_response.rb
 lib/zernio-sdk/models/block_whats_app_users200_response.rb
 lib/zernio-sdk/models/block_whats_app_users200_response_blocked_inner.rb
 lib/zernio-sdk/models/block_whats_app_users200_response_failed_inner.rb
@@ -5857,6 +5863,8 @@ lib/zernio-sdk/models/external_post_media_item.rb
 lib/zernio-sdk/models/external_post_summary.rb
 lib/zernio-sdk/models/external_post_summary_analytics.rb
 lib/zernio-sdk/models/external_post_webhook_post.rb
+lib/zernio-sdk/models/facebook_blocked_user.rb
+lib/zernio-sdk/models/facebook_blocked_user_ref.rb
 lib/zernio-sdk/models/facebook_or_instagram_post.rb
 lib/zernio-sdk/models/facebook_page_info.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
@@ -6919,6 +6927,7 @@ lib/zernio-sdk/models/list_event_names200_response_names_inner.rb
 lib/zernio-sdk/models/list_events200_response.rb
 lib/zernio-sdk/models/list_events200_response_events_inner.rb
 lib/zernio-sdk/models/list_events200_response_events_inner_all_of_deliveries_inner.rb
+lib/zernio-sdk/models/list_facebook_blocked_users200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response_pages_inner.rb
 lib/zernio-sdk/models/list_facebook_tagged_posts200_response.rb
@@ -7921,6 +7930,7 @@ lib/zernio-sdk/models/twitter_platform_data.rb
 lib/zernio-sdk/models/twitter_platform_data_poll.rb
 lib/zernio-sdk/models/twitter_platform_data_sensitive_media.rb
 lib/zernio-sdk/models/twitter_platform_data_thread_items_inner.rb
+lib/zernio-sdk/models/unblock_facebook_user200_response.rb
 lib/zernio-sdk/models/unblock_whats_app_users200_response.rb
 lib/zernio-sdk/models/unblock_whats_app_users_request.rb
 lib/zernio-sdk/models/undo_ad_rule_activity200_response.rb
@@ -9183,6 +9193,7 @@ spec/models/billing_snapshot_period_spec.rb
 spec/models/billing_snapshot_plan_spec.rb
 spec/models/billing_snapshot_spec.rb
 spec/models/billing_snapshot_status_spec.rb
+spec/models/block_facebook_user200_response_spec.rb
 spec/models/block_whats_app_users200_response_blocked_inner_spec.rb
 spec/models/block_whats_app_users200_response_failed_inner_spec.rb
 spec/models/block_whats_app_users200_response_spec.rb
@@ -10181,6 +10192,8 @@ spec/models/external_post_media_item_spec.rb
 spec/models/external_post_summary_analytics_spec.rb
 spec/models/external_post_summary_spec.rb
 spec/models/external_post_webhook_post_spec.rb
+spec/models/facebook_blocked_user_ref_spec.rb
+spec/models/facebook_blocked_user_spec.rb
 spec/models/facebook_or_instagram_post_spec.rb
 spec/models/facebook_page_info_spec.rb
 spec/models/facebook_platform_data_failed_collaborators_inner_spec.rb
@@ -11243,6 +11256,7 @@ spec/models/list_event_names200_response_spec.rb
 spec/models/list_events200_response_events_inner_all_of_deliveries_inner_spec.rb
 spec/models/list_events200_response_events_inner_spec.rb
 spec/models/list_events200_response_spec.rb
+spec/models/list_facebook_blocked_users200_response_spec.rb
 spec/models/list_facebook_pages200_response_pages_inner_spec.rb
 spec/models/list_facebook_pages200_response_spec.rb
 spec/models/list_facebook_tagged_posts200_response_spec.rb
@@ -12245,6 +12259,7 @@ spec/models/twitter_platform_data_poll_spec.rb
 spec/models/twitter_platform_data_sensitive_media_spec.rb
 spec/models/twitter_platform_data_spec.rb
 spec/models/twitter_platform_data_thread_items_inner_spec.rb
+spec/models/unblock_facebook_user200_response_spec.rb
 spec/models/unblock_whats_app_users200_response_spec.rb
 spec/models/unblock_whats_app_users_request_spec.rb
 spec/models/undo_ad_rule_activity200_response_spec.rb

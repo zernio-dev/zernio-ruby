@@ -4,6 +4,7 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**block_facebook_user**](AccountSettingsApi.md#block_facebook_user) | **POST** /v1/accounts/{accountId}/facebook-blocked-users | Block a person on a Facebook Page |
 | [**delete_instagram_ice_breakers**](AccountSettingsApi.md#delete_instagram_ice_breakers) | **DELETE** /v1/accounts/{accountId}/instagram-ice-breakers | Delete IG ice breakers |
 | [**delete_messenger_get_started**](AccountSettingsApi.md#delete_messenger_get_started) | **DELETE** /v1/accounts/{accountId}/messenger-get-started | Delete FB Get Started button |
 | [**delete_messenger_greeting**](AccountSettingsApi.md#delete_messenger_greeting) | **DELETE** /v1/accounts/{accountId}/messenger-greeting | Delete FB greeting text |
@@ -18,13 +19,86 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_messenger_menu**](AccountSettingsApi.md#get_messenger_menu) | **GET** /v1/accounts/{accountId}/messenger-menu | Get persistent menu |
 | [**get_telegram_commands**](AccountSettingsApi.md#get_telegram_commands) | **GET** /v1/accounts/{accountId}/telegram-commands | Get TG bot commands |
 | [**get_wechat_server_config**](AccountSettingsApi.md#get_wechat_server_config) | **GET** /v1/accounts/{accountId}/wechat-server-config | Get WeChat server config |
+| [**list_facebook_blocked_users**](AccountSettingsApi.md#list_facebook_blocked_users) | **GET** /v1/accounts/{accountId}/facebook-blocked-users | List the people blocked on a Facebook Page |
 | [**set_instagram_ice_breakers**](AccountSettingsApi.md#set_instagram_ice_breakers) | **PUT** /v1/accounts/{accountId}/instagram-ice-breakers | Set IG ice breakers |
 | [**set_messenger_get_started**](AccountSettingsApi.md#set_messenger_get_started) | **PUT** /v1/accounts/{accountId}/messenger-get-started | Set FB Get Started button |
 | [**set_messenger_greeting**](AccountSettingsApi.md#set_messenger_greeting) | **PUT** /v1/accounts/{accountId}/messenger-greeting | Set FB greeting text |
 | [**set_messenger_ice_breakers**](AccountSettingsApi.md#set_messenger_ice_breakers) | **PUT** /v1/accounts/{accountId}/messenger-ice-breakers | Set FB ice breakers |
 | [**set_messenger_menu**](AccountSettingsApi.md#set_messenger_menu) | **PUT** /v1/accounts/{accountId}/messenger-menu | Set persistent menu |
 | [**set_telegram_commands**](AccountSettingsApi.md#set_telegram_commands) | **PUT** /v1/accounts/{accountId}/telegram-commands | Set TG bot commands |
+| [**unblock_facebook_user**](AccountSettingsApi.md#unblock_facebook_user) | **DELETE** /v1/accounts/{accountId}/facebook-blocked-users | Unblock a person on a Facebook Page |
 | [**update_facebook_page_info**](AccountSettingsApi.md#update_facebook_page_info) | **PATCH** /v1/accounts/{accountId}/facebook-page-info | Update a Facebook Page&#39;s public info |
+
+
+## block_facebook_user
+
+> <BlockFacebookUser200Response> block_facebook_user(account_id, facebook_blocked_user_ref)
+
+Block a person on a Facebook Page
+
+Blocks one person on the Page selected on a `facebook` account. Send `psid` for a Messenger contact (the participant id of a Facebook inbox conversation) or `userId` for a page-scoped user id or a Page id, never both.  `blocked` is Meta's answer for the id. Meta refuses to block someone again too soon after unblocking them, and caps how many people a Page can block: both come back as `platform_api_error`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountSettingsApi.new
+account_id = 'account_id_example' # String | The ID of a connected Facebook account.
+facebook_blocked_user_ref = Zernio::FacebookBlockedUserRef.new # FacebookBlockedUserRef | 
+
+begin
+  # Block a person on a Facebook Page
+  result = api_instance.block_facebook_user(account_id, facebook_blocked_user_ref)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountSettingsApi->block_facebook_user: #{e}"
+end
+```
+
+#### Using the block_facebook_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<BlockFacebookUser200Response>, Integer, Hash)> block_facebook_user_with_http_info(account_id, facebook_blocked_user_ref)
+
+```ruby
+begin
+  # Block a person on a Facebook Page
+  data, status_code, headers = api_instance.block_facebook_user_with_http_info(account_id, facebook_blocked_user_ref)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <BlockFacebookUser200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountSettingsApi->block_facebook_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Facebook account. |  |
+| **facebook_blocked_user_ref** | [**FacebookBlockedUserRef**](FacebookBlockedUserRef.md) |  |  |
+
+### Return type
+
+[**BlockFacebookUser200Response**](BlockFacebookUser200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## delete_instagram_ice_breakers
@@ -990,6 +1064,81 @@ end
 - **Accept**: application/json
 
 
+## list_facebook_blocked_users
+
+> <ListFacebookBlockedUsers200Response> list_facebook_blocked_users(account_id, opts)
+
+List the people blocked on a Facebook Page
+
+Returns the people blocked on the Page selected on a `facebook` account, as Meta returns them from the Page's `blocked` edge.  Cursor-paginated: pass `nextCursor` from the previous response as `cursor` to read the next page. `nextCursor` is null when there are no more pages. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountSettingsApi.new
+account_id = 'account_id_example' # String | The ID of a connected Facebook account.
+opts = {
+  limit: 56, # Integer | Page size.
+  cursor: 'cursor_example' # String | The `nextCursor` of the previous page.
+}
+
+begin
+  # List the people blocked on a Facebook Page
+  result = api_instance.list_facebook_blocked_users(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountSettingsApi->list_facebook_blocked_users: #{e}"
+end
+```
+
+#### Using the list_facebook_blocked_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListFacebookBlockedUsers200Response>, Integer, Hash)> list_facebook_blocked_users_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List the people blocked on a Facebook Page
+  data, status_code, headers = api_instance.list_facebook_blocked_users_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListFacebookBlockedUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountSettingsApi->list_facebook_blocked_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Facebook account. |  |
+| **limit** | **Integer** | Page size. | [optional][default to 25] |
+| **cursor** | **String** | The &#x60;nextCursor&#x60; of the previous page. | [optional] |
+
+### Return type
+
+[**ListFacebookBlockedUsers200Response**](ListFacebookBlockedUsers200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## set_instagram_ice_breakers
 
 > set_instagram_ice_breakers(account_id, set_instagram_ice_breakers_request)
@@ -1410,6 +1559,81 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## unblock_facebook_user
+
+> <UnblockFacebookUser200Response> unblock_facebook_user(account_id, opts)
+
+Unblock a person on a Facebook Page
+
+Unblocks one person on the Page selected on a `facebook` account. Pass `psid` for a Messenger contact or `userId` for a page-scoped user id or a Page id, never both. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountSettingsApi.new
+account_id = 'account_id_example' # String | The ID of a connected Facebook account.
+opts = {
+  psid: 'psid_example', # String | Page-scoped id of a Messenger contact. Set this or `userId`.
+  user_id: 'user_id_example' # String | A page-scoped Facebook user id or a Page id. Set this or `psid`.
+}
+
+begin
+  # Unblock a person on a Facebook Page
+  result = api_instance.unblock_facebook_user(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountSettingsApi->unblock_facebook_user: #{e}"
+end
+```
+
+#### Using the unblock_facebook_user_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UnblockFacebookUser200Response>, Integer, Hash)> unblock_facebook_user_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Unblock a person on a Facebook Page
+  data, status_code, headers = api_instance.unblock_facebook_user_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UnblockFacebookUser200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountSettingsApi->unblock_facebook_user_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of a connected Facebook account. |  |
+| **psid** | **String** | Page-scoped id of a Messenger contact. Set this or &#x60;userId&#x60;. | [optional] |
+| **user_id** | **String** | A page-scoped Facebook user id or a Page id. Set this or &#x60;psid&#x60;. | [optional] |
+
+### Return type
+
+[**UnblockFacebookUser200Response**](UnblockFacebookUser200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
